@@ -15,6 +15,9 @@ inherited VehicleDetailFrm: TVehicleDetailFrm
     ExplicitTop = 0
     ExplicitWidth = 520
     ExplicitHeight = 325
+    inherited lblHeaderTitle: TcxLabel
+      ExplicitWidth = 498
+    end
     inherited btnOK: TcxButton
       Left = 353
       Top = 289

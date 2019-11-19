@@ -97,7 +97,7 @@ begin
   if SameText(TrimAll(edtRegNo.Text), '') then
     raise EValidateException.Create('Vehicle registration number must have a value');
 
-  if SameText(edtYear.Value, '') then
+  if SameText(edtYear.Text, '') then
     raise EValidateException.Create('Salutation must have a value');
 
   MTDM.FFieldValue.VehicleMakeID := VarAsType(lucVehicleMake.EditValue, varInteger);
