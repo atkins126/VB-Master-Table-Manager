@@ -1,0 +1,107 @@
+unit MT_DM;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Winapi.Windows, Vcl.Forms,
+
+  Base_DM,
+
+  IPPeerClient, Data.DBXDataSnap, Data.DBXCommon, Data.DB, Data.SqlExpr,
+
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.UI.Intf,
+  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.FB,
+  FireDAC.Phys.FBDef, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteDef,
+  FireDAC.VCLUI.Wait, FireDAC.Comp.UI, FireDAC.Phys.IBBase, FireDAC.Phys.SQLite,
+  FireDAC.Stan.StorageBin;
+
+type
+  TMTDM = class(TBaseDM)
+    cdsActivityType: TFDMemTable;
+    cdsAgePeriod: TFDMemTable;
+    cdsBank: TFDMemTable;
+    cdsBankAccountType: TFDMemTable;
+    cdsContactType: TFDMemTable;
+    cdsCustomer: TFDMemTable;
+    cdsCustomerGroup: TFDMemTable;
+    cdsCustomerStatus: TFDMemTable;
+    cdsCustomerType: TFDMemTable;
+    cdsJobFunction: TFDMemTable;
+    cdsMonthOfYear: TFDMemTable;
+    cdsPricelist: TFDMemTable;
+    cdsRateUnit: TFDMemTable;
+    cdsSalutation: TFDMemTable;
+    cdsStdActivity: TFDMemTable;
+    cdsTaxOffice: TFDMemTable;
+    cdsVehicleMake: TFDMemTable;
+    dtsActivityType: TDataSource;
+    dtsAgePeriod: TDataSource;
+    dtsBank: TDataSource;
+    dtsBankAccountType: TDataSource;
+    dtsContactType: TDataSource;
+    dtsCustomer: TDataSource;
+    dtsCustomerGroup: TDataSource;
+    dtsCustomerStatus: TDataSource;
+    dtsCustomerType: TDataSource;
+    dtsJobFunction: TDataSource;
+    dtsMonthOfyear: TDataSource;
+    dtsPriceList: TDataSource;
+    dtsRateUnit: TDataSource;
+    dtsSalutation: TDataSource;
+    dtsStdActivityType: TDataSource;
+    dtsTaxOffice: TDataSource;
+    dtsVehicleMake: TDataSource;
+    VbliveConnection: TFDConnection;
+    FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink;
+    FDPhysFBDriverLink: TFDPhysFBDriverLink;
+    FDGUIxWaitCursor: TFDGUIxWaitCursor;
+    procedure cdsActivityTypeAfterPost(DataSet: TDataSet);
+    procedure cdsActivityTypeBeforePost(DataSet: TDataSet);
+  private
+    { Private declarations }
+    FID: Integer;
+
+    property ID: Integer read FID write FID;
+  public
+    { Public declarations }
+    FActionTag: Integer;
+
+    property ActionTag: Integer read FActionTag write FActionTag;
+  end;
+
+var
+  MTDM: TMTDM;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+uses
+  VBBase_DM,
+  VBCommonValues;
+
+{$R *.dfm}
+
+procedure TMTDM.cdsActivityTypeBeforePost(DataSet: TDataSet);
+begin
+  inherited;
+  FID := DataSet.FieldByName('ID').AsInteger;
+end;
+
+procedure TMTDM.cdsActivityTypeAfterPost(DataSet: TDataSet);
+//var
+//  DataSetState: TDatasetState;
+begin
+  inherited;
+//  DataSetState := DataSet.State;
+//  DataSet := cdsTimesheet;
+  SetLength(VBBaseDM.FDataSetArray, 1);
+  VBBaseDM.FDataSetArray[0] := TFDMemTable(DataSet);
+  VBBaseDM.ApplyUpdates(VBBaseDM.FDataSetArray);
+  SendMessage(Application.MainForm.Handle, WM_RECORD_ID, DWORD(PChar('REQUEST=REFRESH_DATA' + '|ID=' + FID.ToString)), 0);
+end;
+
+end.
+
