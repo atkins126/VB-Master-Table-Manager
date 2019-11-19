@@ -22,6 +22,7 @@ inherited BankingDetailFrm: TBankingDetailFrm
       Left = 493
       Top = 179
       TabOrder = 16
+      OnClick = btnOKClick
       ExplicitLeft = 493
       ExplicitTop = 179
     end

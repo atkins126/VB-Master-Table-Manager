@@ -48,6 +48,7 @@ type
     litReq5: TdxLayoutItem;
     litYear: TdxLayoutItem;
     procedure FormCreate(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -64,7 +65,14 @@ implementation
 
 uses
   MT_DM,
-  Lookup_DM, RUtils;
+  Lookup_DM,
+  RUtils;
+
+procedure TVehicleDetailFrm.btnOKClick(Sender: TObject);
+begin
+  inherited;
+  Validate;
+end;
 
 procedure TVehicleDetailFrm.FormCreate(Sender: TObject);
 begin
@@ -104,7 +112,7 @@ begin
   MTDM.FFieldValue.VehicleMake := lucVehicleMake.Text;
   MTDM.FFieldValue.VehicleModel := edtModel.Text;
   MTDM.FFieldValue.VehicleRegNo := edtRegNo.Text;
-  MTDM.FFieldValue.YearOfManufacture := edtYear.ValidateEdit;
+  MTDM.FFieldValue.YearOfManufacture := Trunc(edtYear.Value);
   MTDM.FFieldValue.LicenceRenewalDate := dteRenewlDate.Date;
   MTDM.FFieldValue.MaintenancePlan :=  BooleanToInteger(cbxMaintenancePlan.Checked);
   MTDM.FFieldValue.Comment :=  memComment.Text;

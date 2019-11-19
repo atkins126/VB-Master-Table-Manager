@@ -1678,18 +1678,18 @@ inherited MTDM: TMTDM
       end
       item
         Active = True
-        Selected = True
         Name = 'idxCID'
         Fields = 'CUSTOMER_ID'
       end
       item
         Active = True
+        Selected = True
         Name = 'idxContactdetailValue'
         Fields = 'CUSTOMER_ID;CONTACT_TYPE_ID;VALUE'
         Options = [soNoCase, soUnique]
         FilterOptions = [ekNoCase]
       end>
-    IndexName = 'idxCID'
+    IndexName = 'idxContactdetailValue'
     ConstraintsEnabled = True
     MasterSource = dtsCustomer
     MasterFields = 'ID'

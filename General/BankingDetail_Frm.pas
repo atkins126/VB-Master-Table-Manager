@@ -46,6 +46,7 @@ type
     litReq5: TdxLayoutItem;
     litReq6: TdxLayoutItem;
     procedure FormCreate(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -62,7 +63,14 @@ implementation
 
 uses
   MT_DM,
-  Lookup_DM, RUtils;
+  Lookup_DM,
+  RUtils;
+
+procedure TBankingDetailFrm.btnOKClick(Sender: TObject);
+begin
+  inherited;
+  Validate;
+end;
 
 procedure TBankingDetailFrm.FormCreate(Sender: TObject);
 begin

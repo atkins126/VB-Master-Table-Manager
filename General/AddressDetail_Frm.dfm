@@ -22,6 +22,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 438
       Top = 424
       TabOrder = 25
+      OnClick = btnOKClick
       ExplicitLeft = 438
       ExplicitTop = 424
     end
@@ -210,6 +211,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Font.Name = 'Wingdings 3'
       Font.Style = []
       ParentFont = False
+      OnClick = btnPhysicalToPostalClick
     end
     object btnPostalToPhysical: TcxButton [22]
       Left = 282
@@ -226,6 +228,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Font.Name = 'Wingdings 3'
       Font.Style = []
       ParentFont = False
+      OnClick = btnPostalToPhysicalClick
     end
     object btnPhysicalToBilling: TcxButton [23]
       Left = 282
@@ -242,6 +245,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Font.Name = 'Wingdings 3'
       Font.Style = []
       ParentFont = False
+      OnClick = btnPhysicalToBillingClick
     end
     object btnBillingToPhysical: TcxButton [24]
       Left = 282
@@ -258,6 +262,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Font.Name = 'Wingdings 3'
       Font.Style = []
       ParentFont = False
+      OnClick = btnBillingToPhysicalClick
     end
     object btnBillingToPostal: TcxButton [25]
       Left = 282
@@ -274,6 +279,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Font.Name = 'Wingdings 3'
       Font.Style = []
       ParentFont = False
+      OnClick = btnBillingToPostalClick
     end
     object btnPostalToBilling: TcxButton [26]
       Left = 282
@@ -290,6 +296,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Font.Name = 'Wingdings 3'
       Font.Style = []
       ParentFont = False
+      OnClick = btnPostalToBillingClick
     end
     inherited layMainGroup_Root: TdxLayoutGroup
       ItemIndex = 2

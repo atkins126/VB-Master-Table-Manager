@@ -42,6 +42,7 @@ type
     litReq5: TdxLayoutItem;
     grpEmailAddress: TdxLayoutGroup;
     procedure FormCreate(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -56,7 +57,16 @@ implementation
 
 {$R *.dfm}
 
-uses MT_DM, Lookup_DM, RUtils;
+uses
+  MT_DM,
+  Lookup_DM,
+  RUtils;
+
+procedure TBeneficiaryDetailFrm.btnOKClick(Sender: TObject);
+begin
+  inherited;
+  Validate;
+end;
 
 procedure TBeneficiaryDetailFrm.FormCreate(Sender: TObject);
 begin

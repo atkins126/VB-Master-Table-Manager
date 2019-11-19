@@ -75,6 +75,13 @@ type
     spc2: TdxLayoutEmptySpaceItem;
     spc3: TdxLayoutEmptySpaceItem;
     procedure FormCreate(Sender: TObject);
+    procedure btnPhysicalToPostalClick(Sender: TObject);
+    procedure btnPostalToPhysicalClick(Sender: TObject);
+    procedure btnPhysicalToBillingClick(Sender: TObject);
+    procedure btnBillingToPhysicalClick(Sender: TObject);
+    procedure btnBillingToPostalClick(Sender: TObject);
+    procedure btnPostalToBillingClick(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -92,6 +99,72 @@ implementation
 uses
   MT_DM,
   VBCommonValues;
+
+procedure TAddressDetailFrm.btnPhysicalToPostalClick(Sender: TObject);
+begin
+  inherited;
+  edtPostal1.Text := edtPhysical1.Text;
+  edtPostal2.Text := edtPhysical2.Text;
+  edtPostal3.Text := edtPhysical3.Text;
+  edtPostal4.Text := edtPhysical4.Text;
+  EdtPostalCode.Text := edtPhysicalCode.Text;
+end;
+
+procedure TAddressDetailFrm.btnPostalToPhysicalClick(Sender: TObject);
+begin
+  inherited;
+  edtPhysical1.Text := edtPostal1.Text;
+  edtPhysical2.Text := edtPostal2.Text;
+  edtPhysical3.Text := edtPostal3.Text;
+  edtPhysical4.Text := edtPostal4.Text;
+  edtPhysicalCode.Text := EdtPostalCode.Text;
+end;
+
+procedure TAddressDetailFrm.btnPhysicalToBillingClick(Sender: TObject);
+begin
+  inherited;
+  edtBilling1.Text := edtPhysical1.Text;
+  edtBilling2.Text := edtPhysical2.Text;
+  edtBilling3.Text := edtPhysical3.Text;
+  edtBilling4.Text := edtPhysical4.Text;
+  edtBillingCode.Text := edtPhysicalCode.Text;
+end;
+
+procedure TAddressDetailFrm.btnBillingToPhysicalClick(Sender: TObject);
+begin
+  inherited;
+  edtPhysical1.Text := edtBilling1.Text;
+  edtPhysical2.Text := edtBilling2.Text;
+  edtPhysical3.Text := edtBilling3.Text;
+  edtPhysical4.Text := edtBilling4.Text;
+  edtPhysicalCode.Text := edtBillingCode.Text;
+end;
+
+procedure TAddressDetailFrm.btnBillingToPostalClick(Sender: TObject);
+begin
+  inherited;
+  edtPostal1.Text := edtBilling1.Text;
+  edtPostal2.Text := edtBilling2.Text;
+  edtPostal3.Text := edtBilling3.Text;
+  edtPostal4.Text := edtBilling4.Text;
+  EdtPostalCode.Text := edtBillingCode.Text;
+end;
+
+procedure TAddressDetailFrm.btnOKClick(Sender: TObject);
+begin
+  inherited;
+  Validate;
+end;
+
+procedure TAddressDetailFrm.btnPostalToBillingClick(Sender: TObject);
+begin
+  inherited;
+  edtBilling1.Text := edtPostal1.Text;
+  edtBilling2.Text := edtPostal2.Text;
+  edtBilling3.Text := edtPostal3.Text;
+  edtBilling4.Text := edtPostal4.Text;
+  edtBillingCode.Text := EdtPostalCode.Text;
+end;
 
 procedure TAddressDetailFrm.FormCreate(Sender: TObject);
 begin

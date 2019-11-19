@@ -22,6 +22,7 @@ inherited PersonContactDetailFrm: TPersonContactDetailFrm
       Left = 213
       Top = 264
       TabOrder = 9
+      OnClick = btnOKClick
       ExplicitLeft = 213
       ExplicitTop = 264
     end

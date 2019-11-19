@@ -43,6 +43,7 @@ type
     litOtherName: TdxLayoutItem;
     spc1: TdxLayoutEmptySpaceItem;
     procedure FormCreate(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -59,7 +60,14 @@ implementation
 
 uses
   MT_DM,
-  Lookup_DM, RUtils;
+  Lookup_DM,
+  RUtils;
+
+procedure TDirectorDetailFrm.btnOKClick(Sender: TObject);
+begin
+  inherited;
+  Validate;
+end;
 
 procedure TDirectorDetailFrm.FormCreate(Sender: TObject);
 begin

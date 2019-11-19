@@ -22,6 +22,7 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       Left = 393
       Top = 214
       TabOrder = 14
+      OnClick = btnOKClick
       ExplicitLeft = 393
       ExplicitTop = 214
     end

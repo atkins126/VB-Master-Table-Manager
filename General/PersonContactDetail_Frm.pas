@@ -31,6 +31,7 @@ type
     lblReq1: TcxLabel;
     lblReq2: TcxLabel;
     procedure FormCreate(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -47,7 +48,14 @@ implementation
 
 uses
   MT_DM,
-  Lookup_DM, RUtils;
+  Lookup_DM,
+  RUtils;
+
+procedure TPersonContactDetailFrm.btnOKClick(Sender: TObject);
+begin
+  inherited;
+  Validate;
+end;
 
 procedure TPersonContactDetailFrm.FormCreate(Sender: TObject);
 begin

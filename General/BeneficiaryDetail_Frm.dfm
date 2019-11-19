@@ -22,6 +22,7 @@ inherited BeneficiaryDetailFrm: TBeneficiaryDetailFrm
       Left = 393
       Top = 184
       TabOrder = 14
+      OnClick = btnOKClick
       ExplicitLeft = 393
       ExplicitTop = 184
     end

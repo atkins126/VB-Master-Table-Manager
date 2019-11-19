@@ -49,7 +49,7 @@ type
     Billing3: string;
     Billing4: string;
     BillingCode: string;
-    BankID: string;
+    BankID: Integer;
     Bank: string;
     BranchCode: string;
     AccountTypeID: Integer;
@@ -410,7 +410,7 @@ begin
   FFieldValue.Billing3 := '';
   FFieldValue.Billing4 := '';
   FFieldValue.BillingCode := '';
-  FFieldValue.BankID := '';
+  FFieldValue.BankID := 0;
   FFieldValue.Bank := '';
   FFieldValue.BranchCode := '';
   FFieldValue.AccountTypeID := 0;

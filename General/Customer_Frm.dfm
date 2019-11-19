@@ -642,11 +642,12 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 2
     end
     object grdContactDetailCo: TcxGrid [4]
-      Left = 25
-      Top = 413
+      Left = 10000
+      Top = 10000
       Width = 391
       Height = 170
       TabOrder = 4
+      Visible = False
       object viewContactDetailCo: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -821,8 +822,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCDComment: TcxDBMemo [5]
-      Left = 25
-      Top = 589
+      Left = 10000
+      Top = 10000
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailCo
       PopupMenu = popDBAction
@@ -830,6 +831,7 @@ inherited CustomerFrm: TCustomerFrm
       Properties.ScrollBars = ssVertical
       Style.HotTrack = False
       TabOrder = 5
+      Visible = False
       OnDblClick = viewContactDetailCoDblClick
       OnKeyDown = viewContactDetailCoKeyDown
       Height = 69
@@ -1087,12 +1089,12 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdContactPerson: TcxGrid [9]
-      Left = 10000
-      Top = 10000
+      Left = 25
+      Top = 413
       Width = 1250
       Height = 245
       TabOrder = 9
-      Visible = False
+      OnEnter = grdContactPersonEnter
       object viewContactPerson: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -1301,12 +1303,11 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdCPContactDetail: TcxGrid [10]
-      Left = 10000
-      Top = 10000
+      Left = 1281
+      Top = 413
       Width = 400
       Height = 120
       TabOrder = 10
-      Visible = False
       OnEnter = grdCPContactDetailEnter
       object viewCPContactDetail: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -1456,8 +1457,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCPcontactDetailComment: TcxDBMemo [11]
-      Left = 10000
-      Top = 10000
+      Left = 1281
+      Top = 539
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailPerson
       PopupMenu = popDBAction
@@ -1465,7 +1466,6 @@ inherited CustomerFrm: TCustomerFrm
       Properties.ScrollBars = ssVertical
       Style.HotTrack = False
       TabOrder = 11
-      Visible = False
       OnDblClick = viewContactDetailCoDblClick
       OnEnter = grdCPContactDetailEnter
       OnKeyDown = viewContactDetailCoKeyDown
@@ -2265,6 +2265,7 @@ inherited CustomerFrm: TCustomerFrm
       AlignVert = avClient
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
+      ItemIndex = 2
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpDetailGridTabChanged

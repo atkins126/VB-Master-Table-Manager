@@ -58,6 +58,7 @@ type
     lbl3: TcxLabel;
     litLabel3: TdxLayoutItem;
     procedure FormCreate(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -76,6 +77,12 @@ uses
   MT_DM,
   Lookup_DM,
   RUtils;
+
+procedure TContactPersonFrm.btnOKClick(Sender: TObject);
+begin
+  inherited;
+  Validate;
+end;
 
 procedure TContactPersonFrm.FormCreate(Sender: TObject);
 begin

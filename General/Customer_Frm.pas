@@ -8,7 +8,7 @@ uses
   Vcl.Dialogs, System.Actions, Vcl.ActnList, System.StrUtils, Vcl.Menus,
   Vcl.StdCtrls, Data.DB,
 
-  BaseLayout_Frm, CommonValues,
+  BaseLayout_Frm, CommonValues, VBCommonValues,
 
   FireDAC.Comp.Client,
 
@@ -27,13 +27,24 @@ uses
   FireDAC.Stan.Error, FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.Phys.IBWrapper;
 
   // To handle TFDGUIxErrordialog
-//  FireDAC.UI.Intf, FireDAC.VCLUI.Error,
-//  FireDAC.Stan.Error, FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.Phys.IBDef,
-//  FireDAC.Phys, FireDAC.Phys.IBBase, FireDAC.Phys.IB;
+// FireDAC.UI.Intf, FireDAC.VCLUI.Error,
+// FireDAC.Stan.Error, FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.Phys.IBDef,
+// FireDAC.Phys, FireDAC.Phys.IBBase, FireDAC.Phys.IB;
 
 type
   DetailDataSetArray = array of TFDMemTable;
   DetailFriendlyNames = array of string;
+
+  TOpenTableParams = record
+    ScriptID: Integer;
+    DataSet: TFDMemTable;
+    DataSetName: string;
+    FileName: string;
+    GeneratorName: string;
+    UpdateTableName: string;
+    FieldName: string;
+    LocateValue: string;
+  end;
 
   TCustomerFrm = class(TBaseLayoutFrm)
     repScreenTip: TdxScreenTipRepository;
@@ -244,16 +255,19 @@ type
 
     procedure navCustomerButtonsButtonClick(Sender: TObject;
       AButtonIndex: Integer; var ADone: Boolean);
+    procedure grdContactPersonEnter(Sender: TObject);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
     FDetailDataSet: DetailDataSetArray;
+    FOpenTableParam: TOpenTableParams;
 
     procedure CmDrawBorder(var Msg: TMessage); message CM_DRAWBORDER;
     procedure OpenTables;
     procedure EditDeleteRecord(Key: Word);
-    procedure FillFieldData(DetailDataSetID: Integer);
-
+    function FillFieldData(DetailDataSetID: Integer): string;
+  protected
+    procedure HandleTSAfterPost(var MyMsg: TMessage); message WM_RECORD_ID;
   public
     { Public declarations }
     property DetailDataSet: DetailDataSetArray read FDetailDataSet write FDetailDataSet;
@@ -275,7 +289,6 @@ uses
   Lookup_DM,
   MT_DM,
   MsgDialog_Frm,
-  VBCommonValues,
   CustomerEdit_Frm,
   Progress_Frm,
   VBBase_DM,
@@ -287,7 +300,8 @@ uses
   BankingDetail_Frm,
   DirectorDetail_Frm,
   BeneficiaryDetail_Frm,
-  VehicleDetail_Frm, ContactPerson_Frm;
+  VehicleDetail_Frm,
+  ContactPerson_Frm;
 
 procedure TCustomerFrm.CmDrawBorder(var Msg: TMessage);
 begin
@@ -330,20 +344,20 @@ begin
 //
 end;
 
-procedure TCustomerFrm.FillFieldData(DetailDataSetID: Integer);
+function TCustomerFrm.FillFieldData(DetailDataSetID: Integer): string;
 const
-  ERROR_MESSAGE =
-    '%s' + CRLF + // Error type
-    '%s' + CRLF + CRLF; // Detail table identifier
+//  ERROR_MESSAGE =
+//    '%s' + CRLF + // Error type
+//    '%s' + CRLF + CRLF; // Detail table identifier
 
   ERROR_VALUES = '%s';
 var
   ErrorValues: string;
-
 begin
-//  if FDetailDataSet[MTDM.DetailIndex].State in [dsEdit, dsInsert] then
-//    FDetailDataSet[MTDM.DetailIndex].Cancel;
+// if FDetailDataSet[MTDM.DetailIndex].State in [dsEdit, dsInsert] then
+// FDetailDataSet[MTDM.DetailIndex].Cancel;
 
+  Result := '';
   case MTDM.DBAction of
     acInsert: FDetailDataSet[MTDM.DetailIndex].Insert;
     acModify: FDetailDataSet[MTDM.DetailIndex].Edit;
@@ -352,55 +366,59 @@ begin
   case DetailDataSetID of
     0: // Company contact
       begin
-        MTDM.cdsContactDetailCo.FieldByName('CONTACT_TYPE_ID').AsInteger := MTDM.FFieldValue.ContactTypeID;
-        MTDM.cdsContactDetailCo.FieldByName('VALUE').AsString := MTDM.FFieldValue.TextValue;
-        MTDM.cdsContactDetailCo.FieldByName('COMMENT').AsString := MTDm.FFieldValue.Comment;
+// MTDM.cdsContactDetailCo.FieldByName('CONTACT_TYPE_ID').AsInteger := MTDM.FFieldValue.ContactTypeID;
+// MTDM.cdsContactDetailCo.FieldByName('VALUE').AsString := MTDM.FFieldValue.TextValue;
+// MTDM.cdsContactDetailCo.FieldByName('COMMENT').AsString := MTDm.FFieldValue.Comment;
+        FDetailDataSet[MTDM.DetailIndex].FieldByName('CONTACT_TYPE_ID').AsInteger := MTDM.FFieldValue.ContactTypeID;
+        FDetailDataSet[MTDM.DetailIndex].FieldByName('VALUE').AsString := MTDM.FFieldValue.TextValue;
+        FDetailDataSet[MTDM.DetailIndex].FieldByName('COMMENT').AsString := MTDM.FFieldValue.Comment;
         MTDM.ValueArray[0] := 'Contact Type:' + TAB + MTDM.FFieldValue.ContactType;
         MTDM.ValueArray[1] := 'Contact Value:' + TAB + MTDM.FFieldValue.TextValue;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1]]);
 
-//        if CompanyContactDetailFrm <> nil then
-//        begin
-//          CompanyContactDetailFrm.Close;
-//          FreeAndNil(CompanyContactDetailFrm);
-//        end;
+// if CompanyContactDetailFrm <> nil then
+// begin
+// CompanyContactDetailFrm.Close;
+// FreeAndNil(CompanyContactDetailFrm);
+// end;
       end;
 
     1: // Address
       begin
         MTDM.cdsAddress.FieldByName('PHYSICAL1').AsString := MTDM.FFieldValue.Physical1;
-        MTDM.cdsAddress.FieldByName('PHYSICAL2').AsString := CustomerEditFrm.edtPhysical2.Text;
-        MTDM.cdsAddress.FieldByName('PHYSICAL3').AsString := CustomerEditFrm.edtPhysical3.Text;
-        MTDM.cdsAddress.FieldByName('PHYSICAL4').AsString := CustomerEditFrm.edtPhysical4.Text;
-        MTDM.cdsAddress.FieldByName('PHYSICAL_CODE').AsString := CustomerEditFrm.edtPhysicalPostalCode.Text;
+        MTDM.cdsAddress.FieldByName('PHYSICAL2').AsString := MTDM.FFieldValue.Physical2;
+        MTDM.cdsAddress.FieldByName('PHYSICAL3').AsString := MTDM.FFieldValue.Physical3;
+        MTDM.cdsAddress.FieldByName('PHYSICAL4').AsString := MTDM.FFieldValue.Physical4;
+        MTDM.cdsAddress.FieldByName('PHYSICAL_CODE').AsString := MTDM.FFieldValue.PhysicalCode;
 
-        MTDM.cdsAddress.FieldByName('POSTAL1').AsString := CustomerEditFrm.edtPostal1.Text;
-        MTDM.cdsAddress.FieldByName('POSTAL2').AsString := CustomerEditFrm.edtPostal2.Text;
-        MTDM.cdsAddress.FieldByName('POSTAL3').AsString := CustomerEditFrm.edtPostal3.Text;
-        MTDM.cdsAddress.FieldByName('POSTAL4').AsString := CustomerEditFrm.edtPostal4.Text;
-        MTDM.cdsAddress.FieldByName('POSTAL_CODE').AsString := CustomerEditFrm.EdtPostalCode.Text;
+        MTDM.cdsAddress.FieldByName('POSTAL1').AsString := MTDM.FFieldValue.Postal1;
+        MTDM.cdsAddress.FieldByName('POSTAL2').AsString := MTDM.FFieldValue.Postal2;
+        MTDM.cdsAddress.FieldByName('POSTAL3').AsString := MTDM.FFieldValue.Postal3;
+        MTDM.cdsAddress.FieldByName('POSTAL4').AsString := MTDM.FFieldValue.Postal4;
+        MTDM.cdsAddress.FieldByName('POSTAL_CODE').AsString := MTDM.FFieldValue.PostalCode;
 
-        MTDM.cdsAddress.FieldByName('BILLING1').AsString := CustomerEditFrm.edtBilling1.Text;
-        MTDM.cdsAddress.FieldByName('BILLING2').AsString := CustomerEditFrm.edtBilling2.Text;
-        MTDM.cdsAddress.FieldByName('BILLING3').AsString := CustomerEditFrm.edtBilling3.Text;
-        MTDM.cdsAddress.FieldByName('BILLING4').AsString := CustomerEditFrm.edtBilling4.Text;
-        MTDM.cdsAddress.FieldByName('BILLING_CODE').AsString := CustomerEditFrm.edtBillingPostalCode.Text;
+        MTDM.cdsAddress.FieldByName('BILLING1').AsString := MTDM.FFieldValue.Billing1;
+        MTDM.cdsAddress.FieldByName('BILLING2').AsString := MTDM.FFieldValue.Billing2;
+        MTDM.cdsAddress.FieldByName('BILLING3').AsString := MTDM.FFieldValue.Billing3;
+        MTDM.cdsAddress.FieldByName('BILLING4').AsString := MTDM.FFieldValue.Billing4;
+        MTDM.cdsAddress.FieldByName('BILLING_CODE').AsString := MTDM.FFieldValue.BillingCode;
+        ErrorValues := '';
       end;
 
     2: // Contact person
       begin
-        MTDM.cdsContactPerson.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtPFirstName.Text;
-        MTDM.cdsContactPerson.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtPLastName.Text;
-        MTDM.cdsContactPerson.FieldByName('OTHER_NAME').AsString := CustomerEditFrm.edtPOtherName.Text;
-        MTDM.cdsContactPerson.FieldByName('ID_NUMBER').AsString := CustomerEditFrm.edtPIDNo.Text;
-        MTDM.cdsContactPerson.FieldByName('PASSPORT_NUMBER').AsString := CustomerEditFrm.edtPPassportNo.Text;
-        MTDM.cdsContactPerson.FieldByName('SALUTATION_ID').AsInteger := CustomerEditFrm.lucPSalutation.EditValue;
-        MTDM.cdsContactPerson.FieldByName('INITIALS').AsString := CustomerEditFrm.edtPInitials.Text;
-        MTDM.cdsContactPerson.FieldByName('DOB').AsDateTime := CustomerEditFrm.lucPDOB.EditValue;
-        MTDM.cdsContactPerson.FieldByName('JOB_FUNCTION_ID').AsInteger := CustomerEditFrm.lucPJobFunction.EditValue;
-        MTDM.cdsContactPerson.FieldByName('IS_PRIMARY_CONTACT').AsInteger := RUtils.BooleanToInteger(CustomerEditFrm.cbxPPrimaryContact.Checked);
+        MTDM.cdsContactPerson.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
+        MTDM.cdsContactPerson.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
+        MTDM.cdsContactPerson.FieldByName('OTHER_NAME').AsString := MTDM.FFieldValue.OtherName;
+        MTDM.cdsContactPerson.FieldByName('ID_NUMBER').AsString := MTDM.FFieldValue.IDNo;
+        MTDM.cdsContactPerson.FieldByName('PASSPORT_NUMBER').AsString := MTDM.FFieldValue.PassportNo;
+        MTDM.cdsContactPerson.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
+        MTDM.cdsContactPerson.FieldByName('INITIALS').AsString := MTDM.FFieldValue.Initials;
+        MTDM.cdsContactPerson.FieldByName('DOB').AsDateTime := MTDM.FFieldValue.DOB;
+        MTDM.cdsContactPerson.FieldByName('JOB_FUNCTION_ID').AsInteger := MTDM.FFieldValue.JobFunctionID;
+        MTDM.cdsContactPerson.FieldByName('IS_PRIMARY_CONTACT').AsInteger := MTDM.FFieldValue.PrimaryContact;
 
         MTDM.ValueArray[0] := 'First Name:' + TAB + CustomerEditFrm.edtPFirstName.Text;
         MTDM.ValueArray[1] := 'Last Name:' + TAB + CustomerEditFrm.edtPLastName.Text;
@@ -413,9 +431,9 @@ begin
 
     3: // Contact details person
       begin
-        MTDM.cdsContactDetailPerson.FieldByName('CONTACT_TYPE_ID').AsInteger := CustomerEditFrm.lucCDPContactType.EditValue;
-        MTDM.cdsContactDetailPerson.FieldByName('VALUE').AsString := CustomerEditFrm.edtCDPValue.Text;
-        MTDM.cdsContactDetailPerson.FieldByName('COMMENT').AsString := CustomerEditFrm.memCDPComment.Text;
+        MTDM.cdsContactDetailPerson.FieldByName('CONTACT_TYPE_ID').AsInteger := MTDM.FFieldValue.ContactTypeID;
+        MTDM.cdsContactDetailPerson.FieldByName('VALUE').AsString := MTDM.FFieldValue.TextValue;
+        MTDM.cdsContactDetailPerson.FieldByName('COMMENT').AsString := MTDM.FFieldValue.Comment;
 
         MTDM.ValueArray[0] := 'Contact Type:' + TAB + CustomerEditFrm.lucCDPContactType.Text;
         MTDM.ValueArray[1] := 'Contact Value:' + TAB + CustomerEditFrm.edtCDPValue.Text;
@@ -426,12 +444,12 @@ begin
 
     4: // Banking details
       begin
-        MTDM.cdsBankingDetail.FieldByName('BANK_ID').AsInteger := CustomerEditFrm.lucBank.EditValue;
-        MTDM.cdsBankingDetail.FieldByName('ACCOUNT_TYPE_ID').AsInteger := CustomerEditFrm.lucAccType.EditValue;
-        MTDM.cdsBankingDetail.FieldByName('BRANCH_CODE').AsString := CustomerEditFrm.edtBranchCode.Text;
-        MTDM.cdsBankingDetail.FieldByName('ACCOUNT_NO').AsString := CustomerEditFrm.edtAccNo.Text;
-        MTDM.cdsBankingDetail.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtBFirstName.Text;
-        MTDM.cdsBankingDetail.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtBLastName.Text;
+        MTDM.cdsBankingDetail.FieldByName('BANK_ID').AsInteger := MTDM.FFieldValue.BankID;
+        MTDM.cdsBankingDetail.FieldByName('ACCOUNT_TYPE_ID').AsInteger := MTDM.FFieldValue.AccountTypeID;
+        MTDM.cdsBankingDetail.FieldByName('BRANCH_CODE').AsString := MTDM.FFieldValue.BranchCode;
+        MTDM.cdsBankingDetail.FieldByName('ACCOUNT_NO').AsString := MTDM.FFieldValue.AccountNo;
+        MTDM.cdsBankingDetail.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
+        MTDM.cdsBankingDetail.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
 
         MTDM.ValueArray[0] := 'Bank:' + TAB + CustomerEditFrm.lucBank.Text;
         MTDM.ValueArray[1] := 'Account Type:' + TAB + CustomerEditFrm.lucAccType.Text;
@@ -445,13 +463,13 @@ begin
 
     5: // Director
       begin
-        MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtDFirstName.Text;
-        MTDM.cdsDirector.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtDLastName.Text;
-        MTDM.cdsDirector.FieldByName('MIDDLE_NAME').AsString := CustomerEditFrm.edtDOtherName.Text;
-        MTDM.cdsDirector.FieldByName('EMAIL_ADDRESS').AsString := CustomerEditFrm.edtDEmailAddress.Text;
-        MTDM.cdsDirector.FieldByName('SALUTATION_ID').AsInteger := CustomerEditFrm.lucDSalutation.EditValue;
-        MTDM.cdsDirector.FieldByName('TAX_NO').AsString := CustomerEditFrm.edtDTaxNo.Text;
-        MTDM.cdsDirector.FieldByName('MOBILE_PHONE').AsString := CustomerEditFrm.edtDMobileNo.Text;
+        MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
+        MTDM.cdsDirector.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
+        MTDM.cdsDirector.FieldByName('MIDDLE_NAME').AsString := MTDM.FFieldValue.OtherName;
+        MTDM.cdsDirector.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FFieldValue.EmailAddress;
+        MTDM.cdsDirector.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
+        MTDM.cdsDirector.FieldByName('TAX_NO').AsString := MTDM.FFieldValue.TaxNo;
+        MTDM.cdsDirector.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
 
         MTDM.ValueArray[0] := 'First Name:' + TAB + CustomerEditFrm.edtDFirstName.Text;
         MTDM.ValueArray[1] := 'Last Name:' + TAB + CustomerEditFrm.edtDLastName.Text;
@@ -464,11 +482,11 @@ begin
 
     6: // Beneficiary
       begin
-        MTDM.cdsBeneficiary.FieldByName('SALUTATION_ID').AsInteger := CustomerEditFrm.lucBFSalutation.EditValue;
-        MTDM.cdsBeneficiary.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtBFFirstName.Text;
-        MTDM.cdsBeneficiary.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtBFLastName.Text;
-        MTDM.cdsBeneficiary.FieldByName('MOBILE_PHONE').AsString := CustomerEditFrm.edtBFMobileNo.Text;
-        MTDM.cdsBeneficiary.FieldByName('EMAIL_ADDRESS').AsString := CustomerEditFrm.edtBFEmailAddress.Text;
+        MTDM.cdsBeneficiary.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
+        MTDM.cdsBeneficiary.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
+        MTDM.cdsBeneficiary.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
+        MTDM.cdsBeneficiary.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
+        MTDM.cdsBeneficiary.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FFieldValue.EmailAddress;
 
         MTDM.ValueArray[0] := 'First Name:' + TAB + CustomerEditFrm.edtBFFirstName.Text;
         MTDM.ValueArray[1] := 'Last Name:' + TAB + CustomerEditFrm.edtBFLastName.Text;
@@ -485,13 +503,13 @@ begin
 
     7: // Vehicle
       begin
-        MTDM.cdsVehicle.FieldByName('THE_YEAR').AsInteger := CustomerEditFrm.edtYear.EditValue;
-        MTDM.cdsVehicle.FieldByName('VEHICLE_MAKE_ID').AsString := CustomerEditFrm.lucVehicleMake.EditValue;
-        MTDM.cdsVehicle.FieldByName('VEHICLE_MODEL').AsString := CustomerEditFrm.edtModel.Text;
-        MTDM.cdsVehicle.FieldByName('REG_NO').AsString := CustomerEditFrm.edtRegNo.Text;
-        MTDM.cdsVehicle.FieldByName('RENEWAL_DATE').AsDateTime := CustomerEditFrm.lucRenewlDate.EditValue;
-        MTDM.cdsVehicle.FieldByName('MAINTENANCE_PLAN').AsInteger := RUtils.BooleanToInteger(CustomerEditFrm.cbxMaintenancePlan.Checked);
-        MTDM.cdsVehicle.FieldByName('COMMENT').AsString := CustomerEditFrm.memVComment.Text;
+        MTDM.cdsVehicle.FieldByName('THE_YEAR').AsInteger := MTDM.FFieldValue.YearOfManufacture;
+        MTDM.cdsVehicle.FieldByName('VEHICLE_MAKE_ID').AsInteger := MTDM.FFieldValue.VehicleMakeID;
+        MTDM.cdsVehicle.FieldByName('VEHICLE_MODEL').AsString := MTDM.FFieldValue.VehicleModel;
+        MTDM.cdsVehicle.FieldByName('REG_NO').AsString := MTDM.FFieldValue.VehicleRegNo;
+        MTDM.cdsVehicle.FieldByName('RENEWAL_DATE').AsDateTime := MTDM.FFieldValue.LicenceRenewalDate;
+        MTDM.cdsVehicle.FieldByName('MAINTENANCE_PLAN').AsInteger := MTDM.FFieldValue.MaintenancePlan;
+        MTDM.cdsVehicle.FieldByName('COMMENT').AsString := MTDM.FFieldValue.Comment;
 
         MTDM.ValueArray[0] := 'Make:' + TAB + TAB + CustomerEditFrm.lucVehicleMake.Text;
         MTDM.ValueArray[1] := 'Model:' + TAB + TAB + CustomerEditFrm.edtModel.Text;
@@ -506,272 +524,272 @@ begin
             MTDM.ValueArray[4]]);
       end;
   end;
+  Result := ErrorValues;
 
-  // Post the data
-  try
-    FDetailDataSet[MTDM.DetailIndex].Post;
-//  except on E: EIBNativeException do
-//  except on E: EFDDBEngineException do
-
-//  except on E: Exception do
-  except on E: EFDException do
-    begin
-      if MTDM.PostError then
-      begin
-//        Beep;
-        if E.FDCode = 15 then // Duplicate record
-          raise EDuplicateException.Create('Duplicate records not allowed.' + CRLF + CRLF +
-            FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + ' already exists.' + CRLF + CRLF +
-            ErrorValues
-            );
-
-//        DisplayMsg(
-//          Application.Title,
-//          'Data Validataion Error',
-//          'One or more errors occurred in posting data.' + CRLF + CRLF +
-//          E.Message + CRLF + CRLF +
-//          FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + ' already exists.' + CRLF + CRLF +
-//          ErrorValues,
-//          mtError,
-//          [mbOK]
-//          );
-      end;
-    end;
-  end;
+// // Post the data
+// try
+/// /    FDetailDataSet[MTDM.DetailIndex].Post;
+// MTDM.cdsContactDetailCo.Post;
+//
+/// /  except on E: Exception do
+// except on E: EFDException do
+// begin
+// if MTDM.PostError then
+// begin
+/// /        Beep;
+// if E.FDCode = 15 then // Duplicate record
+// raise EDuplicateException.Create('Duplicate records not allowed.' + CRLF + CRLF +
+// FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + ' already exists.' + CRLF + CRLF +
+// ErrorValues
+// );
+//
+/// /        DisplayMsg(
+/// /          Application.Title,
+/// /          'Data Validataion Error',
+/// /          'One or more errors occurred in posting data.' + CRLF + CRLF +
+/// /          E.Message + CRLF + CRLF +
+/// /          FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + ' already exists.' + CRLF + CRLF +
+/// /          ErrorValues,
+/// /          mtError,
+/// /          [mbOK]
+/// /          );
+// end;
+// end;
+// end;
 end;
 
-//procedure TCustomerFrm.FillFieldData(DetailDataSetID: Integer);
-//const
-//  ERROR_MESSAGE =
-//    '%s' + CRLF + // Error type
-//    '%s' + CRLF + CRLF; // Detail table identifier
+// procedure TCustomerFrm.FillFieldData(DetailDataSetID: Integer);
+// const
+// ERROR_MESSAGE =
+// '%s' + CRLF + // Error type
+// '%s' + CRLF + CRLF; // Detail table identifier
 //
-//  ERROR_VALUES = '%s';
-//var
-//  ErrorValues: string;
+// ERROR_VALUES = '%s';
+// var
+// ErrorValues: string;
 //
-//begin
-////  if FDetailDataSet[MTDM.DetailIndex].State in [dsEdit, dsInsert] then
-////    FDetailDataSet[MTDM.DetailIndex].Cancel;
+// begin
+/// /  if FDetailDataSet[MTDM.DetailIndex].State in [dsEdit, dsInsert] then
+/// /    FDetailDataSet[MTDM.DetailIndex].Cancel;
 //
-//  case MTDM.DBAction of
-//    acInsert: FDetailDataSet[MTDM.DetailIndex].Insert;
-//    acModify: FDetailDataSet[MTDM.DetailIndex].Edit;
-//  end;
+// case MTDM.DBAction of
+// acInsert: FDetailDataSet[MTDM.DetailIndex].Insert;
+// acModify: FDetailDataSet[MTDM.DetailIndex].Edit;
+// end;
 //
-//  case DetailDataSetID of
-//    0: // Company contact
-//      begin
-//        MTDM.cdsContactDetailCo.FieldByName('CONTACT_TYPE_ID').AsInteger := CustomerEditFrm.lucContactType.EditValue;
-//        MTDM.cdsContactDetailCo.FieldByName('VALUE').AsString := CustomerEditFrm.edtContactDetailValue.Text;
-//        MTDM.cdsContactDetailCo.FieldByName('COMMENT').AsString := CustomerEditFrm.memContactDetailComment.Text;
+// case DetailDataSetID of
+// 0: // Company contact
+// begin
+// MTDM.cdsContactDetailCo.FieldByName('CONTACT_TYPE_ID').AsInteger := CustomerEditFrm.lucContactType.EditValue;
+// MTDM.cdsContactDetailCo.FieldByName('VALUE').AsString := CustomerEditFrm.edtContactDetailValue.Text;
+// MTDM.cdsContactDetailCo.FieldByName('COMMENT').AsString := CustomerEditFrm.memContactDetailComment.Text;
 //
-//        MTDM.ValueArray[0] := 'Contact Type:' + TAB + CustomerEditFrm.lucContactType.Text;
-//        MTDM.ValueArray[1] := 'Contact Value:' + TAB + CustomerEditFrm.edtContactDetailValue.Text;
-//        ErrorValues := Format(ERROR_VALUES, [
-//          MTDM.ValueArray[0] + CRLF +
-//            MTDM.ValueArray[1]]);
-//      end;
+// MTDM.ValueArray[0] := 'Contact Type:' + TAB + CustomerEditFrm.lucContactType.Text;
+// MTDM.ValueArray[1] := 'Contact Value:' + TAB + CustomerEditFrm.edtContactDetailValue.Text;
+// ErrorValues := Format(ERROR_VALUES, [
+// MTDM.ValueArray[0] + CRLF +
+// MTDM.ValueArray[1]]);
+// end;
 //
-//    1: // Address
-//      begin
-//        MTDM.cdsAddress.FieldByName('PHYSICAL1').AsString := CustomerEditFrm.edtPhysical1.Text;
-//        MTDM.cdsAddress.FieldByName('PHYSICAL2').AsString := CustomerEditFrm.edtPhysical2.Text;
-//        MTDM.cdsAddress.FieldByName('PHYSICAL3').AsString := CustomerEditFrm.edtPhysical3.Text;
-//        MTDM.cdsAddress.FieldByName('PHYSICAL4').AsString := CustomerEditFrm.edtPhysical4.Text;
-//        MTDM.cdsAddress.FieldByName('PHYSICAL_CODE').AsString := CustomerEditFrm.edtPhysicalPostalCode.Text;
+// 1: // Address
+// begin
+// MTDM.cdsAddress.FieldByName('PHYSICAL1').AsString := CustomerEditFrm.edtPhysical1.Text;
+// MTDM.cdsAddress.FieldByName('PHYSICAL2').AsString := CustomerEditFrm.edtPhysical2.Text;
+// MTDM.cdsAddress.FieldByName('PHYSICAL3').AsString := CustomerEditFrm.edtPhysical3.Text;
+// MTDM.cdsAddress.FieldByName('PHYSICAL4').AsString := CustomerEditFrm.edtPhysical4.Text;
+// MTDM.cdsAddress.FieldByName('PHYSICAL_CODE').AsString := CustomerEditFrm.edtPhysicalPostalCode.Text;
 //
-//        MTDM.cdsAddress.FieldByName('POSTAL1').AsString := CustomerEditFrm.edtPostal1.Text;
-//        MTDM.cdsAddress.FieldByName('POSTAL2').AsString := CustomerEditFrm.edtPostal2.Text;
-//        MTDM.cdsAddress.FieldByName('POSTAL3').AsString := CustomerEditFrm.edtPostal3.Text;
-//        MTDM.cdsAddress.FieldByName('POSTAL4').AsString := CustomerEditFrm.edtPostal4.Text;
-//        MTDM.cdsAddress.FieldByName('POSTAL_CODE').AsString := CustomerEditFrm.EdtPostalCode.Text;
+// MTDM.cdsAddress.FieldByName('POSTAL1').AsString := CustomerEditFrm.edtPostal1.Text;
+// MTDM.cdsAddress.FieldByName('POSTAL2').AsString := CustomerEditFrm.edtPostal2.Text;
+// MTDM.cdsAddress.FieldByName('POSTAL3').AsString := CustomerEditFrm.edtPostal3.Text;
+// MTDM.cdsAddress.FieldByName('POSTAL4').AsString := CustomerEditFrm.edtPostal4.Text;
+// MTDM.cdsAddress.FieldByName('POSTAL_CODE').AsString := CustomerEditFrm.EdtPostalCode.Text;
 //
-//        MTDM.cdsAddress.FieldByName('BILLING1').AsString := CustomerEditFrm.edtBilling1.Text;
-//        MTDM.cdsAddress.FieldByName('BILLING2').AsString := CustomerEditFrm.edtBilling2.Text;
-//        MTDM.cdsAddress.FieldByName('BILLING3').AsString := CustomerEditFrm.edtBilling3.Text;
-//        MTDM.cdsAddress.FieldByName('BILLING4').AsString := CustomerEditFrm.edtBilling4.Text;
-//        MTDM.cdsAddress.FieldByName('BILLING_CODE').AsString := CustomerEditFrm.edtBillingPostalCode.Text;
-//      end;
+// MTDM.cdsAddress.FieldByName('BILLING1').AsString := CustomerEditFrm.edtBilling1.Text;
+// MTDM.cdsAddress.FieldByName('BILLING2').AsString := CustomerEditFrm.edtBilling2.Text;
+// MTDM.cdsAddress.FieldByName('BILLING3').AsString := CustomerEditFrm.edtBilling3.Text;
+// MTDM.cdsAddress.FieldByName('BILLING4').AsString := CustomerEditFrm.edtBilling4.Text;
+// MTDM.cdsAddress.FieldByName('BILLING_CODE').AsString := CustomerEditFrm.edtBillingPostalCode.Text;
+// end;
 //
-//    2: // Contact person
-//      begin
-//        MTDM.cdsContactPerson.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtPFirstName.Text;
-//        MTDM.cdsContactPerson.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtPLastName.Text;
-//        MTDM.cdsContactPerson.FieldByName('OTHER_NAME').AsString := CustomerEditFrm.edtPOtherName.Text;
-//        MTDM.cdsContactPerson.FieldByName('ID_NUMBER').AsString := CustomerEditFrm.edtPIDNo.Text;
-//        MTDM.cdsContactPerson.FieldByName('PASSPORT_NUMBER').AsString := CustomerEditFrm.edtPPassportNo.Text;
-//        MTDM.cdsContactPerson.FieldByName('SALUTATION_ID').AsInteger := CustomerEditFrm.lucPSalutation.EditValue;
-//        MTDM.cdsContactPerson.FieldByName('INITIALS').AsString := CustomerEditFrm.edtPInitials.Text;
-//        MTDM.cdsContactPerson.FieldByName('DOB').AsDateTime := CustomerEditFrm.lucPDOB.EditValue;
-//        MTDM.cdsContactPerson.FieldByName('JOB_FUNCTION_ID').AsInteger := CustomerEditFrm.lucPJobFunction.EditValue;
-//        MTDM.cdsContactPerson.FieldByName('IS_PRIMARY_CONTACT').AsInteger := RUtils.BooleanToInteger(CustomerEditFrm.cbxPPrimaryContact.Checked);
+// 2: // Contact person
+// begin
+// MTDM.cdsContactPerson.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtPFirstName.Text;
+// MTDM.cdsContactPerson.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtPLastName.Text;
+// MTDM.cdsContactPerson.FieldByName('OTHER_NAME').AsString := CustomerEditFrm.edtPOtherName.Text;
+// MTDM.cdsContactPerson.FieldByName('ID_NUMBER').AsString := CustomerEditFrm.edtPIDNo.Text;
+// MTDM.cdsContactPerson.FieldByName('PASSPORT_NUMBER').AsString := CustomerEditFrm.edtPPassportNo.Text;
+// MTDM.cdsContactPerson.FieldByName('SALUTATION_ID').AsInteger := CustomerEditFrm.lucPSalutation.EditValue;
+// MTDM.cdsContactPerson.FieldByName('INITIALS').AsString := CustomerEditFrm.edtPInitials.Text;
+// MTDM.cdsContactPerson.FieldByName('DOB').AsDateTime := CustomerEditFrm.lucPDOB.EditValue;
+// MTDM.cdsContactPerson.FieldByName('JOB_FUNCTION_ID').AsInteger := CustomerEditFrm.lucPJobFunction.EditValue;
+// MTDM.cdsContactPerson.FieldByName('IS_PRIMARY_CONTACT').AsInteger := RUtils.BooleanToInteger(CustomerEditFrm.cbxPPrimaryContact.Checked);
 //
-//        MTDM.ValueArray[0] := 'First Name:' + TAB + CustomerEditFrm.edtPFirstName.Text;
-//        MTDM.ValueArray[1] := 'Last Name:' + TAB + CustomerEditFrm.edtPLastName.Text;
-//        MTDM.ValueArray[2] := 'Salutation:' + TAB + CustomerEditFrm.lucPSalutation.Text;
-//        ErrorValues := Format(ERROR_VALUES, [
-//          MTDM.ValueArray[0] + CRLF +
-//            MTDM.ValueArray[1] + CRLF +
-//            MTDM.ValueArray[1]]);
-//      end;
+// MTDM.ValueArray[0] := 'First Name:' + TAB + CustomerEditFrm.edtPFirstName.Text;
+// MTDM.ValueArray[1] := 'Last Name:' + TAB + CustomerEditFrm.edtPLastName.Text;
+// MTDM.ValueArray[2] := 'Salutation:' + TAB + CustomerEditFrm.lucPSalutation.Text;
+// ErrorValues := Format(ERROR_VALUES, [
+// MTDM.ValueArray[0] + CRLF +
+// MTDM.ValueArray[1] + CRLF +
+// MTDM.ValueArray[1]]);
+// end;
 //
-//    3: // Contact details person
-//      begin
-//        MTDM.cdsContactDetailPerson.FieldByName('CONTACT_TYPE_ID').AsInteger := CustomerEditFrm.lucCDPContactType.EditValue;
-//        MTDM.cdsContactDetailPerson.FieldByName('VALUE').AsString := CustomerEditFrm.edtCDPValue.Text;
-//        MTDM.cdsContactDetailPerson.FieldByName('COMMENT').AsString := CustomerEditFrm.memCDPComment.Text;
+// 3: // Contact details person
+// begin
+// MTDM.cdsContactDetailPerson.FieldByName('CONTACT_TYPE_ID').AsInteger := CustomerEditFrm.lucCDPContactType.EditValue;
+// MTDM.cdsContactDetailPerson.FieldByName('VALUE').AsString := CustomerEditFrm.edtCDPValue.Text;
+// MTDM.cdsContactDetailPerson.FieldByName('COMMENT').AsString := CustomerEditFrm.memCDPComment.Text;
 //
-//        MTDM.ValueArray[0] := 'Contact Type:' + TAB + CustomerEditFrm.lucCDPContactType.Text;
-//        MTDM.ValueArray[1] := 'Contact Value:' + TAB + CustomerEditFrm.edtCDPValue.Text;
-//        ErrorValues := Format(ERROR_VALUES, [
-//          MTDM.ValueArray[0] + CRLF +
-//            MTDM.ValueArray[1]]);
-//      end;
+// MTDM.ValueArray[0] := 'Contact Type:' + TAB + CustomerEditFrm.lucCDPContactType.Text;
+// MTDM.ValueArray[1] := 'Contact Value:' + TAB + CustomerEditFrm.edtCDPValue.Text;
+// ErrorValues := Format(ERROR_VALUES, [
+// MTDM.ValueArray[0] + CRLF +
+// MTDM.ValueArray[1]]);
+// end;
 //
-//    4: // Banking details
-//      begin
-//        MTDM.cdsBankingDetail.FieldByName('BANK_ID').AsInteger := CustomerEditFrm.lucBank.EditValue;
-//        MTDM.cdsBankingDetail.FieldByName('ACCOUNT_TYPE_ID').AsInteger := CustomerEditFrm.lucAccType.EditValue;
-//        MTDM.cdsBankingDetail.FieldByName('BRANCH_CODE').AsString := CustomerEditFrm.edtBranchCode.Text;
-//        MTDM.cdsBankingDetail.FieldByName('ACCOUNT_NO').AsString := CustomerEditFrm.edtAccNo.Text;
-//        MTDM.cdsBankingDetail.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtBFirstName.Text;
-//        MTDM.cdsBankingDetail.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtBLastName.Text;
+// 4: // Banking details
+// begin
+// MTDM.cdsBankingDetail.FieldByName('BANK_ID').AsInteger := CustomerEditFrm.lucBank.EditValue;
+// MTDM.cdsBankingDetail.FieldByName('ACCOUNT_TYPE_ID').AsInteger := CustomerEditFrm.lucAccType.EditValue;
+// MTDM.cdsBankingDetail.FieldByName('BRANCH_CODE').AsString := CustomerEditFrm.edtBranchCode.Text;
+// MTDM.cdsBankingDetail.FieldByName('ACCOUNT_NO').AsString := CustomerEditFrm.edtAccNo.Text;
+// MTDM.cdsBankingDetail.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtBFirstName.Text;
+// MTDM.cdsBankingDetail.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtBLastName.Text;
 //
-//        MTDM.ValueArray[0] := 'Bank:' + TAB + CustomerEditFrm.lucBank.Text;
-//        MTDM.ValueArray[1] := 'Account Type:' + TAB + CustomerEditFrm.lucAccType.Text;
-//        MTDM.ValueArray[2] := 'Account No:' + TAB + CustomerEditFrm.edtAccNo.Text;
-//        ErrorValues := Format(ERROR_VALUES, [
-//          MTDM.ValueArray[0] + CRLF +
-//            MTDM.ValueArray[1] + CRLF +
-//            MTDM.ValueArray[2]
-//            ]);
-//      end;
+// MTDM.ValueArray[0] := 'Bank:' + TAB + CustomerEditFrm.lucBank.Text;
+// MTDM.ValueArray[1] := 'Account Type:' + TAB + CustomerEditFrm.lucAccType.Text;
+// MTDM.ValueArray[2] := 'Account No:' + TAB + CustomerEditFrm.edtAccNo.Text;
+// ErrorValues := Format(ERROR_VALUES, [
+// MTDM.ValueArray[0] + CRLF +
+// MTDM.ValueArray[1] + CRLF +
+// MTDM.ValueArray[2]
+// ]);
+// end;
 //
-//    5: // Director
-//      begin
-//        MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtDFirstName.Text;
-//        MTDM.cdsDirector.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtDLastName.Text;
-//        MTDM.cdsDirector.FieldByName('MIDDLE_NAME').AsString := CustomerEditFrm.edtDOtherName.Text;
-//        MTDM.cdsDirector.FieldByName('EMAIL_ADDRESS').AsString := CustomerEditFrm.edtDEmailAddress.Text;
-//        MTDM.cdsDirector.FieldByName('SALUTATION_ID').AsInteger := CustomerEditFrm.lucDSalutation.EditValue;
-//        MTDM.cdsDirector.FieldByName('TAX_NO').AsString := CustomerEditFrm.edtDTaxNo.Text;
-//        MTDM.cdsDirector.FieldByName('MOBILE_PHONE').AsString := CustomerEditFrm.edtDMobileNo.Text;
+// 5: // Director
+// begin
+// MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtDFirstName.Text;
+// MTDM.cdsDirector.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtDLastName.Text;
+// MTDM.cdsDirector.FieldByName('MIDDLE_NAME').AsString := CustomerEditFrm.edtDOtherName.Text;
+// MTDM.cdsDirector.FieldByName('EMAIL_ADDRESS').AsString := CustomerEditFrm.edtDEmailAddress.Text;
+// MTDM.cdsDirector.FieldByName('SALUTATION_ID').AsInteger := CustomerEditFrm.lucDSalutation.EditValue;
+// MTDM.cdsDirector.FieldByName('TAX_NO').AsString := CustomerEditFrm.edtDTaxNo.Text;
+// MTDM.cdsDirector.FieldByName('MOBILE_PHONE').AsString := CustomerEditFrm.edtDMobileNo.Text;
 //
-//        MTDM.ValueArray[0] := 'First Name:' + TAB + CustomerEditFrm.edtDFirstName.Text;
-//        MTDM.ValueArray[1] := 'Last Name:' + TAB + CustomerEditFrm.edtDLastName.Text;
-//        MTDM.ValueArray[2] := 'Salutation:' + TAB + CustomerEditFrm.lucDSalutation.Text;
-//        ErrorValues := Format(ERROR_VALUES, [
-//          MTDM.ValueArray[0] + CRLF +
-//            MTDM.ValueArray[1] + CRLF +
-//            MTDM.ValueArray[2]]);
-//      end;
+// MTDM.ValueArray[0] := 'First Name:' + TAB + CustomerEditFrm.edtDFirstName.Text;
+// MTDM.ValueArray[1] := 'Last Name:' + TAB + CustomerEditFrm.edtDLastName.Text;
+// MTDM.ValueArray[2] := 'Salutation:' + TAB + CustomerEditFrm.lucDSalutation.Text;
+// ErrorValues := Format(ERROR_VALUES, [
+// MTDM.ValueArray[0] + CRLF +
+// MTDM.ValueArray[1] + CRLF +
+// MTDM.ValueArray[2]]);
+// end;
 //
-//    6: // Beneficiary
-//      begin
-//        MTDM.cdsBeneficiary.FieldByName('SALUTATION_ID').AsInteger := CustomerEditFrm.lucBFSalutation.EditValue;
-//        MTDM.cdsBeneficiary.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtBFFirstName.Text;
-//        MTDM.cdsBeneficiary.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtBFLastName.Text;
-//        MTDM.cdsBeneficiary.FieldByName('MOBILE_PHONE').AsString := CustomerEditFrm.edtBFMobileNo.Text;
-//        MTDM.cdsBeneficiary.FieldByName('EMAIL_ADDRESS').AsString := CustomerEditFrm.edtBFEmailAddress.Text;
+// 6: // Beneficiary
+// begin
+// MTDM.cdsBeneficiary.FieldByName('SALUTATION_ID').AsInteger := CustomerEditFrm.lucBFSalutation.EditValue;
+// MTDM.cdsBeneficiary.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtBFFirstName.Text;
+// MTDM.cdsBeneficiary.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtBFLastName.Text;
+// MTDM.cdsBeneficiary.FieldByName('MOBILE_PHONE').AsString := CustomerEditFrm.edtBFMobileNo.Text;
+// MTDM.cdsBeneficiary.FieldByName('EMAIL_ADDRESS').AsString := CustomerEditFrm.edtBFEmailAddress.Text;
 //
-//        MTDM.ValueArray[0] := 'First Name:' + TAB + CustomerEditFrm.edtBFFirstName.Text;
-//        MTDM.ValueArray[1] := 'Last Name:' + TAB + CustomerEditFrm.edtBFLastName.Text;
-//        MTDM.ValueArray[2] := 'Salutation:' + TAB + CustomerEditFrm.lucBFSalutation.Text;
-//        MTDM.ValueArray[3] := 'Mobile No:' + TAB + CustomerEditFrm.edtBFMobileNo.Text;
-//        MTDM.ValueArray[4] := 'Email Address:' + TAB + CustomerEditFrm.edtBFEmailAddress.Text;
-//        ErrorValues := Format(ERROR_VALUES, [
-//          MTDM.ValueArray[0] + CRLF +
-//            MTDM.ValueArray[1] + CRLF +
-//            MTDM.ValueArray[2] + CRLF +
-//            MTDM.ValueArray[3] + CRLF +
-//            MTDM.ValueArray[4]]);
-//      end;
+// MTDM.ValueArray[0] := 'First Name:' + TAB + CustomerEditFrm.edtBFFirstName.Text;
+// MTDM.ValueArray[1] := 'Last Name:' + TAB + CustomerEditFrm.edtBFLastName.Text;
+// MTDM.ValueArray[2] := 'Salutation:' + TAB + CustomerEditFrm.lucBFSalutation.Text;
+// MTDM.ValueArray[3] := 'Mobile No:' + TAB + CustomerEditFrm.edtBFMobileNo.Text;
+// MTDM.ValueArray[4] := 'Email Address:' + TAB + CustomerEditFrm.edtBFEmailAddress.Text;
+// ErrorValues := Format(ERROR_VALUES, [
+// MTDM.ValueArray[0] + CRLF +
+// MTDM.ValueArray[1] + CRLF +
+// MTDM.ValueArray[2] + CRLF +
+// MTDM.ValueArray[3] + CRLF +
+// MTDM.ValueArray[4]]);
+// end;
 //
-//    7: // Vehicle
-//      begin
-//        MTDM.cdsVehicle.FieldByName('THE_YEAR').AsInteger := CustomerEditFrm.edtYear.EditValue;
-//        MTDM.cdsVehicle.FieldByName('VEHICLE_MAKE_ID').AsString := CustomerEditFrm.lucVehicleMake.EditValue;
-//        MTDM.cdsVehicle.FieldByName('VEHICLE_MODEL').AsString := CustomerEditFrm.edtModel.Text;
-//        MTDM.cdsVehicle.FieldByName('REG_NO').AsString := CustomerEditFrm.edtRegNo.Text;
-//        MTDM.cdsVehicle.FieldByName('RENEWAL_DATE').AsDateTime := CustomerEditFrm.lucRenewlDate.EditValue;
-//        MTDM.cdsVehicle.FieldByName('MAINTENANCE_PLAN').AsInteger := RUtils.BooleanToInteger(CustomerEditFrm.cbxMaintenancePlan.Checked);
-//        MTDM.cdsVehicle.FieldByName('COMMENT').AsString := CustomerEditFrm.memVComment.Text;
+// 7: // Vehicle
+// begin
+// MTDM.cdsVehicle.FieldByName('THE_YEAR').AsInteger := CustomerEditFrm.edtYear.EditValue;
+// MTDM.cdsVehicle.FieldByName('VEHICLE_MAKE_ID').AsString := CustomerEditFrm.lucVehicleMake.EditValue;
+// MTDM.cdsVehicle.FieldByName('VEHICLE_MODEL').AsString := CustomerEditFrm.edtModel.Text;
+// MTDM.cdsVehicle.FieldByName('REG_NO').AsString := CustomerEditFrm.edtRegNo.Text;
+// MTDM.cdsVehicle.FieldByName('RENEWAL_DATE').AsDateTime := CustomerEditFrm.lucRenewlDate.EditValue;
+// MTDM.cdsVehicle.FieldByName('MAINTENANCE_PLAN').AsInteger := RUtils.BooleanToInteger(CustomerEditFrm.cbxMaintenancePlan.Checked);
+// MTDM.cdsVehicle.FieldByName('COMMENT').AsString := CustomerEditFrm.memVComment.Text;
 //
-//        MTDM.ValueArray[0] := 'Make:' + TAB + TAB + CustomerEditFrm.lucVehicleMake.Text;
-//        MTDM.ValueArray[1] := 'Model:' + TAB + TAB + CustomerEditFrm.edtModel.Text;
-//        MTDM.ValueArray[2] := 'Year:' + TAB + TAB + CustomerEditFrm.edtYear.Text;
-//        MTDM.ValueArray[3] := 'Reg No:' + TAB + TAB + CustomerEditFrm.edtRegNo.Text;
-//        MTDM.ValueArray[4] := 'Renewal Date: ' + TAB + CustomerEditFrm.lucVehicleMake.Text;
-//        ErrorValues := Format(ERROR_VALUES, [
-//          MTDM.ValueArray[0] + CRLF +
-//            MTDM.ValueArray[1] + CRLF +
-//            MTDM.ValueArray[2] + CRLF +
-//            MTDM.ValueArray[3] + CRLF +
-//            MTDM.ValueArray[4]]);
-//      end;
-//  end;
+// MTDM.ValueArray[0] := 'Make:' + TAB + TAB + CustomerEditFrm.lucVehicleMake.Text;
+// MTDM.ValueArray[1] := 'Model:' + TAB + TAB + CustomerEditFrm.edtModel.Text;
+// MTDM.ValueArray[2] := 'Year:' + TAB + TAB + CustomerEditFrm.edtYear.Text;
+// MTDM.ValueArray[3] := 'Reg No:' + TAB + TAB + CustomerEditFrm.edtRegNo.Text;
+// MTDM.ValueArray[4] := 'Renewal Date: ' + TAB + CustomerEditFrm.lucVehicleMake.Text;
+// ErrorValues := Format(ERROR_VALUES, [
+// MTDM.ValueArray[0] + CRLF +
+// MTDM.ValueArray[1] + CRLF +
+// MTDM.ValueArray[2] + CRLF +
+// MTDM.ValueArray[3] + CRLF +
+// MTDM.ValueArray[4]]);
+// end;
+// end;
 //
-//  // Post the data
-//  try
-//    FDetailDataSet[MTDM.DetailIndex].Post;
-////  except on E: EIBNativeException do
-////  except on E: EFDDBEngineException do
+// // Post the data
+// try
+// FDetailDataSet[MTDM.DetailIndex].Post;
+/// /  except on E: EIBNativeException do
+/// /  except on E: EFDDBEngineException do
 //
-////  except on E: Exception do
-//  except on E: EFDException do
-//    begin
-//      if MTDM.PostError then
-//      begin
-//        Beep;
-//        if E.FDCode = 15 then // Duplicate record
+/// /  except on E: Exception do
+// except on E: EFDException do
+// begin
+// if MTDM.PostError then
+// begin
+// Beep;
+// if E.FDCode = 15 then // Duplicate record
 //
-//          DisplayMsg(
-//            Application.Title,
-//            'Data Validataion Error',
-//            'One or more errors occurred in posting data.' + CRLF + CRLF +
-//            E.Message + CRLF + CRLF +
-//            FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + ' already exists.' + CRLF + CRLF +
-//            ErrorValues,
-//            mtError,
-//            [mbOK]
-//            );
+// DisplayMsg(
+// Application.Title,
+// 'Data Validataion Error',
+// 'One or more errors occurred in posting data.' + CRLF + CRLF +
+// E.Message + CRLF + CRLF +
+// FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + ' already exists.' + CRLF + CRLF +
+// ErrorValues,
+// mtError,
+// [mbOK]
+// );
 //
-////        case MTDM.DetailIndex of
-////          0: // Company contact details
-////            begin
-////              DisplayMsg(
-////                Application.Title,
-////                'Data Validataion Error',
-////                'One or more errors occurred in posting data.' + CRLF + CRLF +
-////                E.Message + CRLF + CRLF +
-////                FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + CRLF + CRLF +
-////                ErrorValues,
-//////                ERROR_VALUES,
-////                mtError,
-////                [mbOK]
-////                );
-////            end;
-////
-////          4: // Banking details
-////            begin
-////              DisplayMsg(
-////                Application.Title,
-////                'Data Validataion Error',
-////                'One or more errors occurred in posting data.' + CRLF + CRLF +
-////                E.Message + CRLF + CRLF +
-////                FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + CRLF + CRLF +
-////                ErrorValues,
-//////                ERROR_VALUES,
-////                mtError,
-////                [mbOK]
-////                );
-////            end;
-////        end;
-//      end;
-//    end;
-//  end;
-//end;
+/// /        case MTDM.DetailIndex of
+/// /          0: // Company contact details
+/// /            begin
+/// /              DisplayMsg(
+/// /                Application.Title,
+/// /                'Data Validataion Error',
+/// /                'One or more errors occurred in posting data.' + CRLF + CRLF +
+/// /                E.Message + CRLF + CRLF +
+/// /                FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + CRLF + CRLF +
+/// /                ErrorValues,
+/// ///                ERROR_VALUES,
+/// /                mtError,
+/// /                [mbOK]
+/// /                );
+/// /            end;
+/// /
+/// /          4: // Banking details
+/// /            begin
+/// /              DisplayMsg(
+/// /                Application.Title,
+/// /                'Data Validataion Error',
+/// /                'One or more errors occurred in posting data.' + CRLF + CRLF +
+/// /                E.Message + CRLF + CRLF +
+/// /                FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + CRLF + CRLF +
+/// /                ErrorValues,
+/// ///                ERROR_VALUES,
+/// /                mtError,
+/// /                [mbOK]
+/// /                );
+/// /            end;
+/// /        end;
+// end;
+// end;
+// end;
+// end;
 //
 
 procedure TCustomerFrm.FormCreate(Sender: TObject);
@@ -779,7 +797,7 @@ begin
   inherited;
   Screen.Cursor := crHourglass;
   Caption := 'Customer Manager';
-//  Customer := TCustomerDetail.Create;
+// Customer := TCustomerDetail.Create;
   litLegend.LayoutLookAndFeel := lafCustomSkin;
   styLegend.Style.Font.Color := cxLookAndFeels.RootLookAndFeel.SkinPainter.DefaultContentTextColor;
   styLegend.Style.TextColor := cxLookAndFeels.RootLookAndFeel.SkinPainter.DefaultContentTextColor;
@@ -818,14 +836,14 @@ begin
   viewDirector.DataController.DataSource := MTDM.dtsDirector;
   viewBeneficiary.DataController.DataSource := MTDM.dtsBeneficiary;
   viewVehicle.DataController.DataSource := MTDM.dtsVehicle;
-//  FDetailDataSet[0] := MTDM.cdsContactDetailCo;
-//  FDetailDataSet[1] := MTDM.cdsAddress;
-//  FDetailDataSet[2] := MTDM.cdsContactPerson;
-//  FDetailDataSet[3] := MTDM.cdsContactDetailPerson;
-//  FDetailDataSet[4] := MTDM.cdsBankingDetail;
-//  FDetailDataSet[5] := MTDM.cdsDirector;
-//  FDetailDataSet[6] := MTDM.cdsBeneficiary;
-//  FDetailDataSet[7] := MTDM.cdsVehicle;
+// FDetailDataSet[0] := MTDM.cdsContactDetailCo;
+// FDetailDataSet[1] := MTDM.cdsAddress;
+// FDetailDataSet[2] := MTDM.cdsContactPerson;
+// FDetailDataSet[3] := MTDM.cdsContactDetailPerson;
+// FDetailDataSet[4] := MTDM.cdsBankingDetail;
+// FDetailDataSet[5] := MTDM.cdsDirector;
+// FDetailDataSet[6] := MTDM.cdsBeneficiary;
+// FDetailDataSet[7] := MTDM.cdsVehicle;
 
   SetLength(FDetailDataSet, 8);
   FDetailDataSet[0] := MTDM.cdsContactDetailCo;
@@ -874,7 +892,7 @@ begin
 
   if Self.Showing then
   begin
-    case MTDM.DetailIndex {grpDetailGrid.ItemIndex} of
+    case MTDM.DetailIndex { grpDetailGrid.ItemIndex } of
       0:
         begin
           grdContactDetailCo.SetFocus;
@@ -896,7 +914,7 @@ begin
 
       2:
         begin
-//          MTDM.DetailIndex := grpDetailGrid.ItemIndex;
+// MTDM.DetailIndex := grpDetailGrid.ItemIndex;
 
           grdContactPerson.SetFocus;
           viewContactPerson.Focused := True;
@@ -906,14 +924,15 @@ begin
           MTDM.FormCaption := 'Contact Person Details';
         end;
 
-//      3:
-//        begin
-//          grdCPContactDetail.SetFocus;
-//          viewCPContactDetail.Focused := True;
-//          actInsert.Caption := 'Add a new contact detail';
-//          actEdit.Caption := 'Edit selected contact detail';
-//          actDelete.Caption := 'Delete selected contact detail';
-//        end;
+        {TODO: Not setting form caption correctly here!!}
+// 3:
+// begin
+// grdCPContactDetail.SetFocus;
+// viewCPContactDetail.Focused := True;
+// actInsert.Caption := 'Add a new contact detail';
+// actEdit.Caption := 'Edit selected contact detail';
+// actDelete.Caption := 'Delete selected contact detail';
+// end;
 
       4:
         begin
@@ -956,6 +975,34 @@ begin
         end;
     end;
   end;
+end;
+
+procedure TCustomerFrm.HandleTSAfterPost(var MyMsg: TMessage);
+//var
+//// S: PChar;
+//  SL: TStringList;
+begin
+//  SL := TStringList.Create;
+//  SL.Delimiter := PIPE;
+//  SL.QuoteChar := '"';
+//  SL.DelimitedText := PChar(MyMsg.WParam);
+//// S := PChar(MyMsg.LParam);
+//
+//  try
+//    if SL.Values['REQUEST'] = 'REFRESH_DATA' then
+//    begin
+//      viewBillable.DataController.BeginUpdate;
+//      try
+//        GetBillableTimesheet;
+//        if not ReportDM.cdsTimesheet.Locate('ID', StrToInt(SL.Values['ID']), []) then
+//          ReportDM.cdsTimesheet.First;
+//      finally
+//        viewBillable.DataController.EndUpdate;
+//      end;
+//    end;
+//  finally
+//    MyMsg.Result := -1;
+//  end;
 end;
 
 procedure TCustomerFrm.navCustomerButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
@@ -1036,13 +1083,13 @@ begin
     if not MTDM.cdsContactPerson.Active then
       MTDM.cdsContactPerson.CreateDataSet;
 
-    // Contact Detail Person
+    // Person Contact Detail
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
     SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Contact Detail Table' + '|PROGRESS=' + Iteration.ToString)), 0);
     VBBaseDM.GetData(37, MTDM.cdsContactDetailPerson, MTDM.cdsContactDetailPerson.Name, ONE_SPACE,
-      'C:\Data\Xml\Contact Detail PersonCustomer.xml', MTDM.cdsContactDetailPerson.UpdateOptions.Generatorname,
+      'C:\Data\Xml\Contact Detail Person Customer.xml', MTDM.cdsContactDetailPerson.UpdateOptions.Generatorname,
       MTDM.cdsContactDetailPerson.UpdateOptions.UpdateTableName);
 
     if not MTDM.cdsContactDetailPerson.Active then
@@ -1179,6 +1226,15 @@ begin
 
 end;
 
+procedure TCustomerFrm.grdContactPersonEnter(Sender: TObject);
+begin
+  inherited;
+  actInsert.Caption := 'Add a new contact person';
+  actEdit.Caption := 'Edit selected contact person';
+  actDelete.Caption := 'Delete selected contact person';
+  MTDM.DetailIndex :=  2;
+end;
+
 procedure TCustomerFrm.grdCPContactDetailEnter(Sender: TObject);
 begin
   inherited;
@@ -1191,11 +1247,11 @@ end;
 procedure TCustomerFrm.grdPhysicalAddressDblClick(Sender: TObject);
 begin
   inherited;
-//  if TcxGridSite(TcxDBVerticalGrid(Sender)).GridView.DataController.RecordCount = 0 then
+// if TcxGridSite(TcxDBVerticalGrid(Sender)).GridView.DataController.RecordCount = 0 then
   if TcxDBVerticalGrid(Sender).DataController.RecordCount = 0 then
     EditDeleteRecord(VK_INSERT)
   else
-    EditDeleteRecord({VK_F2}VK_RETURN);
+    EditDeleteRecord({ VK_F2 }VK_RETURN);
 end;
 
 procedure TCustomerFrm.grdPhysicalAddressEnter(Sender: TObject);
@@ -1208,200 +1264,238 @@ end;
 
 procedure TCustomerFrm.EditDeleteRecord(Key: Word);
 var
-//  ModResult: ShortInt;
-  ErrorMessage: string;
-  I, ModResult: Integer;
+// ModResult: ShortInt;
+  ErrorValues: string;
+  ModResult: Integer;
+  DataSet: TFDMemTable;
 begin
   Screen.Cursor := crHourglass;
+  ModResult := mrNone;
+  ErrorValues := '';
+  DataSet := nil;
 
   case Key of
-    VK_INSERT, VK_RETURN {VK_F2}:
+    VK_INSERT, VK_RETURN { VK_F2 }:
       begin
+        FOpenTableParam.ScriptID := 0;
+        FOpenTableParam.DataSet := nil;
+        FOpenTableParam.DataSetName := '';
+        FOpenTableParam.FileName := '';
+        FOpenTableParam.GeneratorName := '';
+        FOpenTableParam.UpdateTableName := '';
+        FOpenTableParam.FieldName := '';
+        FOpenTableParam.LocateValue := '';
+
         case Key of
           VK_INSERT: MTDM.DBAction := acInsert;
-          {VK_F2}VK_RETURN: MTDM.DBAction := acModify;
+          { VK_F2 }VK_RETURN: MTDM.DBAction := acModify;
         end;
 
         case MTDM.DetailIndex of
           0:
             begin
+              DataSet := MTDM.cdsContactDetailCo;
+
               if CompanyContactDetailFrm = nil then
                 CompanyContactDetailFrm := TCompanyContactDetailFrm.Create(nil);
 
               ModResult := CompanyContactDetailFrm.ShowModal;
               if ModResult = mrOK then
               begin
+                FOpenTableParam.ScriptID := 9;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Contact Detail Co.xml';
+                FOpenTableParam.FieldName := 'VALUE';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
               end;
+
               CompanyContactDetailFrm.Close;
               FreeAndNil(CompanyContactDetailFrm);
             end;
 
           1:
             begin
+              DataSet := MTDM.cdsAddress;
+
               if AddressDetailFrm = nil then
                 AddressDetailFrm := TAddressDetailFrm.Create(nil);
 
-              Modresult := AddressDetailFrm.ShowModal;
+              ModResult := AddressDetailFrm.ShowModal;
               if ModResult = mrOK then
               begin
+                FOpenTableParam.ScriptID := 4;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Address.xml';
+                FOpenTableParam.FieldName := 'PHYSICAL1';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
               end;
+
               AddressDetailFrm.Close;
               FreeAndNil(AddressDetailFrm);
             end;
 
+          2:
+            begin
+              DataSet := MTDM.cdsContactPerson;
+
+              if ContactPersonFrm = nil then
+                ContactPersonFrm := TContactPersonFrm.Create(nil);
+
+              ModResult := ContactPersonFrm.ShowModal;
+              if ModResult = mrOK then
+              begin
+                FOpenTableParam.ScriptID := 10;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Contact Person.xml';
+                FOpenTableParam.FieldName := 'FIRST_NAME';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
+              end;
+
+              ContactPersonFrm.Close;
+              FreeAndNil(ContactPersonFrm);
+            end;
+
           3:
             begin
+              if MTDM.cdsContactPerson.IsEmpty then
+              begin
+                Screen.Cursor := crDefault;
+                raise ENoDataException.Create('Please add a contact person before adding the details.');
+              end;
+
+              DataSet := MTDM.cdsContactDetailPerson;
+
               if PersonContactDetailFrm = nil then
                 PersonContactDetailFrm := TPersonContactDetailFrm.Create(nil);
-              ModResult := PersonContactDetailFrm.ShowModal;
-              if ModalResult = mrOK then
-              begin
 
+              ModResult := PersonContactDetailFrm.ShowModal;
+              if ModResult = mrOK then
+              begin
+                FOpenTableParam.ScriptID := 37;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Contact Detail Person Customer.xml';
+                FOpenTableParam.FieldName := 'VALUE';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
               end;
+
               PersonContactDetailFrm.Close;
               FreeAndNil(PersonContactDetailFrm);
             end;
 
           4:
             begin
+              DataSet := MTDM.cdsBankingDetail;
+
               if BankingDetailFrm = nil then
                 BankingDetailFrm := TBankingDetailFrm.Create(nil);
+
               ModResult := BankingDetailFrm.ShowModal;
               if ModResult = mrOK then
               begin
+                FOpenTableParam.ScriptID := 7;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Banking Detail.xml';
+                FOpenTableParam.FieldName := 'FIRST_NAME';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
               end;
+
               BankingDetailFrm.Close;
               FreeAndNil(BankingDetailFrm);
             end;
 
           5:
             begin
+              DataSet := MTDM.cdsDirector;
+
               if DirectorDetailFrm = nil then
                 DirectorDetailFrm := TDirectorDetailFrm.Create(nil);
+
               ModResult := DirectorDetailFrm.ShowModal;
               if ModResult = mrOK then
               begin
-
+                FOpenTableParam.ScriptID := 16;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Director.xml';
+                FOpenTableParam.FieldName := 'FIRST_NAME';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
               end;
+
               DirectorDetailFrm.Close;
               FreeAndNil(DirectorDetailFrm);
             end;
 
           6:
             begin
+              DataSet := MTDM.cdsBeneficiary;
+
               if BeneficiaryDetailFrm = nil then
                 BeneficiaryDetailFrm := TBeneficiaryDetailFrm.Create(nil);
+
               ModResult := BeneficiaryDetailFrm.ShowModal;
               if ModResult = mrOK then
               begin
-
+                FOpenTableParam.ScriptID := 8;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Beneficiary.xml';
+                FOpenTableParam.FieldName := 'FIRST_NAME';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
               end;
+
               BeneficiaryDetailFrm.Close;
               FreeAndNil(BeneficiaryDetailFrm);
             end;
 
           7:
             begin
+              DataSet := MTDM.cdsVehicle;
+
               if VehicleDetailFrm = nil then
                 VehicleDetailFrm := TVehicleDetailFrm.Create(nil);
+
               ModResult := VehicleDetailFrm.ShowModal;
               if ModResult = mrOK then
               begin
-
+                FOpenTableParam.ScriptID := 49;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Vehicle.xml';
+                FOpenTableParam.FieldName := 'REG_NO';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
               end;
+
               VehicleDetailFrm.Close;
               FreeAndNil(VehicleDetailFrm);
             end;
         end;
 
+// SELECT GEN_ID( <GeneratorName>, 0 ) FROM RDB$DATABASE;
         if ModResult = mrOK then
-          FillFieldData(MTDM.DetailIndex);
+          try
+            Screen.Cursor := crHourglass;
+            ErrorValues := FillFieldData(MTDM.DetailIndex);
+            FOpenTableParam.DataSet := DataSet;
+            FOpenTableParam.DataSetName := DataSet.Name;
+            FOpenTableParam.GeneratorName := DataSet.UpdateOptions.Generatorname;
+            FOpenTableParam.UpdateTableName := DataSet.UpdateOptions.UpdateTableName;
 
-        Exit;
-
-        if CustomerEditFrm = nil then
-          CustomerEditFrm := TCustomerEditFrm.Create(nil);
-
-        CustomerEditFrm.lblHeaderTitle.Caption := FDetailFriendlyName[MTDM.DetailIndex];
-        CustomerEditFrm.lblSubTitle.Caption := MTDM.cdsCustomer.FieldByName('NAME').AsString;
-
-        MTDM.PostError := False;
-//        MTDM.DetailIndex := grpDetailGrid.ItemIndex;
-
-        try
-          if CustomerEditFrm.ShowModal = mrOK then
+            // Post the data
             try
-              FillFieldData(MTDM.DetailIndex);
-            except on E: EFDDBEngineException do
+              FDetailDataSet[MTDM.DetailIndex].Post;
+
+              VBBaseDM.GetData(FOpenTableParam.ScriptID, FOpenTableParam.DataSet, FOpenTableParam.DataSetName, ONE_SPACE,
+                FOpenTableParam.FileName, FOpenTableParam.GeneratorName, FOpenTableParam.UpdateTableName);
+
+              // Don't do a located for Address
+              if MTDM.DetailIndex <> 1 then
+                if not FDetailDataSet[MTDM.DetailIndex].Locate(FOpenTableParam.FieldName, FOpenTableParam.LocateValue, [loCaseInsensitive]) then
+                  FDetailDataSet[MTDM.DetailIndex].First;
+            except
+              on E: EFDException do
               begin
-                ErrorMessage := E.Message;
-                for I := 0 to E.ErrorCount - 1 do
-                  ShowMessage('Error code: ' + E.Errors[I].ErrorCode.ToString);
-                Delete(ErrorMessage, 1, pos(' ', E.Message, 1));
-                Beep;
-                DisplayMsg(
-                  Application.Title,
-                  'Data Validataion Error',
-                  'An error occurred in posting data.' + CRLF + CRLF +
-                  ErrorMessage + CRLF + CRLF +
-                  'Please ansure that all fields have been enterd and try again or Cancel to abort the transaction.',
-                  mtError,
-                  [mbOK]
-                  );
+                if MTDM.PostError then
+                begin
+                  if E.FDCode = 15 then // Duplicate record
+                    raise EDuplicateException.Create('Duplicate records not allowed.' + CRLF + CRLF +
+                      FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + ' already exists.' + CRLF + CRLF +
+                      ErrorValues
+                      );
+                end;
               end;
             end;
-        finally
-          CustomerEditFrm.Close;
-          FreeAndNil(CustomerEditFrm);
-        end;
-
-//        repeat
-//          ModResult := CustomerEditFrm.ShowModal;
-//          if ModResult = mrRetry then
-//          begin
-//            try
-//              FillFieldData(MTDM.DetailIndex);
-//              ModResult := mrOK;
-//              CustomerEditFrm.Close;
-//              FreeAndNil(CustomerEditFrm);
-//            except on E: EDatabaseError do
-//              begin
-//                ModResult := mrRetry;
-//                ErrorMessage := E.Message;
-//                Delete(ErrorMessage, 1, pos(' ', E.Message, 1));
-//                Beep;
-//                DisplayMsg(
-//                  Application.Title,
-//                  'Data Validataion Error',
-//                  'An error occurred in posting data.' + CRLF + CRLF +
-//                  ErrorMessage + CRLF + CRLF +
-//                  'Please ansure that all fields have been enterd and try again or Cancel to abort the transaction.',
-//                  mtError,
-//                  [mbOK]
-//                  );
-//
-//                CustomerEditFrm.Close;
-//              end;
-//            end;
-//          end
-//          else
-//            MTDM.PostError := False
-//        until
-//          (MTDM.PostError = False)
-//          or (ModResult = mrOK);
-//
-//        if ModResult = mrCancel then
-//          if FDetailDataSet[MTDM.DetailIndex].State in [dsEdit, dsInsert] then
-//            FDetailDataSet[MTDM.DetailIndex].Cancel;
-//
-////        RUtils.PressKey(VK_ESCAPE, [], False);
-////        RUtils.PressKey(VK_ESCAPE, [], False);
-//
-//        if not (ModResult = mrOK) and (MTDM.PostError) then
-//        begin
-//          CustomerEditFrm.Close;
-//          FreeAndNil(CustomerEditFrm);
-//        end;
+          finally
+            Screen.Cursor := crDefault;
+          end;
       end;
 
     VK_DELETE:
@@ -1426,28 +1520,28 @@ begin
   if TcxGridSite(Sender).GridView.DataController.RecordCount = 0 then
     EditDeleteRecord(VK_INSERT)
   else
-    EditDeleteRecord({VK_F2}VK_RETURN);
+    EditDeleteRecord({ VK_F2 }VK_RETURN);
 end;
 
 procedure TCustomerFrm.viewContactDetailCoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-//var
-//  KeyPressed: Word;
+// var
+// KeyPressed: Word;
 begin
   inherited;
-//  KeyPressed := Key;
-//  case KeyPressed of
-//    VK_INSERT, VK_F2, VK_DELETE:
-//      begin
-//        // We handle key pressed ourselves from here.
-//        Key := 0;
-//        if Sender is TcxDBVerticalGrid then
-//          case KeyPressed of
-//            VK_INSERT, VK_F2: KeyPressed := VK_F2;
-//          end;
+// KeyPressed := Key;
+// case KeyPressed of
+// VK_INSERT, VK_F2, VK_DELETE:
+// begin
+// // We handle key pressed ourselves from here.
+// Key := 0;
+// if Sender is TcxDBVerticalGrid then
+// case KeyPressed of
+// VK_INSERT, VK_F2: KeyPressed := VK_F2;
+// end;
 //
-//        EditDeleteRecord(KeyPressed);
-//      end;
-//  end;
+// EditDeleteRecord(KeyPressed);
+// end;
+// end;
 end;
 
 procedure TCustomerFrm.viewContactDetailNavigatorButtonsButtonClick(Sender: TObject;
@@ -1460,7 +1554,7 @@ begin
 
   case AButtonIndex of
     NBDI_INSERT: Key := VK_INSERT;
-    NBDI_EDIT: Key := VK_RETURN {VK_F2};
+    NBDI_EDIT: Key := VK_RETURN { VK_F2 };
     NBDI_DELETE: Key := VK_DELETE;
   else
     Key := 0;
@@ -1468,48 +1562,48 @@ begin
 
   EditDeleteRecord(Key);
 
-//  case AButtonIndex of
-//    NBDI_DELETE:
-//      begin
-//        Beep;
-//        ADone := DisplayMsg(
-//          Application.Title,
-//          'Delete Confirmaiton',
-//          'Are you sure you want to delete the selected Activity Type?' + CRLF + CRLF +
-//          'This action cannot be undone!',
-//          mtConfirmation,
-//          [mbYes, mbNo]
-//          ) = mrNo;
-//      end;
+// case AButtonIndex of
+// NBDI_DELETE:
+// begin
+// Beep;
+// ADone := DisplayMsg(
+// Application.Title,
+// 'Delete Confirmaiton',
+// 'Are you sure you want to delete the selected Activity Type?' + CRLF + CRLF +
+// 'This action cannot be undone!',
+// mtConfirmation,
+// [mbYes, mbNo]
+// ) = mrNo;
+// end;
 //
-//    NBDI_INSERT, NBDI_EDIT:
-//      begin
-//        if CustomerEditFrm = nil then
-//          CustomerEditFrm := TCustomerEditFrm.Create(nil);
+// NBDI_INSERT, NBDI_EDIT:
+// begin
+// if CustomerEditFrm = nil then
+// CustomerEditFrm := TCustomerEditFrm.Create(nil);
 //
-//        MTDM.DetailIndex := 0;
-//        case AButtonIndex of
-//          NBDI_INSERT: MTDM.DBAction := acInsert;
-//          NBDI_EDIT: MTDM.DBAction := acModify;
-//        end;
+// MTDM.DetailIndex := 0;
+// case AButtonIndex of
+// NBDI_INSERT: MTDM.DBAction := acInsert;
+// NBDI_EDIT: MTDM.DBAction := acModify;
+// end;
 //
-//        if CustomerEditFrm.ShowModal = mrOK then
-//          MTDM.cdsContactDetailCo.Post
-//        else if MTDM.cdsContactDetailCo.State in [dsEdit, dsInsert] then
-//          MTDM.cdsContactDetailCo.Cancel;
+// if CustomerEditFrm.ShowModal = mrOK then
+// MTDM.cdsContactDetailCo.Post
+// else if MTDM.cdsContactDetailCo.State in [dsEdit, dsInsert] then
+// MTDM.cdsContactDetailCo.Cancel;
 //
-//        CustomerEditFrm.Close;
-//        FreeAndNil(CustomerEditFrm);
-//      end;
-//  end;
+// CustomerEditFrm.Close;
+// FreeAndNil(CustomerEditFrm);
+// end;
+// end;
 end;
 
 procedure TCustomerFrm.viewContactPersonFocusedRecordChanged(Sender: TcxCustomGridTableView; APrevFocusedRecord,
   AFocusedRecord: TcxCustomGridRecord; ANewItemRecordFocusingChanged: Boolean);
 begin
   inherited;
-//  if AFocusedRecord <> nil then
-//  begin
+// if AFocusedRecord <> nil then
+// begin
   viewCPContactDetail.OnKeyDown := viewContactDetailCoKeyDown;
   viewCPContactDetail.OnDblClick := viewContactDetailCoDblClick;
   viewCPContactDetail.Navigator.Visible := viewContactPerson.DataController.RecordCount > 0;
@@ -1520,9 +1614,9 @@ begin
     viewCPContactDetail.OnDblClick := nil;
   end;
 
-//    viewContactPerson.OptionsData.Inserting := viewContactPerson.DataController.RecordCount > 0;
-//    viewContactPerson.OptionsData.Editing := viewContactPerson.OptionsData.Inserting;
-//  end;
+// viewContactPerson.OptionsData.Inserting := viewContactPerson.DataController.RecordCount > 0;
+// viewContactPerson.OptionsData.Editing := viewContactPerson.OptionsData.Inserting;
+// end;
 end;
 
 procedure TCustomerFrm.viewCustomerCustomDrawCell(Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;

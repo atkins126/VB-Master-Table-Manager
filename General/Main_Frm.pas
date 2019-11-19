@@ -19,7 +19,7 @@ uses
   System.Classes, Vcl.Graphics, System.ImageList, Vcl.ImgList, Vcl.Controls,
   Vcl.Dialogs, System.Actions, Vcl.ActnList, System.StrUtils, System.Types,
 
-  VBProxyClass, BaseLayout_Frm,
+  VBProxyClass, BaseLayout_Frm, VBCommonValues, CommonMethods, CommonFunction,
 
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
   dxSkinsDefaultPainters, cxImageList, dxLayoutLookAndFeels, cxClasses, cxStyles,
@@ -110,6 +110,8 @@ type
     function CreateNewTabSheet(TabSheetName, TabSheetCaption: string; PageControl: TcxPageControl; Action: TAction): TcxTabSheet;
     procedure UpdateApplicationSkin(SkinResourceFileName, SkinName: string);
     procedure CloseTheForm(PageIndex: Integer; FormToClose: TForm; ActionTag: Integer; Action: TAction);
+  protected
+    procedure HandleTSAfterPost(var MyMsg: TMessage); message WM_RECORD_ID;
   public
     { Public declarations }
   end;
@@ -143,9 +145,6 @@ uses
   TaxOffice_Frm,
   VehicleMake_Frm,
   RUtils,
-  CommonMethods,
-  VBCommonValues,
-  CommonFunction,
   VBBase_DM,
   Base_Frm,
   Lookup_DM,
@@ -234,6 +233,23 @@ begin
   finally
     Screen.Cursor := crDefault;
   end;
+end;
+
+procedure TMainFrm.HandleTSAfterPost(var MyMsg: TMessage);
+//var
+//  SL: TStringList;
+begin
+//  SL := TStringList.Create;
+//  SL.Delimiter := PIPE;
+//  SL.QuoteChar := '"';
+//  SL.DelimitedText := PChar(MyMsg.WParam);
+//
+//  try
+//    if SL.Values['REQUEST'] = 'REFRESH_DATA' then
+//      SendMessage(CustomerFrm.Handle, WM_RECORD_ID, DWORD(PChar(SL.DelimitedText)), 0);
+//  finally
+//    MyMsg.Result := -1;
+//  end;
 end;
 
 procedure TMainFrm.FormDestroy(Sender: TObject);

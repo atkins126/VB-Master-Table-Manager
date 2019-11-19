@@ -1218,7 +1218,960 @@ inherited CustomerEditFrm: TCustomerEditFrm
       end
     end
   end
-  object pnlAddress: TcxGroupBox [6]
+  object pnlDirector: TcxGroupBox [6]
+    Left = 503
+    Top = 554
+    PanelStyle.Active = True
+    Style.BorderStyle = ebsNone
+    TabOrder = 7
+    Visible = False
+    Height = 135
+    Width = 555
+    object layDirector: TdxLayoutControl
+      Left = 3
+      Top = 3
+      Width = 549
+      Height = 381
+      Align = alTop
+      TabOrder = 0
+      object lucDSalutation: TcxLookupComboBox
+        Left = 98
+        Top = 40
+        BeepOnEnter = False
+        Properties.DropDownAutoSize = True
+        Properties.DropDownListStyle = lsFixedList
+        Properties.ImmediatePost = True
+        Properties.KeyFieldNames = 'ID'
+        Properties.ListColumns = <
+          item
+            FieldName = 'NAME'
+          end>
+        Properties.PostPopupValueOnTab = True
+        Properties.OnChange = lucContactTypePropertiesChange
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        Style.ButtonStyle = bts3D
+        Style.PopupBorderStyle = epbsFrame3D
+        TabOrder = 4
+        Width = 160
+      end
+      object edtDFirstName: TcxTextEdit
+        Left = 98
+        Top = 11
+        BeepOnEnter = False
+        Properties.OnChange = lucContactTypePropertiesChange
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 0
+        Text = 'edtDFirstName'
+        Width = 160
+      end
+      object edtDLastName: TcxTextEdit
+        Left = 359
+        Top = 11
+        BeepOnEnter = False
+        Properties.OnChange = lucContactTypePropertiesChange
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 2
+        Text = 'edtDLastName'
+        Width = 160
+      end
+      object edtDOtherName: TcxTextEdit
+        Left = 359
+        Top = 40
+        BeepOnEnter = False
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 6
+        Text = 'edtDOtherName'
+        Width = 160
+      end
+      object edtDTaxNo: TcxTextEdit
+        Left = 359
+        Top = 69
+        BeepOnEnter = False
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 8
+        Text = 'edtDTaxNo'
+        Width = 160
+      end
+      object edtDMobileNo: TcxTextEdit
+        Left = 98
+        Top = 69
+        BeepOnEnter = False
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 7
+        Text = 'edtDMobileNo'
+        Width = 160
+      end
+      object edtDEmailAddress: TcxTextEdit
+        Left = 98
+        Top = 96
+        BeepOnEnter = False
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 9
+        Text = 'edtDEmailAddress'
+        Width = 421
+      end
+      object lblReq14: TcxLabel
+        Left = 264
+        Top = 11
+        Caption = '*'
+        ParentFont = False
+        Style.HotTrack = False
+        Style.StyleController = styMandatory
+        Properties.Alignment.Vert = taVCenter
+        Transparent = True
+        AnchorY = 23
+      end
+      object lblReq15: TcxLabel
+        Left = 525
+        Top = 11
+        Caption = '*'
+        ParentFont = False
+        Style.HotTrack = False
+        Style.StyleController = styMandatory
+        Properties.Alignment.Vert = taVCenter
+        Transparent = True
+        AnchorY = 23
+      end
+      object lblReq16: TcxLabel
+        Left = 264
+        Top = 40
+        Caption = '*'
+        ParentFont = False
+        Style.HotTrack = False
+        Style.StyleController = styMandatory
+        Properties.Alignment.Vert = taVCenter
+        Transparent = True
+        AnchorY = 52
+      end
+      object layDirectorGroup_Root: TdxLayoutGroup
+        AlignHorz = ahParentManaged
+        AlignVert = avParentManaged
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ItemIndex = 3
+        ShowBorder = False
+        Index = -1
+      end
+      object grpDFirstName: TdxLayoutGroup
+        Parent = layDirectorGroup_Root
+        CaptionOptions.Text = 'New Group'
+        ButtonOptions.Buttons = <>
+        ItemIndex = 3
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 0
+      end
+      object grpDSalutation: TdxLayoutGroup
+        Parent = layDirectorGroup_Root
+        CaptionOptions.Text = 'New Group'
+        ButtonOptions.Buttons = <>
+        ItemIndex = 1
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 1
+      end
+      object grpTaxNo: TdxLayoutGroup
+        Parent = layDirectorGroup_Root
+        CaptionOptions.Text = 'New Group'
+        ButtonOptions.Buttons = <>
+        ItemIndex = 1
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 2
+      end
+      object litDFirstName: TdxLayoutItem
+        Parent = grpDFirstName
+        CaptionOptions.Text = 'First Name'
+        Control = edtDFirstName
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object litDLastName: TdxLayoutItem
+        Parent = grpDFirstName
+        CaptionOptions.Text = 'Last Name'
+        Control = edtDLastName
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object litDSalutation: TdxLayoutItem
+        Parent = grpDSalutation
+        CaptionOptions.Text = 'Salutation'
+        Control = lucDSalutation
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object litDTaxNo: TdxLayoutItem
+        Parent = grpTaxNo
+        CaptionOptions.Text = 'Tax No'
+        Control = edtDMobileNo
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object litDMobileNo: TdxLayoutItem
+        Parent = grpTaxNo
+        CaptionOptions.Text = 'Mobile No'
+        Control = edtDTaxNo
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object litDEmailAddress: TdxLayoutItem
+        Parent = layDirectorGroup_Root
+        AlignHorz = ahLeft
+        CaptionOptions.Text = 'Email Address'
+        Control = edtDEmailAddress
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 421
+        ControlOptions.ShowBorder = False
+        Index = 3
+      end
+      object litDOtherName: TdxLayoutItem
+        Parent = grpDSalutation
+        CaptionOptions.Text = 'Other Name'
+        Control = edtDOtherName
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object litReq14: TdxLayoutItem
+        Parent = grpDFirstName
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Control = lblReq14
+        ControlOptions.OriginalHeight = 23
+        ControlOptions.OriginalWidth = 14
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object litReq15: TdxLayoutItem
+        Parent = grpDFirstName
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Control = lblReq15
+        ControlOptions.OriginalHeight = 23
+        ControlOptions.OriginalWidth = 14
+        ControlOptions.ShowBorder = False
+        Index = 3
+      end
+      object litReq16: TdxLayoutItem
+        Parent = grpDSalutation
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Control = lblReq16
+        ControlOptions.OriginalHeight = 23
+        ControlOptions.OriginalWidth = 14
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object spc1: TdxLayoutEmptySpaceItem
+        Parent = grpTaxNo
+        CaptionOptions.Text = 'Empty Space Item'
+        SizeOptions.Height = 10
+        SizeOptions.Width = 28
+        Index = 1
+      end
+    end
+  end
+  object pnlBeneficiary: TcxGroupBox [7]
+    Left = 506
+    Top = 687
+    PanelStyle.Active = True
+    Style.BorderStyle = ebsNone
+    TabOrder = 8
+    Visible = False
+    Height = 110
+    Width = 555
+    object layBeneficiary: TdxLayoutControl
+      Left = 3
+      Top = 3
+      Width = 549
+      Height = 381
+      Align = alTop
+      TabOrder = 0
+      object lucBFSalutation: TcxLookupComboBox
+        Left = 98
+        Top = 40
+        BeepOnEnter = False
+        Properties.DropDownAutoSize = True
+        Properties.DropDownListStyle = lsFixedList
+        Properties.ImmediatePost = True
+        Properties.KeyFieldNames = 'ID'
+        Properties.ListColumns = <
+          item
+            FieldName = 'NAME'
+          end>
+        Properties.PostPopupValueOnTab = True
+        Properties.OnChange = lucContactTypePropertiesChange
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        Style.ButtonStyle = bts3D
+        Style.PopupBorderStyle = epbsFrame3D
+        TabOrder = 4
+        Width = 160
+      end
+      object edtBFFirstname: TcxTextEdit
+        Left = 98
+        Top = 11
+        BeepOnEnter = False
+        Properties.OnChange = lucContactTypePropertiesChange
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 0
+        Text = 'edtBFFirstname'
+        Width = 160
+      end
+      object edtBFLastName: TcxTextEdit
+        Left = 350
+        Top = 11
+        BeepOnEnter = False
+        Properties.OnChange = lucContactTypePropertiesChange
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 2
+        Text = 'edtBFLastName'
+        Width = 160
+      end
+      object edtBFEmailAddress: TcxTextEdit
+        Left = 98
+        Top = 69
+        BeepOnEnter = False
+        Properties.OnChange = lucContactTypePropertiesChange
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 8
+        Text = 'edtBFEmailAddress'
+        Width = 412
+      end
+      object edtBFMobileNo: TcxTextEdit
+        Left = 350
+        Top = 40
+        BeepOnEnter = False
+        Properties.OnChange = lucContactTypePropertiesChange
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 6
+        Text = 'edtBFMobileNo'
+        Width = 160
+      end
+      object lblReq17: TcxLabel
+        Left = 264
+        Top = 11
+        Caption = '*'
+        ParentFont = False
+        Style.HotTrack = False
+        Style.StyleController = styMandatory
+        Properties.Alignment.Vert = taVCenter
+        Transparent = True
+        AnchorY = 23
+      end
+      object lblReq18: TcxLabel
+        Left = 516
+        Top = 11
+        Caption = '*'
+        ParentFont = False
+        Style.HotTrack = False
+        Style.StyleController = styMandatory
+        Properties.Alignment.Vert = taVCenter
+        Transparent = True
+        AnchorY = 23
+      end
+      object lblReq19: TcxLabel
+        Left = 264
+        Top = 40
+        Caption = '*'
+        ParentFont = False
+        Style.HotTrack = False
+        Style.StyleController = styMandatory
+        Properties.Alignment.Vert = taVCenter
+        Transparent = True
+        AnchorY = 52
+      end
+      object lblReq20: TcxLabel
+        Left = 516
+        Top = 40
+        Caption = '*'
+        ParentFont = False
+        Style.HotTrack = False
+        Style.StyleController = styMandatory
+        Properties.Alignment.Vert = taVCenter
+        Transparent = True
+        AnchorY = 52
+      end
+      object lblReq21: TcxLabel
+        Left = 516
+        Top = 69
+        Caption = '*'
+        ParentFont = False
+        Style.HotTrack = False
+        Style.StyleController = styMandatory
+        Properties.Alignment.Vert = taVCenter
+        Transparent = True
+        AnchorY = 81
+      end
+      object layBeneficiaryGroup_Root: TdxLayoutGroup
+        AlignHorz = ahParentManaged
+        AlignVert = avParentManaged
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ItemIndex = 1
+        ShowBorder = False
+        Index = -1
+      end
+      object grpBFName: TdxLayoutGroup
+        Parent = layBeneficiaryGroup_Root
+        CaptionOptions.Text = 'New Group'
+        ButtonOptions.Buttons = <>
+        ItemIndex = 3
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 0
+      end
+      object grpBFSalutation: TdxLayoutGroup
+        Parent = layBeneficiaryGroup_Root
+        CaptionOptions.Text = 'New Group'
+        ButtonOptions.Buttons = <>
+        ItemIndex = 3
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 1
+      end
+      object litBFFirstName: TdxLayoutItem
+        Parent = grpBFName
+        CaptionOptions.Text = 'First Name'
+        Control = edtBFFirstname
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object litBFLastName: TdxLayoutItem
+        Parent = grpBFName
+        CaptionOptions.Text = 'Last Name'
+        Control = edtBFLastName
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object TdxLayoutItem
+        Parent = grpBFSalutation
+        CaptionOptions.Text = 'Salutation'
+        Control = lucBFSalutation
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object litBFMobileNo: TdxLayoutItem
+        Parent = grpBFSalutation
+        CaptionOptions.Text = 'Mobile No'
+        Control = edtBFMobileNo
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object litBFEmailAddress: TdxLayoutItem
+        Parent = grpBFEmailAddress
+        AlignHorz = ahLeft
+        CaptionOptions.Text = 'Email Address'
+        Control = edtBFEmailAddress
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 412
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object litReq17: TdxLayoutItem
+        Parent = grpBFName
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Control = lblReq17
+        ControlOptions.OriginalHeight = 23
+        ControlOptions.OriginalWidth = 14
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object litReq18: TdxLayoutItem
+        Parent = grpBFName
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Control = lblReq18
+        ControlOptions.OriginalHeight = 23
+        ControlOptions.OriginalWidth = 14
+        ControlOptions.ShowBorder = False
+        Index = 3
+      end
+      object litReq19: TdxLayoutItem
+        Parent = grpBFSalutation
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Control = lblReq19
+        ControlOptions.OriginalHeight = 23
+        ControlOptions.OriginalWidth = 14
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object litReq21: TdxLayoutItem
+        Parent = grpBFEmailAddress
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Control = lblReq21
+        ControlOptions.OriginalHeight = 23
+        ControlOptions.OriginalWidth = 14
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object grpBFEmailAddress: TdxLayoutGroup
+        Parent = layBeneficiaryGroup_Root
+        CaptionOptions.Text = 'New Group'
+        ButtonOptions.Buttons = <>
+        ItemIndex = 1
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 2
+      end
+      object litReq20: TdxLayoutItem
+        Parent = grpBFSalutation
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Control = lblReq20
+        ControlOptions.OriginalHeight = 23
+        ControlOptions.OriginalWidth = 14
+        ControlOptions.ShowBorder = False
+        Index = 3
+      end
+    end
+  end
+  object pnlCoContactPerson: TcxGroupBox [8]
+    Left = 551
+    Top = 382
+    PanelStyle.Active = True
+    Style.BorderStyle = ebsNone
+    TabOrder = 4
+    Visible = False
+    Height = 160
+    Width = 545
+    object layContactPerson: TdxLayoutControl
+      Left = 3
+      Top = 3
+      Width = 539
+      Height = 381
+      Align = alTop
+      TabOrder = 0
+      object lucPSalutation: TcxLookupComboBox
+        Left = 87
+        Top = 40
+        BeepOnEnter = False
+        Properties.DropDownAutoSize = True
+        Properties.DropDownListStyle = lsFixedList
+        Properties.ImmediatePost = True
+        Properties.KeyFieldNames = 'ID'
+        Properties.ListColumns = <
+          item
+            FieldName = 'NAME'
+          end>
+        Properties.PostPopupValueOnTab = True
+        Properties.OnChange = lucContactTypePropertiesChange
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        Style.ButtonStyle = bts3D
+        Style.PopupBorderStyle = epbsFrame3D
+        TabOrder = 4
+        Width = 160
+      end
+      object lucPJobFunction: TcxLookupComboBox
+        Left = 87
+        Top = 123
+        BeepOnEnter = False
+        Properties.DropDownAutoSize = True
+        Properties.DropDownListStyle = lsFixedList
+        Properties.ImmediatePost = True
+        Properties.KeyFieldNames = 'ID'
+        Properties.ListColumns = <
+          item
+            FieldName = 'NAME'
+          end>
+        Properties.PostPopupValueOnTab = True
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        Style.ButtonStyle = bts3D
+        Style.PopupBorderStyle = epbsFrame3D
+        TabOrder = 11
+        Width = 160
+      end
+      object edtPFirstName: TcxTextEdit
+        Left = 87
+        Top = 11
+        BeepOnEnter = False
+        Properties.OnChange = lucContactTypePropertiesChange
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 0
+        Text = 'edtPFirstName'
+        Width = 160
+      end
+      object edtPLastName: TcxTextEdit
+        Left = 347
+        Top = 11
+        BeepOnEnter = False
+        Properties.OnChange = lucContactTypePropertiesChange
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 2
+        Text = 'edtPLastName'
+        Width = 160
+      end
+      object edtPInitials: TcxTextEdit
+        Left = 347
+        Top = 40
+        BeepOnEnter = False
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 6
+        Text = 'edtPInitials'
+        Width = 160
+      end
+      object edtPOtherName: TcxTextEdit
+        Left = 87
+        Top = 69
+        BeepOnEnter = False
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 7
+        Text = 'edtPOtherName'
+        Width = 160
+      end
+      object edtPIDNo: TcxTextEdit
+        Left = 87
+        Top = 96
+        BeepOnEnter = False
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 9
+        Text = 'edtPIDNo'
+        Width = 160
+      end
+      object edtPPassportNo: TcxTextEdit
+        Left = 346
+        Top = 96
+        BeepOnEnter = False
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 10
+        Text = 'edtPPassportNo'
+        Width = 160
+      end
+      object lucPDOB: TcxDateEdit
+        Left = 347
+        Top = 69
+        Properties.ImmediatePost = True
+        Properties.SaveTime = False
+        Properties.ShowTime = False
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        Style.ButtonStyle = bts3D
+        Style.PopupBorderStyle = epbsFrame3D
+        TabOrder = 8
+        Width = 160
+      end
+      object cbxPPrimaryContact: TcxCheckBox
+        Left = 269
+        Top = 123
+        Caption = 'Primary Contact'
+        Properties.Alignment = taLeftJustify
+        Properties.ImmediatePost = True
+        Properties.UseAlignmentWhenInplace = True
+        Properties.ValueChecked = 1
+        Properties.ValueUnchecked = 0
+        State = cbsGrayed
+        Style.BorderColor = clWindowFrame
+        Style.BorderStyle = ebs3D
+        Style.HotTrack = False
+        TabOrder = 12
+        Transparent = True
+      end
+      object lblReq3: TcxLabel
+        Left = 253
+        Top = 11
+        Caption = '*'
+        ParentFont = False
+        Style.HotTrack = False
+        Style.StyleController = styMandatory
+        Properties.Alignment.Vert = taVCenter
+        Transparent = True
+        AnchorY = 23
+      end
+      object lblReq4: TcxLabel
+        Left = 513
+        Top = 11
+        Caption = '*'
+        ParentFont = False
+        Style.HotTrack = False
+        Style.StyleController = styMandatory
+        Properties.Alignment.Vert = taVCenter
+        Transparent = True
+        AnchorY = 23
+      end
+      object lblReq5: TcxLabel
+        Left = 253
+        Top = 40
+        Caption = '*'
+        ParentFont = False
+        Style.HotTrack = False
+        Style.StyleController = styMandatory
+        Properties.Alignment.Vert = taVCenter
+        Transparent = True
+        AnchorY = 52
+      end
+      object layContactPersonGroup_Root: TdxLayoutGroup
+        AlignHorz = ahParentManaged
+        AlignVert = avParentManaged
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ItemIndex = 3
+        ShowBorder = False
+        Index = -1
+      end
+      object grpCPName: TdxLayoutGroup
+        Parent = layContactPersonGroup_Root
+        CaptionOptions.Text = 'New Group'
+        ButtonOptions.Buttons = <>
+        ItemIndex = 2
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 0
+      end
+      object grpCPSalutation: TdxLayoutGroup
+        Parent = layContactPersonGroup_Root
+        CaptionOptions.Text = 'New Group'
+        ButtonOptions.Buttons = <>
+        ItemIndex = 2
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 1
+      end
+      object grpCPDOB: TdxLayoutGroup
+        Parent = layContactPersonGroup_Root
+        CaptionOptions.Text = 'New Group'
+        ButtonOptions.Buttons = <>
+        ItemIndex = 1
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 2
+      end
+      object grpCPIDNo: TdxLayoutGroup
+        Parent = layContactPersonGroup_Root
+        CaptionOptions.Text = 'New Group'
+        ButtonOptions.Buttons = <>
+        ItemIndex = 1
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 3
+      end
+      object litCPFirstName: TdxLayoutItem
+        Parent = grpCPName
+        CaptionOptions.Text = 'First Name'
+        Control = edtPFirstName
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object litCPLasNname: TdxLayoutItem
+        Parent = grpCPName
+        CaptionOptions.Text = 'Last Name  '
+        Control = edtPLastName
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object litCPSalutation: TdxLayoutItem
+        Parent = grpCPSalutation
+        CaptionOptions.Text = 'Salutation'
+        Control = lucPSalutation
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object litCPInitials: TdxLayoutItem
+        Parent = grpCPSalutation
+        CaptionOptions.Text = 'Initials'
+        Control = edtPInitials
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object litCPOtherName: TdxLayoutItem
+        Parent = grpCPDOB
+        CaptionOptions.Text = 'Other Name'
+        Control = edtPOtherName
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object litCPDOB: TdxLayoutItem
+        Parent = grpCPDOB
+        CaptionOptions.Text = 'DOB'
+        Control = lucPDOB
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object litCPIDNo: TdxLayoutItem
+        Parent = grpCPIDNo
+        CaptionOptions.Text = 'ID No'
+        Control = edtPIDNo
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object litCPJobFunction: TdxLayoutItem
+        Parent = grpJobFunction
+        CaptionOptions.Text = 'Job Function'
+        Control = lucPJobFunction
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 0
+      end
+      object litCPPassportNo: TdxLayoutItem
+        Parent = grpCPIDNo
+        CaptionOptions.Text = 'Passport No'
+        Control = edtPPassportNo
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 160
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object litCPPrimaryContact: TdxLayoutItem
+        Parent = grpJobFunction
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Control = cbxPPrimaryContact
+        ControlOptions.OriginalHeight = 21
+        ControlOptions.OriginalWidth = 117
+        ControlOptions.ShowBorder = False
+        Index = 2
+      end
+      object grpJobFunction: TdxLayoutGroup
+        Parent = layContactPersonGroup_Root
+        CaptionOptions.Text = 'New Group'
+        ButtonOptions.Buttons = <>
+        ItemIndex = 1
+        LayoutDirection = ldHorizontal
+        ShowBorder = False
+        Index = 4
+      end
+      object litMand3: TdxLayoutItem
+        Parent = grpCPName
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Control = lblReq3
+        ControlOptions.OriginalHeight = 23
+        ControlOptions.OriginalWidth = 14
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object litMand4: TdxLayoutItem
+        Parent = grpCPName
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Control = lblReq4
+        ControlOptions.OriginalHeight = 23
+        ControlOptions.OriginalWidth = 14
+        ControlOptions.ShowBorder = False
+        Index = 3
+      end
+      object litMand5: TdxLayoutItem
+        Parent = grpCPSalutation
+        CaptionOptions.Text = 'New Item'
+        CaptionOptions.Visible = False
+        Control = lblReq5
+        ControlOptions.OriginalHeight = 23
+        ControlOptions.OriginalWidth = 14
+        ControlOptions.ShowBorder = False
+        Index = 1
+      end
+      object spc2: TdxLayoutEmptySpaceItem
+        Parent = grpCPDOB
+        CaptionOptions.Text = 'Empty Space Item'
+        SizeOptions.Height = 10
+        SizeOptions.Width = 14
+        Index = 1
+      end
+      object spc3: TdxLayoutEmptySpaceItem
+        Parent = grpCPIDNo
+        CaptionOptions.Text = 'Empty Space Item'
+        SizeOptions.Height = 10
+        SizeOptions.Width = 13
+        Index = 1
+      end
+      object spc4: TdxLayoutEmptySpaceItem
+        Parent = grpJobFunction
+        CaptionOptions.Text = 'Empty Space Item'
+        SizeOptions.Height = 10
+        SizeOptions.Width = 10
+        Index = 1
+      end
+      object spc6: TdxLayoutEmptySpaceItem
+        CaptionOptions.Text = 'Empty Space Item'
+        SizeOptions.Height = 10
+        SizeOptions.Width = 5
+        Index = -1
+      end
+      object spc7: TdxLayoutEmptySpaceItem
+        CaptionOptions.Text = 'Empty Space Item'
+        SizeOptions.Height = 10
+        SizeOptions.Width = 5
+        Index = -1
+      end
+    end
+  end
+  object pnlAddress: TcxGroupBox [9]
     AlignWithMargins = True
     Left = 730
     Top = 349
@@ -1766,959 +2719,6 @@ inherited CustomerEditFrm: TCustomerEditFrm
         SizeOptions.Height = 5
         SizeOptions.Width = 10
         Index = 1
-      end
-    end
-  end
-  object pnlDirector: TcxGroupBox [7]
-    Left = 503
-    Top = 554
-    PanelStyle.Active = True
-    Style.BorderStyle = ebsNone
-    TabOrder = 7
-    Visible = False
-    Height = 135
-    Width = 555
-    object layDirector: TdxLayoutControl
-      Left = 3
-      Top = 3
-      Width = 549
-      Height = 381
-      Align = alTop
-      TabOrder = 0
-      object lucDSalutation: TcxLookupComboBox
-        Left = 98
-        Top = 40
-        BeepOnEnter = False
-        Properties.DropDownAutoSize = True
-        Properties.DropDownListStyle = lsFixedList
-        Properties.ImmediatePost = True
-        Properties.KeyFieldNames = 'ID'
-        Properties.ListColumns = <
-          item
-            FieldName = 'NAME'
-          end>
-        Properties.PostPopupValueOnTab = True
-        Properties.OnChange = lucContactTypePropertiesChange
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        Style.ButtonStyle = bts3D
-        Style.PopupBorderStyle = epbsFrame3D
-        TabOrder = 4
-        Width = 160
-      end
-      object edtDFirstName: TcxTextEdit
-        Left = 98
-        Top = 11
-        BeepOnEnter = False
-        Properties.OnChange = lucContactTypePropertiesChange
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 0
-        Text = 'edtDFirstName'
-        Width = 160
-      end
-      object edtDLastName: TcxTextEdit
-        Left = 359
-        Top = 11
-        BeepOnEnter = False
-        Properties.OnChange = lucContactTypePropertiesChange
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 2
-        Text = 'edtDLastName'
-        Width = 160
-      end
-      object edtDOtherName: TcxTextEdit
-        Left = 359
-        Top = 40
-        BeepOnEnter = False
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 6
-        Text = 'edtDOtherName'
-        Width = 160
-      end
-      object edtDTaxNo: TcxTextEdit
-        Left = 359
-        Top = 69
-        BeepOnEnter = False
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 8
-        Text = 'edtDTaxNo'
-        Width = 160
-      end
-      object edtDMobileNo: TcxTextEdit
-        Left = 98
-        Top = 69
-        BeepOnEnter = False
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 7
-        Text = 'edtDMobileNo'
-        Width = 160
-      end
-      object edtDEmailAddress: TcxTextEdit
-        Left = 98
-        Top = 96
-        BeepOnEnter = False
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 9
-        Text = 'edtDEmailAddress'
-        Width = 421
-      end
-      object lblReq14: TcxLabel
-        Left = 264
-        Top = 11
-        Caption = '*'
-        ParentFont = False
-        Style.HotTrack = False
-        Style.StyleController = styMandatory
-        Properties.Alignment.Vert = taVCenter
-        Transparent = True
-        AnchorY = 23
-      end
-      object lblReq15: TcxLabel
-        Left = 525
-        Top = 11
-        Caption = '*'
-        ParentFont = False
-        Style.HotTrack = False
-        Style.StyleController = styMandatory
-        Properties.Alignment.Vert = taVCenter
-        Transparent = True
-        AnchorY = 23
-      end
-      object lblReq16: TcxLabel
-        Left = 264
-        Top = 40
-        Caption = '*'
-        ParentFont = False
-        Style.HotTrack = False
-        Style.StyleController = styMandatory
-        Properties.Alignment.Vert = taVCenter
-        Transparent = True
-        AnchorY = 52
-      end
-      object layDirectorGroup_Root: TdxLayoutGroup
-        AlignHorz = ahParentManaged
-        AlignVert = avParentManaged
-        ButtonOptions.Buttons = <>
-        Hidden = True
-        ItemIndex = 3
-        ShowBorder = False
-        Index = -1
-      end
-      object grpDFirstName: TdxLayoutGroup
-        Parent = layDirectorGroup_Root
-        CaptionOptions.Text = 'New Group'
-        ButtonOptions.Buttons = <>
-        ItemIndex = 3
-        LayoutDirection = ldHorizontal
-        ShowBorder = False
-        Index = 0
-      end
-      object grpDSalutation: TdxLayoutGroup
-        Parent = layDirectorGroup_Root
-        CaptionOptions.Text = 'New Group'
-        ButtonOptions.Buttons = <>
-        ItemIndex = 1
-        LayoutDirection = ldHorizontal
-        ShowBorder = False
-        Index = 1
-      end
-      object grpTaxNo: TdxLayoutGroup
-        Parent = layDirectorGroup_Root
-        CaptionOptions.Text = 'New Group'
-        ButtonOptions.Buttons = <>
-        ItemIndex = 1
-        LayoutDirection = ldHorizontal
-        ShowBorder = False
-        Index = 2
-      end
-      object litDFirstName: TdxLayoutItem
-        Parent = grpDFirstName
-        CaptionOptions.Text = 'First Name'
-        Control = edtDFirstName
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object litDLastName: TdxLayoutItem
-        Parent = grpDFirstName
-        CaptionOptions.Text = 'Last Name'
-        Control = edtDLastName
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 2
-      end
-      object litDSalutation: TdxLayoutItem
-        Parent = grpDSalutation
-        CaptionOptions.Text = 'Salutation'
-        Control = lucDSalutation
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object litDTaxNo: TdxLayoutItem
-        Parent = grpTaxNo
-        CaptionOptions.Text = 'Tax No'
-        Control = edtDMobileNo
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object litDMobileNo: TdxLayoutItem
-        Parent = grpTaxNo
-        CaptionOptions.Text = 'Mobile No'
-        Control = edtDTaxNo
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 2
-      end
-      object litDEmailAddress: TdxLayoutItem
-        Parent = layDirectorGroup_Root
-        AlignHorz = ahLeft
-        CaptionOptions.Text = 'Email Address'
-        Control = edtDEmailAddress
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 421
-        ControlOptions.ShowBorder = False
-        Index = 3
-      end
-      object litDOtherName: TdxLayoutItem
-        Parent = grpDSalutation
-        CaptionOptions.Text = 'Other Name'
-        Control = edtDOtherName
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 2
-      end
-      object litReq14: TdxLayoutItem
-        Parent = grpDFirstName
-        CaptionOptions.Text = 'New Item'
-        CaptionOptions.Visible = False
-        Control = lblReq14
-        ControlOptions.OriginalHeight = 23
-        ControlOptions.OriginalWidth = 14
-        ControlOptions.ShowBorder = False
-        Index = 1
-      end
-      object litReq15: TdxLayoutItem
-        Parent = grpDFirstName
-        CaptionOptions.Text = 'New Item'
-        CaptionOptions.Visible = False
-        Control = lblReq15
-        ControlOptions.OriginalHeight = 23
-        ControlOptions.OriginalWidth = 14
-        ControlOptions.ShowBorder = False
-        Index = 3
-      end
-      object litReq16: TdxLayoutItem
-        Parent = grpDSalutation
-        CaptionOptions.Text = 'New Item'
-        CaptionOptions.Visible = False
-        Control = lblReq16
-        ControlOptions.OriginalHeight = 23
-        ControlOptions.OriginalWidth = 14
-        ControlOptions.ShowBorder = False
-        Index = 1
-      end
-      object spc1: TdxLayoutEmptySpaceItem
-        Parent = grpTaxNo
-        CaptionOptions.Text = 'Empty Space Item'
-        SizeOptions.Height = 10
-        SizeOptions.Width = 28
-        Index = 1
-      end
-    end
-  end
-  object pnlBeneficiary: TcxGroupBox [8]
-    Left = 506
-    Top = 687
-    PanelStyle.Active = True
-    Style.BorderStyle = ebsNone
-    TabOrder = 8
-    Visible = False
-    Height = 110
-    Width = 555
-    object layBeneficiary: TdxLayoutControl
-      Left = 3
-      Top = 3
-      Width = 549
-      Height = 381
-      Align = alTop
-      TabOrder = 0
-      object lucBFSalutation: TcxLookupComboBox
-        Left = 98
-        Top = 40
-        BeepOnEnter = False
-        Properties.DropDownAutoSize = True
-        Properties.DropDownListStyle = lsFixedList
-        Properties.ImmediatePost = True
-        Properties.KeyFieldNames = 'ID'
-        Properties.ListColumns = <
-          item
-            FieldName = 'NAME'
-          end>
-        Properties.PostPopupValueOnTab = True
-        Properties.OnChange = lucContactTypePropertiesChange
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        Style.ButtonStyle = bts3D
-        Style.PopupBorderStyle = epbsFrame3D
-        TabOrder = 4
-        Width = 160
-      end
-      object edtBFFirstname: TcxTextEdit
-        Left = 98
-        Top = 11
-        BeepOnEnter = False
-        Properties.OnChange = lucContactTypePropertiesChange
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 0
-        Text = 'edtBFFirstname'
-        Width = 160
-      end
-      object edtBFLastName: TcxTextEdit
-        Left = 350
-        Top = 11
-        BeepOnEnter = False
-        Properties.OnChange = lucContactTypePropertiesChange
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 2
-        Text = 'edtBFLastName'
-        Width = 160
-      end
-      object edtBFEmailAddress: TcxTextEdit
-        Left = 98
-        Top = 69
-        BeepOnEnter = False
-        Properties.OnChange = lucContactTypePropertiesChange
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 8
-        Text = 'edtBFEmailAddress'
-        Width = 412
-      end
-      object edtBFMobileNo: TcxTextEdit
-        Left = 350
-        Top = 40
-        BeepOnEnter = False
-        Properties.OnChange = lucContactTypePropertiesChange
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 6
-        Text = 'edtBFMobileNo'
-        Width = 160
-      end
-      object lblReq17: TcxLabel
-        Left = 264
-        Top = 11
-        Caption = '*'
-        ParentFont = False
-        Style.HotTrack = False
-        Style.StyleController = styMandatory
-        Properties.Alignment.Vert = taVCenter
-        Transparent = True
-        AnchorY = 23
-      end
-      object lblReq18: TcxLabel
-        Left = 516
-        Top = 11
-        Caption = '*'
-        ParentFont = False
-        Style.HotTrack = False
-        Style.StyleController = styMandatory
-        Properties.Alignment.Vert = taVCenter
-        Transparent = True
-        AnchorY = 23
-      end
-      object lblReq19: TcxLabel
-        Left = 264
-        Top = 40
-        Caption = '*'
-        ParentFont = False
-        Style.HotTrack = False
-        Style.StyleController = styMandatory
-        Properties.Alignment.Vert = taVCenter
-        Transparent = True
-        AnchorY = 52
-      end
-      object lblReq20: TcxLabel
-        Left = 516
-        Top = 40
-        Caption = '*'
-        ParentFont = False
-        Style.HotTrack = False
-        Style.StyleController = styMandatory
-        Properties.Alignment.Vert = taVCenter
-        Transparent = True
-        AnchorY = 52
-      end
-      object lblReq21: TcxLabel
-        Left = 516
-        Top = 69
-        Caption = '*'
-        ParentFont = False
-        Style.HotTrack = False
-        Style.StyleController = styMandatory
-        Properties.Alignment.Vert = taVCenter
-        Transparent = True
-        AnchorY = 81
-      end
-      object layBeneficiaryGroup_Root: TdxLayoutGroup
-        AlignHorz = ahParentManaged
-        AlignVert = avParentManaged
-        ButtonOptions.Buttons = <>
-        Hidden = True
-        ItemIndex = 1
-        ShowBorder = False
-        Index = -1
-      end
-      object grpBFName: TdxLayoutGroup
-        Parent = layBeneficiaryGroup_Root
-        CaptionOptions.Text = 'New Group'
-        ButtonOptions.Buttons = <>
-        ItemIndex = 3
-        LayoutDirection = ldHorizontal
-        ShowBorder = False
-        Index = 0
-      end
-      object grpBFSalutation: TdxLayoutGroup
-        Parent = layBeneficiaryGroup_Root
-        CaptionOptions.Text = 'New Group'
-        ButtonOptions.Buttons = <>
-        ItemIndex = 3
-        LayoutDirection = ldHorizontal
-        ShowBorder = False
-        Index = 1
-      end
-      object litBFFirstName: TdxLayoutItem
-        Parent = grpBFName
-        CaptionOptions.Text = 'First Name'
-        Control = edtBFFirstname
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object litBFLastName: TdxLayoutItem
-        Parent = grpBFName
-        CaptionOptions.Text = 'Last Name'
-        Control = edtBFLastName
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 2
-      end
-      object TdxLayoutItem
-        Parent = grpBFSalutation
-        CaptionOptions.Text = 'Salutation'
-        Control = lucBFSalutation
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object litBFMobileNo: TdxLayoutItem
-        Parent = grpBFSalutation
-        CaptionOptions.Text = 'Mobile No'
-        Control = edtBFMobileNo
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 2
-      end
-      object litBFEmailAddress: TdxLayoutItem
-        Parent = grpBFEmailAddress
-        AlignHorz = ahLeft
-        CaptionOptions.Text = 'Email Address'
-        Control = edtBFEmailAddress
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 412
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object litReq17: TdxLayoutItem
-        Parent = grpBFName
-        CaptionOptions.Text = 'New Item'
-        CaptionOptions.Visible = False
-        Control = lblReq17
-        ControlOptions.OriginalHeight = 23
-        ControlOptions.OriginalWidth = 14
-        ControlOptions.ShowBorder = False
-        Index = 1
-      end
-      object litReq18: TdxLayoutItem
-        Parent = grpBFName
-        CaptionOptions.Text = 'New Item'
-        CaptionOptions.Visible = False
-        Control = lblReq18
-        ControlOptions.OriginalHeight = 23
-        ControlOptions.OriginalWidth = 14
-        ControlOptions.ShowBorder = False
-        Index = 3
-      end
-      object litReq19: TdxLayoutItem
-        Parent = grpBFSalutation
-        CaptionOptions.Text = 'New Item'
-        CaptionOptions.Visible = False
-        Control = lblReq19
-        ControlOptions.OriginalHeight = 23
-        ControlOptions.OriginalWidth = 14
-        ControlOptions.ShowBorder = False
-        Index = 1
-      end
-      object litReq21: TdxLayoutItem
-        Parent = grpBFEmailAddress
-        CaptionOptions.Text = 'New Item'
-        CaptionOptions.Visible = False
-        Control = lblReq21
-        ControlOptions.OriginalHeight = 23
-        ControlOptions.OriginalWidth = 14
-        ControlOptions.ShowBorder = False
-        Index = 1
-      end
-      object grpBFEmailAddress: TdxLayoutGroup
-        Parent = layBeneficiaryGroup_Root
-        CaptionOptions.Text = 'New Group'
-        ButtonOptions.Buttons = <>
-        ItemIndex = 1
-        LayoutDirection = ldHorizontal
-        ShowBorder = False
-        Index = 2
-      end
-      object litReq20: TdxLayoutItem
-        Parent = grpBFSalutation
-        CaptionOptions.Text = 'New Item'
-        CaptionOptions.Visible = False
-        Control = lblReq20
-        ControlOptions.OriginalHeight = 23
-        ControlOptions.OriginalWidth = 14
-        ControlOptions.ShowBorder = False
-        Index = 3
-      end
-    end
-  end
-  object pnlCoContactPerson: TcxGroupBox [9]
-    Left = 551
-    Top = 382
-    PanelStyle.Active = True
-    Style.BorderStyle = ebsNone
-    TabOrder = 4
-    Visible = False
-    Height = 160
-    Width = 545
-    object layContactPerson: TdxLayoutControl
-      Left = 3
-      Top = 3
-      Width = 539
-      Height = 381
-      Align = alTop
-      TabOrder = 0
-      object lucPSalutation: TcxLookupComboBox
-        Left = 87
-        Top = 40
-        BeepOnEnter = False
-        Properties.DropDownAutoSize = True
-        Properties.DropDownListStyle = lsFixedList
-        Properties.ImmediatePost = True
-        Properties.KeyFieldNames = 'ID'
-        Properties.ListColumns = <
-          item
-            FieldName = 'NAME'
-          end>
-        Properties.PostPopupValueOnTab = True
-        Properties.OnChange = lucContactTypePropertiesChange
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        Style.ButtonStyle = bts3D
-        Style.PopupBorderStyle = epbsFrame3D
-        TabOrder = 4
-        Width = 160
-      end
-      object lucPJobFunction: TcxLookupComboBox
-        Left = 87
-        Top = 123
-        BeepOnEnter = False
-        Properties.DropDownAutoSize = True
-        Properties.DropDownListStyle = lsFixedList
-        Properties.ImmediatePost = True
-        Properties.KeyFieldNames = 'ID'
-        Properties.ListColumns = <
-          item
-            FieldName = 'NAME'
-          end>
-        Properties.PostPopupValueOnTab = True
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        Style.ButtonStyle = bts3D
-        Style.PopupBorderStyle = epbsFrame3D
-        TabOrder = 11
-        Width = 160
-      end
-      object edtPFirstName: TcxTextEdit
-        Left = 87
-        Top = 11
-        BeepOnEnter = False
-        Properties.OnChange = lucContactTypePropertiesChange
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 0
-        Text = 'edtPFirstName'
-        Width = 160
-      end
-      object edtPLastName: TcxTextEdit
-        Left = 347
-        Top = 11
-        BeepOnEnter = False
-        Properties.OnChange = lucContactTypePropertiesChange
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 2
-        Text = 'edtPLastName'
-        Width = 160
-      end
-      object edtPInitials: TcxTextEdit
-        Left = 347
-        Top = 40
-        BeepOnEnter = False
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 6
-        Text = 'edtPInitials'
-        Width = 160
-      end
-      object edtPOtherName: TcxTextEdit
-        Left = 87
-        Top = 69
-        BeepOnEnter = False
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 7
-        Text = 'edtPOtherName'
-        Width = 160
-      end
-      object edtPIDNo: TcxTextEdit
-        Left = 87
-        Top = 96
-        BeepOnEnter = False
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 9
-        Text = 'edtPIDNo'
-        Width = 160
-      end
-      object edtPPassportNo: TcxTextEdit
-        Left = 346
-        Top = 96
-        BeepOnEnter = False
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 10
-        Text = 'edtPPassportNo'
-        Width = 160
-      end
-      object lucPDOB: TcxDateEdit
-        Left = 347
-        Top = 69
-        Properties.ImmediatePost = True
-        Properties.SaveTime = False
-        Properties.ShowTime = False
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        Style.ButtonStyle = bts3D
-        Style.PopupBorderStyle = epbsFrame3D
-        TabOrder = 8
-        Width = 160
-      end
-      object cbxPPrimaryContact: TcxCheckBox
-        Left = 269
-        Top = 123
-        Caption = 'Primary Contact'
-        Properties.Alignment = taLeftJustify
-        Properties.ImmediatePost = True
-        Properties.UseAlignmentWhenInplace = True
-        Properties.ValueChecked = 1
-        Properties.ValueUnchecked = 0
-        State = cbsGrayed
-        Style.BorderColor = clWindowFrame
-        Style.BorderStyle = ebs3D
-        Style.HotTrack = False
-        TabOrder = 12
-        Transparent = True
-      end
-      object lblReq3: TcxLabel
-        Left = 253
-        Top = 11
-        Caption = '*'
-        ParentFont = False
-        Style.HotTrack = False
-        Style.StyleController = styMandatory
-        Properties.Alignment.Vert = taVCenter
-        Transparent = True
-        AnchorY = 23
-      end
-      object lblReq4: TcxLabel
-        Left = 513
-        Top = 11
-        Caption = '*'
-        ParentFont = False
-        Style.HotTrack = False
-        Style.StyleController = styMandatory
-        Properties.Alignment.Vert = taVCenter
-        Transparent = True
-        AnchorY = 23
-      end
-      object lblReq5: TcxLabel
-        Left = 253
-        Top = 40
-        Caption = '*'
-        ParentFont = False
-        Style.HotTrack = False
-        Style.StyleController = styMandatory
-        Properties.Alignment.Vert = taVCenter
-        Transparent = True
-        AnchorY = 52
-      end
-      object layContactPersonGroup_Root: TdxLayoutGroup
-        AlignHorz = ahParentManaged
-        AlignVert = avParentManaged
-        ButtonOptions.Buttons = <>
-        Hidden = True
-        ItemIndex = 3
-        ShowBorder = False
-        Index = -1
-      end
-      object grpCPName: TdxLayoutGroup
-        Parent = layContactPersonGroup_Root
-        CaptionOptions.Text = 'New Group'
-        ButtonOptions.Buttons = <>
-        ItemIndex = 2
-        LayoutDirection = ldHorizontal
-        ShowBorder = False
-        Index = 0
-      end
-      object grpCPSalutation: TdxLayoutGroup
-        Parent = layContactPersonGroup_Root
-        CaptionOptions.Text = 'New Group'
-        ButtonOptions.Buttons = <>
-        ItemIndex = 2
-        LayoutDirection = ldHorizontal
-        ShowBorder = False
-        Index = 1
-      end
-      object grpCPDOB: TdxLayoutGroup
-        Parent = layContactPersonGroup_Root
-        CaptionOptions.Text = 'New Group'
-        ButtonOptions.Buttons = <>
-        ItemIndex = 1
-        LayoutDirection = ldHorizontal
-        ShowBorder = False
-        Index = 2
-      end
-      object grpCPIDNo: TdxLayoutGroup
-        Parent = layContactPersonGroup_Root
-        CaptionOptions.Text = 'New Group'
-        ButtonOptions.Buttons = <>
-        ItemIndex = 1
-        LayoutDirection = ldHorizontal
-        ShowBorder = False
-        Index = 3
-      end
-      object litCPFirstName: TdxLayoutItem
-        Parent = grpCPName
-        CaptionOptions.Text = 'First Name'
-        Control = edtPFirstName
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object litCPLasNname: TdxLayoutItem
-        Parent = grpCPName
-        CaptionOptions.Text = 'Last Name  '
-        Control = edtPLastName
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 2
-      end
-      object litCPSalutation: TdxLayoutItem
-        Parent = grpCPSalutation
-        CaptionOptions.Text = 'Salutation'
-        Control = lucPSalutation
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object litCPInitials: TdxLayoutItem
-        Parent = grpCPSalutation
-        CaptionOptions.Text = 'Initials'
-        Control = edtPInitials
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 2
-      end
-      object litCPOtherName: TdxLayoutItem
-        Parent = grpCPDOB
-        CaptionOptions.Text = 'Other Name'
-        Control = edtPOtherName
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object litCPDOB: TdxLayoutItem
-        Parent = grpCPDOB
-        CaptionOptions.Text = 'DOB'
-        Control = lucPDOB
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 2
-      end
-      object litCPIDNo: TdxLayoutItem
-        Parent = grpCPIDNo
-        CaptionOptions.Text = 'ID No'
-        Control = edtPIDNo
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object litCPJobFunction: TdxLayoutItem
-        Parent = grpJobFunction
-        CaptionOptions.Text = 'Job Function'
-        Control = lucPJobFunction
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 0
-      end
-      object litCPPassportNo: TdxLayoutItem
-        Parent = grpCPIDNo
-        CaptionOptions.Text = 'Passport No'
-        Control = edtPPassportNo
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 160
-        ControlOptions.ShowBorder = False
-        Index = 2
-      end
-      object litCPPrimaryContact: TdxLayoutItem
-        Parent = grpJobFunction
-        CaptionOptions.Text = 'New Item'
-        CaptionOptions.Visible = False
-        Control = cbxPPrimaryContact
-        ControlOptions.OriginalHeight = 21
-        ControlOptions.OriginalWidth = 117
-        ControlOptions.ShowBorder = False
-        Index = 2
-      end
-      object grpJobFunction: TdxLayoutGroup
-        Parent = layContactPersonGroup_Root
-        CaptionOptions.Text = 'New Group'
-        ButtonOptions.Buttons = <>
-        ItemIndex = 1
-        LayoutDirection = ldHorizontal
-        ShowBorder = False
-        Index = 4
-      end
-      object litMand3: TdxLayoutItem
-        Parent = grpCPName
-        CaptionOptions.Text = 'New Item'
-        CaptionOptions.Visible = False
-        Control = lblReq3
-        ControlOptions.OriginalHeight = 23
-        ControlOptions.OriginalWidth = 14
-        ControlOptions.ShowBorder = False
-        Index = 1
-      end
-      object litMand4: TdxLayoutItem
-        Parent = grpCPName
-        CaptionOptions.Text = 'New Item'
-        CaptionOptions.Visible = False
-        Control = lblReq4
-        ControlOptions.OriginalHeight = 23
-        ControlOptions.OriginalWidth = 14
-        ControlOptions.ShowBorder = False
-        Index = 3
-      end
-      object litMand5: TdxLayoutItem
-        Parent = grpCPSalutation
-        CaptionOptions.Text = 'New Item'
-        CaptionOptions.Visible = False
-        Control = lblReq5
-        ControlOptions.OriginalHeight = 23
-        ControlOptions.OriginalWidth = 14
-        ControlOptions.ShowBorder = False
-        Index = 1
-      end
-      object spc2: TdxLayoutEmptySpaceItem
-        Parent = grpCPDOB
-        CaptionOptions.Text = 'Empty Space Item'
-        SizeOptions.Height = 10
-        SizeOptions.Width = 14
-        Index = 1
-      end
-      object spc3: TdxLayoutEmptySpaceItem
-        Parent = grpCPIDNo
-        CaptionOptions.Text = 'Empty Space Item'
-        SizeOptions.Height = 10
-        SizeOptions.Width = 13
-        Index = 1
-      end
-      object spc4: TdxLayoutEmptySpaceItem
-        Parent = grpJobFunction
-        CaptionOptions.Text = 'Empty Space Item'
-        SizeOptions.Height = 10
-        SizeOptions.Width = 10
-        Index = 1
-      end
-      object spc6: TdxLayoutEmptySpaceItem
-        CaptionOptions.Text = 'Empty Space Item'
-        SizeOptions.Height = 10
-        SizeOptions.Width = 5
-        Index = -1
-      end
-      object spc7: TdxLayoutEmptySpaceItem
-        CaptionOptions.Text = 'Empty Space Item'
-        SizeOptions.Height = 10
-        SizeOptions.Width = 5
-        Index = -1
       end
     end
   end

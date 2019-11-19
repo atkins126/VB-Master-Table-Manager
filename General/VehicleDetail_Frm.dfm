@@ -22,6 +22,7 @@ inherited VehicleDetailFrm: TVehicleDetailFrm
       Left = 353
       Top = 289
       TabOrder = 16
+      OnClick = btnOKClick
       ExplicitLeft = 353
       ExplicitTop = 289
     end
