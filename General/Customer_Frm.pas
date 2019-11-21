@@ -240,8 +240,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure grpDetailGridTabChanged(Sender: TObject);
     procedure viewContactDetailCoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure DoInsert(Sender: TObject);
-    procedure DoDelete(Sender: TObject);
+    procedure DoDBAction(Sender: TObject);
     procedure grdPhysicalAddressEnter(Sender: TObject);
     procedure viewContactDetailCoDblClick(Sender: TObject);
     procedure grdCPContactDetailEnter(Sender: TObject);
@@ -310,7 +309,7 @@ begin
     TcxCanvas(Msg.WParam).DrawComplexFrame(TcxGridTableDataCellViewInfo(Msg.LParam).ClientBounds, clRed, clRed, cxBordersAll, 1);
 end;
 
-procedure TCustomerFrm.DoInsert(Sender: TObject);
+procedure TCustomerFrm.DoDBAction(Sender: TObject);
 var
   Key: Integer;
 begin
@@ -336,12 +335,6 @@ begin
       end;
   end;
   EditDeleteRecord(Key);
-end;
-
-procedure TCustomerFrm.DoDelete(Sender: TObject);
-begin
-  inherited;
-//
 end;
 
 function TCustomerFrm.FillFieldData(DetailDataSetID: Integer): string;
@@ -418,11 +411,11 @@ begin
         MTDM.cdsContactPerson.FieldByName('INITIALS').AsString := MTDM.FFieldValue.Initials;
         MTDM.cdsContactPerson.FieldByName('DOB').AsDateTime := MTDM.FFieldValue.DOB;
         MTDM.cdsContactPerson.FieldByName('JOB_FUNCTION_ID').AsInteger := MTDM.FFieldValue.JobFunctionID;
-        MTDM.cdsContactPerson.FieldByName('IS_PRIMARY_CONTACT').AsInteger := MTDM.FFieldValue.PrimaryContact;
+        MTDM.cdsContactPerson.FieldByName('IS_PRIMARY_CONTACT').AsInteger := BooleanToInteger(MTDM.FFieldValue.PrimaryContact);
 
-        MTDM.ValueArray[0] := 'First Name:' + TAB + CustomerEditFrm.edtPFirstName.Text;
-        MTDM.ValueArray[1] := 'Last Name:' + TAB + CustomerEditFrm.edtPLastName.Text;
-        MTDM.ValueArray[2] := 'Salutation:' + TAB + CustomerEditFrm.lucPSalutation.Text;
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
+        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
@@ -435,8 +428,8 @@ begin
         MTDM.cdsContactDetailPerson.FieldByName('VALUE').AsString := MTDM.FFieldValue.TextValue;
         MTDM.cdsContactDetailPerson.FieldByName('COMMENT').AsString := MTDM.FFieldValue.Comment;
 
-        MTDM.ValueArray[0] := 'Contact Type:' + TAB + CustomerEditFrm.lucCDPContactType.Text;
-        MTDM.ValueArray[1] := 'Contact Value:' + TAB + CustomerEditFrm.edtCDPValue.Text;
+        MTDM.ValueArray[0] := 'Contact Type:' + TAB + MTDM.FFieldValue.ContactType;
+        MTDM.ValueArray[1] := 'Contact Value:' + TAB + MTDM.FFieldValue.TextValue;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1]]);
@@ -451,9 +444,9 @@ begin
         MTDM.cdsBankingDetail.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
         MTDM.cdsBankingDetail.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
 
-        MTDM.ValueArray[0] := 'Bank:' + TAB + CustomerEditFrm.lucBank.Text;
-        MTDM.ValueArray[1] := 'Account Type:' + TAB + CustomerEditFrm.lucAccType.Text;
-        MTDM.ValueArray[2] := 'Account No:' + TAB + CustomerEditFrm.edtAccNo.Text;
+        MTDM.ValueArray[0] := 'Bank:' + TAB + MTDM.FFieldValue.Bank;
+        MTDM.ValueArray[1] := 'Account Type:' + TAB + MTDM.FFieldValue.AccountType;
+        MTDM.ValueArray[2] := 'Account No:' + TAB + MTDM.FFieldValue.AccountNo;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
@@ -471,9 +464,9 @@ begin
         MTDM.cdsDirector.FieldByName('TAX_NO').AsString := MTDM.FFieldValue.TaxNo;
         MTDM.cdsDirector.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
 
-        MTDM.ValueArray[0] := 'First Name:' + TAB + CustomerEditFrm.edtDFirstName.Text;
-        MTDM.ValueArray[1] := 'Last Name:' + TAB + CustomerEditFrm.edtDLastName.Text;
-        MTDM.ValueArray[2] := 'Salutation:' + TAB + CustomerEditFrm.lucDSalutation.Text;
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
+        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
@@ -488,11 +481,11 @@ begin
         MTDM.cdsBeneficiary.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
         MTDM.cdsBeneficiary.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FFieldValue.EmailAddress;
 
-        MTDM.ValueArray[0] := 'First Name:' + TAB + CustomerEditFrm.edtBFFirstName.Text;
-        MTDM.ValueArray[1] := 'Last Name:' + TAB + CustomerEditFrm.edtBFLastName.Text;
-        MTDM.ValueArray[2] := 'Salutation:' + TAB + CustomerEditFrm.lucBFSalutation.Text;
-        MTDM.ValueArray[3] := 'Mobile No:' + TAB + CustomerEditFrm.edtBFMobileNo.Text;
-        MTDM.ValueArray[4] := 'Email Address:' + TAB + CustomerEditFrm.edtBFEmailAddress.Text;
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
+        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
+        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FFieldValue.MobileNo;
+        MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FFieldValue.EmailAddress;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
@@ -508,14 +501,14 @@ begin
         MTDM.cdsVehicle.FieldByName('VEHICLE_MODEL').AsString := MTDM.FFieldValue.VehicleModel;
         MTDM.cdsVehicle.FieldByName('REG_NO').AsString := MTDM.FFieldValue.VehicleRegNo;
         MTDM.cdsVehicle.FieldByName('RENEWAL_DATE').AsDateTime := MTDM.FFieldValue.LicenceRenewalDate;
-        MTDM.cdsVehicle.FieldByName('MAINTENANCE_PLAN').AsInteger := MTDM.FFieldValue.MaintenancePlan;
+        MTDM.cdsVehicle.FieldByName('MAINTENANCE_PLAN').AsInteger := BooleanToInteger(MTDM.FFieldValue.MaintenancePlan);
         MTDM.cdsVehicle.FieldByName('COMMENT').AsString := MTDM.FFieldValue.Comment;
 
-        MTDM.ValueArray[0] := 'Make:' + TAB + TAB + CustomerEditFrm.lucVehicleMake.Text;
-        MTDM.ValueArray[1] := 'Model:' + TAB + TAB + CustomerEditFrm.edtModel.Text;
-        MTDM.ValueArray[2] := 'Year:' + TAB + TAB + CustomerEditFrm.edtYear.Text;
-        MTDM.ValueArray[3] := 'Reg No:' + TAB + TAB + CustomerEditFrm.edtRegNo.Text;
-        MTDM.ValueArray[4] := 'Renewal Date: ' + TAB + CustomerEditFrm.lucVehicleMake.Text;
+        MTDM.ValueArray[0] := 'Make:' + TAB + TAB + MTDM.FFieldValue.VehicleMake;
+        MTDM.ValueArray[1] := 'Model:' + TAB + TAB + MTDM.FFieldValue.VehicleModel;
+        MTDM.ValueArray[2] := 'Year:' + TAB + TAB + MTDM.FFieldValue.YearOfManufacture.ToString;
+        MTDM.ValueArray[3] := 'Reg No:' + TAB + TAB + MTDM.FFieldValue.VehicleRegNo;
+        MTDM.ValueArray[4] := 'Renewal Date: ' + TAB + FormatDateTime('dd/MM/yyyy', MTDM.FFieldValue.LicenceRenewalDate);
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
@@ -815,6 +808,7 @@ begin
   TcxLookupComboBoxProperties(lucDrSalutation.Properties).ListSource := LookupDM.dtsDirectorSalutation;
   TcxLookupComboBoxProperties(lucBFSalutationID.Properties).ListSource := LookupDM.dtsBFSalutation;
   TcxLookupComboBoxProperties(lucVMakeID.Properties).ListSource := LookupDM.dtsVehicleMake;
+  TcxLookupComboBoxProperties(lucDrSalutation.Properties).ListSource := LookupDM.dtsDirectorSalutation;
 
   TcxLookupComboBoxProperties(lucCPJobFunction.Properties).ListSource := LookupDM.dtsJobFunction;
   TcxLookupComboBoxProperties(lucCPContactDetailTypeID.Properties).ListSource := LookupDM.dtsContactType;
@@ -912,17 +906,15 @@ begin
           MTDM.FormCaption := 'Address Details';
         end;
 
-      2:
-        begin
-// MTDM.DetailIndex := grpDetailGrid.ItemIndex;
-
-          grdContactPerson.SetFocus;
-          viewContactPerson.Focused := True;
-          actInsert.Caption := 'Add a new contact person';
-          actEdit.Caption := 'Edit selected contact person';
-          actDelete.Caption := 'Delete selected cotact person';
-          MTDM.FormCaption := 'Contact Person Details';
-        end;
+//      2:
+//        begin
+//          grdContactPerson.SetFocus;
+//          viewContactPerson.Focused := True;
+//          actInsert.Caption := 'Add a new contact person';
+//          actEdit.Caption := 'Edit selected contact person';
+//          actDelete.Caption := 'Delete selected cotact person';
+//          MTDM.FormCaption := 'Contact Person Details';
+//        end;
 
         {TODO: Not setting form caption correctly here!!}
 // 3:
@@ -1232,7 +1224,8 @@ begin
   actInsert.Caption := 'Add a new contact person';
   actEdit.Caption := 'Edit selected contact person';
   actDelete.Caption := 'Delete selected contact person';
-  MTDM.DetailIndex :=  2;
+  MTDM.FormCaption := 'Contact Person';
+  MTDM.DetailIndex := 2;
 end;
 
 procedure TCustomerFrm.grdCPContactDetailEnter(Sender: TObject);
@@ -1241,6 +1234,7 @@ begin
   actInsert.Caption := 'Add a new person contact detail';
   actEdit.Caption := 'Edit selected person contact detail';
   actDelete.Caption := 'Delete selected person cotact detail';
+  MTDM.FormCaption := 'Contact Person Details';
   MTDM.DetailIndex := 3;
 end;
 
@@ -1325,7 +1319,7 @@ begin
                 FOpenTableParam.ScriptID := 4;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Address.xml';
                 FOpenTableParam.FieldName := 'PHYSICAL1';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.Physical1;
               end;
 
               AddressDetailFrm.Close;
@@ -1345,7 +1339,7 @@ begin
                 FOpenTableParam.ScriptID := 10;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Contact Person.xml';
                 FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
               end;
 
               ContactPersonFrm.Close;
@@ -1391,7 +1385,7 @@ begin
                 FOpenTableParam.ScriptID := 7;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Banking Detail.xml';
                 FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.Bank;
               end;
 
               BankingDetailFrm.Close;
@@ -1411,7 +1405,7 @@ begin
                 FOpenTableParam.ScriptID := 16;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Director.xml';
                 FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
               end;
 
               DirectorDetailFrm.Close;
@@ -1431,7 +1425,7 @@ begin
                 FOpenTableParam.ScriptID := 8;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Beneficiary.xml';
                 FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
               end;
 
               BeneficiaryDetailFrm.Close;
@@ -1451,7 +1445,7 @@ begin
                 FOpenTableParam.ScriptID := 49;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Vehicle.xml';
                 FOpenTableParam.FieldName := 'REG_NO';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.VehicleRegNo;
               end;
 
               VehicleDetailFrm.Close;

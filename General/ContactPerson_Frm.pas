@@ -59,6 +59,7 @@ type
     litLabel3: TdxLayoutItem;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
+    procedure edtFirstNamePropertiesChange(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -76,12 +77,20 @@ implementation
 uses
   MT_DM,
   Lookup_DM,
-  RUtils;
+  RUtils,
+  VBBase_DM;
 
 procedure TContactPersonFrm.btnOKClick(Sender: TObject);
 begin
   inherited;
-  Validate;
+  if VBBaseDM.MadeChanges then
+    Validate;
+end;
+
+procedure TContactPersonFrm.edtFirstNamePropertiesChange(Sender: TObject);
+begin
+  inherited;
+  VBBaseDM.MadeChanges := True;
 end;
 
 procedure TContactPersonFrm.FormCreate(Sender: TObject);
@@ -90,8 +99,8 @@ begin
   // Width = 550; Height = 310
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
   lucJobFunction.Properties.ListSource := LookupDM.dtsJobFunction;
-  dteDOB.Properties.MinDate :=  StrToDate('10/01/1900');
-  dteDOB.Properties.MaxDate :=  Date;
+  dteDOB.Properties.MinDate := StrToDate('10/01/1900');
+  dteDOB.Properties.MaxDate := Date;
 
   if MTDM.DBAction = acModify then
   begin
@@ -133,7 +142,7 @@ begin
   MTDM.FFieldValue.PassportNo := edtPassportNo.Text;
   MTDM.FFieldValue.JobFunctionID := VarAsType(lucJobFunction.EditValue, varInteger);
   MTDM.FFieldValue.JobFunction := lucJobFunction.Text;
-  MTDM.FFieldValue.PrimaryContact := BooleanToInteger(cbxPrimaryContact.Checked);
+  MTDM.FFieldValue.PrimaryContact := cbxPrimaryContact.Checked;
 
   ModalResult := mrOK;
 end;

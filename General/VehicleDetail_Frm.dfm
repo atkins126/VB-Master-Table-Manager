@@ -75,6 +75,7 @@ inherited VehicleDetailFrm: TVehicleDetailFrm
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 6
+      OnKeyPress = edtRegNoKeyPress
       Width = 160
     end
     object dteRenewlDate: TcxDateEdit [8]
@@ -94,8 +95,6 @@ inherited VehicleDetailFrm: TVehicleDetailFrm
     object memComment: TcxMemo [9]
       Left = 96
       Top = 163
-      Lines.Strings = (
-        'memVComment')
       Properties.ScrollBars = ssVertical
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
@@ -169,7 +168,6 @@ inherited VehicleDetailFrm: TVehicleDetailFrm
       Properties.UseAlignmentWhenInplace = True
       Properties.ValueChecked = 1
       Properties.ValueUnchecked = 0
-      State = cbsGrayed
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False

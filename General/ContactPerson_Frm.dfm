@@ -50,6 +50,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       Left = 87
       Top = 76
       BeepOnEnter = False
+      Properties.OnChange = edtFirstNamePropertiesChange
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -70,6 +71,7 @@ inherited ContactPersonFrm: TContactPersonFrm
         end>
       Properties.ListSource = LookupDM.dtsSalutation
       Properties.PostPopupValueOnTab = True
+      Properties.OnChange = edtFirstNamePropertiesChange
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -82,6 +84,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       Left = 87
       Top = 134
       BeepOnEnter = False
+      Properties.OnChange = edtFirstNamePropertiesChange
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -92,6 +95,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       Left = 87
       Top = 163
       BeepOnEnter = False
+      Properties.OnChange = edtFirstNamePropertiesChange
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -112,6 +116,7 @@ inherited ContactPersonFrm: TContactPersonFrm
         end>
       Properties.ListSource = LookupDM.dtsJobFunction
       Properties.PostPopupValueOnTab = True
+      Properties.OnChange = edtFirstNamePropertiesChange
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -146,6 +151,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       Left = 339
       Top = 76
       BeepOnEnter = False
+      Properties.OnChange = edtFirstNamePropertiesChange
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -156,6 +162,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       Left = 339
       Top = 105
       BeepOnEnter = False
+      Properties.OnChange = edtFirstNamePropertiesChange
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -169,6 +176,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       Properties.SaveTime = False
       Properties.ShowOnlyValidDates = True
       Properties.ShowTime = False
+      Properties.OnChange = edtFirstNamePropertiesChange
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -181,6 +189,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       Left = 342
       Top = 163
       BeepOnEnter = False
+      Properties.OnChange = edtFirstNamePropertiesChange
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
@@ -196,7 +205,6 @@ inherited ContactPersonFrm: TContactPersonFrm
       Properties.UseAlignmentWhenInplace = True
       Properties.ValueChecked = 1
       Properties.ValueUnchecked = 0
-      State = cbsGrayed
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False

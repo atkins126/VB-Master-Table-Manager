@@ -524,7 +524,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
     end
     object litBilling3: TdxLayoutItem
       Parent = grpBillingDetails
-      CaptionOptions.Text = 'Lie 3'
+      CaptionOptions.Text = 'Line 3'
       Control = edtBilling3
       ControlOptions.OriginalHeight = 21
       ControlOptions.OriginalWidth = 175

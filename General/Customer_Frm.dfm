@@ -689,6 +689,8 @@ inherited CustomerFrm: TCustomerFrm
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
         OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Contact Detail data to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -1134,7 +1136,10 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.ImmediateEditor = False
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
         OptionsView.GroupByBox = False
         Bands = <
           item
@@ -1202,6 +1207,7 @@ inherited CustomerFrm: TCustomerFrm
             item
               FieldName = 'NAME'
             end>
+          Properties.ListSource = LookupDM.dtsSalutation
           Properties.ReadOnly = True
           Options.Moving = False
           Width = 75
@@ -1348,7 +1354,11 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnTab = True
         OptionsBehavior.FocusCellOnCycle = True
         OptionsCustomize.ColumnsQuickCustomization = True
+        OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Contact Detail data to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -1517,7 +1527,10 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.ImmediateEditor = False
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Banking Detail data to display>'
         OptionsView.GroupByBox = False
         Bands = <
@@ -1678,7 +1691,10 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnCycle = True
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Director data to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -1734,6 +1750,7 @@ inherited CustomerFrm: TCustomerFrm
             item
               FieldName = 'NAME'
             end>
+          Properties.ListSource = LookupDM.dtsDirectorSalutation
           MinWidth = 75
           Options.Editing = False
           Options.Filtering = False
@@ -1888,7 +1905,10 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnCycle = True
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Beneficiary data to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -2059,7 +2079,10 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnCycle = True
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Vehicle data to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -2237,8 +2260,8 @@ inherited CustomerFrm: TCustomerFrm
       Left = 11
       Top = 681
       Caption = 
-        'INS = Add a new record;  F2 = Edit selected record;  DEL = Delet' +
-        'e selected record'
+        'INS = Add a new record;  ENTER = Edit selected record;  DEL = De' +
+        'lete selected record'
       ParentFont = False
       Style.HotTrack = False
       Style.StyleController = styLegend
@@ -5238,21 +5261,21 @@ inherited CustomerFrm: TCustomerFrm
       Caption = 'Add new contact detail'
       ImageIndex = 9
       ShortCut = 45
-      OnExecute = DoInsert
+      OnExecute = DoDBAction
     end
     object actEdit: TAction
       Tag = 1
       Caption = 'Edit selected contact detail'
       ImageIndex = 13
       ShortCut = 13
-      OnExecute = DoInsert
+      OnExecute = DoDBAction
     end
     object actDelete: TAction
       Tag = 2
       Caption = 'Delete selected contact detail'
       ImageIndex = 10
       ShortCut = 46
-      OnExecute = DoDelete
+      OnExecute = DoDBAction
     end
   end
   object styLegend: TcxEditStyleController

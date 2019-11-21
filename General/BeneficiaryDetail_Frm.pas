@@ -79,7 +79,7 @@ begin
     edtFirstName.Text := MTDM.cdsBeneficiary.FieldByName('FIRST_NAME').AsString;
     edtLastName.Text := MTDM.cdsBeneficiary.FieldByName('LAST_NAME').AsString;
     lucSalutation.EditValue := MTDM.cdsBeneficiary.FieldByName('SALUTATION_ID').AsInteger;
-    edtMobileNo.Text := MTDM.cdsBeneficiary.FieldByName('MOBILE_NO').AsString;
+    edtMobileNo.Text := MTDM.cdsBeneficiary.FieldByName('MOBILE_PHONE').AsString;
     edtEmailAddress.Text := MTDM.cdsBeneficiary.FieldByName('EMAIL_ADDRESS').AsString;
   end;
 end;
@@ -95,8 +95,16 @@ begin
   if SameText(lucSalutation.Text, '') then
     raise EValidateException.Create('Salutation must have a value');
 
+  if SameText(TrimAll(edtMobileNo.Text), '') then
+    raise EValidateException.Create('Mobile number must have a value');
+
+  if SameText(TrimAll(edtEmailAddress.Text), '') then
+    raise EValidateException.Create('Email address must have a value');
+
   MTDM.FFieldValue.FirstName := edtFirstName.Text;
   MTDM.FFieldValue.LastName := edtLastName.Text;
+  MTDM.FFieldValue.SalutationID := VarAsType(lucSalutation.EditValue, varInteger);
+  MTDM.FFieldValue.Salutation := lucSalutation.Text;
   MTDM.FFieldValue.MobileNo := edtMobileNo.Text;
   MTDM.FFieldValue.EmailAddress := edtEmailAddress.Text;
 

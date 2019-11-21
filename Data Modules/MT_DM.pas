@@ -28,6 +28,7 @@ type
   TableNameArray = array of string;
   TableReadOnlyArray = array of Boolean;
   FieldValueArray = array of string;
+  HeaderCaptionArray = array of string;
 
   FieldValues = record
     ContactTypeID: Integer;
@@ -65,7 +66,7 @@ type
     PassportNo: string;
     JobFunctionID: Integer;
     JobFunction: string;
-    PrimaryContact: Integer;
+    PrimaryContact: Boolean;
     EmailAddress: string;
     TaxNo: string;
     MobileNo: string;
@@ -76,7 +77,7 @@ type
     YearOfManufacture: Integer;
     VehicleRegNo: string;
     LicenceRenewalDate: TDateTime;
-    MaintenancePlan: Integer;
+    MaintenancePlan: Boolean;
   end;
 
   TMTDM = class(TVBBaseDM)
@@ -306,6 +307,7 @@ type
     FHeaderTitle: string;
     FSubTitle: string;
     FFormCaption: string;
+    FHeaderCaptionArray: HeaderCaptionArray;
   public
     { Public declarations }
     FFieldValue: FieldValues;
@@ -321,6 +323,7 @@ type
     property SubTitle: string read FSubTitle write FSubTitle;
     property FormCaption: string read FFormCaption write FFormCaption;
     procedure ClearFieldValues;
+    property HeaderCaptionArray: HeaderCaptionArray read FHeaderCaptionArray write FHeaderCaptionArray;
   end;
 
 var
@@ -352,21 +355,18 @@ begin
   begin
     DataSet.FieldByName('CONTACT_PERSON_ID').AsInteger := 0;
     DataSet.FieldByName('CONTACT_TYPE_ID').AsInteger := 0;
-  end;
+  end
 
-  if (TFDMemTable(DataSet) = cdsContactDetailPerson) then
+  else if (TFDMemTable(DataSet) = cdsContactDetailPerson) then
   begin
     DataSet.FieldByName('CONTACT_PERSON_ID').AsInteger := MTDM.cdsContactPerson.FieldByName('ID').AsInteger;
     DataSet.FieldByName('CONTACT_TYPE_ID').AsInteger := 0;
-  end;
+  end
 
-  if (TFDMemTable(DataSet) = cdsContactPerson) then
-    DataSet.FieldByName('IS_PRIMARY_CONTACT').AsInteger := 0;
+  else if (TFDMemTable(DataSet) = cdsContactPerson) then
+    DataSet.FieldByName('IS_PRIMARY_CONTACT').AsInteger := 0
 
-  if (TFDMemTable(DataSet) = cdsContactDetailPerson) then
-    DataSet.FieldByName('CONTACT_PERSON_ID').AsInteger := MTDM.cdsContactPerson.FieldByName('ID').AsInteger;
-
-  if (TFDMemTable(DataSet) = cdsVehicle) then
+  else if (TFDMemTable(DataSet) = cdsVehicle) then
     DataSet.FieldByName('MAINTENANCE_PLAN').AsInteger := 0;
 end;
 
@@ -426,7 +426,7 @@ begin
   FFieldValue.PassportNo := '';
   FFieldValue.JobFunctionID := 0;
   FFieldValue.JobFunction := '';
-  FFieldValue.PrimaryContact := 0;
+  FFieldValue.PrimaryContact := False;
   FFieldValue.EmailAddress := '';
   FFieldValue.TaxNo := '';
   FFieldValue.MobileNo := '';
@@ -437,7 +437,7 @@ begin
   FFieldValue.YearOfManufacture := 0;
   FFieldValue.VehicleRegNo := '';
   FFieldValue.LicenceRenewalDate := 0.0;
-  FFieldValue.MaintenancePlan := 0;
+  FFieldValue.MaintenancePlan := False;
 end;
 
 procedure TMTDM.DataModuleCreate(Sender: TObject);
@@ -462,6 +462,16 @@ begin
   FTableNameArray[15] := 'Salutaion';
   FTableNameArray[16] := 'Tax Office';
   FTableNameArray[17] := 'Vehicle make';
+
+  Setlength(FHeaderCaptionArray, CUSTOMER_DETAIL_FORMS);
+  FHeaderCaptionArray[0] := 'Company Contact Detail';
+  FHeaderCaptionArray[1] := 'Address Information';
+  FHeaderCaptionArray[2] := 'Contact Person';
+  FHeaderCaptionArray[3] := 'Contact Person Detail';
+  FHeaderCaptionArray[4] := 'Banking Details';
+  FHeaderCaptionArray[5] := 'Director Details';
+  FHeaderCaptionArray[6] := 'Beneficiary Details';
+  FHeaderCaptionArray[7] := 'Veicle Details';
 
   SetLength(FValueArray, FIELD_VALUES);
   ClearFieldValueArray;

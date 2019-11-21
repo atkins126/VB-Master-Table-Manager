@@ -49,6 +49,7 @@ type
     litYear: TdxLayoutItem;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
+    procedure edtRegNoKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     procedure Validate;
@@ -74,18 +75,25 @@ begin
   Validate;
 end;
 
+procedure TVehicleDetailFrm.edtRegNoKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := UpCase(Key);
+end;
+
 procedure TVehicleDetailFrm.FormCreate(Sender: TObject);
 begin
   inherited;
 // Width = 520; Height = 360
   lucVehicleMake.Properties.ListSource := LookupDM.dtsVehicleMake;
-  edtYear.Properties.MinValue :=  1950;
+//  edtYear.Properties.MinValue :=  1950;
   edtYear.Properties.MaxValue :=  CurrentYear;
+//  edtYear.Value := 0;
 
   if MTDM.DBAction = acModify then
   begin
     lucVehicleMake.EditValue := MTDM.cdsVehicle.FieldByName('VEHICLE_MAKE_ID').AsInteger;
-    edtModel.Text := MTDM.cdsVehicle.FieldByName('MODEL').AsString;
+    edtModel.Text := MTDM.cdsVehicle.FieldByName('VEHICLE_MODEL').AsString;
     edtRegNo.Text := MTDM.cdsVehicle.FieldByName('REG_NO').AsString;
     edtYear.Value := MTDM.cdsVehicle.FieldByName('THE_YEAR').AsInteger;
     dteRenewlDate.Date := MTDM.cdsVehicle.FieldByName('RENEWAL_DATE').AsDateTime;
@@ -106,7 +114,10 @@ begin
     raise EValidateException.Create('Vehicle registration number must have a value');
 
   if SameText(edtYear.Text, '') then
-    raise EValidateException.Create('Salutation must have a value');
+    raise EValidateException.Create('Manufacturing year must have a value');
+
+  if SameText(dteRenewlDate.Text, '') then
+    raise EValidateException.Create('Renewal date must have a value');
 
   MTDM.FFieldValue.VehicleMakeID := VarAsType(lucVehicleMake.EditValue, varInteger);
   MTDM.FFieldValue.VehicleMake := lucVehicleMake.Text;
@@ -114,7 +125,7 @@ begin
   MTDM.FFieldValue.VehicleRegNo := edtRegNo.Text;
   MTDM.FFieldValue.YearOfManufacture := Trunc(edtYear.Value);
   MTDM.FFieldValue.LicenceRenewalDate := dteRenewlDate.Date;
-  MTDM.FFieldValue.MaintenancePlan :=  BooleanToInteger(cbxMaintenancePlan.Checked);
+  MTDM.FFieldValue.MaintenancePlan :=  cbxMaintenancePlan.Checked;
   MTDM.FFieldValue.Comment :=  memComment.Text;
 
   ModalResult := mrOK;

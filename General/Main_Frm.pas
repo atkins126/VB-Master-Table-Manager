@@ -28,7 +28,8 @@ uses
   dxCustomHint, cxHint, cxTextEdit,
 
   FireDAC.Stan.Def, FireDAC.VCLUI.Wait, FireDAC.Phys.IBWrapper, FireDAC.Phys.FB,
-  FireDAC.Phys.IBBase, FireDAC.Stan.Intf, FireDAC.Phys;
+  FireDAC.Phys.IBBase, FireDAC.Stan.Intf, FireDAC.Phys, cxMaskEdit,
+  cxDropDownEdit, cxBarEditItem;
 
 type
   TMainFrm = class(TBaseLayoutFrm)
@@ -44,7 +45,6 @@ type
     sknController: TdxSkinController;
     sbrMain: TdxStatusBar;
     pagMain: TcxPageControl;
-    cntShowMasterList: TdxBarControlContainerItem;
     cbxShowMasterList: TcxCheckBox;
     actExitApp: TAction;
     actCloseScreen: TAction;
@@ -96,6 +96,18 @@ type
     FDIBValidate: TFDIBValidate;
     FDIBSecurity: TFDIBSecurity;
     FDIBConfig: TFDIBConfig;
+    barTabaleManager: TdxBar;
+    grpToolbar: TdxLayoutGroup;
+    litMaasterTableToolbar: TdxLayoutItem;
+    docMasterTableToolbar: TdxBarDockControl;
+    btnActivityTypeM: TdxBarLargeButton;
+    btnAgePeriodM: TdxBarLargeButton;
+    btnBankM: TdxBarLargeButton;
+    btnBankAccountTypeM: TdxBarLargeButton;
+    btnContactTypeM: TdxBarLargeButton;
+    btnCountryM: TdxBarLargeButton;
+    lucToolbarOption: TcxComboBox;
+    cbxViewMode: TcxBarEditItem;
     procedure FormCreate(Sender: TObject);
     procedure DoLaunchMasterTable(Sender: TObject);
     procedure pagMainChange(Sender: TObject);
@@ -169,7 +181,7 @@ begin
   Screen.Cursor := crHourglass;
   dxBarMakeInactiveImagesDingy := False;
   FSwitchPrefix := ['/'];
-  cntShowMasterList.Control := cbxShowMasterList;
+//  cntShowMasterList.Control := cbxShowMasterList;
 
   if MsgDialogFrm = nil then
     MsgDialogFrm := TMsgDialogFrm.Create(nil);
@@ -316,6 +328,9 @@ var
   ActionTag: Integer;
 begin
   inherited;
+  if pagMain.PageCount = 0 then
+    Exit;
+
   ActionTag := StrToInt(AnsiRightStr(pagMain.ActivePage.Name, 2));
   case ActionTag of
     0: CloseTheForm(pagMain.ActivePageIndex, ActivityTypeFrm, actActivityType.Tag, actActivityType);

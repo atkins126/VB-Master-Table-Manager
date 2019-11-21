@@ -58,6 +58,7 @@ begin
 //  if not MTDM.cdsMasterList.Locate('ID', 15, []) then
 //    ReadOnly := True;
 
+Check readonly property here!!
   SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
 end;
 

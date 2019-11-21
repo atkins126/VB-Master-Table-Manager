@@ -80,9 +80,9 @@ begin
     edtFirstName.Text := MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString;
     edtLastName.Text := MTDM.cdsDirector.FieldByName('LAST_NAME').AsString;
     lucSalutation.EditValue := MTDM.cdsDirector.FieldByName('SALUTATION_ID').AsInteger;
-    edtOtherName.Text := MTDM.cdsDirector.FieldByName('OTHER_NAME').AsString;
+    edtOtherName.Text := MTDM.cdsDirector.FieldByName('MIDDLE_NAME').AsString;
     edtTaxNo.Text := MTDM.cdsDirector.FieldByName('TAX_NO').AsString;
-    edtMobileNo.Text := MTDM.cdsDirector.FieldByName('MOBILE_NO').AsString;
+    edtMobileNo.Text := MTDM.cdsDirector.FieldByName('MOBILE_PHONE').AsString;
     edtEmailAddress.Text := MTDM.cdsDirector.FieldByName('EMAIL_ADDRESS').AsString;
   end;
 end;
