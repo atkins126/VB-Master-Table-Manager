@@ -41,8 +41,6 @@ uses
   RUtils;
 
 procedure TCustomerStatusFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Customer  Status';
@@ -53,10 +51,7 @@ begin
     'C:\Data\Xml\Customer Status.xml', MTDM.cdsCustomerStatus.UpdateOptions.Generatorname,
     MTDM.cdsCustomerStatus.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 13, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 13);
 end;
 
 procedure TCustomerStatusFrm.navMasterButtonsButtonClick(Sender: TObject;  AButtonIndex: Integer; var ADone: Boolean);

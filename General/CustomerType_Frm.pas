@@ -41,8 +41,6 @@ uses
   RUtils;
 
 procedure TCustomerTypeFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Customer Type';
@@ -53,10 +51,7 @@ begin
     'C:\Data\Xml\Customer Type.xml', MTDM.cdsCustomerType.UpdateOptions.Generatorname,
     MTDM.cdsCustomerType.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 7, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 7);
 end;
 
 procedure TCustomerTypeFrm.navMasterButtonsButtonClick(Sender: TObject;  AButtonIndex: Integer; var ADone: Boolean);

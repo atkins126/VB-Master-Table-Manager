@@ -1,7 +1,10 @@
 inherited MainFrm: TMainFrm
+  BorderIcons = []
+  BorderStyle = bsNone
   Caption = 'MainFrm'
-  ClientHeight = 704
-  ClientWidth = 1165
+  ClientHeight = 743
+  ClientWidth = 1181
+  OnClose = FormClose
   OnDestroy = FormDestroy
   ExplicitWidth = 1181
   ExplicitHeight = 743
@@ -16,9 +19,9 @@ inherited MainFrm: TMainFrm
     object docToolbar: TdxBarDockControl [0]
       Left = 11
       Top = 11
-      Width = 320
+      Width = 895
       Height = 54
-      Align = dalTop
+      Align = dalNone
       AllowDocking = False
       BarManager = barManager
     end
@@ -30,21 +33,13 @@ inherited MainFrm: TMainFrm
       Color = 16053234
       ParentBackground = False
       ParentColor = False
-      TabOrder = 2
+      TabOrder = 1
       Properties.CustomButtons.Buttons = <>
       OnChange = pagMainChange
       ClientRectBottom = 563
       ClientRectLeft = 3
       ClientRectRight = 898
       ClientRectTop = 3
-    end
-    object docMasterTableToolbar: TdxBarDockControl [2]
-      Left = 337
-      Top = 11
-      Width = 500
-      Height = 54
-      Align = dalNone
-      BarManager = barManager
     end
     object grpMain: TdxLayoutGroup
       Parent = layMainGroup_Root
@@ -57,11 +52,10 @@ inherited MainFrm: TMainFrm
     end
     object litToolbar: TdxLayoutItem
       Parent = grpToolbar
-      AlignHorz = ahLeft
       Control = docToolbar
       ControlOptions.AutoColor = True
       ControlOptions.OriginalHeight = 54
-      ControlOptions.OriginalWidth = 320
+      ControlOptions.OriginalWidth = 895
       ControlOptions.ShowBorder = False
       Index = 0
     end
@@ -84,20 +78,11 @@ inherited MainFrm: TMainFrm
       ShowBorder = False
       Index = 0
     end
-    object litMaasterTableToolbar: TdxLayoutItem
-      Parent = grpToolbar
-      Control = docMasterTableToolbar
-      ControlOptions.AutoColor = True
-      ControlOptions.OriginalHeight = 54
-      ControlOptions.OriginalWidth = 500
-      ControlOptions.ShowBorder = False
-      Index = 1
-    end
   end
   object sbrMain: TdxStatusBar [1]
     Left = 0
-    Top = 684
-    Width = 1165
+    Top = 723
+    Width = 1181
     Height = 20
     Panels = <
       item
@@ -124,18 +109,6 @@ inherited MainFrm: TMainFrm
     Transparent = True
     Visible = False
   end
-  object lucToolbarOption: TcxComboBox [3]
-    Left = 955
-    Top = 190
-    Properties.DropDownListStyle = lsFixedList
-    Properties.ImmediatePost = True
-    Properties.Items.Strings = (
-      'Drop down'
-      'Toolbar')
-    TabOrder = 7
-    Text = 'Drop down'
-    Width = 90
-  end
   inherited styRepository: TcxStyleRepository
     Left = 465
     Top = 170
@@ -147,7 +120,7 @@ inherited MainFrm: TMainFrm
     Top = 170
     object actExitApp: TAction
       Category = 'System'
-      Caption = 'Exit VB Shell'
+      Caption = 'Exit'
       ImageIndex = 18
       OnExecute = DoExitApp
     end
@@ -4522,12 +4495,6 @@ inherited MainFrm: TMainFrm
         item
           Visible = True
           ItemName = 'btnClosemasterTable'
-        end
-        item
-          UserDefine = [udPaintStyle, udWidth]
-          ViewLayout = ivlGlyphControlCaption
-          Visible = True
-          ItemName = 'cbxViewMode'
         end>
       NotDocking = [dsNone, dsLeft, dsTop, dsRight, dsBottom]
       OneOnRow = True
@@ -4538,63 +4505,16 @@ inherited MainFrm: TMainFrm
       Visible = True
       WholeRow = False
     end
-    object barTabaleManager: TdxBar
-      AllowCustomizing = False
-      AllowQuickCustomizing = False
-      AllowReset = False
-      BorderStyle = bbsNone
-      Caption = 'Master Table'
-      CaptionButtons = <>
-      DockControl = docMasterTableToolbar
-      DockedDockControl = docMasterTableToolbar
-      DockedLeft = 0
-      DockedTop = 0
-      FloatLeft = 1193
-      FloatTop = 2
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'btnActivityTypeM'
-        end
-        item
-          Visible = True
-          ItemName = 'btnAgePeriodM'
-        end
-        item
-          Visible = True
-          ItemName = 'btnBankM'
-        end
-        item
-          Visible = True
-          ItemName = 'btnBankAccountTypeM'
-        end
-        item
-          Visible = True
-          ItemName = 'btnCountryM'
-        end
-        item
-          Visible = True
-          ItemName = 'btnContactTypeM'
-        end>
-      NotDocking = [dsNone, dsLeft, dsTop, dsRight, dsBottom]
-      OneOnRow = True
-      Row = 0
-      ShowMark = False
-      SizeGrip = False
-      UseOwnFont = False
-      Visible = True
-      WholeRow = True
-    end
     object btnExit: TdxBarLargeButton
       Action = actExitApp
       Category = 0
+      ScreenTip = tipExit
       AutoGrayScale = False
     end
     object btnMasterList: TdxBarLargeButton
       Caption = 'Master List'
       Category = 0
+      ScreenTip = tipLaunchMasterTableManager
       Visible = ivAlways
       ButtonStyle = bsDropDown
       DropDownMenu = popMasterTable
@@ -4607,6 +4527,7 @@ inherited MainFrm: TMainFrm
     object btnClosemasterTable: TdxBarLargeButton
       Action = actCloseScreen
       Category = 0
+      ScreenTip = tipCloseScreen
       AutoGrayScale = False
     end
     object btnActivityType: TdxBarButton
@@ -4680,48 +4601,6 @@ inherited MainFrm: TMainFrm
     object btnCustomer: TdxBarButton
       Action = actCustomer
       Category = 0
-    end
-    object btnActivityTypeM: TdxBarLargeButton
-      Action = actActivityType
-      Category = 0
-      AutoGrayScale = False
-    end
-    object btnAgePeriodM: TdxBarLargeButton
-      Action = actAgePeriod
-      Category = 0
-      AutoGrayScale = False
-    end
-    object btnBankM: TdxBarLargeButton
-      Action = actBank
-      Category = 0
-      AutoGrayScale = False
-    end
-    object btnBankAccountTypeM: TdxBarLargeButton
-      Action = actBankAccountType
-      Category = 0
-      AutoGrayScale = False
-    end
-    object btnContactTypeM: TdxBarLargeButton
-      Action = actContactType
-      Category = 0
-      AutoGrayScale = False
-    end
-    object btnCountryM: TdxBarLargeButton
-      Action = actCountry
-      Category = 0
-      AutoGrayScale = False
-    end
-    object cbxViewMode: TcxBarEditItem
-      Caption = 'Toolbar'
-      Category = 0
-      Hint = 'Toolbar'
-      Visible = ivAlways
-      ShowCaption = True
-      PropertiesClassName = 'TcxCheckBoxProperties'
-      BarStyleDropDownButton = False
-      Properties.ImmediatePost = True
-      Properties.UseAlignmentWhenInplace = True
-      InternalEditValue = 'True'
     end
   end
   object sknController: TdxSkinController

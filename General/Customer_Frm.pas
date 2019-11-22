@@ -24,7 +24,8 @@ uses
   cxGridInplaceEditForm,
 
   FireDAC.UI.Intf, FireDAC.VCLUI.Error,
-  FireDAC.Stan.Error, FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.Phys.IBWrapper;
+  FireDAC.Stan.Error, FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.Phys.IBWrapper,
+  dxSkinMoneyTwins, dxSkinOffice2019Colorful, dxSkinTheBezier;
 
   // To handle TFDGUIxErrordialog
 // FireDAC.UI.Intf, FireDAC.VCLUI.Error,
@@ -288,7 +289,6 @@ uses
   Lookup_DM,
   MT_DM,
   MsgDialog_Frm,
-  CustomerEdit_Frm,
   Progress_Frm,
   VBBase_DM,
   RUtils,

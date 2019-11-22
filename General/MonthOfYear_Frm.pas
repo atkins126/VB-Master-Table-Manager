@@ -41,8 +41,6 @@ uses
   RUtils;
 
 procedure TMonthOfYearFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Month of Year';
@@ -53,10 +51,7 @@ begin
     'C:\Data\Xml\Month of Year.xml', MTDM.cdsMonthOfYear.UpdateOptions.Generatorname,
     MTDM.cdsMonthOfYear.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 9, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 9);
 end;
 
 procedure TMonthOfYearFrm.navMasterButtonsButtonClick(Sender: TObject;    AButtonIndex: Integer; var ADone: Boolean);

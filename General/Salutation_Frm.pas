@@ -42,8 +42,6 @@ uses
   Lookup_DM;
 
 procedure TSalutationFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Salutation';
@@ -55,11 +53,7 @@ begin
     MTDM.cdsSalutation.UpdateOptions.UpdateTableName);
 
   LookupDM.cdsSalutation.Data := MTDM.cdsSalutation.Data;
-
-//  if not MTDM.cdsMasterList.Locate('ID', 11, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 11);
 end;
 
 procedure TSalutationFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);

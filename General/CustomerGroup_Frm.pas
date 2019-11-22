@@ -41,8 +41,6 @@ uses
   RUtils;
 
 procedure TCustomerGroupFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Customer Group';
@@ -53,10 +51,7 @@ begin
     'C:\Data\Xml\Customer Group.xml', MTDM.cdsCustomerGroup.UpdateOptions.Generatorname,
     MTDM.cdsCustomerGroup.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 18, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 18);
 end;
 
 procedure TCustomerGroupFrm.navMasterButtonsButtonClick(Sender: TObject;  AButtonIndex: Integer; var ADone: Boolean);

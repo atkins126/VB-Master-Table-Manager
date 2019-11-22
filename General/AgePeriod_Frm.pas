@@ -36,8 +36,6 @@ implementation
 uses MT_DM, VBBase_DM, CommonFunction, VBCommonValues, RUtils;
 
 procedure TAgePeriodFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Age Period';
@@ -50,13 +48,10 @@ begin
     'C:\Data\Xml\Age Period.xml', MTDM.cdsAgePeriod.UpdateOptions.Generatorname,
     MTDM.cdsAgePeriod.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 1, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 1);
 end;
 
-procedure TAgePeriodFrm.navMasterButtonsButtonClick(Sender: TObject;  AButtonIndex: Integer; var ADone: Boolean);
+procedure TAgePeriodFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 begin
   inherited;
   case AButtonIndex of
@@ -76,3 +71,4 @@ begin
 end;
 
 end.
+

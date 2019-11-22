@@ -29,7 +29,8 @@ uses
 
   FireDAC.Stan.Def, FireDAC.VCLUI.Wait, FireDAC.Phys.IBWrapper, FireDAC.Phys.FB,
   FireDAC.Phys.IBBase, FireDAC.Stan.Intf, FireDAC.Phys, cxMaskEdit,
-  cxDropDownEdit, cxBarEditItem;
+  cxDropDownEdit, cxBarEditItem, dxSkinMoneyTwins, dxSkinOffice2019Colorful,
+  dxSkinTheBezier;
 
 type
   TMainFrm = class(TBaseLayoutFrm)
@@ -96,18 +97,7 @@ type
     FDIBValidate: TFDIBValidate;
     FDIBSecurity: TFDIBSecurity;
     FDIBConfig: TFDIBConfig;
-    barTabaleManager: TdxBar;
     grpToolbar: TdxLayoutGroup;
-    litMaasterTableToolbar: TdxLayoutItem;
-    docMasterTableToolbar: TdxBarDockControl;
-    btnActivityTypeM: TdxBarLargeButton;
-    btnAgePeriodM: TdxBarLargeButton;
-    btnBankM: TdxBarLargeButton;
-    btnBankAccountTypeM: TdxBarLargeButton;
-    btnContactTypeM: TdxBarLargeButton;
-    btnCountryM: TdxBarLargeButton;
-    lucToolbarOption: TcxComboBox;
-    cbxViewMode: TcxBarEditItem;
     procedure FormCreate(Sender: TObject);
     procedure DoLaunchMasterTable(Sender: TObject);
     procedure pagMainChange(Sender: TObject);
@@ -117,6 +107,7 @@ type
     procedure btnMasterListClick(Sender: TObject);
     procedure DoCloseScreen(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     function CreateNewTabSheet(TabSheetName, TabSheetCaption: string; PageControl: TcxPageControl; Action: TAction): TcxTabSheet;
@@ -162,6 +153,13 @@ uses
   Lookup_DM,
   Customer_Frm;
 
+procedure TMainFrm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  if FCallingFromShell then
+    SendMessageToApp('VB Shell', 'Close App')
+end;
+
 procedure TMainFrm.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -173,14 +171,15 @@ end;
 
 procedure TMainFrm.FormShow(Sender: TObject);
 var
-  ErrorMsg: string;
-  SkinResourceFileName, SkinName: string;
+  VBShell: string;
+{$IFDEF DEBUG}ErrorMsg, {$ENDIF}SkinResourceFileName, SkinName: string;
   Day, Month, Year: Word;
 begin
   inherited;
   Screen.Cursor := crHourglass;
   dxBarMakeInactiveImagesDingy := False;
   FSwitchPrefix := ['/'];
+  FCallingFromShell := FindCmdLineSwitch('VB_SHELL', VBShell, True, [clstValueNextParam, clstValueAppended]);
 //  cntShowMasterList.Control := cbxShowMasterList;
 
   if MsgDialogFrm = nil then
@@ -188,13 +187,14 @@ begin
 
   try
 {$IFDEF DEBUG}
+    Self.BorderStyle :=  bsSizeable;
     ErrorMsg := '';
     if not LocalDSServerIsRunning(LOCAL_VB_SHELL_DS_SERVER, ErrorMsg) then
     begin
       Beep;
       DisplayMsg(
         Application.Title,
-        Application.Title + ' - Datasnap Server Connection Error',
+        'Datasnap Server Connection Error',
         'Could not establish a connection to the requested Datasnap server.' + CRLF + CRLF +
         ErrorMsg
         + CRLF + CRLF + 'Please ensure that the local ' + Application.Title + ' Datasnap '
@@ -214,7 +214,7 @@ begin
     if LookupDM = nil then
       LookupDM := TLookupDM.Create(nil);
 
-    sbrMain.Panels[1].Text := 'User: ' + VBBaseDM.UserData.UserName;
+    sbrMain.Panels[1].Text := 'User: ' + VBBaseDM.FUserData.UserName;
     VBBaseDM.SetConnectionProperties;
     VBBaseDM.sqlConnection.Open;
     VBBaseDM.Client := TVBServerMethodsClient.Create(VBBaseDM.sqlConnection.DBXConnection);
@@ -239,9 +239,20 @@ begin
       MTDM.cdsMasterList.UpdateOptions.UpdateTableName);
 
     if FCallingFromShell then
-      SendTheMessage(WM_APP_READY, 0, 0)
-    else
-      WindowState := wsMaximized;
+      if not SendMessageToApp('VB Shell', 'App Ready') then
+      begin
+        Beep;
+        DisplayMsg(
+          Application.Title,
+          'Application launch Error',
+          'Host application: VB Shell not found!',
+          mtError,
+          [mbOK]
+          );
+        Application.Terminate;
+      end
+      else
+        WindowState := wsMaximized;
   finally
     Screen.Cursor := crDefault;
   end;
@@ -353,22 +364,10 @@ begin
     17: CloseTheForm(pagMain.ActivePageIndex, VehicleMakeFrm, actVehicleMake.Tag, actVehicleMake);
   end;
 
-//  case MTDM.ActionTag of
-//    0: CloseTheForm(pagMain.ActivePageIndex, ActivityTypeFrm, 0, actActivityType);
-//    1: CloseTheForm(pagMain.ActivePageIndex, AgePeriodFrm, 0, actAgePeriod);
-////    2: CloseTheForm(pagMain.ActivePageIndex, BILIFrm, 0, actBILI);
-////    3: CloseTheForm(pagMain.ActivePageIndex, SDALFrm, 0, actSDAL);
-////    4: CloseTheForm(pagMain.ActivePageIndex, PPHIFrm, 0, actPPHI);
-////    5: CloseTheForm(pagMain.ActivePageIndex, WUSEFrm, 0, actWUSE);
-////    6: CloseTheForm(pagMain.ActivePageIndex, CoExecPlanFrm, 0, actCoExecPlan);
-////    8: CloseTheForm(pagMain.ActivePageIndex, MOPicklistFrm, 0, actGetMOPicklist);
-//  end;
-
   if pagMain.PageCount = 0 then
     RUtils.PressKey(VK_HOME, [], False);
 
   actCloseScreen.Enabled := pagMain.PageCount > 0;
-  //    lucFSTool.SetFocus();
 end;
 
 procedure TMainFrm.DoExitApp(Sender: TObject);
@@ -406,9 +405,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -435,9 +431,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -464,9 +457,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -493,9 +483,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -522,9 +509,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -551,9 +535,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -580,9 +561,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -609,9 +587,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -638,9 +613,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -667,9 +639,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -696,9 +665,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -725,9 +691,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -754,9 +717,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -783,9 +743,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -812,9 +769,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -841,9 +795,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -870,9 +821,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;
@@ -899,9 +847,6 @@ begin
           NewTabSheet.TabVisible := True;
           pagMain.Repaint;
         finally
-//          NewTabSheet.Visible := True;
-//          NewTabSheet.TabVisible := True;
-//          pagMain.Repaint;
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
         end;

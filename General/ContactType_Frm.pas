@@ -41,8 +41,6 @@ uses
   RUtils;
 
 procedure TContactTypeFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Contact Type';
@@ -55,10 +53,7 @@ begin
     'C:\Data\Xml\Contact Type.xml', MTDM.cdsContactType.UpdateOptions.Generatorname,
     MTDM.cdsContactType.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 4, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 4);
 end;
 
 procedure TContactTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);

@@ -41,8 +41,6 @@ uses
   RUtils;
 
 procedure TBankFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Bank';
@@ -55,10 +53,7 @@ begin
     'C:\Data\Xml\Bannk.xml', MTDM.cdsBank.UpdateOptions.Generatorname,
     MTDM.cdsBank.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 2, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 2);
 end;
 
 procedure TBankFrm.navMasterButtonsButtonClick(Sender: TObject;

@@ -36,8 +36,6 @@ implementation
 uses MT_DM, VBBase_DM, CommonFunction, VBCommonValues, RUtils;
 
 procedure TBankAccountTypeFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Bank Account Type';
@@ -50,10 +48,7 @@ begin
     'C:\Data\Xml\Bannk Account Type.xml', MTDM.cdsBankAccountType.UpdateOptions.Generatorname,
     MTDM.cdsBankAccountType.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 3, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 3);
 end;
 
 procedure TBankAccountTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);

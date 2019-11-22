@@ -42,8 +42,6 @@ uses
   Lookup_DM;
 
 procedure TStdActivityFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Standard Activity Type';
@@ -55,11 +53,7 @@ begin
     MTDM.cdsStdActivity.UpdateOptions.UpdateTableName);
 
   LookupDM.cdsStdActivity.Data := MTDM.cdsStdActivity.Data;
-
-//  if not MTDM.cdsMasterList.Locate('ID', 17, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 17);
 end;
 
 procedure TStdActivityFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);

@@ -41,8 +41,6 @@ uses
   RUtils;
 
 procedure TRateUnitFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Activity Type';
@@ -53,10 +51,7 @@ begin
     'C:\Data\Xml\Rate Unit.xml', MTDM.cdsRateUnit.UpdateOptions.Generatorname,
     MTDM.cdsRateUnit.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 14, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 14);
 end;
 
 procedure TRateUnitFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);

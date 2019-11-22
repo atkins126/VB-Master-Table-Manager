@@ -486,13 +486,8 @@ begin
 end;
 
 procedure TMTDM.cdsActivityTypeAfterPost(DataSet: TDataSet);
-var
-  DataSetState: TDatasetState;
 begin
   inherited;
-//  DataSetState := DataSet.State;
-//  DataSet := cdsTimesheet;
-
   SetLength(VBBaseDM.FDataSetArray, 1);
   VBBaseDM.FDataSetArray[0] := TFDMemTable(DataSet);
   VBBaseDM.ApplyUpdates(VBBaseDM.FDataSetArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName);

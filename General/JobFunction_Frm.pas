@@ -42,8 +42,6 @@ uses
   Lookup_DM;
 
 procedure TJobFunctionFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Job Function';
@@ -55,11 +53,7 @@ begin
     MTDM.cdsJobFunction.UpdateOptions.UpdateTableName);
 
   LookupDM.cdsJobFunction.Data := MTDM.cdsJobFunction.Data;
-
-//  if not MTDM.cdsMasterList.Locate('ID', 8, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 8);
 end;
 
 procedure TJobFunctionFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);

@@ -42,8 +42,6 @@ uses
   RUtils;
 
 procedure TCountryFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Country';
@@ -54,10 +52,7 @@ begin
     'C:\Data\Xml\Country.xml', MTDM.cdsCountry.UpdateOptions.Generatorname,
     MTDM.cdsCountry.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 5, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 5);
 end;
 
 procedure TCountryFrm.navMasterButtonsButtonClick(Sender: TObject;  AButtonIndex: Integer; var ADone: Boolean);

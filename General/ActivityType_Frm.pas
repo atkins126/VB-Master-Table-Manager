@@ -43,8 +43,6 @@ uses
   RUtils;
 
 procedure TActivityTypeFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Activity Type';
@@ -55,11 +53,7 @@ begin
     'C:\Data\Xml\Activity Type.xml', MTDM.cdsActivityType.UpdateOptions.Generatorname,
     MTDM.cdsActivityType.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 15, []) then
-//    ReadOnly := True;
-
-Check readonly property here!!
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 15);
 end;
 
 procedure TActivityTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);

@@ -41,8 +41,6 @@ uses
   RUtils;
 
 procedure TVehicleMakeFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Vehicle Make';
@@ -53,10 +51,7 @@ begin
     'C:\Data\Xml\Vehicle Make.xml', MTDM.cdsVehicleMake.UpdateOptions.Generatorname,
     MTDM.cdsVehicleMake.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 16, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 16);
 end;
 
 procedure TVehicleMakeFrm.navMasterButtonsButtonClick(Sender: TObject;     AButtonIndex: Integer; var ADone: Boolean);

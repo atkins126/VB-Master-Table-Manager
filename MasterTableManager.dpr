@@ -51,7 +51,6 @@ uses
   VBBase_DM in '..\..\Lib\VBBase_DM.pas' {VBBaseDM: TDataModule},
   Lookup_DM in 'Data Modules\Lookup_DM.pas' {LookupDM: TDataModule},
   Customer_Frm in 'General\Customer_Frm.pas' {CustomerFrm},
-  CustomerEdit_Frm in 'General\CustomerEdit_Frm.pas' {CustomerEditFrm},
   VBProxyClass in '..\Lib\VBProxyClass.pas',
   BaseCustomerEdit_Frm in '..\..\Lib\BaseCustomerEdit_Frm.pas' {BaseCustomerEditFrm},
   CompanyContactDetail_Frm in 'General\CompanyContactDetail_Frm.pas' {CompanyContactDetailFrm},
@@ -71,20 +70,19 @@ var
 
 const
   APP_NAME = 'MasterTableManager.exe';
-  APP_TITLE = 'Master Table Manager';
 
 begin
 {$IFDEF DEBUG}
   ReportMemoryLeaksOnShutdown := True;
 {$ENDIF}
-
+  Application.Title := 'Master Table Manager';
   LaunchDrive := ExtractFileDrive(Application.ExeName);
   SwitchPrefix := ['/'];
 {$IFDEF RELEASE}
   if not FindCmdLineSwitch('VB_SHELL', SwitchPrefix, True) then
   begin
     Beep;
-    TaskMessageDlg(Application.Title + ' - Task Launch Error',
+    TaskMessageDlg('Task Launch Error',
       Application.Title + ' can only run through VB Shell.' + CRLF +
       'Please launch RC Shell to access this task.',
       mtError,
@@ -97,24 +95,18 @@ begin
 {$ENDIF}if (AnsiCompareText(LaunchDrive, 'C:') <> 0) then
     begin
       Beep;
-      TaskMessageDlg(APP_TITLE + ' - Applicaton Launch Error',
-        'You cannot run ' + APP_TITLE + ' from drive ' + LaunchDrive, mtError,
+      TaskMessageDlg('Applicaton Launch Error',
+        'You cannot run ' + Application.Title + ' from drive ' + LaunchDrive, mtError,
         [mbOK], 0);
       Application.Terminate;
       Application.ShowMainForm := False;
     end
     else
     begin
-      Application.Title := APP_TITLE;
       Application.Initialize;
       Application.MainFormOnTaskbar := True;
       Application.CreateForm(TMainFrm, MainFrm);
-  Application.Run;
+      Application.Run;
     end;
-
-//  Application.Title := APP_TITLE;
-//  Application.Initialize;
-//  Application.MainFormOnTaskbar := True;
-//  Application.Run;
 end.
 

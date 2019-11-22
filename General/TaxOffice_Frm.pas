@@ -42,8 +42,6 @@ uses
   Lookup_DM;
 
 procedure TTaxOfficeFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Activity Type';
@@ -54,10 +52,7 @@ begin
     'C:\Data\Xml\Tax Office.xml', MTDM.cdsTaxOffice.UpdateOptions.Generatorname,
     MTDM.cdsTaxOffice.UpdateOptions.UpdateTableName);
 
-//  if not MTDM.cdsMasterList.Locate('ID', 12, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 12);
 end;
 
 procedure TTaxOfficeFrm.navMasterButtonsButtonClick(Sender: TObject;   AButtonIndex: Integer; var ADone: Boolean);

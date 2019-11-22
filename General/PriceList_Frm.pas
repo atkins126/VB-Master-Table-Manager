@@ -47,8 +47,6 @@ uses
   Lookup_DM;
 
 procedure TPriceListFrm.FormCreate(Sender: TObject);
-//var
-//  ReadOnly: Boolean;
 begin
   inherited;
   Caption := 'Price list';
@@ -60,21 +58,11 @@ begin
     'C:\Data\Xml\Price List.xml', MTDM.cdsPricelist.UpdateOptions.Generatorname,
     MTDM.cdsPricelist.UpdateOptions.UpdateTableName);
 
-//  VBBaseDM.GetData(38, MTDM.cdsRateUnit, MTDM.cdsRateUnit.Name, '',
-//    'C:\Data\Xml\Rate Unit.xml', MTDM.cdsRateUnit.UpdateOptions.Generatorname,
-//    MTDM.cdsRateUnit.UpdateOptions.UpdateTableName);
-//
-//  LookupDM.cdsRateUnit.Data := MTDM.cdsRateUnit.Data;
-
   VBBaseDM.GetData(38, LookupDM.cdsRateUnit, LookupDM.cdsRateUnit.Name, '',
     'C:\Data\Xml\Rate Unit.xml', LookupDM.cdsRateUnit.UpdateOptions.Generatorname,
     LookupDM.cdsRateUnit.UpdateOptions.UpdateTableName);
 
-
-//  if not MTDM.cdsMasterList.Locate('ID', 10, []) then
-//    ReadOnly := True;
-
-  SetButtonVisibility(RUtils.IntegerToBoolean(MTDM.cdsMasterList.FieldByName('READ_ONLY').AsInteger));
+  SetButtonVisibility(MTDM.cdsMasterList, 10);
 end;
 
 procedure TPriceListFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
