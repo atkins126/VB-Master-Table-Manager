@@ -1215,7 +1215,6 @@ begin
     ProgressFrm.Close;
     FreeAndNil(ProgressFrm);
   end;
-
 end;
 
 procedure TCustomerFrm.grdContactPersonEnter(Sender: TObject);

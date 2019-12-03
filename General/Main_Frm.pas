@@ -29,8 +29,7 @@ uses
 
   FireDAC.Stan.Def, FireDAC.VCLUI.Wait, FireDAC.Phys.IBWrapper, FireDAC.Phys.FB,
   FireDAC.Phys.IBBase, FireDAC.Stan.Intf, FireDAC.Phys, cxMaskEdit,
-  cxDropDownEdit, cxBarEditItem, dxSkinMoneyTwins, dxSkinOffice2019Colorful,
-  dxSkinTheBezier;
+  cxDropDownEdit, cxBarEditItem;
 
 type
   TMainFrm = class(TBaseLayoutFrm)
@@ -163,7 +162,7 @@ end;
 procedure TMainFrm.FormCreate(Sender: TObject);
 begin
   inherited;
-  Caption := 'Master Table Manager';
+  Caption := Application.Title;
   layMain.LayoutLookAndFeel := lafCustomSkin;
 //  cntShowMasterList.Control := cbxShowMasterList;
   styHintController.HintHidePause := 5000;
@@ -181,6 +180,7 @@ begin
   FSwitchPrefix := ['/'];
   FCallingFromShell := FindCmdLineSwitch('VB_SHELL', VBShell, True, [clstValueNextParam, clstValueAppended]);
 //  cntShowMasterList.Control := cbxShowMasterList;
+  actCloseScreen.Enabled := pagMain.PageCount > 0;
 
   if MsgDialogFrm = nil then
     MsgDialogFrm := TMsgDialogFrm.Create(nil);
@@ -220,7 +220,7 @@ begin
     VBBaseDM.Client := TVBServerMethodsClient.Create(VBBaseDM.sqlConnection.DBXConnection);
     MTDM.ShellResource := VBBaseDM.GetShellResource;
     SkinResourceFileName := RESOURCE_FOLDER + SKIN_RESOURCE_FILE;
-    SkinName := VBBaseDM.ShellResource.SkinName;
+    SkinName := MTDM.ShellResource.SkinName;
 
     if Length(Trim(SkinName)) = 0 then
       SkinName := DEFAULT_SKIN_NAME;
@@ -256,23 +256,6 @@ begin
   finally
     Screen.Cursor := crDefault;
   end;
-end;
-
-procedure TMainFrm.HandleTSAfterPost(var MyMsg: TMessage);
-//var
-//  SL: TStringList;
-begin
-//  SL := TStringList.Create;
-//  SL.Delimiter := PIPE;
-//  SL.QuoteChar := '"';
-//  SL.DelimitedText := PChar(MyMsg.WParam);
-//
-//  try
-//    if SL.Values['REQUEST'] = 'REFRESH_DATA' then
-//      SendMessage(CustomerFrm.Handle, WM_RECORD_ID, DWORD(PChar(SL.DelimitedText)), 0);
-//  finally
-//    MyMsg.Result := -1;
-//  end;
 end;
 
 procedure TMainFrm.FormDestroy(Sender: TObject);
@@ -1022,6 +1005,23 @@ begin
     pagMain.OnChange := pagMainChange;
     actCloseScreen.Enabled := pagMain.PageCount > 0;
   end;
+end;
+
+procedure TMainFrm.HandleTSAfterPost(var MyMsg: TMessage);
+//var
+//  SL: TStringList;
+begin
+//  SL := TStringList.Create;
+//  SL.Delimiter := PIPE;
+//  SL.QuoteChar := '"';
+//  SL.DelimitedText := PChar(MyMsg.WParam);
+//
+//  try
+//    if SL.Values['REQUEST'] = 'REFRESH_DATA' then
+//      SendMessage(CustomerFrm.Handle, WM_RECORD_ID, DWORD(PChar(SL.DelimitedText)), 0);
+//  finally
+//    MyMsg.Result := -1;
+//  end;
 end;
 
 end.
