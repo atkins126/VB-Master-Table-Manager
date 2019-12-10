@@ -23,6 +23,7 @@ inherited CustomerFrm: TCustomerFrm
         FindPanel.ApplyInputDelay = 600
         FindPanel.DisplayMode = fpdmAlways
         FindPanel.ShowCloseButton = False
+        ScrollbarAnnotations.CustomAnnotations = <>
         OnCustomDrawCell = viewCustomerCustomDrawCell
         DataController.DataSource = MTDM.dtsCustomer
         DataController.Summary.DefaultGroupSummaryItems = <>
@@ -173,6 +174,7 @@ inherited CustomerFrm: TCustomerFrm
       OptionsData.Appending = False
       OptionsData.DeletingConfirmation = False
       Navigator.Buttons.CustomButtons = <>
+      ScrollbarAnnotations.CustomAnnotations = <>
       TabOrder = 3
       DataController.DataSource = MTDM.dtsCustomer
       Version = 1
@@ -676,6 +678,7 @@ inherited CustomerFrm: TCustomerFrm
         Navigator.Buttons.GotoBookmark.Visible = False
         Navigator.Buttons.Filter.Visible = False
         Navigator.Visible = True
+        ScrollbarAnnotations.CustomAnnotations = <>
         OnCustomDrawCell = viewCustomerCustomDrawCell
         DataController.DataSource = MTDM.dtsContactDetailCo
         DataController.Summary.DefaultGroupSummaryItems = <>
@@ -879,6 +882,7 @@ inherited CustomerFrm: TCustomerFrm
       Navigator.Buttons.Filter.Visible = False
       Navigator.Visible = True
       PopupMenu = popDBAction
+      ScrollbarAnnotations.CustomAnnotations = <>
       TabOrder = 6
       Visible = False
       OnDblClick = grdPhysicalAddressDblClick
@@ -955,6 +959,7 @@ inherited CustomerFrm: TCustomerFrm
       OptionsData.Inserting = False
       Navigator.Buttons.CustomButtons = <>
       PopupMenu = popDBAction
+      ScrollbarAnnotations.CustomAnnotations = <>
       TabOrder = 7
       Visible = False
       OnDblClick = grdPhysicalAddressDblClick
@@ -1032,6 +1037,7 @@ inherited CustomerFrm: TCustomerFrm
       OptionsData.Inserting = False
       Navigator.Buttons.CustomButtons = <>
       PopupMenu = popDBAction
+      ScrollbarAnnotations.CustomAnnotations = <>
       TabOrder = 8
       Visible = False
       OnDblClick = grdPhysicalAddressDblClick
@@ -1124,6 +1130,7 @@ inherited CustomerFrm: TCustomerFrm
         Navigator.Buttons.GotoBookmark.Visible = False
         Navigator.Buttons.Filter.Visible = False
         Navigator.Visible = True
+        ScrollbarAnnotations.CustomAnnotations = <>
         OnCustomDrawCell = viewCustomerCustomDrawCell
         OnFocusedRecordChanged = viewContactPersonFocusedRecordChanged
         DataController.DataSource = MTDM.dtsContactPerson
@@ -1346,6 +1353,7 @@ inherited CustomerFrm: TCustomerFrm
         Navigator.Buttons.GotoBookmark.Visible = False
         Navigator.Buttons.Filter.Visible = False
         Navigator.Visible = True
+        ScrollbarAnnotations.CustomAnnotations = <>
         OnCustomDrawCell = viewCustomerCustomDrawCell
         DataController.DataSource = MTDM.dtsContactDetailPerson
         DataController.Summary.DefaultGroupSummaryItems = <>
@@ -1516,6 +1524,7 @@ inherited CustomerFrm: TCustomerFrm
         Navigator.Buttons.GotoBookmark.Visible = False
         Navigator.Buttons.Filter.Visible = False
         Navigator.Visible = True
+        ScrollbarAnnotations.CustomAnnotations = <>
         OnCustomDrawCell = viewCustomerCustomDrawCell
         DataController.DataSource = MTDM.dtsBankingDetail
         DataController.Summary.DefaultGroupSummaryItems = <>
@@ -1681,6 +1690,7 @@ inherited CustomerFrm: TCustomerFrm
         Navigator.Buttons.GotoBookmark.Visible = False
         Navigator.Buttons.Filter.Visible = False
         Navigator.Visible = True
+        ScrollbarAnnotations.CustomAnnotations = <>
         OnCustomDrawCell = viewCustomerCustomDrawCell
         DataController.DataSource = MTDM.dtsDirector
         DataController.Summary.DefaultGroupSummaryItems = <>
@@ -1895,6 +1905,7 @@ inherited CustomerFrm: TCustomerFrm
         Navigator.Buttons.GotoBookmark.Visible = False
         Navigator.Buttons.Filter.Visible = False
         Navigator.Visible = True
+        ScrollbarAnnotations.CustomAnnotations = <>
         OnCustomDrawCell = viewCustomerCustomDrawCell
         DataController.DataSource = MTDM.dtsBeneficiary
         DataController.Summary.DefaultGroupSummaryItems = <>
@@ -2069,6 +2080,7 @@ inherited CustomerFrm: TCustomerFrm
         Navigator.Buttons.GotoBookmark.Visible = False
         Navigator.Buttons.Filter.Visible = False
         Navigator.Visible = True
+        ScrollbarAnnotations.CustomAnnotations = <>
         OnCustomDrawCell = viewCustomerCustomDrawCell
         DataController.DataSource = MTDM.dtsVehicle
         DataController.Summary.DefaultGroupSummaryItems = <>

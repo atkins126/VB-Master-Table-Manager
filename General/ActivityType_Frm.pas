@@ -14,7 +14,7 @@ uses
   cxEdit, cxNavigator, dxDateRanges, cxDBData, dxLayoutContainer, dxLayoutLookAndFeels,
   cxClasses, cxDBNavigator, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridBandedTableView, cxGridDBBandedTableView, cxGrid,
-  dxLayoutControl, cxCurrencyEdit, cxTextEdit;
+  dxLayoutControl, cxCurrencyEdit, cxTextEdit, dxScrollbarAnnotations;
 
 type
   TActivityTypeFrm = class(TBaseGridFrm)

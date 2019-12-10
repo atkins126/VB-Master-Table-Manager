@@ -300,7 +300,7 @@ type
     FActionTag: Integer;
     FTableReadOnlyArray: TableReadOnlyArray;
     FTableNameArray: TableNameArray;
-    FDBAction: TDBActions;
+//    FDBAction: TDBActions;
     FDetailIndex: Integer;
     FPostError: Boolean;
     FValueArray: FieldValueArray;
@@ -315,7 +315,7 @@ type
     property ActionTag: Integer read FActionTag write FActionTag;
     property TableNameArray: TableNameArray read FTableNameArray write FTableNameArray;
     property TableReadOnlyArray: TableReadOnlyArray read FTableReadOnlyArray write FTableReadOnlyArray;
-    property DBAction: TDBActions read FDBAction write FDBAction;
+//    property DBAction: TDBActions read FDBAction write FDBAction;
     property DetailIndex: Integer read FDetailIndex write FDetailIndex;
     property PostError: Boolean read FPostError write FPostError;
     property ValueArray: FieldValueArray read FValueArray write FValueArray;

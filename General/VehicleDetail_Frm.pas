@@ -87,10 +87,10 @@ begin
 // Width = 520; Height = 360
   lucVehicleMake.Properties.ListSource := LookupDM.dtsVehicleMake;
 //  edtYear.Properties.MinValue :=  1950;
-  edtYear.Properties.MaxValue :=  CurrentYear;
+  edtYear.Properties.MaxValue :=  YearInt(Date);
 //  edtYear.Value := 0;
 
-  if MTDM.DBAction = acModify then
+  if DBAction = acModify then
   begin
     lucVehicleMake.EditValue := MTDM.cdsVehicle.FieldByName('VEHICLE_MAKE_ID').AsInteger;
     edtModel.Text := MTDM.cdsVehicle.FieldByName('VEHICLE_MODEL').AsString;

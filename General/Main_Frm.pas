@@ -172,7 +172,7 @@ procedure TMainFrm.FormShow(Sender: TObject);
 var
   VBShell: string;
 {$IFDEF DEBUG}ErrorMsg, {$ENDIF}SkinResourceFileName, SkinName: string;
-  Day, Month, Year: Word;
+//  Day, Month, Year: Word;
 begin
   inherited;
   Screen.Cursor := crHourglass;
@@ -230,9 +230,8 @@ begin
     if BaseFrm = nil then
       BaseFrm := TBaseFrm.Create(nil);
 
-    DecodeDate(Date, Year, Month, Day);
-    VBBaseDM.CurrentPeriod := Year * 100 + Month;
-    VBBaseDM.CurrentMonth := VBBaseDM.CurrentPeriod mod 100;
+    VBBaseDM.CurrentPeriod := RUtils.CurrentPeriod(Date);
+    VBBaseDM.CurrentMonth :=  RUtils.MonthInt(Date);
 
     VBBaseDM.GetData(35, MTDM.cdsMasterList, MTDM.cdsMasterList.Name, '',
       'C:\Data\Xml\Master list.xml', MTDM.cdsMasterList.UpdateOptions.Generatorname,

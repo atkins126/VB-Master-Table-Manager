@@ -15,9 +15,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
     ExplicitTop = 0
     ExplicitWidth = 605
     ExplicitHeight = 460
-    inherited lblHeaderTitle: TcxLabel
-      ExplicitWidth = 583
-    end
     inherited btnOK: TcxButton
       Left = 438
       Top = 424
@@ -351,9 +348,9 @@ inherited AddressDetailFrm: TAddressDetailFrm
     end
     object spc1: TdxLayoutEmptySpaceItem
       Parent = grpPhysPostalControl
-      CaptionOptions.Text = 'Empty Space Item'
       SizeOptions.Height = 10
       SizeOptions.Width = 10
+      CaptionOptions.Text = 'Empty Space Item'
       Index = 3
     end
     object litBillingToPhysical: TdxLayoutItem
@@ -558,16 +555,16 @@ inherited AddressDetailFrm: TAddressDetailFrm
     end
     object spc2: TdxLayoutEmptySpaceItem
       Parent = grpPhysPostalControl
-      CaptionOptions.Text = 'Empty Space Item'
       SizeOptions.Height = 10
       SizeOptions.Width = 10
+      CaptionOptions.Text = 'Empty Space Item'
       Index = 0
     end
     object spc3: TdxLayoutEmptySpaceItem
       Parent = grpBillingControls
-      CaptionOptions.Text = 'Empty Space Item'
       SizeOptions.Height = 10
       SizeOptions.Width = 10
+      CaptionOptions.Text = 'Empty Space Item'
       Index = 0
     end
   end

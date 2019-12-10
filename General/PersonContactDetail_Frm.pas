@@ -64,7 +64,7 @@ begin
 
   lucContactType.Properties.ListSource := LookupDM.dtsContactType;
 
-  if MTDM.DBAction = acModify then
+  if DBAction = acModify then
   begin
     lucContactType.EditValue := MTDM.cdsContactDetailPerson.FieldByName('CONTACT_TYPE_ID').AsInteger;
     edtValue.Text := MTDM.cdsContactDetailPerson.FieldByName('VALUE').AsString;

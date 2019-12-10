@@ -51,7 +51,6 @@ uses
   VBBase_DM in '..\..\Lib\VBBase_DM.pas' {VBBaseDM: TDataModule},
   Lookup_DM in 'Data Modules\Lookup_DM.pas' {LookupDM: TDataModule},
   Customer_Frm in 'General\Customer_Frm.pas' {CustomerFrm},
-  VBProxyClass in '..\Lib\VBProxyClass.pas',
   BaseCustomerEdit_Frm in '..\..\Lib\BaseCustomerEdit_Frm.pas' {BaseCustomerEditFrm},
   CompanyContactDetail_Frm in 'General\CompanyContactDetail_Frm.pas' {CompanyContactDetailFrm},
   AddressDetail_Frm in 'General\AddressDetail_Frm.pas' {AddressDetailFrm},
@@ -60,7 +59,8 @@ uses
   DirectorDetail_Frm in 'General\DirectorDetail_Frm.pas' {DirectorDetailFrm},
   BeneficiaryDetail_Frm in 'General\BeneficiaryDetail_Frm.pas' {BeneficiaryDetailFrm},
   VehicleDetail_Frm in 'General\VehicleDetail_Frm.pas' {VehicleDetailFrm},
-  ContactPerson_Frm in 'General\ContactPerson_Frm.pas' {ContactPersonFrm};
+  ContactPerson_Frm in 'General\ContactPerson_Frm.pas' {ContactPersonFrm},
+  VBProxyClass in '..\Lib\VBProxyClass.pas';
 
 {$R *.res}
 

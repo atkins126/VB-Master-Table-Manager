@@ -102,7 +102,7 @@ begin
   dteDOB.Properties.MinDate := StrToDate('10/01/1900');
   dteDOB.Properties.MaxDate := Date;
 
-  if MTDM.DBAction = acModify then
+  if DBAction = acModify then
   begin
     edtFirstName.Text := MTDM.cdsContactPerson.FieldByName('FIRST_NAME').AsString;
     edtLastName.Text := MTDM.cdsContactPerson.FieldByName('LAST_NAME').AsString;

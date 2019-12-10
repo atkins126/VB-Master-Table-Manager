@@ -21,7 +21,6 @@ inherited CompanyContactDetailFrm: TCompanyContactDetailFrm
     inherited btnOK: TcxButton
       Left = 213
       Top = 264
-      ModalResult = 0
       TabOrder = 9
       OnClick = btnOKClick
       ExplicitLeft = 213

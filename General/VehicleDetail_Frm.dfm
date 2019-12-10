@@ -271,7 +271,7 @@ inherited VehicleDetailFrm: TVehicleDetailFrm
       CaptionOptions.Visible = False
       Control = cbxMaintenancePlan
       ControlOptions.OriginalHeight = 21
-      ControlOptions.OriginalWidth = 123
+      ControlOptions.OriginalWidth = 121
       ControlOptions.ShowBorder = False
       Index = 2
     end

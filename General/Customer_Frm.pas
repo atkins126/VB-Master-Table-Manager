@@ -25,7 +25,8 @@ uses
 
   FireDAC.UI.Intf, FireDAC.VCLUI.Error,
   FireDAC.Stan.Error, FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.Phys.IBWrapper,
-  dxSkinMoneyTwins, dxSkinOffice2019Colorful, dxSkinTheBezier;
+  dxSkinMoneyTwins, dxSkinOffice2019Colorful, dxSkinTheBezier,
+  dxScrollbarAnnotations;
 
   // To handle TFDGUIxErrordialog
 // FireDAC.UI.Intf, FireDAC.VCLUI.Error,
@@ -319,19 +320,19 @@ begin
     0:
       begin
         Key := VK_INSERT;
-        MTDM.DBAction := acInsert;
+        DBAction := acInsert;
       end;
 
     1:
       begin
         Key := VK_RETURN; // VK_F2;
-        MTDM.DBAction := acModify;
+        DBAction := acModify;
       end;
 
     2:
       begin
         Key := VK_DELETE;
-        MTDM.DBAction := acDelete;
+        DBAction := acDelete;
       end;
   end;
   EditDeleteRecord(Key);
@@ -351,7 +352,7 @@ begin
 // FDetailDataSet[MTDM.DetailIndex].Cancel;
 
   Result := '';
-  case MTDM.DBAction of
+  case DBAction of
     acInsert: FDetailDataSet[MTDM.DetailIndex].Insert;
     acModify: FDetailDataSet[MTDM.DetailIndex].Edit;
   end;
@@ -565,7 +566,7 @@ end;
 /// /  if FDetailDataSet[MTDM.DetailIndex].State in [dsEdit, dsInsert] then
 /// /    FDetailDataSet[MTDM.DetailIndex].Cancel;
 //
-// case MTDM.DBAction of
+// case DBAction of
 // acInsert: FDetailDataSet[MTDM.DetailIndex].Insert;
 // acModify: FDetailDataSet[MTDM.DetailIndex].Edit;
 // end;
@@ -1280,8 +1281,8 @@ begin
         FOpenTableParam.LocateValue := '';
 
         case Key of
-          VK_INSERT: MTDM.DBAction := acInsert;
-          { VK_F2 }VK_RETURN: MTDM.DBAction := acModify;
+          VK_INSERT: DBAction := acInsert;
+          { VK_F2 }VK_RETURN: DBAction := acModify;
         end;
 
         case MTDM.DetailIndex of
@@ -1576,8 +1577,8 @@ begin
 //
 // MTDM.DetailIndex := 0;
 // case AButtonIndex of
-// NBDI_INSERT: MTDM.DBAction := acInsert;
-// NBDI_EDIT: MTDM.DBAction := acModify;
+// NBDI_INSERT: DBAction := acInsert;
+// NBDI_EDIT: DBAction := acModify;
 // end;
 //
 // if CustomerEditFrm.ShowModal = mrOK then

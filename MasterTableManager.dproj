@@ -216,7 +216,6 @@
         <DCCReference Include="General\Customer_Frm.pas">
             <Form>CustomerFrm</Form>
         </DCCReference>
-        <DCCReference Include="..\Lib\VBProxyClass.pas"/>
         <DCCReference Include="..\..\Lib\BaseCustomerEdit_Frm.pas">
             <Form>BaseCustomerEditFrm</Form>
             <FormType>dfm</FormType>
@@ -253,6 +252,7 @@
             <Form>ContactPersonFrm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\Lib\VBProxyClass.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
