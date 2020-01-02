@@ -75,10 +75,10 @@ implementation
 {$R *.dfm}
 
 uses
+  VBBase_DM,
   MT_DM,
   Lookup_DM,
-  RUtils,
-  VBBase_DM;
+  RUtils;
 
 procedure TContactPersonFrm.btnOKClick(Sender: TObject);
 begin
@@ -102,7 +102,7 @@ begin
   dteDOB.Properties.MinDate := StrToDate('10/01/1900');
   dteDOB.Properties.MaxDate := Date;
 
-  if DBAction = acModify then
+  if VBBaseDM.DBAction = acModify then
   begin
     edtFirstName.Text := MTDM.cdsContactPerson.FieldByName('FIRST_NAME').AsString;
     edtLastName.Text := MTDM.cdsContactPerson.FieldByName('LAST_NAME').AsString;

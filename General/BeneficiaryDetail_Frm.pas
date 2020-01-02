@@ -58,6 +58,7 @@ implementation
 {$R *.dfm}
 
 uses
+  VBBase_DM,
   MT_DM,
   Lookup_DM,
   RUtils;
@@ -74,7 +75,7 @@ begin
 // Width = 560; Height = 255
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
 
-  if DBAction = acModify then
+  if VBBaseDM.DBAction = acModify then
   begin
     edtFirstName.Text := MTDM.cdsBeneficiary.FieldByName('FIRST_NAME').AsString;
     edtLastName.Text := MTDM.cdsBeneficiary.FieldByName('LAST_NAME').AsString;

@@ -287,11 +287,11 @@ implementation
 
 uses
   Base_DM,
+  VBBase_DM,
   Lookup_DM,
   MT_DM,
   MsgDialog_Frm,
   Progress_Frm,
-  VBBase_DM,
   RUtils,
   CommonFunction,
   CompanyContactDetail_Frm,
@@ -320,19 +320,19 @@ begin
     0:
       begin
         Key := VK_INSERT;
-        DBAction := acInsert;
+        VBBaseDM.DBAction := acInsert;
       end;
 
     1:
       begin
         Key := VK_RETURN; // VK_F2;
-        DBAction := acModify;
+        VBBaseDM.DBAction := acModify;
       end;
 
     2:
       begin
         Key := VK_DELETE;
-        DBAction := acDelete;
+        VBBaseDM.DBAction := acDelete;
       end;
   end;
   EditDeleteRecord(Key);
@@ -352,7 +352,7 @@ begin
 // FDetailDataSet[MTDM.DetailIndex].Cancel;
 
   Result := '';
-  case DBAction of
+  case VBBaseDM.DBAction of
     acInsert: FDetailDataSet[MTDM.DetailIndex].Insert;
     acModify: FDetailDataSet[MTDM.DetailIndex].Edit;
   end;
@@ -1281,8 +1281,8 @@ begin
         FOpenTableParam.LocateValue := '';
 
         case Key of
-          VK_INSERT: DBAction := acInsert;
-          { VK_F2 }VK_RETURN: DBAction := acModify;
+          VK_INSERT: VBBaseDM.DBAction := acInsert;
+          { VK_F2 }VK_RETURN: VBBaseDM.DBAction := acModify;
         end;
 
         case MTDM.DetailIndex of

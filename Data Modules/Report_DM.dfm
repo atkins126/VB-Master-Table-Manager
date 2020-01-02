@@ -1,13 +1,9 @@
-inherited MTDM: TMTDM
-  Height = 672
-  Width = 1097
+inherited ReportDM: TReportDM
+  OldCreateOrder = True
+  Height = 737
+  Width = 1191
   object cdsActivityType: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -66,10 +62,6 @@ inherited MTDM: TMTDM
   end
   object cdsAgePeriod: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -145,10 +137,6 @@ inherited MTDM: TMTDM
   end
   object cdsBank: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -214,10 +202,6 @@ inherited MTDM: TMTDM
   end
   object cdsBankAccountType: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -283,10 +267,6 @@ inherited MTDM: TMTDM
   end
   object cdsContactType: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -351,10 +331,6 @@ inherited MTDM: TMTDM
   end
   object cdsCustomer: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -625,11 +601,6 @@ inherited MTDM: TMTDM
   end
   object cdsCustomerGroup: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -678,7 +649,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'CUSTOMER_GROUP'
     StoreDefs = True
     Left = 135
-    Top = 140
+    Top = 200
     object cdsCustomerGroupID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -696,11 +667,6 @@ inherited MTDM: TMTDM
   end
   object cdsCustomerStatus: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -749,7 +715,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'CUSTOMER_STATUS'
     StoreDefs = True
     Left = 235
-    Top = 140
+    Top = 200
     object cdsCustomerStatusID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -766,11 +732,6 @@ inherited MTDM: TMTDM
   end
   object cdsCustomerType: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -819,7 +780,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'CUSTOMER_TYPE'
     StoreDefs = True
     Left = 335
-    Top = 140
+    Top = 200
     object cdsCustomerTypeID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -837,11 +798,6 @@ inherited MTDM: TMTDM
   end
   object cdsJobFunction: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -890,7 +846,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'JOB_FUNCTION'
     StoreDefs = True
     Left = 435
-    Top = 140
+    Top = 200
     object cdsJobFunctionID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -908,11 +864,6 @@ inherited MTDM: TMTDM
   end
   object cdsMonthOfYear: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -960,7 +911,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'MONTH_OF_YEAR'
     StoreDefs = True
     Left = 635
-    Top = 140
+    Top = 200
     object cdsMonthOfYearID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -978,11 +929,6 @@ inherited MTDM: TMTDM
   end
   object cdsPricelist: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -1046,7 +992,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'PRICE_LIST'
     StoreDefs = True
     Left = 720
-    Top = 140
+    Top = 200
     object cdsPricelistID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1087,11 +1033,6 @@ inherited MTDM: TMTDM
   end
   object cdsRateUnit: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -1140,7 +1081,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'RATE_UNIT'
     StoreDefs = True
     Left = 130
-    Top = 285
+    Top = 345
     object cdsRateUnitID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1158,11 +1099,6 @@ inherited MTDM: TMTDM
   end
   object cdsSalutation: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -1211,7 +1147,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'SALUTATION'
     StoreDefs = True
     Left = 230
-    Top = 285
+    Top = 345
     object cdsSalutationID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1228,11 +1164,6 @@ inherited MTDM: TMTDM
   end
   object cdsStdActivity: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -1281,7 +1212,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'STD_ACTIVITY'
     StoreDefs = True
     Left = 330
-    Top = 285
+    Top = 345
     object cdsStdActivityID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1299,11 +1230,6 @@ inherited MTDM: TMTDM
   end
   object cdsTaxOffice: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -1347,7 +1273,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'TAX_OFFICE'
     StoreDefs = True
     Left = 430
-    Top = 285
+    Top = 345
     object cdsTaxOfficeID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1365,11 +1291,6 @@ inherited MTDM: TMTDM
   end
   object cdsVehicleMake: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -1418,7 +1339,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'VEHICLE_MAKE'
     StoreDefs = True
     Left = 530
-    Top = 285
+    Top = 345
     object cdsVehicleMakeID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1467,57 +1388,57 @@ inherited MTDM: TMTDM
   object dtsCustomerGroup: TDataSource
     DataSet = cdsCustomerGroup
     Left = 135
-    Top = 190
+    Top = 250
   end
   object dtsCustomerStatus: TDataSource
     DataSet = cdsCustomerStatus
     Left = 235
-    Top = 190
+    Top = 250
   end
   object dtsCustomerType: TDataSource
     DataSet = cdsCustomerType
     Left = 335
-    Top = 190
+    Top = 250
   end
   object dtsJobFunction: TDataSource
     DataSet = cdsJobFunction
     Left = 435
-    Top = 190
+    Top = 250
   end
   object dtsMonthOfyear: TDataSource
     DataSet = cdsMonthOfYear
     Left = 635
-    Top = 190
+    Top = 250
   end
   object dtsPriceList: TDataSource
     DataSet = cdsPricelist
     Left = 720
-    Top = 190
+    Top = 250
   end
   object dtsRateUnit: TDataSource
     DataSet = cdsRateUnit
     Left = 130
-    Top = 335
+    Top = 395
   end
   object dtsSalutation: TDataSource
     DataSet = cdsSalutation
     Left = 230
-    Top = 335
+    Top = 395
   end
   object dtsStdActivityType: TDataSource
     DataSet = cdsStdActivity
     Left = 330
-    Top = 335
+    Top = 395
   end
   object dtsTaxOffice: TDataSource
     DataSet = cdsTaxOffice
     Left = 430
-    Top = 335
+    Top = 395
   end
   object dtsVehicleMake: TDataSource
     DataSet = cdsVehicleMake
     Left = 530
-    Top = 335
+    Top = 395
   end
   object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
     Left = 885
@@ -1534,11 +1455,6 @@ inherited MTDM: TMTDM
   end
   object cdsMasterList: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     CachedUpdates = True
     Indexes = <
@@ -1572,7 +1488,7 @@ inherited MTDM: TMTDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'MASTER_LIST'
     Left = 535
-    Top = 140
+    Top = 200
     object cdsMasterListID: TIntegerField
       FieldName = 'ID'
       Origin = 'ID'
@@ -1609,14 +1525,10 @@ inherited MTDM: TMTDM
   object dtsMasterList: TDataSource
     DataSet = cdsMasterList
     Left = 535
-    Top = 190
+    Top = 250
   end
   object cdsCountry: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -1674,11 +1586,6 @@ inherited MTDM: TMTDM
   end
   object cdsContactDetailCo: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -1740,7 +1647,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'CONTACT_DETAIL_CO'
     StoreDefs = True
     Left = 130
-    Top = 425
+    Top = 485
     object cdsContactDetailCoID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1786,15 +1693,10 @@ inherited MTDM: TMTDM
   object dtsContactDetailCo: TDataSource
     DataSet = cdsContactDetailCo
     Left = 130
-    Top = 485
+    Top = 545
   end
   object cdsAddress: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     FieldDefs = <>
     CachedUpdates = True
@@ -1837,7 +1739,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'ADDRESS'
     StoreDefs = True
     Left = 240
-    Top = 425
+    Top = 485
     object cdsAddressID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1946,15 +1848,10 @@ inherited MTDM: TMTDM
   object dtsAddress: TDataSource
     DataSet = cdsAddress
     Left = 235
-    Top = 485
+    Top = 545
   end
   object cdsContactDetailPerson: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -2009,7 +1906,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'CONTACT_DETAIL_PERSON'
     StoreDefs = True
     Left = 540
-    Top = 425
+    Top = 485
     object cdsContactDetailPersonID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2053,15 +1950,10 @@ inherited MTDM: TMTDM
   object dtsContactDetailPerson: TDataSource
     DataSet = cdsContactDetailPerson
     Left = 540
-    Top = 485
+    Top = 545
   end
   object cdsBankingDetail: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -2142,7 +2034,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'BANKING_DETAIL'
     StoreDefs = True
     Left = 325
-    Top = 425
+    Top = 485
     object cdsBankingDetailID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2199,15 +2091,10 @@ inherited MTDM: TMTDM
   object dtsBankingDetail: TDataSource
     DataSet = cdsBankingDetail
     Left = 320
-    Top = 485
+    Top = 545
   end
   object cdsContactPerson: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -2262,7 +2149,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'CONTACT_PERSON'
     StoreDefs = True
     Left = 430
-    Top = 425
+    Top = 485
     object cdsContactPersonID: TIntegerField
       Alignment = taLeftJustify
       DisplayWidth = 10
@@ -2354,15 +2241,10 @@ inherited MTDM: TMTDM
   object dtsContactPerson: TDataSource
     DataSet = cdsContactPerson
     Left = 425
-    Top = 485
+    Top = 545
   end
   object cdsDirector: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -2433,7 +2315,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'DIRECTOR'
     StoreDefs = True
     Left = 645
-    Top = 425
+    Top = 485
     object cdsDirectorID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2495,15 +2377,10 @@ inherited MTDM: TMTDM
   object dtsDirector: TDataSource
     DataSet = cdsDirector
     Left = 640
-    Top = 485
+    Top = 545
   end
   object cdsBeneficiary: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -2573,7 +2450,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'BENEFICIARY'
     StoreDefs = True
     Left = 720
-    Top = 425
+    Top = 485
     object cdsBeneficiaryID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2625,15 +2502,10 @@ inherited MTDM: TMTDM
   object dtsBeneficiary: TDataSource
     DataSet = cdsBeneficiary
     Left = 720
-    Top = 485
+    Top = 545
   end
   object cdsVehicle: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    BeforePost = cdsActivityTypeBeforePost
-    AfterPost = cdsActivityTypeAfterPost
-    AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsActivityTypeNewRecord
-    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -2700,7 +2572,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'VEHICLE'
     StoreDefs = True
     Left = 795
-    Top = 425
+    Top = 485
     object cdsVehicleID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2767,48 +2639,790 @@ inherited MTDM: TMTDM
   object dtsVehicle: TDataSource
     DataSet = cdsVehicle
     Left = 795
-    Top = 485
+    Top = 545
   end
-  object VbtestConnection: TFDConnection
-    Params.Strings = (
-      'ConnectionDef=VB Live')
-    FormatOptions.AssignedValues = [fvMapRules]
-    FormatOptions.OwnMapRules = True
-    FormatOptions.MapRules = <
+  object rptTimesheetByUser: TfrxReport
+    Version = '6.2.1'
+    DotMatrixReport = False
+    EngineOptions.DoublePass = True
+    EngineOptions.PrintIfEmpty = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 43494.671348414300000000
+    ReportOptions.LastChange = 43498.656623368100000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 30
+    Top = 160
+    Datasets = <
       item
-        SourceDataType = dtWideString
-        TargetDataType = dtAnsiString
-      end
-      item
-        SourceDataType = dtFmtBCD
-        TargetDataType = dtCurrency
-      end
-      item
-        SourceDataType = dtSingle
-        TargetDataType = dtDouble
+        DataSetName = 'Timesheet'
       end>
-    ResourceOptions.AssignedValues = [rvAutoReconnect]
-    ResourceOptions.AutoReconnect = True
-    LoginPrompt = False
-    Left = 997
-    Top = 12
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Calibri'
+      Font.Style = []
+      Orientation = poLandscape
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = []
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Top = 18.897650000000000000
+        Width = 1046.929810000000000000
+      end
+      object bndMaster: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = [ftBottom]
+        Height = 22.677180000000000000
+        Top = 260.787570000000000000
+        Width = 1046.929810000000000000
+        DataSetName = 'Timesheet'
+        RowCount = 0
+        Stretched = True
+        object TimesheetACTIVITY_DATE: TfrxMemoView
+          AllowVectorExport = True
+          Left = 83.149660000000000000
+          Width = 75.590551180000000000
+          Height = 18.897650000000000000
+          DataField = 'ACTIVITY_DATE'
+          DataSetName = 'Timesheet'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Timesheet."ACTIVITY_DATE"]')
+        end
+        object TimesheetCUSTOMER_NAME: TfrxMemoView
+          AllowVectorExport = True
+          Left = 162.519790000000000000
+          Width = 196.535560000000000000
+          Height = 18.897650000000000000
+          DataField = 'CUSTOMER_NAME'
+          DataSetName = 'Timesheet'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Timesheet."CUSTOMER_NAME"]')
+        end
+        object TimesheetACTIVITY_TYPE: TfrxMemoView
+          AllowVectorExport = True
+          Left = 362.834880000000000000
+          Width = 151.181102360000000000
+          Height = 18.897650000000000000
+          DataField = 'ACTIVITY_TYPE'
+          DataSetName = 'Timesheet'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Timesheet."ACTIVITY_TYPE"]')
+        end
+        object TimesheetACTIVITY: TfrxMemoView
+          AllowVectorExport = True
+          Left = 521.575140000000000000
+          Width = 283.464566929134000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'ACTIVITY'
+          DataSetName = 'Timesheet'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Timesheet."ACTIVITY"]')
+        end
+        object TimesheetTIME_SPENT: TfrxMemoView
+          AllowVectorExport = True
+          Left = 831.496731810000000000
+          Width = 41.574803150000000000
+          Height = 18.897650000000000000
+          DataField = 'TIME_SPENT'
+          DataSetName = 'Timesheet'
+          DisplayFormat.FormatStr = '###0'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Timesheet."TIME_SPENT"]')
+        end
+        object TimesheetRATE: TfrxMemoView
+          AllowVectorExport = True
+          Left = 925.984256850000000000
+          Width = 56.692913390000000000
+          Height = 18.897650000000000000
+          DataField = 'ACTUAL_RATE'
+          DataSetName = 'Timesheet'
+          DisplayFormat.FormatStr = '###0'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Timesheet."ACTUAL_RATE"]')
+        end
+        object TimesheetITEM_VALUE: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 990.236896614173200000
+          Width = 56.692913385826800000
+          Height = 18.897650000000000000
+          DataField = 'ITEM_VALUE'
+          DataSetName = 'Timesheet'
+          DisplayFormat.FormatStr = '###,##0'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Timesheet."ITEM_VALUE"]')
+        end
+        object TimesheetTIME_HOURS: TfrxMemoView
+          AllowVectorExport = True
+          Left = 876.850437640000000000
+          Width = 45.354330710000000000
+          Height = 18.897650000000000000
+          DataField = 'TIME_HOURS'
+          DataSetName = 'Timesheet'
+          DisplayFormat.FormatStr = '###0.00'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Timesheet."TIME_HOURS"]')
+        end
+        object Memo15: TfrxMemoView
+          AllowVectorExport = True
+          Width = 75.590551180000000000
+          Height = 18.897650000000000000
+          DataField = 'WEEK_ENDING'
+          DataSetName = 'Timesheet'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Timesheet."WEEK_ENDING"]')
+        end
+        object Memo30: TfrxMemoView
+          AllowVectorExport = True
+          Left = 805.039890000000000000
+          Width = 24.566929130000000000
+          Height = 18.897650000000000000
+          DataField = 'BILLABLE_STR'
+          DataSetName = 'Timesheet'
+          DisplayFormat.FormatStr = '###0'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Timesheet."BILLABLE_STR"]')
+        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Frame.Typ = [ftBottom]
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        Height = 22.677180000000000000
+        ParentFont = False
+        Top = 306.141930000000000000
+        Width = 1046.929810000000000000
+        object Memo13: TfrxMemoView
+          AllowVectorExport = True
+          Left = 831.496121570000000000
+          Width = 41.574803150000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '###,##0'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<Timesheet."TIME_SPENT">,bndMaster)]')
+        end
+        object Memo14: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 990.236896614173200000
+          Width = 56.692913385826800000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '###,##0'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<Timesheet."ITEM_VALUE">,bndMaster)]')
+        end
+        object Memo16: TfrxMemoView
+          AllowVectorExport = True
+          Left = 876.850437640000000000
+          Width = 45.354330710000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '###,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<Timesheet."TIME_HOURS">,bndMaster)]')
+        end
+        object Memo17: TfrxMemoView
+          AllowVectorExport = True
+          Left = 642.520100000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Totals for time:')
+        end
+        object Memo2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 487.559370000000000000
+          Width = 143.622047240000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Week Ending: [(<Timesheet."WEEK_ENDING">)]')
+        end
+        object Memo3: TfrxMemoView
+          AllowVectorExport = True
+          Left = 925.984850000000000000
+          Width = 56.692950000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Tot Amt:')
+        end
+      end
+      object grpMain: TfrxGroupHeader
+        FillType = ftBrush
+        Frame.Typ = [ftBottom]
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        Height = 22.677165350000000000
+        ParentFont = False
+        Top = 215.433210000000000000
+        Width = 1046.929810000000000000
+        Condition = 'Timesheet."LOGIN_NAME"'
+        KeepTogether = True
+        ResetPageNumbers = True
+        StartNewPage = True
+        object Memo1: TfrxMemoView
+          AllowVectorExport = True
+          Width = 185.196970000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'User Name: [(<Timesheet."LOGIN_NAME">)]')
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Frame.Typ = [ftTop]
+        Height = 22.677180000000000000
+        Top = 434.645950000000000000
+        Width = 1046.929810000000000000
+        object Memo11: TfrxMemoView
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Top = 3.779530000000000000
+          Width = 207.874150000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Printed on: [(Date)] at: [(Time)]')
+        end
+        object Memo12: TfrxMemoView
+          AllowVectorExport = True
+          Left = 880.630490000000000000
+          Width = 143.622140000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Page [Page] of [TotalPages]')
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+      end
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        Height = 113.385826770000000000
+        ParentFont = False
+        Top = 41.574830000000000000
+        Width = 1046.929810000000000000
+        object Memo18: TfrxMemoView
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Top = 86.929190000000000000
+          Width = 1046.929133860000000000
+          Height = 26.456692910000000000
+          Frame.Typ = [ftTop, ftBottom]
+        end
+        object Memo20: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 823.937540000000000000
+          Top = 11.338590000000000000
+          Width = 222.992270000000000000
+          Height = 18.897650000000000000
+          Visible = False
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Timesheet data grouped by user')
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Memo21: TfrxMemoView
+          AllowVectorExport = True
+          Left = 83.149660000000000000
+          Top = 90.708720000000000000
+          Width = 52.913420000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Date')
+        end
+        object Memo22: TfrxMemoView
+          AllowVectorExport = True
+          Left = 162.519790000000000000
+          Top = 90.708720000000000000
+          Width = 98.267780000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Customer')
+        end
+        object Memo23: TfrxMemoView
+          AllowVectorExport = True
+          Left = 362.834880000000000000
+          Top = 90.708720000000000000
+          Width = 52.913420000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Activity Type')
+        end
+        object Memo24: TfrxMemoView
+          AllowVectorExport = True
+          Left = 521.575140000000000000
+          Top = 90.708720000000000000
+          Width = 105.826840000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Description')
+        end
+        object Memo25: TfrxMemoView
+          AllowVectorExport = True
+          Left = 831.496104490000000000
+          Top = 90.708720000000000000
+          Width = 41.574803150000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Spent')
+        end
+        object Memo26: TfrxMemoView
+          AllowVectorExport = True
+          Left = 925.984251968503900000
+          Top = 90.708720000000000000
+          Width = 56.692913390000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Rate')
+        end
+        object Memo27: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 990.236896610000000000
+          Top = 90.708720000000000000
+          Width = 56.692913390000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Amt')
+        end
+        object Memo28: TfrxMemoView
+          AllowVectorExport = True
+          Left = 876.850437640000000000
+          Top = 90.708720000000000000
+          Width = 45.354330710000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Hours')
+        end
+        object Memo5: TfrxMemoView
+          AllowVectorExport = True
+          Top = 56.692950000000000000
+          Width = 222.992270000000000000
+          Height = 18.897650000000000000
+          Visible = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Timesheets for: [(<Timesheet."LOGIN_NAME">)]')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          AllowVectorExport = True
+          Top = 90.708720000000000000
+          Width = 75.590600000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Week Ending')
+        end
+        object Memo10: TfrxMemoView
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Width = 257.008040000000000000
+          Height = 30.236240000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'van Brakel and Associates')
+          ParentFont = False
+        end
+        object Memo29: TfrxMemoView
+          AllowVectorExport = True
+          Left = 801.260360000000000000
+          Top = 90.708720000000000000
+          Width = 24.566929130000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Bill')
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Frame.Typ = [ftBottom]
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        Height = 22.677180000000000000
+        ParentFont = False
+        Top = 351.496290000000000000
+        Width = 1046.929810000000000000
+        object Memo4: TfrxMemoView
+          AllowVectorExport = True
+          Left = 831.496600000000000000
+          Width = 41.574803150000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '###,##0'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<Timesheet."TIME_SPENT">,bndMaster)]')
+        end
+        object Memo6: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 990.236896614173200000
+          Width = 56.692913385826800000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '###,##0'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<Timesheet."ITEM_VALUE">,bndMaster)]')
+        end
+        object Memo7: TfrxMemoView
+          AllowVectorExport = True
+          Left = 876.850916070000000000
+          Width = 45.354330710000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '###,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<Timesheet."TIME_HOURS">,bndMaster)]')
+        end
+        object Memo8: TfrxMemoView
+          AllowVectorExport = True
+          Left = 925.985328430000000000
+          Width = 56.692950000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Tot Amt:')
+        end
+        object Memo9: TfrxMemoView
+          AllowVectorExport = True
+          Left = 646.299630000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Grand Totals:')
+        end
+      end
+    end
   end
-  object Age_periodTable: TFDQuery
-    Connection = VbtestConnection
-    SQL.Strings = (
-      'SELECT * FROM AGE_PERIOD')
-    Left = 997
-    Top = 69
-    object Age_periodTableID: TIntegerField
-      FieldName = 'ID'
-      Origin = 'ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+  object fdsTimesheetByUser: TfrxDBDataset
+    UserName = 'TimesheetByUser'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'FIRST_NAME=FIRST_NAME'
+      'LAST_NAME=LAST_NAME'
+      'LOGIN_NAME=LOGIN_NAME'
+      'ACTIVITY_DATE=ACTIVITY_DATE'
+      'CUSTOMER_TYPE=CUSTOMER_TYPE'
+      'CUSTOMER_NAME=CUSTOMER_NAME'
+      'ACTIVITY_TYPE=ACTIVITY_TYPE'
+      'ACTIVITY=ACTIVITY'
+      'PRICE_LIST_ITEM=PRICE_LIST_ITEM'
+      'TIME_SPENT=TIME_SPENT'
+      'TIME_HOURS=TIME_HOURS'
+      'ACTUAL_RATE=ACTUAL_RATE'
+      'STD_RATE=STD_RATE'
+      'ITEM_VALUE=ITEM_VALUE'
+      'THE_PERIOD=THE_PERIOD'
+      'WEEK_ENDING=WEEK_ENDING'
+      'BILLABLE=BILLABLE'
+      'BILLABLE_STR=BILLABLE_STR'
+      'INVOICE_ID=INVOICE_ID'
+      'CN_ID=CN_ID'
+      'LOCKED=LOCKED'
+      'LOCKED_STR=LOCKED_STR'
+      'INVOICE_DATE=INVOICE_DATE'
+      'CARRY_FORWARD=CARRY_FORWARD'
+      'CARRY_FORWARD_STR=CARRY_FORWARD_STR'
+      'IS_ADDITIONAL_WORK=IS_ADDITIONAL_WORK'
+      'IS_ADDITIONAL_WORK_STR=IS_ADDITIONAL_WORK_STR'
+      'TOTAL_CARRY_FORWARD=TOTAL_CARRY_FORWARD')
+    BCDToCurrency = False
+    Left = 30
+    Top = 215
+  end
+  object rptMaster: TfrxReport
+    Version = '6.2.1'
+    DotMatrixReport = False
+    EngineOptions.DoublePass = True
+    EngineOptions.PrintIfEmpty = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 43494.671348414300000000
+    ReportOptions.LastChange = 43831.708335821760000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 35
+    Top = 60
+    Datasets = <
+      item
+        DataSet = fdsTimesheetByUser
+        DataSetName = 'TimesheetByUser'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
     end
-    object Age_periodTableNAME: TStringField
-      FieldName = 'NAME'
-      Origin = 'NAME'
-      Required = True
+    object Page1: TfrxReportPage
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Calibri'
+      Font.Style = []
+      Orientation = poLandscape
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = []
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Top = 18.897650000000000000
+        Width = 1046.929810000000000000
+      end
+      object bndMaster: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = [ftRight, ftTop, ftBottom]
+        Height = 18.897637800000000000
+        Top = 170.078850000000000000
+        Width = 1046.929810000000000000
+        DataSet = fdsTimesheetByUser
+        DataSetName = 'TimesheetByUser'
+        RowCount = 0
+        Stretched = True
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Frame.Typ = [ftTop]
+        Height = 22.677180000000000000
+        Top = 249.448980000000000000
+        Width = 1046.929810000000000000
+        object Memo11: TfrxMemoView
+          Align = baLeft
+          AllowVectorExport = True
+          Top = 3.779530000000000000
+          Width = 207.874150000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Printed on: [(Date)] at: [(Time)]')
+        end
+        object Memo12: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 854.173780000000100000
+          Width = 192.756030000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Page [Page] of [TotalPages]')
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+      end
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        Height = 68.031540000000010000
+        ParentFont = False
+        Top = 41.574830000000000000
+        Width = 1046.929810000000000000
+        object lblReportType: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 604.724800000000100000
+          Width = 442.205010000000000000
+          Height = 30.236220470000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Timesheets for: [TimesheetByUser."LOGIN_NAME"]')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Align = baLeft
+          AllowVectorExport = True
+          Width = 257.008040000000000000
+          Height = 30.236240000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'van Brakel and Associates')
+          ParentFont = False
+        end
+        object Memo18: TfrxMemoView
+          AllowVectorExport = True
+          Top = 49.133889999999970000
+          Width = 1046.929133860000000000
+          Height = 18.897637800000000000
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        end
+        object Memo21: TfrxMemoView
+          AllowVectorExport = True
+          Top = 49.133890000000000000
+          Width = 257.007988740000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            'Name')
+        end
+      end
     end
+  end
+  object fdsActivityType: TfrxDBDataset
+    UserName = 'frxDBDataset1'
+    CloseDataSource = False
+    DataSet = cdsActivityType
+    BCDToCurrency = False
+    Left = 135
+    Top = 115
+  end
+  object fdsAgePeriod: TfrxDBDataset
+    UserName = 'frxDBDataset1'
+    CloseDataSource = False
+    DataSet = cdsAgePeriod
+    BCDToCurrency = False
+    Left = 235
+    Top = 115
+  end
+  object fdsBank: TfrxDBDataset
+    UserName = 'frxDBDataset1'
+    CloseDataSource = False
+    DataSet = cdsBank
+    BCDToCurrency = False
+    Left = 330
+    Top = 115
   end
 end

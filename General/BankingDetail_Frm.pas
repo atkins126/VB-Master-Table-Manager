@@ -62,6 +62,7 @@ implementation
 {$R *.dfm}
 
 uses
+  VBBase_DM,
   MT_DM,
   Lookup_DM,
   RUtils;
@@ -79,7 +80,7 @@ begin
   lucBank.Properties.ListSource := LookupDM.dtsBank;
   lucAccType.Properties.ListSource := LookupDM.dtsBankAccountType;
 
-  if DBAction = acModify then
+  if VBBaseDM.DBAction = acModify then
   begin
     lucBank.EditValue := MTDM.cdsBankingDetail.FieldByName('BANK_ID').AsInteger;
     edtBranchCode.Text := MTDM.cdsBankingDetail.FieldByName('BRANCH_CODE').AsString;

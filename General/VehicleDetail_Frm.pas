@@ -65,6 +65,7 @@ implementation
 {$R *.dfm}
 
 uses
+  VBBase_DM,
   MT_DM,
   Lookup_DM,
   RUtils;
@@ -90,7 +91,7 @@ begin
   edtYear.Properties.MaxValue :=  YearInt(Date);
 //  edtYear.Value := 0;
 
-  if DBAction = acModify then
+  if VBBaseDM.DBAction = acModify then
   begin
     lucVehicleMake.EditValue := MTDM.cdsVehicle.FieldByName('VEHICLE_MAKE_ID').AsInteger;
     edtModel.Text := MTDM.cdsVehicle.FieldByName('VEHICLE_MODEL').AsString;

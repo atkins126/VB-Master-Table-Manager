@@ -97,6 +97,7 @@ implementation
 {$R *.dfm}
 
 uses
+  VBBase_DM,
   MT_DM,
   VBCommonValues;
 
@@ -170,7 +171,7 @@ procedure TAddressDetailFrm.FormCreate(Sender: TObject);
 begin
   inherited;
   //  Width = 615, Height = 495
-  if DBAction = acModify then
+  if VBBaseDM.DBAction = acModify then
   begin
     edtPhysical1.Text := MTDM.cdsAddress.FieldByName('PHYSICAL1').AsString;
     edtPhysical2.Text := MTDM.cdsAddress.FieldByName('PHYSICAL2').AsString;

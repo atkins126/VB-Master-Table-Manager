@@ -165,7 +165,10 @@ begin
   Caption := Application.Title;
   layMain.LayoutLookAndFeel := lafCustomSkin;
 //  cntShowMasterList.Control := cbxShowMasterList;
-  styHintController.HintHidePause := 5000;
+  Application.HintPause := 0;
+  Application.HintShortPause := 0;
+  Application.HintHidePause := 150000;
+  styHintController.HintHidePause := 15000;
 end;
 
 procedure TMainFrm.FormShow(Sender: TObject);
@@ -187,7 +190,7 @@ begin
 
   try
 {$IFDEF DEBUG}
-    Self.BorderStyle :=  bsSizeable;
+    Self.BorderStyle := bsSizeable;
     ErrorMsg := '';
     if not LocalDSServerIsRunning(LOCAL_VB_SHELL_DS_SERVER, ErrorMsg) then
     begin
@@ -231,13 +234,14 @@ begin
       BaseFrm := TBaseFrm.Create(nil);
 
     VBBaseDM.CurrentPeriod := RUtils.CurrentPeriod(Date);
-    VBBaseDM.CurrentMonth :=  RUtils.MonthInt(Date);
+    VBBaseDM.CurrentMonth := RUtils.MonthInt(Date);
 
     VBBaseDM.GetData(35, MTDM.cdsMasterList, MTDM.cdsMasterList.Name, '',
       'C:\Data\Xml\Master list.xml', MTDM.cdsMasterList.UpdateOptions.Generatorname,
       MTDM.cdsMasterList.UpdateOptions.UpdateTableName);
 
     if FCallingFromShell then
+    begin
       if not SendMessageToApp('VB Shell', 'App Ready') then
       begin
         Beep;
@@ -249,9 +253,9 @@ begin
           [mbOK]
           );
         Application.Terminate;
-      end
-      else
-        WindowState := wsMaximized;
+      end;
+      WindowState := wsMaximized;
+    end;
   finally
     Screen.Cursor := crDefault;
   end;

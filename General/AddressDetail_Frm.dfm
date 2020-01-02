@@ -15,6 +15,9 @@ inherited AddressDetailFrm: TAddressDetailFrm
     ExplicitTop = 0
     ExplicitWidth = 605
     ExplicitHeight = 460
+    inherited lblHeaderTitle: TcxLabel
+      ExplicitWidth = 583
+    end
     inherited btnOK: TcxButton
       Left = 438
       Top = 424

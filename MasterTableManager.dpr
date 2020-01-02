@@ -60,7 +60,8 @@ uses
   BeneficiaryDetail_Frm in 'General\BeneficiaryDetail_Frm.pas' {BeneficiaryDetailFrm},
   VehicleDetail_Frm in 'General\VehicleDetail_Frm.pas' {VehicleDetailFrm},
   ContactPerson_Frm in 'General\ContactPerson_Frm.pas' {ContactPersonFrm},
-  VBProxyClass in '..\Lib\VBProxyClass.pas';
+  VBProxyClass in '..\Lib\VBProxyClass.pas',
+  Report_DM in 'Data Modules\Report_DM.pas' {ReportDM: TDataModule};
 
 {$R *.res}
 

@@ -286,6 +286,14 @@ type
     cdsContactDetailCoCONTACT_PERSON_ID: TIntegerField;
     cdsContactDetailCoVALUE: TStringField;
     cdsContactDetailCoCOMMENT: TStringField;
+    VbtestConnection: TFDConnection;
+    cdsActivityTypeID: TIntegerField;
+    cdsActivityTypeNAME: TStringField;
+    Age_periodTable: TFDQuery;
+    Age_periodTableID: TIntegerField;
+    Age_periodTableNAME: TStringField;
+    cdsAgePeriodID: TIntegerField;
+    cdsAgePeriodNAME: TStringField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);
@@ -349,7 +357,9 @@ procedure TMTDM.cdsActivityTypeNewRecord(DataSet: TDataSet);
 begin
   inherited;
   DataSet.FieldByName('ID').AsInteger := 0;
-  DataSet.FieldByName('CUSTOMER_ID').AsInteger := cdsCustomer.FieldByName('ID').AsInteger;
+
+  if DataSet.FindField('CUSTOMER_ID') <> nil then
+    DataSet.FieldByName('CUSTOMER_ID').AsInteger := cdsCustomer.FieldByName('ID').AsInteger;
 
   if (TFDMemTable(DataSet) = cdsContactDetailCo) then
   begin

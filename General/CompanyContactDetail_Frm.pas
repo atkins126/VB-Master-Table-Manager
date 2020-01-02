@@ -47,6 +47,7 @@ implementation
 {$R *.dfm}
 
 uses
+  VBBase_DM,
   MT_DM,
   Lookup_DM,
   RUtils;
@@ -72,7 +73,7 @@ begin
 
   lucContactType.Properties.ListSource := LookupDM.dtsContactType;
 
-  if DBAction = acModify then
+  if VBBaseDM.DBAction = acModify then
   begin
     lucContactType.EditValue := MTDM.cdsContactDetailCo.FieldByName('CONTACT_TYPE_ID').AsInteger;
     edtValue.Text := MTDM.cdsContactDetailCo.FieldByName('VALUE').AsString;
@@ -88,10 +89,10 @@ begin
   if SameText(TrimAll(edtValue.Text), '') then
     raise EValidateException.Create(lucContactType.Text + ' must have a value');
 
-  MTDM.FFieldValue.ContactTypeID :=  VarAsType(lucContactType.EditValue, varInteger);
-  MTDM.FFieldValue.ContactType :=  lucContactType.Text;
-  MTDM.FFieldValue.TextValue :=  TrimAll(edtValue.Text);
-  MTDM.FFieldValue.Comment :=  TrimAll(memComment.Text);
+  MTDM.FFieldValue.ContactTypeID := VarAsType(lucContactType.EditValue, varInteger);
+  MTDM.FFieldValue.ContactType := lucContactType.Text;
+  MTDM.FFieldValue.TextValue := TrimAll(edtValue.Text);
+  MTDM.FFieldValue.Comment := TrimAll(memComment.Text);
 
   ModalResult := mrOK;
 end;
