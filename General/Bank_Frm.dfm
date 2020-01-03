@@ -48,7 +48,6 @@ inherited BankFrm: TBankFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Buttons.OnButtonClick = navMasterButtonsButtonClick
       DataSource = MTDM.dtsBank
     end
     inherited litGrid: TdxLayoutItem

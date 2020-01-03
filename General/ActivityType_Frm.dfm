@@ -54,13 +54,12 @@ inherited ActivityTypeFrm: TActivityTypeFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 215
-      Buttons.OnButtonClick = navMasterButtonsButtonClick
+      Width = 324
       DataSource = MTDM.dtsActivityType
-      ExplicitWidth = 215
+      ExplicitWidth = 324
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 215
+      ControlOptions.OriginalWidth = 324
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450

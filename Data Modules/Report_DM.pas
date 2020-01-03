@@ -5,9 +5,11 @@ interface
 uses
   System.SysUtils, System.Classes, Winapi.Windows, Vcl.Forms, Vcl.Dialogs,
 
-  VBBase_DM, CommonValues, VBCommonValues,
+  Base_DM, VBBase_DM, CommonValues, VBCommonValues,
 
   IPPeerClient, Data.DBXDataSnap, Data.DBXCommon, Data.DB, Data.SqlExpr,
+
+  frxClass, frxDBSet,
 
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
@@ -15,7 +17,7 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteDef,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, FireDAC.Phys.IBBase, FireDAC.Phys.SQLite,
-  FireDAC.Stan.StorageBin, Base_DM, frxClass, frxDBSet;
+  FireDAC.Stan.StorageBin;
 
 type
   TReportDM = class(TBaseDM)
@@ -234,6 +236,10 @@ type
     fdsActivityType: TfrxDBDataset;
     fdsAgePeriod: TfrxDBDataset;
     fdsBank: TfrxDBDataset;
+    fdsMaster: TfrxDBDataset;
+    procedure PrepareReport(SourceDataSet, TargetDataSet: TFDmemTable;
+      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
+      ReportTypeName: string);
   private
     { Private declarations }
   public
@@ -249,4 +255,22 @@ implementation
 
 {$R *.dfm}
 
+{ TReportDM }
+
+{ TReportDM }
+
+procedure TReportDM.PrepareReport(SourceDataSet, TargetDataSet: TFDmemTable;
+  ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
+  ReportTypeName: string);
+begin
+  TargetDataSet.Close;
+  TargetDataSet.Data := SourceDataSet.Data;
+  fdsMaster.DataSet := TargetDataSet;
+  Report.DataSets.Clear;
+  Report.DataSets.Add(fdsMaster);
+  Report.LoadFromFile(ReportFileName, False);
+  TfrxMemoView(Report.FindObject('lblReportTypeName')).Text := ReportTypeName;
+end;
+
 end.
+

@@ -2659,7 +2659,7 @@ inherited ReportDM: TReportDM
       ''
       'end.')
     Left = 30
-    Top = 160
+    Top = 345
     Datasets = <
       item
         DataSetName = 'Timesheet'
@@ -3240,7 +3240,7 @@ inherited ReportDM: TReportDM
       'TOTAL_CARRY_FORWARD=TOTAL_CARRY_FORWARD')
     BCDToCurrency = False
     Left = 30
-    Top = 215
+    Top = 400
   end
   object rptMaster: TfrxReport
     Version = '6.2.1'
@@ -3253,7 +3253,7 @@ inherited ReportDM: TReportDM
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43494.671348414300000000
-    ReportOptions.LastChange = 43831.708335821760000000
+    ReportOptions.LastChange = 43832.716880011580000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -3263,8 +3263,8 @@ inherited ReportDM: TReportDM
     Top = 60
     Datasets = <
       item
-        DataSet = fdsTimesheetByUser
-        DataSetName = 'TimesheetByUser'
+        DataSet = fdsMaster
+        DataSetName = 'MasterDataSet'
       end>
     Variables = <>
     Style = <>
@@ -3278,9 +3278,8 @@ inherited ReportDM: TReportDM
       Font.Height = -13
       Font.Name = 'Calibri'
       Font.Style = []
-      Orientation = poLandscape
-      PaperWidth = 297.000000000000000000
-      PaperHeight = 210.000000000000000000
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
       PaperSize = 9
       LeftMargin = 10.000000000000000000
       RightMargin = 10.000000000000000000
@@ -3291,25 +3290,34 @@ inherited ReportDM: TReportDM
         FillType = ftBrush
         Frame.Typ = []
         Top = 18.897650000000000000
-        Width = 1046.929810000000000000
+        Width = 718.110700000000000000
       end
       object bndMaster: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = [ftRight, ftTop, ftBottom]
         Height = 18.897637800000000000
         Top = 170.078850000000000000
-        Width = 1046.929810000000000000
-        DataSet = fdsTimesheetByUser
-        DataSetName = 'TimesheetByUser'
+        Width = 718.110700000000000000
+        DataSet = fdsMaster
+        DataSetName = 'MasterDataSet'
         RowCount = 0
         Stretched = True
+        object Memo1: TfrxMemoView
+          AllowVectorExport = True
+          Width = 1035.591168740000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[(<MasterDataSet."NAME">)]Name')
+        end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Frame.Typ = [ftTop]
         Height = 22.677180000000000000
         Top = 249.448980000000000000
-        Width = 1046.929810000000000000
+        Width = 718.110700000000000000
         object Memo11: TfrxMemoView
           Align = baLeft
           AllowVectorExport = True
@@ -3323,7 +3331,7 @@ inherited ReportDM: TReportDM
         object Memo12: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 854.173780000000100000
+          Left = 525.354669999999900000
           Width = 192.756030000000000000
           Height = 18.897650000000000000
           Frame.Typ = []
@@ -3345,14 +3353,14 @@ inherited ReportDM: TReportDM
         Font.Height = -15
         Font.Name = 'Calibri'
         Font.Style = [fsBold]
-        Height = 68.031540000000010000
+        Height = 68.031540000000000000
         ParentFont = False
         Top = 41.574830000000000000
-        Width = 1046.929810000000000000
-        object lblReportType: TfrxMemoView
+        Width = 718.110700000000000000
+        object lblReportTypeName: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 604.724800000000100000
+          Left = 275.905689999999900000
           Width = 442.205010000000000000
           Height = 30.236220470000000000
           Font.Charset = ANSI_CHARSET
@@ -3363,7 +3371,7 @@ inherited ReportDM: TReportDM
           Frame.Typ = []
           HAlign = haRight
           Memo.UTF8W = (
-            'Timesheets for: [TimesheetByUser."LOGIN_NAME"]')
+            'Report Type')
           ParentFont = False
         end
         object Memo10: TfrxMemoView
@@ -3383,15 +3391,15 @@ inherited ReportDM: TReportDM
         end
         object Memo18: TfrxMemoView
           AllowVectorExport = True
-          Top = 49.133889999999970000
-          Width = 1046.929133860000000000
+          Top = 49.133890000000000000
+          Width = 718.110236220472400000
           Height = 18.897637800000000000
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
         end
         object Memo21: TfrxMemoView
           AllowVectorExport = True
           Top = 49.133890000000000000
-          Width = 257.007988740000000000
+          Width = 430.866368740000000000
           Height = 18.897650000000000000
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
@@ -3423,6 +3431,17 @@ inherited ReportDM: TReportDM
     DataSet = cdsBank
     BCDToCurrency = False
     Left = 330
+    Top = 115
+  end
+  object fdsMaster: TfrxDBDataset
+    UserName = 'MasterDataSet'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'NAME=NAME')
+    DataSet = cdsActivityType
+    BCDToCurrency = False
+    Left = 35
     Top = 115
   end
 end

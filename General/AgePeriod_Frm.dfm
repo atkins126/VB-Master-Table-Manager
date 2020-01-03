@@ -51,12 +51,11 @@ inherited AgePeriodFrm: TAgePeriodFrm
     end
     inherited navMaster: TcxDBNavigator
       Tag = 1
-      Width = 275
-      Buttons.OnButtonClick = navMasterButtonsButtonClick
-      ExplicitWidth = 275
+      Width = 342
+      ExplicitWidth = 342
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 275
+      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450

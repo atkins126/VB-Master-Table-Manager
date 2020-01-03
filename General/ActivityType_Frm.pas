@@ -4,17 +4,20 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Forms,
-  System.Classes, Vcl.Graphics, Vcl.ImgList, cxImageList, Vcl.ActnList,
-  Vcl.Controls, Vcl.Dialogs, System.Actions, System.ImageList, Data.DB,
+  System.Classes, Vcl.Graphics, Vcl.ImgList, cxImageList, Vcl.ActnList, Data.DB,
+  Vcl.Controls, Vcl.Dialogs, System.Actions, System.ImageList, System.IOUtils,
 
   BaseGrid_Frm,
+
+  frxClass, frxDBSet,
 
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
   dxSkinsDefaultPainters, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
   cxEdit, cxNavigator, dxDateRanges, cxDBData, dxLayoutContainer, dxLayoutLookAndFeels,
   cxClasses, cxDBNavigator, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridBandedTableView, cxGridDBBandedTableView, cxGrid,
-  dxLayoutControl, cxCurrencyEdit, cxTextEdit, dxScrollbarAnnotations;
+  dxLayoutControl, cxCurrencyEdit, cxTextEdit, dxScrollbarAnnotations, dxPrnDev,
+  dxPrnDlg;
 
 type
   TActivityTypeFrm = class(TBaseGridFrm)
@@ -40,7 +43,8 @@ uses
   VBBase_DM,
   CommonFunction,
   VBCommonValues,
-  RUtils;
+  RUtils,
+  Report_DM;
 
 procedure TActivityTypeFrm.FormCreate(Sender: TObject);
 begin
@@ -57,8 +61,11 @@ begin
 end;
 
 procedure TActivityTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
+var
+  RepFileName, ReportTypeName: string;
+  Report: TfrxReport;
+  ReportDataSet: TfrxDBDataset;
 begin
-  inherited;
   case AButtonIndex of
     NBDI_DELETE:
       begin
@@ -71,6 +78,25 @@ begin
           mtConfirmation,
           [mbYes, mbNo]
           ) = mrNo;
+      end;
+
+    16, 17, 18, 19:
+      begin
+        Screen.Cursor := crHourglass;
+        try
+          RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
+
+          if not TFile.Exists(RepFileName) then
+            raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+
+          Report := ReportDM.rptMaster;
+          ReportDataSet := ReportDM.fdsMaster;
+          ReportTypeName := 'Activity Type Listing';
+          ReportDM.PrepareReport(MTDM.cdsActivityType, ReportDM.cdsActivityType, RepFileName, Report, ReportDataSet, ReportTypeName);
+          inherited;
+        finally
+          Screen.Cursor := crDefault;
+        end;
       end;
   end;
 end;

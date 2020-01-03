@@ -150,7 +150,8 @@ uses
   VBBase_DM,
   Base_Frm,
   Lookup_DM,
-  Customer_Frm;
+  Customer_Frm,
+  Report_DM;
 
 procedure TMainFrm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -217,6 +218,9 @@ begin
     if LookupDM = nil then
       LookupDM := TLookupDM.Create(nil);
 
+    if ReportDM = nil then
+      ReportDM := TReportDM.Create(nil);
+
     sbrMain.Panels[1].Text := 'User: ' + VBBaseDM.FUserData.UserName;
     VBBaseDM.SetConnectionProperties;
     VBBaseDM.sqlConnection.Open;
@@ -278,6 +282,9 @@ begin
 
   if Assigned(LookupDM) then
     FreeAndNil(LookupDM);
+
+  if Assigned(ReportDM) then
+    FreeAndNil(ReportDM);
 end;
 
 procedure TMainFrm.pagMainChange(Sender: TObject);
