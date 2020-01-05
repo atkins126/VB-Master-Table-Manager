@@ -82,24 +82,35 @@ inherited ReportDM: TReportDM
         Size = 20
       end>
     CachedUpdates = True
-    IndexDefs = <>
+    IndexDefs = <
+      item
+        Name = 'idxID'
+        Fields = 'ID'
+        Options = [ixPrimary]
+      end
+      item
+        Name = 'idxName'
+        CaseInsFields = 'NAME'
+        Fields = 'NAME'
+        Options = [ixUnique, ixCaseInsensitive]
+      end>
     Indexes = <
       item
         Active = True
+        Selected = True
         Name = 'idxID'
         Fields = 'ID'
         Options = [soPrimary]
       end
       item
         Active = True
-        Selected = True
         Name = 'idxName'
         Fields = 'NAME'
         CaseInsFields = 'NAME'
         Options = [soNoCase, soUnique]
         FilterOptions = [ekNoCase]
       end>
-    IndexName = 'idxName'
+    IndexName = 'idxID'
     ConstraintsEnabled = True
     FetchOptions.AssignedValues = [evMode, evRecordCountMode]
     FetchOptions.Mode = fmAll
@@ -649,7 +660,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'CUSTOMER_GROUP'
     StoreDefs = True
     Left = 135
-    Top = 200
+    Top = 290
     object cdsCustomerGroupID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -715,7 +726,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'CUSTOMER_STATUS'
     StoreDefs = True
     Left = 235
-    Top = 200
+    Top = 290
     object cdsCustomerStatusID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -780,7 +791,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'CUSTOMER_TYPE'
     StoreDefs = True
     Left = 335
-    Top = 200
+    Top = 290
     object cdsCustomerTypeID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -846,7 +857,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'JOB_FUNCTION'
     StoreDefs = True
     Left = 435
-    Top = 200
+    Top = 290
     object cdsJobFunctionID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -911,7 +922,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'MONTH_OF_YEAR'
     StoreDefs = True
     Left = 635
-    Top = 200
+    Top = 290
     object cdsMonthOfYearID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -992,7 +1003,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'PRICE_LIST'
     StoreDefs = True
     Left = 720
-    Top = 200
+    Top = 290
     object cdsPricelistID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1081,7 +1092,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'RATE_UNIT'
     StoreDefs = True
     Left = 130
-    Top = 345
+    Top = 435
     object cdsRateUnitID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1147,7 +1158,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'SALUTATION'
     StoreDefs = True
     Left = 230
-    Top = 345
+    Top = 435
     object cdsSalutationID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1212,7 +1223,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'STD_ACTIVITY'
     StoreDefs = True
     Left = 330
-    Top = 345
+    Top = 435
     object cdsStdActivityID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1273,7 +1284,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'TAX_OFFICE'
     StoreDefs = True
     Left = 430
-    Top = 345
+    Top = 435
     object cdsTaxOfficeID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1339,7 +1350,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'VEHICLE_MAKE'
     StoreDefs = True
     Left = 530
-    Top = 345
+    Top = 435
     object cdsVehicleMakeID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1388,57 +1399,57 @@ inherited ReportDM: TReportDM
   object dtsCustomerGroup: TDataSource
     DataSet = cdsCustomerGroup
     Left = 135
-    Top = 250
+    Top = 340
   end
   object dtsCustomerStatus: TDataSource
     DataSet = cdsCustomerStatus
     Left = 235
-    Top = 250
+    Top = 340
   end
   object dtsCustomerType: TDataSource
     DataSet = cdsCustomerType
     Left = 335
-    Top = 250
+    Top = 340
   end
   object dtsJobFunction: TDataSource
     DataSet = cdsJobFunction
     Left = 435
-    Top = 250
+    Top = 340
   end
   object dtsMonthOfyear: TDataSource
     DataSet = cdsMonthOfYear
     Left = 635
-    Top = 250
+    Top = 340
   end
   object dtsPriceList: TDataSource
     DataSet = cdsPricelist
     Left = 720
-    Top = 250
+    Top = 340
   end
   object dtsRateUnit: TDataSource
     DataSet = cdsRateUnit
     Left = 130
-    Top = 395
+    Top = 485
   end
   object dtsSalutation: TDataSource
     DataSet = cdsSalutation
     Left = 230
-    Top = 395
+    Top = 485
   end
   object dtsStdActivityType: TDataSource
     DataSet = cdsStdActivity
     Left = 330
-    Top = 395
+    Top = 485
   end
   object dtsTaxOffice: TDataSource
     DataSet = cdsTaxOffice
     Left = 430
-    Top = 395
+    Top = 485
   end
   object dtsVehicleMake: TDataSource
     DataSet = cdsVehicleMake
     Left = 530
-    Top = 395
+    Top = 485
   end
   object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
     Left = 885
@@ -1488,7 +1499,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'MASTER_LIST'
     Left = 535
-    Top = 200
+    Top = 290
     object cdsMasterListID: TIntegerField
       FieldName = 'ID'
       Origin = 'ID'
@@ -1525,7 +1536,7 @@ inherited ReportDM: TReportDM
   object dtsMasterList: TDataSource
     DataSet = cdsMasterList
     Left = 535
-    Top = 250
+    Top = 340
   end
   object cdsCountry: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -1647,7 +1658,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'CONTACT_DETAIL_CO'
     StoreDefs = True
     Left = 130
-    Top = 485
+    Top = 575
     object cdsContactDetailCoID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1693,7 +1704,7 @@ inherited ReportDM: TReportDM
   object dtsContactDetailCo: TDataSource
     DataSet = cdsContactDetailCo
     Left = 130
-    Top = 545
+    Top = 635
   end
   object cdsAddress: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -1739,7 +1750,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'ADDRESS'
     StoreDefs = True
     Left = 240
-    Top = 485
+    Top = 575
     object cdsAddressID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1848,7 +1859,7 @@ inherited ReportDM: TReportDM
   object dtsAddress: TDataSource
     DataSet = cdsAddress
     Left = 235
-    Top = 545
+    Top = 635
   end
   object cdsContactDetailPerson: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -1906,7 +1917,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'CONTACT_DETAIL_PERSON'
     StoreDefs = True
     Left = 540
-    Top = 485
+    Top = 575
     object cdsContactDetailPersonID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1950,7 +1961,7 @@ inherited ReportDM: TReportDM
   object dtsContactDetailPerson: TDataSource
     DataSet = cdsContactDetailPerson
     Left = 540
-    Top = 545
+    Top = 635
   end
   object cdsBankingDetail: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2034,7 +2045,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'BANKING_DETAIL'
     StoreDefs = True
     Left = 325
-    Top = 485
+    Top = 575
     object cdsBankingDetailID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2091,7 +2102,7 @@ inherited ReportDM: TReportDM
   object dtsBankingDetail: TDataSource
     DataSet = cdsBankingDetail
     Left = 320
-    Top = 545
+    Top = 635
   end
   object cdsContactPerson: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2149,7 +2160,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'CONTACT_PERSON'
     StoreDefs = True
     Left = 430
-    Top = 485
+    Top = 575
     object cdsContactPersonID: TIntegerField
       Alignment = taLeftJustify
       DisplayWidth = 10
@@ -2241,7 +2252,7 @@ inherited ReportDM: TReportDM
   object dtsContactPerson: TDataSource
     DataSet = cdsContactPerson
     Left = 425
-    Top = 545
+    Top = 635
   end
   object cdsDirector: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2315,7 +2326,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'DIRECTOR'
     StoreDefs = True
     Left = 645
-    Top = 485
+    Top = 575
     object cdsDirectorID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2377,7 +2388,7 @@ inherited ReportDM: TReportDM
   object dtsDirector: TDataSource
     DataSet = cdsDirector
     Left = 640
-    Top = 545
+    Top = 635
   end
   object cdsBeneficiary: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2450,7 +2461,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'BENEFICIARY'
     StoreDefs = True
     Left = 720
-    Top = 485
+    Top = 575
     object cdsBeneficiaryID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2502,7 +2513,7 @@ inherited ReportDM: TReportDM
   object dtsBeneficiary: TDataSource
     DataSet = cdsBeneficiary
     Left = 720
-    Top = 545
+    Top = 635
   end
   object cdsVehicle: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2572,7 +2583,7 @@ inherited ReportDM: TReportDM
     UpdateOptions.UpdateTableName = 'VEHICLE'
     StoreDefs = True
     Left = 795
-    Top = 485
+    Top = 575
     object cdsVehicleID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2639,7 +2650,7 @@ inherited ReportDM: TReportDM
   object dtsVehicle: TDataSource
     DataSet = cdsVehicle
     Left = 795
-    Top = 545
+    Top = 635
   end
   object rptTimesheetByUser: TfrxReport
     Version = '6.2.1'
@@ -2659,7 +2670,7 @@ inherited ReportDM: TReportDM
       ''
       'end.')
     Left = 30
-    Top = 345
+    Top = 435
     Datasets = <
       item
         DataSetName = 'Timesheet'
@@ -3240,7 +3251,7 @@ inherited ReportDM: TReportDM
       'TOTAL_CARRY_FORWARD=TOTAL_CARRY_FORWARD')
     BCDToCurrency = False
     Left = 30
-    Top = 400
+    Top = 490
   end
   object rptMaster: TfrxReport
     Version = '6.2.1'
@@ -3253,7 +3264,7 @@ inherited ReportDM: TReportDM
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43494.671348414300000000
-    ReportOptions.LastChange = 43832.716880011580000000
+    ReportOptions.LastChange = 43833.395171759300000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -3309,7 +3320,209 @@ inherited ReportDM: TReportDM
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           Memo.UTF8W = (
-            '[(<MasterDataSet."NAME">)]Name')
+            '[(<MasterDataSet."NAME">)]')
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Frame.Typ = [ftTop]
+        Height = 22.677180000000000000
+        Top = 249.448980000000000000
+        Width = 718.110700000000000000
+        object Memo11: TfrxMemoView
+          Align = baLeft
+          AllowVectorExport = True
+          Top = 3.779530000000000000
+          Width = 207.874150000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Printed on: [(Date)] at: [(Time)]')
+        end
+        object Memo12: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 525.354670000000000000
+          Width = 192.756030000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Page [Page] of [TotalPages]')
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+      end
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        Height = 68.031540000000000000
+        ParentFont = False
+        Top = 41.574830000000000000
+        Width = 718.110700000000000000
+        object lblReportTypeName: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 275.905690000000000000
+          Width = 442.205010000000000000
+          Height = 30.236220470000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Report Type')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Align = baLeft
+          AllowVectorExport = True
+          Width = 257.008040000000000000
+          Height = 30.236240000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'van Brakel and Associates')
+          ParentFont = False
+        end
+        object Memo18: TfrxMemoView
+          AllowVectorExport = True
+          Top = 49.133890000000000000
+          Width = 718.110236220471900000
+          Height = 18.897637800000000000
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        end
+        object Memo21: TfrxMemoView
+          AllowVectorExport = True
+          Top = 49.133890000000000000
+          Width = 430.866368740000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            'Name')
+        end
+      end
+    end
+  end
+  object fdsCustomerListing: TfrxDBDataset
+    UserName = 'CustomeListing'
+    CloseDataSource = False
+    DataSet = cdsCustomer
+    BCDToCurrency = False
+    Left = 635
+    Top = 115
+  end
+  object fdsAgePeriod: TfrxDBDataset
+    UserName = 'frxDBDataset1'
+    CloseDataSource = False
+    DataSet = cdsAgePeriod
+    BCDToCurrency = False
+    Left = 235
+    Top = 115
+  end
+  object fdsBank: TfrxDBDataset
+    UserName = 'frxDBDataset1'
+    CloseDataSource = False
+    DataSet = cdsBank
+    BCDToCurrency = False
+    Left = 330
+    Top = 115
+  end
+  object fdsMaster: TfrxDBDataset
+    UserName = 'MasterDataSet'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'NAME=NAME')
+    DataSet = cdsActivityType
+    BCDToCurrency = False
+    Left = 35
+    Top = 115
+  end
+  object rptCustomerListing: TfrxReport
+    Version = '6.2.1'
+    DotMatrixReport = False
+    EngineOptions.DoublePass = True
+    EngineOptions.PrintIfEmpty = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 43494.671348414300000000
+    ReportOptions.LastChange = 43833.439896562500000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 635
+    Top = 165
+    Datasets = <
+      item
+        DataSet = fdsCustomerListing
+        DataSetName = 'CustomeListing'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Calibri'
+      Font.Style = []
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = []
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+      end
+      object bndMaster: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = [ftRight, ftTop, ftBottom]
+        Height = 18.897637800000000000
+        Top = 170.078850000000000000
+        Width = 718.110700000000000000
+        DataSet = fdsCustomerListing
+        DataSetName = 'CustomeListing'
+        RowCount = 0
+        Stretched = True
+        object Memo1: TfrxMemoView
+          AllowVectorExport = True
+          Width = 1035.591168740000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[(<MasterDataSet."NAME">)]')
         end
       end
       object PageFooter1: TfrxPageFooter
@@ -3392,7 +3605,7 @@ inherited ReportDM: TReportDM
         object Memo18: TfrxMemoView
           AllowVectorExport = True
           Top = 49.133890000000000000
-          Width = 718.110236220472400000
+          Width = 718.110236220471900000
           Height = 18.897637800000000000
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
         end
@@ -3408,40 +3621,5 @@ inherited ReportDM: TReportDM
         end
       end
     end
-  end
-  object fdsActivityType: TfrxDBDataset
-    UserName = 'frxDBDataset1'
-    CloseDataSource = False
-    DataSet = cdsActivityType
-    BCDToCurrency = False
-    Left = 135
-    Top = 115
-  end
-  object fdsAgePeriod: TfrxDBDataset
-    UserName = 'frxDBDataset1'
-    CloseDataSource = False
-    DataSet = cdsAgePeriod
-    BCDToCurrency = False
-    Left = 235
-    Top = 115
-  end
-  object fdsBank: TfrxDBDataset
-    UserName = 'frxDBDataset1'
-    CloseDataSource = False
-    DataSet = cdsBank
-    BCDToCurrency = False
-    Left = 330
-    Top = 115
-  end
-  object fdsMaster: TfrxDBDataset
-    UserName = 'MasterDataSet'
-    CloseDataSource = False
-    FieldAliases.Strings = (
-      'ID=ID'
-      'NAME=NAME')
-    DataSet = cdsActivityType
-    BCDToCurrency = False
-    Left = 35
-    Top = 115
   end
 end

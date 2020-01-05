@@ -4,6 +4,7 @@ inherited SalutationFrm: TSalutationFrm
   Caption = 'SalutationFrm'
   ClientHeight = 745
   ClientWidth = 968
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
@@ -50,8 +51,12 @@ inherited SalutationFrm: TSalutationFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Buttons.OnButtonClick = navMasterButtonsButtonClick
+      Width = 324
       DataSource = MTDM.dtsSalutation
+      ExplicitWidth = 324
+    end
+    inherited litNavigator: TdxLayoutItem
+      ControlOptions.OriginalWidth = 324
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450

@@ -90,24 +90,35 @@ inherited MTDM: TMTDM
         Size = 20
       end>
     CachedUpdates = True
-    IndexDefs = <>
+    IndexDefs = <
+      item
+        Name = 'idxID'
+        Fields = 'ID'
+        Options = [ixPrimary]
+      end
+      item
+        Name = 'idxName'
+        CaseInsFields = 'NAME'
+        Fields = 'NAME'
+        Options = [ixUnique, ixCaseInsensitive]
+      end>
     Indexes = <
       item
         Active = True
+        Selected = True
         Name = 'idxID'
         Fields = 'ID'
         Options = [soPrimary]
       end
       item
         Active = True
-        Selected = True
         Name = 'idxName'
         Fields = 'NAME'
         CaseInsFields = 'NAME'
         Options = [soNoCase, soUnique]
         FilterOptions = [ekNoCase]
       end>
-    IndexName = 'idxName'
+    IndexName = 'idxID'
     ConstraintsEnabled = True
     FetchOptions.AssignedValues = [evMode, evRecordCountMode]
     FetchOptions.Mode = fmAll

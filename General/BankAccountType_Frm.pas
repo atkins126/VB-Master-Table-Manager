@@ -3,15 +3,21 @@ unit BankAccountType_Frm;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, BaseGrid_Frm, cxGraphics, cxControls,
-  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
-  cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit, cxNavigator,
-  dxDateRanges, Data.DB, cxDBData, dxLayoutContainer, System.ImageList,
-  Vcl.ImgList, cxImageList, dxLayoutLookAndFeels, System.Actions, Vcl.ActnList,
-  cxClasses, cxDBNavigator, cxGridLevel, cxGridCustomView,
-  cxGridCustomTableView, cxGridTableView, cxGridBandedTableView,
-  cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxCurrencyEdit, cxTextEdit;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Forms,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Dialogs, System.ImageList,
+  Vcl.ImgList, System.Actions, Vcl.ActnList, System.IOUtils,
+
+  BaseGrid_Frm,
+
+  frxClass, frxDBSet,
+
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
+  cxEdit, cxNavigator, dxDateRanges, Data.DB, cxDBData, dxLayoutContainer,
+  cxImageList, dxLayoutLookAndFeels, cxClasses, cxDBNavigator, cxGridLevel,
+  cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridBandedTableView,
+  cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxCurrencyEdit, cxTextEdit,
+  dxScrollbarAnnotations, dxPrnDev, dxPrnDlg;
 
 type
   TBankAccountTypeFrm = class(TBaseGridFrm)
@@ -33,7 +39,13 @@ implementation
 
 {$R *.dfm}
 
-uses MT_DM, VBBase_DM, CommonFunction, VBCommonValues, RUtils;
+uses
+  MT_DM,
+  VBBase_DM,
+  CommonFunction,
+  VBCommonValues,
+  RUtils,
+  Report_DM;
 
 procedure TBankAccountTypeFrm.FormCreate(Sender: TObject);
 begin
@@ -41,8 +53,6 @@ begin
   Caption := 'Bank Account Type';
   viewMaster.DataController.DataSource := MTDM.dtsBankAccountType;
   navMaster.DataSource := MTDM.dtsBankAccountType;
-
-  MTDM.cdsBankAccountType.Close;
 
   VBBaseDM.GetData(6, MTDM.cdsBankAccountType, MTDM.cdsBankAccountType.Name, '',
     'C:\Data\Xml\Bannk Account Type.xml', MTDM.cdsBankAccountType.UpdateOptions.Generatorname,
@@ -52,6 +62,10 @@ begin
 end;
 
 procedure TBankAccountTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
+var
+  RepFileName, ReportTypeName: string;
+  Report: TfrxReport;
+  ReportDataSet: TfrxDBDataset;
 begin
   inherited;
   case AButtonIndex of
@@ -66,6 +80,25 @@ begin
           mtConfirmation,
           [mbYes, mbNo]
           ) = mrNo;
+      end;
+
+    16, 17, 18, 19:
+      begin
+        Screen.Cursor := crHourglass;
+        try
+          RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
+
+          if not TFile.Exists(RepFileName) then
+            raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+
+          Report := ReportDM.rptMaster;
+          ReportDataSet := ReportDM.fdsMaster;
+          ReportTypeName := 'Bank Account Type Listing';
+          ReportDM.PrepareReport(MTDM.cdsBankAccountType, ReportDM.cdsBankAccountType, RepFileName, Report, ReportDataSet, ReportTypeName);
+          PrintReport(AButtonIndex);
+        finally
+          Screen.Cursor := crDefault;
+        end;
       end;
   end;
 end;

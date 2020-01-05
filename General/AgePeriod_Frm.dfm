@@ -7,6 +7,7 @@ inherited AgePeriodFrm: TAgePeriodFrm
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
+    LayoutLookAndFeel = lafCustomSkin
     inherited grdMaster: TcxGrid
       Width = 450
       ExplicitWidth = 450
@@ -26,6 +27,7 @@ inherited AgePeriodFrm: TAgePeriodFrm
           Properties.DisplayFormat = '#,###,##0'
           Properties.EditFormat = '#,###,##0'
           Properties.ReadOnly = True
+          Visible = False
           MinWidth = 60
           Options.Editing = False
           Options.Filtering = False

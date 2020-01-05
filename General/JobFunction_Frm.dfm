@@ -4,6 +4,7 @@ inherited JobFunctionFrm: TJobFunctionFrm
   Caption = 'JobFunctionFrm'
   ClientHeight = 745
   ClientWidth = 968
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
@@ -49,7 +50,11 @@ inherited JobFunctionFrm: TJobFunctionFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Buttons.OnButtonClick = navMasterButtonsButtonClick
+      Width = 324
+      ExplicitWidth = 324
+    end
+    inherited litNavigator: TdxLayoutItem
+      ControlOptions.OriginalWidth = 324
     end
   end
   inherited styRepository: TcxStyleRepository

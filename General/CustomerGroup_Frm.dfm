@@ -25,6 +25,7 @@ inherited CustomerGroupFrm: TCustomerGroupFrm
           Properties.DisplayFormat = '#,##,##0'
           Properties.EditFormat = '#,##,##0'
           Properties.ReadOnly = True
+          Visible = False
           MinWidth = 74
           Options.Editing = False
           Options.Filtering = False
@@ -46,8 +47,12 @@ inherited CustomerGroupFrm: TCustomerGroupFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Buttons.OnButtonClick = navMasterButtonsButtonClick
+      Width = 324
       DataSource = MTDM.dtsCustomerGroup
+      ExplicitWidth = 324
+    end
+    inherited litNavigator: TdxLayoutItem
+      ControlOptions.OriginalWidth = 324
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450

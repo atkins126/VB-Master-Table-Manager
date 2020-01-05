@@ -233,10 +233,11 @@ type
     rptTimesheetByUser: TfrxReport;
     fdsTimesheetByUser: TfrxDBDataset;
     rptMaster: TfrxReport;
-    fdsActivityType: TfrxDBDataset;
+    fdsCustomerListing: TfrxDBDataset;
     fdsAgePeriod: TfrxDBDataset;
     fdsBank: TfrxDBDataset;
     fdsMaster: TfrxDBDataset;
+    rptCustomerListing: TfrxReport;
     procedure PrepareReport(SourceDataSet, TargetDataSet: TFDmemTable;
       ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
       ReportTypeName: string);
@@ -273,4 +274,5 @@ begin
 end;
 
 end.
+
 

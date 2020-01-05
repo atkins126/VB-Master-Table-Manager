@@ -50,8 +50,12 @@ inherited RateUnitFrm: TRateUnitFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Buttons.OnButtonClick = navMasterButtonsButtonClick
+      Width = 324
       DataSource = MTDM.dtsRateUnit
+      ExplicitWidth = 324
+    end
+    inherited litNavigator: TdxLayoutItem
+      ControlOptions.OriginalWidth = 324
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450

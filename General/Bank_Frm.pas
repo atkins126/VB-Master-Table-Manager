@@ -54,8 +54,6 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsBank;
   navMaster.DataSource := MTDM.dtsBank;
 
-  MTDM.cdsBank.Close;
-
   VBBaseDM.GetData(5, MTDM.cdsBank, MTDM.cdsBank.Name, '',
     'C:\Data\Xml\Bannk.xml', MTDM.cdsBank.UpdateOptions.Generatorname,
     MTDM.cdsBank.UpdateOptions.UpdateTableName);
@@ -70,6 +68,7 @@ var
   Report: TfrxReport;
   ReportDataSet: TfrxDBDataset;
 begin
+  inherited;
   case AButtonIndex of
     NBDI_DELETE:
       begin
@@ -97,8 +96,7 @@ begin
           ReportDataSet := ReportDM.fdsMaster;
           ReportTypeName := 'Bank Listing';
           ReportDM.PrepareReport(MTDM.cdsBank, ReportDM.cdsBank, RepFileName, Report, ReportDataSet, ReportTypeName);
-
-          inherited;
+          PrintReport(AButtonIndex);
         finally
           Screen.Cursor := crDefault;
         end;

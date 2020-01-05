@@ -66,6 +66,7 @@ var
   Report: TfrxReport;
   ReportDataSet: TfrxDBDataset;
 begin
+  inherited;
   case AButtonIndex of
     NBDI_DELETE:
       begin
@@ -93,7 +94,7 @@ begin
           ReportDataSet := ReportDM.fdsMaster;
           ReportTypeName := 'Activity Type Listing';
           ReportDM.PrepareReport(MTDM.cdsActivityType, ReportDM.cdsActivityType, RepFileName, Report, ReportDataSet, ReportTypeName);
-          inherited;
+          PrintReport(AButtonIndex);
         finally
           Screen.Cursor := crDefault;
         end;

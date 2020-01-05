@@ -50,8 +50,6 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsAgePeriod;
   navMaster.DataSource := MTDM.dtsAgePeriod;
 
-  MTDM.cdsAgePeriod.Close;
-
   VBBaseDM.GetData(13, MTDM.cdsAgePeriod, MTDM.cdsAgePeriod.Name, '',
     'C:\Data\Xml\Age Period.xml', MTDM.cdsAgePeriod.UpdateOptions.Generatorname,
     MTDM.cdsAgePeriod.UpdateOptions.UpdateTableName);
@@ -65,6 +63,7 @@ var
   Report: TfrxReport;
   ReportDataSet: TfrxDBDataset;
 begin
+  inherited;
   case AButtonIndex of
     NBDI_DELETE:
       begin
@@ -92,7 +91,7 @@ begin
           ReportDataSet := ReportDM.fdsMaster;
           ReportTypeName := 'Age Period Listing';
           ReportDM.PrepareReport(MTDM.cdsAgePeriod, ReportDM.cdsAgePeriod, RepFileName, Report, ReportDataSet, ReportTypeName);
-          inherited;
+          PrintReport(AButtonIndex);
         finally
           Screen.Cursor := crDefault;
         end;
