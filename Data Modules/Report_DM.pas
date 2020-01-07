@@ -234,17 +234,38 @@ type
     fdsTimesheetByUser: TfrxDBDataset;
     rptMaster: TfrxReport;
     fdsCustomerListing: TfrxDBDataset;
-    fdsAgePeriod: TfrxDBDataset;
+    fdsPriceList: TfrxDBDataset;
     fdsBank: TfrxDBDataset;
     fdsMaster: TfrxDBDataset;
     rptCustomerListing: TfrxReport;
+    cdsPricelistRATE_UNIT: TStringField;
+    dtsPriceHistory: TDataSource;
+    rptPricelist: TfrxReport;
+    rptPriceHistory: TfrxReport;
+    fdsPriceHistory: TfrxDBDataset;
+    cdsPriceHistoryYear: TFDMemTable;
+    dtsPriceHistoryYear: TDataSource;
+    cdsPriceHistoryYearTHE_YEAR: TIntegerField;
+    cdsPriceHistory: TFDMemTable;
+    cdsPriceHistoryID: TIntegerField;
+    cdsPriceHistoryRATE_UNIT_ID: TIntegerField;
+    cdsPriceHistoryNAME: TStringField;
+    cdsPriceHistoryDESCRIPTION: TStringField;
+    cdsPriceHistoryRATE_UNIT: TStringField;
+    cdsPriceHistoryFloatField2020: TFloatField;
+    cdsPriceHistoryFloatField2019: TFloatField;
     procedure PrepareReport(SourceDataSet, TargetDataSet: TFDmemTable;
       ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
       ReportTypeName: string);
+    procedure CreatePricehistory;
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
+    FSLTheYear: TStringList;
   public
     { Public declarations }
+    property SLTheYear: TStringList read FSLTheYear write FSLTheYear;
   end;
 
 var
@@ -254,11 +275,41 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
+uses RUtils;
+
 {$R *.dfm}
 
 { TReportDM }
 
 { TReportDM }
+
+procedure TReportDM.CreatePricehistory;
+var
+  I: Integer;
+begin
+  cdsPriceHistory.FieldDefs.Count;
+  cdsPriceHistory.FieldDefs.Clear;
+  cdsPriceHistory.FieldDefs.Add('ID', ftInteger, 0);
+  cdsPriceHistory.FieldDefs.Add('RATE_UNIT_ID', ftInteger, 0);
+  cdsPriceHistory.FieldDefs.Add('NAME', ftString, 200);
+  cdsPriceHistory.FieldDefs.Add('DESCRIPTION', ftString, 500);
+  cdsPriceHistory.FieldDefs.Add('RATE_UNIT', ftString, 30);
+
+  for I := 0 to FSLTheYear.Count - 1 do
+    cdsPriceHistory.FieldDefs.Add(FSLTheYear[I], ftFloat, 0);
+end;
+
+procedure TReportDM.DataModuleCreate(Sender: TObject);
+begin
+  inherited;
+  FSLTheYear := RUtils.CreateStringList(COMMA, DelimChar);
+end;
+
+procedure TReportDM.DataModuleDestroy(Sender: TObject);
+begin
+  inherited;
+  FreeAndNil(FSLTheYear);
+end;
 
 procedure TReportDM.PrepareReport(SourceDataSet, TargetDataSet: TFDmemTable;
   ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
@@ -274,5 +325,4 @@ begin
 end;
 
 end.
-
 

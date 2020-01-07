@@ -1,5 +1,6 @@
 inherited ReportDM: TReportDM
   OldCreateOrder = True
+  OnDestroy = DataModuleDestroy
   Height = 737
   Width = 1191
   object cdsActivityType: TFDMemTable
@@ -1041,6 +1042,11 @@ inherited ReportDM: TReportDM
       Origin = 'DESCRIPTION'
       Size = 500
     end
+    object cdsPricelistRATE_UNIT: TStringField
+      DisplayLabel = 'Rate Unit'
+      FieldName = 'RATE_UNIT'
+      Size = 30
+    end
   end
   object cdsRateUnit: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -1453,16 +1459,16 @@ inherited ReportDM: TReportDM
   end
   object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
     Left = 885
-    Top = 255
+    Top = 120
   end
   object FDPhysFBDriverLink: TFDPhysFBDriverLink
     Left = 885
-    Top = 200
+    Top = 65
   end
   object FDGUIxWaitCursor: TFDGUIxWaitCursor
     Provider = 'Forms'
     Left = 885
-    Top = 140
+    Top = 5
   end
   object cdsMasterList: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -3264,7 +3270,7 @@ inherited ReportDM: TReportDM
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43494.671348414300000000
-    ReportOptions.LastChange = 43833.395171759300000000
+    ReportOptions.LastChange = 43835.443958599540000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -3274,8 +3280,8 @@ inherited ReportDM: TReportDM
     Top = 60
     Datasets = <
       item
-        DataSet = fdsMaster
-        DataSetName = 'MasterDataSet'
+        DataSet = fdsPriceList
+        DataSetName = 'Pricelist'
       end>
     Variables = <>
     Style = <>
@@ -3289,8 +3295,9 @@ inherited ReportDM: TReportDM
       Font.Height = -13
       Font.Name = 'Calibri'
       Font.Style = []
-      PaperWidth = 210.000000000000000000
-      PaperHeight = 297.000000000000000000
+      Orientation = poLandscape
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
       PaperSize = 9
       LeftMargin = 10.000000000000000000
       RightMargin = 10.000000000000000000
@@ -3301,26 +3308,58 @@ inherited ReportDM: TReportDM
         FillType = ftBrush
         Frame.Typ = []
         Top = 18.897650000000000000
-        Width = 718.110700000000000000
+        Width = 1046.929810000000000000
       end
       object bndMaster: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = [ftRight, ftTop, ftBottom]
         Height = 18.897637800000000000
         Top = 170.078850000000000000
-        Width = 718.110700000000000000
+        Width = 1046.929810000000000000
         DataSet = fdsMaster
         DataSetName = 'MasterDataSet'
         RowCount = 0
         Stretched = True
         object Memo1: TfrxMemoView
           AllowVectorExport = True
-          Width = 1035.591168740000000000
+          Width = 279.685168740000000000
           Height = 18.897650000000000000
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           Memo.UTF8W = (
-            '[(<MasterDataSet."NAME">)]')
+            '[(<Pricelist."NAME">)]')
+        end
+        object Memo2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 291.023810000000000000
+          Width = 102.047258740000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2f'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[(<Pricelist."RATE">)]')
+        end
+        object Memo3: TfrxMemoView
+          AllowVectorExport = True
+          Left = 396.850650000000000000
+          Width = 94.488198740000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[(<Pricelist."NAME">)]')
+        end
+        object Memo4: TfrxMemoView
+          AllowVectorExport = True
+          Left = 498.897960000000000000
+          Width = 279.685168740000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[(<Pricelist."NAME">)]')
         end
       end
       object PageFooter1: TfrxPageFooter
@@ -3328,7 +3367,7 @@ inherited ReportDM: TReportDM
         Frame.Typ = [ftTop]
         Height = 22.677180000000000000
         Top = 249.448980000000000000
-        Width = 718.110700000000000000
+        Width = 1046.929810000000000000
         object Memo11: TfrxMemoView
           Align = baLeft
           AllowVectorExport = True
@@ -3342,7 +3381,7 @@ inherited ReportDM: TReportDM
         object Memo12: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 525.354670000000000000
+          Left = 854.173780000000000000
           Width = 192.756030000000000000
           Height = 18.897650000000000000
           Frame.Typ = []
@@ -3367,11 +3406,11 @@ inherited ReportDM: TReportDM
         Height = 68.031540000000000000
         ParentFont = False
         Top = 41.574830000000000000
-        Width = 718.110700000000000000
+        Width = 1046.929810000000000000
         object lblReportTypeName: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 275.905690000000000000
+          Left = 604.724800000000000000
           Width = 442.205010000000000000
           Height = 30.236220470000000000
           Font.Charset = ANSI_CHARSET
@@ -3402,15 +3441,16 @@ inherited ReportDM: TReportDM
         end
         object Memo18: TfrxMemoView
           AllowVectorExport = True
+          Left = 1.890042050000000000
           Top = 49.133890000000000000
-          Width = 718.110236220471900000
+          Width = 1043.149725910000000000
           Height = 18.897637800000000000
           Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
         end
         object Memo21: TfrxMemoView
           AllowVectorExport = True
           Top = 49.133890000000000000
-          Width = 430.866368740000000000
+          Width = 219.212185910000000000
           Height = 18.897650000000000000
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
@@ -3428,13 +3468,13 @@ inherited ReportDM: TReportDM
     Left = 635
     Top = 115
   end
-  object fdsAgePeriod: TfrxDBDataset
-    UserName = 'frxDBDataset1'
+  object fdsPriceList: TfrxDBDataset
+    UserName = 'Pricelist'
     CloseDataSource = False
-    DataSet = cdsAgePeriod
+    DataSet = cdsPricelist
     BCDToCurrency = False
-    Left = 235
-    Top = 115
+    Left = 720
+    Top = 400
   end
   object fdsBank: TfrxDBDataset
     UserName = 'frxDBDataset1'
@@ -3620,6 +3660,386 @@ inherited ReportDM: TReportDM
             'Name')
         end
       end
+    end
+  end
+  object dtsPriceHistory: TDataSource
+    DataSet = cdsPriceHistory
+    Left = 805
+    Top = 340
+  end
+  object rptPricelist: TfrxReport
+    Version = '6.2.1'
+    DotMatrixReport = False
+    EngineOptions.DoublePass = True
+    EngineOptions.PrintIfEmpty = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 43494.671348414300000000
+    ReportOptions.LastChange = 43835.463059456010000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 720
+    Top = 450
+    Datasets = <
+      item
+        DataSet = fdsPriceList
+        DataSetName = 'Pricelist'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Calibri'
+      Font.Style = []
+      Orientation = poLandscape
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = []
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Top = 18.897650000000000000
+        Width = 1046.929810000000000000
+      end
+      object bndMaster: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = [ftRight, ftTop, ftBottom]
+        Height = 18.897637800000000000
+        Top = 162.519790000000000000
+        Width = 1046.929810000000000000
+        DataSet = fdsPriceList
+        DataSetName = 'Pricelist'
+        RowCount = 0
+        Stretched = True
+        object Memo1: TfrxMemoView
+          AllowVectorExport = True
+          Width = 381.732478740000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'NAME'
+          DataSet = fdsPriceList
+          DataSetName = 'Pricelist'
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[Pricelist."NAME"]')
+        end
+        object Memo2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 389.291590000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataSet = fdsPriceList
+          DataSetName = 'Pricelist'
+          DisplayFormat.DecimalSeparator = '.'
+          DisplayFormat.FormatStr = '#,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Pricelist."RATE"]')
+        end
+        object Memo3: TfrxMemoView
+          AllowVectorExport = True
+          Left = 461.102660000000000000
+          Width = 94.488198740000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'RATE_UNIT'
+          DataSet = fdsPriceList
+          DataSetName = 'Pricelist'
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[Pricelist."RATE_UNIT"]')
+        end
+        object Memo4: TfrxMemoView
+          AllowVectorExport = True
+          Left = 594.141732280000000000
+          Width = 453.543307090000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'DESCRIPTION'
+          DataSet = fdsPriceList
+          DataSetName = 'Pricelist'
+          Frame.Typ = [ftLeft, ftRight]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[Pricelist."DESCRIPTION"]')
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Frame.Typ = [ftTop]
+        Height = 22.677180000000000000
+        Top = 241.889920000000000000
+        Width = 1046.929810000000000000
+        object Memo11: TfrxMemoView
+          Align = baLeft
+          AllowVectorExport = True
+          Top = 3.779530000000000000
+          Width = 207.874150000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Printed on: [(Date)] at: [(Time)]')
+        end
+        object Memo12: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 854.173780000000000000
+          Width = 192.756030000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Page [Page] of [TotalPages]')
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+      end
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        Height = 60.472440944881890000
+        ParentFont = False
+        Top = 41.574830000000000000
+        Width = 1046.929810000000000000
+        object lblReportTypeName: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 604.724800000000000000
+          Width = 442.205010000000000000
+          Height = 30.236220470000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Report Type')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Align = baLeft
+          AllowVectorExport = True
+          Width = 257.008040000000000000
+          Height = 30.236240000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'van Brakel and Associates')
+          ParentFont = False
+        end
+        object Memo18: TfrxMemoView
+          AllowVectorExport = True
+          Top = 41.574830000000000000
+          Width = 1046.929810000000000000
+          Height = 18.897637800000000000
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        end
+        object Memo21: TfrxMemoView
+          AllowVectorExport = True
+          Top = 41.574830000000000000
+          Width = 381.732283460000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            'Price Item')
+        end
+        object Memo5: TfrxMemoView
+          AllowVectorExport = True
+          Left = 389.291341020000000000
+          Top = 41.574830000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Rate')
+        end
+        object Memo13: TfrxMemoView
+          AllowVectorExport = True
+          Left = 461.102660000000000000
+          Top = 41.574830000000000000
+          Width = 75.590551180000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            'Rate Unit')
+        end
+        object Memo14: TfrxMemoView
+          AllowVectorExport = True
+          Left = 594.165740000000000000
+          Top = 41.574830000000000000
+          Width = 453.543307090000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            'Description')
+        end
+      end
+    end
+  end
+  object rptPriceHistory: TfrxReport
+    Version = '6.2.1'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 43835.464268009260000000
+    ReportOptions.LastChange = 43835.464268009260000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 805
+    Top = 450
+    Datasets = <>
+    Variables = <>
+    Style = <>
+  end
+  object fdsPriceHistory: TfrxDBDataset
+    UserName = 'PriceHistory'
+    CloseDataSource = False
+    BCDToCurrency = False
+    Left = 805
+    Top = 400
+  end
+  object cdsPriceHistoryYear: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    CachedUpdates = True
+    ConstraintsEnabled = True
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvDataSnapCompatibility]
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'VIEW_PRICE_HISTORY_YEAR'
+    Left = 905
+    Top = 290
+    object cdsPriceHistoryYearTHE_YEAR: TIntegerField
+      DisplayLabel = 'Year'
+      FieldName = 'THE_YEAR'
+    end
+  end
+  object dtsPriceHistoryYear: TDataSource
+    DataSet = cdsPriceHistoryYear
+    Left = 905
+    Top = 340
+  end
+  object cdsPriceHistory: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <>
+    ConstraintsEnabled = True
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvDataSnapCompatibility]
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
+    Left = 805
+    Top = 290
+    object cdsPriceHistoryID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPriceHistoryRATE_UNIT_ID: TIntegerField
+      FieldName = 'RATE_UNIT_ID'
+      Origin = 'RATE_UNIT_ID'
+      Required = True
+    end
+    object cdsPriceHistoryNAME: TStringField
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+      Size = 200
+    end
+    object cdsPriceHistoryDESCRIPTION: TStringField
+      FieldName = 'DESCRIPTION'
+      Origin = 'DESCRIPTION'
+      Size = 500
+    end
+    object cdsPriceHistoryRATE_UNIT: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'RATE_UNIT'
+      Origin = 'NAME'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 30
+    end
+    object cdsPriceHistoryFloatField2020: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = '2020'
+      Origin = 'RATE'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object cdsPriceHistoryFloatField2019: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = '2019'
+      Origin = 'RATE'
+      ProviderFlags = []
+      ReadOnly = True
     end
   end
 end

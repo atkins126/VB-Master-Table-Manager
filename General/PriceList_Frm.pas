@@ -3,16 +3,21 @@ unit PriceList_Frm;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, BaseGrid_Frm, cxGraphics, cxControls,
-  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
-  cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit, cxNavigator,
-  dxDateRanges, Data.DB, cxDBData, dxLayoutContainer, System.ImageList,
-  Vcl.ImgList, cxImageList, dxLayoutLookAndFeels, System.Actions, Vcl.ActnList,
-  cxClasses, cxDBNavigator, cxGridLevel, cxGridCustomView,
-  cxGridCustomTableView, cxGridTableView, cxGridBandedTableView,
-  cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxCurrencyEdit, cxTextEdit,
-  cxMemo, cxDBLookupComboBox;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Forms,
+  System.Classes, Vcl.Graphics, Data.DB, Vcl.ImgList, cxImageList, Vcl.Controls,
+  Vcl.Dialogs, System.IOUtils, System.ImageList, System.Actions, Vcl.ActnList,
+
+  BaseGrid_Frm,
+
+  frxClass, frxDBSet,
+
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
+  cxEdit, cxNavigator, dxDateRanges, cxDBData, dxLayoutContainer, cxDBNavigator,
+  dxLayoutLookAndFeels, cxClasses, cxGridLevel, cxGridCustomView, cxTextEdit,
+  cxGridCustomTableView, cxGridTableView, cxGridBandedTableView, cxCurrencyEdit,
+  cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxMemo, cxDBLookupComboBox,
+  dxScrollbarAnnotations, dxPrnDev, dxPrnDlg;
 
 type
   TPriceListFrm = class(TBaseGridFrm)
@@ -22,11 +27,18 @@ type
     edtRate: TcxGridDBBandedColumn;
     edtInvoiceDescription: TcxGridDBBandedColumn;
     edtDescription: TcxGridDBBandedColumn;
+    grpPricelist: TdxLayoutGroup;
+    litPriceHistory: TdxLayoutItem;
+    grdPriceHistory: TcxGrid;
+    viewPriceHistory: TcxGridDBBandedTableView;
+    lvlPriceHistory: TcxGridLevel;
     procedure FormCreate(Sender: TObject);
     procedure navMasterButtonsButtonClick(Sender: TObject;
       AButtonIndex: Integer; var ADone: Boolean);
+    procedure grpPricelistTabChanged(Sender: TObject);
   private
     { Private declarations }
+    procedure CreateGridColumns;
   public
     { Public declarations }
   end;
@@ -44,17 +56,115 @@ uses
   CommonFunction,
   VBCommonValues,
   RUtils,
-  Lookup_DM;
+  Lookup_DM,
+  Report_DM;
+
+procedure TPriceListFrm.CreateGridColumns;
+var
+  AColumn: TcxGridDBBandedColumn;
+//  AView: TcxGridDBBandedTableView;
+  I: Integer;
+begin
+  viewPriceHistory.BeginUpdate;
+  viewPriceHistory.ClearItems;
+  try
+    AColumn := viewPriceHistory.CreateColumn;
+    AColumn.DataBinding.FieldName := 'ID';
+    AColumn.Caption := 'ID';
+    AColumn.Position.BandIndex := 0;
+    AColumn.Width := 50;
+    AColumn.Visible := False;
+    AColumn.Options.Editing := False;
+    AColumn.PropertiesClass := TcxCurrencyEditProperties;
+    TcxCurrencyEditProperties(AColumn.Properties).Alignment.Vert := taTopJustify;
+    TcxCurrencyEditProperties(AColumn.Properties).DecimalPlaces := 0;
+    TcxCurrencyEditProperties(AColumn.Properties).DisplayFormat := '#,##0';
+    TcxCurrencyEditProperties(AColumn.Properties).EditFormat := '#,##0';
+    TcxCurrencyEditProperties(AColumn.Properties).UseThousandSeparator := False;
+    TcxCurrencyEditProperties(AColumn.Properties).ReadOnly := True;
+
+    AColumn := viewPriceHistory.CreateColumn;
+    AColumn.DataBinding.FieldName := 'RATE_UNIT_ID';
+    AColumn.Caption := 'RU ID';
+    AColumn.Position.BandIndex := 0;
+    AColumn.Width := 50;
+    AColumn.Visible := False;
+    AColumn.Options.Editing := False;
+    AColumn.PropertiesClass := TcxCurrencyEditProperties;
+    TcxCurrencyEditProperties(AColumn.Properties).Alignment.Vert := taTopJustify;
+    TcxCurrencyEditProperties(AColumn.Properties).DecimalPlaces := 0;
+    TcxCurrencyEditProperties(AColumn.Properties).DisplayFormat := '#,##0';
+    TcxCurrencyEditProperties(AColumn.Properties).EditFormat := '#,##0';
+    TcxCurrencyEditProperties(AColumn.Properties).UseThousandSeparator := False;
+    TcxCurrencyEditProperties(AColumn.Properties).ReadOnly := True;
+
+    AColumn := viewPriceHistory.CreateColumn;
+    AColumn.DataBinding.FieldName := 'NAME';
+    AColumn.Caption := 'Price Item';
+    AColumn.Position.BandIndex := 0;
+    AColumn.Width := 450;
+    AColumn.Visible := True;
+    AColumn.Options.Editing := False;
+    AColumn.PropertiesClass := TcxTextEditProperties;
+    TcxTextEditProperties(AColumn.Properties).Alignment.Vert := taTopJustify;
+    TcxTextEditProperties(Acolumn.Properties).ReadOnly := True;
+
+    AColumn := viewPriceHistory.CreateColumn;
+    AColumn.DataBinding.FieldName := 'DESCRIPTION';
+    AColumn.Caption := 'Description';
+    AColumn.Position.BandIndex := 0;
+    AColumn.Width := 450;
+    AColumn.Visible := True;
+    AColumn.Options.Editing := False;
+    AColumn.PropertiesClass := TcxTextEditProperties;
+    TcxTextEditProperties(AColumn.Properties).Alignment.Vert := taTopJustify;
+    TcxTextEditProperties(Acolumn.Properties).ReadOnly := True;
+
+    AColumn := viewPriceHistory.CreateColumn;
+    AColumn.DataBinding.FieldName := 'RATE_UNIT';
+    AColumn.Caption := 'Rate Unit';
+    AColumn.Position.BandIndex := 0;
+    AColumn.Width := 130;
+    AColumn.Visible := True;
+    AColumn.Options.Editing := False;
+    AColumn.PropertiesClass := TcxTextEditProperties;
+    TcxTextEditProperties(AColumn.Properties).Alignment.Vert := taTopJustify;
+    TcxTextEditProperties(Acolumn.Properties).ReadOnly := True;
+
+    for I := 0 to ReportDM.SLTheYear.Count - 1 do
+    begin
+      AColumn := viewPriceHistory.CreateColumn;
+      AColumn.DataBinding.FieldName := ReportDM.SLTheYear[I];
+      AColumn.Caption := ReportDM.SLTheYear[I];
+      AColumn.Position.BandIndex := 1;
+      AColumn.Width := 80;
+      AColumn.Visible := True;
+      AColumn.Options.Editing := False;
+      AColumn.HeaderAlignmentHorz := taRightJustify;
+      AColumn.PropertiesClass := TcxCurrencyEditProperties;
+      TcxCurrencyEditProperties(AColumn.Properties).Alignment.Vert := taTopJustify;
+      TcxCurrencyEditProperties(AColumn.Properties).Alignment.Horz := taRightJustify;
+      TcxCurrencyEditProperties(AColumn.Properties).DecimalPlaces := 2;
+      TcxCurrencyEditProperties(AColumn.Properties).DisplayFormat := '#,##0.00';
+      TcxCurrencyEditProperties(AColumn.Properties).EditFormat := '#,##0.00';
+      TcxCurrencyEditProperties(AColumn.Properties).UseThousandSeparator := True;
+      TcxCurrencyEditProperties(AColumn.Properties).ReadOnly := True;
+    end;
+  finally
+    viewPriceHistory.EndUpdate;
+  end;
+end;
 
 procedure TPriceListFrm.FormCreate(Sender: TObject);
 begin
   inherited;
   Caption := 'Price list';
   viewMaster.DataController.DataSource := MTDM.dtsPriceList;
+//  viewPriceHistory.DataController.DataSource := ReportDM.dtsPriceHistory;
   navMaster.DataSource := MTDM.dtsPriceList;
   TcxLookupComboBoxProperties(lucRateUnit.Properties).ListSource := LookupDM.dtsRateUnit;
 
-  VBBaseDM.GetData(22, MTDM.cdsPricelist, MTDM.cdsPricelist.Name, '',
+  VBBaseDM.GetData(22, MTDM.cdsPricelist, MTDM.cdsPricelist.Name, ONE_SPACE,
     'C:\Data\Xml\Price List.xml', MTDM.cdsPricelist.UpdateOptions.Generatorname,
     MTDM.cdsPricelist.UpdateOptions.UpdateTableName);
 
@@ -65,7 +175,59 @@ begin
   SetButtonVisibility(MTDM.cdsMasterList, 10);
 end;
 
+procedure TPriceListFrm.grpPricelistTabChanged(Sender: TObject);
+var
+  TheYear: Integer;
+  YearClause, TheYearStr: string;
+begin
+  inherited;
+  case grpPricelist.ItemIndex of
+    0: // Price List
+      begin
+
+      end;
+
+    1: // Price History
+      begin
+        if not ReportDM.cdsPriceHistoryYear.Active then
+          VBBaseDM.GetData(64, ReportDM.cdsPriceHistoryYear, ReportDM.cdsPriceHistoryYear.Name, ONE_SPACE,
+            'C:\Data\Xml\Price History Year.xml', ReportDM.cdsPriceHistoryYear.UpdateOptions.Generatorname,
+            ReportDM.cdsPriceHistoryYear.UpdateOptions.UpdateTableName);
+
+        if not ReportDM.cdsPriceHistory.Active then
+        begin
+          ReportDM.SLtheYear.Clear;
+          YearClause := '';
+
+          while not ReportDM.cdsPriceHistoryYear.EOF do
+          begin
+            TheYear := ReportDM.cdsPriceHistoryYear.FieldByName('THE_YEAR').Asinteger;
+            TheYearStr := AnsiQuotedStr(AnsiUpperCase(TheYear.ToString), '"');
+            ReportDM.SLTheYear.Add(TheYear.ToString);
+            YearClause := YearClause + Format(PRICE_HISTORY_CLAUSE, [TheYearStr, TheYear.ToString, TheYearStr]) + ONE_SPACE;
+            ReportDM.cdsPriceHistoryYear.Next;
+
+            if not ReportDM.cdsPriceHistoryYear.EOF then
+              YearClause := YearClause + ',';
+          end;
+
+          ReportDM.cdsPriceHistoryYear.First;
+          ReportDM.CreatePricehistory;
+          CreateGridColumns;
+
+          VBBaseDM.GetData(65, ReportDM.cdsPriceHistory, ReportDM.cdsPriceHistory.Name, YearClause,
+            'C:\Data\Xml\Price History.xml', ReportDM.cdsPriceHistory.UpdateOptions.Generatorname,
+            ReportDM.cdsPriceHistory.UpdateOptions.UpdateTableName);
+        end;
+      end;
+  end;
+end;
+
 procedure TPriceListFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
+var
+  RepFileName, ReportTypeName: string;
+  Report: TfrxReport;
+//  ReportDataSet: TfrxDBDataset;
 begin
   inherited;
   case AButtonIndex of
@@ -81,8 +243,74 @@ begin
           [mbYes, mbNo]
           ) = mrNo;
       end;
+
+    16, 17, 18, 19:
+      begin
+        Screen.Cursor := crHourglass;
+        try
+          RepFileName := MTDM.ShellResource.ReportFolder + 'Pricelist.fr3';
+
+          if not TFile.Exists(RepFileName) then
+            raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+
+          Report := ReportDM.rptMaster;
+//          ReportDataSet := ReportDM.fdsPriceList;
+          ReportTypeName := 'Price List (Current)';
+
+          VBBaseDM.GetData(42, ReportDM.cdsPricelist, ReportDM.cdsPricelist.Name, '',
+            'C:\Data\Xml\Price List View.xml', ReportDM.cdsPricelist.UpdateOptions.Generatorname,
+            ReportDM.cdsPricelist.UpdateOptions.UpdateTableName);
+
+          ReportDM.fdsMaster.DataSet := ReportDM.cdsPricelist;
+          Report.DataSets.Clear;
+          Report.DataSets.Add(ReportDM.fdsMaster);
+          Report.LoadFromFile(RepFileName, False);
+          TfrxMemoView(Report.FindObject('lblReportTypeName')).Text := ReportTypeName;
+
+//          ReportDM.PrepareReport(MTDM.cdsActivityType, ReportDM.cdsActivityType, RepFileName, Report, ReportDataSet, ReportTypeName);
+          PrintReport(AButtonIndex);
+        finally
+          Screen.Cursor := crDefault;
+        end;
+      end;
   end;
 end;
 
 end.
+
+{
+SELECT
+P.ID,
+P.RATE_UNIT_ID,
+P."NAME",
+P.DESCRIPTION,
+P.INVOICE_DESCRIPTION,
+R."NAME" AS "RATE_UNIT",
+
+(SELECT
+  H.RATE
+ FROM
+  PRICE_HISTORY H
+ WHERE
+  H.THE_YEAR = 2020
+  AND H.PRICE_LIST_ITEM_ID = P.ID
+ ) AS "2020",
+
+(SELECT
+  H.RATE
+ FROM
+  PRICE_HISTORY H
+ WHERE
+  H.THE_YEAR = 2019
+  AND H.PRICE_LIST_ITEM_ID = P.ID
+ )
+ AS "2019"
+
+FROM
+ PRICE_LIST P
+LEFT JOIN RATE_UNIT R
+ON P.RATE_UNIT_ID = R.ID
+ORDER BY
+ P."NAME"
+}
 
