@@ -64,13 +64,13 @@ inherited PriceListFrm: TPriceListFrm
           Properties.DisplayFormat = '#,###,##0.00'
           Properties.EditFormat = '#,###,##0.00'
           HeaderAlignmentHorz = taRightJustify
-          MinWidth = 80
+          MinWidth = 70
           Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
-          Width = 80
+          Width = 70
           Position.BandIndex = 0
           Position.ColIndex = 2
           Position.RowIndex = 0
@@ -115,14 +115,9 @@ inherited PriceListFrm: TPriceListFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 336
-      Buttons.CustomButtons = <
-        item
-          Hint = 'Preview'
-          ImageIndex = 11
-        end>
+      Width = 324
       DataSource = MTDM.dtsPriceList
-      ExplicitWidth = 336
+      ExplicitWidth = 324
     end
     object grdPriceHistory: TcxGrid [2]
       Left = 10000
@@ -158,7 +153,7 @@ inherited PriceListFrm: TPriceListFrm
       ItemIndex = 1
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 336
+      ControlOptions.OriginalWidth = 324
     end
     inherited litGrid: TdxLayoutItem
       Parent = grpPricelist
@@ -178,6 +173,7 @@ inherited PriceListFrm: TPriceListFrm
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpPricelistTabChanged
+      OnTabChanging = grpPricelistTabChanging
       Index = 1
     end
     object litPriceHistory: TdxLayoutItem

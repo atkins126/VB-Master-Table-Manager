@@ -889,19 +889,12 @@ inherited ReportDM: TReportDM
     Indexes = <
       item
         Active = True
+        Selected = True
         Name = 'idxID'
         Fields = 'ID'
         Options = [soPrimary]
-      end
-      item
-        Active = True
-        Selected = True
-        Name = 'idxName'
-        Fields = 'NAME'
-        CaseInsFields = 'NAME'
-        Options = [soUnique]
       end>
-    IndexName = 'idxName'
+    IndexName = 'idxID'
     ConstraintsEnabled = True
     FetchOptions.AssignedValues = [evMode, evRecordCountMode]
     FetchOptions.Mode = fmAll
@@ -1256,17 +1249,20 @@ inherited ReportDM: TReportDM
       end>
     FieldDefs = <>
     CachedUpdates = True
-    IndexDefs = <
+    IndexDefs = <>
+    Indexes = <
       item
+        Active = True
         Name = 'idxID'
         Fields = 'ID'
-        Options = [ixPrimary]
+        Options = [soPrimary]
       end
       item
+        Active = True
+        Selected = True
         Name = 'idxName'
-        CaseInsFields = 'NAME'
         Fields = 'NAME'
-        Options = [ixUnique, ixCaseInsensitive]
+        Options = [soNoCase, soUnique]
       end>
     IndexName = 'idxName'
     ConstraintsEnabled = True
@@ -3678,7 +3674,7 @@ inherited ReportDM: TReportDM
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43494.671348414300000000
-    ReportOptions.LastChange = 43835.463059456010000000
+    ReportOptions.LastChange = 43837.313638425930000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -3921,13 +3917,15 @@ inherited ReportDM: TReportDM
   object rptPriceHistory: TfrxReport
     Version = '6.2.1'
     DotMatrixReport = False
+    EngineOptions.DoublePass = True
+    EngineOptions.PrintIfEmpty = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 43835.464268009260000000
-    ReportOptions.LastChange = 43835.464268009260000000
+    ReportOptions.CreateDate = 43494.671348414300000000
+    ReportOptions.LastChange = 43837.327643182870000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -3935,13 +3933,411 @@ inherited ReportDM: TReportDM
       'end.')
     Left = 805
     Top = 450
-    Datasets = <>
+    Datasets = <
+      item
+        DataSet = fdsPriceHistory
+        DataSetName = 'PriceHistory'
+      end>
     Variables = <>
     Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Calibri'
+      Font.Style = []
+      Orientation = poLandscape
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = []
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Top = 18.897650000000000000
+        Width = 1046.929810000000000000
+      end
+      object bndMaster: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = [ftRight, ftTop, ftBottom]
+        Height = 18.897637800000000000
+        Top = 162.519790000000000000
+        Width = 1046.929810000000000000
+        DataSet = fdsPriceHistory
+        DataSetName = 'PriceHistory'
+        RowCount = 0
+        Stretched = True
+        object Memo1: TfrxMemoView
+          AllowVectorExport = True
+          Width = 374.173228350000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'NAME'
+          DataSet = fdsPriceHistory
+          DataSetName = 'PriceHistory'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[PriceHistory."NAME"]')
+          ParentFont = False
+        end
+        object lblRate1: TfrxMemoView
+          AllowVectorExport = True
+          Left = 376.173470000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataSet = fdsPriceHistory
+          DataSetName = 'PriceHistory'
+          DisplayFormat.DecimalSeparator = '.'
+          DisplayFormat.FormatStr = '#,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Pricelist."RATE"]')
+          ParentFont = False
+        end
+        object lblRate2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 444.205010000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataSet = fdsPriceHistory
+          DataSetName = 'PriceHistory'
+          DisplayFormat.DecimalSeparator = '.'
+          DisplayFormat.FormatStr = '#,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Pricelist."RATE"]')
+          ParentFont = False
+        end
+        object lblRate3: TfrxMemoView
+          AllowVectorExport = True
+          Left = 512.236550000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataSet = fdsPriceHistory
+          DataSetName = 'PriceHistory'
+          DisplayFormat.DecimalSeparator = '.'
+          DisplayFormat.FormatStr = '#,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Pricelist."RATE"]')
+          ParentFont = False
+        end
+        object lblRate4: TfrxMemoView
+          AllowVectorExport = True
+          Left = 580.268090000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataSet = fdsPriceHistory
+          DataSetName = 'PriceHistory'
+          DisplayFormat.DecimalSeparator = '.'
+          DisplayFormat.FormatStr = '#,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Pricelist."RATE"]')
+          ParentFont = False
+        end
+        object lblRate5: TfrxMemoView
+          AllowVectorExport = True
+          Left = 648.299630000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataSet = fdsPriceHistory
+          DataSetName = 'PriceHistory'
+          DisplayFormat.DecimalSeparator = '.'
+          DisplayFormat.FormatStr = '#,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Pricelist."RATE"]')
+          ParentFont = False
+        end
+        object lblRate6: TfrxMemoView
+          AllowVectorExport = True
+          Left = 712.551640000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataSet = fdsPriceHistory
+          DataSetName = 'PriceHistory'
+          DisplayFormat.DecimalSeparator = '.'
+          DisplayFormat.FormatStr = '#,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Pricelist."RATE"]')
+          ParentFont = False
+        end
+        object lblRate7: TfrxMemoView
+          AllowVectorExport = True
+          Left = 780.583180000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataSet = fdsPriceHistory
+          DataSetName = 'PriceHistory'
+          DisplayFormat.DecimalSeparator = '.'
+          DisplayFormat.FormatStr = '#,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Pricelist."RATE"]')
+          ParentFont = False
+        end
+        object lblRate8: TfrxMemoView
+          AllowVectorExport = True
+          Left = 848.614720000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataSet = fdsPriceHistory
+          DataSetName = 'PriceHistory'
+          DisplayFormat.DecimalSeparator = '.'
+          DisplayFormat.FormatStr = '#,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Pricelist."RATE"]')
+          ParentFont = False
+        end
+        object lblRate9: TfrxMemoView
+          AllowVectorExport = True
+          Left = 916.646260000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataSet = fdsPriceHistory
+          DataSetName = 'PriceHistory'
+          DisplayFormat.DecimalSeparator = '.'
+          DisplayFormat.FormatStr = '#,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Pricelist."RATE"]')
+          ParentFont = False
+        end
+        object lblRate10: TfrxMemoView
+          AllowVectorExport = True
+          Left = 980.898270000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataSet = fdsPriceHistory
+          DataSetName = 'PriceHistory'
+          DisplayFormat.DecimalSeparator = '.'
+          DisplayFormat.FormatStr = '#,##0.00'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Pricelist."RATE"]')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Frame.Typ = [ftTop]
+        Height = 22.677180000000000000
+        Top = 241.889920000000000000
+        Width = 1046.929810000000000000
+        object Memo11: TfrxMemoView
+          Align = baLeft
+          AllowVectorExport = True
+          Top = 3.779530000000000000
+          Width = 207.874150000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Printed on: [(Date)] at: [(Time)]')
+        end
+        object Memo12: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 854.173780000000000000
+          Width = 192.756030000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Page [Page] of [TotalPages]')
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+      end
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        Height = 60.472440944881900000
+        ParentFont = False
+        Top = 41.574830000000000000
+        Width = 1046.929810000000000000
+        object lblReportTypeName: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 604.724800000000000000
+          Width = 442.205010000000000000
+          Height = 30.236220470000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Report Type')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Align = baLeft
+          AllowVectorExport = True
+          Width = 257.008040000000000000
+          Height = 30.236240000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'van Brakel and Associates')
+          ParentFont = False
+        end
+        object Memo18: TfrxMemoView
+          AllowVectorExport = True
+          Top = 41.574830000000000000
+          Width = 1046.929810000000000000
+          Height = 18.897637800000000000
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        end
+        object Memo21: TfrxMemoView
+          AllowVectorExport = True
+          Top = 41.574830000000000000
+          Width = 374.173228346456700000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            'Price Item')
+        end
+        object Memo5: TfrxMemoView
+          AllowVectorExport = True
+          Left = 376.062992130000000000
+          Top = 41.574830000000000000
+          Width = 668.976768500000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'Rate')
+        end
+      end
+    end
   end
   object fdsPriceHistory: TfrxDBDataset
     UserName = 'PriceHistory'
     CloseDataSource = False
+    DataSet = cdsPriceHistory
     BCDToCurrency = False
     Left = 805
     Top = 400
@@ -3981,6 +4377,13 @@ inherited ReportDM: TReportDM
     FieldDefs = <>
     CachedUpdates = True
     IndexDefs = <>
+    Indexes = <
+      item
+        Name = 'idxName'
+        Fields = 'NAME'
+        CaseInsFields = 'NAME'
+        Options = [soNoCase]
+      end>
     ConstraintsEnabled = True
     FetchOptions.AssignedValues = [evMode, evRecordCountMode]
     FetchOptions.Mode = fmAll
@@ -3997,49 +4400,5 @@ inherited ReportDM: TReportDM
     StoreDefs = True
     Left = 805
     Top = 290
-    object cdsPriceHistoryID: TIntegerField
-      FieldName = 'ID'
-      Origin = 'ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object cdsPriceHistoryRATE_UNIT_ID: TIntegerField
-      FieldName = 'RATE_UNIT_ID'
-      Origin = 'RATE_UNIT_ID'
-      Required = True
-    end
-    object cdsPriceHistoryNAME: TStringField
-      FieldName = 'NAME'
-      Origin = 'NAME'
-      Required = True
-      Size = 200
-    end
-    object cdsPriceHistoryDESCRIPTION: TStringField
-      FieldName = 'DESCRIPTION'
-      Origin = 'DESCRIPTION'
-      Size = 500
-    end
-    object cdsPriceHistoryRATE_UNIT: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'RATE_UNIT'
-      Origin = 'NAME'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 30
-    end
-    object cdsPriceHistoryFloatField2020: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = '2020'
-      Origin = 'RATE'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object cdsPriceHistoryFloatField2019: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = '2019'
-      Origin = 'RATE'
-      ProviderFlags = []
-      ReadOnly = True
-    end
   end
 end

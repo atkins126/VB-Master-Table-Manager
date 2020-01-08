@@ -87,16 +87,31 @@ begin
       begin
         Screen.Cursor := crHourglass;
         try
-          RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
-
-          if not TFile.Exists(RepFileName) then
-            raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
-
-          Report := ReportDM.rptMaster;
-          ReportDataSet := ReportDM.fdsMaster;
           ReportTypeName := 'Country Listing';
-          ReportDM.PrepareReport(MTDM.cdsCountry, ReportDM.cdsCountry, RepFileName, Report, ReportDataSet, ReportTypeName);
-          PrintReport(AButtonIndex);
+          case AButtonIndex of
+            16, 17:
+              begin
+                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
+
+                if not TFile.Exists(RepFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+
+                Report := ReportDM.rptMaster;
+                ReportDataSet := ReportDM.fdsMaster;
+                ReportDM.PrepareReport(MTDM.cdsCountry, ReportDM.cdsCountry, RepFileName, Report, ReportDataSet, ReportTypeName);
+                PrintReport(AButtonIndex);
+              end;
+
+            18:
+              begin
+                ExportToExcel(ReportTypeName, grdMaster);
+              end;
+
+            19:
+              begin
+
+              end;
+          end;
         finally
           Screen.Cursor := crDefault;
         end;

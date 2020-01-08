@@ -933,23 +933,27 @@ inherited MTDM: TMTDM
       end>
     FieldDefs = <>
     CachedUpdates = True
-    IndexDefs = <>
+    IndexDefs = <
+      item
+        Name = 'idxID'
+        Fields = 'ID'
+        Options = [ixPrimary]
+      end
+      item
+        Name = 'idxName'
+        CaseInsFields = 'NAME'
+        Fields = 'NAME'
+        Options = [ixUnique]
+      end>
     Indexes = <
       item
         Active = True
+        Selected = True
         Name = 'idxID'
         Fields = 'ID'
         Options = [soPrimary]
-      end
-      item
-        Active = True
-        Selected = True
-        Name = 'idxName'
-        Fields = 'NAME'
-        CaseInsFields = 'NAME'
-        Options = [soUnique]
       end>
-    IndexName = 'idxName'
+    IndexName = 'idxID'
     ConstraintsEnabled = True
     FetchOptions.AssignedValues = [evMode, evRecordCountMode]
     FetchOptions.Mode = fmAll

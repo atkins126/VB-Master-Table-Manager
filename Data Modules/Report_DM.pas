@@ -247,16 +247,10 @@ type
     dtsPriceHistoryYear: TDataSource;
     cdsPriceHistoryYearTHE_YEAR: TIntegerField;
     cdsPriceHistory: TFDMemTable;
-    cdsPriceHistoryID: TIntegerField;
-    cdsPriceHistoryRATE_UNIT_ID: TIntegerField;
-    cdsPriceHistoryNAME: TStringField;
-    cdsPriceHistoryDESCRIPTION: TStringField;
-    cdsPriceHistoryRATE_UNIT: TStringField;
-    cdsPriceHistoryFloatField2020: TFloatField;
-    cdsPriceHistoryFloatField2019: TFloatField;
     procedure PrepareReport(SourceDataSet, TargetDataSet: TFDmemTable;
       ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
       ReportTypeName: string);
+
     procedure CreatePricehistory;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -297,6 +291,9 @@ begin
 
   for I := 0 to FSLTheYear.Count - 1 do
     cdsPriceHistory.FieldDefs.Add(FSLTheYear[I], ftFloat, 0);
+
+  fdsPriceHistory.Clear;
+  fdsPriceHistory.AllObjects;
 end;
 
 procedure TReportDM.DataModuleCreate(Sender: TObject);

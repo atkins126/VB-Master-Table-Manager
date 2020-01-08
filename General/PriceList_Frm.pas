@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, Data.DB, Vcl.ImgList, cxImageList, Vcl.Controls,
   Vcl.Dialogs, System.IOUtils, System.ImageList, System.Actions, Vcl.ActnList,
 
-  BaseGrid_Frm,
+  BaseGrid_Frm, CommonValues,
 
   frxClass, frxDBSet,
 
@@ -36,9 +36,12 @@ type
     procedure navMasterButtonsButtonClick(Sender: TObject;
       AButtonIndex: Integer; var ADone: Boolean);
     procedure grpPricelistTabChanged(Sender: TObject);
+    procedure grpPricelistTabChanging(Sender: TObject; ANewTabIndex: Integer; var Allow: Boolean);
   private
     { Private declarations }
     procedure CreateGridColumns;
+    procedure PrintPriceList(ButtonIndex: integer);
+    procedure PrintPriceHistory(ButtonIndex: integer);
   public
     { Public declarations }
   end;
@@ -114,7 +117,7 @@ begin
     AColumn.Caption := 'Description';
     AColumn.Position.BandIndex := 0;
     AColumn.Width := 450;
-    AColumn.Visible := True;
+    AColumn.Visible := False;
     AColumn.Options.Editing := False;
     AColumn.PropertiesClass := TcxTextEditProperties;
     TcxTextEditProperties(AColumn.Properties).Alignment.Vert := taTopJustify;
@@ -137,7 +140,7 @@ begin
       AColumn.DataBinding.FieldName := ReportDM.SLTheYear[I];
       AColumn.Caption := ReportDM.SLTheYear[I];
       AColumn.Position.BandIndex := 1;
-      AColumn.Width := 80;
+      AColumn.Width := 70;
       AColumn.Visible := True;
       AColumn.Options.Editing := False;
       AColumn.HeaderAlignmentHorz := taRightJustify;
@@ -173,6 +176,7 @@ begin
     LookupDM.cdsRateUnit.UpdateOptions.UpdateTableName);
 
   SetButtonVisibility(MTDM.cdsMasterList, 10);
+  grpPricelist.ItemIndex := 0;
 end;
 
 procedure TPriceListFrm.grpPricelistTabChanged(Sender: TObject);
@@ -181,14 +185,20 @@ var
   YearClause, TheYearStr: string;
 begin
   inherited;
+  navMaster.Buttons[6].Enabled := grpPricelist.ItemIndex = 0; // Insert
+  navMaster.Buttons[8].Enabled := grpPricelist.ItemIndex = 0; // Delete
+  navMaster.Buttons[10].Enabled := grpPricelist.ItemIndex = 0; // Post
+  navMaster.Buttons[11].Enabled := grpPricelist.ItemIndex = 0; // Cancel
+
   case grpPricelist.ItemIndex of
     0: // Price List
       begin
-
+        navMaster.DataSource := MTDM.dtsPriceList;
       end;
 
     1: // Price History
       begin
+        navMaster.DataSource := ReportDM.dtsPriceHistory;
         if not ReportDM.cdsPriceHistoryYear.Active then
           VBBaseDM.GetData(64, ReportDM.cdsPriceHistoryYear, ReportDM.cdsPriceHistoryYear.Name, ONE_SPACE,
             'C:\Data\Xml\Price History Year.xml', ReportDM.cdsPriceHistoryYear.UpdateOptions.Generatorname,
@@ -223,11 +233,19 @@ begin
   end;
 end;
 
+procedure TPriceListFrm.grpPricelistTabChanging(Sender: TObject;
+  ANewTabIndex: Integer; var Allow: Boolean);
+begin
+  inherited;
+  Allow := not (MTDM.cdsPricelist.State in [dsEdit, dsInsert]);
+  if not Allow then
+    raise EExecutionException.Create('Please post or cancel current transaction in orer to access price history.');
+end;
+
 procedure TPriceListFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
-var
-  RepFileName, ReportTypeName: string;
-  Report: TfrxReport;
-//  ReportDataSet: TfrxDBDataset;
+//var
+//  RepFileName, ReportTypeName: string;
+//  Report: TfrxReport;
 begin
   inherited;
   case AButtonIndex of
@@ -246,34 +264,50 @@ begin
 
     16, 17, 18, 19:
       begin
-        Screen.Cursor := crHourglass;
-        try
-          RepFileName := MTDM.ShellResource.ReportFolder + 'Pricelist.fr3';
-
-          if not TFile.Exists(RepFileName) then
-            raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
-
-          Report := ReportDM.rptMaster;
-//          ReportDataSet := ReportDM.fdsPriceList;
-          ReportTypeName := 'Price List (Current)';
-
-          VBBaseDM.GetData(42, ReportDM.cdsPricelist, ReportDM.cdsPricelist.Name, '',
-            'C:\Data\Xml\Price List View.xml', ReportDM.cdsPricelist.UpdateOptions.Generatorname,
-            ReportDM.cdsPricelist.UpdateOptions.UpdateTableName);
-
-          ReportDM.fdsMaster.DataSet := ReportDM.cdsPricelist;
-          Report.DataSets.Clear;
-          Report.DataSets.Add(ReportDM.fdsMaster);
-          Report.LoadFromFile(RepFileName, False);
-          TfrxMemoView(Report.FindObject('lblReportTypeName')).Text := ReportTypeName;
-
-//          ReportDM.PrepareReport(MTDM.cdsActivityType, ReportDM.cdsActivityType, RepFileName, Report, ReportDataSet, ReportTypeName);
-          PrintReport(AButtonIndex);
-        finally
-          Screen.Cursor := crDefault;
+        case grpPricelist.ItemIndex of
+          0: PrintPriceList(AButtonIndex);
+          1: PrintPriceHistory(AButtonIndex);
         end;
       end;
   end;
+end;
+
+procedure TPriceListFrm.PrintPriceList(ButtonIndex: integer);
+var
+  RepFileName, ReportTypeName: string;
+  Report: TfrxReport;
+begin
+  Screen.Cursor := crHourglass;
+  try
+    RepFileName := MTDM.ShellResource.ReportFolder + 'Pricelist.fr3';
+
+    if not TFile.Exists(RepFileName) then
+      raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+
+    Report := ReportDM.rptMaster;
+//          ReportDataSet := ReportDM.fdsPriceList;
+    ReportTypeName := 'Price List (Current)';
+
+    VBBaseDM.GetData(42, ReportDM.cdsPricelist, ReportDM.cdsPricelist.Name, '',
+      'C:\Data\Xml\Price List View.xml', ReportDM.cdsPricelist.UpdateOptions.Generatorname,
+      ReportDM.cdsPricelist.UpdateOptions.UpdateTableName);
+
+    ReportDM.fdsMaster.DataSet := ReportDM.cdsPricelist;
+    Report.DataSets.Clear;
+    Report.DataSets.Add(ReportDM.fdsMaster);
+    Report.LoadFromFile(RepFileName, False);
+    TfrxMemoView(Report.FindObject('lblReportTypeName')).Text := ReportTypeName;
+
+//          ReportDM.PrepareReport(MTDM.cdsActivityType, ReportDM.cdsActivityType, RepFileName, Report, ReportDataSet, ReportTypeName);
+    PrintReport(ButtonIndex);
+  finally
+    Screen.Cursor := crDefault;
+  end;
+end;
+
+procedure TPriceListFrm.PrintPriceHistory(ButtonIndex: integer);
+begin
+//
 end;
 
 end.
