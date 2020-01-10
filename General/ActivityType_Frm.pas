@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, Vcl.ImgList, cxImageList, Vcl.ActnList, Data.DB,
   Vcl.Controls, Vcl.Dialogs, System.Actions, System.ImageList, System.IOUtils,
 
-  BaseGrid_Frm,
+  BaseGrid_Frm, CommonValues, PrintExportData,
 
   frxClass, frxDBSet,
 
@@ -65,6 +65,7 @@ var
   RepFileName, ReportTypeName: string;
   Report: TfrxReport;
   ReportDataSet: TfrxDBDataset;
+  PrintExportReport: TPrintExportData;
 begin
   inherited;
   case AButtonIndex of
@@ -83,34 +84,46 @@ begin
 
     16, 17, 18, 19:
       begin
+        inherited;
         Screen.Cursor := crHourglass;
         try
-          ReportTypeName := 'Activity Type Listing';
-          case AButtonIndex of
-            16, 17:
-              begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
-
-                if not TFile.Exists(RepFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
-
-                Report := ReportDM.rptMaster;
-                ReportDataSet := ReportDM.fdsMaster;
-                ReportDM.PrepareReport(MTDM.cdsActivityType, ReportDM.cdsActivityType, RepFileName, Report, ReportDataSet, ReportTypeName);
-                PrintReport(AButtonIndex);
-              end;
-
-            18:
-              begin
-                ExportToExcel(ReportTypeName, grdMaster);
-              end;
-
-            19:
-              begin
-
-              end;
-          end;
+          ReportDM.MasterFormType := ftActivityType;
+          ReportDM.PrintExporting := True;
+          ReportDM.PrintReport;
+//        ReportTypeName := 'Activity Type Listing';
+//        try
+//          case ReportDM.ReportAction of
+//            raPreview, raPrint:
+//              begin
+//                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
+//
+//                if not TFile.Exists(RepFileName) then
+//                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+//
+//                PrintExportReport := TPrintExportData.Create;
+//                PrintExportReport.SourceDataSet := MTDM.cdsActivityType;
+//                PrintExportReport.TargetDataSet := ReportDM.cdsActivityType;
+//                PrintExportReport.Report := ReportDM.rptMaster;
+//                PrintExportReport.ReportDataSet := ReportDM.fdsMaster;
+//                PrintExportReport.ReportTypeName := ReportTypeName;
+//                PrintExportReport.ReportFileName := RepFileName;
+//                PrintExportReport.ReportAction := ReportDM.ReportAction;
+//                PrintExportReport.PrintPreview;
+//              end;
+//
+//            raExcel:
+//              begin
+//                ExportToExcel(ReportTypeName, grdMaster);
+//              end;
+//
+//            raPDF:
+//              begin
+//
+//              end;
+//          end;
         finally
+//          PrintExportReport.Free;
+//          ReportDM.PrintExporting := False;
           Screen.Cursor := crDefault;
         end;
       end;

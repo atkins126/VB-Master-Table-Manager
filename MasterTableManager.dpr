@@ -61,7 +61,8 @@ uses
   VehicleDetail_Frm in 'General\VehicleDetail_Frm.pas' {VehicleDetailFrm},
   ContactPerson_Frm in 'General\ContactPerson_Frm.pas' {ContactPersonFrm},
   VBProxyClass in '..\Lib\VBProxyClass.pas',
-  Report_DM in 'Data Modules\Report_DM.pas' {ReportDM: TDataModule};
+  Report_DM in 'Data Modules\Report_DM.pas' {ReportDM: TDataModule},
+  PrintExportData in '..\..\..\..\Lib\PrintExportData.pas';
 
 {$R *.res}
 

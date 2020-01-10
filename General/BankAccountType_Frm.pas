@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Dialogs, System.ImageList,
   Vcl.ImgList, System.Actions, Vcl.ActnList, System.IOUtils,
 
-  BaseGrid_Frm,
+  BaseGrid_Frm, PrintExportData,
 
   frxClass, frxDBSet,
 
@@ -66,6 +66,7 @@ var
   RepFileName, ReportTypeName: string;
   Report: TfrxReport;
   ReportDataSet: TfrxDBDataset;
+  PrintExportReport: TPrintExportData;
 begin
   inherited;
   case AButtonIndex of
@@ -85,8 +86,10 @@ begin
     16, 17, 18, 19:
       begin
         Screen.Cursor := crHourglass;
+        ReportDM.MasterFormType := ftActivityType;
+        ReportDM.PrintExporting := True;
+        ReportTypeName := 'Bank Account Type Listing';
         try
-          ReportTypeName := 'Bank Account Type Listing';
           case AButtonIndex of
             16, 17:
               begin
@@ -95,10 +98,15 @@ begin
                 if not TFile.Exists(RepFileName) then
                   raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
 
-                Report := ReportDM.rptMaster;
-                ReportDataSet := ReportDM.fdsMaster;
-                ReportDM.PrepareReport(MTDM.cdsBankAccountType, ReportDM.cdsBankAccountType, RepFileName, Report, ReportDataSet, ReportTypeName);
-                PrintReport(AButtonIndex);
+                PrintExportReport := TPrintExportData.Create;
+                PrintExportReport.SourceDataSet := MTDM.cdsBankAccountType;
+                PrintExportReport.TargetDataSet := ReportDM.cdsBankAccountType;
+                PrintExportReport.Report := ReportDM.rptMaster;
+                PrintExportReport.ReportDataSet := ReportDM.fdsMaster;
+                PrintExportReport.ReportTypeName := ReportTypeName;
+                PrintExportReport.ReportFileName := RepFileName;
+                PrintExportReport.ReportAction := ReportDM.ReportAction;
+                PrintExportReport.PrintPreview;
               end;
 
             18:

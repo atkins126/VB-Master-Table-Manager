@@ -1,4 +1,5 @@
 inherited BankFrm: TBankFrm
+  Tag = 3
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'BankFrm'

@@ -1,4 +1,5 @@
 inherited AgePeriodFrm: TAgePeriodFrm
+  Tag = 1
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'AgePeriodFrm'
@@ -53,11 +54,11 @@ inherited AgePeriodFrm: TAgePeriodFrm
     end
     inherited navMaster: TcxDBNavigator
       Tag = 1
-      Width = 342
-      ExplicitWidth = 342
+      Width = 324
+      ExplicitWidth = 324
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 342
+      ControlOptions.OriginalWidth = 324
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450

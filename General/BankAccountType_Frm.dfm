@@ -1,4 +1,5 @@
 inherited BankAccountTypeFrm: TBankAccountTypeFrm
+  Tag = 2
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'BankAccountTypeFrm'

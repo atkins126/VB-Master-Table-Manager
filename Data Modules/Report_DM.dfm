@@ -4266,7 +4266,7 @@ inherited ReportDM: TReportDM
         Font.Height = -15
         Font.Name = 'Calibri'
         Font.Style = [fsBold]
-        Height = 60.472440944881900000
+        Height = 60.472440944881890000
         ParentFont = False
         Top = 41.574830000000000000
         Width = 1046.929810000000000000
@@ -4400,5 +4400,46 @@ inherited ReportDM: TReportDM
     StoreDefs = True
     Left = 805
     Top = 290
+  end
+  object frxPDFExport: TfrxPDFExport
+    FileName = 'TimesheetUser.pdf'
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    CreationTime = 43629.686801180560000000
+    DataOnly = False
+    OpenAfterExport = False
+    PrintOptimized = False
+    Outline = False
+    Background = False
+    HTMLTags = True
+    Quality = 95
+    Transparency = False
+    Author = 'FastReport'
+    Subject = 'FastReport PDF export'
+    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
+    HideToolbar = False
+    HideMenubar = False
+    HideWindowUI = False
+    FitWindow = False
+    CenterWindow = False
+    PrintScaling = False
+    PdfA = False
+    Left = 30
+    Top = 170
+  end
+  object dlgPrint: TdxPrintDialog
+    ButtonsEnabled = [pdbPrinterProperties, pdbNetwork, pdbPreview, pdbPageSetup]
+    ButtonsVisible = [pdbPrinterProperties, pdbNetwork, pdbPageSetup]
+    OptionsEnabled = [pdoPrintToFile, pdoAllPages, pdoCurrentPage, pdoPageRange]
+    Left = 115
+    Top = 170
+  end
+  object dlgFileSave: TFileSaveDialog
+    FavoriteLinks = <>
+    FileTypes = <>
+    Options = []
+    Left = 120
+    Top = 115
   end
 end

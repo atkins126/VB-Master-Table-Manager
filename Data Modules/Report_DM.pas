@@ -5,11 +5,11 @@ interface
 uses
   System.SysUtils, System.Classes, Winapi.Windows, Vcl.Forms, Vcl.Dialogs,
 
-  Base_DM, VBBase_DM, CommonValues, VBCommonValues,
+  Base_DM, VBBase_DM, CommonValues, VBCommonValues, PrintExportData,
 
   IPPeerClient, Data.DBXDataSnap, Data.DBXCommon, Data.DB, Data.SqlExpr,
 
-  frxClass, frxDBSet,
+  frxClass, frxDBSet, frxExportBaseDialog, frxExportPDF,
 
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
@@ -17,9 +17,21 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteDef,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, FireDAC.Phys.IBBase, FireDAC.Phys.SQLite,
-  FireDAC.Stan.StorageBin;
+  FireDAC.Stan.StorageBin,
+
+  dxPrnDev, cxClasses, dxPrnDlg, cxGridExportLink;
 
 type
+  TReportOptions = record
+    SourceDataSet: TFDMemTable;
+    TargetDataSet: TFDMemTable;
+    Report: TfrxReport;
+    ReportDataSet: TfrxDBDataset;
+    ReportTypeName: string;
+    ReportFileName: string;
+    ReportAction: TReportActions;
+  end;
+
   TReportDM = class(TBaseDM)
     cdsActivityType: TFDMemTable;
     cdsActivityTypeID: TIntegerField;
@@ -247,19 +259,34 @@ type
     dtsPriceHistoryYear: TDataSource;
     cdsPriceHistoryYearTHE_YEAR: TIntegerField;
     cdsPriceHistory: TFDMemTable;
-    procedure PrepareReport(SourceDataSet, TargetDataSet: TFDmemTable;
-      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
-      ReportTypeName: string);
+    frxPDFExport: TfrxPDFExport;
+    dlgPrint: TdxPrintDialog;
+    dlgFileSave: TFileSaveDialog;
+//    procedure PrintReport(SourceDataSet, TargetDataSet: TFDmemTable;
+//      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
+//      ReportTypeName: string);
 
+    procedure PrintReport;
     procedure CreatePricehistory;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
     FSLTheYear: TStringList;
+    FReportType: TReportActions;
+    FPrintExporting: Boolean;
+    FReportOption: TReportOptions;
+    FFormID: Integer;
+    FMasterFormType: TMasterFormTypes;
+//    FReportType: TReportTypes;
   public
     { Public declarations }
     property SLTheYear: TStringList read FSLTheYear write FSLTheYear;
+    property ReportAction: TReportActions read FReportType write FReportType;
+    property PrintExporting: Boolean read FPrintExporting write FPrintExporting;
+    property ReportOption: TReportOptions read FReportOption write FReportOption;
+    property FormID: Integer read FFormID write FFormID;
+    property MasterFormType: TMasterFormTypes read FMasterFormType write FMasterFormType;
   end;
 
 var
@@ -269,11 +296,9 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses RUtils;
+uses RUtils, MT_DM;
 
 {$R *.dfm}
-
-{ TReportDM }
 
 { TReportDM }
 
@@ -308,17 +333,152 @@ begin
   FreeAndNil(FSLTheYear);
 end;
 
-procedure TReportDM.PrepareReport(SourceDataSet, TargetDataSet: TFDmemTable;
-  ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
-  ReportTypeName: string);
+//procedure TReportDM.PrintReport(SourceDataSet, TargetDataSet: TFDmemTable;
+//  ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
+//  ReportTypeName: string);
+
+procedure TReportDM.PrintReport;
+var
+  PrintExportReport: TPrintExportData;
 begin
-  TargetDataSet.Close;
-  TargetDataSet.Data := SourceDataSet.Data;
-  fdsMaster.DataSet := TargetDataSet;
-  Report.DataSets.Clear;
-  Report.DataSets.Add(fdsMaster);
-  Report.LoadFromFile(ReportFileName, False);
-  TfrxMemoView(Report.FindObject('lblReportTypeName')).Text := ReportTypeName;
+  ReportDM.PrintExporting := True;
+  PrintExportReport := TPrintExportData.Create;
+  try
+    PrintExportReport.ReportAction := ReportDM.ReportAction;
+    PrintExportReport.Report := ReportDM.rptMaster;
+    PrintExportReport.ReportDataSet := ReportDM.fdsMaster;
+    PrintExportReport.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
+
+    case FMasterFormType of
+      ftActivityType:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsActivityType;
+          PrintExportReport.TargetDataSet := ReportDM.cdsActivityType;
+          PrintExportReport.ReportTypeName := 'Activity Type Listing';
+        end;
+      ftAgePeriod:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsAgePeriod;
+          PrintExportReport.TargetDataSet := ReportDM.cdsAgePeriod;
+          PrintExportReport.ReportTypeName := 'Age Period Listing';
+        end;
+      ftBankAccountType:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsBankAccountType;
+          PrintExportReport.TargetDataSet := ReportDM.cdsBankAccountType;
+          PrintExportReport.ReportTypeName := 'Bank Account Type Listing';
+        end;
+      ftBank:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsBank;
+          PrintExportReport.TargetDataSet := ReportDM.cdsBank;
+          PrintExportReport.ReportTypeName := 'Bank Listing';
+        end;
+      ftContactType:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsContactType;
+          PrintExportReport.TargetDataSet := ReportDM.cdsContactType;
+          PrintExportReport.ReportTypeName := 'Contact Type Listing';
+        end;
+      ftCountry:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsCountry;
+          PrintExportReport.TargetDataSet := ReportDM.cdsCountry;
+          PrintExportReport.ReportTypeName := 'Country Listing';
+        end;
+      ftCustomerGroup:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsCustomerGroup;
+          PrintExportReport.TargetDataSet := ReportDM.cdsCustomerGroup;
+          PrintExportReport.ReportTypeName := 'Cutosmer Group Listing';
+        end;
+      ftCustomerStatus:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsCustomerStatus;
+          PrintExportReport.TargetDataSet := ReportDM.cdsCustomerStatus;
+          PrintExportReport.ReportTypeName := 'Customer Status Listing';
+        end;
+      ftCustomerType:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsCustomerType;
+          PrintExportReport.TargetDataSet := ReportDM.cdsCustomerType;
+          PrintExportReport.ReportTypeName := 'Customer Type Listing';
+        end;
+      ftJobFunction:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsJobFunction;
+          PrintExportReport.TargetDataSet := ReportDM.cdsJobFunction;
+          PrintExportReport.ReportTypeName := 'Job Function Listing';
+        end;
+      ftMonthOfYear:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsMonthOfYear;
+          PrintExportReport.TargetDataSet := ReportDM.cdsMonthOfYear;
+          PrintExportReport.ReportTypeName := 'Mont of Year Listing';
+        end;
+      ftRateUnit:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsRateUnit;
+          PrintExportReport.TargetDataSet := ReportDM.cdsRateUnit;
+          PrintExportReport.ReportTypeName := 'Rate Unit Listing';
+        end;
+      ftSalutation:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsSalutation;
+          PrintExportReport.TargetDataSet := ReportDM.cdsSalutation;
+          PrintExportReport.ReportTypeName := 'Salutation Listing';
+        end;
+      ftStdActivity:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsStdActivity;
+          PrintExportReport.TargetDataSet := ReportDM.cdsStdActivity;
+          PrintExportReport.ReportTypeName := 'Standard Activity Listing';
+        end;
+      ftTaxoffice:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsTaxOffice;
+          PrintExportReport.TargetDataSet := ReportDM.cdsTaxOffice;
+          PrintExportReport.ReportTypeName := 'Tax Office Listing';
+        end;
+      ftVehicleMake:
+        begin
+          PrintExportReport.SourceDataSet := MTDM.cdsVehicleMake;
+          PrintExportReport.TargetDataSet := ReportDM.cdsVehicleMake;
+          PrintExportReport.ReportTypeName := 'Vehicle Make Listing';
+        end;
+    end;
+
+    PrintExportReport.PrintPreview;
+//  TargetDataSet.Close;
+//  TargetDataSet.Data := SourceDataSet.Data;
+//  fdsMaster.DataSet := TargetDataSet;
+//  Report.DataSets.Clear;
+//  Report.DataSets.Add(fdsMaster);
+//  Report.LoadFromFile(ReportFileName, False);
+//  TfrxMemoView(Report.FindObject('lblReportTypeName')).Text := ReportTypeName;
+
+//  case ReportAction of
+//    raPreview, raPrint: // Preview & Print
+//      begin
+//        if ReportDM.rptMaster.PrepareReport then
+//          if ReportAction = raPreview then
+//            ReportDM.rptMaster.ShowPreparedReport
+//          else
+//          begin
+//            if dlgPrint.Execute then
+//            begin
+//              ReportDM.rptMaster.PrintOptions.Copies :=
+//                dlgPrint.DialogData.Copies;
+//
+//              ReportDM.rptMaster.Print;
+//            end;
+//          end;
+//      end;
+//  end;
+
+  finally
+    PrintExportReport.Free;
+  end;
 end;
 
 end.

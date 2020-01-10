@@ -3,20 +3,20 @@ unit Bank_Frm;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.IOUtils,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Forms,
+  System.Classes, Vcl.Graphics, System.ImageList, System.Actions, Vcl.ActnList,
+  Vcl.ImgList,
+  Vcl.Controls, Vcl.Dialogs, System.IOUtils,
 
-  BaseGrid_Frm,
+  BaseGrid_Frm, PrintExportData,
 
   frxClass, frxDBSet,
 
-  cxGraphics, cxControls,
-  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
-  cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxEdit, cxNavigator,
-  dxDateRanges, Data.DB, cxDBData, dxLayoutContainer, System.ImageList,
-  Vcl.ImgList, cxImageList, dxLayoutLookAndFeels, System.Actions, Vcl.ActnList,
-  cxClasses, cxDBNavigator, cxGridLevel, cxGridCustomView,
-  cxGridCustomTableView, cxGridTableView, cxGridBandedTableView,
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
+  cxEdit, cxNavigator, dxDateRanges, Data.DB, cxDBData, dxLayoutContainer,
+  cxImageList, dxLayoutLookAndFeels, cxClasses, cxDBNavigator, cxGridLevel,
+  cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridBandedTableView,
   cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxCurrencyEdit, cxTextEdit,
   dxScrollbarAnnotations, dxPrnDev, dxPrnDlg;
 
@@ -45,7 +45,8 @@ uses
   CommonFunction,
   VBCommonValues,
   VBBase_DM,
-  RUtils, Report_DM;
+  RUtils,
+  Report_DM;
 
 procedure TBankFrm.FormCreate(Sender: TObject);
 begin
@@ -67,6 +68,7 @@ var
   RepFileName, ReportTypeName: string;
   Report: TfrxReport;
   ReportDataSet: TfrxDBDataset;
+  PrintExportReport: TPrintExportData;
 begin
   inherited;
   case AButtonIndex of
@@ -86,8 +88,10 @@ begin
     16, 17, 18, 19:
       begin
         Screen.Cursor := crHourglass;
+        ReportDM.MasterFormType := ftActivityType;
+        ReportDM.PrintExporting := True;
+        ReportTypeName := 'Bank Listing';
         try
-          ReportTypeName := 'Bank Listing';
           case AButtonIndex of
             16, 17:
               begin
@@ -96,10 +100,15 @@ begin
                 if not TFile.Exists(RepFileName) then
                   raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
 
-                Report := ReportDM.rptMaster;
-                ReportDataSet := ReportDM.fdsMaster;
-                ReportDM.PrepareReport(MTDM.cdsBank, ReportDM.cdsBank, RepFileName, Report, ReportDataSet, ReportTypeName);
-                PrintReport(AButtonIndex);
+                PrintExportReport := TPrintExportData.Create;
+                PrintExportReport.SourceDataSet := MTDM.cdsBank;
+                PrintExportReport.TargetDataSet := ReportDM.cdsBank;
+                PrintExportReport.Report := ReportDM.rptMaster;
+                PrintExportReport.ReportDataSet := ReportDM.fdsMaster;
+                PrintExportReport.ReportTypeName := ReportTypeName;
+                PrintExportReport.ReportFileName := RepFileName;
+                PrintExportReport.ReportAction := ReportDM.ReportAction;
+                PrintExportReport.PrintPreview;
               end;
 
             18:

@@ -299,7 +299,7 @@ begin
     TfrxMemoView(Report.FindObject('lblReportTypeName')).Text := ReportTypeName;
 
 //          ReportDM.PrepareReport(MTDM.cdsActivityType, ReportDM.cdsActivityType, RepFileName, Report, ReportDataSet, ReportTypeName);
-    PrintReport(ButtonIndex);
+//    PrintReport(ButtonIndex);
   finally
     Screen.Cursor := crDefault;
   end;

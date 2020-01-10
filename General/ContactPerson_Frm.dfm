@@ -372,7 +372,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       CaptionOptions.Visible = False
       Control = cbxPrimaryContact
       ControlOptions.OriginalHeight = 21
-      ControlOptions.OriginalWidth = 117
+      ControlOptions.OriginalWidth = 115
       ControlOptions.ShowBorder = False
       Index = 2
     end

@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, Vcl.ImgList, cxImageList, Vcl.Controls,
   Vcl.Dialogs, System.Actions, Vcl.ActnList, Data.DB, System.IOUtils,
 
-  BaseGrid_Frm,
+  BaseGrid_Frm, PrintExportData,
 
   frxClass, frxDBSet,
 
@@ -66,6 +66,7 @@ var
   RepFileName, ReportTypeName: string;
   Report: TfrxReport;
   ReportDataSet: TfrxDBDataset;
+  PrintExportReport: TPrintExportData;
 begin
   inherited;
   case AButtonIndex of
@@ -95,10 +96,15 @@ begin
                 if not TFile.Exists(RepFileName) then
                   raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
 
-                Report := ReportDM.rptMaster;
-                ReportDataSet := ReportDM.fdsMaster;
-                ReportDM.PrepareReport(MTDM.cdsContactType, ReportDM.cdsContactType, RepFileName, Report, ReportDataSet, ReportTypeName);
-                PrintReport(AButtonIndex);
+                PrintExportReport := TPrintExportData.Create;
+                PrintExportReport.SourceDataSet := MTDM.cdsContactType;
+                PrintExportReport.TargetDataSet := ReportDM.cdsContactType;
+                PrintExportReport.Report := ReportDM.rptMaster;
+                PrintExportReport.ReportDataSet := ReportDM.fdsMaster;
+                PrintExportReport.ReportTypeName := ReportTypeName;
+                PrintExportReport.ReportFileName := RepFileName;
+                PrintExportReport.ReportAction := ReportDM.ReportAction;
+                PrintExportReport.PrintPreview;
               end;
 
             18:
