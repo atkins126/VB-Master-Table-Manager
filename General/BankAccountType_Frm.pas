@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Dialogs, System.ImageList,
   Vcl.ImgList, System.Actions, Vcl.ActnList, System.IOUtils,
 
-  BaseGrid_Frm, PrintExportData,
+  BaseGrid_Frm, VBPrintExportData, CommonValues,
 
   frxClass, frxDBSet,
 
@@ -17,7 +17,8 @@ uses
   cxImageList, dxLayoutLookAndFeels, cxClasses, cxDBNavigator, cxGridLevel,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridBandedTableView,
   cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxCurrencyEdit, cxTextEdit,
-  dxScrollbarAnnotations, dxPrnDev, dxPrnDlg;
+  dxScrollbarAnnotations, dxPrnDev, dxPrnDlg, dxLayoutcxEditAdapters,
+  cxContainer, cxCheckBox;
 
 type
   TBankAccountTypeFrm = class(TBaseGridFrm)
@@ -64,9 +65,9 @@ end;
 procedure TBankAccountTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
   RepFileName, ReportTypeName: string;
-  Report: TfrxReport;
-  ReportDataSet: TfrxDBDataset;
-  PrintExportReport: TPrintExportData;
+//  Report: TfrxReport;
+//  ReportDataSet: TfrxDBDataset;
+//  PrintExportReport: TVBPrintExportData;
 begin
   inherited;
   case AButtonIndex of
@@ -86,42 +87,77 @@ begin
     16, 17, 18, 19:
       begin
         Screen.Cursor := crHourglass;
-        ReportDM.MasterFormType := ftActivityType;
+        ReportDM.MasterFormType := ftBankAccountType;
         ReportDM.PrintExporting := True;
-        ReportTypeName := 'Bank Account Type Listing';
+
         try
-          case AButtonIndex of
-            16, 17:
+          case ReportDM.ReportAction of
+            raPreview, raPrint:
               begin
                 RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
 
                 if not TFile.Exists(RepFileName) then
                   raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
 
-                PrintExportReport := TPrintExportData.Create;
-                PrintExportReport.SourceDataSet := MTDM.cdsBankAccountType;
-                PrintExportReport.TargetDataSet := ReportDM.cdsBankAccountType;
-                PrintExportReport.Report := ReportDM.rptMaster;
-                PrintExportReport.ReportDataSet := ReportDM.fdsMaster;
-                PrintExportReport.ReportTypeName := ReportTypeName;
-                PrintExportReport.ReportFileName := RepFileName;
-                PrintExportReport.ReportAction := ReportDM.ReportAction;
-                PrintExportReport.PrintPreview;
+                ReportDM.PrintReport;
               end;
 
-            18:
+            raExcel:
               begin
-                ExportToExcel(ReportTypeName, grdMaster);
+                ReportDM.ExportToExcel(grdMaster, EXCEL_DOCS + 'Bank Account Type Listing', cbxOpenAfterExport.Checked);
               end;
 
-            19:
+            raPDF:
               begin
+                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
 
+                if not TFile.Exists(RepFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+
+                ReportDM.ExportToPDF(PDF_DOCS + 'Bank Account Type Listing', cbxOpenAfterExport.Checked);
               end;
           end;
         finally
           Screen.Cursor := crDefault;
         end;
+
+//        Screen.Cursor := crHourglass;
+//        ReportDM.MasterFormType := ftActivityType;
+//        ReportDM.PrintExporting := True;
+//        ReportTypeName := 'Bank Account Type Listing';
+//        try
+//          case AButtonIndex of
+//            16, 17:
+//              begin
+//                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
+//
+//                if not TFile.Exists(RepFileName) then
+//                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+//
+//                PrintExportReport := TVBPrintExportData.Create;
+//                PrintExportReport.SourceDataSet := MTDM.cdsBankAccountType;
+//                PrintExportReport.TargetDataSet := ReportDM.cdsBankAccountType;
+//                PrintExportReport.Report := ReportDM.rptMaster;
+//                PrintExportReport.ReportDataSet := ReportDM.fdsMaster;
+//                PrintExportReport.ReportTypeName := ReportTypeName;
+//                PrintExportReport.ReportFileName := RepFileName;
+//                PrintExportReport.ReportAction := ReportDM.ReportAction;
+//                PrintExportReport.PrintPreview;
+//              end;
+//
+//            18:
+//              begin
+//                ExportToExcel(ReportTypeName, grdMaster);
+//              end;
+//
+//            19:
+//              begin
+//
+//              end;
+//          end;
+//        finally
+//          Screen.Cursor := crDefault;
+//        end;
       end;
   end;
 end;

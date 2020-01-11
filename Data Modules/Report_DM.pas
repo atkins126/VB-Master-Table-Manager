@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Classes, Winapi.Windows, Vcl.Forms, Vcl.Dialogs,
 
-  Base_DM, VBBase_DM, CommonValues, VBCommonValues, PrintExportData,
+  Base_DM, VBBase_DM, CommonValues, VBCommonValues, VBPrintExportData,
 
   IPPeerClient, Data.DBXDataSnap, Data.DBXCommon, Data.DB, Data.SqlExpr,
 
@@ -19,7 +19,7 @@ uses
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, FireDAC.Phys.IBBase, FireDAC.Phys.SQLite,
   FireDAC.Stan.StorageBin,
 
-  dxPrnDev, cxClasses, dxPrnDlg, cxGridExportLink;
+  dxPrnDev, cxClasses, dxPrnDlg, cxGrid, cxGridExportLink;
 
 type
   TReportOptions = record
@@ -266,14 +266,17 @@ type
 //      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
 //      ReportTypeName: string);
 
+    function PrepareReport: TVBPrintExportData;
     procedure PrintReport;
+    procedure ExportToExcel(ExportGrid: TcxGrid; FileName: string; OpenAfterExport: Boolean);
+    procedure ExportToPDF(FileName: string; OpenAfterExport: Boolean);
     procedure CreatePricehistory;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
     FSLTheYear: TStringList;
-    FReportType: TReportActions;
+    FReportAction: TReportActions;
     FPrintExporting: Boolean;
     FReportOption: TReportOptions;
     FFormID: Integer;
@@ -282,7 +285,7 @@ type
   public
     { Public declarations }
     property SLTheYear: TStringList read FSLTheYear write FSLTheYear;
-    property ReportAction: TReportActions read FReportType write FReportType;
+    property ReportAction: TReportActions read FReportAction write FReportAction;
     property PrintExporting: Boolean read FPrintExporting write FPrintExporting;
     property ReportOption: TReportOptions read FReportOption write FReportOption;
     property FormID: Integer read FFormID write FFormID;
@@ -333,151 +336,156 @@ begin
   FreeAndNil(FSLTheYear);
 end;
 
-//procedure TReportDM.PrintReport(SourceDataSet, TargetDataSet: TFDmemTable;
-//  ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
-//  ReportTypeName: string);
+procedure TReportDM.ExportToExcel(ExportGrid: TcxGrid; FileName: string; OpenAfterExport: Boolean);
+var
+  PrintExportReport: TVBPrintExportData;
+begin
+  PrintExportReport := TVBPrintExportData.Create;
+  try
+    PrintExportReport.ReportAction := FReportAction;
+    PrintExportReport.Grid := ExportGrid;
+    PrintExportReport.ExportFileName := FileName;
+    PrintExportReport.OpenAfterExport := OpenAfterExport;
+    PrintExportReport.ExportToExcel;
+  finally
+    PrintExportReport.Free;
+  end;
+end;
+
+procedure TReportDM.ExportToPDF(FileName: string; OpenAfterExport: Boolean);
+var
+  PrintExportReport: TVBPrintExportData;
+begin
+  ReportDM.PrintExporting := True;
+  try
+    PrintExportReport := PrepareReport;
+    PrintExportReport.ExportFileName := FileName;
+    PrintExportReport.OpenAfterExport := OpenAfterExport;
+    PrintExportReport.ExportToPDF;
+  finally
+    PrintExportReport.Free;
+  end;
+end;
 
 procedure TReportDM.PrintReport;
 var
-  PrintExportReport: TPrintExportData;
+  PrintExportReport: TVBPrintExportData;
 begin
   ReportDM.PrintExporting := True;
-  PrintExportReport := TPrintExportData.Create;
   try
-    PrintExportReport.ReportAction := ReportDM.ReportAction;
-    PrintExportReport.Report := ReportDM.rptMaster;
-    PrintExportReport.ReportDataSet := ReportDM.fdsMaster;
-    PrintExportReport.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
-
-    case FMasterFormType of
-      ftActivityType:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsActivityType;
-          PrintExportReport.TargetDataSet := ReportDM.cdsActivityType;
-          PrintExportReport.ReportTypeName := 'Activity Type Listing';
-        end;
-      ftAgePeriod:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsAgePeriod;
-          PrintExportReport.TargetDataSet := ReportDM.cdsAgePeriod;
-          PrintExportReport.ReportTypeName := 'Age Period Listing';
-        end;
-      ftBankAccountType:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsBankAccountType;
-          PrintExportReport.TargetDataSet := ReportDM.cdsBankAccountType;
-          PrintExportReport.ReportTypeName := 'Bank Account Type Listing';
-        end;
-      ftBank:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsBank;
-          PrintExportReport.TargetDataSet := ReportDM.cdsBank;
-          PrintExportReport.ReportTypeName := 'Bank Listing';
-        end;
-      ftContactType:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsContactType;
-          PrintExportReport.TargetDataSet := ReportDM.cdsContactType;
-          PrintExportReport.ReportTypeName := 'Contact Type Listing';
-        end;
-      ftCountry:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsCountry;
-          PrintExportReport.TargetDataSet := ReportDM.cdsCountry;
-          PrintExportReport.ReportTypeName := 'Country Listing';
-        end;
-      ftCustomerGroup:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsCustomerGroup;
-          PrintExportReport.TargetDataSet := ReportDM.cdsCustomerGroup;
-          PrintExportReport.ReportTypeName := 'Cutosmer Group Listing';
-        end;
-      ftCustomerStatus:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsCustomerStatus;
-          PrintExportReport.TargetDataSet := ReportDM.cdsCustomerStatus;
-          PrintExportReport.ReportTypeName := 'Customer Status Listing';
-        end;
-      ftCustomerType:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsCustomerType;
-          PrintExportReport.TargetDataSet := ReportDM.cdsCustomerType;
-          PrintExportReport.ReportTypeName := 'Customer Type Listing';
-        end;
-      ftJobFunction:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsJobFunction;
-          PrintExportReport.TargetDataSet := ReportDM.cdsJobFunction;
-          PrintExportReport.ReportTypeName := 'Job Function Listing';
-        end;
-      ftMonthOfYear:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsMonthOfYear;
-          PrintExportReport.TargetDataSet := ReportDM.cdsMonthOfYear;
-          PrintExportReport.ReportTypeName := 'Mont of Year Listing';
-        end;
-      ftRateUnit:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsRateUnit;
-          PrintExportReport.TargetDataSet := ReportDM.cdsRateUnit;
-          PrintExportReport.ReportTypeName := 'Rate Unit Listing';
-        end;
-      ftSalutation:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsSalutation;
-          PrintExportReport.TargetDataSet := ReportDM.cdsSalutation;
-          PrintExportReport.ReportTypeName := 'Salutation Listing';
-        end;
-      ftStdActivity:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsStdActivity;
-          PrintExportReport.TargetDataSet := ReportDM.cdsStdActivity;
-          PrintExportReport.ReportTypeName := 'Standard Activity Listing';
-        end;
-      ftTaxoffice:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsTaxOffice;
-          PrintExportReport.TargetDataSet := ReportDM.cdsTaxOffice;
-          PrintExportReport.ReportTypeName := 'Tax Office Listing';
-        end;
-      ftVehicleMake:
-        begin
-          PrintExportReport.SourceDataSet := MTDM.cdsVehicleMake;
-          PrintExportReport.TargetDataSet := ReportDM.cdsVehicleMake;
-          PrintExportReport.ReportTypeName := 'Vehicle Make Listing';
-        end;
-    end;
-
+    ReportDM.PrintExporting := True;
+    PrintExportReport := PrepareReport;
     PrintExportReport.PrintPreview;
-//  TargetDataSet.Close;
-//  TargetDataSet.Data := SourceDataSet.Data;
-//  fdsMaster.DataSet := TargetDataSet;
-//  Report.DataSets.Clear;
-//  Report.DataSets.Add(fdsMaster);
-//  Report.LoadFromFile(ReportFileName, False);
-//  TfrxMemoView(Report.FindObject('lblReportTypeName')).Text := ReportTypeName;
-
-//  case ReportAction of
-//    raPreview, raPrint: // Preview & Print
-//      begin
-//        if ReportDM.rptMaster.PrepareReport then
-//          if ReportAction = raPreview then
-//            ReportDM.rptMaster.ShowPreparedReport
-//          else
-//          begin
-//            if dlgPrint.Execute then
-//            begin
-//              ReportDM.rptMaster.PrintOptions.Copies :=
-//                dlgPrint.DialogData.Copies;
-//
-//              ReportDM.rptMaster.Print;
-//            end;
-//          end;
-//      end;
-//  end;
-
   finally
     PrintExportReport.Free;
+  end;
+end;
+
+function TReportDM.PrepareReport: TVBPrintExportData;
+begin
+  Result := TVBPrintExportData.Create;
+  Result.ReportAction := ReportDM.ReportAction;
+  Result.Report := ReportDM.rptMaster;
+  Result.ReportDataSet := ReportDM.fdsMaster;
+  Result.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
+
+  case FMasterFormType of
+    ftActivityType:
+      begin
+        Result.SourceDataSet := MTDM.cdsActivityType;
+        Result.TargetDataSet := ReportDM.cdsActivityType;
+        Result.ReportTypeName := 'Activity Type Listing';
+      end;
+    ftAgePeriod:
+      begin
+        Result.SourceDataSet := MTDM.cdsAgePeriod;
+        Result.TargetDataSet := ReportDM.cdsAgePeriod;
+        Result.ReportTypeName := 'Age Period Listing';
+      end;
+    ftBankAccountType:
+      begin
+        Result.SourceDataSet := MTDM.cdsBankAccountType;
+        Result.TargetDataSet := ReportDM.cdsBankAccountType;
+        Result.ReportTypeName := 'Bank Account Type Listing';
+      end;
+    ftBank:
+      begin
+        Result.SourceDataSet := MTDM.cdsBank;
+        Result.TargetDataSet := ReportDM.cdsBank;
+        Result.ReportTypeName := 'Bank Listing';
+      end;
+    ftContactType:
+      begin
+        Result.SourceDataSet := MTDM.cdsContactType;
+        Result.TargetDataSet := ReportDM.cdsContactType;
+        Result.ReportTypeName := 'Contact Type Listing';
+      end;
+    ftCountry:
+      begin
+        Result.SourceDataSet := MTDM.cdsCountry;
+        Result.TargetDataSet := ReportDM.cdsCountry;
+        Result.ReportTypeName := 'Country Listing';
+      end;
+    ftCustomerGroup:
+      begin
+        Result.SourceDataSet := MTDM.cdsCustomerGroup;
+        Result.TargetDataSet := ReportDM.cdsCustomerGroup;
+        Result.ReportTypeName := 'Cutosmer Group Listing';
+      end;
+    ftCustomerStatus:
+      begin
+        Result.SourceDataSet := MTDM.cdsCustomerStatus;
+        Result.TargetDataSet := ReportDM.cdsCustomerStatus;
+        Result.ReportTypeName := 'Customer Status Listing';
+      end;
+    ftCustomerType:
+      begin
+        Result.SourceDataSet := MTDM.cdsCustomerType;
+        Result.TargetDataSet := ReportDM.cdsCustomerType;
+        Result.ReportTypeName := 'Customer Type Listing';
+      end;
+    ftJobFunction:
+      begin
+        Result.SourceDataSet := MTDM.cdsJobFunction;
+        Result.TargetDataSet := ReportDM.cdsJobFunction;
+        Result.ReportTypeName := 'Job Function Listing';
+      end;
+    ftMonthOfYear:
+      begin
+        Result.SourceDataSet := MTDM.cdsMonthOfYear;
+        Result.TargetDataSet := ReportDM.cdsMonthOfYear;
+        Result.ReportTypeName := 'Mont of Year Listing';
+      end;
+    ftRateUnit:
+      begin
+        Result.SourceDataSet := MTDM.cdsRateUnit;
+        Result.TargetDataSet := ReportDM.cdsRateUnit;
+        Result.ReportTypeName := 'Rate Unit Listing';
+      end;
+    ftSalutation:
+      begin
+        Result.SourceDataSet := MTDM.cdsSalutation;
+        Result.TargetDataSet := ReportDM.cdsSalutation;
+        Result.ReportTypeName := 'Salutation Listing';
+      end;
+    ftStdActivity:
+      begin
+        Result.SourceDataSet := MTDM.cdsStdActivity;
+        Result.TargetDataSet := ReportDM.cdsStdActivity;
+        Result.ReportTypeName := 'Standard Activity Listing';
+      end;
+    ftTaxoffice:
+      begin
+        Result.SourceDataSet := MTDM.cdsTaxOffice;
+        Result.TargetDataSet := ReportDM.cdsTaxOffice;
+        Result.ReportTypeName := 'Tax Office Listing';
+      end;
+    ftVehicleMake:
+      begin
+        Result.SourceDataSet := MTDM.cdsVehicleMake;
+        Result.TargetDataSet := ReportDM.cdsVehicleMake;
+        Result.ReportTypeName := 'Vehicle Make Listing';
+      end;
   end;
 end;
 

@@ -58,12 +58,34 @@ inherited ActivityTypeFrm: TActivityTypeFrm
       DataSource = MTDM.dtsActivityType
       ExplicitWidth = 324
     end
+    inherited cbxOpenAfterExport: TcxCheckBox
+      Left = 341
+      Top = 21
+      ExplicitLeft = 341
+      ExplicitTop = 21
+      ExplicitWidth = 183
+      ExplicitHeight = 19
+    end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450
     end
+    inherited litOpenAfterExport: TdxLayoutItem
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 183
+    end
+  end
+  object cxButton1: TcxButton [1]
+    Left = 625
+    Top = 67
+    Width = 75
+    Height = 25
+    Caption = 'cxButton1'
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
   end
   inherited styRepository: TcxStyleRepository
     PixelsPerInch = 96

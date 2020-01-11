@@ -51,15 +51,21 @@ inherited SalutationFrm: TSalutationFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 324
+      Width = 342
       DataSource = MTDM.dtsSalutation
-      ExplicitWidth = 324
+      ExplicitWidth = 342
+    end
+    inherited cbxOpenAfterExport: TcxCheckBox
+      ExplicitWidth = 182
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 324
+      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450
+    end
+    inherited litOpenAfterExport: TdxLayoutItem
+      ControlOptions.OriginalWidth = 182
     end
   end
   inherited styRepository: TcxStyleRepository

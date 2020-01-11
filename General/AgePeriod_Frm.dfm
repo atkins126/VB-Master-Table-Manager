@@ -57,11 +57,19 @@ inherited AgePeriodFrm: TAgePeriodFrm
       Width = 324
       ExplicitWidth = 324
     end
+    inherited cbxOpenAfterExport: TcxCheckBox
+      ExplicitWidth = 183
+      ExplicitHeight = 19
+    end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450
+    end
+    inherited litOpenAfterExport: TdxLayoutItem
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 183
     end
   end
   inherited styRepository: TcxStyleRepository

@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, Vcl.ImgList, cxImageList, Vcl.Controls,
   Vcl.Dialogs, System.Actions, Vcl.ActnList, Data.DB, System.IOUtils,
 
-  BaseGrid_Frm, PrintExportData,
+  BaseGrid_Frm, VBPrintExportData, CommonValues,
 
   frxClass, frxDBSet,
 
@@ -17,7 +17,8 @@ uses
   dxLayoutLookAndFeels, cxClasses, cxDBNavigator, cxGridLevel, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridBandedTableView, cxCurrencyEdit,
   cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxTextEdit,
-  dxScrollbarAnnotations, dxPrnDev, dxPrnDlg;
+  dxScrollbarAnnotations, dxPrnDev, dxPrnDlg, cxContainer,
+  dxLayoutcxEditAdapters, cxCheckBox;
 
 type
   TContactTypeFrm = class(TBaseGridFrm)
@@ -63,10 +64,7 @@ end;
 
 procedure TContactTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
-  RepFileName, ReportTypeName: string;
-  Report: TfrxReport;
-  ReportDataSet: TfrxDBDataset;
-  PrintExportReport: TPrintExportData;
+  RepFileName: string;
 begin
   inherited;
   case AButtonIndex of
@@ -86,35 +84,34 @@ begin
     16, 17, 18, 19:
       begin
         Screen.Cursor := crHourglass;
+        ReportDM.MasterFormType := ftContactType;
+        ReportDM.PrintExporting := True;
+
         try
-          ReportTypeName := 'Contact Type Listing';
-          case AButtonIndex of
-            16, 17:
+          case ReportDM.ReportAction of
+            raPreview, raPrint:
               begin
                 RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
 
                 if not TFile.Exists(RepFileName) then
                   raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
 
-                PrintExportReport := TPrintExportData.Create;
-                PrintExportReport.SourceDataSet := MTDM.cdsContactType;
-                PrintExportReport.TargetDataSet := ReportDM.cdsContactType;
-                PrintExportReport.Report := ReportDM.rptMaster;
-                PrintExportReport.ReportDataSet := ReportDM.fdsMaster;
-                PrintExportReport.ReportTypeName := ReportTypeName;
-                PrintExportReport.ReportFileName := RepFileName;
-                PrintExportReport.ReportAction := ReportDM.ReportAction;
-                PrintExportReport.PrintPreview;
+                ReportDM.PrintReport;
               end;
 
-            18:
+            raExcel:
               begin
-                ExportToExcel(ReportTypeName, grdMaster);
+                ReportDM.ExportToExcel(grdMaster, EXCEL_DOCS + 'Contact Type Listing', cbxOpenAfterExport.Checked);
               end;
 
-            19:
+            raPDF:
               begin
+                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
 
+                if not TFile.Exists(RepFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+
+                ReportDM.ExportToPDF(PDF_DOCS + 'Contact Type Listing', cbxOpenAfterExport.Checked);
               end;
           end;
         finally

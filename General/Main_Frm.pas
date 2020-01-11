@@ -29,7 +29,7 @@ uses
 
   FireDAC.Stan.Def, FireDAC.VCLUI.Wait, FireDAC.Phys.IBWrapper, FireDAC.Phys.FB,
   FireDAC.Phys.IBBase, FireDAC.Stan.Intf, FireDAC.Phys, cxMaskEdit,
-  cxDropDownEdit, cxBarEditItem;
+  cxDropDownEdit, cxBarEditItem, Vcl.Menus;
 
 type
   TMainFrm = class(TBaseLayoutFrm)
@@ -99,7 +99,6 @@ type
     grpToolbar: TdxLayoutGroup;
     procedure FormCreate(Sender: TObject);
     procedure DoLaunchMasterTable(Sender: TObject);
-    procedure pagMainChange(Sender: TObject);
     procedure DoExitApp(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure DoActivityType(Sender: TObject);
@@ -287,12 +286,6 @@ begin
     FreeAndNil(ReportDM);
 end;
 
-procedure TMainFrm.pagMainChange(Sender: TObject);
-begin
-  inherited;
-//
-end;
-
 procedure TMainFrm.UpdateApplicationSkin(SkinResourceFileName, SkinName: string);
 begin
   sknController.BeginUpdate;
@@ -396,7 +389,6 @@ begin
           ActivityTypeFrm.Show;
           NewTabSheet.Visible := True;
           NewTabSheet.TabVisible := True;
-          pagMain.Repaint;
         finally
           docToolbar.Enabled := True;
           Screen.Cursor := crDefault;
@@ -1012,7 +1004,7 @@ begin
 //      8: tipCloseScreen.Description.Text := 'Close MO Picklist screen';
     end;
   finally
-    pagMain.OnChange := pagMainChange;
+//    pagMain.OnChange := pagMainChange;
     actCloseScreen.Enabled := pagMain.PageCount > 0;
   end;
 end;

@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Dialogs, System.IOUtils,
   System.ImageList, System.Actions, Vcl.ActnList, Vcl.ImgList,
 
-  BaseGrid_Frm, PrintExportData,
+  BaseGrid_Frm, VBPrintExportData, CommonValues,
 
   frxClass, frxDBSet,
 
@@ -17,15 +17,15 @@ uses
   cxImageList, dxLayoutLookAndFeels, cxClasses, cxDBNavigator, cxGridLevel,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridBandedTableView,
   cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxCurrencyEdit, cxTextEdit,
-  dxScrollbarAnnotations, dxPrnDev, dxPrnDlg;
+  dxScrollbarAnnotations, dxPrnDev, dxPrnDlg, cxContainer,
+  dxLayoutcxEditAdapters, cxCheckBox;
 
 type
   TAgePeriodFrm = class(TBaseGridFrm)
     edtID: TcxGridDBBandedColumn;
     edtName: TcxGridDBBandedColumn;
     procedure FormCreate(Sender: TObject);
-    procedure navMasterButtonsButtonClick(Sender: TObject;
-      AButtonIndex: Integer; var ADone: Boolean);
+    procedure navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
   private
     { Private declarations }
   public
@@ -39,7 +39,13 @@ implementation
 
 {$R *.dfm}
 
-uses MT_DM, VBBase_DM, CommonFunction, VBCommonValues, RUtils, Report_DM;
+uses
+  MT_DM,
+  VBBase_DM,
+  CommonFunction,
+  VBCommonValues,
+  RUtils,
+  Report_DM;
 
 procedure TAgePeriodFrm.FormCreate(Sender: TObject);
 begin
@@ -58,9 +64,8 @@ end;
 procedure TAgePeriodFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
   RepFileName, ReportTypeName: string;
-  Report: TfrxReport;
-  ReportDataSet: TfrxDBDataset;
-  PrintExportReport: TPrintExportData;
+  PrintExportReport: TVBPrintExportData;
+  ID: Integer;
 begin
   inherited;
   case AButtonIndex of
@@ -80,37 +85,35 @@ begin
     16, 17, 18, 19:
       begin
         Screen.Cursor := crHourglass;
-        ReportDM.MasterFormType := ftActivityType;
+        ReportDM.MasterFormType := ftAgePeriod;
         ReportDM.PrintExporting := True;
-        ReportTypeName := 'Age Period Listing';
+
         try
-          case AButtonIndex of
-            16, 17:
+          case ReportDM.ReportAction of
+            raPreview, raPrint:
               begin
                 RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
 
                 if not TFile.Exists(RepFileName) then
                   raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
 
-                PrintExportReport := TPrintExportData.Create;
-                PrintExportReport.SourceDataSet := MTDM.cdsAgePeriod;
-                PrintExportReport.TargetDataSet := ReportDM.cdsAgePeriod;
-                PrintExportReport.Report := ReportDM.rptMaster;
-                PrintExportReport.ReportDataSet := ReportDM.fdsMaster;
-                PrintExportReport.ReportTypeName := ReportTypeName;
-                PrintExportReport.ReportFileName := RepFileName;
-                PrintExportReport.ReportAction := ReportDM.ReportAction;
-                PrintExportReport.PrintPreview;
+                ReportDM.PrintReport;
               end;
 
-            18:
+            raExcel:
               begin
-                ExportToExcel(ReportTypeName, grdMaster);
+                ReportDM.ExportToExcel(grdMaster, EXCEL_DOCS + 'Age Period Listing', cbxOpenAfterExport.Checked);
+//                ExportToExcel(ReportTypeName, grdMaster);
               end;
 
-            19:
+            raPDF:
               begin
+                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
 
+                if not TFile.Exists(RepFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+
+                ReportDM.ExportToPDF(PDF_DOCS + 'Age Preiod Listing', cbxOpenAfterExport.Checked);
               end;
           end;
         finally

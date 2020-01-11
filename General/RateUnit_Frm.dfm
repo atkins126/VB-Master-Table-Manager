@@ -1,7 +1,7 @@
 inherited RateUnitFrm: TRateUnitFrm
   BorderIcons = []
   BorderStyle = bsNone
-  Caption = 'RateUnitFrm'
+  Caption = 'TVBPrintExportData'
   ClientHeight = 745
   ClientWidth = 968
   PixelsPerInch = 96
@@ -50,15 +50,23 @@ inherited RateUnitFrm: TRateUnitFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 324
+      Width = 342
       DataSource = MTDM.dtsRateUnit
-      ExplicitWidth = 324
+      ExplicitWidth = 342
+    end
+    inherited cbxOpenAfterExport: TcxCheckBox
+      Left = 359
+      ExplicitLeft = 359
+      ExplicitWidth = 182
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 324
+      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450
+    end
+    inherited litOpenAfterExport: TdxLayoutItem
+      ControlOptions.OriginalWidth = 182
     end
   end
   inherited styRepository: TcxStyleRepository

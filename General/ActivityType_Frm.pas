@@ -4,25 +4,27 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Forms,
-  System.Classes, Vcl.Graphics, Vcl.ImgList, cxImageList, Vcl.ActnList, Data.DB,
-  Vcl.Controls, Vcl.Dialogs, System.Actions, System.ImageList, System.IOUtils,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Dialogs, System.IOUtils,
+  System.ImageList, System.Actions, Vcl.ActnList, Vcl.ImgList,
 
-  BaseGrid_Frm, CommonValues, PrintExportData,
+  BaseGrid_Frm, VBPrintExportData, CommonValues,
 
   frxClass, frxDBSet,
 
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
   dxSkinsDefaultPainters, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage,
-  cxEdit, cxNavigator, dxDateRanges, cxDBData, dxLayoutContainer, dxLayoutLookAndFeels,
-  cxClasses, cxDBNavigator, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
-  cxGridTableView, cxGridBandedTableView, cxGridDBBandedTableView, cxGrid,
-  dxLayoutControl, cxCurrencyEdit, cxTextEdit, dxScrollbarAnnotations, dxPrnDev,
-  dxPrnDlg;
+  cxEdit, cxNavigator, dxDateRanges, Data.DB, cxDBData, dxLayoutContainer,
+  cxImageList, dxLayoutLookAndFeels, cxClasses, cxDBNavigator, cxGridLevel,
+  cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridBandedTableView,
+  cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxCurrencyEdit, cxTextEdit,
+  dxScrollbarAnnotations, dxPrnDev, dxPrnDlg, cxContainer,
+  dxLayoutcxEditAdapters, cxCheckBox, Vcl.Menus, Vcl.StdCtrls, cxButtons;
 
 type
   TActivityTypeFrm = class(TBaseGridFrm)
     edtID: TcxGridDBBandedColumn;
     edtName: TcxGridDBBandedColumn;
+    cxButton1: TcxButton;
     procedure FormCreate(Sender: TObject);
     procedure navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
   private
@@ -62,10 +64,8 @@ end;
 
 procedure TActivityTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
-  RepFileName, ReportTypeName: string;
-  Report: TfrxReport;
-  ReportDataSet: TfrxDBDataset;
-  PrintExportReport: TPrintExportData;
+  RepFileName: string;
+  ID: Integer;
 begin
   inherited;
   case AButtonIndex of
@@ -84,46 +84,38 @@ begin
 
     16, 17, 18, 19:
       begin
-        inherited;
         Screen.Cursor := crHourglass;
+        ReportDM.MasterFormType := ftActivityType;
+        ReportDM.PrintExporting := True;
+
         try
-          ReportDM.MasterFormType := ftActivityType;
-          ReportDM.PrintExporting := True;
-          ReportDM.PrintReport;
-//        ReportTypeName := 'Activity Type Listing';
-//        try
-//          case ReportDM.ReportAction of
-//            raPreview, raPrint:
-//              begin
-//                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
-//
-//                if not TFile.Exists(RepFileName) then
-//                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
-//
-//                PrintExportReport := TPrintExportData.Create;
-//                PrintExportReport.SourceDataSet := MTDM.cdsActivityType;
-//                PrintExportReport.TargetDataSet := ReportDM.cdsActivityType;
-//                PrintExportReport.Report := ReportDM.rptMaster;
-//                PrintExportReport.ReportDataSet := ReportDM.fdsMaster;
-//                PrintExportReport.ReportTypeName := ReportTypeName;
-//                PrintExportReport.ReportFileName := RepFileName;
-//                PrintExportReport.ReportAction := ReportDM.ReportAction;
-//                PrintExportReport.PrintPreview;
-//              end;
-//
-//            raExcel:
-//              begin
-//                ExportToExcel(ReportTypeName, grdMaster);
-//              end;
-//
-//            raPDF:
-//              begin
-//
-//              end;
-//          end;
+          case ReportDM.ReportAction of
+            raPreview, raPrint:
+              begin
+                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
+
+                if not TFile.Exists(RepFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+
+                ReportDM.PrintReport;
+              end;
+
+            raExcel:
+              begin
+                ReportDM.ExportToExcel(grdMaster, EXCEL_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+              end;
+
+            raPDF:
+              begin
+                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
+
+                if not TFile.Exists(RepFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+
+                ReportDM.ExportToPDF(PDF_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+              end;
+          end;
         finally
-//          PrintExportReport.Free;
-//          ReportDM.PrintExporting := False;
           Screen.Cursor := crDefault;
         end;
       end;
