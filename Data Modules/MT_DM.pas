@@ -29,6 +29,7 @@ type
   TableReadOnlyArray = array of Boolean;
   FieldValueArray = array of string;
   HeaderCaptionArray = array of string;
+  TMasterDatasets = array of TFDMemTable;
 
   FieldValues = record
     ContactTypeID: Integer;
@@ -316,6 +317,7 @@ type
     FSubTitle: string;
     FFormCaption: string;
     FHeaderCaptionArray: HeaderCaptionArray;
+    FMasterDataSet: TMasterDataSets;
   public
     { Public declarations }
     FFieldValue: FieldValues;
@@ -332,6 +334,7 @@ type
     property FormCaption: string read FFormCaption write FFormCaption;
     procedure ClearFieldValues;
     property HeaderCaptionArray: HeaderCaptionArray read FHeaderCaptionArray write FHeaderCaptionArray;
+    property MasterDataSet: TMasterDataSets read FMasterDataSet write FMasterDataSet;
   end;
 
 var
@@ -453,7 +456,7 @@ end;
 procedure TMTDM.DataModuleCreate(Sender: TObject);
 begin
   inherited;
-  SetLength(FTableNameArray, 18);
+  SetLength(FTableNameArray, MASTER_DATASET_COUNT);
   FTableNameArray[0] := 'Activity Type';
   FTableNameArray[1] := 'Age Period';
   FTableNameArray[2] := 'Bank';
@@ -485,6 +488,26 @@ begin
 
   SetLength(FValueArray, FIELD_VALUES);
   ClearFieldValueArray;
+
+  SetLength(FMasterDataset, MASTER_DATASET_COUNT);
+  FMasterDataSet[0] := cdsActivityType;
+  FMasterDataSet[1] := cdsAgePeriod;
+  FMasterDataSet[2] := cdsBank;
+  FMasterDataSet[3] := cdsBankAccountType;
+  FMasterDataSet[4] := cdsContactType;
+  FMasterDataSet[5] := cdsCountry;
+  FMasterDataSet[6] := cdsCustomer;
+  FMasterDataSet[7] := cdsCustomerGroup;
+  FMasterDataSet[8] := cdsCustomerStatus;
+  FMasterDataSet[9] := cdsCustomerType;
+  FMasterDataSet[10] := cdsJobFunction;
+  FMasterDataSet[11] := cdsMonthOfYear;
+  FMasterDataSet[12] := cdsPricelist;
+  FMasterDataSet[13] := cdsRateUnit;
+  FMasterDataSet[14] := cdsSalutation;
+  FMasterDataSet[15] := cdsStdActivity;
+  FMasterDataSet[16] := cdsTaxoffice;
+  FMasterDataSet[17] := cdsVehicleMake;
 end;
 
 procedure TMTDM.cdsActivityTypeAfterDelete(DataSet: TDataSet);

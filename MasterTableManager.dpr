@@ -25,7 +25,6 @@ uses
   MsgDialog_Frm in '..\..\..\..\Lib\MsgDialog_Frm.pas' {msgDialogFrm},
   Progress_Frm in '..\..\..\..\Lib\Progress_Frm.pas' {ProgressFrm},
   RUtils in '..\..\..\..\Lib\RUtils.pas',
-  MyClasses in '..\..\..\..\Lib\MyClasses.pas',
   About_Frm in '..\..\..\..\Lib\About_Frm.pas' {AboutFrm},
   VBCommonValues in '..\..\Lib\VBCommonValues.pas',
   Main_Frm in 'General\Main_Frm.pas' {MainFrm},
@@ -62,7 +61,8 @@ uses
   ContactPerson_Frm in 'General\ContactPerson_Frm.pas' {ContactPersonFrm},
   VBProxyClass in '..\Lib\VBProxyClass.pas',
   Report_DM in 'Data Modules\Report_DM.pas' {ReportDM: TDataModule},
-  VBPrintExportData in '..\..\..\..\Lib\VBPrintExportData.pas';
+  VBPrintExportData in '..\..\..\..\Lib\Classes\VBPrintExportData.pas',
+  MyClasses in '..\..\..\..\Lib\Classes\MyClasses.pas';
 
 {$R *.res}
 

@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Forms,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Dialogs, System.IOUtils,
-  System.ImageList, System.Actions, Vcl.ActnList, Vcl.ImgList,
+  System.ImageList, System.Actions, Vcl.ActnList, Vcl.ImgList, Vcl.Menus,
+  Vcl.StdCtrls,
 
   BaseGrid_Frm, VBPrintExportData, CommonValues,
 
@@ -18,7 +19,7 @@ uses
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridBandedTableView,
   cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxCurrencyEdit, cxTextEdit,
   dxScrollbarAnnotations, dxPrnDev, dxPrnDlg, cxContainer,
-  dxLayoutcxEditAdapters, cxCheckBox, Vcl.Menus, Vcl.StdCtrls, cxButtons;
+  dxLayoutcxEditAdapters, cxCheckBox, cxButtons;
 
 type
   TActivityTypeFrm = class(TBaseGridFrm)

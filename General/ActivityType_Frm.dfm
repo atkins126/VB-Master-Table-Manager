@@ -64,7 +64,6 @@ inherited ActivityTypeFrm: TActivityTypeFrm
       ExplicitLeft = 341
       ExplicitTop = 21
       ExplicitWidth = 183
-      ExplicitHeight = 19
     end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324
@@ -73,7 +72,6 @@ inherited ActivityTypeFrm: TActivityTypeFrm
       ControlOptions.OriginalWidth = 450
     end
     inherited litOpenAfterExport: TdxLayoutItem
-      ControlOptions.OriginalHeight = 19
       ControlOptions.OriginalWidth = 183
     end
   end

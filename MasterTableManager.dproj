@@ -139,7 +139,6 @@
             <Form>ProgressFrm</Form>
         </DCCReference>
         <DCCReference Include="..\..\..\..\Lib\RUtils.pas"/>
-        <DCCReference Include="..\..\..\..\Lib\MyClasses.pas"/>
         <DCCReference Include="..\..\..\..\Lib\About_Frm.pas">
             <Form>AboutFrm</Form>
         </DCCReference>
@@ -258,7 +257,8 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\..\..\..\Lib\VBPrintExportData.pas"/>
+        <DCCReference Include="..\..\..\..\Lib\Classes\VBPrintExportData.pas"/>
+        <DCCReference Include="..\..\..\..\Lib\Classes\MyClasses.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
