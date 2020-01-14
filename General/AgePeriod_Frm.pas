@@ -67,27 +67,18 @@ var
   PrintExportReport: TVBPrintExportData;
   ID: Integer;
 begin
+  Screen.Cursor := crHourglass;
+  ReportDM.MasterFormType := ftAgePeriod;
   inherited;
   case AButtonIndex of
     NBDI_DELETE:
       begin
-        Beep;
-        ADone := DisplayMsg(
-          Application.Title,
-          'Delete Confirmaiton',
-          'Are you sure you want to delete the selected Age Period?' + CRLF + CRLF +
-          'This action cannot be undone!',
-          mtConfirmation,
-          [mbYes, mbNo]
-          ) = mrNo;
+        raise EValidateException.Create('Age Periods cannot be deleted from the system.');
       end;
 
     16, 17, 18, 19:
       begin
-        Screen.Cursor := crHourglass;
-        ReportDM.MasterFormType := ftAgePeriod;
-        ReportDM.PrintExporting := True;
-
+        inherited;
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:

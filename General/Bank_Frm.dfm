@@ -25,6 +25,8 @@ inherited BankFrm: TBankFrm
         object edtID: TcxGridDBBandedColumn
           DataBinding.FieldName = 'ID'
           PropertiesClassName = 'TcxCurrencyEditProperties'
+          Properties.DisplayFormat = '###0'
+          Properties.EditFormat = '###0'
           Properties.ReadOnly = True
           Visible = False
           MinWidth = 60

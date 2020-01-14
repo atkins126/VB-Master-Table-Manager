@@ -25,7 +25,7 @@ uses
   FireDAC.Stan.StorageBin;
 
 type
-  TableNameArray = array of string;
+  MasterItemArray = array of string;
   TableReadOnlyArray = array of Boolean;
   FieldValueArray = array of string;
   HeaderCaptionArray = array of string;
@@ -308,7 +308,7 @@ type
     FID: Integer;
     FActionTag: Integer;
     FTableReadOnlyArray: TableReadOnlyArray;
-    FTableNameArray: TableNameArray;
+    FMasterItem: MasterItemArray;
 //    FDBAction: TDBActions;
     FDetailIndex: Integer;
     FPostError: Boolean;
@@ -323,7 +323,7 @@ type
     FFieldValue: FieldValues;
 
     property ActionTag: Integer read FActionTag write FActionTag;
-    property TableNameArray: TableNameArray read FTableNameArray write FTableNameArray;
+    property MasterItem: MasterItemArray read FMasterItem write FMasterItem;
     property TableReadOnlyArray: TableReadOnlyArray read FTableReadOnlyArray write FTableReadOnlyArray;
 //    property DBAction: TDBActions read FDBAction write FDBAction;
     property DetailIndex: Integer read FDetailIndex write FDetailIndex;
@@ -456,25 +456,25 @@ end;
 procedure TMTDM.DataModuleCreate(Sender: TObject);
 begin
   inherited;
-  SetLength(FTableNameArray, MASTER_DATASET_COUNT);
-  FTableNameArray[0] := 'Activity Type';
-  FTableNameArray[1] := 'Age Period';
-  FTableNameArray[2] := 'Bank';
-  FTableNameArray[3] := 'Bank Account Type';
-  FTableNameArray[4] := 'Contact Type';
-  FTableNameArray[5] := 'Country';
-  FTableNameArray[6] := 'Customer';
-  FTableNameArray[7] := 'Customer Group';
-  FTableNameArray[8] := 'Customer Status';
-  FTableNameArray[9] := 'Customer Type';
-  FTableNameArray[10] := 'Job Functio';
-  FTableNameArray[11] := 'Month of year';
-  FTableNameArray[12] := 'Price List';
-  FTableNameArray[13] := 'Rate Unit';
-  FTableNameArray[14] := 'STD Acrtivity';
-  FTableNameArray[15] := 'Salutaion';
-  FTableNameArray[16] := 'Tax Office';
-  FTableNameArray[17] := 'Vehicle make';
+  SetLength(FMasterItem, MASTER_DATASET_COUNT);
+  FMasterItem[0] := 'Activity Type';
+  FMasterItem[1] := 'Age Period';
+  FMasterItem[2] := 'Bank';
+  FMasterItem[3] := 'Bank Account Type';
+  FMasterItem[4] := 'Contact Type';
+  FMasterItem[5] := 'Country';
+  FMasterItem[6] := 'Customer';
+  FMasterItem[7] := 'Customer Group';
+  FMasterItem[8] := 'Customer Status';
+  FMasterItem[9] := 'Customer Type';
+  FMasterItem[10] := 'Job Functio';
+  FMasterItem[11] := 'Month of year';
+  FMasterItem[12] := 'Price List';
+  FMasterItem[13] := 'Rate Unit';
+  FMasterItem[14] := 'STD Acrtivity';
+  FMasterItem[15] := 'Salutaion';
+  FMasterItem[16] := 'Tax Office';
+  FMasterItem[17] := 'Vehicle make';
 
   Setlength(FHeaderCaptionArray, CUSTOMER_DETAIL_FORMS);
   FHeaderCaptionArray[0] := 'Company Contact Detail';

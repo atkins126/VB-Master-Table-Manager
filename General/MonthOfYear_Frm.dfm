@@ -43,6 +43,8 @@ inherited MonthOfYearFrm: TMonthOfYearFrm
         object edtName: TcxGridDBBandedColumn
           DataBinding.FieldName = 'NAME'
           PropertiesClassName = 'TcxTextEditProperties'
+          Properties.ReadOnly = True
+          Options.Editing = False
           Position.BandIndex = 0
           Position.ColIndex = 1
           Position.RowIndex = 0
@@ -54,6 +56,8 @@ inherited MonthOfYearFrm: TMonthOfYearFrm
       ExplicitWidth = 342
     end
     inherited cbxOpenAfterExport: TcxCheckBox
+      Left = 359
+      ExplicitLeft = 359
       ExplicitWidth = 182
     end
     inherited litNavigator: TdxLayoutItem

@@ -17,7 +17,8 @@ uses
   dxLayoutLookAndFeels, cxClasses, cxGridLevel, cxGridCustomView, cxTextEdit,
   cxGridCustomTableView, cxGridTableView, cxGridBandedTableView, cxCurrencyEdit,
   cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxMemo, cxDBLookupComboBox,
-  dxScrollbarAnnotations, dxPrnDev, dxPrnDlg;
+  dxScrollbarAnnotations, dxPrnDev, dxPrnDlg, cxContainer,
+  dxLayoutcxEditAdapters, cxCheckBox;
 
 type
   TPriceListFrm = class(TBaseGridFrm)
@@ -243,23 +244,19 @@ begin
 end;
 
 procedure TPriceListFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
-//var
-//  RepFileName, ReportTypeName: string;
-//  Report: TfrxReport;
+var
+  RepFileName: string;
 begin
-  inherited;
+  Screen.Cursor := crHourglass;
+  ReportDM.MasterFormType := ftPricelist;
   case AButtonIndex of
     NBDI_DELETE:
       begin
-        Beep;
-        ADone := DisplayMsg(
-          Application.Title,
-          'Delete Confirmaiton',
-          'Are you sure you want to delete the selected Price List Item?' + CRLF + CRLF +
-          'This action cannot be undone!',
-          mtConfirmation,
-          [mbYes, mbNo]
-          ) = mrNo;
+        VBBaseDM.QueryRequest := Format(USE_COUNT, ['SELECT COUNT(ID) AS USE_COUNT FROM TIMESHEET WHERE PRICE_LIST_ITEM_ID = ' +
+          IntToStr(MTDM.cdsPricelist.FieldByName('ID').AsInteger)]);
+
+        VBBaseDM.ItemToCount := 'Price List Item';
+        inherited;
       end;
 
     16, 17, 18, 19:

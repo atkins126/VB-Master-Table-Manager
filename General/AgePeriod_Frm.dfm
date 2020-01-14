@@ -30,7 +30,6 @@ inherited AgePeriodFrm: TAgePeriodFrm
           Properties.ReadOnly = True
           Visible = False
           MinWidth = 60
-          Options.Editing = False
           Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
@@ -44,6 +43,7 @@ inherited AgePeriodFrm: TAgePeriodFrm
         object edtName: TcxGridDBBandedColumn
           DataBinding.FieldName = 'NAME'
           PropertiesClassName = 'TcxTextEditProperties'
+          Properties.ReadOnly = True
           Options.Grouping = False
           Options.Moving = False
           Position.BandIndex = 0
@@ -54,22 +54,22 @@ inherited AgePeriodFrm: TAgePeriodFrm
     end
     inherited navMaster: TcxDBNavigator
       Tag = 1
-      Width = 324
-      ExplicitWidth = 324
+      Width = 342
+      ExplicitWidth = 342
     end
     inherited cbxOpenAfterExport: TcxCheckBox
-      ExplicitWidth = 183
-      ExplicitHeight = 19
+      Left = 359
+      ExplicitLeft = 359
+      ExplicitWidth = 182
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 324
+      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450
     end
     inherited litOpenAfterExport: TdxLayoutItem
-      ControlOptions.OriginalHeight = 19
-      ControlOptions.OriginalWidth = 183
+      ControlOptions.OriginalWidth = 182
     end
   end
   inherited styRepository: TcxStyleRepository

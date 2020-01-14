@@ -72,32 +72,31 @@ end;
 
 procedure TStdActivityFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
-  RepFileName, ReportTypeName: string;
-  Report: TfrxReport;
-  ReportDataSet: TfrxDBDataset;
-  PrintExportReport: TVBPrintExportData;
+  RepFileName: string;
 begin
-  inherited;
+  Screen.Cursor := crHourglass;
+  ReportDM.MasterFormType := ftStdActivity;
   case AButtonIndex of
     NBDI_DELETE:
       begin
+        ADone := True;
         Beep;
-        ADone := DisplayMsg(
+        if DisplayMsg(
           Application.Title,
           'Delete Confirmaiton',
-          'Are you sure you want to delete the selected Standard Activity Type?' + CRLF + CRLF +
+          'Are you sure you want to delete the selected Standard Activity?' + CRLF + CRLF +
           'This action cannot be undone!',
           mtConfirmation,
           [mbYes, mbNo]
-          ) = mrNo;
+          ) = mrNo then
+          Exit;
+
+        MTDM.cdsStdActivity.Delete;
       end;
 
     16, 17, 18, 19:
       begin
-        Screen.Cursor := crHourglass;
-        ReportDM.MasterFormType := ftStdActivity;
-        ReportDM.PrintExporting := True;
-
+        inherited;
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:

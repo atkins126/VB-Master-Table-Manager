@@ -62,32 +62,23 @@ end;
 
 procedure TCustomerTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
-  RepFileName, ReportTypeName: string;
-//  Report: TfrxReport;
-//  ReportDataSet: TfrxDBDataset;
-//  PrintExportReport: TVBPrintExportData;
+  RepFileName: string;
 begin
-  inherited;
+  Screen.Cursor := crHourglass;
+  ReportDM.MasterFormType := ftCustomerType;
   case AButtonIndex of
     NBDI_DELETE:
       begin
-        Beep;
-        ADone := DisplayMsg(
-          Application.Title,
-          'Delete Confirmaiton',
-          'Are you sure you want to delete the selected Cusotmer Type?' + CRLF + CRLF +
-          'This action cannot be undone!',
-          mtConfirmation,
-          [mbYes, mbNo]
-          ) = mrNo;
+        VBBaseDM.QueryRequest := Format(USE_COUNT, ['SELECT COUNT(ID) AS USE_COUNT FROM CUSTOMER WHERE CUSTOMER_TYPE_ID = ' +
+          IntToStr(MTDM.cdsCustomerType.FieldByName('ID').AsInteger)]);
+
+        VBBaseDM.ItemToCount := 'Customer Type';
+        inherited;
       end;
 
     16, 17, 18, 19:
       begin
-        Screen.Cursor := crHourglass;
-        ReportDM.MasterFormType := ftCustomerType;
-        ReportDM.PrintExporting := True;
-
+        inherited;
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:

@@ -52,22 +52,20 @@ inherited CustomerTypeFrm: TCustomerTypeFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 324
-      ExplicitWidth = 324
+      Width = 342
+      ExplicitWidth = 342
     end
     inherited cbxOpenAfterExport: TcxCheckBox
-      ExplicitWidth = 183
-      ExplicitHeight = 19
+      ExplicitWidth = 182
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 324
+      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450
     end
     inherited litOpenAfterExport: TdxLayoutItem
-      ControlOptions.OriginalHeight = 19
-      ControlOptions.OriginalWidth = 183
+      ControlOptions.OriginalWidth = 182
     end
   end
   inherited styRepository: TcxStyleRepository

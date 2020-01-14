@@ -1014,11 +1014,6 @@ inherited MTDM: TMTDM
         CustomConstraint = 'RATE > 0'
         ErrorMessage = 'Value for rate must be > 0'
         FromDictionary = False
-      end
-      item
-        CustomConstraint = 'CHAR_LENGTH(DESCRIPTION) > 0'
-        ErrorMessage = 'Item Description must have a value'
-        FromDictionary = False
       end>
     FieldDefs = <>
     CachedUpdates = True

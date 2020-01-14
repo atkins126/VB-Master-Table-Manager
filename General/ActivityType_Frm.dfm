@@ -54,25 +54,23 @@ inherited ActivityTypeFrm: TActivityTypeFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 324
+      Width = 342
       DataSource = MTDM.dtsActivityType
-      ExplicitWidth = 324
+      ExplicitWidth = 342
     end
     inherited cbxOpenAfterExport: TcxCheckBox
-      Left = 341
-      Top = 21
-      ExplicitLeft = 341
-      ExplicitTop = 21
-      ExplicitWidth = 183
+      Left = 359
+      ExplicitLeft = 359
+      ExplicitWidth = 182
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 324
+      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450
     end
     inherited litOpenAfterExport: TdxLayoutItem
-      ControlOptions.OriginalWidth = 183
+      ControlOptions.OriginalWidth = 182
     end
   end
   object cxButton1: TcxButton [1]

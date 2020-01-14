@@ -65,28 +65,28 @@ end;
 procedure TContactTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
   RepFileName: string;
+  ID: Integer;
 begin
-  inherited;
+  Screen.Cursor := crHourglass;
+  ReportDM.MasterFormType := ftContactType;
   case AButtonIndex of
     NBDI_DELETE:
       begin
-        Beep;
-        ADone := DisplayMsg(
-          Application.Title,
-          'Delete Confirmaiton',
-          'Are you sure you want to delete the selected Contact Type?' + CRLF + CRLF +
-          'This action cannot be undone!',
-          mtConfirmation,
-          [mbYes, mbNo]
-          ) = mrNo;
+        VBBaseDM.QueryRequest := Format(USE_COUNT, [
+          'SELECT COUNT(ID) AS USE_COUNT FROM CONTACT_DETAIL_CO WHERE CONTACT_TYPE_ID = ' +
+            IntToStr(MTDM.cdsContactType.FieldByName('ID').AsInteger) +
+            ' UNION ALL ' +
+            'SELECT COUNT(ID) AS USE_COUNT FROM CONTACT_DETAIL_PERSON WHERE CONTACT_TYPE_ID = ' +
+            IntToStr(MTDM.cdsContactType.FieldByName('ID').AsInteger)
+            ]);
+
+        VBBaseDM.ItemToCount := 'Contact Type';
+        inherited;
       end;
 
     16, 17, 18, 19:
       begin
-        Screen.Cursor := crHourglass;
-        ReportDM.MasterFormType := ftContactType;
-        ReportDM.PrintExporting := True;
-
+        inherited;
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:

@@ -66,29 +66,22 @@ end;
 procedure TActivityTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
   RepFileName: string;
-  ID: Integer;
 begin
-  inherited;
+  Screen.Cursor := crHourglass;
+  ReportDM.MasterFormType := ftActivityType;
   case AButtonIndex of
     NBDI_DELETE:
       begin
-        Beep;
-        ADone := DisplayMsg(
-          Application.Title,
-          'Delete Confirmaiton',
-          'Are you sure you want to delete the selected Activity Type?' + CRLF + CRLF +
-          'This action cannot be undone!',
-          mtConfirmation,
-          [mbYes, mbNo]
-          ) = mrNo;
+        VBBaseDM.QueryRequest := Format(USE_COUNT, ['SELECT COUNT(ID) AS USE_COUNT FROM TIMESHEET WHERE ACTIVITY_TYPE_ID = ' +
+          IntToStr(MTDM.cdsActivityType.FieldByName('ID').AsInteger)]);
+
+        VBBaseDM.ItemToCount := 'Activity Type';
+        inherited;
       end;
 
     16, 17, 18, 19:
       begin
-        Screen.Cursor := crHourglass;
-        ReportDM.MasterFormType := ftActivityType;
-        ReportDM.PrintExporting := True;
-
+        inherited;
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:

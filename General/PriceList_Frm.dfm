@@ -14,14 +14,14 @@ inherited PriceListFrm: TPriceListFrm
     ExplicitWidth = 1421
     ExplicitHeight = 691
     inherited grdMaster: TcxGrid
-      Left = 25
-      Top = 94
-      Width = 1368
-      Height = 569
-      ExplicitLeft = 25
-      ExplicitTop = 94
-      ExplicitWidth = 1368
-      ExplicitHeight = 569
+      Left = 22
+      Top = 92
+      Width = 1377
+      Height = 577
+      ExplicitLeft = 22
+      ExplicitTop = 92
+      ExplicitWidth = 1377
+      ExplicitHeight = 577
       inherited viewMaster: TcxGridDBBandedTableView
         DataController.DataSource = MTDM.dtsPriceList
         OptionsView.NoDataToDisplayInfoText = '<No Price List data to display>'
@@ -115,16 +115,19 @@ inherited PriceListFrm: TPriceListFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 324
+      Width = 342
       DataSource = MTDM.dtsPriceList
-      ExplicitWidth = 324
+      ExplicitWidth = 342
     end
-    object grdPriceHistory: TcxGrid [2]
+    inherited cbxOpenAfterExport: TcxCheckBox
+      ExplicitWidth = 182
+    end
+    object grdPriceHistory: TcxGrid [3]
       Left = 10000
       Top = 10000
       Width = 1368
       Height = 569
-      TabOrder = 2
+      TabOrder = 3
       Visible = False
       object viewPriceHistory: TcxGridDBBandedTableView
         Navigator.Buttons.CustomButtons = <>
@@ -153,7 +156,7 @@ inherited PriceListFrm: TPriceListFrm
       ItemIndex = 1
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 324
+      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       Parent = grpPricelist
@@ -163,6 +166,9 @@ inherited PriceListFrm: TPriceListFrm
       ControlOptions.OriginalHeight = 448
       ControlOptions.OriginalWidth = 1315
       Index = 0
+    end
+    inherited litOpenAfterExport: TdxLayoutItem
+      ControlOptions.OriginalWidth = 182
     end
     object grpPricelist: TdxLayoutGroup
       Parent = layMainGroup_Root

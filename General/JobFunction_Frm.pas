@@ -72,32 +72,23 @@ end;
 
 procedure TJobFunctionFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
-  RepFileName, ReportTypeName: string;
-//  Report: TfrxReport;
-//  ReportDataSet: TfrxDBDataset;
-  PrintExportReport: TVBPrintExportData;
+  RepFileName: string;
 begin
-  inherited;
+  Screen.Cursor := crHourglass;
+  ReportDM.MasterFormType := ftJobFunction;
   case AButtonIndex of
     NBDI_DELETE:
       begin
-        Beep;
-        ADone := DisplayMsg(
-          Application.Title,
-          'Delete Confirmaiton',
-          'Are you sure you want to delete the selected Job Function?' + CRLF + CRLF +
-          'This action cannot be undone!',
-          mtConfirmation,
-          [mbYes, mbNo]
-          ) = mrNo;
+        VBBaseDM.QueryRequest := Format(USE_COUNT, ['SELECT COUNT(ID) AS USE_COUNT FROM CONTACT_PERSON WHERE JOB_FUNCTION_ID = ' +
+          IntToStr(MTDM.cdsJobFunction.FieldByName('ID').AsInteger)]);
+
+        VBBaseDM.ItemToCount := 'Job Function';
+        inherited;
       end;
 
     16, 17, 18, 19:
       begin
-        Screen.Cursor := crHourglass;
-        ReportDM.MasterFormType := ftJobFunction;
-        ReportDM.PrintExporting := True;
-
+        inherited;
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:

@@ -59,10 +59,10 @@ uses
   BeneficiaryDetail_Frm in 'General\BeneficiaryDetail_Frm.pas' {BeneficiaryDetailFrm},
   VehicleDetail_Frm in 'General\VehicleDetail_Frm.pas' {VehicleDetailFrm},
   ContactPerson_Frm in 'General\ContactPerson_Frm.pas' {ContactPersonFrm},
-  VBProxyClass in '..\Lib\VBProxyClass.pas',
   Report_DM in 'Data Modules\Report_DM.pas' {ReportDM: TDataModule},
-  VBPrintExportData in '..\..\..\..\Lib\Classes\VBPrintExportData.pas',
-  MyClasses in '..\..\..\..\Lib\Classes\MyClasses.pas';
+  MyClasses in '..\..\..\..\Lib\Classes\MyClasses.pas',
+  VBPrintExportData in '..\..\Lib\VBPrintExportData.pas',
+  VBProxyClass in '..\Lib\VBProxyClass.pas';
 
 {$R *.res}
 

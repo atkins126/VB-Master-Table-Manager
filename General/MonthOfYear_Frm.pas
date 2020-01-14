@@ -63,32 +63,35 @@ end;
 
 procedure TMonthOfYearFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
-  RepFileName, ReportTypeName: string;
-  Report: TfrxReport;
-  ReportDataSet: TfrxDBDataset;
-  PrintExportReport: TVBPrintExportData;
+  RepFileName: string;
+  ID: Integer;
 begin
-  inherited;
+  Screen.Cursor := crHourglass;
+  ReportDM.MasterFormType := ftMonthOfYear;
   case AButtonIndex of
     NBDI_DELETE:
       begin
-        Beep;
-        ADone := DisplayMsg(
-          Application.Title,
-          'Delete Confirmaiton',
-          'Are you sure you want to delete the selected Month of Year?' + CRLF + CRLF +
-          'This action cannot be undone!',
-          mtConfirmation,
-          [mbYes, mbNo]
-          ) = mrNo;
+        raise EValidateException.Create('Months of year cannot be deleted from the system.');
+//        VBBaseDM.QueryRequest := Format(USE_COUNT, [
+//          'SELECT COUNT(ID) AS USE_COUNT FROM CUSTOMER WHERE YEAR_END_MONTH_ID = ' +
+//            IntToStr(MTDM.cdsActivityType.FieldByName('ID').AsInteger) +
+//
+//            ' UNION ALL ' +
+//            'SELECT COUNT(ID) AS USE_COUNT FROM CUSTOMER WHERE VAT_MONTH_ID = ' +
+//            IntToStr(MTDM.cdsActivityType.FieldByName('ID').AsInteger) +
+//
+//            ' UNION ALL ' +
+//            'SELECT COUNT(ID) AS USE_COUNT FROM CUSTOMER WHERE AR_MONTH_ID = ' +
+//            IntToStr(MTDM.cdsActivityType.FieldByName('ID').AsInteger)
+//            ]);
+//
+//        VBBaseDM.ItemToCount := 'Month of Year';
+//        inherited;
       end;
 
     16, 17, 18, 19:
       begin
-        Screen.Cursor := crHourglass;
-        ReportDM.MasterFormType := ftMonthOfYear;
-        ReportDM.PrintExporting := True;
-
+        inherited;
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:
