@@ -25,7 +25,6 @@ type
   TActivityTypeFrm = class(TBaseGridFrm)
     edtID: TcxGridDBBandedColumn;
     edtName: TcxGridDBBandedColumn;
-    cxButton1: TcxButton;
     procedure FormCreate(Sender: TObject);
     procedure navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
   private
@@ -64,8 +63,6 @@ begin
 end;
 
 procedure TActivityTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
-var
-  RepFileName: string;
 begin
   Screen.Cursor := crHourglass;
   ReportDM.MasterFormType := ftActivityType;
@@ -83,13 +80,12 @@ begin
       begin
         inherited;
         try
+          ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
           case ReportDM.ReportAction of
             raPreview, raPrint:
               begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
-
-                if not TFile.Exists(RepFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
                 ReportDM.PrintReport;
               end;
@@ -101,10 +97,8 @@ begin
 
             raPDF:
               begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
-
-                if not TFile.Exists(RepFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
                 ReportDM.ExportToPDF(PDF_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
               end;

@@ -93,7 +93,7 @@ begin
           case ReportDM.ReportAction of
             raPreview, raPrint:
               begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
+                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
 
                 if not TFile.Exists(RepFileName) then
                   raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
@@ -108,7 +108,7 @@ begin
 
             raPDF:
               begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
+                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
 
                 if not TFile.Exists(RepFileName) then
                   raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');

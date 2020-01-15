@@ -281,6 +281,7 @@ type
     FReportOption: TReportOptions;
     FFormID: Integer;
     FMasterFormType: TMasterFormTypes;
+    FReportFileName: String;
 //    FReportType: TReportTypes;
   public
     { Public declarations }
@@ -290,6 +291,7 @@ type
     property ReportOption: TReportOptions read FReportOption write FReportOption;
     property FormID: Integer read FFormID write FFormID;
     property MasterFormType: TMasterFormTypes read FMasterFormType write FMasterFormType;
+    property ReportFileName: String read FReportFileName write FReportFileName;
   end;
 
 var
@@ -387,132 +389,158 @@ begin
   Result.ReportAction := ReportDM.ReportAction;
   Result.Report := ReportDM.rptMaster;
   Result.ReportDataSet := ReportDM.fdsMaster;
-  Result.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
+  Result.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTable.fr3';
 
   case FMasterFormType of
     ftActivityType:
       begin
         Result.SourceDataSet := MTDM.cdsActivityType;
-        Result.TargetDataSet := ReportDM.cdsActivityType;
+        Result.TargetDataSet := cdsActivityType;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Activity Type Listing';
       end;
 
     ftAgePeriod:
       begin
         Result.SourceDataSet := MTDM.cdsAgePeriod;
-        Result.TargetDataSet := ReportDM.cdsAgePeriod;
+        Result.TargetDataSet := cdsAgePeriod;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Age Period Listing';
       end;
 
     ftBank:
       begin
         Result.SourceDataSet := MTDM.cdsBank;
-        Result.TargetDataSet := ReportDM.cdsBank;
+        Result.TargetDataSet := cdsBank;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Bank Listing';
       end;
 
     ftBankAccountType:
       begin
         Result.SourceDataSet := MTDM.cdsBankAccountType;
-        Result.TargetDataSet := ReportDM.cdsBankAccountType;
+        Result.TargetDataSet := cdsBankAccountType;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Bank Account Type Listing';
       end;
 
     ftContactType:
       begin
         Result.SourceDataSet := MTDM.cdsContactType;
-        Result.TargetDataSet := ReportDM.cdsContactType;
+        Result.TargetDataSet := cdsContactType;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Contact Type Listing';
       end;
 
     ftCountry:
       begin
         Result.SourceDataSet := MTDM.cdsCountry;
-        Result.TargetDataSet := ReportDM.cdsCountry;
+        Result.TargetDataSet := cdsCountry;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Country Listing';
       end;
 
     ftCustomer:
       begin
         Result.SourceDataSet := MTDM.cdsCustomer;
-        Result.TargetDataSet := ReportDM.cdsCustomer;
+        Result.TargetDataSet := cdsCustomer;
         Result.ReportTypeName := 'Cutosmer Listing';
       end;
 
     ftCustomerGroup:
       begin
         Result.SourceDataSet := MTDM.cdsCustomerGroup;
-        Result.TargetDataSet := ReportDM.cdsCustomerGroup;
+        Result.TargetDataSet := cdsCustomerGroup;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Cutosmer Group Listing';
       end;
 
     ftCustomerStatus:
       begin
         Result.SourceDataSet := MTDM.cdsCustomerStatus;
-        Result.TargetDataSet := ReportDM.cdsCustomerStatus;
+        Result.TargetDataSet := cdsCustomerStatus;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Customer Status Listing';
       end;
 
     ftCustomerType:
       begin
         Result.SourceDataSet := MTDM.cdsCustomerType;
-        Result.TargetDataSet := ReportDM.cdsCustomerType;
+        Result.TargetDataSet := cdsCustomerType;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Customer Type Listing';
       end;
 
     ftJobFunction:
       begin
         Result.SourceDataSet := MTDM.cdsJobFunction;
-        Result.TargetDataSet := ReportDM.cdsJobFunction;
+        Result.TargetDataSet := cdsJobFunction;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Job Function Listing';
       end;
 
     ftMonthOfYear:
       begin
         Result.SourceDataSet := MTDM.cdsMonthOfYear;
-        Result.TargetDataSet := ReportDM.cdsMonthOfYear;
+        Result.TargetDataSet := cdsMonthOfYear;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Month of Year Listing';
       end;
 
     ftPricelist:
       begin
-        Result.SourceDataSet := MTDM.cdsPricelist;
-        Result.TargetDataSet := ReportDM.cdsPricelist;
+        Result.TargetDataSet := cdsPricelist;
+
+        VBBaseDM.GetData(42, Result.TargetDataSet, Result.TargetDataSet.Name, ONE_SPACE,
+          'C:\Data\Xml\Price List Report.xml', Result.TargetDataSet.UpdateOptions.Generatorname,
+          Result.TargetDataSet.UpdateOptions.UpdateTableName);
+
+//        VBBaseDM.GetData(42, cdsPricelist, cdsPricelist.Name, ONE_SPACE,
+//          'C:\Data\Xml\Price List.xml', cdsPricelist.UpdateOptions.Generatorname,
+//          MTDM.cdsPricelist.UpdateOptions.UpdateTableName);
+
+        Result.SourceDataSet := nil;
+//        Result.TargetDataSet := cdsPricelist;
         Result.ReportTypeName := 'Price Item Listing';
       end;
 
     ftRateUnit:
       begin
         Result.SourceDataSet := MTDM.cdsRateUnit;
-        Result.TargetDataSet := ReportDM.cdsRateUnit;
+        Result.TargetDataSet := cdsRateUnit;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Rate Unit Listing';
       end;
 
     ftSalutation:
       begin
         Result.SourceDataSet := MTDM.cdsSalutation;
-        Result.TargetDataSet := ReportDM.cdsSalutation;
+        Result.TargetDataSet := cdsSalutation;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Salutation Listing';
       end;
 
     ftStdActivity:
       begin
         Result.SourceDataSet := MTDM.cdsStdActivity;
-        Result.TargetDataSet := ReportDM.cdsStdActivity;
+        Result.TargetDataSet := cdsStdActivity;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Standard Activity Listing';
       end;
 
     ftTaxoffice:
       begin
         Result.SourceDataSet := MTDM.cdsTaxOffice;
-        Result.TargetDataSet := ReportDM.cdsTaxOffice;
+        Result.TargetDataSet := cdsTaxOffice;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Tax Office Listing';
       end;
 
     ftVehicleMake:
       begin
         Result.SourceDataSet := MTDM.cdsVehicleMake;
-        Result.TargetDataSet := ReportDM.cdsVehicleMake;
+        Result.TargetDataSet := cdsVehicleMake;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Vehicle Make Listing';
       end;
   end;

@@ -62,10 +62,6 @@ begin
 end;
 
 procedure TAgePeriodFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
-var
-  RepFileName, ReportTypeName: string;
-  PrintExportReport: TVBPrintExportData;
-  ID: Integer;
 begin
   Screen.Cursor := crHourglass;
   ReportDM.MasterFormType := ftAgePeriod;
@@ -80,13 +76,12 @@ begin
       begin
         inherited;
         try
-          case ReportDM.ReportAction of
+            ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
+        case ReportDM.ReportAction of
             raPreview, raPrint:
               begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
-
-                if not TFile.Exists(RepFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
                 ReportDM.PrintReport;
               end;
@@ -99,10 +94,8 @@ begin
 
             raPDF:
               begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTableTemplate.fr3';
-
-                if not TFile.Exists(RepFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
                 ReportDM.ExportToPDF(PDF_DOCS + 'Age Preiod Listing', cbxOpenAfterExport.Checked);
               end;

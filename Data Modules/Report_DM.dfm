@@ -1016,6 +1016,11 @@ inherited ReportDM: TReportDM
       DisplayLabel = 'Rate'
       FieldName = 'RATE'
     end
+    object cdsPricelistRATE_UNIT: TStringField
+      DisplayLabel = 'Rate Unit'
+      FieldName = 'RATE_UNIT'
+      Size = 30
+    end
     object cdsPricelistNAME: TStringField
       DisplayLabel = 'Name'
       FieldName = 'NAME'
@@ -1034,11 +1039,6 @@ inherited ReportDM: TReportDM
       FieldName = 'DESCRIPTION'
       Origin = 'DESCRIPTION'
       Size = 500
-    end
-    object cdsPricelistRATE_UNIT: TStringField
-      DisplayLabel = 'Rate Unit'
-      FieldName = 'RATE_UNIT'
-      Size = 30
     end
   end
   object cdsRateUnit: TFDMemTable

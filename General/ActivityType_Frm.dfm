@@ -1,13 +1,14 @@
 inherited ActivityTypeFrm: TActivityTypeFrm
   BorderStyle = bsNone
   Caption = 'ActivityTypeFrm'
-  ClientHeight = 745
-  ClientWidth = 968
+  ClientHeight = 697
+  ClientWidth = 777
+  ExplicitWidth = 777
+  ExplicitHeight = 697
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
     Width = 586
-    LayoutLookAndFeel = lafCustomSkin
     ExplicitWidth = 586
     inherited grdMaster: TcxGrid
       Width = 450
@@ -54,34 +55,11 @@ inherited ActivityTypeFrm: TActivityTypeFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 342
       DataSource = MTDM.dtsActivityType
-      ExplicitWidth = 342
-    end
-    inherited cbxOpenAfterExport: TcxCheckBox
-      Left = 359
-      ExplicitLeft = 359
-      ExplicitWidth = 182
-    end
-    inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450
     end
-    inherited litOpenAfterExport: TdxLayoutItem
-      ControlOptions.OriginalWidth = 182
-    end
-  end
-  object cxButton1: TcxButton [1]
-    Left = 625
-    Top = 67
-    Width = 75
-    Height = 25
-    Caption = 'cxButton1'
-    ParentShowHint = False
-    ShowHint = True
-    TabOrder = 1
   end
   inherited styRepository: TcxStyleRepository
     PixelsPerInch = 96

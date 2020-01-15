@@ -5,10 +5,11 @@ inherited AgePeriodFrm: TAgePeriodFrm
   Caption = 'AgePeriodFrm'
   ClientHeight = 745
   ClientWidth = 968
+  ExplicitWidth = 968
+  ExplicitHeight = 745
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
-    LayoutLookAndFeel = lafCustomSkin
     inherited grdMaster: TcxGrid
       Width = 450
       ExplicitWidth = 450
@@ -54,22 +55,9 @@ inherited AgePeriodFrm: TAgePeriodFrm
     end
     inherited navMaster: TcxDBNavigator
       Tag = 1
-      Width = 342
-      ExplicitWidth = 342
-    end
-    inherited cbxOpenAfterExport: TcxCheckBox
-      Left = 359
-      ExplicitLeft = 359
-      ExplicitWidth = 182
-    end
-    inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450
-    end
-    inherited litOpenAfterExport: TdxLayoutItem
-      ControlOptions.OriginalWidth = 182
     end
   end
   inherited styRepository: TcxStyleRepository

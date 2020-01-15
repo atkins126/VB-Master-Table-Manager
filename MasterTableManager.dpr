@@ -29,7 +29,6 @@ uses
   VBCommonValues in '..\..\Lib\VBCommonValues.pas',
   Main_Frm in 'General\Main_Frm.pas' {MainFrm},
   MT_DM in 'Data Modules\MT_DM.pas' {MTDM: TDataModule},
-  BaseGrid_Frm in '..\Lib\BaseGrid_Frm.pas' {BaseGridFrm},
   ActivityType_Frm in 'General\ActivityType_Frm.pas' {ActivityTypeFrm},
   AgePeriod_Frm in 'General\AgePeriod_Frm.pas' {AgePeriodFrm},
   Bank_Frm in 'General\Bank_Frm.pas' {BankFrm},
@@ -62,7 +61,8 @@ uses
   Report_DM in 'Data Modules\Report_DM.pas' {ReportDM: TDataModule},
   MyClasses in '..\..\..\..\Lib\Classes\MyClasses.pas',
   VBPrintExportData in '..\..\Lib\VBPrintExportData.pas',
-  VBProxyClass in '..\Lib\VBProxyClass.pas';
+  VBProxyClass in '..\Lib\VBProxyClass.pas',
+  BaseGrid_Frm in '..\Lib\BaseGrid_Frm.pas' {BaseGridFrm};
 
 {$R *.res}
 

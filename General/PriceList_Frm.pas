@@ -244,8 +244,6 @@ begin
 end;
 
 procedure TPriceListFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
-var
-  RepFileName: string;
 begin
   Screen.Cursor := crHourglass;
   ReportDM.MasterFormType := ftPricelist;
@@ -261,10 +259,43 @@ begin
 
     16, 17, 18, 19:
       begin
-        case grpPricelist.ItemIndex of
-          0: PrintPriceList(AButtonIndex);
-          1: PrintPriceHistory(AButtonIndex);
+        inherited;
+        try
+          case ReportDM.ReportAction of
+            raPreview, raPrint:
+              begin
+                ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'PriceList.fr3';
+
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
+
+                ReportDM.PrintReport;
+              end;
+
+            raExcel:
+              begin
+                ReportDM.ExportToExcel(grdMaster, EXCEL_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+              end;
+
+            raPDF:
+              begin
+                ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
+
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
+
+                ReportDM.ExportToPDF(PDF_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+              end;
+          end;
+        finally
+          Screen.Cursor := crDefault;
         end;
+
+
+//        case grpPricelist.ItemIndex of
+//          0: PrintPriceList(AButtonIndex);
+//          1: PrintPriceHistory(AButtonIndex);
+//        end;
       end;
   end;
 end;
