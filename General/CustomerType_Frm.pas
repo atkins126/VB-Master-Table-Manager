@@ -61,8 +61,6 @@ begin
 end;
 
 procedure TCustomerTypeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
-var
-  RepFileName: string;
 begin
   Screen.Cursor := crHourglass;
   ReportDM.MasterFormType := ftCustomerType;
@@ -79,14 +77,13 @@ begin
     16, 17, 18, 19:
       begin
         inherited;
+        ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:
               begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
-
-                if not TFile.Exists(RepFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
                 ReportDM.PrintReport;
               end;
@@ -98,10 +95,8 @@ begin
 
             raPDF:
               begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
-
-                if not TFile.Exists(RepFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
                 ReportDM.ExportToPDF(PDF_DOCS + 'Customer Type Listing', cbxOpenAfterExport.Checked);
               end;

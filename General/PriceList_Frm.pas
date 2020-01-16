@@ -153,6 +153,7 @@ begin
       TcxCurrencyEditProperties(AColumn.Properties).EditFormat := '#,##0.00';
       TcxCurrencyEditProperties(AColumn.Properties).UseThousandSeparator := True;
       TcxCurrencyEditProperties(AColumn.Properties).ReadOnly := True;
+
     end;
   finally
     viewPriceHistory.EndUpdate;
@@ -200,6 +201,7 @@ begin
     1: // Price History
       begin
         navMaster.DataSource := ReportDM.dtsPriceHistory;
+
         if not ReportDM.cdsPriceHistoryYear.Active then
           VBBaseDM.GetData(64, ReportDM.cdsPriceHistoryYear, ReportDM.cdsPriceHistoryYear.Name, ONE_SPACE,
             'C:\Data\Xml\Price History Year.xml', ReportDM.cdsPriceHistoryYear.UpdateOptions.Generatorname,
@@ -244,6 +246,8 @@ begin
 end;
 
 procedure TPriceListFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
+var
+  ID: Integer;
 begin
   Screen.Cursor := crHourglass;
   ReportDM.MasterFormType := ftPricelist;
@@ -260,37 +264,61 @@ begin
     16, 17, 18, 19:
       begin
         inherited;
+        if grpPricelist.ItemIndex = 0 then
+          ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'PriceList.fr3'
+        else
+          ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'PriceHistory.fr3';
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:
               begin
-                ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'PriceList.fr3';
 
                 if not TFile.Exists(ReportDM.ReportFileName) then
                   raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
-                ReportDM.PrintReport;
+                viewPriceHistory.DataController.BeginUpdate;
+                try
+                  ID := ReportDM.cdsPriceHistory.FieldByName('ID').AsInteger;
+                  ReportDM.PrintReport;
+                finally
+                  if not ReportDM.cdsPriceHistory.Locate('ID', ID, []) then
+                    ReportDM.cdsPriceHistory.First;
+                  viewPriceHistory.DataController.EndUpdate;
+                end;
               end;
 
             raExcel:
               begin
-                ReportDM.ExportToExcel(grdMaster, EXCEL_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+                if grpPricelist.ItemIndex = 0 then
+                  ReportDM.ExportToExcel(grdMaster, EXCEL_DOCS + 'Price Item Listintg', cbxOpenAfterExport.Checked)
+                else
+                  ReportDM.ExportToExcel(grdPriceHistory, EXCEL_DOCS + 'Price History Listintg', cbxOpenAfterExport.Checked);
               end;
 
             raPDF:
               begin
-                ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
+                begin
+                  if not TFile.Exists(ReportDM.ReportFileName) then
+                    raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
-                if not TFile.Exists(ReportDM.ReportFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
-
-                ReportDM.ExportToPDF(PDF_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+                  viewPriceHistory.DataController.BeginUpdate;
+                  try
+                    ID := ReportDM.cdsPriceHistory.FieldByName('ID').AsInteger;
+                    if grpPricelist.ItemIndex = 0 then
+                      ReportDM.ExportToPDF(PDF_DOCS + 'Price Item Listing', cbxOpenAfterExport.Checked)
+                    else
+                      ReportDM.ExportToPDF(PDF_DOCS + 'Price History Listing', cbxOpenAfterExport.Checked);
+                  finally
+                    if not ReportDM.cdsPriceHistory.Locate('ID', ID, []) then
+                      ReportDM.cdsPriceHistory.First;
+                    viewPriceHistory.DataController.EndUpdate;
+                  end;
+                end;
               end;
           end;
         finally
           Screen.Cursor := crDefault;
         end;
-
 
 //        case grpPricelist.ItemIndex of
 //          0: PrintPriceList(AButtonIndex);
@@ -325,6 +353,7 @@ begin
     Report.DataSets.Add(ReportDM.fdsMaster);
     Report.LoadFromFile(RepFileName, False);
     TfrxMemoView(Report.FindObject('lblReportTypeName')).Text := ReportTypeName;
+//    TfrxMemoView(Report.FindObject('lblReportTypeName')).Text := ReportTypeName;
 
 //          ReportDM.PrepareReport(MTDM.cdsActivityType, ReportDM.cdsActivityType, RepFileName, Report, ReportDataSet, ReportTypeName);
 //    PrintReport(ButtonIndex);

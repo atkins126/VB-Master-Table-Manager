@@ -4,16 +4,22 @@ inherited MonthOfYearFrm: TMonthOfYearFrm
   Caption = 'MonthOfYearFrm'
   ClientHeight = 745
   ClientWidth = 968
+  ExplicitWidth = 968
+  ExplicitHeight = 745
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
-    LayoutLookAndFeel = lafCustomSkin
     inherited grdMaster: TcxGrid
       Width = 450
       ExplicitWidth = 450
       inherited viewMaster: TcxGridDBBandedTableView
         DataController.DataSource = MTDM.dtsMonthOfyear
         OptionsCustomize.ColumnsQuickCustomization = True
+        OptionsData.CancelOnExit = False
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Month of Year data to display>'
         OptionsView.ColumnAutoWidth = True
         Bands = <
@@ -51,23 +57,8 @@ inherited MonthOfYearFrm: TMonthOfYearFrm
         end
       end
     end
-    inherited navMaster: TcxDBNavigator
-      Width = 342
-      ExplicitWidth = 342
-    end
-    inherited cbxOpenAfterExport: TcxCheckBox
-      Left = 359
-      ExplicitLeft = 359
-      ExplicitWidth = 182
-    end
-    inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 342
-    end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450
-    end
-    inherited litOpenAfterExport: TdxLayoutItem
-      ControlOptions.OriginalWidth = 182
     end
   end
   inherited styRepository: TcxStyleRepository

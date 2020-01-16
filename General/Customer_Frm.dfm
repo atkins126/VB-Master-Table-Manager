@@ -9,15 +9,14 @@ inherited CustomerFrm: TCustomerFrm
   inherited layMain: TdxLayoutControl
     Width = 1376
     Height = 731
-    LayoutLookAndFeel = lafCustomSkin
     ExplicitWidth = 1376
     ExplicitHeight = 731
     object grdCustomer: TcxGrid [0]
       Left = 11
-      Top = 57
+      Top = 59
       Width = 791
       Height = 313
-      TabOrder = 1
+      TabOrder = 3
       object viewCustomer: TcxGridDBBandedTableView
         Navigator.Buttons.CustomButtons = <>
         FindPanel.ApplyInputDelay = 600
@@ -166,7 +165,7 @@ inherited CustomerFrm: TCustomerFrm
     end
     object grdVCustomer: TcxDBVerticalGrid [1]
       Left = 808
-      Top = 103
+      Top = 105
       Width = 444
       Height = 267
       OptionsView.ScrollBars = ssVertical
@@ -175,7 +174,7 @@ inherited CustomerFrm: TCustomerFrm
       OptionsData.DeletingConfirmation = False
       Navigator.Buttons.CustomButtons = <>
       ScrollbarAnnotations.CustomAnnotations = <>
-      TabOrder = 3
+      TabOrder = 5
       DataController.DataSource = MTDM.dtsCustomer
       Version = 1
       object grpGeneralInformation: TcxCategoryRow
@@ -543,7 +542,7 @@ inherited CustomerFrm: TCustomerFrm
     object navCustomer: TcxDBNavigator [2]
       Left = 11
       Top = 11
-      Width = 396
+      Width = 360
       Height = 40
       BorderStyle = nbsNone
       Buttons.OnButtonClick = navCustomerButtonsButtonClick
@@ -594,7 +593,7 @@ inherited CustomerFrm: TCustomerFrm
       Buttons.GotoBookmark.Visible = False
       Buttons.Filter.Hint = 'Filter dataset'
       Buttons.Filter.ImageIndex = 12
-      Buttons.Filter.Visible = True
+      Buttons.Filter.Visible = False
       DataSource = MTDM.dtsCustomer
       ParentShowHint = False
       ShowHint = True
@@ -602,7 +601,7 @@ inherited CustomerFrm: TCustomerFrm
     end
     object navVCustomer: TcxDBNavigator [3]
       Left = 808
-      Top = 57
+      Top = 59
       Width = 216
       Height = 40
       BorderStyle = nbsNone
@@ -641,15 +640,14 @@ inherited CustomerFrm: TCustomerFrm
       DataSource = MTDM.dtsCustomer
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 2
+      TabOrder = 4
     end
     object grdContactDetailCo: TcxGrid [4]
-      Left = 10000
-      Top = 10000
+      Left = 25
+      Top = 415
       Width = 391
       Height = 170
-      TabOrder = 4
-      Visible = False
+      TabOrder = 6
       object viewContactDetailCo: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -827,19 +825,18 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCDComment: TcxDBMemo [5]
-      Left = 10000
-      Top = 10000
+      Left = 25
+      Top = 591
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailCo
       PopupMenu = popDBAction
       Properties.ReadOnly = True
       Properties.ScrollBars = ssVertical
       Style.HotTrack = False
-      TabOrder = 5
-      Visible = False
+      TabOrder = 7
       OnDblClick = viewContactDetailCoDblClick
       OnKeyDown = viewContactDetailCoKeyDown
-      Height = 69
+      Height = 67
       Width = 391
     end
     object grdPhysicalAddress: TcxDBVerticalGrid [6]
@@ -883,7 +880,7 @@ inherited CustomerFrm: TCustomerFrm
       Navigator.Visible = True
       PopupMenu = popDBAction
       ScrollbarAnnotations.CustomAnnotations = <>
-      TabOrder = 6
+      TabOrder = 8
       Visible = False
       OnDblClick = grdPhysicalAddressDblClick
       OnEnter = grdPhysicalAddressEnter
@@ -960,7 +957,7 @@ inherited CustomerFrm: TCustomerFrm
       Navigator.Buttons.CustomButtons = <>
       PopupMenu = popDBAction
       ScrollbarAnnotations.CustomAnnotations = <>
-      TabOrder = 7
+      TabOrder = 9
       Visible = False
       OnDblClick = grdPhysicalAddressDblClick
       OnEnter = grdPhysicalAddressEnter
@@ -1038,7 +1035,7 @@ inherited CustomerFrm: TCustomerFrm
       Navigator.Buttons.CustomButtons = <>
       PopupMenu = popDBAction
       ScrollbarAnnotations.CustomAnnotations = <>
-      TabOrder = 8
+      TabOrder = 10
       Visible = False
       OnDblClick = grdPhysicalAddressDblClick
       OnEnter = grdPhysicalAddressEnter
@@ -1097,11 +1094,12 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdContactPerson: TcxGrid [9]
-      Left = 25
-      Top = 413
+      Left = 10000
+      Top = 10000
       Width = 1250
       Height = 245
-      TabOrder = 9
+      TabOrder = 11
+      Visible = False
       OnEnter = grdContactPersonEnter
       object viewContactPerson: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -1316,11 +1314,12 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdCPContactDetail: TcxGrid [10]
-      Left = 1281
-      Top = 413
+      Left = 10000
+      Top = 10000
       Width = 400
       Height = 120
-      TabOrder = 10
+      TabOrder = 12
+      Visible = False
       OnEnter = grdCPContactDetailEnter
       object viewCPContactDetail: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -1475,15 +1474,16 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCPcontactDetailComment: TcxDBMemo [11]
-      Left = 1281
-      Top = 539
+      Left = 10000
+      Top = 10000
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailPerson
       PopupMenu = popDBAction
       Properties.ReadOnly = True
       Properties.ScrollBars = ssVertical
       Style.HotTrack = False
-      TabOrder = 11
+      TabOrder = 13
+      Visible = False
       OnDblClick = viewContactDetailCoDblClick
       OnEnter = grdCPContactDetailEnter
       OnKeyDown = viewContactDetailCoKeyDown
@@ -1495,7 +1495,7 @@ inherited CustomerFrm: TCustomerFrm
       Top = 10000
       Width = 1656
       Height = 245
-      TabOrder = 12
+      TabOrder = 14
       Visible = False
       object viewBankingDetail: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -1661,7 +1661,7 @@ inherited CustomerFrm: TCustomerFrm
       Top = 10000
       Width = 1656
       Height = 245
-      TabOrder = 13
+      TabOrder = 15
       Visible = False
       object viewDirector: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -1876,7 +1876,7 @@ inherited CustomerFrm: TCustomerFrm
       Top = 10000
       Width = 1656
       Height = 245
-      TabOrder = 14
+      TabOrder = 16
       Visible = False
       object viewBeneficiary: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -2051,7 +2051,7 @@ inherited CustomerFrm: TCustomerFrm
       Top = 10000
       Width = 1656
       Height = 245
-      TabOrder = 15
+      TabOrder = 17
       Visible = False
       object viewVehicle: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -2279,10 +2279,30 @@ inherited CustomerFrm: TCustomerFrm
       Style.StyleController = styLegend
       Transparent = True
     end
+    object cbxOpenAfterExport: TcxCheckBox [17]
+      Left = 994
+      Top = 22
+      Caption = 'Open document after export'
+      Properties.ImmediatePost = True
+      Properties.UseAlignmentWhenInplace = True
+      Style.HotTrack = False
+      Style.TransparentBorder = False
+      TabOrder = 2
+      Transparent = True
+    end
+    object docPrint: TdxBarDockControl [18]
+      Left = 377
+      Top = 11
+      Width = 611
+      Height = 42
+      Align = dalNone
+      BarManager = barManager
+    end
     object grpToolbar: TdxLayoutGroup
       Parent = layMainGroup_Root
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
+      ItemIndex = 1
       LayoutDirection = ldHorizontal
       ShowBorder = False
       Index = 0
@@ -2300,7 +2320,6 @@ inherited CustomerFrm: TCustomerFrm
       AlignVert = avClient
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
-      ItemIndex = 2
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpDetailGridTabChanged
@@ -2343,7 +2362,7 @@ inherited CustomerFrm: TCustomerFrm
       Parent = grpToolbar
       Control = navCustomer
       ControlOptions.OriginalHeight = 40
-      ControlOptions.OriginalWidth = 396
+      ControlOptions.OriginalWidth = 360
       ControlOptions.ShowBorder = False
       Index = 0
     end
@@ -2511,6 +2530,28 @@ inherited CustomerFrm: TCustomerFrm
       ButtonOptions.Buttons = <>
       ItemIndex = 2
       LayoutDirection = ldHorizontal
+      Index = 1
+    end
+    object litOpenAfterExport: TdxLayoutItem
+      Parent = grpToolbar
+      AlignVert = avCenter
+      CaptionOptions.Text = 'New Item'
+      CaptionOptions.Visible = False
+      Control = cbxOpenAfterExport
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 183
+      ControlOptions.ShowBorder = False
+      Index = 2
+    end
+    object litPrintToolbar: TdxLayoutItem
+      Parent = grpToolbar
+      AlignVert = avCenter
+      CaptionOptions.Visible = False
+      Control = docPrint
+      ControlOptions.AutoColor = True
+      ControlOptions.OriginalHeight = 42
+      ControlOptions.OriginalWidth = 611
+      ControlOptions.ShowBorder = False
       Index = 1
     end
   end
@@ -5305,5 +5346,79 @@ inherited CustomerFrm: TCustomerFrm
     Provider = 'Forms'
     Left = 320
     Top = 185
+  end
+  object barManager: TdxBarManager
+    AllowReset = False
+    AlwaysSaveText = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    Categories.Strings = (
+      'Default')
+    Categories.ItemsVisibles = (
+      2)
+    Categories.Visibles = (
+      True)
+    PopupMenuLinks = <>
+    Style = bmsUseLookAndFeel
+    UseSystemFont = False
+    Left = 410
+    Top = 185
+    PixelsPerInch = 96
+    object barPrint: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      AllowReset = False
+      BorderStyle = bbsNone
+      Caption = 'Print Toolbar'
+      CaptionButtons = <>
+      DockControl = docPrint
+      DockedDockControl = docPrint
+      DockedLeft = 0
+      DockedTop = 0
+      FloatLeft = 1518
+      FloatTop = 2
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <
+        item
+          UserDefine = [udWidth]
+          UserWidth = 162
+          Visible = True
+          ItemName = 'lucReportType'
+        end
+        item
+          Visible = True
+          ItemName = 'btnReportType'
+        end>
+      NotDocking = [dsNone, dsLeft, dsTop, dsRight, dsBottom]
+      OneOnRow = True
+      Row = 0
+      ShowMark = False
+      SizeGrip = False
+      UseOwnFont = False
+      Visible = True
+      WholeRow = True
+    end
+    object btnReportType: TdxBarLargeButton
+      Caption = 'Report Type'
+      Category = 0
+      Hint = 'Report Type'
+      Visible = ivAlways
+    end
+    object lucReportType: TcxBarEditItem
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
+      PropertiesClassName = 'TcxComboBoxProperties'
+      Properties.Items.Strings = (
+        'Customer List'
+        'Customer Details')
+      InternalEditValue = nil
+    end
   end
 end

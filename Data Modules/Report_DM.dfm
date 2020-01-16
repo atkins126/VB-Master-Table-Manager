@@ -1454,16 +1454,16 @@ inherited ReportDM: TReportDM
     Top = 485
   end
   object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
-    Left = 885
+    Left = 980
     Top = 120
   end
   object FDPhysFBDriverLink: TFDPhysFBDriverLink
-    Left = 885
+    Left = 980
     Top = 65
   end
   object FDGUIxWaitCursor: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 885
+    Left = 980
     Top = 5
   end
   object cdsMasterList: TFDMemTable
@@ -1589,13 +1589,13 @@ inherited ReportDM: TReportDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'COUNTRY'
     StoreDefs = True
-    Left = 720
-    Top = 10
+    Left = 40
+    Top = 290
   end
   object dtsCountry: TDataSource
     DataSet = cdsCountry
-    Left = 720
-    Top = 60
+    Left = 40
+    Top = 340
   end
   object cdsContactDetailCo: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -3459,10 +3459,26 @@ inherited ReportDM: TReportDM
   object fdsCustomerListing: TfrxDBDataset
     UserName = 'CustomeListing'
     CloseDataSource = False
-    DataSet = cdsCustomer
+    FieldAliases.Strings = (
+      'ID=ID'
+      'CUSTOMER_TYPE_ID=CUSTOMER_TYPE_ID'
+      'STATUS_ID=STATUS_ID'
+      'CUSTOMER_STATUS=CUSTOMER_STATUS'
+      'CUSTOMER_TYPE=CUSTOMER_TYPE'
+      'NAME=NAME'
+      'FIRST_NAME=FIRST_NAME'
+      'LAST_NAME=LAST_NAME'
+      'TRADING_AS=TRADING_AS'
+      'CO_NO=CO_NO'
+      'TAX_NO=TAX_NO'
+      'VAT_NO=VAT_NO'
+      'IS_ACTIVE=IS_ACTIVE'
+      'CONTACT_FIRST_NAME=CONTACT_FIRST_NAME'
+      'CONTACT_LAST_NAME=CONTACT_LAST_NAME')
+    DataSet = cdsCustomerListing
     BCDToCurrency = False
-    Left = 635
-    Top = 115
+    Left = 765
+    Top = 120
   end
   object fdsPriceList: TfrxDBDataset
     UserName = 'Pricelist'
@@ -3508,8 +3524,8 @@ inherited ReportDM: TReportDM
       'begin'
       ''
       'end.')
-    Left = 635
-    Top = 165
+    Left = 765
+    Top = 170
     Datasets = <
       item
         DataSet = fdsCustomerListing
@@ -3925,7 +3941,7 @@ inherited ReportDM: TReportDM
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43494.671348414300000000
-    ReportOptions.LastChange = 43837.327643182870000000
+    ReportOptions.LastChange = 43845.363629583330000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -4013,13 +4029,11 @@ inherited ReportDM: TReportDM
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           HAlign = haRight
-          Memo.UTF8W = (
-            '[Pricelist."RATE"]')
           ParentFont = False
         end
         object lblRate2: TfrxMemoView
           AllowVectorExport = True
-          Left = 444.205010000000000000
+          Left = 443.562844610000000000
           Width = 64.251968500000000000
           Height = 18.897650000000000000
           StretchMode = smMaxHeight
@@ -4036,13 +4050,11 @@ inherited ReportDM: TReportDM
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           HAlign = haRight
-          Memo.UTF8W = (
-            '[Pricelist."RATE"]')
           ParentFont = False
         end
         object lblRate3: TfrxMemoView
           AllowVectorExport = True
-          Left = 512.236550000000000000
+          Left = 510.952219220000000000
           Width = 64.251968500000000000
           Height = 18.897650000000000000
           StretchMode = smMaxHeight
@@ -4059,13 +4071,11 @@ inherited ReportDM: TReportDM
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           HAlign = haRight
-          Memo.UTF8W = (
-            '[Pricelist."RATE"]')
           ParentFont = False
         end
         object lblRate4: TfrxMemoView
           AllowVectorExport = True
-          Left = 580.268090000000000000
+          Left = 578.341593833333000000
           Width = 64.251968500000000000
           Height = 18.897650000000000000
           StretchMode = smMaxHeight
@@ -4082,13 +4092,11 @@ inherited ReportDM: TReportDM
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           HAlign = haRight
-          Memo.UTF8W = (
-            '[Pricelist."RATE"]')
           ParentFont = False
         end
         object lblRate5: TfrxMemoView
           AllowVectorExport = True
-          Left = 648.299630000000000000
+          Left = 645.730968444444000000
           Width = 64.251968500000000000
           Height = 18.897650000000000000
           StretchMode = smMaxHeight
@@ -4105,13 +4113,11 @@ inherited ReportDM: TReportDM
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           HAlign = haRight
-          Memo.UTF8W = (
-            '[Pricelist."RATE"]')
           ParentFont = False
         end
         object lblRate6: TfrxMemoView
           AllowVectorExport = True
-          Left = 712.551640000000000000
+          Left = 713.120343055556000000
           Width = 64.251968500000000000
           Height = 18.897650000000000000
           StretchMode = smMaxHeight
@@ -4128,13 +4134,11 @@ inherited ReportDM: TReportDM
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           HAlign = haRight
-          Memo.UTF8W = (
-            '[Pricelist."RATE"]')
           ParentFont = False
         end
         object lblRate7: TfrxMemoView
           AllowVectorExport = True
-          Left = 780.583180000000000000
+          Left = 780.509717666667000000
           Width = 64.251968500000000000
           Height = 18.897650000000000000
           StretchMode = smMaxHeight
@@ -4151,13 +4155,11 @@ inherited ReportDM: TReportDM
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           HAlign = haRight
-          Memo.UTF8W = (
-            '[Pricelist."RATE"]')
           ParentFont = False
         end
         object lblRate8: TfrxMemoView
           AllowVectorExport = True
-          Left = 848.614720000000000000
+          Left = 847.899092277778000000
           Width = 64.251968500000000000
           Height = 18.897650000000000000
           StretchMode = smMaxHeight
@@ -4174,13 +4176,11 @@ inherited ReportDM: TReportDM
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           HAlign = haRight
-          Memo.UTF8W = (
-            '[Pricelist."RATE"]')
           ParentFont = False
         end
         object lblRate9: TfrxMemoView
           AllowVectorExport = True
-          Left = 916.646260000000000000
+          Left = 915.288466888889000000
           Width = 64.251968500000000000
           Height = 18.897650000000000000
           StretchMode = smMaxHeight
@@ -4197,13 +4197,11 @@ inherited ReportDM: TReportDM
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           HAlign = haRight
-          Memo.UTF8W = (
-            '[Pricelist."RATE"]')
           ParentFont = False
         end
         object lblRate10: TfrxMemoView
           AllowVectorExport = True
-          Left = 980.898270000000000000
+          Left = 982.677841500000000000
           Width = 64.251968500000000000
           Height = 18.897650000000000000
           StretchMode = smMaxHeight
@@ -4220,8 +4218,6 @@ inherited ReportDM: TReportDM
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           HAlign = haRight
-          Memo.UTF8W = (
-            '[Pricelist."RATE"]')
           ParentFont = False
         end
       end
@@ -4266,7 +4262,7 @@ inherited ReportDM: TReportDM
         Font.Height = -15
         Font.Name = 'Calibri'
         Font.Style = [fsBold]
-        Height = 60.472440944881890000
+        Height = 60.472440940000000000
         ParentFont = False
         Top = 41.574830000000000000
         Width = 1046.929810000000000000
@@ -4312,24 +4308,114 @@ inherited ReportDM: TReportDM
         object Memo21: TfrxMemoView
           AllowVectorExport = True
           Top = 41.574830000000000000
-          Width = 374.173228346456700000
+          Width = 374.173228350000000000
           Height = 18.897650000000000000
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           Memo.UTF8W = (
             'Price Item')
         end
-        object Memo5: TfrxMemoView
+        object lblHeader1: TfrxMemoView
           AllowVectorExport = True
-          Left = 376.062992130000000000
+          Left = 376.173470000000000000
           Top = 41.574830000000000000
-          Width = 668.976768500000000000
+          Width = 64.251968500000000000
           Height = 18.897650000000000000
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
-          HAlign = haCenter
+          HAlign = haRight
           Memo.UTF8W = (
-            'Rate')
+            '')
+        end
+        object lblHeader2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 443.562844610000000000
+          Top = 41.574830000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+        end
+        object lblHeader3: TfrxMemoView
+          AllowVectorExport = True
+          Left = 510.952219220000000000
+          Top = 41.574830000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+        end
+        object lblHeader4: TfrxMemoView
+          AllowVectorExport = True
+          Left = 578.341593830000000000
+          Top = 41.574830000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+        end
+        object lblHeader5: TfrxMemoView
+          AllowVectorExport = True
+          Left = 645.730968440000000000
+          Top = 41.574830000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+        end
+        object lblHeader6: TfrxMemoView
+          AllowVectorExport = True
+          Left = 713.120343060000000000
+          Top = 41.574830000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+        end
+        object lblHeader7: TfrxMemoView
+          AllowVectorExport = True
+          Left = 780.509717670000000000
+          Top = 41.574830000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+        end
+        object lblHeader8: TfrxMemoView
+          AllowVectorExport = True
+          Left = 847.899092280000000000
+          Top = 41.574830000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+        end
+        object lblHeader9: TfrxMemoView
+          AllowVectorExport = True
+          Left = 915.288466890000000000
+          Top = 41.574830000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
+        end
+        object lblHeader10: TfrxMemoView
+          AllowVectorExport = True
+          Left = 982.677841500000000000
+          Top = 41.574830000000000000
+          Width = 64.251968500000000000
+          Height = 18.897650000000000000
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          HAlign = haRight
         end
       end
     end
@@ -4374,7 +4460,46 @@ inherited ReportDM: TReportDM
   object cdsPriceHistory: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     FilterOptions = [foCaseInsensitive]
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'RATE_UNIT_ID'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'NAME'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 200
+      end
+      item
+        Name = 'DESCRIPTION'
+        DataType = ftString
+        Size = 500
+      end
+      item
+        Name = 'RATE_UNIT'
+        Attributes = [faReadonly]
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = '2020'
+        Attributes = [faReadonly]
+        DataType = ftFloat
+        Precision = 8
+      end
+      item
+        Name = '2019'
+        Attributes = [faReadonly]
+        DataType = ftFloat
+        Precision = 8
+      end>
     CachedUpdates = True
     IndexDefs = <>
     Indexes = <
@@ -4441,5 +4566,155 @@ inherited ReportDM: TReportDM
     Options = []
     Left = 120
     Top = 115
+  end
+  object cdsCustomerListing: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    Constraints = <
+      item
+        CustomConstraint = 'CUSTOMER_TYPE_ID > 0'
+        ErrorMessage = 'Customer type must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 
+          'CHAR_LENGTH(TRIM(NAME)) > 0 OR (CHAR_LENGTH(TRIM(FIRST_NAME)) > ' +
+          '0 AND CHAR_LENGTH(TRIM(LAST_NAME)) > 0)'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <>
+    Indexes = <
+      item
+        Active = True
+        Name = 'idxCustomerID'
+        Fields = 'ID'
+        Options = [soPrimary]
+      end
+      item
+        Active = True
+        Selected = True
+        Name = 'idxCustName'
+        Fields = 'NAME'
+        CaseInsFields = 'NAME'
+        Options = [soNoCase, soUnique]
+        FilterOptions = [ekNoCase]
+      end>
+    IndexName = 'idxCustName'
+    ConstraintsEnabled = True
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'CUSTOMER_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'CUSTOMER'
+    StoreDefs = True
+    Left = 765
+    Top = 10
+    object IntegerField1: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object IntegerField2: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_TYPE_ID'
+      Origin = 'CUSTOMER_TYPE_ID'
+      Required = True
+    end
+    object IntegerField9: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Status'
+      FieldName = 'STATUS_ID'
+      Origin = 'STATUS_ID'
+      Required = True
+    end
+    object cdsCustomerListingCUSTOMER_STATUS: TStringField
+      DisplayLabel = 'Status'
+      FieldName = 'CUSTOMER_STATUS'
+    end
+    object cdsCustomerListingCUSTOMER_TYPE: TStringField
+      DisplayLabel = 'Type'
+      FieldName = 'CUSTOMER_TYPE'
+      Size = 30
+    end
+    object StringField1: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+      Size = 100
+    end
+    object StringField2: TStringField
+      DisplayLabel = 'First Name'
+      FieldName = 'FIRST_NAME'
+      Origin = 'FIRST_NAME'
+      Size = 30
+    end
+    object StringField3: TStringField
+      DisplayLabel = 'Last Name'
+      FieldName = 'LAST_NAME'
+      Origin = 'LAST_NAME'
+      Size = 30
+    end
+    object StringField5: TStringField
+      DisplayLabel = 'Trading As'
+      FieldName = 'TRADING_AS'
+      Origin = 'TRADING_AS'
+      Size = 100
+    end
+    object StringField7: TStringField
+      DisplayLabel = 'Company No'
+      FieldName = 'CO_NO'
+      Origin = 'CO_NO'
+    end
+    object StringField8: TStringField
+      DisplayLabel = 'Tax No'
+      FieldName = 'TAX_NO'
+      Origin = 'TAX_NO'
+    end
+    object StringField9: TStringField
+      DisplayLabel = 'VAT No'
+      FieldName = 'VAT_NO'
+      Origin = 'VAT_NO'
+    end
+    object IntegerField13: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Act'
+      FieldName = 'IS_ACTIVE'
+      Origin = 'IS_ACTIVE'
+      Required = True
+    end
+    object cdsCustomerListingCONTACT_FIRST_NAME: TStringField
+      DisplayLabel = 'Contact First'
+      FieldName = 'CONTACT_FIRST_NAME'
+      Size = 30
+    end
+    object cdsCustomerListingCONTACT_LAST_NAME: TStringField
+      DisplayLabel = 'Contact Last'
+      FieldName = 'CONTACT_LAST_NAME'
+      Size = 30
+    end
+  end
+  object dtsCustomerListing: TDataSource
+    DataSet = cdsCustomerListing
+    Left = 765
+    Top = 60
   end
 end

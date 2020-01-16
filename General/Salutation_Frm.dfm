@@ -5,10 +5,11 @@ inherited SalutationFrm: TSalutationFrm
   ClientHeight = 745
   ClientWidth = 968
   OnClose = FormClose
+  ExplicitWidth = 968
+  ExplicitHeight = 745
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
-    LayoutLookAndFeel = lafCustomSkin
     inherited grdMaster: TcxGrid
       Width = 450
       ExplicitWidth = 450
@@ -51,21 +52,10 @@ inherited SalutationFrm: TSalutationFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 342
       DataSource = MTDM.dtsSalutation
-      ExplicitWidth = 342
-    end
-    inherited cbxOpenAfterExport: TcxCheckBox
-      ExplicitWidth = 182
-    end
-    inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450
-    end
-    inherited litOpenAfterExport: TdxLayoutItem
-      ControlOptions.OriginalWidth = 182
     end
   end
   inherited styRepository: TcxStyleRepository

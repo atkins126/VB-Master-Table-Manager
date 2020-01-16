@@ -13,7 +13,6 @@ inherited MainFrm: TMainFrm
   inherited layMain: TdxLayoutControl
     Width = 926
     Height = 651
-    LayoutLookAndFeel = lafCustomSkin
     ExplicitWidth = 926
     ExplicitHeight = 651
     object docToolbar: TdxBarDockControl [0]

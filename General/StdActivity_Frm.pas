@@ -71,14 +71,15 @@ begin
 end;
 
 procedure TStdActivityFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
-var
-  RepFileName: string;
 begin
   Screen.Cursor := crHourglass;
   ReportDM.MasterFormType := ftStdActivity;
   case AButtonIndex of
     NBDI_DELETE:
       begin
+        // Do the deletio here as this is not a lookup field in the Timesheet
+        // table so there is no need to check if any Timesheet items contain
+        // this lookup field ID.
         ADone := True;
         Beep;
         if DisplayMsg(
@@ -97,14 +98,13 @@ begin
     16, 17, 18, 19:
       begin
         inherited;
+        ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:
               begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
-
-                if not TFile.Exists(RepFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
                 ReportDM.PrintReport;
               end;
@@ -116,10 +116,8 @@ begin
 
             raPDF:
               begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
-
-                if not TFile.Exists(RepFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
                 ReportDM.ExportToPDF(PDF_DOCS + 'Standard Activity Listing', cbxOpenAfterExport.Checked);
               end;

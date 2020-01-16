@@ -5,12 +5,12 @@ inherited PriceListFrm: TPriceListFrm
   ClientHeight = 745
   ClientWidth = 1504
   ExplicitWidth = 1504
+  ExplicitHeight = 745
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
     Width = 1421
     Height = 691
-    LayoutLookAndFeel = lafCustomSkin
     ExplicitWidth = 1421
     ExplicitHeight = 691
     inherited grdMaster: TcxGrid
@@ -115,18 +115,13 @@ inherited PriceListFrm: TPriceListFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 342
       DataSource = MTDM.dtsPriceList
-      ExplicitWidth = 342
-    end
-    inherited cbxOpenAfterExport: TcxCheckBox
-      ExplicitWidth = 182
     end
     object grdPriceHistory: TcxGrid [3]
       Left = 10000
       Top = 10000
-      Width = 1368
-      Height = 569
+      Width = 1377
+      Height = 577
       TabOrder = 3
       Visible = False
       object viewPriceHistory: TcxGridDBBandedTableView
@@ -152,23 +147,12 @@ inherited PriceListFrm: TPriceListFrm
         GridView = viewPriceHistory
       end
     end
-    inherited layMainGroup_Root: TdxLayoutGroup
-      ItemIndex = 1
-    end
-    inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 342
-    end
     inherited litGrid: TdxLayoutItem
       Parent = grpPricelist
       AlignHorz = ahClient
       CaptionOptions.Text = 'Price List'
-      CaptionOptions.Visible = False
-      ControlOptions.OriginalHeight = 448
       ControlOptions.OriginalWidth = 1315
       Index = 0
-    end
-    inherited litOpenAfterExport: TdxLayoutItem
-      ControlOptions.OriginalWidth = 182
     end
     object grpPricelist: TdxLayoutGroup
       Parent = layMainGroup_Root

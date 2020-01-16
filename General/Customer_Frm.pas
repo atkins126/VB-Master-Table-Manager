@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Forms,
   System.Classes, Vcl.Graphics, System.ImageList, Vcl.ImgList, Vcl.Controls,
   Vcl.Dialogs, System.Actions, Vcl.ActnList, System.StrUtils, Vcl.Menus,
-  Vcl.StdCtrls, Data.DB,
+  System.IOUtils, Vcl.StdCtrls, Data.DB,
 
   BaseLayout_Frm, CommonValues, VBCommonValues,
 
@@ -26,7 +26,7 @@ uses
   FireDAC.UI.Intf, FireDAC.VCLUI.Error,
   FireDAC.Stan.Error, FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.Phys.IBWrapper,
   dxSkinMoneyTwins, dxSkinOffice2019Colorful, dxSkinTheBezier,
-  dxScrollbarAnnotations;
+  dxScrollbarAnnotations, Report_DM, dxBar, cxDropDownEdit, cxBarEditItem;
 
   // To handle TFDGUIxErrordialog
 // FireDAC.UI.Intf, FireDAC.VCLUI.Error,
@@ -237,6 +237,14 @@ type
     lucCreated: TcxDBEditorRow;
     lucModified: TcxDBEditorRow;
     dlgFireDACError: TFDGUIxErrorDialog;
+    litOpenAfterExport: TdxLayoutItem;
+    cbxOpenAfterExport: TcxCheckBox;
+    docPrint: TdxBarDockControl;
+    litPrintToolbar: TdxLayoutItem;
+    barManager: TdxBarManager;
+    barPrint: TdxBar;
+    btnReportType: TdxBarLargeButton;
+    lucReportType: TcxBarEditItem;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -1004,6 +1012,13 @@ var
 begin
   inherited;
   case AButtonIndex of
+    16: ReportDM.ReportAction := raPreview;
+    17: ReportDM.ReportAction := raPrint;
+    18: ReportDM.ReportAction := raExcel;
+    19: ReportDM.ReportAction := raPDF;
+  end;
+
+  case AButtonIndex of
     NBDI_REFRESH:
       begin
         ADone := True;
@@ -1012,6 +1027,37 @@ begin
         if not MTDM.cdsCustomer.Locate('ID', ID, []) then
           MTDM.cdsCustomer.First;
       end;
+
+    16, 17, 18, 19:
+      ReportDM.PrintExporting := True;
+
+    try
+      ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'CustomerListing.fr3';
+      case ReportDM.ReportAction of
+        raPreview, raPrint:
+          begin
+            if not TFile.Exists(ReportDM.ReportFileName) then
+              raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
+
+            ReportDM.PrintReport;
+          end;
+
+        raExcel:
+          begin
+            ReportDM.ExportToExcel(grdMaster, EXCEL_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+          end;
+
+        raPDF:
+          begin
+            if not TFile.Exists(ReportDM.ReportFileName) then
+              raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
+
+            ReportDM.ExportToPDF(PDF_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+          end;
+      end;
+    finally
+      Screen.Cursor := crDefault;
+    end;
   end;
 end;
 

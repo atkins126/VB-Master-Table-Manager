@@ -262,6 +262,23 @@ type
     frxPDFExport: TfrxPDFExport;
     dlgPrint: TdxPrintDialog;
     dlgFileSave: TFileSaveDialog;
+    cdsCustomerListing: TFDMemTable;
+    IntegerField1: TIntegerField;
+    IntegerField2: TIntegerField;
+    IntegerField9: TIntegerField;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField5: TStringField;
+    StringField7: TStringField;
+    StringField8: TStringField;
+    StringField9: TStringField;
+    IntegerField13: TIntegerField;
+    dtsCustomerListing: TDataSource;
+    cdsCustomerListingCUSTOMER_TYPE: TStringField;
+    cdsCustomerListingCUSTOMER_STATUS: TStringField;
+    cdsCustomerListingCONTACT_FIRST_NAME: TStringField;
+    cdsCustomerListingCONTACT_LAST_NAME: TStringField;
 //    procedure PrintReport(SourceDataSet, TargetDataSet: TFDmemTable;
 //      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
 //      ReportTypeName: string);
@@ -281,8 +298,7 @@ type
     FReportOption: TReportOptions;
     FFormID: Integer;
     FMasterFormType: TMasterFormTypes;
-    FReportFileName: String;
-//    FReportType: TReportTypes;
+    FReportFileName: string;
   public
     { Public declarations }
     property SLTheYear: TStringList read FSLTheYear write FSLTheYear;
@@ -291,7 +307,7 @@ type
     property ReportOption: TReportOptions read FReportOption write FReportOption;
     property FormID: Integer read FFormID write FFormID;
     property MasterFormType: TMasterFormTypes read FMasterFormType write FMasterFormType;
-    property ReportFileName: String read FReportFileName write FReportFileName;
+    property ReportFileName: string read FReportFileName write FReportFileName;
   end;
 
 var
@@ -301,7 +317,9 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses RUtils, MT_DM;
+uses
+  RUtils,
+  MT_DM;
 
 {$R *.dfm}
 
@@ -310,6 +328,7 @@ uses RUtils, MT_DM;
 procedure TReportDM.CreatePricehistory;
 var
   I: Integer;
+  LabelHeader, LabelRate: string;
 begin
   cdsPriceHistory.FieldDefs.Count;
   cdsPriceHistory.FieldDefs.Clear;
@@ -320,7 +339,13 @@ begin
   cdsPriceHistory.FieldDefs.Add('RATE_UNIT', ftString, 30);
 
   for I := 0 to FSLTheYear.Count - 1 do
+  begin
     cdsPriceHistory.FieldDefs.Add(FSLTheYear[I], ftFloat, 0);
+    LabelHeader := 'lblHeader' + (I + 1).ToString;
+    TfrxMemoView(rptPriceHistory.FindObject(LabelHeader)).Text := FSLTheYear[I];
+    LabelRate := 'lblRate' + (I + 1).ToString;
+    TfrxMemoView(rptPriceHistory.FindObject(LabelRate)).DataField := FSLTheYear[I];
+  end;
 
   fdsPriceHistory.Clear;
   fdsPriceHistory.AllObjects;
@@ -384,12 +409,15 @@ begin
 end;
 
 function TReportDM.PrepareReport: TVBPrintExportData;
+var
+  TheYear: Integer;
+  YearClause, TheYearStr: string;
 begin
   Result := TVBPrintExportData.Create;
   Result.ReportAction := ReportDM.ReportAction;
   Result.Report := ReportDM.rptMaster;
   Result.ReportDataSet := ReportDM.fdsMaster;
-  Result.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericTable.fr3';
+  Result.ReportFileName := {MTDM.ShellResource.ReportFolder + }ReportFileName;
 
   case FMasterFormType of
     ftActivityType:
@@ -489,19 +517,24 @@ begin
 
     ftPricelist:
       begin
-        Result.TargetDataSet := cdsPricelist;
-
-        VBBaseDM.GetData(42, Result.TargetDataSet, Result.TargetDataSet.Name, ONE_SPACE,
-          'C:\Data\Xml\Price List Report.xml', Result.TargetDataSet.UpdateOptions.Generatorname,
-          Result.TargetDataSet.UpdateOptions.UpdateTableName);
-
-//        VBBaseDM.GetData(42, cdsPricelist, cdsPricelist.Name, ONE_SPACE,
-//          'C:\Data\Xml\Price List.xml', cdsPricelist.UpdateOptions.Generatorname,
-//          MTDM.cdsPricelist.UpdateOptions.UpdateTableName);
-
         Result.SourceDataSet := nil;
-//        Result.TargetDataSet := cdsPricelist;
-        Result.ReportTypeName := 'Price Item Listing';
+
+        if ExtractFileName(ReportFileName) = 'PriceList.fr3' then
+        begin
+          Result.Report := ReportDM.rptPricelist;
+          Result.ReportDataSet := ReportDM.fdsPriceList;
+          Result.TargetDataSet := cdsPricelist;
+          Result.ReportTypeName := 'Price Item Listing';
+          VBBaseDM.GetData(42, Result.TargetDataSet, Result.TargetDataSet.Name, ONE_SPACE,
+            'C:\Data\Xml\Price List Report.xml', Result.TargetDataSet.UpdateOptions.Generatorname,
+            Result.TargetDataSet.UpdateOptions.UpdateTableName);
+        end
+        else
+        begin
+          Result.TargetDataSet := cdsPriceHistory;
+          Result.Report := ReportDM.rptPriceHistory;
+          Result.ReportDataSet := ReportDM.fdsPriceHistory;
+        end;
       end;
 
     ftRateUnit:
@@ -547,4 +580,5 @@ begin
 end;
 
 end.
+
 

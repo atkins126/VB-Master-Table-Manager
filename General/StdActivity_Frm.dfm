@@ -5,10 +5,11 @@ inherited StdActivityFrm: TStdActivityFrm
   ClientHeight = 745
   ClientWidth = 968
   OnClose = FormClose
+  ExplicitWidth = 968
+  ExplicitHeight = 745
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
-    LayoutLookAndFeel = lafCustomSkin
     inherited grdMaster: TcxGrid
       Width = 600
       ExplicitWidth = 600
@@ -50,21 +51,10 @@ inherited StdActivityFrm: TStdActivityFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 342
       DataSource = MTDM.dtsStdActivityType
-      ExplicitWidth = 342
-    end
-    inherited cbxOpenAfterExport: TcxCheckBox
-      ExplicitWidth = 182
-    end
-    inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 600
-    end
-    inherited litOpenAfterExport: TdxLayoutItem
-      ControlOptions.OriginalWidth = 182
     end
   end
   inherited styRepository: TcxStyleRepository

@@ -16,6 +16,8 @@ inherited AgePeriodFrm: TAgePeriodFrm
       inherited viewMaster: TcxGridDBBandedTableView
         DataController.DataSource = MTDM.dtsAgePeriod
         OptionsCustomize.ColumnsQuickCustomization = True
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
         OptionsView.NoDataToDisplayInfoText = '<No Age Period data to display>'
         OptionsView.ColumnAutoWidth = True
         Bands = <
@@ -44,7 +46,7 @@ inherited AgePeriodFrm: TAgePeriodFrm
         object edtName: TcxGridDBBandedColumn
           DataBinding.FieldName = 'NAME'
           PropertiesClassName = 'TcxTextEditProperties'
-          Properties.ReadOnly = True
+          Properties.ReadOnly = False
           Options.Grouping = False
           Options.Moving = False
           Position.BandIndex = 0

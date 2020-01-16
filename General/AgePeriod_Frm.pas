@@ -68,16 +68,14 @@ begin
   inherited;
   case AButtonIndex of
     NBDI_DELETE:
-      begin
-        raise EValidateException.Create('Age Periods cannot be deleted from the system.');
-      end;
+      raise EValidateException.Create('Age Periods cannot be deleted from the system.');
 
     16, 17, 18, 19:
       begin
         inherited;
         try
-            ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
-        case ReportDM.ReportAction of
+          ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
+          case ReportDM.ReportAction of
             raPreview, raPrint:
               begin
                 if not TFile.Exists(ReportDM.ReportFileName) then

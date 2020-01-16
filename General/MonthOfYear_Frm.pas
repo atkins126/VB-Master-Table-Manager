@@ -62,44 +62,23 @@ begin
 end;
 
 procedure TMonthOfYearFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
-var
-  RepFileName: string;
-  ID: Integer;
 begin
   Screen.Cursor := crHourglass;
   ReportDM.MasterFormType := ftMonthOfYear;
   case AButtonIndex of
     NBDI_DELETE:
-      begin
-        raise EValidateException.Create('Months of year cannot be deleted from the system.');
-//        VBBaseDM.QueryRequest := Format(USE_COUNT, [
-//          'SELECT COUNT(ID) AS USE_COUNT FROM CUSTOMER WHERE YEAR_END_MONTH_ID = ' +
-//            IntToStr(MTDM.cdsActivityType.FieldByName('ID').AsInteger) +
-//
-//            ' UNION ALL ' +
-//            'SELECT COUNT(ID) AS USE_COUNT FROM CUSTOMER WHERE VAT_MONTH_ID = ' +
-//            IntToStr(MTDM.cdsActivityType.FieldByName('ID').AsInteger) +
-//
-//            ' UNION ALL ' +
-//            'SELECT COUNT(ID) AS USE_COUNT FROM CUSTOMER WHERE AR_MONTH_ID = ' +
-//            IntToStr(MTDM.cdsActivityType.FieldByName('ID').AsInteger)
-//            ]);
-//
-//        VBBaseDM.ItemToCount := 'Month of Year';
-//        inherited;
-      end;
+      raise EValidateException.Create('Months of year cannot be deleted from the system.');
 
     16, 17, 18, 19:
       begin
         inherited;
+        ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:
               begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
-
-                if not TFile.Exists(RepFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
                 ReportDM.PrintReport;
               end;
@@ -111,10 +90,8 @@ begin
 
             raPDF:
               begin
-                RepFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
-
-                if not TFile.Exists(RepFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + RepFileName + ' not found. Cannot load report.');
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
                 ReportDM.ExportToPDF(PDF_DOCS + 'Month of Year Listing', cbxOpenAfterExport.Checked);
               end;

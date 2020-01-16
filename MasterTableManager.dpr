@@ -62,7 +62,8 @@ uses
   MyClasses in '..\..\..\..\Lib\Classes\MyClasses.pas',
   VBPrintExportData in '..\..\Lib\VBPrintExportData.pas',
   VBProxyClass in '..\Lib\VBProxyClass.pas',
-  BaseGrid_Frm in '..\Lib\BaseGrid_Frm.pas' {BaseGridFrm};
+  BaseGrid_Frm in '..\Lib\BaseGrid_Frm.pas' {BaseGridFrm},
+  CustomerReportSelection_Frm in 'General\CustomerReportSelection_Frm.pas' {CustomerReportSelectionFrm};
 
 {$R *.res}
 

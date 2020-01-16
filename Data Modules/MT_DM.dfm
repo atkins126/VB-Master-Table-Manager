@@ -1530,16 +1530,16 @@ inherited MTDM: TMTDM
     Top = 335
   end
   object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
-    Left = 885
+    Left = 990
     Top = 255
   end
   object FDPhysFBDriverLink: TFDPhysFBDriverLink
-    Left = 885
+    Left = 990
     Top = 200
   end
   object FDGUIxWaitCursor: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 885
+    Left = 990
     Top = 140
   end
   object cdsMasterList: TFDMemTable
