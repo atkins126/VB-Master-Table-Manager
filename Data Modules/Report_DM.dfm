@@ -4717,4 +4717,279 @@ inherited ReportDM: TReportDM
     Left = 765
     Top = 60
   end
+  object cdsCustomerSelect: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    Constraints = <
+      item
+        CustomConstraint = 'CUSTOMER_TYPE_ID > 0'
+        ErrorMessage = 'Customer type must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 
+          'CHAR_LENGTH(TRIM(NAME)) > 0 OR (CHAR_LENGTH(TRIM(FIRST_NAME)) > ' +
+          '0 AND CHAR_LENGTH(TRIM(LAST_NAME)) > 0)'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <>
+    Indexes = <
+      item
+        Active = True
+        Name = 'idxCustomerID'
+        Fields = 'ID'
+        Options = [soPrimary]
+      end
+      item
+        Active = True
+        Selected = True
+        Name = 'idxCustName'
+        Fields = 'NAME'
+        CaseInsFields = 'NAME'
+        Options = [soNoCase, soUnique]
+        FilterOptions = [ekNoCase]
+      end>
+    IndexName = 'idxCustName'
+    ConstraintsEnabled = True
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'CUSTOMER_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'CUSTOMER'
+    StoreDefs = True
+    Left = 635
+    Top = 120
+    object cdsCustomerSelectID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsCustomerSelectCUSTOMER_TYPE_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_TYPE_ID'
+      Origin = 'CUSTOMER_TYPE_ID'
+      Required = True
+    end
+    object cdsCustomerSelectYEAR_END_MONTH_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Year End'
+      FieldName = 'YEAR_END_MONTH_ID'
+      Origin = 'YEAR_END_MONTH_ID'
+      Required = True
+    end
+    object cdsCustomerSelectTAX_OFFICE_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Tax Office'
+      FieldName = 'TAX_OFFICE_ID'
+      Origin = 'TAX_OFFICE_ID'
+    end
+    object cdsCustomerSelectVAT_MONTH_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'VAT Month'
+      FieldName = 'VAT_MONTH_ID'
+      Origin = 'VAT_MONTH_ID'
+    end
+    object cdsCustomerSelectVAT_COUNTRY_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'VAT Country'
+      FieldName = 'VAT_COUNTRY_ID'
+      Origin = 'VAT_COUNTRY_ID'
+    end
+    object cdsCustomerSelectVAT_OFFICE_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'VAT Office'
+      FieldName = 'VAT_OFFICE_ID'
+      Origin = 'VAT_OFFICE_ID'
+    end
+    object cdsCustomerSelectAR_MONTH_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'AR Month'
+      FieldName = 'AR_MONTH_ID'
+      Origin = 'AR_MONTH_ID'
+    end
+    object cdsCustomerSelectSTATUS_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Status'
+      FieldName = 'STATUS_ID'
+      Origin = 'STATUS_ID'
+      Required = True
+    end
+    object cdsCustomerSelectNAME: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+      Size = 100
+    end
+    object cdsCustomerSelectFIRST_NAME: TStringField
+      DisplayLabel = 'First Name'
+      FieldName = 'FIRST_NAME'
+      Origin = 'FIRST_NAME'
+      Size = 30
+    end
+    object cdsCustomerSelectLAST_NAME: TStringField
+      DisplayLabel = 'Last Name'
+      FieldName = 'LAST_NAME'
+      Origin = 'LAST_NAME'
+      Size = 30
+    end
+    object cdsCustomerSelectINITIALS: TStringField
+      DisplayLabel = 'Init'
+      FieldName = 'INITIALS'
+      Origin = 'INITIALS'
+      Size = 5
+    end
+    object cdsCustomerSelectTRADING_AS: TStringField
+      DisplayLabel = 'Trading As'
+      FieldName = 'TRADING_AS'
+      Origin = 'TRADING_AS'
+      Size = 100
+    end
+    object cdsCustomerSelectBILL_TO: TStringField
+      DisplayLabel = 'Bill To Name'
+      FieldName = 'BILL_TO'
+      Origin = 'BILL_TO'
+      Size = 100
+    end
+    object cdsCustomerSelectCO_NO: TStringField
+      DisplayLabel = 'Company No'
+      FieldName = 'CO_NO'
+      Origin = 'CO_NO'
+    end
+    object cdsCustomerSelectTAX_NO: TStringField
+      DisplayLabel = 'Tax No'
+      FieldName = 'TAX_NO'
+      Origin = 'TAX_NO'
+    end
+    object cdsCustomerSelectVAT_NO: TStringField
+      DisplayLabel = 'VAT No'
+      FieldName = 'VAT_NO'
+      Origin = 'VAT_NO'
+    end
+    object cdsCustomerSelectVAT_CUSTOMS_CODE: TStringField
+      DisplayLabel = 'VAT Customs Code'
+      FieldName = 'VAT_CUSTOMS_CODE'
+      Origin = 'VAT_CUSTOMS_CODE'
+    end
+    object cdsCustomerSelectPAYE_UIF_NO: TStringField
+      DisplayLabel = 'PAYE/UIF No'
+      FieldName = 'PAYE_UIF_NO'
+      Origin = 'PAYE_UIF_NO'
+    end
+    object cdsCustomerSelectSDL_NO: TStringField
+      DisplayLabel = 'SDL No'
+      FieldName = 'SDL_NO'
+      Origin = 'SDL_NO'
+    end
+    object cdsCustomerSelectWC_NO: TStringField
+      DisplayLabel = 'WC No'
+      FieldName = 'WC_NO'
+      Origin = 'WC_NO'
+    end
+    object cdsCustomerSelectAR_COMPLETION_DATE: TSQLTimeStampField
+      DisplayLabel = 'AR Comp Date'
+      FieldName = 'AR_COMPLETION_DATE'
+      Origin = 'AR_COMPLETION_DATE'
+    end
+    object cdsCustomerSelectSARS_AUTHORIZATION_SHEET: TStringField
+      FieldName = 'SARS_AUTHORIZATION_SHEET'
+      Origin = 'SARS_AUTHORIZATION_SHEET'
+    end
+    object cdsCustomerSelectPASTEL_ACC_CODE: TStringField
+      DisplayLabel = 'Pastel Acc'
+      FieldName = 'PASTEL_ACC_CODE'
+      Origin = 'PASTEL_ACC_CODE'
+      Size = 25
+    end
+    object cdsCustomerSelectVB_TAX_ACC_CODE: TStringField
+      DisplayLabel = 'VB Tax Acc Code'
+      FieldName = 'VB_TAX_ACC_CODE'
+      Origin = 'VB_TAX_ACC_CODE'
+      Size = 25
+    end
+    object cdsCustomerSelectIS_PROV_TAX_PAYER: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Prov'
+      FieldName = 'IS_PROV_TAX_PAYER'
+      Origin = 'IS_PROV_TAX_PAYER'
+      Required = True
+    end
+    object cdsCustomerSelectHAS_LIVING_WILL: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Liv Will'
+      FieldName = 'HAS_LIVING_WILL'
+      Origin = 'HAS_LIVING_WILL'
+      Required = True
+    end
+    object cdsCustomerSelectIS_ORGAN_DONOR: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Org Donr'
+      FieldName = 'IS_ORGAN_DONOR'
+      Origin = 'IS_ORGAN_DONOR'
+      Required = True
+    end
+    object cdsCustomerSelectDATE_CREATED: TSQLTimeStampField
+      DisplayLabel = 'Created'
+      FieldName = 'DATE_CREATED'
+      Origin = 'DATE_CREATED'
+    end
+    object cdsCustomerSelectDATE_MODIFIED: TSQLTimeStampField
+      DisplayLabel = 'Modified'
+      FieldName = 'DATE_MODIFIED'
+      Origin = 'DATE_MODIFIED'
+    end
+    object cdsCustomerSelectIS_ACTIVE: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Act'
+      FieldName = 'IS_ACTIVE'
+      Origin = 'IS_ACTIVE'
+      Required = True
+    end
+    object cdsCustomerSelectEFILING: TStringField
+      DisplayLabel = 'EFiling'
+      FieldName = 'EFILING'
+      Origin = 'EFILING'
+      Size = 30
+    end
+    object cdsCustomerSelectEF_USER_NAME: TStringField
+      DisplayLabel = 'EF User Name'
+      FieldName = 'EF_USER_NAME'
+      Origin = 'EF_USER_NAME'
+      Size = 30
+    end
+    object cdsCustomerSelectEF_PASSWORD: TStringField
+      DisplayLabel = 'EF Password'
+      FieldName = 'EF_PASSWORD'
+      Origin = 'EF_PASSWORD'
+    end
+    object cdsCustomerSelectCUSTOMER_GROUP_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'CG ID'
+      FieldName = 'CUSTOMER_GROUP_ID'
+      Origin = 'CUSTOMER_GROUP_ID'
+    end
+  end
+  object dtsCustomerSelect: TDataSource
+    DataSet = cdsCustomerSelect
+    Left = 635
+    Top = 170
+  end
 end

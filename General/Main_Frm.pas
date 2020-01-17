@@ -243,6 +243,8 @@ begin
       'C:\Data\Xml\Master list.xml', MTDM.cdsMasterList.UpdateOptions.Generatorname,
       MTDM.cdsMasterList.UpdateOptions.UpdateTableName);
 
+    BorderIcons := [];
+    BorderStyle := bsNone;
     if FCallingFromShell then
     begin
       if not SendMessageToApp('VB Shell', 'App Ready') then
@@ -257,8 +259,14 @@ begin
           );
         Application.Terminate;
       end;
-      WindowState := wsMaximized;
+//      WindowState := wsMaximized;
+    end
+    else
+    begin
+      BorderIcons := [biSystemMenu, biMinimize, biMaximize];
+      BorderStyle := bsSizeable;
     end;
+    WindowState := wsMaximized;
   finally
     Screen.Cursor := crDefault;
   end;

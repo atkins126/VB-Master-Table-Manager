@@ -1760,7 +1760,7 @@ inherited MTDM: TMTDM
     end
     object cdsContactDetailCoCONTACT_TYPE_ID: TIntegerField
       Alignment = taLeftJustify
-      DisplayLabel = 'Contac Type'
+      DisplayLabel = 'Contact Type'
       FieldName = 'CONTACT_TYPE_ID'
       Origin = 'CONTACT_TYPE_ID'
       Required = True

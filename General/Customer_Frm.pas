@@ -59,7 +59,7 @@ type
     lvlCustomer: TcxGridLevel;
     edtCustomerID: TcxGridDBBandedColumn;
     lucCustomerType: TcxGridDBBandedColumn;
-    edtStatusID: TcxGridDBBandedColumn;
+    lucStatus: TcxGridDBBandedColumn;
     edtName: TcxGridDBBandedColumn;
     edtFirstName: TcxGridDBBandedColumn;
     edtlastName: TcxGridDBBandedColumn;
@@ -200,7 +200,7 @@ type
     lucVYearEndmonth: TcxDBEditorRow;
     edtVTaxNo: TcxDBEditorRow;
     lucVTaxOffice: TcxDBEditorRow;
-    edtARMonth: TcxDBEditorRow;
+    lucVARMonth: TcxDBEditorRow;
     grpTaxInformation: TcxCategoryRow;
     grpVATInformation: TcxCategoryRow;
     grpSARS: TcxCategoryRow;
@@ -245,6 +245,10 @@ type
     barPrint: TdxBar;
     btnReportType: TdxBarLargeButton;
     lucReportType: TcxBarEditItem;
+    cbxIsActive: TcxGridDBBandedColumn;
+    grdCustomerListing: TcxGrid;
+    viewCustomerListing: TcxGridDBBandedTableView;
+    lvlCustomerListing: TcxGridLevel;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -265,6 +269,8 @@ type
     procedure navCustomerButtonsButtonClick(Sender: TObject;
       AButtonIndex: Integer; var ADone: Boolean);
     procedure grdContactPersonEnter(Sender: TObject);
+    procedure grdVCustomerInitEdit(Sender, AItem: TObject;
+      AEdit: TcxCustomEdit);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
@@ -275,6 +281,9 @@ type
     procedure OpenTables;
     procedure EditDeleteRecord(Key: Word);
     function FillFieldData(DetailDataSetID: Integer): string;
+    // Controls scrolling of embedded loolup comboboxes.
+    procedure DoMyMouseWheel(Sender: TObject; Shift: TShiftState;
+      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
   protected
     procedure HandleTSAfterPost(var MyMsg: TMessage); message WM_RECORD_ID;
   public
@@ -287,7 +296,7 @@ var
   CustomerFrm: TCustomerFrm;
 
 const
-  TABLE_COUNT = 17;
+  TABLE_COUNT = 21;
 
 implementation
 
@@ -344,6 +353,13 @@ begin
       end;
   end;
   EditDeleteRecord(Key);
+end;
+
+procedure TCustomerFrm.DoMyMouseWheel(Sender: TObject; Shift: TShiftState;
+  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+begin
+  if not TcxLookupComboBox(Sender).DroppedDown then
+    Handled := True;
 end;
 
 function TCustomerFrm.FillFieldData(DetailDataSetID: Integer): string;
@@ -808,8 +824,13 @@ begin
   grdVCustomer.DataController.DataSource := MTDM.dtsCustomer;
   navCustomer.DataSource := MTDM.dtsCustomer;
   navVCustomer.DataSource := MTDM.dtsCustomer;
+
   TcxLookupComboBoxProperties(lucCustomerType.Properties).ListSource := LookupDM.dtsCustomerType;
   TcxLookupComboBoxProperties(lucCustomerType.Properties).Buttons.Items[0].Visible := False;
+
+  TcxLookupComboBoxProperties(lucStatus.Properties).ListSource := LookupDM.dtsCustomerStatus;
+  TcxLookupComboBoxProperties(lucStatus.Properties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucCDContactTypeID.Properties).ListSource := LookupDM.dtsContactType;
   TcxLookupComboBoxProperties(lucCDContactTypeID.Properties).Buttons.Items[0].Visible := False;
 
@@ -825,12 +846,23 @@ begin
   TcxLookupComboBoxProperties(lucBankDAccountTypeID.Properties).ListSource := LookupDM.dtsBankAccountType;
   TcxLookupComboBoxProperties(lucVCustomerType.Properties.EditProperties).ListSource := LookupDM.dtsCustomerType;
   TcxLookupComboBoxProperties(lucVStatus.Properties.EditProperties).ListSource := LookupDM.dtsCustomerStatus;
+
   TcxLookupComboBoxProperties(lucVYearEndmonth.Properties.EditProperties).ListSource := LookupDM.dtsMonthOfyear;
-  TcxLookupComboBoxProperties(lucVYearEndmonth.Properties.EditProperties).ListSource := LookupDM.dtsARMonthOfyear;
+  TcxLookupComboBoxProperties(lucVARMonth.Properties.EditProperties).ListSource := LookupDM.dtsARMonthOfyear;
+
   TcxLookupComboBoxProperties(lucVTaxOffice.Properties.EditProperties).ListSource := LookupDM.dtsTaxOffice;
   TcxLookupComboBoxProperties(lucVVATOffice.Properties.EditProperties).ListSource := LookupDM.dtsVATOffice;
   TcxLookupComboBoxProperties(lucVVATMonth.Properties.EditProperties).ListSource := LookupDM.dtsVATMonth;
   TcxLookupComboBoxProperties(lucVCountry.Properties.EditProperties).ListSource := LookupDM.dtsCountry;
+
+  // Prevent scrolling in these lookkup comboboxes
+//  TcxDBComboBoxAccess(lucVStatus).OnMouseWheel := DoMyMouseWheel;
+//  TcxDBComboBoxAccess(lucVYearEndmonth).OnMouseWheel := DoMyMouseWheel;
+//  TcxDBComboBoxAccess(lucVTaxOffice).OnMouseWheel := DoMyMouseWheel;
+//  TcxDBComboBoxAccess(lucVARMonth).OnMouseWheel := DoMyMouseWheel;
+//  TcxDBComboBoxAccess(lucVVATOffice).OnMouseWheel := DoMyMouseWheel;
+//  TcxDBComboBoxAccess(lucVVATMonth).OnMouseWheel := DoMyMouseWheel;
+//  TcxDBComboBoxAccess(lucVCountry).OnMouseWheel := DoMyMouseWheel;
 
   viewContactDetailCo.DataController.DataSource := MTDM.dtsContactDetailCo;
   viewContactPerson.DataController.DataSource := MTDM.dtsContactPerson;
@@ -839,6 +871,7 @@ begin
   viewDirector.DataController.DataSource := MTDM.dtsDirector;
   viewBeneficiary.DataController.DataSource := MTDM.dtsBeneficiary;
   viewVehicle.DataController.DataSource := MTDM.dtsVehicle;
+  viewCustomerListing.DataController.DataSource :=  ReportDM.dtsCustomerListing;
 // FDetailDataSet[0] := MTDM.cdsContactDetailCo;
 // FDetailDataSet[1] := MTDM.cdsAddress;
 // FDetailDataSet[2] := MTDM.cdsContactPerson;
@@ -1029,35 +1062,36 @@ begin
       end;
 
     16, 17, 18, 19:
-      ReportDM.PrintExporting := True;
+      begin
+        ReportDM.PrintExporting := True;
+        try
+          ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'CustomerListing.fr3';
+          case ReportDM.ReportAction of
+            raPreview, raPrint:
+              begin
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
-    try
-      ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'CustomerListing.fr3';
-      case ReportDM.ReportAction of
-        raPreview, raPrint:
-          begin
-            if not TFile.Exists(ReportDM.ReportFileName) then
-              raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
+                ReportDM.PrintReport;
+              end;
 
-            ReportDM.PrintReport;
+            raExcel:
+              begin
+//                ReportDM.ExportToExcel(grdMaster, EXCEL_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+              end;
+
+            raPDF:
+              begin
+                if not TFile.Exists(ReportDM.ReportFileName) then
+                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
+
+                ReportDM.ExportToPDF(PDF_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+              end;
           end;
-
-        raExcel:
-          begin
-            ReportDM.ExportToExcel(grdMaster, EXCEL_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
-          end;
-
-        raPDF:
-          begin
-            if not TFile.Exists(ReportDM.ReportFileName) then
-              raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
-
-            ReportDM.ExportToPDF(PDF_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
-          end;
+        finally
+          Screen.Cursor := crDefault;
+        end;
       end;
-    finally
-      Screen.Cursor := crDefault;
-    end;
   end;
 end;
 
@@ -1184,6 +1218,24 @@ begin
 
 // Open all lookup tables  -----------------------------------------------------
 
+    // Customer type
+    Inc(Counter);
+    Iteration := Counter / TABLE_COUNT * 100;
+
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Customer Type Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    VBBaseDM.GetData(15, LookupDM.cdsCustomerType, LookupDM.cdsCustomerType.Name, ONE_SPACE,
+      'C:\Data\Xml\Customer Type.xml', LookupDM.cdsCustomerType.UpdateOptions.Generatorname,
+      LookupDM.cdsCustomerType.UpdateOptions.UpdateTableName);
+
+    // Customer status
+    Inc(Counter);
+    Iteration := Counter / TABLE_COUNT * 100;
+
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Customer Status Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    VBBaseDM.GetData(14, LookupDM.cdsCustomerStatus, LookupDM.cdsCustomerStatus.Name, ONE_SPACE,
+      'C:\Data\Xml\Customer Status.xml', LookupDM.cdsCustomerStatus.UpdateOptions.Generatorname,
+      LookupDM.cdsCustomerStatus.UpdateOptions.UpdateTableName);
+
     // Contact type
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
@@ -1235,6 +1287,28 @@ begin
       'C:\Data\Xml\Bank Account Type.xml', LookupDM.cdsBankAccountType.UpdateOptions.Generatorname,
       LookupDM.cdsBankAccountType.UpdateOptions.UpdateTableName);
 
+    // Tax/VAT Office
+    Inc(Counter);
+    Iteration := Counter / TABLE_COUNT * 100;
+
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Tax/VAT Office Tables' + '|PROGRESS=' + Iteration.ToString)), 0);
+    VBBaseDM.GetData(25, LookupDM.cdsTaxOffice, LookupDM.cdsTaxOffice.Name, ONE_SPACE,
+      'C:\Data\Xml\Tax Office.xml', LookupDM.cdsTaxOffice.UpdateOptions.Generatorname,
+      LookupDM.cdsTaxOffice.UpdateOptions.UpdateTableName);
+
+    LookupDM.cdsVATOffice.Close;
+
+    LookupDM.cdsVATOffice.Data := LookupDM.cdsTaxOffice.Data;
+
+    // Country
+    Inc(Counter);
+    Iteration := Counter / TABLE_COUNT * 100;
+
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Country Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    VBBaseDM.GetData(12, LookupDM.cdsCountry, LookupDM.cdsCountry.Name, ONE_SPACE,
+      'C:\Data\Xml\Country.xml', LookupDM.cdsCountry.UpdateOptions.Generatorname,
+      LookupDM.cdsCountry.UpdateOptions.UpdateTableName);
+
     // Vehicle make
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
@@ -1244,7 +1318,7 @@ begin
       'C:\Data\Xml\Vehicle Make.xml', LookupDM.cdsVehicleMake.UpdateOptions.Generatorname,
       LookupDM.cdsVehicleMake.UpdateOptions.UpdateTableName);
 
-    // onth of Year
+    // Month of Year
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
@@ -1256,8 +1330,8 @@ begin
     LookupDM.cdsARMonthOfYear.Close;
     LookupDM.cdsVATMonth.Close;
 
-    LookupDM.cdsARMonthOfYear.Data := LookupDM.cdsSalutation.Data;
-    LookupDM.cdsVATMonth.Data := LookupDM.cdsSalutation.Data;
+    LookupDM.cdsARMonthOfYear.Data := LookupDM.cdsMonthOfYear.Data;
+    LookupDM.cdsVATMonth.Data := LookupDM.cdsMonthOfYear.Data;
   finally
     ProgressFrm.Close;
     FreeAndNil(ProgressFrm);
@@ -1300,6 +1374,16 @@ begin
   actInsert.Caption := 'Add a new address';
   actEdit.Caption := 'Edit selected address';
   actDelete.Caption := 'Delete selected address';
+end;
+
+procedure TCustomerFrm.grdVCustomerInitEdit(Sender, AItem: TObject; AEdit: TcxCustomEdit);
+begin
+  inherited;
+  // Prevent scrolling when editor is not dropped down. This prevents
+  // accidental changing of the lookup combo's value.
+  if AEdit is TcxLookupComboBox then
+    if not TcxLookupComboBox(AEdit).DroppedDown then
+      TcxLookupComboBox(AEdit).Properties.UseMouseWheel := False;
 end;
 
 procedure TCustomerFrm.EditDeleteRecord(Key: Word);

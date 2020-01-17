@@ -1,9 +1,7 @@
 inherited MainFrm: TMainFrm
-  BorderIcons = []
-  BorderStyle = bsNone
   Caption = 'MainFrm'
-  ClientHeight = 743
-  ClientWidth = 1181
+  ClientHeight = 704
+  ClientWidth = 1165
   OnClose = FormClose
   OnDestroy = FormDestroy
   ExplicitWidth = 1181
@@ -79,8 +77,8 @@ inherited MainFrm: TMainFrm
   end
   object sbrMain: TdxStatusBar [1]
     Left = 0
-    Top = 723
-    Width = 1181
+    Top = 684
+    Width = 1165
     Height = 20
     Panels = <
       item
@@ -96,6 +94,8 @@ inherited MainFrm: TMainFrm
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
+    ExplicitTop = 723
+    ExplicitWidth = 1181
   end
   object cbxShowMasterList: TcxCheckBox [2]
     Left = 965

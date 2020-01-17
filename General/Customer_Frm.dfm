@@ -14,7 +14,7 @@ inherited CustomerFrm: TCustomerFrm
     object grdCustomer: TcxGrid [0]
       Left = 11
       Top = 59
-      Width = 791
+      Width = 900
       Height = 313
       TabOrder = 3
       object viewCustomer: TcxGridDBBandedTableView
@@ -70,34 +70,13 @@ inherited CustomerFrm: TCustomerFrm
           Properties.ReadOnly = True
           MinWidth = 200
           Options.Editing = False
-          Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
           Width = 200
           Position.BandIndex = 0
-          Position.ColIndex = 3
-          Position.RowIndex = 0
-        end
-        object edtStatusID: TcxGridDBBandedColumn
-          DataBinding.FieldName = 'STATUS_ID'
-          PropertiesClassName = 'TcxCurrencyEditProperties'
-          Properties.DecimalPlaces = 0
-          Properties.DisplayFormat = '#,###,##0'
-          Properties.EditFormat = '#,###,##0'
-          Properties.ReadOnly = True
-          Visible = False
-          MinWidth = 60
-          Options.Editing = False
-          Options.Filtering = False
-          Options.IncSearch = False
-          Options.Grouping = False
-          Options.HorzSizing = False
-          Options.Moving = False
-          Width = 60
-          Position.BandIndex = 0
-          Position.ColIndex = 1
+          Position.ColIndex = 2
           Position.RowIndex = 0
         end
         object edtName: TcxGridDBBandedColumn
@@ -111,7 +90,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Moving = False
           Width = 400
           Position.BandIndex = 0
-          Position.ColIndex = 2
+          Position.ColIndex = 1
           Position.RowIndex = 0
         end
         object edtFirstName: TcxGridDBBandedColumn
@@ -126,7 +105,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Moving = False
           Width = 160
           Position.BandIndex = 0
-          Position.ColIndex = 4
+          Position.ColIndex = 3
           Position.RowIndex = 0
         end
         object edtlastName: TcxGridDBBandedColumn
@@ -141,7 +120,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Moving = False
           Width = 160
           Position.BandIndex = 0
-          Position.ColIndex = 5
+          Position.ColIndex = 4
           Position.RowIndex = 0
         end
         object edtTaxNo: TcxGridDBBandedColumn
@@ -150,12 +129,54 @@ inherited CustomerFrm: TCustomerFrm
           Properties.ReadOnly = True
           MinWidth = 120
           Options.Editing = False
+          Options.Filtering = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
           Width = 120
           Position.BandIndex = 0
+          Position.ColIndex = 5
+          Position.RowIndex = 0
+        end
+        object lucStatus: TcxGridDBBandedColumn
+          DataBinding.FieldName = 'STATUS_ID'
+          PropertiesClassName = 'TcxLookupComboBoxProperties'
+          Properties.KeyFieldNames = 'ID'
+          Properties.ListColumns = <
+            item
+              FieldName = 'NAME'
+            end>
+          Properties.ListSource = LookupDM.dtsCustomerStatus
+          Properties.ReadOnly = True
+          MinWidth = 80
+          Options.Editing = False
+          Options.IncSearch = False
+          Options.Grouping = False
+          Options.HorzSizing = False
+          Options.Moving = False
+          Width = 80
+          Position.BandIndex = 0
           Position.ColIndex = 6
+          Position.RowIndex = 0
+        end
+        object cbxIsActive: TcxGridDBBandedColumn
+          Caption = 'Active'
+          DataBinding.FieldName = 'IS_ACTIVE'
+          PropertiesClassName = 'TcxCheckBoxProperties'
+          Properties.Alignment = taCenter
+          Properties.ReadOnly = True
+          Properties.ValueChecked = 1
+          Properties.ValueUnchecked = 0
+          HeaderAlignmentHorz = taCenter
+          MinWidth = 60
+          Options.Editing = False
+          Options.IncSearch = False
+          Options.Grouping = False
+          Options.HorzSizing = False
+          Options.Moving = False
+          Width = 60
+          Position.BandIndex = 0
+          Position.ColIndex = 7
           Position.RowIndex = 0
         end
       end
@@ -164,7 +185,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVCustomer: TcxDBVerticalGrid [1]
-      Left = 808
+      Left = 917
       Top = 105
       Width = 444
       Height = 267
@@ -175,6 +196,7 @@ inherited CustomerFrm: TCustomerFrm
       Navigator.Buttons.CustomButtons = <>
       ScrollbarAnnotations.CustomAnnotations = <>
       TabOrder = 5
+      OnInitEdit = grdVCustomerInitEdit
       DataController.DataSource = MTDM.dtsCustomer
       Version = 1
       object grpGeneralInformation: TcxCategoryRow
@@ -275,6 +297,7 @@ inherited CustomerFrm: TCustomerFrm
           item
             FieldName = 'NAME'
           end>
+        Properties.EditProperties.ListSource = LookupDM.dtsMonthOfyear
         Properties.DataBinding.FieldName = 'YEAR_END_MONTH_ID'
         ID = 9
         ParentID = 8
@@ -282,7 +305,13 @@ inherited CustomerFrm: TCustomerFrm
         Version = 1
       end
       object edtVTaxNo: TcxDBEditorRow
-        Properties.EditPropertiesClassName = 'TcxTextEditProperties'
+        Properties.EditPropertiesClassName = 'TcxLookupComboBoxProperties'
+        Properties.EditProperties.KeyFieldNames = 'ID'
+        Properties.EditProperties.ListColumns = <
+          item
+            FieldName = 'NAME'
+          end>
+        Properties.EditProperties.ListSource = LookupDM.dtsTaxOffice
         Properties.DataBinding.FieldName = 'TAX_NO'
         ID = 10
         ParentID = 8
@@ -290,22 +319,27 @@ inherited CustomerFrm: TCustomerFrm
         Version = 1
       end
       object lucVTaxOffice: TcxDBEditorRow
-        Properties.Caption = 'Tax Office'
-        Properties.EditPropertiesClassName = 'TcxLookupComboBoxProperties'
-        Properties.EditProperties.ListColumns = <>
-        Properties.DataBinding.FieldName = 'VAT_OFFICE_ID'
-        ID = 11
-        ParentID = 8
-        Index = 2
-        Version = 1
-      end
-      object edtARMonth: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxLookupComboBoxProperties'
         Properties.EditProperties.KeyFieldNames = 'ID'
         Properties.EditProperties.ListColumns = <
           item
             FieldName = 'NAME'
           end>
+        Properties.EditProperties.ListSource = LookupDM.dtsTaxOffice
+        Properties.DataBinding.FieldName = 'TAX_OFFICE_ID'
+        ID = 11
+        ParentID = 8
+        Index = 2
+        Version = 1
+      end
+      object lucVARMonth: TcxDBEditorRow
+        Properties.EditPropertiesClassName = 'TcxLookupComboBoxProperties'
+        Properties.EditProperties.KeyFieldNames = 'ID'
+        Properties.EditProperties.ListColumns = <
+          item
+            FieldName = 'NAME'
+          end>
+        Properties.EditProperties.ListSource = LookupDM.dtsARMonthOfyear
         Properties.DataBinding.FieldName = 'AR_MONTH_ID'
         ID = 12
         ParentID = 8
@@ -334,6 +368,7 @@ inherited CustomerFrm: TCustomerFrm
           item
             FieldName = 'NAME'
           end>
+        Properties.EditProperties.ListSource = LookupDM.dtsVATOffice
         Properties.DataBinding.FieldName = 'VAT_OFFICE_ID'
         ID = 15
         ParentID = 13
@@ -347,6 +382,7 @@ inherited CustomerFrm: TCustomerFrm
           item
             FieldName = 'NAME'
           end>
+        Properties.EditProperties.ListSource = LookupDM.dtsVATMonth
         Properties.DataBinding.FieldName = 'VAT_MONTH_ID'
         ID = 16
         ParentID = 13
@@ -364,6 +400,7 @@ inherited CustomerFrm: TCustomerFrm
             Width = 70
             FieldName = 'DIALING_CODE'
           end>
+        Properties.EditProperties.ListSource = LookupDM.dtsCountry
         Properties.DataBinding.FieldName = 'VAT_COUNTRY_ID'
         ID = 17
         ParentID = 13
@@ -470,6 +507,7 @@ inherited CustomerFrm: TCustomerFrm
         Version = 1
       end
       object cbxVProvTaxPayer: TcxDBEditorRow
+        Properties.Caption = 'Prov Tax Payer'
         Properties.EditPropertiesClassName = 'TcxCheckBoxProperties'
         Properties.EditProperties.Alignment = taLeftJustify
         Properties.EditProperties.ImmediatePost = True
@@ -600,7 +638,7 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 0
     end
     object navVCustomer: TcxDBNavigator [3]
-      Left = 808
+      Left = 917
       Top = 59
       Width = 216
       Height = 40
@@ -2336,7 +2374,7 @@ inherited CustomerFrm: TCustomerFrm
       Parent = grpCustomerGrid
       Control = grdCustomer
       ControlOptions.OriginalHeight = 313
-      ControlOptions.OriginalWidth = 791
+      ControlOptions.OriginalWidth = 900
       ControlOptions.ShowBorder = False
       Index = 0
     end
@@ -2553,6 +2591,42 @@ inherited CustomerFrm: TCustomerFrm
       ControlOptions.OriginalWidth = 611
       ControlOptions.ShowBorder = False
       Index = 1
+    end
+  end
+  object grdCustomerListing: TcxGrid [1]
+    Left = 740
+    Top = 480
+    Width = 711
+    Height = 326
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Calibri'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 5
+    object viewCustomerListing: TcxGridDBBandedTableView
+      Navigator.Buttons.CustomButtons = <>
+      ScrollbarAnnotations.CustomAnnotations = <>
+      DataController.DataSource = ReportDM.dtsCustomerListing
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      OptionsBehavior.FocusCellOnTab = True
+      OptionsBehavior.NavigatorHints = True
+      OptionsBehavior.FocusCellOnCycle = True
+      OptionsData.CancelOnExit = False
+      OptionsData.Deleting = False
+      OptionsData.DeletingConfirmation = False
+      OptionsData.Editing = False
+      OptionsData.Inserting = False
+      OptionsView.GroupByBox = False
+      Bands = <
+        item
+        end>
+    end
+    object lvlCustomerListing: TcxGridLevel
+      GridView = viewCustomerListing
     end
   end
   inherited styRepository: TcxStyleRepository
