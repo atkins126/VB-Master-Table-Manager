@@ -56,7 +56,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsBank;
   navMaster.DataSource := MTDM.dtsBank;
 
-  VBBaseDM.GetData(5, MTDM.cdsBank, MTDM.cdsBank.Name, '',
+  VBBaseDM.GetData(5, MTDM.cdsBank, MTDM.cdsBank.Name, ONE_SPACE,
     'C:\Data\Xml\Bannk.xml', MTDM.cdsBank.UpdateOptions.Generatorname,
     MTDM.cdsBank.UpdateOptions.UpdateTableName);
 

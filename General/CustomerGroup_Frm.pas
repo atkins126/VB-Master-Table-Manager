@@ -54,7 +54,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsCustomerGroup;
   navMaster.DataSource := MTDM.dtsCustomerGroup;
 
-  VBBaseDM.GetData(56, MTDM.cdsCustomerGroup, MTDM.cdsCustomerGroup.Name, '',
+  VBBaseDM.GetData(56, MTDM.cdsCustomerGroup, MTDM.cdsCustomerGroup.Name, ONE_SPACE,
     'C:\Data\Xml\Customer Group.xml', MTDM.cdsCustomerGroup.UpdateOptions.Generatorname,
     MTDM.cdsCustomerGroup.UpdateOptions.UpdateTableName);
 

@@ -173,7 +173,7 @@ begin
     'C:\Data\Xml\Price List.xml', MTDM.cdsPricelist.UpdateOptions.Generatorname,
     MTDM.cdsPricelist.UpdateOptions.UpdateTableName);
 
-  VBBaseDM.GetData(38, LookupDM.cdsRateUnit, LookupDM.cdsRateUnit.Name, '',
+  VBBaseDM.GetData(38, LookupDM.cdsRateUnit, LookupDM.cdsRateUnit.Name, ONE_SPACE,
     'C:\Data\Xml\Rate Unit.xml', LookupDM.cdsRateUnit.UpdateOptions.Generatorname,
     LookupDM.cdsRateUnit.UpdateOptions.UpdateTableName);
 
@@ -344,7 +344,7 @@ begin
 //          ReportDataSet := ReportDM.fdsPriceList;
     ReportTypeName := 'Price List (Current)';
 
-    VBBaseDM.GetData(42, ReportDM.cdsPricelist, ReportDM.cdsPricelist.Name, '',
+    VBBaseDM.GetData(42, ReportDM.cdsPricelist, ReportDM.cdsPricelist.Name, ONE_SPACE,
       'C:\Data\Xml\Price List View.xml', ReportDM.cdsPricelist.UpdateOptions.Generatorname,
       ReportDM.cdsPricelist.UpdateOptions.UpdateTableName);
 

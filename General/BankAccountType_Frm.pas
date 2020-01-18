@@ -55,7 +55,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsBankAccountType;
   navMaster.DataSource := MTDM.dtsBankAccountType;
 
-  VBBaseDM.GetData(6, MTDM.cdsBankAccountType, MTDM.cdsBankAccountType.Name, '',
+  VBBaseDM.GetData(6, MTDM.cdsBankAccountType, MTDM.cdsBankAccountType.Name, ONE_SPACE,
     'C:\Data\Xml\Bannk Account Type.xml', MTDM.cdsBankAccountType.UpdateOptions.Generatorname,
     MTDM.cdsBankAccountType.UpdateOptions.UpdateTableName);
 

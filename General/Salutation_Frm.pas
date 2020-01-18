@@ -62,7 +62,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsSalutation;
   navMaster.DataSource := MTDM.dtsSalutation;
 
-  VBBaseDM.GetData(23, MTDM.cdsSalutation, MTDM.cdsSalutation.Name, '',
+  VBBaseDM.GetData(23, MTDM.cdsSalutation, MTDM.cdsSalutation.Name, ONE_SPACE,
     'C:\Data\Xml\Salutation.xml', MTDM.cdsSalutation.UpdateOptions.Generatorname,
     MTDM.cdsSalutation.UpdateOptions.UpdateTableName);
 

@@ -55,7 +55,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsTaxOffice;
   navMaster.DataSource := MTDM.dtsTaxOffice;
 
-  VBBaseDM.GetData(25, MTDM.cdsTaxOffice, MTDM.cdsTaxOffice.Name, '',
+  VBBaseDM.GetData(25, MTDM.cdsTaxOffice, MTDM.cdsTaxOffice.Name, ONE_SPACE,
     'C:\Data\Xml\Tax Office.xml', MTDM.cdsTaxOffice.UpdateOptions.Generatorname,
     MTDM.cdsTaxOffice.UpdateOptions.UpdateTableName);
 

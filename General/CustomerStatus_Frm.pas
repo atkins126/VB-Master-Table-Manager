@@ -54,7 +54,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsCustomerStatus;
   navMaster.DataSource := MTDM.dtsCustomerStatus;
 
-  VBBaseDM.GetData(14, MTDM.cdsCustomerStatus, MTDM.cdsCustomerStatus.Name, '',
+  VBBaseDM.GetData(14, MTDM.cdsCustomerStatus, MTDM.cdsCustomerStatus.Name, ONE_SPACE,
     'C:\Data\Xml\Customer Status.xml', MTDM.cdsCustomerStatus.UpdateOptions.Generatorname,
     MTDM.cdsCustomerStatus.UpdateOptions.UpdateTableName);
 

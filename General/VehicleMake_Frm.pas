@@ -54,7 +54,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsVehicleMake;
   navMaster.DataSource := MTDM.dtsVehicleMake;
 
-  VBBaseDM.GetData(48, MTDM.cdsVehicleMake, MTDM.cdsVehicleMake.Name, '',
+  VBBaseDM.GetData(48, MTDM.cdsVehicleMake, MTDM.cdsVehicleMake.Name, ONE_SPACE,
     'C:\Data\Xml\Vehicle Make.xml', MTDM.cdsVehicleMake.UpdateOptions.Generatorname,
     MTDM.cdsVehicleMake.UpdateOptions.UpdateTableName);
 

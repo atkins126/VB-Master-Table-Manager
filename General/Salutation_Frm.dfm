@@ -52,7 +52,11 @@ inherited SalutationFrm: TSalutationFrm
       end
     end
     inherited navMaster: TcxDBNavigator
+      Width = 351
       DataSource = MTDM.dtsSalutation
+    end
+    inherited litNavigator: TdxLayoutItem
+      ControlOptions.OriginalWidth = 351
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450

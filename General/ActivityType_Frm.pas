@@ -55,7 +55,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsActivityType;
   navMaster.DataSource := MTDM.dtsActivityType;
 
-  VBBaseDM.GetData(39, MTDM.cdsActivityType, MTDM.cdsActivityType.Name, '',
+  VBBaseDM.GetData(39, MTDM.cdsActivityType, MTDM.cdsActivityType.Name, ONE_SPACE,
     'C:\Data\Xml\Activity Type.xml', MTDM.cdsActivityType.UpdateOptions.Generatorname,
     MTDM.cdsActivityType.UpdateOptions.UpdateTableName);
 

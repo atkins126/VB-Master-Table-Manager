@@ -50,6 +50,12 @@ inherited JobFunctionFrm: TJobFunctionFrm
         end
       end
     end
+    inherited navMaster: TcxDBNavigator
+      Width = 324
+    end
+    inherited litNavigator: TdxLayoutItem
+      ControlOptions.OriginalWidth = 324
+    end
   end
   inherited styRepository: TcxStyleRepository
     PixelsPerInch = 96

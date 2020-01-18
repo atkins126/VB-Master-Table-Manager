@@ -54,7 +54,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsMonthOfyear;
   navMaster.DataSource := MTDM.dtsMonthOfyear;
 
-  VBBaseDM.GetData(20, MTDM.cdsMonthOfYear, MTDM.cdsMonthOfYear.Name, '',
+  VBBaseDM.GetData(20, MTDM.cdsMonthOfYear, MTDM.cdsMonthOfYear.Name, ONE_SPACE,
     'C:\Data\Xml\Month of Year.xml', MTDM.cdsMonthOfYear.UpdateOptions.Generatorname,
     MTDM.cdsMonthOfYear.UpdateOptions.UpdateTableName);
 

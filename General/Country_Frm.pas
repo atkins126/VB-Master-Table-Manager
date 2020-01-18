@@ -55,7 +55,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsCountry;
   navMaster.DataSource := MTDM.dtsCountry;
 
-  VBBaseDM.GetData(12, MTDM.cdsCountry, MTDM.cdsCountry.Name, '',
+  VBBaseDM.GetData(12, MTDM.cdsCountry, MTDM.cdsCountry.Name, ONE_SPACE,
     'C:\Data\Xml\Country.xml', MTDM.cdsCountry.UpdateOptions.Generatorname,
     MTDM.cdsCountry.UpdateOptions.UpdateTableName);
 

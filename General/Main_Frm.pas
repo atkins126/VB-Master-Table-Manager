@@ -239,7 +239,7 @@ begin
     VBBaseDM.CurrentPeriod := RUtils.CurrentPeriod(Date);
     VBBaseDM.CurrentMonth := RUtils.MonthInt(Date);
 
-    VBBaseDM.GetData(35, MTDM.cdsMasterList, MTDM.cdsMasterList.Name, '',
+    VBBaseDM.GetData(35, MTDM.cdsMasterList, MTDM.cdsMasterList.Name, ONE_SPACE,
       'C:\Data\Xml\Master list.xml', MTDM.cdsMasterList.UpdateOptions.Generatorname,
       MTDM.cdsMasterList.UpdateOptions.UpdateTableName);
 

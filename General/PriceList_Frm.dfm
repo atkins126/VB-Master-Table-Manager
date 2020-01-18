@@ -115,6 +115,7 @@ inherited PriceListFrm: TPriceListFrm
       end
     end
     inherited navMaster: TcxDBNavigator
+      Width = 351
       DataSource = MTDM.dtsPriceList
     end
     object grdPriceHistory: TcxGrid [3]
@@ -146,6 +147,9 @@ inherited PriceListFrm: TPriceListFrm
       object lvlPriceHistory: TcxGridLevel
         GridView = viewPriceHistory
       end
+    end
+    inherited litNavigator: TdxLayoutItem
+      ControlOptions.OriginalWidth = 351
     end
     inherited litGrid: TdxLayoutItem
       Parent = grpPricelist

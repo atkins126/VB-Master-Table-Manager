@@ -54,7 +54,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsAgePeriod;
   navMaster.DataSource := MTDM.dtsAgePeriod;
 
-  VBBaseDM.GetData(13, MTDM.cdsAgePeriod, MTDM.cdsAgePeriod.Name, '',
+  VBBaseDM.GetData(13, MTDM.cdsAgePeriod, MTDM.cdsAgePeriod.Name, ONE_SPACE,
     'C:\Data\Xml\Age Period.xml', MTDM.cdsAgePeriod.UpdateOptions.Generatorname,
     MTDM.cdsAgePeriod.UpdateOptions.UpdateTableName);
 

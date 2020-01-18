@@ -61,7 +61,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsJobFunction;
   navMaster.DataSource := MTDM.dtsJobFunction;
 
-  VBBaseDM.GetData(19, MTDM.cdsJobFunction, MTDM.cdsJobFunction.Name, '',
+  VBBaseDM.GetData(19, MTDM.cdsJobFunction, MTDM.cdsJobFunction.Name, ONE_SPACE,
     'C:\Data\Xml\Job Function.xml', MTDM.cdsJobFunction.UpdateOptions.Generatorname,
     MTDM.cdsJobFunction.UpdateOptions.UpdateTableName);
 

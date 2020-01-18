@@ -54,7 +54,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsRateUnit;
   navMaster.DataSource := MTDM.dtsRateUnit;
 
-  VBBaseDM.GetData(38, MTDM.cdsRateUnit, MTDM.cdsRateUnit.Name, '',
+  VBBaseDM.GetData(38, MTDM.cdsRateUnit, MTDM.cdsRateUnit.Name, ONE_SPACE,
     'C:\Data\Xml\Rate Unit.xml', MTDM.cdsRateUnit.UpdateOptions.Generatorname,
     MTDM.cdsRateUnit.UpdateOptions.UpdateTableName);
 

@@ -55,7 +55,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsContactType;
   navMaster.DataSource := MTDM.dtsContactType;
 
-  VBBaseDM.GetData(11, MTDM.cdsContactType, MTDM.cdsContactType.Name, '',
+  VBBaseDM.GetData(11, MTDM.cdsContactType, MTDM.cdsContactType.Name, ONE_SPACE,
     'C:\Data\Xml\Contact Type.xml', MTDM.cdsContactType.UpdateOptions.Generatorname,
     MTDM.cdsContactType.UpdateOptions.UpdateTableName);
 

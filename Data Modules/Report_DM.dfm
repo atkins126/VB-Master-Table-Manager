@@ -358,7 +358,18 @@ inherited ReportDM: TReportDM
       end>
     FieldDefs = <>
     CachedUpdates = True
-    IndexDefs = <>
+    IndexDefs = <
+      item
+        Name = 'idxCustomerID'
+        Fields = 'ID'
+        Options = [ixPrimary]
+      end
+      item
+        Name = 'idxCustName'
+        CaseInsFields = 'NAME'
+        Fields = 'NAME'
+        Options = [ixUnique, ixCaseInsensitive]
+      end>
     Indexes = <
       item
         Active = True
@@ -3462,19 +3473,45 @@ inherited ReportDM: TReportDM
     FieldAliases.Strings = (
       'ID=ID'
       'CUSTOMER_TYPE_ID=CUSTOMER_TYPE_ID'
+      'YEAR_END_MONTH_ID=YEAR_END_MONTH_ID'
+      'TAX_OFFICE_ID=TAX_OFFICE_ID'
+      'AR_MONTH_ID=AR_MONTH_ID'
+      'VAT_MONTH_ID=VAT_MONTH_ID'
+      'VAT_COUNTRY_ID=VAT_COUNTRY_ID'
+      'VAT_OFFICE_ID=VAT_OFFICE_ID'
       'STATUS_ID=STATUS_ID'
-      'CUSTOMER_STATUS=CUSTOMER_STATUS'
       'CUSTOMER_TYPE=CUSTOMER_TYPE'
       'NAME=NAME'
       'FIRST_NAME=FIRST_NAME'
       'LAST_NAME=LAST_NAME'
+      'INITIALS=INITIALS'
       'TRADING_AS=TRADING_AS'
+      'BILL_TO=BILL_TO'
       'CO_NO=CO_NO'
       'TAX_NO=TAX_NO'
       'VAT_NO=VAT_NO'
+      'VAT_CUSTOMS_CODE=VAT_CUSTOMS_CODE'
+      'PAYE_UIF_NO=PAYE_UIF_NO'
+      'SDL_NO=SDL_NO'
+      'WC_NO=WC_NO'
+      'AR_COMPLETION_DATE=AR_COMPLETION_DATE'
+      'PASTEL_ACC_CODE=PASTEL_ACC_CODE'
+      'VB_TAX_ACC_CODE=VB_TAX_ACC_CODE'
+      'IS_PROV_TAX_PAYER=IS_PROV_TAX_PAYER'
+      'HAS_LIVING_WILL=HAS_LIVING_WILL'
+      'IS_ORGAN_DONOR=IS_ORGAN_DONOR'
+      'DATE_CREATED=DATE_CREATED'
+      'DATE_MODIFIED=DATE_MODIFIED'
       'IS_ACTIVE=IS_ACTIVE'
-      'CONTACT_FIRST_NAME=CONTACT_FIRST_NAME'
-      'CONTACT_LAST_NAME=CONTACT_LAST_NAME')
+      'EFILING=EFILING'
+      'EF_USER_NAME=EF_USER_NAME'
+      'EF_PASSWORD=EF_PASSWORD'
+      'TAX_OFFICE=TAX_OFFICE'
+      'VAT_MONTH=VAT_MONTH'
+      'VAT_COUNTRY=VAT_COUNTRY'
+      'VAT_OFFICE=VAT_OFFICE'
+      'AR_MONTH=AR_MONTH'
+      'CUSTOMER_STATUS=CUSTOMER_STATUS')
     DataSet = cdsCustomerListing
     BCDToCurrency = False
     Left = 765
@@ -3518,7 +3555,7 @@ inherited ReportDM: TReportDM
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43494.671348414300000000
-    ReportOptions.LastChange = 43833.439896562500000000
+    ReportOptions.LastChange = 43847.683759583330000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -3543,8 +3580,9 @@ inherited ReportDM: TReportDM
       Font.Height = -13
       Font.Name = 'Calibri'
       Font.Style = []
-      PaperWidth = 210.000000000000000000
-      PaperHeight = 297.000000000000000000
+      Orientation = poLandscape
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
       PaperSize = 9
       LeftMargin = 10.000000000000000000
       RightMargin = 10.000000000000000000
@@ -3555,34 +3593,216 @@ inherited ReportDM: TReportDM
         FillType = ftBrush
         Frame.Typ = []
         Top = 18.897650000000000000
-        Width = 718.110700000000000000
+        Width = 1046.929810000000000000
       end
       object bndMaster: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = [ftRight, ftTop, ftBottom]
-        Height = 18.897637800000000000
-        Top = 170.078850000000000000
-        Width = 718.110700000000000000
+        Height = 39.685039370000000000
+        Top = 185.196970000000000000
+        Width = 1046.929810000000000000
         DataSet = fdsCustomerListing
         DataSetName = 'CustomeListing'
         RowCount = 0
         Stretched = True
         object Memo1: TfrxMemoView
           AllowVectorExport = True
-          Width = 1035.591168740000000000
+          Left = 83.149660000000000000
+          Width = 366.614358740000000000
           Height = 18.897650000000000000
+          DataField = 'NAME'
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
           Frame.Typ = [ftLeft]
           GapX = 5.000000000000000000
           Memo.UTF8W = (
-            '[(<MasterDataSet."NAME">)]')
+            '[CustomeListing."NAME"]')
+        end
+        object Memo2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 83.149660000000000000
+          Top = 18.897637800000000000
+          Width = 366.614358740000000000
+          Height = 18.897650000000000000
+          DataField = 'TRADING_AS'
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[CustomeListing."TRADING_AS"]')
+        end
+        object Memo3: TfrxMemoView
+          AllowVectorExport = True
+          Width = 79.370078740000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          GapX = 10.000000000000000000
+          Memo.UTF8W = (
+            'Customer')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          AllowVectorExport = True
+          Top = 18.897637800000000000
+          Width = 79.370078740157500000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          GapX = 10.000000000000000000
+          Memo.UTF8W = (
+            'Trading As')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          AllowVectorExport = True
+          Left = 510.236550000000000000
+          Width = 113.385826770000000000
+          Height = 18.897650000000000000
+          DataField = 'CO_NO'
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[CustomeListing."CO_NO"]')
+        end
+        object Memo13: TfrxMemoView
+          AllowVectorExport = True
+          Left = 510.236550000000000000
+          Top = 18.897637800000000000
+          Width = 113.385826770000000000
+          Height = 18.897650000000000000
+          DataField = 'TAX_NO'
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[CustomeListing."TAX_NO"]')
+        end
+        object Memo14: TfrxMemoView
+          AllowVectorExport = True
+          Left = 453.543600000000000000
+          Width = 49.133858270000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            'Co No')
+          ParentFont = False
+        end
+        object Memo15: TfrxMemoView
+          AllowVectorExport = True
+          Left = 453.543600000000000000
+          Top = 18.897637800000000000
+          Width = 49.133858270000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            'Tax No')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          AllowVectorExport = True
+          Left = 699.213050000000000000
+          Top = 0.000014650000000005
+          Width = 139.842558740000000000
+          Height = 18.897650000000000000
+          DataField = 'CUSTOMER_TYPE'
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[CustomeListing."CUSTOMER_TYPE"]')
+        end
+        object Memo17: TfrxMemoView
+          AllowVectorExport = True
+          Left = 646.299630000000000000
+          Width = 49.133858270000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            'Type')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          AllowVectorExport = True
+          Left = 699.213050000000000000
+          Top = 18.897637800000000000
+          Width = 139.842558740000000000
+          Height = 18.897650000000000000
+          DataField = 'CUSTOMER_STATUS'
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            '[CustomeListing."CUSTOMER_STATUS"]')
+        end
+        object Memo20: TfrxMemoView
+          AllowVectorExport = True
+          Left = 646.299630000000000000
+          Top = 18.897637800000000000
+          Width = 49.133816770000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          GapX = 5.000000000000000000
+          Memo.UTF8W = (
+            'Status')
+          ParentFont = False
         end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Frame.Typ = [ftTop]
         Height = 22.677180000000000000
-        Top = 249.448980000000000000
-        Width = 718.110700000000000000
+        Top = 287.244280000000000000
+        Width = 1046.929810000000000000
         object Memo11: TfrxMemoView
           Align = baLeft
           AllowVectorExport = True
@@ -3596,7 +3816,7 @@ inherited ReportDM: TReportDM
         object Memo12: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 525.354669999999900000
+          Left = 854.173780000000000000
           Width = 192.756030000000000000
           Height = 18.897650000000000000
           Frame.Typ = []
@@ -3618,14 +3838,14 @@ inherited ReportDM: TReportDM
         Font.Height = -15
         Font.Name = 'Calibri'
         Font.Style = [fsBold]
-        Height = 68.031540000000000000
+        Height = 37.795275590551200000
         ParentFont = False
         Top = 41.574830000000000000
-        Width = 718.110700000000000000
+        Width = 1046.929810000000000000
         object lblReportTypeName: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 275.905689999999900000
+          Left = 604.724800000000000000
           Width = 442.205010000000000000
           Height = 30.236220470000000000
           Font.Charset = ANSI_CHARSET
@@ -3654,22 +3874,41 @@ inherited ReportDM: TReportDM
             'van Brakel and Associates')
           ParentFont = False
         end
+      end
+      object bndcustomerTypeGroup: TfrxGroupHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        Height = 22.677180000000000000
+        ParentFont = False
+        Top = 139.842610000000000000
+        Width = 1046.929810000000000000
+        Condition = 'CustomeListing."CUSTOMER_TYPE"'
+        ResetPageNumbers = True
+        StartNewPage = True
         object Memo18: TfrxMemoView
           AllowVectorExport = True
-          Top = 49.133890000000000000
-          Width = 718.110236220471900000
-          Height = 18.897637800000000000
-          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Left = 109.606370000000000000
+          Width = 245.669450000000000000
+          Height = 18.897650000000000000
+          DataField = 'CUSTOMER_TYPE'
+          DataSet = fdsCustomerListing
+          DataSetName = 'CustomeListing'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[CustomeListing."CUSTOMER_TYPE"]')
         end
         object Memo21: TfrxMemoView
           AllowVectorExport = True
-          Top = 49.133890000000000000
-          Width = 430.866368740000000000
+          Width = 105.826840000000000000
           Height = 18.897650000000000000
-          Frame.Typ = [ftLeft]
-          GapX = 5.000000000000000000
+          Frame.Typ = []
           Memo.UTF8W = (
-            'Name')
+            'Customer Type:')
         end
       end
     end
@@ -4570,18 +4809,6 @@ inherited ReportDM: TReportDM
   object cdsCustomerListing: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     FilterOptions = [foCaseInsensitive]
-    Constraints = <
-      item
-        CustomConstraint = 'CUSTOMER_TYPE_ID > 0'
-        ErrorMessage = 'Customer type must have a value'
-        FromDictionary = False
-      end
-      item
-        CustomConstraint = 
-          'CHAR_LENGTH(TRIM(NAME)) > 0 OR (CHAR_LENGTH(TRIM(FIRST_NAME)) > ' +
-          '0 AND CHAR_LENGTH(TRIM(LAST_NAME)) > 0)'
-        FromDictionary = False
-      end>
     FieldDefs = <>
     CachedUpdates = True
     IndexDefs = <>
@@ -4590,18 +4817,24 @@ inherited ReportDM: TReportDM
         Active = True
         Name = 'idxCustomerID'
         Fields = 'ID'
-        Options = [soPrimary]
+        Options = [soUnique, soPrimary]
       end
       item
         Active = True
-        Selected = True
         Name = 'idxCustName'
         Fields = 'NAME'
         CaseInsFields = 'NAME'
         Options = [soNoCase, soUnique]
+      end
+      item
+        Active = True
+        Selected = True
+        Name = 'idxTypeName'
+        Fields = 'CUSTOMER_TYPE;NAME'
+        Options = [soNoCase]
         FilterOptions = [ekNoCase]
       end>
-    IndexName = 'idxCustName'
+    IndexName = 'idxTypeName'
     ConstraintsEnabled = True
     FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
     FetchOptions.Mode = fmAll
@@ -4624,92 +4857,232 @@ inherited ReportDM: TReportDM
     StoreDefs = True
     Left = 765
     Top = 10
-    object IntegerField1: TIntegerField
+    object cdsCustomerListingID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
       Origin = 'ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
     end
-    object IntegerField2: TIntegerField
+    object cdsCustomerListingCUSTOMER_TYPE_ID: TIntegerField
       Alignment = taLeftJustify
       DisplayLabel = 'C ID'
       FieldName = 'CUSTOMER_TYPE_ID'
       Origin = 'CUSTOMER_TYPE_ID'
-      Required = True
     end
-    object IntegerField9: TIntegerField
+    object cdsCustomerListingYEAR_END_MONTH_ID: TIntegerField
       Alignment = taLeftJustify
-      DisplayLabel = 'Status'
+      DisplayLabel = 'YEM ID'
+      FieldName = 'YEAR_END_MONTH_ID'
+      Origin = 'YEAR_END_MONTH_ID'
+    end
+    object cdsCustomerListingTAX_OFFICE_ID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'TAX_OFFICE_ID'
+      Origin = 'TAX_OFFICE_ID'
+    end
+    object cdsCustomerListingAR_MONTH_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'ARM ID'
+      FieldName = 'AR_MONTH_ID'
+      Origin = 'AR_MONTH_ID'
+    end
+    object cdsCustomerListingVAT_MONTH_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'VATM ID'
+      FieldName = 'VAT_MONTH_ID'
+      Origin = 'VAT_MONTH_ID'
+    end
+    object cdsCustomerListingVAT_COUNTRY_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'VATC ID'
+      FieldName = 'VAT_COUNTRY_ID'
+      Origin = 'VAT_COUNTRY_ID'
+    end
+    object cdsCustomerListingVAT_OFFICE_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'VATO ID'
+      FieldName = 'VAT_OFFICE_ID'
+      Origin = 'VAT_OFFICE_ID'
+    end
+    object cdsCustomerListingSTATUS_ID: TIntegerField
+      DisplayLabel = 'ST ID'
       FieldName = 'STATUS_ID'
       Origin = 'STATUS_ID'
-      Required = True
-    end
-    object cdsCustomerListingCUSTOMER_STATUS: TStringField
-      DisplayLabel = 'Status'
-      FieldName = 'CUSTOMER_STATUS'
     end
     object cdsCustomerListingCUSTOMER_TYPE: TStringField
       DisplayLabel = 'Type'
       FieldName = 'CUSTOMER_TYPE'
+      Origin = 'CUSTOMER_TYPE'
       Size = 30
     end
-    object StringField1: TStringField
-      DisplayLabel = 'Name'
+    object cdsCustomerListingNAME: TStringField
+      DisplayLabel = 'Customer'
       FieldName = 'NAME'
       Origin = 'NAME'
-      Required = True
       Size = 100
     end
-    object StringField2: TStringField
+    object cdsCustomerListingFIRST_NAME: TStringField
       DisplayLabel = 'First Name'
       FieldName = 'FIRST_NAME'
       Origin = 'FIRST_NAME'
       Size = 30
     end
-    object StringField3: TStringField
+    object cdsCustomerListingLAST_NAME: TStringField
       DisplayLabel = 'Last Name'
       FieldName = 'LAST_NAME'
       Origin = 'LAST_NAME'
       Size = 30
     end
-    object StringField5: TStringField
+    object cdsCustomerListingINITIALS: TStringField
+      DisplayLabel = 'Init'
+      FieldName = 'INITIALS'
+      Origin = 'INITIALS'
+      Size = 5
+    end
+    object cdsCustomerListingTRADING_AS: TStringField
       DisplayLabel = 'Trading As'
       FieldName = 'TRADING_AS'
       Origin = 'TRADING_AS'
       Size = 100
     end
-    object StringField7: TStringField
-      DisplayLabel = 'Company No'
+    object cdsCustomerListingBILL_TO: TStringField
+      DisplayLabel = 'Bill To'
+      FieldName = 'BILL_TO'
+      Origin = 'BILL_TO'
+      Size = 100
+    end
+    object cdsCustomerListingCO_NO: TStringField
+      DisplayLabel = 'Co No'
       FieldName = 'CO_NO'
       Origin = 'CO_NO'
     end
-    object StringField8: TStringField
+    object cdsCustomerListingTAX_NO: TStringField
       DisplayLabel = 'Tax No'
       FieldName = 'TAX_NO'
       Origin = 'TAX_NO'
     end
-    object StringField9: TStringField
+    object cdsCustomerListingVAT_NO: TStringField
       DisplayLabel = 'VAT No'
       FieldName = 'VAT_NO'
       Origin = 'VAT_NO'
     end
-    object IntegerField13: TIntegerField
-      Alignment = taCenter
-      DisplayLabel = 'Act'
+    object cdsCustomerListingVAT_CUSTOMS_CODE: TStringField
+      DisplayLabel = 'VAT Code'
+      FieldName = 'VAT_CUSTOMS_CODE'
+      Origin = 'VAT_CUSTOMS_CODE'
+    end
+    object cdsCustomerListingPAYE_UIF_NO: TStringField
+      DisplayLabel = 'PAYE/UIF'
+      FieldName = 'PAYE_UIF_NO'
+      Origin = 'PAYE_UIF_NO'
+    end
+    object cdsCustomerListingSDL_NO: TStringField
+      DisplayLabel = 'SDL No'
+      FieldName = 'SDL_NO'
+      Origin = 'SDL_NO'
+    end
+    object cdsCustomerListingWC_NO: TStringField
+      DisplayLabel = 'WC No'
+      FieldName = 'WC_NO'
+      Origin = 'WC_NO'
+    end
+    object cdsCustomerListingAR_COMPLETION_DATE: TSQLTimeStampField
+      DisplayLabel = 'AR Date'
+      FieldName = 'AR_COMPLETION_DATE'
+      Origin = 'AR_COMPLETION_DATE'
+    end
+    object cdsCustomerListingPASTEL_ACC_CODE: TStringField
+      DisplayLabel = 'Pastel Acc'
+      FieldName = 'PASTEL_ACC_CODE'
+      Origin = 'PASTEL_ACC_CODE'
+      Size = 25
+    end
+    object cdsCustomerListingVB_TAX_ACC_CODE: TStringField
+      DisplayLabel = 'VB Tax Code'
+      FieldName = 'VB_TAX_ACC_CODE'
+      Origin = 'VB_TAX_ACC_CODE'
+      Size = 25
+    end
+    object cdsCustomerListingIS_PROV_TAX_PAYER: TIntegerField
+      DisplayLabel = 'Prov Tax'
+      FieldName = 'IS_PROV_TAX_PAYER'
+      Origin = 'IS_PROV_TAX_PAYER'
+    end
+    object cdsCustomerListingHAS_LIVING_WILL: TIntegerField
+      DisplayLabel = 'LIv Will'
+      FieldName = 'HAS_LIVING_WILL'
+      Origin = 'HAS_LIVING_WILL'
+    end
+    object cdsCustomerListingIS_ORGAN_DONOR: TIntegerField
+      DisplayLabel = 'Org Don'
+      FieldName = 'IS_ORGAN_DONOR'
+      Origin = 'IS_ORGAN_DONOR'
+    end
+    object cdsCustomerListingDATE_CREATED: TSQLTimeStampField
+      DisplayLabel = 'Created'
+      FieldName = 'DATE_CREATED'
+      Origin = 'DATE_CREATED'
+    end
+    object cdsCustomerListingDATE_MODIFIED: TSQLTimeStampField
+      DisplayLabel = 'Modified'
+      FieldName = 'DATE_MODIFIED'
+      Origin = 'DATE_MODIFIED'
+    end
+    object cdsCustomerListingIS_ACTIVE: TIntegerField
+      DisplayLabel = 'Active'
       FieldName = 'IS_ACTIVE'
       Origin = 'IS_ACTIVE'
-      Required = True
     end
-    object cdsCustomerListingCONTACT_FIRST_NAME: TStringField
-      DisplayLabel = 'Contact First'
-      FieldName = 'CONTACT_FIRST_NAME'
+    object cdsCustomerListingEFILING: TStringField
+      DisplayLabel = 'E Filing'
+      FieldName = 'EFILING'
+      Origin = 'EFILING'
       Size = 30
     end
-    object cdsCustomerListingCONTACT_LAST_NAME: TStringField
-      DisplayLabel = 'Contact Last'
-      FieldName = 'CONTACT_LAST_NAME'
+    object cdsCustomerListingEF_USER_NAME: TStringField
+      DisplayLabel = 'EF User Name'
+      FieldName = 'EF_USER_NAME'
+      Origin = 'EF_USER_NAME'
       Size = 30
+    end
+    object cdsCustomerListingEF_PASSWORD: TStringField
+      DisplayLabel = 'EF Password'
+      FieldName = 'EF_PASSWORD'
+      Origin = 'EF_PASSWORD'
+    end
+    object cdsCustomerListingTAX_OFFICE: TStringField
+      DisplayLabel = 'Tax Office'
+      FieldName = 'TAX_OFFICE'
+      Origin = 'TAX_OFFICE'
+      Size = 40
+    end
+    object cdsCustomerListingVAT_MONTH: TStringField
+      DisplayLabel = 'VAT Month'
+      FieldName = 'VAT_MONTH'
+      Origin = 'VAT_MONTH'
+      Size = 10
+    end
+    object cdsCustomerListingVAT_COUNTRY: TStringField
+      DisplayLabel = 'VAT Country'
+      FieldName = 'VAT_COUNTRY'
+      Origin = 'VAT_COUNTRY'
+      Size = 50
+    end
+    object cdsCustomerListingVAT_OFFICE: TStringField
+      DisplayLabel = 'VAT Office'
+      FieldName = 'VAT_OFFICE'
+      Origin = 'VAT_OFFICE'
+      Size = 40
+    end
+    object cdsCustomerListingAR_MONTH: TStringField
+      DisplayLabel = 'AR Month'
+      FieldName = 'AR_MONTH'
+      Origin = 'AR_MONTH'
+      Size = 10
+    end
+    object cdsCustomerListingCUSTOMER_STATUS: TStringField
+      DisplayLabel = 'Status'
+      FieldName = 'CUSTOMER_STATUS'
+      Origin = 'CUSTOMER_STATUS'
     end
   end
   object dtsCustomerListing: TDataSource
@@ -4991,5 +5364,21 @@ inherited ReportDM: TReportDM
     DataSet = cdsCustomerSelect
     Left = 635
     Top = 170
+  end
+  object VbtestConnection: TFDConnection
+    Params.Strings = (
+      'ConnectionDef=VB Test')
+    FormatOptions.AssignedValues = [fvMapRules]
+    FormatOptions.OwnMapRules = True
+    FormatOptions.MapRules = <
+      item
+        SourceDataType = dtWideString
+        TargetDataType = dtAnsiString
+      end>
+    ResourceOptions.AssignedValues = [rvAutoReconnect]
+    ResourceOptions.AutoReconnect = True
+    LoginPrompt = False
+    Left = 986
+    Top = 179
   end
 end

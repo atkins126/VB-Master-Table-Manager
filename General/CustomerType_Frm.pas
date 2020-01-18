@@ -53,7 +53,7 @@ begin
   viewMaster.DataController.DataSource := MTDM.dtsCustomerType;
   navMaster.DataSource := MTDM.dtsCustomerType;
 
-  VBBaseDM.GetData(15, MTDM.cdsCustomerType, MTDM.cdsCustomerType.Name, '',
+  VBBaseDM.GetData(15, MTDM.cdsCustomerType, MTDM.cdsCustomerType.Name, ONE_SPACE,
     'C:\Data\Xml\Customer Type.xml', MTDM.cdsCustomerType.UpdateOptions.Generatorname,
     MTDM.cdsCustomerType.UpdateOptions.UpdateTableName);
 

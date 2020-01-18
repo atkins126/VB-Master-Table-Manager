@@ -12,6 +12,8 @@ uses
 
   FireDAC.Comp.Client,
 
+  frxClass,
+
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
   dxSkinsDefaultPainters, dxScreenTip, dxCustomHint, cxHint, cxClasses, cxStyles,
   cxImageList, dxLayoutLookAndFeels, dxLayoutContainer, dxLayoutControl, cxEdit,
@@ -26,7 +28,8 @@ uses
   FireDAC.UI.Intf, FireDAC.VCLUI.Error,
   FireDAC.Stan.Error, FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.Phys.IBWrapper,
   dxSkinMoneyTwins, dxSkinOffice2019Colorful, dxSkinTheBezier,
-  dxScrollbarAnnotations, Report_DM, dxBar, cxDropDownEdit, cxBarEditItem;
+  dxScrollbarAnnotations, Report_DM, dxBar, cxDropDownEdit, cxBarEditItem,
+  cxMaskEdit, dxPrnDev, dxPrnDlg;
 
   // To handle TFDGUIxErrordialog
 // FireDAC.UI.Intf, FireDAC.VCLUI.Error,
@@ -239,16 +242,79 @@ type
     dlgFireDACError: TFDGUIxErrorDialog;
     litOpenAfterExport: TdxLayoutItem;
     cbxOpenAfterExport: TcxCheckBox;
-    docPrint: TdxBarDockControl;
     litPrintToolbar: TdxLayoutItem;
     barManager: TdxBarManager;
-    barPrint: TdxBar;
-    btnReportType: TdxBarLargeButton;
-    lucReportType: TcxBarEditItem;
     cbxIsActive: TcxGridDBBandedColumn;
     grdCustomerListing: TcxGrid;
     viewCustomerListing: TcxGridDBBandedTableView;
     lvlCustomerListing: TcxGridLevel;
+    tipPersistSelection: TdxScreenTip;
+    cbxPersistSelection: TcxCheckBox;
+    litPersistSelection: TdxLayoutItem;
+    litReportType: TdxLayoutItem;
+    litWhatToPrint: TdxLayoutItem;
+    litGroupBy: TdxLayoutItem;
+    cbxGroupedReport: TcxCheckBox;
+    lucPrintWhat: TcxComboBox;
+    lucReportType: TcxComboBox;
+    tipOpenAfterExport: TdxScreenTip;
+    tipGroupedReport: TdxScreenTip;
+    tipRepoortType: TdxScreenTip;
+    tipPrintWhat: TdxScreenTip;
+    viewCustomerListingID: TcxGridDBBandedColumn;
+    viewCustomerListingCUSTOMER_TYPE_ID: TcxGridDBBandedColumn;
+    viewCustomerListingYEAR_END_MONTH_ID: TcxGridDBBandedColumn;
+    viewCustomerListingTAX_OFFICE_ID: TcxGridDBBandedColumn;
+    viewCustomerListingAR_MONTH_ID: TcxGridDBBandedColumn;
+    viewCustomerListingVAT_MONTH_ID: TcxGridDBBandedColumn;
+    viewCustomerListingVAT_COUNTRY_ID: TcxGridDBBandedColumn;
+    viewCustomerListingVAT_OFFICE_ID: TcxGridDBBandedColumn;
+    viewCustomerListingSTATUS_ID: TcxGridDBBandedColumn;
+    viewCustomerListingCUSTOMER_TYPE: TcxGridDBBandedColumn;
+    viewCustomerListingNAME: TcxGridDBBandedColumn;
+    viewCustomerListingFIRST_NAME: TcxGridDBBandedColumn;
+    viewCustomerListingLAST_NAME: TcxGridDBBandedColumn;
+    viewCustomerListingINITIALS: TcxGridDBBandedColumn;
+    viewCustomerListingTRADING_AS: TcxGridDBBandedColumn;
+    viewCustomerListingBILL_TO: TcxGridDBBandedColumn;
+    viewCustomerListingCO_NO: TcxGridDBBandedColumn;
+    viewCustomerListingTAX_NO: TcxGridDBBandedColumn;
+    viewCustomerListingVAT_NO: TcxGridDBBandedColumn;
+    viewCustomerListingVAT_CUSTOMS_CODE: TcxGridDBBandedColumn;
+    viewCustomerListingPAYE_UIF_NO: TcxGridDBBandedColumn;
+    viewCustomerListingSDL_NO: TcxGridDBBandedColumn;
+    viewCustomerListingWC_NO: TcxGridDBBandedColumn;
+    viewCustomerListingAR_COMPLETION_DATE: TcxGridDBBandedColumn;
+    viewCustomerListingPASTEL_ACC_CODE: TcxGridDBBandedColumn;
+    viewCustomerListingVB_TAX_ACC_CODE: TcxGridDBBandedColumn;
+    viewCustomerListingIS_PROV_TAX_PAYER: TcxGridDBBandedColumn;
+    viewCustomerListingHAS_LIVING_WILL: TcxGridDBBandedColumn;
+    viewCustomerListingIS_ORGAN_DONOR: TcxGridDBBandedColumn;
+    viewCustomerListingDATE_CREATED: TcxGridDBBandedColumn;
+    viewCustomerListingDATE_MODIFIED: TcxGridDBBandedColumn;
+    viewCustomerListingIS_ACTIVE: TcxGridDBBandedColumn;
+    viewCustomerListingEFILING: TcxGridDBBandedColumn;
+    viewCustomerListingEF_USER_NAME: TcxGridDBBandedColumn;
+    viewCustomerListingEF_PASSWORD: TcxGridDBBandedColumn;
+    viewCustomerListingTAX_OFFICE: TcxGridDBBandedColumn;
+    viewCustomerListingVAT_MONTH: TcxGridDBBandedColumn;
+    viewCustomerListingVAT_COUNTRY: TcxGridDBBandedColumn;
+    viewCustomerListingVAT_OFFICE: TcxGridDBBandedColumn;
+    viewCustomerListingAR_MONTH: TcxGridDBBandedColumn;
+    viewCustomerListingCUSTOMER_STATUS: TcxGridDBBandedColumn;
+    dlgFileSave: TSaveDialog;
+    dlgPrint: TdxPrintDialog;
+    grdCustomerReport: TcxGrid;
+    viewCustomerReport: TcxGridDBBandedTableView;
+    cxGridDBBandedColumn1: TcxGridDBBandedColumn;
+    cxGridDBBandedColumn2: TcxGridDBBandedColumn;
+    cxGridDBBandedColumn3: TcxGridDBBandedColumn;
+    cxGridDBBandedColumn4: TcxGridDBBandedColumn;
+    cxGridDBBandedColumn5: TcxGridDBBandedColumn;
+    cxGridDBBandedColumn6: TcxGridDBBandedColumn;
+    cxGridDBBandedColumn7: TcxGridDBBandedColumn;
+    cxGridDBBandedColumn8: TcxGridDBBandedColumn;
+    cxGridLevel1: TcxGridLevel;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -271,6 +337,9 @@ type
     procedure grdContactPersonEnter(Sender: TObject);
     procedure grdVCustomerInitEdit(Sender, AItem: TObject;
       AEdit: TcxCustomEdit);
+    procedure cbxPersistSelectionPropertiesEditValueChanged(Sender: TObject);
+    procedure lucPrintWhatPropertiesEditValueChanged(Sender: TObject);
+    procedure cbxOpenAfterExportPropertiesEditValueChanged(Sender: TObject);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
@@ -320,6 +389,31 @@ uses
   VehicleDetail_Frm,
   ContactPerson_Frm;
 
+procedure TCustomerFrm.cbxOpenAfterExportPropertiesEditValueChanged(Sender: TObject);
+begin
+  inherited;
+  if Self.Showing then
+  begin
+    grdCustomer.SetFocus;
+    viewCustomer.Focused := True;
+  end;
+end;
+
+procedure TCustomerFrm.cbxPersistSelectionPropertiesEditValueChanged(Sender: TObject);
+begin
+  inherited;
+  if cbxPersistSelection.Checked then
+    viewCustomer.OptionsSelection.MultiSelectMode := msmPersistent
+  else
+    viewCustomer.OptionsSelection.MultiSelectMode := msmStandard;
+
+  if Self.Showing then
+  begin
+    grdCustomer.SetFocus;
+    viewCustomer.Focused := True;
+  end;
+end;
+
 procedure TCustomerFrm.CmDrawBorder(var Msg: TMessage);
 begin
   if (TObject(Msg.WParam) is TcxCanvas)
@@ -353,13 +447,6 @@ begin
       end;
   end;
   EditDeleteRecord(Key);
-end;
-
-procedure TCustomerFrm.DoMyMouseWheel(Sender: TObject; Shift: TShiftState;
-  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
-begin
-  if not TcxLookupComboBox(Sender).DroppedDown then
-    Handled := True;
 end;
 
 function TCustomerFrm.FillFieldData(DetailDataSetID: Integer): string;
@@ -815,7 +902,10 @@ begin
   inherited;
   Screen.Cursor := crHourglass;
   Caption := 'Customer Manager';
-// Customer := TCustomerDetail.Create;
+  Application.HintPause := 0;
+  Application.HintShortPause := 0;
+  Application.HintHidePause := 250000;
+  styHintController.HintHidePause := 25000;
   litLegend.LayoutLookAndFeel := lafCustomSkin;
   styLegend.Style.Font.Color := cxLookAndFeels.RootLookAndFeel.SkinPainter.DefaultContentTextColor;
   styLegend.Style.TextColor := cxLookAndFeels.RootLookAndFeel.SkinPainter.DefaultContentTextColor;
@@ -855,15 +945,6 @@ begin
   TcxLookupComboBoxProperties(lucVVATMonth.Properties.EditProperties).ListSource := LookupDM.dtsVATMonth;
   TcxLookupComboBoxProperties(lucVCountry.Properties.EditProperties).ListSource := LookupDM.dtsCountry;
 
-  // Prevent scrolling in these lookkup comboboxes
-//  TcxDBComboBoxAccess(lucVStatus).OnMouseWheel := DoMyMouseWheel;
-//  TcxDBComboBoxAccess(lucVYearEndmonth).OnMouseWheel := DoMyMouseWheel;
-//  TcxDBComboBoxAccess(lucVTaxOffice).OnMouseWheel := DoMyMouseWheel;
-//  TcxDBComboBoxAccess(lucVARMonth).OnMouseWheel := DoMyMouseWheel;
-//  TcxDBComboBoxAccess(lucVVATOffice).OnMouseWheel := DoMyMouseWheel;
-//  TcxDBComboBoxAccess(lucVVATMonth).OnMouseWheel := DoMyMouseWheel;
-//  TcxDBComboBoxAccess(lucVCountry).OnMouseWheel := DoMyMouseWheel;
-
   viewContactDetailCo.DataController.DataSource := MTDM.dtsContactDetailCo;
   viewContactPerson.DataController.DataSource := MTDM.dtsContactPerson;
   viewCPContactDetail.DataController.DataSource := MTDM.dtsContactDetailPerson;
@@ -871,7 +952,7 @@ begin
   viewDirector.DataController.DataSource := MTDM.dtsDirector;
   viewBeneficiary.DataController.DataSource := MTDM.dtsBeneficiary;
   viewVehicle.DataController.DataSource := MTDM.dtsVehicle;
-  viewCustomerListing.DataController.DataSource :=  ReportDM.dtsCustomerListing;
+  viewCustomerListing.DataController.DataSource := ReportDM.dtsCustomerListing;
 // FDetailDataSet[0] := MTDM.cdsContactDetailCo;
 // FDetailDataSet[1] := MTDM.cdsAddress;
 // FDetailDataSet[2] := MTDM.cdsContactPerson;
@@ -912,7 +993,10 @@ begin
   viewCustomer.Focused := True;
 
   if viewCustomer.DataController.RecordCount > 0 then
+  begin
     viewCustomer.Controller.FocusedRecordIndex := 0;
+    viewCustomer.Controller.FocusedRecord.Selected := True;
+  end;
 
   viewCustomer.Controller.FocusedColumn := edtName;
   Screen.Cursor := crDefault;
@@ -1039,9 +1123,23 @@ begin
 //  end;
 end;
 
+procedure TCustomerFrm.lucPrintWhatPropertiesEditValueChanged(Sender: TObject);
+begin
+  inherited;
+  if Self.Showing then
+  begin
+    grdCustomer.SetFocus;
+    viewCustomer.Focused := True;
+  end;
+end;
+
 procedure TCustomerFrm.navCustomerButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
   ID: Integer;
+  WhereClause, OrderByClause: string;
+  DC: TcxDBDataController;
+  C: TcxCustomGridTableController;
+  I: Integer;
 begin
   inherited;
   case AButtonIndex of
@@ -1064,6 +1162,8 @@ begin
     16, 17, 18, 19:
       begin
         ReportDM.PrintExporting := True;
+        DC := viewCustomer.DataController;
+        C := viewCustomer.Controller;
         try
           ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'CustomerListing.fr3';
           case ReportDM.ReportAction of
@@ -1072,7 +1172,86 @@ begin
                 if not TFile.Exists(ReportDM.ReportFileName) then
                   raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
-                ReportDM.PrintReport;
+                case lucReportType.ItemIndex of
+                  0: TfrxMemoView(ReportDM.rptCustomerListing.FindObject('lblReportTypeName')).Text := 'Customer Listing';
+                  1: TfrxMemoView(ReportDM.rptCustomerListing.FindObject('lblReportTypeName')).Text := 'Customer Detail Report';
+                end;
+
+                if cbxGroupedReport.Checked then
+                begin
+                  OrderByClause := ' ORDER BY C.CUSTOMER_TYPE, C."NAME" ';
+                  ReportDM.cdsCustomerListing.IndexName := 'idxTypeName';
+                  TfrxGroupHeader(ReportDM.rptCustomerListing.FindObject('bndCustomerTypeGroup')).Visible := True;
+                end
+                else
+                begin
+                  OrderByClause := ' ORDER BY C."NAME" ';
+                  ReportDM.cdsCustomerListing.IndexName := 'idxCustName';
+                  TfrxGroupHeader(ReportDM.rptCustomerListing.FindObject('bndCustomerTypeGroup')).Visible := False;
+                end;
+
+                WhereClause := ' WHERE C.ID IN (';
+
+                C := viewCustomer.Controller;
+                DC := viewCustomer.DataController;
+
+                case lucPrintWhat.ItemIndex of
+                  0:
+                    begin
+                      WhereClause := '';
+                    end;
+
+                  1:
+                    begin
+                      if C.SelectedRecordCount = 0 then
+                        raise ESelectionException.Create('No customers have been selected. Please select at least one customer before using this option.');
+
+                      for I := 0 to C.SelectedRecordCount - 1 do
+                      begin
+                        WhereClause := WhereClause + IntToStr(DC.Values[C.SelectedRecords[I].Index, edtCustomerID.Index]);
+                        if I < C.SelectedRecordCount - 1 then
+                          WhereClause := WhereClause + ',';
+                      end;
+                      WhereClause := WhereClause + ')';
+                    end;
+
+                  2:
+                    begin
+                      if not DC.filter.Active then
+                        raise ESelectionException.Create('No filter has been applied to the customer list. Please apply a filter before using this option.');
+
+                      for I := 0 to DC.FilteredRecordCount - 1 do
+                      begin
+                        WhereClause := WhereClause + IntToStr(DC.Values[DC.FilteredRecordIndex[I], edtCustomerID.Index]);
+                        if I < DC.FilteredRecordCount - 1 then
+                          WhereClause := WhereClause + ',';
+                      end;
+                      WhereClause := WhereClause + ')';
+                    end;
+                end;
+
+                VBBaseDM.GetData(53, ReportDM.cdsCustomerListing, ReportDM.cdsCustomerListing.Name, WhereClause,
+                  'C:\Data\Xml\Customer Listing.xml', ReportDM.cdsCustomerListing.UpdateOptions.Generatorname,
+                  ReportDM.cdsCustomerListing.UpdateOptions.UpdateTableName);
+
+                case ReportDM.ReportAction of
+                  raPreview, raPrint:
+                    begin
+                      if ReportDM.rptCustomerListing.PrepareReport then
+                        if ReportDM.ReportAction = raPreview then
+                          ReportDM.rptCustomerListing.ShowPreparedReport
+                        else
+                        begin
+                          if dlgPrint.Execute then
+                          begin
+                            ReportDM.rptCustomerListing.PrintOptions.Copies :=
+                              dlgPrint.DialogData.Copies;
+
+                            ReportDM.rptCustomerListing.Print;
+                          end;
+                        end;
+                    end;
+                end;
               end;
 
             raExcel:
@@ -1374,6 +1553,13 @@ begin
   actInsert.Caption := 'Add a new address';
   actEdit.Caption := 'Edit selected address';
   actDelete.Caption := 'Delete selected address';
+end;
+
+procedure TCustomerFrm.DoMyMouseWheel(Sender: TObject; Shift: TShiftState;
+  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+begin
+  if not TcxLookupComboBox(Sender).DroppedDown then
+    Handled := True;
 end;
 
 procedure TCustomerFrm.grdVCustomerInitEdit(Sender, AItem: TObject; AEdit: TcxCustomEdit);
