@@ -261,60 +261,68 @@ type
     tipGroupedReport: TdxScreenTip;
     tipRepoortType: TdxScreenTip;
     tipPrintWhat: TdxScreenTip;
-    viewCustomerListingID: TcxGridDBBandedColumn;
-    viewCustomerListingCUSTOMER_TYPE_ID: TcxGridDBBandedColumn;
-    viewCustomerListingYEAR_END_MONTH_ID: TcxGridDBBandedColumn;
-    viewCustomerListingTAX_OFFICE_ID: TcxGridDBBandedColumn;
-    viewCustomerListingAR_MONTH_ID: TcxGridDBBandedColumn;
-    viewCustomerListingVAT_MONTH_ID: TcxGridDBBandedColumn;
-    viewCustomerListingVAT_COUNTRY_ID: TcxGridDBBandedColumn;
-    viewCustomerListingVAT_OFFICE_ID: TcxGridDBBandedColumn;
-    viewCustomerListingSTATUS_ID: TcxGridDBBandedColumn;
-    viewCustomerListingCUSTOMER_TYPE: TcxGridDBBandedColumn;
-    viewCustomerListingNAME: TcxGridDBBandedColumn;
-    viewCustomerListingFIRST_NAME: TcxGridDBBandedColumn;
-    viewCustomerListingLAST_NAME: TcxGridDBBandedColumn;
-    viewCustomerListingINITIALS: TcxGridDBBandedColumn;
-    viewCustomerListingTRADING_AS: TcxGridDBBandedColumn;
-    viewCustomerListingBILL_TO: TcxGridDBBandedColumn;
-    viewCustomerListingCO_NO: TcxGridDBBandedColumn;
-    viewCustomerListingTAX_NO: TcxGridDBBandedColumn;
-    viewCustomerListingVAT_NO: TcxGridDBBandedColumn;
-    viewCustomerListingVAT_CUSTOMS_CODE: TcxGridDBBandedColumn;
-    viewCustomerListingPAYE_UIF_NO: TcxGridDBBandedColumn;
-    viewCustomerListingSDL_NO: TcxGridDBBandedColumn;
-    viewCustomerListingWC_NO: TcxGridDBBandedColumn;
-    viewCustomerListingAR_COMPLETION_DATE: TcxGridDBBandedColumn;
-    viewCustomerListingPASTEL_ACC_CODE: TcxGridDBBandedColumn;
-    viewCustomerListingVB_TAX_ACC_CODE: TcxGridDBBandedColumn;
-    viewCustomerListingIS_PROV_TAX_PAYER: TcxGridDBBandedColumn;
-    viewCustomerListingHAS_LIVING_WILL: TcxGridDBBandedColumn;
-    viewCustomerListingIS_ORGAN_DONOR: TcxGridDBBandedColumn;
-    viewCustomerListingDATE_CREATED: TcxGridDBBandedColumn;
-    viewCustomerListingDATE_MODIFIED: TcxGridDBBandedColumn;
-    viewCustomerListingIS_ACTIVE: TcxGridDBBandedColumn;
-    viewCustomerListingEFILING: TcxGridDBBandedColumn;
-    viewCustomerListingEF_USER_NAME: TcxGridDBBandedColumn;
-    viewCustomerListingEF_PASSWORD: TcxGridDBBandedColumn;
-    viewCustomerListingTAX_OFFICE: TcxGridDBBandedColumn;
-    viewCustomerListingVAT_MONTH: TcxGridDBBandedColumn;
-    viewCustomerListingVAT_COUNTRY: TcxGridDBBandedColumn;
-    viewCustomerListingVAT_OFFICE: TcxGridDBBandedColumn;
-    viewCustomerListingAR_MONTH: TcxGridDBBandedColumn;
-    viewCustomerListingCUSTOMER_STATUS: TcxGridDBBandedColumn;
+    edtCLID: TcxGridDBBandedColumn;
+    edtCLCustomerTypeID: TcxGridDBBandedColumn;
+    edtCLYearEndMonthID: TcxGridDBBandedColumn;
+    edtCLTaxOfficeID: TcxGridDBBandedColumn;
+    edtCLARMonthID: TcxGridDBBandedColumn;
+    edtCLVATMonthID: TcxGridDBBandedColumn;
+    edtCLVATCountryID: TcxGridDBBandedColumn;
+    edtCLVATOfficeID: TcxGridDBBandedColumn;
+    edtCLStatusID: TcxGridDBBandedColumn;
+    edtCLCustomerType: TcxGridDBBandedColumn;
+    edtCLName: TcxGridDBBandedColumn;
+    edtCLTradingAs: TcxGridDBBandedColumn;
+    edtCLCoNo: TcxGridDBBandedColumn;
+    edtCLTaxNo: TcxGridDBBandedColumn;
+    edtCLVATNo: TcxGridDBBandedColumn;
+    cbxCLIsActive: TcxGridDBBandedColumn;
+    edtCLStatus: TcxGridDBBandedColumn;
     dlgFileSave: TSaveDialog;
     dlgPrint: TdxPrintDialog;
     grdCustomerReport: TcxGrid;
     viewCustomerReport: TcxGridDBBandedTableView;
-    cxGridDBBandedColumn1: TcxGridDBBandedColumn;
-    cxGridDBBandedColumn2: TcxGridDBBandedColumn;
-    cxGridDBBandedColumn3: TcxGridDBBandedColumn;
-    cxGridDBBandedColumn4: TcxGridDBBandedColumn;
-    cxGridDBBandedColumn5: TcxGridDBBandedColumn;
-    cxGridDBBandedColumn6: TcxGridDBBandedColumn;
-    cxGridDBBandedColumn7: TcxGridDBBandedColumn;
-    cxGridDBBandedColumn8: TcxGridDBBandedColumn;
     cxGridLevel1: TcxGridLevel;
+    grpReportOptions: TdxLayoutGroup;
+    litPrintContactDetails: TdxLayoutItem;
+    cbxPrintContactDetails: TcxCheckBox;
+    tipPrintContactDetails: TdxScreenTip;
+    viewCustomerReportID: TcxGridDBBandedColumn;
+    viewCustomerReportCUSTOMER_TYPE_ID: TcxGridDBBandedColumn;
+    viewCustomerReportYEAR_END_MONTH_ID: TcxGridDBBandedColumn;
+    viewCustomerReportTAX_OFFICE_ID: TcxGridDBBandedColumn;
+    viewCustomerReportVAT_MONTH_ID: TcxGridDBBandedColumn;
+    viewCustomerReportVAT_COUNTRY_ID: TcxGridDBBandedColumn;
+    viewCustomerReportVAT_OFFICE_ID: TcxGridDBBandedColumn;
+    viewCustomerReportAR_MONTH_ID: TcxGridDBBandedColumn;
+    viewCustomerReportSTATUS_ID: TcxGridDBBandedColumn;
+    viewCustomerReportNAME: TcxGridDBBandedColumn;
+    viewCustomerReportFIRST_NAME: TcxGridDBBandedColumn;
+    viewCustomerReportLAST_NAME: TcxGridDBBandedColumn;
+    viewCustomerReportINITIALS: TcxGridDBBandedColumn;
+    viewCustomerReportTRADING_AS: TcxGridDBBandedColumn;
+    viewCustomerReportBILL_TO: TcxGridDBBandedColumn;
+    viewCustomerReportCO_NO: TcxGridDBBandedColumn;
+    viewCustomerReportTAX_NO: TcxGridDBBandedColumn;
+    viewCustomerReportVAT_NO: TcxGridDBBandedColumn;
+    viewCustomerReportVAT_CUSTOMS_CODE: TcxGridDBBandedColumn;
+    viewCustomerReportPAYE_UIF_NO: TcxGridDBBandedColumn;
+    viewCustomerReportSDL_NO: TcxGridDBBandedColumn;
+    viewCustomerReportWC_NO: TcxGridDBBandedColumn;
+    viewCustomerReportAR_COMPLETION_DATE: TcxGridDBBandedColumn;
+    viewCustomerReportSARS_AUTHORIZATION_SHEET: TcxGridDBBandedColumn;
+    viewCustomerReportPASTEL_ACC_CODE: TcxGridDBBandedColumn;
+    viewCustomerReportVB_TAX_ACC_CODE: TcxGridDBBandedColumn;
+    viewCustomerReportIS_PROV_TAX_PAYER: TcxGridDBBandedColumn;
+    viewCustomerReportHAS_LIVING_WILL: TcxGridDBBandedColumn;
+    viewCustomerReportIS_ORGAN_DONOR: TcxGridDBBandedColumn;
+    viewCustomerReportDATE_CREATED: TcxGridDBBandedColumn;
+    viewCustomerReportDATE_MODIFIED: TcxGridDBBandedColumn;
+    viewCustomerReportIS_ACTIVE: TcxGridDBBandedColumn;
+    viewCustomerReportEFILING: TcxGridDBBandedColumn;
+    viewCustomerReportEF_USER_NAME: TcxGridDBBandedColumn;
+    viewCustomerReportEF_PASSWORD: TcxGridDBBandedColumn;
+    viewCustomerReportCUSTOMER_GROUP_ID: TcxGridDBBandedColumn;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -911,7 +919,8 @@ begin
   styLegend.Style.TextColor := cxLookAndFeels.RootLookAndFeel.SkinPainter.DefaultContentTextColor;
 
   viewCustomer.DataController.DataSource := MTDM.dtsCustomer;
-  grdVCustomer.DataController.DataSource := MTDM.dtsCustomer;
+  viewCustomerReport.DataController.DataSource :=  ReportDM.dtsCustomer;
+  viewCustomerListing.DataController.DataSource := ReportDM.dtsCustomerListing;
   navCustomer.DataSource := MTDM.dtsCustomer;
   navVCustomer.DataSource := MTDM.dtsCustomer;
 
@@ -952,7 +961,6 @@ begin
   viewDirector.DataController.DataSource := MTDM.dtsDirector;
   viewBeneficiary.DataController.DataSource := MTDM.dtsBeneficiary;
   viewVehicle.DataController.DataSource := MTDM.dtsVehicle;
-  viewCustomerListing.DataController.DataSource := ReportDM.dtsCustomerListing;
 // FDetailDataSet[0] := MTDM.cdsContactDetailCo;
 // FDetailDataSet[1] := MTDM.cdsAddress;
 // FDetailDataSet[2] := MTDM.cdsContactPerson;
@@ -1136,7 +1144,7 @@ end;
 procedure TCustomerFrm.navCustomerButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
   ID: Integer;
-  WhereClause, OrderByClause: string;
+  CustomerWhereClause, CustomerOrderByClause: string;
   DC: TcxDBDataController;
   C: TcxCustomGridTableController;
   I: Integer;
@@ -1164,111 +1172,205 @@ begin
         ReportDM.PrintExporting := True;
         DC := viewCustomer.DataController;
         C := viewCustomer.Controller;
-        try
-          ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'CustomerListing.fr3';
-          case ReportDM.ReportAction of
-            raPreview, raPrint:
-              begin
-                if not TFile.Exists(ReportDM.ReportFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
-
-                case lucReportType.ItemIndex of
-                  0: TfrxMemoView(ReportDM.rptCustomerListing.FindObject('lblReportTypeName')).Text := 'Customer Listing';
-                  1: TfrxMemoView(ReportDM.rptCustomerListing.FindObject('lblReportTypeName')).Text := 'Customer Detail Report';
-                end;
-
-                if cbxGroupedReport.Checked then
-                begin
-                  OrderByClause := ' ORDER BY C.CUSTOMER_TYPE, C."NAME" ';
-                  ReportDM.cdsCustomerListing.IndexName := 'idxTypeName';
-                  TfrxGroupHeader(ReportDM.rptCustomerListing.FindObject('bndCustomerTypeGroup')).Visible := True;
-                end
-                else
-                begin
-                  OrderByClause := ' ORDER BY C."NAME" ';
-                  ReportDM.cdsCustomerListing.IndexName := 'idxCustName';
-                  TfrxGroupHeader(ReportDM.rptCustomerListing.FindObject('bndCustomerTypeGroup')).Visible := False;
-                end;
-
-                WhereClause := ' WHERE C.ID IN (';
-
-                C := viewCustomer.Controller;
-                DC := viewCustomer.DataController;
-
-                case lucPrintWhat.ItemIndex of
-                  0:
-                    begin
-                      WhereClause := '';
-                    end;
-
-                  1:
-                    begin
-                      if C.SelectedRecordCount = 0 then
-                        raise ESelectionException.Create('No customers have been selected. Please select at least one customer before using this option.');
-
-                      for I := 0 to C.SelectedRecordCount - 1 do
-                      begin
-                        WhereClause := WhereClause + IntToStr(DC.Values[C.SelectedRecords[I].Index, edtCustomerID.Index]);
-                        if I < C.SelectedRecordCount - 1 then
-                          WhereClause := WhereClause + ',';
-                      end;
-                      WhereClause := WhereClause + ')';
-                    end;
-
-                  2:
-                    begin
-                      if not DC.filter.Active then
-                        raise ESelectionException.Create('No filter has been applied to the customer list. Please apply a filter before using this option.');
-
-                      for I := 0 to DC.FilteredRecordCount - 1 do
-                      begin
-                        WhereClause := WhereClause + IntToStr(DC.Values[DC.FilteredRecordIndex[I], edtCustomerID.Index]);
-                        if I < DC.FilteredRecordCount - 1 then
-                          WhereClause := WhereClause + ',';
-                      end;
-                      WhereClause := WhereClause + ')';
-                    end;
-                end;
-
-                VBBaseDM.GetData(53, ReportDM.cdsCustomerListing, ReportDM.cdsCustomerListing.Name, WhereClause,
-                  'C:\Data\Xml\Customer Listing.xml', ReportDM.cdsCustomerListing.UpdateOptions.Generatorname,
-                  ReportDM.cdsCustomerListing.UpdateOptions.UpdateTableName);
-
+        case lucReportType.ItemIndex of
+          0: // Customer listing
+            begin
+              try
+                ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'CustomerListing.fr3';
                 case ReportDM.ReportAction of
                   raPreview, raPrint:
                     begin
-                      if ReportDM.rptCustomerListing.PrepareReport then
-                        if ReportDM.ReportAction = raPreview then
-                          ReportDM.rptCustomerListing.ShowPreparedReport
-                        else
-                        begin
-                          if dlgPrint.Execute then
-                          begin
-                            ReportDM.rptCustomerListing.PrintOptions.Copies :=
-                              dlgPrint.DialogData.Copies;
+                      if not TFile.Exists(ReportDM.ReportFileName) then
+                        raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
-                            ReportDM.rptCustomerListing.Print;
+                      TfrxMemoView(ReportDM.rptCustomerListing.FindObject('lblReportTypeName')).Text := 'Customer Listing';
+                      TfrxGroupHeader(ReportDM.rptCustomerListing.FindObject('bndCustomerTypeGroup')).Visible := cbxGroupedReport.Checked;
+
+                      if cbxGroupedReport.Checked then
+                      begin
+                        CustomerOrderByClause := ' ORDER BY C.CUSTOMER_TYPE, C."NAME" ';
+                        ReportDM.cdsCustomerListing.IndexName := 'idxTypeName';
+                      end
+                      else
+                      begin
+                        CustomerOrderByClause := ' ORDER BY C."NAME" ';
+                        ReportDM.cdsCustomerListing.IndexName := 'idxCustName';
+                      end;
+
+//                if cbxPrintContactDetails.Checked then
+//                  TfrxGroupHeader(ReportDM.rptCustomerListing.FindObject('bndCustomerTypeGroup')).Height := 2
+//                else
+//                  TfrxGroupHeader(ReportDM.rptCustomerListing.FindObject('bndCustomerTypeGroup')).Height := 1.05;
+
+                      CustomerWhereClause := ' WHERE C.ID IN (';
+
+                      case lucPrintWhat.ItemIndex of
+                        0: CustomerWhereClause := '';
+
+                        1:
+                          begin
+                            if C.SelectedRecordCount = 0 then
+                              raise ESelectionException.Create('No customers have been selected. Please select at least one customer before using this option.');
+
+                            for I := 0 to C.SelectedRecordCount - 1 do
+                            begin
+                              CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[C.SelectedRecords[I].Index, edtCustomerID.Index]);
+                              if I < C.SelectedRecordCount - 1 then
+                                CustomerWhereClause := CustomerWhereClause + ',';
+                            end;
+                            CustomerWhereClause := CustomerWhereClause + ')';
                           end;
-                        end;
+
+                        2:
+                          begin
+                            if not DC.filter.Active then
+                              raise ESelectionException.Create('No filter has been applied to the customer list. Please apply a filter before using this option.');
+
+                            for I := 0 to DC.FilteredRecordCount - 1 do
+                            begin
+                              CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[DC.FilteredRecordIndex[I], edtCustomerID.Index]);
+                              if I < DC.FilteredRecordCount - 1 then
+                                CustomerWhereClause := CustomerWhereClause + ',';
+                            end;
+                            CustomerWhereClause := CustomerWhereClause + ')';
+                          end;
+                      end;
+
+                      CustomerWhereClause := CustomerWhereClause + CustomerOrderByClause;
+
+                      // Customer data
+                      VBBaseDM.GetData(66, ReportDM.cdsCustomerListing, ReportDM.cdsCustomerListing.Name, CustomerWhereClause,
+                        'C:\Data\Xml\Customer Listing.xml', ReportDM.cdsCustomerListing.UpdateOptions.Generatorname,
+                        ReportDM.cdsCustomerListing.UpdateOptions.UpdateTableName);
+
+                      case ReportDM.ReportAction of
+                        raPreview, raPrint:
+                          begin
+                            if ReportDM.rptCustomerListing.PrepareReport then
+                              if ReportDM.ReportAction = raPreview then
+                                ReportDM.rptCustomerListing.ShowPreparedReport
+                              else
+                              begin
+                                if dlgPrint.Execute then
+                                begin
+                                  ReportDM.rptCustomerListing.PrintOptions.Copies :=
+                                    dlgPrint.DialogData.Copies;
+
+                                  ReportDM.rptCustomerListing.Print;
+                                end;
+                              end;
+                          end;
+                      end;
+                    end;
+
+                  raExcel:
+                    begin
+//                ReportDM.ExportToExcel(grdMaster, EXCEL_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+                    end;
+
+                  raPDF:
+                    begin
+                      if not TFile.Exists(ReportDM.ReportFileName) then
+                        raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
+
+                      ReportDM.ExportToPDF(PDF_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
                     end;
                 end;
+              finally
+                Screen.Cursor := crDefault;
               end;
+            end;
 
-            raExcel:
-              begin
+          1: // Customer detail report
+            begin
+              try
+                ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'CustomerDetail.fr3';
+                case ReportDM.ReportAction of
+                  raPreview, raPrint:
+                    begin
+                      if not TFile.Exists(ReportDM.ReportFileName) then
+                        raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
+
+                      TfrxMemoView(ReportDM.rptCustomer.FindObject('lblReportTypeName')).Text := 'Customer Detail Report';
+                      CustomerOrderByClause := ' ORDER BY C."NAME" ';
+                      CustomerWhereClause := ' WHERE C.ID IN (';
+
+                      case lucPrintWhat.ItemIndex of
+                        0: CustomerWhereClause := '';
+
+                        1:
+                          begin
+                            if C.SelectedRecordCount = 0 then
+                              raise ESelectionException.Create('No customers have been selected. Please select at least one customer before using this option.');
+
+                            for I := 0 to C.SelectedRecordCount - 1 do
+                            begin
+                              CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[C.SelectedRecords[I].Index, edtCustomerID.Index]);
+                              if I < C.SelectedRecordCount - 1 then
+                                CustomerWhereClause := CustomerWhereClause + ',';
+                            end;
+                            CustomerWhereClause := CustomerWhereClause + ')';
+                          end;
+
+                        2:
+                          begin
+                            if not DC.filter.Active then
+                              raise ESelectionException.Create('No filter has been applied to the customer list. Please apply a filter before using this option.');
+
+                            for I := 0 to DC.FilteredRecordCount - 1 do
+                            begin
+                              CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[DC.FilteredRecordIndex[I], edtCustomerID.Index]);
+                              if I < DC.FilteredRecordCount - 1 then
+                                CustomerWhereClause := CustomerWhereClause + ',';
+                            end;
+                            CustomerWhereClause := CustomerWhereClause + ')';
+                          end;
+                      end;
+
+                      CustomerWhereClause := CustomerWhereClause + CustomerOrderByClause;
+
+                      // Customer data
+                      VBBaseDM.GetData(53, ReportDM.cdsCustomer, ReportDM.cdsCustomer.Name, CustomerWhereClause,
+                        'C:\Data\Xml\Customer Detail.xml', ReportDM.cdsCustomer.UpdateOptions.Generatorname,
+                        ReportDM.cdsCustomer.UpdateOptions.UpdateTableName);
+
+                      case ReportDM.ReportAction of
+                        raPreview, raPrint:
+                          begin
+                            if ReportDM.rptCustomer.PrepareReport then
+                              if ReportDM.ReportAction = raPreview then
+                                ReportDM.rptCustomer.ShowPreparedReport
+                              else
+                              begin
+                                if dlgPrint.Execute then
+                                begin
+                                  ReportDM.rptCustomer.PrintOptions.Copies :=
+                                    dlgPrint.DialogData.Copies;
+
+                                  ReportDM.rptCustomer.Print;
+                                end;
+                              end;
+                          end;
+                      end;
+                    end;
+
+                  raExcel:
+                    begin
 //                ReportDM.ExportToExcel(grdMaster, EXCEL_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
-              end;
+                    end;
 
-            raPDF:
-              begin
-                if not TFile.Exists(ReportDM.ReportFileName) then
-                  raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
+                  raPDF:
+                    begin
+                      if not TFile.Exists(ReportDM.ReportFileName) then
+                        raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
-                ReportDM.ExportToPDF(PDF_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+                      ReportDM.ExportToPDF(PDF_DOCS + 'Activity Type Listing', cbxOpenAfterExport.Checked);
+                    end;
+                end;
+              finally
+                Screen.Cursor := crDefault;
               end;
-          end;
-        finally
-          Screen.Cursor := crDefault;
+            end;
         end;
       end;
   end;
@@ -1951,4 +2053,6 @@ begin
 end;
 
 end.
+
+
 
