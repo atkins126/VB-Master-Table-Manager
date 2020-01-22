@@ -323,6 +323,30 @@ type
     viewCustomerReportEF_USER_NAME: TcxGridDBBandedColumn;
     viewCustomerReportEF_PASSWORD: TcxGridDBBandedColumn;
     viewCustomerReportCUSTOMER_GROUP_ID: TcxGridDBBandedColumn;
+    grdAddress: TcxGrid;
+    viewAddress: TcxGridDBBandedTableView;
+    lvlAddress: TcxGridLevel;
+    viewAddressADDRESS_ID: TcxGridDBBandedColumn;
+    viewAddressCUSTOMER_ID: TcxGridDBBandedColumn;
+    viewAddressCUSTOMER_TYPE_ID: TcxGridDBBandedColumn;
+    viewAddressCUSTOMER_TYPE: TcxGridDBBandedColumn;
+    viewAddressNAME: TcxGridDBBandedColumn;
+    viewAddressTRADING_AS: TcxGridDBBandedColumn;
+    viewAddressPHYSICAL1: TcxGridDBBandedColumn;
+    viewAddressPHYSICAL2: TcxGridDBBandedColumn;
+    viewAddressPHYSICAL3: TcxGridDBBandedColumn;
+    viewAddressPHYSICAL4: TcxGridDBBandedColumn;
+    viewAddressPHYSICAL_CODE: TcxGridDBBandedColumn;
+    viewAddressPOSTAL1: TcxGridDBBandedColumn;
+    viewAddressPOSTAL2: TcxGridDBBandedColumn;
+    viewAddressPOSTAL3: TcxGridDBBandedColumn;
+    viewAddressPOSTAL4: TcxGridDBBandedColumn;
+    viewAddressPOSTAL_CODE: TcxGridDBBandedColumn;
+    viewAddressBILLING1: TcxGridDBBandedColumn;
+    viewAddressBILLING2: TcxGridDBBandedColumn;
+    viewAddressBILLING3: TcxGridDBBandedColumn;
+    viewAddressBILLING4: TcxGridDBBandedColumn;
+    viewAddressBILLING_CODE: TcxGridDBBandedColumn;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -919,7 +943,7 @@ begin
   styLegend.Style.TextColor := cxLookAndFeels.RootLookAndFeel.SkinPainter.DefaultContentTextColor;
 
   viewCustomer.DataController.DataSource := MTDM.dtsCustomer;
-  viewCustomerReport.DataController.DataSource :=  ReportDM.dtsCustomer;
+  viewCustomerReport.DataController.DataSource := ReportDM.dtsCustomer;
   viewCustomerListing.DataController.DataSource := ReportDM.dtsCustomerListing;
   navCustomer.DataSource := MTDM.dtsCustomer;
   navVCustomer.DataSource := MTDM.dtsCustomer;
@@ -1144,7 +1168,7 @@ end;
 procedure TCustomerFrm.navCustomerButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
   ID: Integer;
-  CustomerWhereClause, CustomerOrderByClause: string;
+  CustomerWhereClause, CustomerOrderByClause, AddressClause: string;
   DC: TcxDBDataController;
   C: TcxCustomGridTableController;
   I: Integer;
@@ -1177,6 +1201,7 @@ begin
             begin
               try
                 ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'CustomerListing.fr3';
+                ReportDM.cdsAddress.IndexName := 'idxCustID';
                 case ReportDM.ReportAction of
                   raPreview, raPrint:
                     begin
@@ -1205,7 +1230,11 @@ begin
                       CustomerWhereClause := ' WHERE C.ID IN (';
 
                       case lucPrintWhat.ItemIndex of
-                        0: CustomerWhereClause := '';
+                        0:
+                          begin
+                            CustomerWhereClause := '';
+                            AddressClause := '';
+                          end;
 
                         1:
                           begin
@@ -1214,7 +1243,7 @@ begin
 
                             for I := 0 to C.SelectedRecordCount - 1 do
                             begin
-                              CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[C.SelectedRecords[I].Index, edtCustomerID.Index]);
+                              CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[C.SelectedRecords[I].RecordIndex, edtCustomerID.Index]);
                               if I < C.SelectedRecordCount - 1 then
                                 CustomerWhereClause := CustomerWhereClause + ',';
                             end;
@@ -1292,11 +1321,27 @@ begin
                         raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
                       TfrxMemoView(ReportDM.rptCustomer.FindObject('lblReportTypeName')).Text := 'Customer Detail Report';
+
+//                      TfrxMemoView(ReportDM.rptCustomer.FindObject('lblPhysicalTitle')).Font.Name := 'Calibri';
+//                      TfrxMemoView(ReportDM.rptCustomer.FindObject('lblPhysicalTitle')).Font.Size := 10;
+//                      TfrxMemoView(ReportDM.rptCustomer.FindObject('lblPhysicalTitle')).Font.Style := [fsBold];
+//
+//                      TfrxMemoView(ReportDM.rptCustomer.FindObject('lblPhysical1')).Font.Name := 'Calibri';
+//                      TfrxMemoView(ReportDM.rptCustomer.FindObject('lblPhysical1')).Font.Size := 10;
+//
+//                      TfrxMemoView(ReportDM.rptCustomer.FindObject('lblPhysical2')).Font.Name := 'Calibri';
+//                      TfrxMemoView(ReportDM.rptCustomer.FindObject('lblPhysical2')).Font.Size := 10;
+
                       CustomerOrderByClause := ' ORDER BY C."NAME" ';
                       CustomerWhereClause := ' WHERE C.ID IN (';
+                      AddressClause := ' WHERE A.CUSTOMER_ID IN (';
 
                       case lucPrintWhat.ItemIndex of
-                        0: CustomerWhereClause := '';
+                        0:
+                          begin
+                            CustomerWhereClause := '';
+                            AddressClause := '';
+                          end;
 
                         1:
                           begin
@@ -1305,11 +1350,16 @@ begin
 
                             for I := 0 to C.SelectedRecordCount - 1 do
                             begin
-                              CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[C.SelectedRecords[I].Index, edtCustomerID.Index]);
+                              CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[C.SelectedRecords[I].RecordIndex, edtCustomerID.Index]);
+                              AddressClause := AddressClause + IntToStr(DC.Values[C.SelectedRecords[I].RecordIndex, edtCustomerID.Index]);
                               if I < C.SelectedRecordCount - 1 then
+                              begin
                                 CustomerWhereClause := CustomerWhereClause + ',';
+                                AddressClause := AddressClause + ',';
+                              end;
                             end;
                             CustomerWhereClause := CustomerWhereClause + ')';
+                            AddressClause := AddressClause + ')';
                           end;
 
                         2:
@@ -1320,38 +1370,64 @@ begin
                             for I := 0 to DC.FilteredRecordCount - 1 do
                             begin
                               CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[DC.FilteredRecordIndex[I], edtCustomerID.Index]);
+                              AddressClause := AddressClause + IntToStr(DC.Values[C.SelectedRecords[I].Index, edtCustomerID.Index]);
                               if I < DC.FilteredRecordCount - 1 then
+                              begin
                                 CustomerWhereClause := CustomerWhereClause + ',';
+                                AddressClause := AddressClause + ',';
+                              end;
                             end;
                             CustomerWhereClause := CustomerWhereClause + ')';
+                            AddressClause := AddressClause + ')';
                           end;
                       end;
 
                       CustomerWhereClause := CustomerWhereClause + CustomerOrderByClause;
+                      AddressClause := AddressClause + ' ORDER BY A.CUSTOMER_ID ';
+//                      AddressClause := AddressClause + ' ORDER BY A."NAME" ';
+
+//                       ReportDM.cdsCustomer.DisableControls;
 
                       // Customer data
                       VBBaseDM.GetData(53, ReportDM.cdsCustomer, ReportDM.cdsCustomer.Name, CustomerWhereClause,
                         'C:\Data\Xml\Customer Detail.xml', ReportDM.cdsCustomer.UpdateOptions.Generatorname,
                         ReportDM.cdsCustomer.UpdateOptions.UpdateTableName);
 
-                      case ReportDM.ReportAction of
-                        raPreview, raPrint:
-                          begin
-                            if ReportDM.rptCustomer.PrepareReport then
-                              if ReportDM.ReportAction = raPreview then
-                                ReportDM.rptCustomer.ShowPreparedReport
-                              else
-                              begin
-                                if dlgPrint.Execute then
-                                begin
-                                  ReportDM.rptCustomer.PrintOptions.Copies :=
-                                    dlgPrint.DialogData.Copies;
+                      VBBaseDM.GetData(67, ReportDM.cdsAddress, ReportDM.cdsAddress.Name, AddressClause,
+                        'C:\Data\Xml\Address Report.xml', ReportDM.cdsAddress.UpdateOptions.Generatorname,
+                        ReportDM.cdsAddress.UpdateOptions.UpdateTableName);
 
-                                  ReportDM.rptCustomer.Print;
+//                      VBBaseDM.GetData(4, ReportDM.cdsAddress, ReportDM.cdsAddress.Name, CustomerWhereClause,
+//                        'C:\Data\Xml\Address Report.xml', ReportDM.cdsAddress.UpdateOptions.Generatorname,
+//                        ReportDM.cdsAddress.UpdateOptions.UpdateTableName);
+
+                      viewCustomerReport.DataController.BeginUpdate;
+                      viewAddress.DataController.BeginUpdate;
+                      try
+
+                        case ReportDM.ReportAction of
+                          raPreview, raPrint:
+                            begin
+                              if ReportDM.rptCustomer.PrepareReport then
+                                if ReportDM.ReportAction = raPreview then
+                                  ReportDM.rptCustomer.ShowPreparedReport
+                                else
+                                begin
+                                  if dlgPrint.Execute then
+                                  begin
+                                    ReportDM.rptCustomer.PrintOptions.Copies :=
+                                      dlgPrint.DialogData.Copies;
+
+                                    ReportDM.rptCustomer.Print;
+                                  end;
                                 end;
-                              end;
-                          end;
+                            end;
+                        end;
+                      finally
+                        viewCustomerReport.DataController.EndUpdate;
+                        viewAddress.DataController.EndUpdate;
                       end;
+//                      ReportDM.cdsCustomer.EnableControls;
                     end;
 
                   raExcel:
@@ -2053,6 +2129,4 @@ begin
 end;
 
 end.
-
-
 

@@ -118,24 +118,6 @@ type
     dtsCountry: TDataSource;
     cdsContactDetailCo: TFDMemTable;
     dtsContactDetailCo: TDataSource;
-    cdsAddress: TFDMemTable;
-    cdsAddressID: TIntegerField;
-    cdsAddressCUSTOMER_ID: TIntegerField;
-    cdsAddressPHYSICAL1: TStringField;
-    cdsAddressPHYSICAL2: TStringField;
-    cdsAddressPHYSICAL3: TStringField;
-    cdsAddressPHYSICAL4: TStringField;
-    cdsAddressPHYSICAL_CODE: TStringField;
-    cdsAddressPOSTAL1: TStringField;
-    cdsAddressPOSTAL2: TStringField;
-    cdsAddressPOSTAL3: TStringField;
-    cdsAddressPOSTAL4: TStringField;
-    cdsAddressPOSTAL_CODE: TStringField;
-    cdsAddressBILLING1: TStringField;
-    cdsAddressBILLING2: TStringField;
-    cdsAddressBILLING3: TStringField;
-    cdsAddressBILLING4: TStringField;
-    cdsAddressBILLING_CODE: TStringField;
     dtsAddress: TDataSource;
     cdsContactDetailPerson: TFDMemTable;
     cdsContactDetailPersonID: TIntegerField;
@@ -346,6 +328,28 @@ type
     fdsVehicle: TfrxDBDataset;
     rptContactDetailCo: TfrxReport;
     rptAddress: TfrxReport;
+    cdsAddress: TFDMemTable;
+    cdsAddressADDRESS_ID: TIntegerField;
+    cdsAddressCUSTOMER_ID: TIntegerField;
+    cdsAddressCUSTOMER_TYPE_ID: TIntegerField;
+    cdsAddressCUSTOMER_TYPE: TStringField;
+    cdsAddressNAME: TStringField;
+    cdsAddressTRADING_AS: TStringField;
+    cdsAddressPHYSICAL1: TStringField;
+    cdsAddressPHYSICAL2: TStringField;
+    cdsAddressPHYSICAL3: TStringField;
+    cdsAddressPHYSICAL4: TStringField;
+    cdsAddressPHYSICAL_CODE: TStringField;
+    cdsAddressPOSTAL1: TStringField;
+    cdsAddressPOSTAL2: TStringField;
+    cdsAddressPOSTAL3: TStringField;
+    cdsAddressPOSTAL4: TStringField;
+    cdsAddressPOSTAL_CODE: TStringField;
+    cdsAddressBILLING1: TStringField;
+    cdsAddressBILLING2: TStringField;
+    cdsAddressBILLING3: TStringField;
+    cdsAddressBILLING4: TStringField;
+    cdsAddressBILLING_CODE: TStringField;
 //    procedure PrintReport(SourceDataSet, TargetDataSet: TFDmemTable;
 //      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
 //      ReportTypeName: string);
@@ -357,6 +361,7 @@ type
     procedure CreatePricehistory;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
+    procedure cdsCustomerAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
     FSLTheYear: TStringList;
@@ -391,6 +396,13 @@ uses
 {$R *.dfm}
 
 { TReportDM }
+
+procedure TReportDM.cdsCustomerAfterScroll(DataSet: TDataSet);
+begin
+  inherited;
+  cdsAddress.Close;
+  cdsAddress.Open;
+end;
 
 procedure TReportDM.CreatePricehistory;
 var
@@ -647,5 +659,4 @@ begin
 end;
 
 end.
-
 
