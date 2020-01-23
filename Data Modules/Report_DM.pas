@@ -329,12 +329,8 @@ type
     rptContactDetailCo: TfrxReport;
     rptAddress: TfrxReport;
     cdsAddress: TFDMemTable;
-    cdsAddressADDRESS_ID: TIntegerField;
+    cdsAddressID: TIntegerField;
     cdsAddressCUSTOMER_ID: TIntegerField;
-    cdsAddressCUSTOMER_TYPE_ID: TIntegerField;
-    cdsAddressCUSTOMER_TYPE: TStringField;
-    cdsAddressNAME: TStringField;
-    cdsAddressTRADING_AS: TStringField;
     cdsAddressPHYSICAL1: TStringField;
     cdsAddressPHYSICAL2: TStringField;
     cdsAddressPHYSICAL3: TStringField;
@@ -350,6 +346,8 @@ type
     cdsAddressBILLING3: TStringField;
     cdsAddressBILLING4: TStringField;
     cdsAddressBILLING_CODE: TStringField;
+    cdsBankingDetailBANK_NAME: TStringField;
+    cdsBankingDetailACCOUNT_TYPE: TStringField;
 //    procedure PrintReport(SourceDataSet, TargetDataSet: TFDmemTable;
 //      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
 //      ReportTypeName: string);
@@ -361,7 +359,6 @@ type
     procedure CreatePricehistory;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
-    procedure cdsCustomerAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
     FSLTheYear: TStringList;
@@ -396,13 +393,6 @@ uses
 {$R *.dfm}
 
 { TReportDM }
-
-procedure TReportDM.cdsCustomerAfterScroll(DataSet: TDataSet);
-begin
-  inherited;
-  cdsAddress.Close;
-  cdsAddress.Open;
-end;
 
 procedure TReportDM.CreatePricehistory;
 var
@@ -659,4 +649,6 @@ begin
 end;
 
 end.
+
+
 

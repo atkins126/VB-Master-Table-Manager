@@ -323,30 +323,6 @@ type
     viewCustomerReportEF_USER_NAME: TcxGridDBBandedColumn;
     viewCustomerReportEF_PASSWORD: TcxGridDBBandedColumn;
     viewCustomerReportCUSTOMER_GROUP_ID: TcxGridDBBandedColumn;
-    grdAddress: TcxGrid;
-    viewAddress: TcxGridDBBandedTableView;
-    lvlAddress: TcxGridLevel;
-    viewAddressADDRESS_ID: TcxGridDBBandedColumn;
-    viewAddressCUSTOMER_ID: TcxGridDBBandedColumn;
-    viewAddressCUSTOMER_TYPE_ID: TcxGridDBBandedColumn;
-    viewAddressCUSTOMER_TYPE: TcxGridDBBandedColumn;
-    viewAddressNAME: TcxGridDBBandedColumn;
-    viewAddressTRADING_AS: TcxGridDBBandedColumn;
-    viewAddressPHYSICAL1: TcxGridDBBandedColumn;
-    viewAddressPHYSICAL2: TcxGridDBBandedColumn;
-    viewAddressPHYSICAL3: TcxGridDBBandedColumn;
-    viewAddressPHYSICAL4: TcxGridDBBandedColumn;
-    viewAddressPHYSICAL_CODE: TcxGridDBBandedColumn;
-    viewAddressPOSTAL1: TcxGridDBBandedColumn;
-    viewAddressPOSTAL2: TcxGridDBBandedColumn;
-    viewAddressPOSTAL3: TcxGridDBBandedColumn;
-    viewAddressPOSTAL4: TcxGridDBBandedColumn;
-    viewAddressPOSTAL_CODE: TcxGridDBBandedColumn;
-    viewAddressBILLING1: TcxGridDBBandedColumn;
-    viewAddressBILLING2: TcxGridDBBandedColumn;
-    viewAddressBILLING3: TcxGridDBBandedColumn;
-    viewAddressBILLING4: TcxGridDBBandedColumn;
-    viewAddressBILLING_CODE: TcxGridDBBandedColumn;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -1168,7 +1144,8 @@ end;
 procedure TCustomerFrm.navCustomerButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
   ID: Integer;
-  CustomerWhereClause, CustomerOrderByClause, AddressClause: string;
+  CustomerWhereClause, CustomerOrderByClause, AddressClause, ContactDetailCoClause: string;
+  BankingDetailClause: string;
   DC: TcxDBDataController;
   C: TcxCustomGridTableController;
   I: Integer;
@@ -1335,12 +1312,16 @@ begin
                       CustomerOrderByClause := ' ORDER BY C."NAME" ';
                       CustomerWhereClause := ' WHERE C.ID IN (';
                       AddressClause := ' WHERE A.CUSTOMER_ID IN (';
+                      ContactDetailCoClause := ' WHERE O.CUSTOMER_ID IN (';
+                      BankingDetailClause := ' WHWERE D.CUSTOMER_ID IN (';
 
                       case lucPrintWhat.ItemIndex of
                         0:
                           begin
                             CustomerWhereClause := '';
                             AddressClause := '';
+                            ContactDetailCoClause := '';
+                            BankingDetailClause := '';
                           end;
 
                         1:
@@ -1356,10 +1337,14 @@ begin
                               begin
                                 CustomerWhereClause := CustomerWhereClause + ',';
                                 AddressClause := AddressClause + ',';
+                                ContactDetailCoClause := ContactDetailCoClause + ',';
+                                BankingDetailClause := BankingDetailClause + ',';
                               end;
                             end;
-                            CustomerWhereClause := CustomerWhereClause + ')';
-                            AddressClause := AddressClause + ')';
+                            CustomerWhereClause := CustomerWhereClause + ') ';
+                            AddressClause := AddressClause + ') ';
+                            ContactDetailCoClause := ContactDetailCoClause + ') ';
+                            BankingDetailClause := BankingDetailClause + ')';
                           end;
 
                         2:
@@ -1375,15 +1360,19 @@ begin
                               begin
                                 CustomerWhereClause := CustomerWhereClause + ',';
                                 AddressClause := AddressClause + ',';
+                                ContactDetailCoClause := ContactDetailCoClause + ',';
+                                BankingDetailClause := BankingDetailClause + ',';
                               end;
                             end;
                             CustomerWhereClause := CustomerWhereClause + ')';
                             AddressClause := AddressClause + ')';
+                            ContactDetailCoClause := ContactDetailCoClause + ') ';
+                            BankingDetailClause := BankingDetailClause + ')';
                           end;
                       end;
 
                       CustomerWhereClause := CustomerWhereClause + CustomerOrderByClause;
-                      AddressClause := AddressClause + ' ORDER BY A.CUSTOMER_ID ';
+                      AddressClause := AddressClause; // + ' ORDER BY A.CUSTOMER_ID ';
 //                      AddressClause := AddressClause + ' ORDER BY A."NAME" ';
 
 //                       ReportDM.cdsCustomer.DisableControls;
@@ -1393,16 +1382,23 @@ begin
                         'C:\Data\Xml\Customer Detail.xml', ReportDM.cdsCustomer.UpdateOptions.Generatorname,
                         ReportDM.cdsCustomer.UpdateOptions.UpdateTableName);
 
-                      VBBaseDM.GetData(67, ReportDM.cdsAddress, ReportDM.cdsAddress.Name, AddressClause,
-                        'C:\Data\Xml\Address Report.xml', ReportDM.cdsAddress.UpdateOptions.Generatorname,
-                        ReportDM.cdsAddress.UpdateOptions.UpdateTableName);
-
-//                      VBBaseDM.GetData(4, ReportDM.cdsAddress, ReportDM.cdsAddress.Name, CustomerWhereClause,
+//                      VBBaseDM.GetData(67, ReportDM.cdsAddress, ReportDM.cdsAddress.Name, AddressClause,
 //                        'C:\Data\Xml\Address Report.xml', ReportDM.cdsAddress.UpdateOptions.Generatorname,
 //                        ReportDM.cdsAddress.UpdateOptions.UpdateTableName);
 
+                      VBBaseDM.GetData(4, ReportDM.cdsAddress, ReportDM.cdsAddress.Name, AddressClause,
+                        'C:\Data\Xml\Address.xml', ReportDM.cdsAddress.UpdateOptions.Generatorname,
+                        ReportDM.cdsAddress.UpdateOptions.UpdateTableName);
+
+                      VBBaseDM.GetData(54, ReportDM.cdsContactDetailCo, ReportDM.cdsContactDetailCo.Name, ContactDetailCoClause,
+                        'C:\Data\Xml\Contact Detail Co.xml', ReportDM.cdsContactDetailCo.UpdateOptions.Generatorname,
+                        ReportDM.cdsContactDetailCo.UpdateOptions.UpdateTableName);
+
+                      VBBaseDM.GetData(69, ReportDM.cdsBankingDetail, ReportDM.cdsBankingDetail.Name, BankingDetailClause,
+                        'C:\Data\Xml\Banking Detail.xml', ReportDM.cdsBankingDetail.UpdateOptions.Generatorname,
+                        ReportDM.cdsBankingDetail.UpdateOptions.UpdateTableName);
+
                       viewCustomerReport.DataController.BeginUpdate;
-                      viewAddress.DataController.BeginUpdate;
                       try
 
                         case ReportDM.ReportAction of
@@ -1425,7 +1421,6 @@ begin
                         end;
                       finally
                         viewCustomerReport.DataController.EndUpdate;
-                        viewAddress.DataController.EndUpdate;
                       end;
 //                      ReportDM.cdsCustomer.EnableControls;
                     end;

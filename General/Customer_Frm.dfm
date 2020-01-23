@@ -2711,8 +2711,8 @@ inherited CustomerFrm: TCustomerFrm
     end
   end
   object grdCustomerReport: TcxGrid [1]
-    Left = 836
-    Top = 77
+    Left = 1406
+    Top = 67
     Width = 915
     Height = 313
     Font.Charset = ANSI_CHARSET
@@ -2744,54 +2744,63 @@ inherited CustomerFrm: TCustomerFrm
         end>
       object viewCustomerReportID: TcxGridDBBandedColumn
         DataBinding.FieldName = 'ID'
+        Visible = False
         Position.BandIndex = 0
         Position.ColIndex = 0
         Position.RowIndex = 0
       end
       object viewCustomerReportCUSTOMER_TYPE_ID: TcxGridDBBandedColumn
         DataBinding.FieldName = 'CUSTOMER_TYPE_ID'
+        Visible = False
         Position.BandIndex = 0
         Position.ColIndex = 1
         Position.RowIndex = 0
       end
       object viewCustomerReportYEAR_END_MONTH_ID: TcxGridDBBandedColumn
         DataBinding.FieldName = 'YEAR_END_MONTH_ID'
+        Visible = False
         Position.BandIndex = 0
         Position.ColIndex = 2
         Position.RowIndex = 0
       end
       object viewCustomerReportTAX_OFFICE_ID: TcxGridDBBandedColumn
         DataBinding.FieldName = 'TAX_OFFICE_ID'
+        Visible = False
         Position.BandIndex = 0
         Position.ColIndex = 3
         Position.RowIndex = 0
       end
       object viewCustomerReportVAT_MONTH_ID: TcxGridDBBandedColumn
         DataBinding.FieldName = 'VAT_MONTH_ID'
+        Visible = False
         Position.BandIndex = 0
         Position.ColIndex = 4
         Position.RowIndex = 0
       end
       object viewCustomerReportVAT_COUNTRY_ID: TcxGridDBBandedColumn
         DataBinding.FieldName = 'VAT_COUNTRY_ID'
+        Visible = False
         Position.BandIndex = 0
         Position.ColIndex = 5
         Position.RowIndex = 0
       end
       object viewCustomerReportVAT_OFFICE_ID: TcxGridDBBandedColumn
         DataBinding.FieldName = 'VAT_OFFICE_ID'
+        Visible = False
         Position.BandIndex = 0
         Position.ColIndex = 6
         Position.RowIndex = 0
       end
       object viewCustomerReportAR_MONTH_ID: TcxGridDBBandedColumn
         DataBinding.FieldName = 'AR_MONTH_ID'
+        Visible = False
         Position.BandIndex = 0
         Position.ColIndex = 7
         Position.RowIndex = 0
       end
       object viewCustomerReportSTATUS_ID: TcxGridDBBandedColumn
         DataBinding.FieldName = 'STATUS_ID'
+        Visible = False
         Position.BandIndex = 0
         Position.ColIndex = 8
         Position.RowIndex = 0
@@ -3109,158 +3118,6 @@ inherited CustomerFrm: TCustomerFrm
     end
     object lvlCustomerListing: TcxGridLevel
       GridView = viewCustomerListing
-    end
-  end
-  object grdAddress: TcxGrid [3]
-    Left = 150
-    Top = 461
-    Width = 761
-    Height = 200
-    TabOrder = 3
-    Visible = False
-    object viewAddress: TcxGridDBBandedTableView
-      Navigator.Buttons.CustomButtons = <>
-      ScrollbarAnnotations.CustomAnnotations = <>
-      DataController.DataSource = ReportDM.dtsAddress
-      DataController.Summary.DefaultGroupSummaryItems = <>
-      DataController.Summary.FooterSummaryItems = <>
-      DataController.Summary.SummaryGroups = <>
-      OptionsBehavior.FocusCellOnTab = True
-      OptionsBehavior.NavigatorHints = True
-      OptionsBehavior.FocusCellOnCycle = True
-      OptionsView.GroupByBox = False
-      Bands = <
-        item
-        end>
-      object viewAddressADDRESS_ID: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'ADDRESS_ID'
-        Position.BandIndex = 0
-        Position.ColIndex = 0
-        Position.RowIndex = 0
-      end
-      object viewAddressCUSTOMER_ID: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'CUSTOMER_ID'
-        Position.BandIndex = 0
-        Position.ColIndex = 1
-        Position.RowIndex = 0
-      end
-      object viewAddressCUSTOMER_TYPE_ID: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'CUSTOMER_TYPE_ID'
-        Position.BandIndex = 0
-        Position.ColIndex = 2
-        Position.RowIndex = 0
-      end
-      object viewAddressCUSTOMER_TYPE: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'CUSTOMER_TYPE'
-        Position.BandIndex = 0
-        Position.ColIndex = 3
-        Position.RowIndex = 0
-      end
-      object viewAddressNAME: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'NAME'
-        Position.BandIndex = 0
-        Position.ColIndex = 4
-        Position.RowIndex = 0
-      end
-      object viewAddressTRADING_AS: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'TRADING_AS'
-        Position.BandIndex = 0
-        Position.ColIndex = 5
-        Position.RowIndex = 0
-      end
-      object viewAddressPHYSICAL1: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'PHYSICAL1'
-        Position.BandIndex = 0
-        Position.ColIndex = 6
-        Position.RowIndex = 0
-      end
-      object viewAddressPHYSICAL2: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'PHYSICAL2'
-        Position.BandIndex = 0
-        Position.ColIndex = 7
-        Position.RowIndex = 0
-      end
-      object viewAddressPHYSICAL3: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'PHYSICAL3'
-        Position.BandIndex = 0
-        Position.ColIndex = 8
-        Position.RowIndex = 0
-      end
-      object viewAddressPHYSICAL4: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'PHYSICAL4'
-        Position.BandIndex = 0
-        Position.ColIndex = 9
-        Position.RowIndex = 0
-      end
-      object viewAddressPHYSICAL_CODE: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'PHYSICAL_CODE'
-        Position.BandIndex = 0
-        Position.ColIndex = 10
-        Position.RowIndex = 0
-      end
-      object viewAddressPOSTAL1: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'POSTAL1'
-        Position.BandIndex = 0
-        Position.ColIndex = 11
-        Position.RowIndex = 0
-      end
-      object viewAddressPOSTAL2: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'POSTAL2'
-        Position.BandIndex = 0
-        Position.ColIndex = 12
-        Position.RowIndex = 0
-      end
-      object viewAddressPOSTAL3: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'POSTAL3'
-        Position.BandIndex = 0
-        Position.ColIndex = 13
-        Position.RowIndex = 0
-      end
-      object viewAddressPOSTAL4: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'POSTAL4'
-        Position.BandIndex = 0
-        Position.ColIndex = 14
-        Position.RowIndex = 0
-      end
-      object viewAddressPOSTAL_CODE: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'POSTAL_CODE'
-        Position.BandIndex = 0
-        Position.ColIndex = 15
-        Position.RowIndex = 0
-      end
-      object viewAddressBILLING1: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'BILLING1'
-        Position.BandIndex = 0
-        Position.ColIndex = 16
-        Position.RowIndex = 0
-      end
-      object viewAddressBILLING2: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'BILLING2'
-        Position.BandIndex = 0
-        Position.ColIndex = 17
-        Position.RowIndex = 0
-      end
-      object viewAddressBILLING3: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'BILLING3'
-        Position.BandIndex = 0
-        Position.ColIndex = 18
-        Position.RowIndex = 0
-      end
-      object viewAddressBILLING4: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'BILLING4'
-        Position.BandIndex = 0
-        Position.ColIndex = 19
-        Position.RowIndex = 0
-      end
-      object viewAddressBILLING_CODE: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'BILLING_CODE'
-        Position.BandIndex = 0
-        Position.ColIndex = 20
-        Position.RowIndex = 0
-      end
-    end
-    object lvlAddress: TcxGridLevel
-      GridView = viewAddress
     end
   end
   inherited styRepository: TcxStyleRepository
