@@ -29,7 +29,7 @@ uses
   FireDAC.Stan.Error, FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.Phys.IBWrapper,
   dxSkinMoneyTwins, dxSkinOffice2019Colorful, dxSkinTheBezier,
   dxScrollbarAnnotations, Report_DM, dxBar, cxDropDownEdit, cxBarEditItem,
-  cxMaskEdit, dxPrnDev, dxPrnDlg;
+  cxMaskEdit, dxPrnDev, dxPrnDlg, AccountHolder_Frm, cxButtonEdit;
 
   // To handle TFDGUIxErrordialog
 // FireDAC.UI.Intf, FireDAC.VCLUI.Error,
@@ -213,9 +213,9 @@ type
     actInsert: TAction;
     actEdit: TAction;
     actDelete: TAction;
-    Addnewcontactdetail1: TMenuItem;
-    Editselectedcontactdetail1: TMenuItem;
-    Deleteselectedcontactdetail1: TMenuItem;
+    mnuInsertContactDetail: TMenuItem;
+    mnuEditSelectedContactDetail: TMenuItem;
+    mnuDeleteSelectedContactDetail: TMenuItem;
     litLegend: TdxLayoutItem;
     lblLegend: TcxLabel;
     styLegend: TcxEditStyleController;
@@ -323,6 +323,8 @@ type
     viewCustomerReportEF_USER_NAME: TcxGridDBBandedColumn;
     viewCustomerReportEF_PASSWORD: TcxGridDBBandedColumn;
     viewCustomerReportCUSTOMER_GROUP_ID: TcxGridDBBandedColumn;
+    lucAccountHolderName: TcxGridDBBandedColumn;
+    actAccountHolderName: TAction;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -348,6 +350,8 @@ type
     procedure cbxPersistSelectionPropertiesEditValueChanged(Sender: TObject);
     procedure lucPrintWhatPropertiesEditValueChanged(Sender: TObject);
     procedure cbxOpenAfterExportPropertiesEditValueChanged(Sender: TObject);
+    procedure DoSetCoporateAccHolderName(Sender: TObject);
+    procedure popDBActionPopup(Sender: TObject);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
@@ -1690,6 +1694,12 @@ begin
   end;
 end;
 
+procedure TCustomerFrm.popDBActionPopup(Sender: TObject);
+begin
+  inherited;
+//mnuEditSelectedContactDetail.Enabled :=  MTDM.cds
+end;
+
 procedure TCustomerFrm.grdContactPersonEnter(Sender: TObject);
 begin
   inherited;
@@ -1735,6 +1745,38 @@ begin
     Handled := True;
 end;
 
+procedure TCustomerFrm.DoSetCoporateAccHolderName(Sender: TObject);
+begin
+  inherited;
+  if AccountHolderFrm = nil then
+    AccountHolderFrm := TAccountHolderFrm.Create(nil);
+  if AccountHolderFrm.ShowModal = mrOK then
+  begin
+    case AccountHolderFrm.radCustomerName.ItemIndex of
+      0:
+        begin
+          if not (MTDM.cdsBankingDetail.State in [dsEdit, dsInsert]) then
+            MTDM.cdsBankingDetail.Edit;
+          MTDM.cdsBankingDetail.FieldByName('FIRST_NAME').AsString :=
+            MTDM.cdsCustomer.FieldByName('NAME').AsString;
+          MTDM.cdsBankingDetail.FieldByName('LAST_NAME').AsString := '';
+        end;
+      1:
+        begin
+          if not (MTDM.cdsBankingDetail.State in [dsEdit, dsInsert]) then
+            MTDM.cdsBankingDetail.Edit;
+          MTDM.cdsBankingDetail.FieldByName('FIRST_NAME').AsString :=
+            MTDM.cdsCustomer.FieldByName('TRADING_AS').AsString;
+          MTDM.cdsBankingDetail.FieldByName('LAST_NAME').AsString := '';
+        end;
+    end;
+    if MTDM.cdsBankingDetail.State in [dsEdit, dsInsert] then
+      MTDM.cdsBankingDetail.Post;
+  end;
+  AccountHolderFrm.Close;
+  FreeAndNil(AccountHolderFrm);
+end;
+
 procedure TCustomerFrm.grdVCustomerInitEdit(Sender, AItem: TObject; AEdit: TcxCustomEdit);
 begin
   inherited;
@@ -1752,10 +1794,21 @@ var
   ModResult: Integer;
   DataSet: TFDMemTable;
 begin
-  Screen.Cursor := crHourglass;
+//  Screen.Cursor := crHourglass;
   ModResult := mrNone;
   ErrorValues := '';
   DataSet := nil;
+
+  case MTDM.DetailIndex of
+    0: DataSet := MTDM.cdsContactDetailCo;
+    1: DataSet := MTDM.cdsAddress;
+    2: DataSet := MTDM.cdsContactPerson;
+    3: DataSet := MTDM.cdsContactDetailPerson;
+    4: DataSet := MTDM.cdsBankingDetail;
+    5: DataSet := MTDM.cdsDirector;
+    6: DataSet := MTDM.cdsBeneficiary;
+    7: DataSet := MTDM.cdsVehicle;
+  end;
 
   case Key of
     VK_INSERT, VK_RETURN { VK_F2 }:
@@ -1777,7 +1830,7 @@ begin
         case MTDM.DetailIndex of
           0:
             begin
-              DataSet := MTDM.cdsContactDetailCo;
+//              DataSet := MTDM.cdsContactDetailCo;
 
               if CompanyContactDetailFrm = nil then
                 CompanyContactDetailFrm := TCompanyContactDetailFrm.Create(nil);
@@ -1797,7 +1850,7 @@ begin
 
           1:
             begin
-              DataSet := MTDM.cdsAddress;
+//              DataSet := MTDM.cdsAddress;
 
               if AddressDetailFrm = nil then
                 AddressDetailFrm := TAddressDetailFrm.Create(nil);
@@ -1817,7 +1870,7 @@ begin
 
           2:
             begin
-              DataSet := MTDM.cdsContactPerson;
+//              DataSet := MTDM.cdsContactPerson;
 
               if ContactPersonFrm = nil then
                 ContactPersonFrm := TContactPersonFrm.Create(nil);
@@ -1843,7 +1896,7 @@ begin
                 raise ENoDataException.Create('Please add a contact person before adding the details.');
               end;
 
-              DataSet := MTDM.cdsContactDetailPerson;
+//              DataSet := MTDM.cdsContactDetailPerson;
 
               if PersonContactDetailFrm = nil then
                 PersonContactDetailFrm := TPersonContactDetailFrm.Create(nil);
@@ -1863,7 +1916,7 @@ begin
 
           4:
             begin
-              DataSet := MTDM.cdsBankingDetail;
+//              DataSet := MTDM.cdsBankingDetail;
 
               if BankingDetailFrm = nil then
                 BankingDetailFrm := TBankingDetailFrm.Create(nil);
@@ -1883,7 +1936,7 @@ begin
 
           5:
             begin
-              DataSet := MTDM.cdsDirector;
+//              DataSet := MTDM.cdsDirector;
 
               if DirectorDetailFrm = nil then
                 DirectorDetailFrm := TDirectorDetailFrm.Create(nil);
@@ -1903,7 +1956,7 @@ begin
 
           6:
             begin
-              DataSet := MTDM.cdsBeneficiary;
+//              DataSet := MTDM.cdsBeneficiary;
 
               if BeneficiaryDetailFrm = nil then
                 BeneficiaryDetailFrm := TBeneficiaryDetailFrm.Create(nil);
@@ -1923,7 +1976,7 @@ begin
 
           7:
             begin
-              DataSet := MTDM.cdsVehicle;
+//              DataSet := MTDM.cdsVehicle;
 
               if VehicleDetailFrm = nil then
                 VehicleDetailFrm := TVehicleDetailFrm.Create(nil);
@@ -1984,6 +2037,9 @@ begin
     VK_DELETE:
       begin
         Beep;
+        if DataSet.IsEmpty then
+          raise EValidateException.Create('Dataset is empty. No records to delete.');
+
         if DisplayMsg(
           Application.Title,
           'Delete Confirmaiton',

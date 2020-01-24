@@ -63,7 +63,8 @@ uses
   VBPrintExportData in '..\..\Lib\VBPrintExportData.pas',
   VBProxyClass in '..\Lib\VBProxyClass.pas',
   BaseGrid_Frm in '..\Lib\BaseGrid_Frm.pas' {BaseGridFrm},
-  CustomerReportSelection_Frm in 'General\CustomerReportSelection_Frm.pas' {CustomerReportSelectionFrm};
+  CustomerReportSelection_Frm in 'General\CustomerReportSelection_Frm.pas' {CustomerReportSelectionFrm},
+  AccountHolder_Frm in 'General\AccountHolder_Frm.pas' {AccountHolderFrm};
 
 {$R *.res}
 

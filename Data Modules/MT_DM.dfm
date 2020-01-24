@@ -2195,9 +2195,10 @@ inherited MTDM: TMTDM
     end
     object cdsBankingDetailFIRST_NAME: TStringField
       DisplayLabel = 'First Name'
+      DisplayWidth = 100
       FieldName = 'FIRST_NAME'
       Origin = 'FIRST_NAME'
-      Size = 30
+      Size = 100
     end
     object cdsBankingDetailLAST_NAME: TStringField
       DisplayLabel = 'Last Name'

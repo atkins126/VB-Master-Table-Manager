@@ -348,6 +348,7 @@ type
     cdsAddressBILLING_CODE: TStringField;
     cdsBankingDetailBANK_NAME: TStringField;
     cdsBankingDetailACCOUNT_TYPE: TStringField;
+    cdsBankingDetailACCOUNT_HOLDER: TStringField;
 //    procedure PrintReport(SourceDataSet, TargetDataSet: TFDmemTable;
 //      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
 //      ReportTypeName: string);
@@ -359,6 +360,7 @@ type
     procedure CreatePricehistory;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
+    procedure cdsBankingDetailCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     FSLTheYear: TStringList;
@@ -393,6 +395,15 @@ uses
 {$R *.dfm}
 
 { TReportDM }
+
+procedure TReportDM.cdsBankingDetailCalcFields(DataSet: TDataSet);
+begin
+  inherited;
+  cdsBankingDetail.FieldByName('ACCOUNT_HOLDER').AsString :=
+    cdsBankingDetail.FieldByName('FIRST_NAME').AsString + ONE_SPACE +
+    cdsBankingDetail.FieldByName('LAST_NAME').AsString;
+
+end;
 
 procedure TReportDM.CreatePricehistory;
 var
@@ -649,6 +660,4 @@ begin
 end;
 
 end.
-
-
 

@@ -672,11 +672,12 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 8
     end
     object grdContactDetailCo: TcxGrid [4]
-      Left = 25
-      Top = 481
+      Left = 10000
+      Top = 10000
       Width = 391
       Height = 170
       TabOrder = 10
+      Visible = False
       object viewContactDetailCo: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -854,8 +855,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCDComment: TcxDBMemo [5]
-      Left = 25
-      Top = 657
+      Left = 10000
+      Top = 10000
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailCo
       PopupMenu = popDBAction
@@ -863,6 +864,7 @@ inherited CustomerFrm: TCustomerFrm
       Properties.ScrollBars = ssVertical
       Style.HotTrack = False
       TabOrder = 11
+      Visible = False
       OnDblClick = viewContactDetailCoDblClick
       OnKeyDown = viewContactDetailCoKeyDown
       Height = 24
@@ -1126,7 +1128,7 @@ inherited CustomerFrm: TCustomerFrm
       Left = 10000
       Top = 10000
       Width = 1250
-      Height = 245
+      Height = 200
       TabOrder = 15
       Visible = False
       OnEnter = grdContactPersonEnter
@@ -1515,16 +1517,15 @@ inherited CustomerFrm: TCustomerFrm
       OnDblClick = viewContactDetailCoDblClick
       OnEnter = grdCPContactDetailEnter
       OnKeyDown = viewContactDetailCoKeyDown
-      Height = 119
+      Height = 74
       Width = 400
     end
     object grdBankingDetail: TcxGrid [12]
-      Left = 10000
-      Top = 10000
+      Left = 25
+      Top = 481
       Width = 1656
-      Height = 245
+      Height = 200
       TabOrder = 18
-      Visible = False
       object viewBankingDetail: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -1566,13 +1567,15 @@ inherited CustomerFrm: TCustomerFrm
         OptionsData.CancelOnExit = False
         OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
-        OptionsData.Editing = False
         OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Banking Detail data to display>'
         OptionsView.GroupByBox = False
         Bands = <
           item
             Caption = 'Banking Details'
+          end
+          item
+            Caption = 'Account Holder'
           end>
         object edtBankDID: TcxGridDBBandedColumn
           DataBinding.FieldName = 'ID'
@@ -1661,13 +1664,76 @@ inherited CustomerFrm: TCustomerFrm
           Position.ColIndex = 5
           Position.RowIndex = 0
         end
+        object lucAccountHolderName: TcxGridDBBandedColumn
+          Caption = 'Acc'
+          PropertiesClassName = 'TcxButtonEditProperties'
+          Properties.Alignment.Horz = taCenter
+          Properties.Buttons = <
+            item
+              Action = actAccountHolderName
+              Default = True
+              Glyph.SourceDPI = 96
+              Glyph.Data = {
+                89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+                61000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                00097048597300000EC300000EC301C76FA8640000036249444154384F8D906B
+                4C936718863F266E59165DCC4CDC1CC942A25137168180B8EA56659ECBA0B3B4
+                5056400AE5E3544E056CB15829D202ADA4C66269DC5AD33AA445AAA25B172190
+                596C8CD66E820A433BA454893A120C6A61B2EF5E038D26FB6176FD7B0ED7FDBC
+                7989FFC266B3170985C2776432D95BC1D6FF26442412C50A48F2B8B8AAEAA2C1
+                606CB6DB7BBE74B9B038387F334AA5725956764E6F0AF73B149024CACBCA28C5
+                E1BA61834EB73AB8F2662412C9A71B36D226B2397BF0A75D0B5FBF19E3BF9A1F
+                3FB9A28FAD2CA1AD31AB521997DAF2198E8ED2CF6E41F676507BCD0E06637D44
+                C4E74F6464121EFE7C04536E1BA6EFFC32E330D796667322DDC7EA99FE0BA65C
+                BFDB5E3DEE736B457D327A68505D203C3C62053F69D3359B22132EE37E0C5BE4
+                B87BB669C669A848D31FE476384F1F42A72E17162D0F17DA8B47F5EABD6B83EA
+                2B42048971A9DAD2846796C399B06BF271519537D9D5C0DDEC1F3C6F9D19EAC6
+                A31E3DAC4A1E54F284BF8D1A6E6AD07B45882C2D665B5D7AF4D306321EEA8278
+                1C29D8D6AD2DD8FAC9ADF643973DB606FC6E92A2A32E03AA037BA896A66F8541
+                8F20B68B26DE631E9DE0708B5AAFD6F3A2A86AF63A9473B74CE564652517EE24
+                A24F54C63FFEA9391FD6C0CB54C29DA829D9E26F94ED66CECB1F249E5B92DEEA
+                D508DAA8E9A236E068831A3FE44641A36C9CCB69A37A397C014B9A16F6873483
+                E617A76F406166344AF2BE7014D7C7AD980FD85435C0C93BFDF279DA0940DA05
+                E81C80F7DE080606875061A3A8AF9BFD361399203716EE7D28E1ACC3C962061E
+                48CB3CB779BC6C4BD8C6778944B5C794A403582D80B81368EA065CE380CFE745
+                9105E0AB475F3C53EE9F749F3905E77903A6DB03CB7A155E960B9E5ED9F5159F
+                E0EA7CD762EA815D6A20CFBC1072AC07B833328A949380B6FA14856611C66EDF
+                0DA4DE073ABF075A14400589E1AD9B9D044BEBED0F175354941C606A814C2390
+                6B02CE5DF6CEC62AE76EB4EE139FA16AC8D9C9EBC3C0D9C085D646402106C874
+                8CC5454D114B59976216257B741FE64F392325D3BFD16A271DB49A3183D2743D
+                E363E1D5B01F13E8CB6FEE63CAFFEAE8BD3757573E8B9A524098052A69C73F83
+                ABC23DF31F49D0FB4297B1ADEF7FC4ED5ABE86DFBF841EA817060BF4D1E9A137
+                14A655FDC9BB536EB2BEA91DD84ED7B8A2D7575A57AE8CFC178310D76F25CD92
+                A00000000049454E44AE426082}
+              Kind = bkGlyph
+            end>
+          Properties.IncrementalSearch = False
+          Properties.ReadOnly = True
+          Properties.UseLeftAlignmentOnEditing = False
+          Properties.ViewStyle = vsButtonsOnly
+          HeaderAlignmentHorz = taCenter
+          HeaderHint = 'Set corporate account holder name'
+          MinWidth = 32
+          Options.Filtering = False
+          Options.IncSearch = False
+          Options.ShowEditButtons = isebAlways
+          Options.Grouping = False
+          Options.HorzSizing = False
+          Options.Moving = False
+          Options.Sorting = False
+          Width = 32
+          Position.BandIndex = 1
+          Position.ColIndex = 0
+          Position.RowIndex = 0
+        end
         object edtBankDFirstName: TcxGridDBBandedColumn
+          Caption = 'First Name/Company Name'
           DataBinding.FieldName = 'FIRST_NAME'
           PropertiesClassName = 'TcxTextEditProperties'
           Properties.ReadOnly = True
-          Width = 130
-          Position.BandIndex = 0
-          Position.ColIndex = 6
+          Width = 350
+          Position.BandIndex = 1
+          Position.ColIndex = 1
           Position.RowIndex = 0
         end
         object edtBankDLastName: TcxGridDBBandedColumn
@@ -1675,8 +1741,8 @@ inherited CustomerFrm: TCustomerFrm
           PropertiesClassName = 'TcxTextEditProperties'
           Properties.ReadOnly = True
           Width = 150
-          Position.BandIndex = 0
-          Position.ColIndex = 7
+          Position.BandIndex = 1
+          Position.ColIndex = 2
           Position.RowIndex = 0
         end
       end
@@ -1688,7 +1754,7 @@ inherited CustomerFrm: TCustomerFrm
       Left = 10000
       Top = 10000
       Width = 1656
-      Height = 245
+      Height = 200
       TabOrder = 19
       Visible = False
       object viewDirector: TcxGridDBBandedTableView
@@ -2076,7 +2142,7 @@ inherited CustomerFrm: TCustomerFrm
       Left = 10000
       Top = 10000
       Width = 1656
-      Height = 245
+      Height = 200
       TabOrder = 21
       Visible = False
       object viewVehicle: TcxGridDBBandedTableView
@@ -2395,7 +2461,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     inherited layMainGroup_Root: TdxLayoutGroup
-      ItemIndex = 1
+      ItemIndex = 3
     end
     object grpToolbar: TdxLayoutGroup
       Parent = layMainGroup_Root
@@ -2419,6 +2485,7 @@ inherited CustomerFrm: TCustomerFrm
       AlignVert = avClient
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
+      ItemIndex = 3
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpDetailGridTabChanged
@@ -2486,7 +2553,6 @@ inherited CustomerFrm: TCustomerFrm
     end
     object litBankingDetail: TdxLayoutItem
       Parent = grpDetailGrid
-      AlignVert = avClient
       CaptionOptions.Text = 'Banking Details'
       CaptionOptions.Visible = False
       Control = grdBankingDetail
@@ -2580,7 +2646,6 @@ inherited CustomerFrm: TCustomerFrm
       Parent = grpDetailGrid
       CaptionOptions.Text = 'Contact Persons'
       ButtonOptions.Buttons = <>
-      ItemIndex = 1
       LayoutDirection = ldHorizontal
       Index = 2
     end
@@ -2973,8 +3038,8 @@ inherited CustomerFrm: TCustomerFrm
     end
   end
   object grdCustomerListing: TcxGrid [2]
-    Left = 818
-    Top = 461
+    Left = 1398
+    Top = 413
     Width = 711
     Height = 326
     Font.Charset = ANSI_CHARSET
@@ -5924,19 +5989,58 @@ inherited CustomerFrm: TCustomerFrm
           E8B93DC63F2BDFB0B4025057ED339F2EA8569E06A0103385752A301BCF1832B1
           1D4052820B006200E2FF615C82E35FC02B8FD5CBC3AEEB0000000049454E44AE
           426082}
+      end
+      item
+        ImageClass = 'TBitmap'
+        Image.Data = {
+          36040000424D3604000000000000360000002800000010000000100000000100
+          2000000000000004000000000000000000000000000000000000000000000300
+          00040A04000F0D0601140A04010D030000040000000000000000000000000000
+          030416121C24181C4257262969812326769015165D7504042030251002348231
+          0197BA5112C6C56126CFB5632CC38B4D239E4A3B315E150B021C04050C142830
+          6A82A493CBDC6E80F6F96F7CFFFF606CFFFF454EFCFD1C1FB7DDAD723FC4FD77
+          20FEFF8230FFFF944FFFFF9F5EFFFFA265FFDCBDACF9CA6C2ACD504066AC6479
+          F8F9D8CBEDFFA3AFFFFF8998FFFF7786FFFF5C66FFFF2D33D3F0B47746CAFF85
+          33FFFF8C47FFFFA367FFFFAD77FFFFBC93FFDFDAD6FFFFA056FFA37993FE728E
+          FFFFDBD5E1FFE0E4FFFF9CADFFFF8695FFFF6673FFFF2E32A7C68C5931A2FF97
+          4EFFFF9552FFFFAD77FFFFBB8AFFFFE3CCFFE2E4E4FFFFA96BFFD7875EF66E7D
+          E2EDA4ACCEFF9EB1C6FF97A8F3FF8B99FFFF5F6BEDF1171B4B6246271356F1A0
+          63F5FF9B59FFFFB27BFFFFC397FFDADCE2FFD7D3D2FFFDAD73FEA8612DAE2634
+          528249608FE6285578FF4A6DA0FF616BC6DD23235263010005090803000D7F56
+          3490F29E5FF3FFA66BFF8C8891FF30659DFF87858EFCBD7B4ABE201F1B53174C
+          69D9375A77F7355C77FF315E6AFF2B4F54C3040C091700000000000000000904
+          020B4D311A56775445C8305B84FE285479FF3C536AF01F1F2054000D14323C6A
+          8EEA688EB5FF5E84AAFF466C8BFF3D6B78F716272B5000000000000000000000
+          0000000000010D1721442F577CF1416688FF41698CFF314D67BB070C121F6180
+          A1C288AEDDFF7BA2D0FF5D83ABFF497A8AFE223B3F6D00000000000000000000
+          000000000001121A2258486A8EF45E84A9FF6890B7FF6081A7ED1420293C768C
+          A4AABBD7F8FF99BCE9FF5B87AAFF4A7F88FA1E31375800000000000000000000
+          0000030202172E3E4DCA5E86AEFF769FCCFF82A9D8FF86AAD5F82837455A3B54
+          66AB80A7C6FF6597ADFF5B94A9FF5F939CDF0C16182800000000000000000000
+          00000D0D0C2F292828EB4E667EFF8DB6E6FFAECEF0FFB3D0ECF8384755702645
+          4FCE4D818EF7629DADF76CA3B7E3425C66730001030400000000000000000000
+          00001313132A343230E7495562FF94B7DEFFA3C4E4FF95B1D0EA1F2830350810
+          11271929304B1E30364B121C202B020604060000000000000000000000000000
+          0000090909114A4947BE5A5856FF666669FF707071FE6F7071D8151516250000
+          0000000000000000000000000000000000000000000000000000000000000000
+          000000000001171717353C3C3B96525254B45858588E2D2B2B3D050404050000
+          0000000000000000000000000000000000000000000000000000000000000000
+          0000000000000000000000000003020202070000000200000000000000000000
+          0000000000000000000000000000000000000000000000000000}
       end>
   end
   object popDBAction: TPopupMenu
     Images = imgNav16
+    OnPopup = popDBActionPopup
     Left = 140
     Top = 190
-    object Addnewcontactdetail1: TMenuItem
+    object mnuInsertContactDetail: TMenuItem
       Action = actInsert
     end
-    object Editselectedcontactdetail1: TMenuItem
+    object mnuEditSelectedContactDetail: TMenuItem
       Action = actEdit
     end
-    object Deleteselectedcontactdetail1: TMenuItem
+    object mnuDeleteSelectedContactDetail: TMenuItem
       Action = actDelete
     end
   end
@@ -5963,6 +6067,10 @@ inherited CustomerFrm: TCustomerFrm
       ImageIndex = 10
       ShortCut = 46
       OnExecute = DoDBAction
+    end
+    object actAccountHolderName: TAction
+      ImageIndex = 15
+      OnExecute = DoSetCoporateAccHolderName
     end
   end
   object styLegend: TcxEditStyleController

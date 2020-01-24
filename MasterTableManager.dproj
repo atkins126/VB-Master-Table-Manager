@@ -264,6 +264,10 @@
             <Form>CustomerReportSelectionFrm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="General\AccountHolder_Frm.pas">
+            <Form>AccountHolderFrm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
