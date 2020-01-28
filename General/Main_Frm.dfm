@@ -94,8 +94,6 @@ inherited MainFrm: TMainFrm
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    ExplicitTop = 723
-    ExplicitWidth = 1181
   end
   object cbxShowMasterList: TcxCheckBox [2]
     Left = 965

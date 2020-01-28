@@ -1521,11 +1521,12 @@ inherited CustomerFrm: TCustomerFrm
       Width = 400
     end
     object grdBankingDetail: TcxGrid [12]
-      Left = 25
-      Top = 481
+      Left = 10000
+      Top = 10000
       Width = 1656
       Height = 200
       TabOrder = 18
+      Visible = False
       object viewBankingDetail: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -1559,6 +1560,7 @@ inherited CustomerFrm: TCustomerFrm
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.CellHints = True
         OptionsBehavior.FocusCellOnTab = True
         OptionsBehavior.NavigatorHints = True
         OptionsBehavior.FocusCellOnCycle = True
@@ -1705,6 +1707,7 @@ inherited CustomerFrm: TCustomerFrm
                 ABC23DF31F49D0FB4297B1ADEF7FC4ED5ABE86DFBF841EA817060BF4D1E9A137
                 14A655FDC9BB536EB2BEA91DD84ED7B8A2D7575A57AE8CFC178310D76F25CD92
                 A00000000049454E44AE426082}
+              Hint = 'Set corporate account holder name'
               Kind = bkGlyph
             end>
           Properties.IncrementalSearch = False
@@ -1968,7 +1971,7 @@ inherited CustomerFrm: TCustomerFrm
       Left = 10000
       Top = 10000
       Width = 1656
-      Height = 245
+      Height = 200
       TabOrder = 20
       Visible = False
       object viewBeneficiary: TcxGridDBBandedTableView
@@ -2139,12 +2142,11 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVehicle: TcxGrid [15]
-      Left = 10000
-      Top = 10000
+      Left = 25
+      Top = 481
       Width = 1656
       Height = 200
       TabOrder = 21
-      Visible = False
       object viewVehicle: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -2485,7 +2487,7 @@ inherited CustomerFrm: TCustomerFrm
       AlignVert = avClient
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
-      ItemIndex = 3
+      ItemIndex = 6
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpDetailGridTabChanged

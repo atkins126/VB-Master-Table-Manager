@@ -357,11 +357,38 @@ type
     FDetailFriendlyName: DetailFriendlyNames;
     FDetailDataSet: DetailDataSetArray;
     FOpenTableParam: TOpenTableParams;
+    FCustomerWhereClause: string;
+    FCustomerOrderByClause: string;
+
+    FAddressWhereClause: string;
+    FAddressOrderByClause: string;
+
+    FContactDetailCoWhereClause: string;
+    FContactDetailCoOrderByClause: string;
+
+    FBankingDetailWhereClause: string;
+    FBankingDetailOrderByClause: string;
+
+    FContactDetailPersonWhereClause: string;
+    FContactDetailPersonOrderByClause: string;
+
+    FContactPersonWhereClause: string;
+    FContactPersonOrderByClause: string;
+
+    FDirecterWhereClaue: string;
+    FDirectorOrderByClause: string;
+
+    FBeneficiaryWhereClaue: string;
+    FBeneficiaryOrderByClause: string;
+
+    FVehicleWhereClause: string;
+    FVehicleOrderByClaue: string;
 
     procedure CmDrawBorder(var Msg: TMessage); message CM_DRAWBORDER;
     procedure OpenTables;
     procedure EditDeleteRecord(Key: Word);
     function FillFieldData(DetailDataSetID: Integer): string;
+    procedure OpenReportDataSets;
     // Controls scrolling of embedded loolup comboboxes.
     procedure DoMyMouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
@@ -375,9 +402,6 @@ type
 
 var
   CustomerFrm: TCustomerFrm;
-
-const
-  TABLE_COUNT = 21;
 
 implementation
 
@@ -1148,11 +1172,15 @@ end;
 procedure TCustomerFrm.navCustomerButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 var
   ID: Integer;
-  CustomerWhereClause, CustomerOrderByClause, AddressClause, ContactDetailCoClause: string;
-  BankingDetailClause: string;
+//  CustomerWhereClause, CustomerOrderByClause, AddressClause, ContactDetailCoClause: string;
+//  BankingDetailClause: string;
   DC: TcxDBDataController;
   C: TcxCustomGridTableController;
   I: Integer;
+//  Counter: Integer;
+//  Iteration: Extended;
+//const
+//  REPORT_TABLE_COUNT = 4;
 begin
   inherited;
   case AButtonIndex of
@@ -1194,12 +1222,12 @@ begin
 
                       if cbxGroupedReport.Checked then
                       begin
-                        CustomerOrderByClause := ' ORDER BY C.CUSTOMER_TYPE, C."NAME" ';
+                        FCustomerOrderByClause := ' ORDER BY C.CUSTOMER_TYPE, C."NAME" ';
                         ReportDM.cdsCustomerListing.IndexName := 'idxTypeName';
                       end
                       else
                       begin
-                        CustomerOrderByClause := ' ORDER BY C."NAME" ';
+                        FCustomerOrderByClause := ' ORDER BY C."NAME" ';
                         ReportDM.cdsCustomerListing.IndexName := 'idxCustName';
                       end;
 
@@ -1208,13 +1236,20 @@ begin
 //                else
 //                  TfrxGroupHeader(ReportDM.rptCustomerListing.FindObject('bndCustomerTypeGroup')).Height := 1.05;
 
-                      CustomerWhereClause := ' WHERE C.ID IN (';
+                      FCustomerWhereClause := ' WHERE C.ID IN (';
 
                       case lucPrintWhat.ItemIndex of
                         0:
                           begin
-                            CustomerWhereClause := '';
-                            AddressClause := '';
+                            FCustomerWhereClause := '';
+                            FAddressWhereClause := '';
+                            FContactDetailCoWhereClause := '';
+                            FBankingDetailWhereClause := '';
+                            FContactDetailPersonWhereClause := '';
+                            FContactPersonWhereClause := '';
+                            FDirecterWhereClaue := '';
+                            FBeneficiaryWhereClaue := '';
+                            FVehicleWhereClause := '';
                           end;
 
                         1:
@@ -1224,11 +1259,11 @@ begin
 
                             for I := 0 to C.SelectedRecordCount - 1 do
                             begin
-                              CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[C.SelectedRecords[I].RecordIndex, edtCustomerID.Index]);
+                              FCustomerWhereClause := FCustomerWhereClause + IntToStr(DC.Values[C.SelectedRecords[I].RecordIndex, edtCustomerID.Index]);
                               if I < C.SelectedRecordCount - 1 then
-                                CustomerWhereClause := CustomerWhereClause + ',';
+                                FCustomerWhereClause := FCustomerWhereClause + ',';
                             end;
-                            CustomerWhereClause := CustomerWhereClause + ')';
+                            FCustomerWhereClause := FCustomerWhereClause + ')';
                           end;
 
                         2:
@@ -1238,18 +1273,18 @@ begin
 
                             for I := 0 to DC.FilteredRecordCount - 1 do
                             begin
-                              CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[DC.FilteredRecordIndex[I], edtCustomerID.Index]);
+                              FCustomerWhereClause := FCustomerWhereClause + IntToStr(DC.Values[DC.FilteredRecordIndex[I], edtCustomerID.Index]);
                               if I < DC.FilteredRecordCount - 1 then
-                                CustomerWhereClause := CustomerWhereClause + ',';
+                                FCustomerWhereClause := FCustomerWhereClause + ',';
                             end;
-                            CustomerWhereClause := CustomerWhereClause + ')';
+                            FCustomerWhereClause := FCustomerWhereClause + ')';
                           end;
                       end;
 
-                      CustomerWhereClause := CustomerWhereClause + CustomerOrderByClause;
+                      FCustomerWhereClause := FCustomerWhereClause {+ FCustomerOrderByClause};
 
                       // Customer data
-                      VBBaseDM.GetData(66, ReportDM.cdsCustomerListing, ReportDM.cdsCustomerListing.Name, CustomerWhereClause,
+                      VBBaseDM.GetData(66, ReportDM.cdsCustomerListing, ReportDM.cdsCustomerListing.Name, FCustomerWhereClause,
                         'C:\Data\Xml\Customer Listing.xml', ReportDM.cdsCustomerListing.UpdateOptions.Generatorname,
                         ReportDM.cdsCustomerListing.UpdateOptions.UpdateTableName);
 
@@ -1293,6 +1328,11 @@ begin
 
           1: // Customer detail report
             begin
+              if ProgressFrm = nil then
+                ProgressFrm := TProgressFrm.Create(nil);
+              ProgressFrm.FormStyle := fsStayOnTop;
+              ProgressFrm.Show;
+
               try
                 ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'CustomerDetail.fr3';
                 case ReportDM.ReportAction of
@@ -1313,19 +1353,45 @@ begin
 //                      TfrxMemoView(ReportDM.rptCustomer.FindObject('lblPhysical2')).Font.Name := 'Calibri';
 //                      TfrxMemoView(ReportDM.rptCustomer.FindObject('lblPhysical2')).Font.Size := 10;
 
-                      CustomerOrderByClause := ' ORDER BY C."NAME" ';
-                      CustomerWhereClause := ' WHERE C.ID IN (';
-                      AddressClause := ' WHERE A.CUSTOMER_ID IN (';
-                      ContactDetailCoClause := ' WHERE O.CUSTOMER_ID IN (';
-                      BankingDetailClause := ' WHWERE D.CUSTOMER_ID IN (';
+                      FCustomerWhereClause := ' WHERE C.ID IN (';
+                      FCustomerOrderByClause := ' ORDER BY C."NAME" ';
+
+                      FAddressWhereClause := ' WHERE A.CUSTOMER_ID IN (';
+                      FAddressOrderByClause := ' ORDER BY A.CUSTOMER_ID ';
+
+                      FContactDetailCoWhereClause := ' WHERE O.CUSTOMER_ID IN (';
+                      FContactDetailCoOrderByClause := ' ORDER BY O.CUSTOMER_ID, O.CONTACT_TYPE ';
+
+                      FBankingDetailWhereClause := ' WHWERE D.CUSTOMER_ID IN (';
+                      FBankingDetailOrderByClause := ' ORDER BY D.CUSTOMER_ID, D.ACCOUNT_TYPE ';
+
+                      FContactDetailPersonWhereClause := ' WHERE P.CUSTOMER_ID IN (';
+                      FContactDetailPersonOrderByClause := ' ORDER BY P.CUSTOMER_ID, P.CONTACT_TYPE ';
+
+                      FContactPersonWhereClause := ' WHERE P.CUSTOMER_ID IN (';
+                      FContactPersonOrderByClause := ' ORDER BY P.CUSTOMER_ID, P.FIRST_NAME, P.LAST_NAME ';
+
+                      FDirecterWhereClaue := ' WHERE D.CUSTOMER_ID IN (';
+                      FDirectorOrderByClause := ' ORDER BY D.CUSTOMER_ID, D.FIRST_NAME, D.LAST_NAME ';
+
+                      FBeneficiaryWhereClaue := ' WHERE B.CUSTOMER_ID IN (';
+                      FBeneficiaryOrderByClause := ' ORDER BY B.CUSTOMER_ID, B.FIRST_NAME, B.LAST_NAME ';
+
+                      FVehicleWhereClause := ' WHERE V.CUSTOMER_ID IN (';
+                      FVehicleOrderByClaue := ' ORDER BY V.CUSTOMER_ID, V.VEHICLE_MAKE, V.VEHICLE_MODEL ';
 
                       case lucPrintWhat.ItemIndex of
                         0:
                           begin
-                            CustomerWhereClause := '';
-                            AddressClause := '';
-                            ContactDetailCoClause := '';
-                            BankingDetailClause := '';
+                            FCustomerWhereClause := '';
+                            FAddressWhereClause := '';
+                            FContactDetailCoWhereClause := '';
+                            FBankingDetailWhereClause := '';
+                            FContactDetailPersonWhereClause := '';
+                            FContactPersonWhereClause := '';
+                            FDirecterWhereClaue := '';
+                            FBeneficiaryWhereClaue := '';
+                            FVehicleWhereClause := '';
                           end;
 
                         1:
@@ -1335,20 +1401,31 @@ begin
 
                             for I := 0 to C.SelectedRecordCount - 1 do
                             begin
-                              CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[C.SelectedRecords[I].RecordIndex, edtCustomerID.Index]);
-                              AddressClause := AddressClause + IntToStr(DC.Values[C.SelectedRecords[I].RecordIndex, edtCustomerID.Index]);
+                              FCustomerWhereClause := FCustomerWhereClause + IntToStr(DC.Values[C.SelectedRecords[I].RecordIndex, edtCustomerID.Index]);
+                              FAddressWhereClause := FAddressWhereClause + IntToStr(DC.Values[C.SelectedRecords[I].RecordIndex, edtCustomerID.Index]);
                               if I < C.SelectedRecordCount - 1 then
                               begin
-                                CustomerWhereClause := CustomerWhereClause + ',';
-                                AddressClause := AddressClause + ',';
-                                ContactDetailCoClause := ContactDetailCoClause + ',';
-                                BankingDetailClause := BankingDetailClause + ',';
+                                FCustomerWhereClause := FCustomerWhereClause + ',';
+                                FAddressWhereClause := FAddressWhereClause + ',';
+                                FContactDetailCoWhereClause := FContactDetailCoWhereClause + ',';
+                                FBankingDetailWhereClause := FBankingDetailWhereClause + ',';
+                                FContactDetailPersonWhereClause := FContactDetailPersonWhereClause + ',';
+                                FContactPersonWhereClause := FContactPersonWhereClause + ',';
+                                FDirecterWhereClaue := FDirecterWhereClaue + ',';
+                                FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + ',';
+                                FVehicleWhereClause := FVehicleWhereClause + ',';
                               end;
                             end;
-                            CustomerWhereClause := CustomerWhereClause + ') ';
-                            AddressClause := AddressClause + ') ';
-                            ContactDetailCoClause := ContactDetailCoClause + ') ';
-                            BankingDetailClause := BankingDetailClause + ')';
+                            FCustomerWhereClause := FCustomerWhereClause + ') ';
+                            FAddressWhereClause := FAddressWhereClause + ') ';
+                            FContactDetailCoWhereClause := FContactDetailCoWhereClause + ') ';
+                            FBankingDetailWhereClause := FBankingDetailWhereClause + ') ';
+                            FContactDetailPersonWhereClause := FContactDetailPersonWhereClause + ') ';
+                            FContactPersonWhereClause := FContactPersonWhereClause + ') ';
+                            FDirecterWhereClaue := FDirecterWhereClaue + ') ';
+                            FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + ') ';
+                            FVehicleWhereClause := FVehicleWhereClause + ') ';
+
                           end;
 
                         2:
@@ -1358,53 +1435,81 @@ begin
 
                             for I := 0 to DC.FilteredRecordCount - 1 do
                             begin
-                              CustomerWhereClause := CustomerWhereClause + IntToStr(DC.Values[DC.FilteredRecordIndex[I], edtCustomerID.Index]);
-                              AddressClause := AddressClause + IntToStr(DC.Values[C.SelectedRecords[I].Index, edtCustomerID.Index]);
+                              FCustomerWhereClause := FCustomerWhereClause + IntToStr(DC.Values[DC.FilteredRecordIndex[I], edtCustomerID.Index]);
+                              FAddressWhereClause := FAddressWhereClause + IntToStr(DC.Values[C.SelectedRecords[I].Index, edtCustomerID.Index]);
                               if I < DC.FilteredRecordCount - 1 then
                               begin
-                                CustomerWhereClause := CustomerWhereClause + ',';
-                                AddressClause := AddressClause + ',';
-                                ContactDetailCoClause := ContactDetailCoClause + ',';
-                                BankingDetailClause := BankingDetailClause + ',';
+                                FCustomerWhereClause := FCustomerWhereClause + ',';
+                                FAddressWhereClause := FAddressWhereClause + ',';
+                                FContactDetailCoWhereClause := FContactDetailCoWhereClause + ',';
+                                FBankingDetailWhereClause := FBankingDetailWhereClause + ',';
+                                FContactDetailPersonWhereClause := FContactDetailPersonWhereClause + ',';
+                                FContactPersonWhereClause := FContactPersonWhereClause + ',';
+                                FDirecterWhereClaue := FDirecterWhereClaue + ',';
+                                FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + ',';
+                                FVehicleWhereClause := FVehicleWhereClause + ',';
                               end;
                             end;
-                            CustomerWhereClause := CustomerWhereClause + ')';
-                            AddressClause := AddressClause + ')';
-                            ContactDetailCoClause := ContactDetailCoClause + ') ';
-                            BankingDetailClause := BankingDetailClause + ')';
+                            FCustomerWhereClause := FCustomerWhereClause + ') ';
+                            FAddressWhereClause := FAddressWhereClause + ') ';
+                            FContactDetailCoWhereClause := FContactDetailCoWhereClause + ') ';
+                            FBankingDetailWhereClause := FBankingDetailWhereClause + ') ';
+                            FContactDetailPersonWhereClause := FContactDetailPersonWhereClause + ') ';
+                            FContactPersonWhereClause := FContactPersonWhereClause + ') ';
+                            FDirecterWhereClaue := FDirecterWhereClaue + ') ';
+                            FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + ') ';
+                            FVehicleWhereClause := FVehicleWhereClause + ') ';
                           end;
                       end;
-
-                      CustomerWhereClause := CustomerWhereClause + CustomerOrderByClause;
-                      AddressClause := AddressClause; // + ' ORDER BY A.CUSTOMER_ID ';
-//                      AddressClause := AddressClause + ' ORDER BY A."NAME" ';
+//                      FCustomerWhereClause := FCustomerWhereClause + FCustomerOrderByClause;
+//                      FAddressWhereClause := FAddressWhereClause + FAddressOrderByClause;
+//                      FContactDetailCoWhereClause := FContactDetailCoWhereClause + FContactDetailCoOrderByClause;
+//                      FBankingDetailWhereClause := FBankingDetailWhereClause + FBankingDetailOrderByClause;
+//                      FContactDetailPersonWhereClaue := FContactDetailPersonWhereClaue + FContactDetailPersonOrderByClause;
+//                      FContactPersonWhereClaue := FContactPersonWhereClaue + FContactPersonOrderByClause;
+//                      FDirecterWhereClaue := FDirecterWhereClaue + FDirectorOrderByClause;
+//                      FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + FBeneficiaryOrderByClause;
+//                      FVehicleWhereClause := FVehicleWhereClause + FVehicleOrderByClaue;
 
 //                       ReportDM.cdsCustomer.DisableControls;
 
-                      // Customer data
-                      VBBaseDM.GetData(53, ReportDM.cdsCustomer, ReportDM.cdsCustomer.Name, CustomerWhereClause,
-                        'C:\Data\Xml\Customer Detail.xml', ReportDM.cdsCustomer.UpdateOptions.Generatorname,
-                        ReportDM.cdsCustomer.UpdateOptions.UpdateTableName);
+                      OpenReportDataSets;
 
-//                      VBBaseDM.GetData(67, ReportDM.cdsAddress, ReportDM.cdsAddress.Name, AddressClause,
-//                        'C:\Data\Xml\Address Report.xml', ReportDM.cdsAddress.UpdateOptions.Generatorname,
+//                      // Customer data
+//                      Counter := 1;
+//                      Iteration := Counter / REPORT_TABLE_COUNT * 100;
+//                      SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Customer Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//                      VBBaseDM.GetData(53, ReportDM.cdsCustomer, ReportDM.cdsCustomer.Name, FCustomerWhereClause,
+//                        'C:\Data\Xml\Customer Detail.xml', ReportDM.cdsCustomer.UpdateOptions.Generatorname,
+//                        ReportDM.cdsCustomer.UpdateOptions.UpdateTableName);
+//
+////                      VBBaseDM.GetData(67, ReportDM.cdsAddress, ReportDM.cdsAddress.Name, FAddressClause,
+////                        'C:\Data\Xml\Address Report.xml', ReportDM.cdsAddress.UpdateOptions.Generatorname,
+////                        ReportDM.cdsAddress.UpdateOptions.UpdateTableName);
+//
+//                      Inc(Counter);
+//                      Iteration := Counter / REPORT_TABLE_COUNT * 100;
+//                      SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Address Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//                      VBBaseDM.GetData(4, ReportDM.cdsAddress, ReportDM.cdsAddress.Name, FAddressClause,
+//                        'C:\Data\Xml\Address.xml', ReportDM.cdsAddress.UpdateOptions.Generatorname,
 //                        ReportDM.cdsAddress.UpdateOptions.UpdateTableName);
-
-                      VBBaseDM.GetData(4, ReportDM.cdsAddress, ReportDM.cdsAddress.Name, AddressClause,
-                        'C:\Data\Xml\Address.xml', ReportDM.cdsAddress.UpdateOptions.Generatorname,
-                        ReportDM.cdsAddress.UpdateOptions.UpdateTableName);
-
-                      VBBaseDM.GetData(54, ReportDM.cdsContactDetailCo, ReportDM.cdsContactDetailCo.Name, ContactDetailCoClause,
-                        'C:\Data\Xml\Contact Detail Co.xml', ReportDM.cdsContactDetailCo.UpdateOptions.Generatorname,
-                        ReportDM.cdsContactDetailCo.UpdateOptions.UpdateTableName);
-
-                      VBBaseDM.GetData(69, ReportDM.cdsBankingDetail, ReportDM.cdsBankingDetail.Name, BankingDetailClause,
-                        'C:\Data\Xml\Banking Detail.xml', ReportDM.cdsBankingDetail.UpdateOptions.Generatorname,
-                        ReportDM.cdsBankingDetail.UpdateOptions.UpdateTableName);
+//
+//                      Inc(Counter);
+//                      Iteration := Counter / REPORT_TABLE_COUNT * 100;
+//                      SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Details' + '|PROGRESS=' + Iteration.ToString)), 0);
+//                      VBBaseDM.GetData(54, ReportDM.cdsContactDetailCo, ReportDM.cdsContactDetailCo.Name, FContactDetailCoClause,
+//                        'C:\Data\Xml\Contact Detail Co.xml', ReportDM.cdsContactDetailCo.UpdateOptions.Generatorname,
+//                        ReportDM.cdsContactDetailCo.UpdateOptions.UpdateTableName);
+//
+//                      Inc(Counter);
+//                      Iteration := Counter / REPORT_TABLE_COUNT * 100;
+//                      SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Banking Details' + '|PROGRESS=' + Iteration.ToString)), 0);
+//                      VBBaseDM.GetData(69, ReportDM.cdsBankingDetail, ReportDM.cdsBankingDetail.Name, FBankingDetailClause,
+//                        'C:\Data\Xml\Banking Detail.xml', ReportDM.cdsBankingDetail.UpdateOptions.Generatorname,
+//                        ReportDM.cdsBankingDetail.UpdateOptions.UpdateTableName);
 
                       viewCustomerReport.DataController.BeginUpdate;
                       try
-
                         case ReportDM.ReportAction of
                           raPreview, raPrint:
                             begin
@@ -1426,7 +1531,6 @@ begin
                       finally
                         viewCustomerReport.DataController.EndUpdate;
                       end;
-//                      ReportDM.cdsCustomer.EnableControls;
                     end;
 
                   raExcel:
@@ -1443,6 +1547,7 @@ begin
                     end;
                 end;
               finally
+                FreeAndNil(ProgressFrm);
                 Screen.Cursor := crDefault;
               end;
             end;
@@ -1451,10 +1556,94 @@ begin
   end;
 end;
 
+procedure TCustomerFrm.OpenReportDataSets;
+var
+  Counter: Integer;
+  Iteration: Extended;
+
+const
+  REPORT_TABLE_COUNT = 9;
+begin
+  // Customer
+  Counter := 1;
+  Iteration := Counter / REPORT_TABLE_COUNT * 100;
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Customer Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+  VBBaseDM.GetData(53, ReportDM.cdsCustomer, ReportDM.cdsCustomer.Name, FCustomerWhereClause + FCustomerOrderByClause,
+    'C:\Data\Xml\Customer Detail.xml', ReportDM.cdsCustomer.UpdateOptions.Generatorname,
+    ReportDM.cdsCustomer.UpdateOptions.UpdateTableName);
+
+  // Address
+  Inc(Counter);
+  Iteration := Counter / REPORT_TABLE_COUNT * 100;
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Address Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+  VBBaseDM.GetData(4, ReportDM.cdsAddress, ReportDM.cdsAddress.Name, FAddressWhereClause {+ FAddressOrderByClause},
+    'C:\Data\Xml\Address.xml', ReportDM.cdsAddress.UpdateOptions.Generatorname,
+    ReportDM.cdsAddress.UpdateOptions.UpdateTableName);
+
+  // Company contact details
+  Inc(Counter);
+  Iteration := Counter / REPORT_TABLE_COUNT * 100;
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Company Contact Details' + '|PROGRESS=' + Iteration.ToString)), 0);
+  VBBaseDM.GetData(54, ReportDM.cdsContactDetailCo, ReportDM.cdsContactDetailCo.Name, FContactDetailCoWhereClause + FContactDetailCoOrderByClause,
+    'C:\Data\Xml\Contact Detail Co.xml', ReportDM.cdsContactDetailCo.UpdateOptions.Generatorname,
+    ReportDM.cdsContactDetailCo.UpdateOptions.UpdateTableName);
+
+  // Banking details
+  Inc(Counter);
+  Iteration := Counter / REPORT_TABLE_COUNT * 100;
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Banking Details' + '|PROGRESS=' + Iteration.ToString)), 0);
+  VBBaseDM.GetData(69, ReportDM.cdsBankingDetail, ReportDM.cdsBankingDetail.Name, FBankingDetailWhereClause + FBankingDetailOrderByClause,
+    'C:\Data\Xml\Banking Detail.xml', ReportDM.cdsBankingDetail.UpdateOptions.Generatorname,
+    ReportDM.cdsBankingDetail.UpdateOptions.UpdateTableName);
+
+  // Contact person
+  Inc(Counter);
+  Iteration := Counter / REPORT_TABLE_COUNT * 100;
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Person Contact' + '|PROGRESS=' + Iteration.ToString)), 0);
+  VBBaseDM.GetData(71, ReportDM.cdsContactPerson, ReportDM.cdsContactPerson.Name, FContactPersonWhereClause + FContactPersonOrderByClause,
+    'C:\Data\Xml\Contact Person.xml', ReportDM.cdsContactPerson.UpdateOptions.Generatorname,
+    ReportDM.cdsContactPerson.UpdateOptions.UpdateTableName);
+
+  // Contact person contact details
+  Inc(Counter);
+  Iteration := Counter / REPORT_TABLE_COUNT * 100;
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Person Contact Details' + '|PROGRESS=' + Iteration.ToString)), 0);
+  VBBaseDM.GetData(70, ReportDM.cdsContactDetailPerson, ReportDM.cdsContactDetailPerson.Name, FContactDetailPersonWhereClause + FContactDetailPersonOrderByClause,
+    'C:\Data\Xml\Contact Detail Person.xml', ReportDM.cdsContactDetailPerson.UpdateOptions.Generatorname,
+    ReportDM.cdsContactDetailPerson.UpdateOptions.UpdateTableName);
+
+  // Directors
+  Inc(Counter);
+  Iteration := Counter / REPORT_TABLE_COUNT * 100;
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Director Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+  VBBaseDM.GetData(72, ReportDM.cdsDirector, ReportDM.cdsDirector.Name, FDirecterWhereClaue + FDirectorOrderByClause,
+    'C:\Data\Xml\Director.xml', ReportDM.cdsDirector.UpdateOptions.Generatorname,
+    ReportDM.cdsDirector.UpdateOptions.UpdateTableName);
+
+  // Beneficiaries
+  Inc(Counter);
+  Iteration := Counter / REPORT_TABLE_COUNT * 100;
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Beneficiary Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+  VBBaseDM.GetData(73, ReportDM.cdsBeneficiary, ReportDM.cdsBeneficiary.Name, FBeneficiaryWhereClaue + FBeneficiaryOrderByClause,
+    'C:\Data\Xml\Beneficiary.xml', ReportDM.cdsBeneficiary.UpdateOptions.Generatorname,
+    ReportDM.cdsBeneficiary.UpdateOptions.UpdateTableName);
+
+  // Vehicles
+  Inc(Counter);
+  Iteration := Counter / REPORT_TABLE_COUNT * 100;
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Vehicle Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+  VBBaseDM.GetData(75, ReportDM.cdsVehicle, ReportDM.cdsVehicle.Name, FVehicleWhereClause + FVehicleOrderByClaue,
+    'C:\Data\Xml\Vehicle.xml', ReportDM.cdsVehicle.UpdateOptions.Generatorname,
+    ReportDM.cdsVehicle.UpdateOptions.UpdateTableName);
+end;
+
 procedure TCustomerFrm.OpenTables;
 var
   Counter: Integer;
   Iteration: Extended;
+
+const
+  TABLE_COUNT = 21;
 begin
   if ProgressFrm = nil then
     ProgressFrm := TProgressFrm.Create(nil);
@@ -1770,8 +1959,18 @@ begin
           MTDM.cdsBankingDetail.FieldByName('LAST_NAME').AsString := '';
         end;
     end;
-    if MTDM.cdsBankingDetail.State in [dsEdit, dsInsert] then
-      MTDM.cdsBankingDetail.Post;
+
+    if DisplayMsg(
+      Application.Title,
+      'Data Overwrite',
+      'This action will overwrite any existing values for First and Last names.' + CRLF + CRLF +
+      'Are you sure you want to proceed?',
+      mtConfirmation,
+      [mbYes, mbNo]
+      ) = mrYes then
+
+      if MTDM.cdsBankingDetail.State in [dsEdit, dsInsert] then
+        MTDM.cdsBankingDetail.Post;
   end;
   AccountHolderFrm.Close;
   FreeAndNil(AccountHolderFrm);
@@ -2181,3 +2380,4 @@ end;
 
 end.
 
+                                                                                                                                                                                                                                                                                                                                                                     '

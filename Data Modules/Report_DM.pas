@@ -326,8 +326,6 @@ type
     fdsDirector: TfrxDBDataset;
     fdsBeneficiary: TfrxDBDataset;
     fdsVehicle: TfrxDBDataset;
-    rptContactDetailCo: TfrxReport;
-    rptAddress: TfrxReport;
     cdsAddress: TFDMemTable;
     cdsAddressID: TIntegerField;
     cdsAddressCUSTOMER_ID: TIntegerField;
@@ -349,6 +347,12 @@ type
     cdsBankingDetailBANK_NAME: TStringField;
     cdsBankingDetailACCOUNT_TYPE: TStringField;
     cdsBankingDetailACCOUNT_HOLDER: TStringField;
+    cdsContactPersonSALUTATION: TStringField;
+    cdsContactPersonJOB_FUNCTION: TStringField;
+    cdsContactDetailPersonCONTACT_TYPE: TStringField;
+    cdsBeneficiarySALUTATION: TStringField;
+    cdsDirectorSALUTATION: TStringField;
+    cdsVehicleVEHICLE_MAKE: TStringField;
 //    procedure PrintReport(SourceDataSet, TargetDataSet: TFDmemTable;
 //      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
 //      ReportTypeName: string);
