@@ -1,46 +1,46 @@
 inherited PersonContactDetailFrm: TPersonContactDetailFrm
   Caption = 'PersonContactDetailFrm'
-  ClientHeight = 306
+  ClientHeight = 321
   ClientWidth = 384
   ExplicitWidth = 390
-  ExplicitHeight = 335
+  ExplicitHeight = 350
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
     Left = 0
     Top = 0
     Width = 380
-    Height = 300
+    Height = 314
     ExplicitLeft = 0
     ExplicitTop = 0
     ExplicitWidth = 380
-    ExplicitHeight = 300
+    ExplicitHeight = 314
     inherited lblHeaderTitle: TcxLabel
       ExplicitWidth = 358
     end
     inherited btnOK: TcxButton
       Left = 213
-      Top = 264
-      TabOrder = 9
+      Top = 278
+      TabOrder = 10
       OnClick = btnOKClick
       ExplicitLeft = 213
-      ExplicitTop = 264
+      ExplicitTop = 278
     end
     inherited btnCancel: TcxButton
       Left = 294
-      Top = 264
-      TabOrder = 10
+      Top = 278
+      TabOrder = 11
       ExplicitLeft = 294
-      ExplicitTop = 264
+      ExplicitTop = 278
     end
     inherited lblLegend: TcxLabel
-      Top = 268
-      ExplicitTop = 268
+      Top = 282
+      ExplicitTop = 282
     end
     inherited lblRequired: TcxLabel
-      Top = 265
-      ExplicitTop = 265
-      AnchorY = 277
+      Top = 279
+      ExplicitTop = 279
+      AnchorY = 291
     end
     inherited lblSubTitle: TcxDBLabel
       ExplicitWidth = 348
@@ -60,19 +60,13 @@ inherited PersonContactDetailFrm: TPersonContactDetailFrm
         end>
       Properties.ListSource = LookupDM.dtsContactType
       Properties.PostPopupValueOnTab = True
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      Style.ButtonStyle = bts3D
-      Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 2
       Width = 250
     end
     object edtValue: TcxTextEdit [7]
       Left = 93
       Top = 105
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 4
       Width = 250
@@ -80,9 +74,9 @@ inherited PersonContactDetailFrm: TPersonContactDetailFrm
     object memComment: TcxMemo [8]
       Left = 93
       Top = 134
+      Properties.MaxLength = 255
       Properties.ScrollBars = ssVertical
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
+      Properties.OnChange = memCommentPropertiesChange
       Style.HotTrack = False
       TabOrder = 6
       Height = 100
@@ -106,11 +100,19 @@ inherited PersonContactDetailFrm: TPersonContactDetailFrm
       Style.StyleController = styMandatory
       Transparent = True
     end
+    object lblCharCount: TcxLabel [11]
+      Left = 11
+      Top = 240
+      Caption = 'lblCharCount'
+      Style.HotTrack = False
+      Style.TransparentBorder = False
+      Transparent = True
+    end
     inherited layMainGroup_Root: TdxLayoutGroup
       ItemIndex = 1
     end
     inherited grpData: TdxLayoutGroup
-      ItemIndex = 2
+      ItemIndex = 3
     end
     object litContactType: TdxLayoutItem
       Parent = grpContactType
@@ -178,6 +180,17 @@ inherited PersonContactDetailFrm: TPersonContactDetailFrm
       ControlOptions.OriginalWidth = 14
       ControlOptions.ShowBorder = False
       Index = 1
+    end
+    object litCharCount: TdxLayoutItem
+      Parent = grpData
+      CaptionOptions.AlignVert = tavTop
+      CaptionOptions.Text = 'lblCharCount'
+      CaptionOptions.Visible = False
+      Control = lblCharCount
+      ControlOptions.OriginalHeight = 13
+      ControlOptions.OriginalWidth = 75
+      ControlOptions.ShowBorder = False
+      Index = 3
     end
   end
   inherited styRepository: TcxStyleRepository

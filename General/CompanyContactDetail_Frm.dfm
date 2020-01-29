@@ -1,46 +1,46 @@
 inherited CompanyContactDetailFrm: TCompanyContactDetailFrm
   Caption = 'CompanyContactDetailFrm'
-  ClientHeight = 306
+  ClientHeight = 316
   ClientWidth = 384
   ExplicitWidth = 390
-  ExplicitHeight = 335
+  ExplicitHeight = 345
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
     Left = 0
     Top = 0
     Width = 380
-    Height = 300
+    Height = 311
     ExplicitLeft = 0
     ExplicitTop = 0
     ExplicitWidth = 380
-    ExplicitHeight = 300
+    ExplicitHeight = 311
     inherited lblHeaderTitle: TcxLabel
       ExplicitWidth = 358
     end
     inherited btnOK: TcxButton
       Left = 213
-      Top = 264
-      TabOrder = 9
+      Top = 275
+      TabOrder = 10
       OnClick = btnOKClick
       ExplicitLeft = 213
-      ExplicitTop = 264
+      ExplicitTop = 275
     end
     inherited btnCancel: TcxButton
       Left = 294
-      Top = 264
-      TabOrder = 10
+      Top = 275
+      TabOrder = 11
       ExplicitLeft = 294
-      ExplicitTop = 264
+      ExplicitTop = 275
     end
     inherited lblLegend: TcxLabel
-      Top = 268
-      ExplicitTop = 268
+      Top = 279
+      ExplicitTop = 279
     end
     inherited lblRequired: TcxLabel
-      Top = 265
-      ExplicitTop = 265
-      AnchorY = 277
+      Top = 276
+      ExplicitTop = 276
+      AnchorY = 288
     end
     inherited lblSubTitle: TcxDBLabel
       ExplicitWidth = 348
@@ -49,8 +49,6 @@ inherited CompanyContactDetailFrm: TCompanyContactDetailFrm
     object edtValue: TcxTextEdit [6]
       Left = 93
       Top = 105
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 4
       Width = 250
@@ -58,9 +56,9 @@ inherited CompanyContactDetailFrm: TCompanyContactDetailFrm
     object memComment: TcxMemo [7]
       Left = 93
       Top = 134
+      Properties.MaxLength = 255
       Properties.ScrollBars = ssVertical
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
+      Properties.OnChange = memCommentPropertiesChange
       Style.HotTrack = False
       TabOrder = 6
       Height = 100
@@ -98,13 +96,23 @@ inherited CompanyContactDetailFrm: TCompanyContactDetailFrm
         end>
       Properties.ListSource = LookupDM.dtsContactType
       Properties.PostPopupValueOnTab = True
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      Style.ButtonStyle = bts3D
-      Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 2
       Width = 250
+    end
+    object lblCharCount: TcxLabel [11]
+      Left = 11
+      Top = 240
+      Caption = 'Characters Left:'
+      Style.HotTrack = False
+      Style.TransparentBorder = False
+      Transparent = True
+    end
+    inherited layMainGroup_Root: TdxLayoutGroup
+      ItemIndex = 1
+    end
+    inherited grpData: TdxLayoutGroup
+      ItemIndex = 3
     end
     inherited litSubTitle: TdxLayoutItem
       ControlOptions.OriginalWidth = 589
@@ -173,6 +181,16 @@ inherited CompanyContactDetailFrm: TCompanyContactDetailFrm
       LayoutDirection = ldHorizontal
       ShowBorder = False
       Index = 1
+    end
+    object litCharCount: TdxLayoutItem
+      Parent = grpData
+      CaptionOptions.AlignVert = tavTop
+      CaptionOptions.Visible = False
+      Control = lblCharCount
+      ControlOptions.OriginalHeight = 13
+      ControlOptions.OriginalWidth = 93
+      ControlOptions.ShowBorder = False
+      Index = 3
     end
   end
   inherited styRepository: TcxStyleRepository

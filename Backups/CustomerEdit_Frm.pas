@@ -8,7 +8,7 @@ uses
   System.ImageList, Vcl.ImgList, System.Actions, Vcl.ActnList, Vcl.StdCtrls,
   Data.DB,
 
-  BaseLayout_Frm, VBCommonValues,
+  BaseLayout_Frm, CommonValues,
 
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
   dxSkinsDefaultPainters, cxImageList, dxLayoutLookAndFeels, cxClasses, cxStyles,
@@ -23,10 +23,10 @@ uses
 
 type
   TCustomerEditFrm = class(TBaseLayoutFrm)
-    grpForm: TdxLayoutGroup;
+    grpCustomerDetail: TdxLayoutGroup;
     grpButtons: TdxLayoutGroup;
     pagMain: TcxPageControl;
-    litPagControl: TdxLayoutItem;
+    litCustomerDetail: TdxLayoutItem;
     btnSave: TcxButton;
     btnCancel: TcxButton;
     litSave: TdxLayoutItem;
@@ -295,6 +295,14 @@ type
     litSubTitle: TdxLayoutItem;
     stySubTitle: TcxEditStyleController;
     lblSubTitle: TcxLabel;
+    pnlContactDetail: TcxGroupBox;
+    pnlAddress: TcxGroupBox;
+    pnlCoContactPerson: TcxGroupBox;
+    pnlContactPerson: TcxGroupBox;
+    pnlBankingDetail: TcxGroupBox;
+    pnlDirector: TcxGroupBox;
+    pnlBeneficiary: TcxGroupBox;
+    pnlVehicle: TcxGroupBox;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure lucContactTypePropertiesChange(Sender: TObject);
@@ -326,7 +334,8 @@ implementation
 uses
   Lookup_DM,
   MT_DM,
-  VBBase_DM, CommonFunction;
+  VBBase_DM,
+  CommonFunction;
 
 procedure TCustomerEditFrm.btnPhysicalToPostalClick(Sender: TObject);
 begin
@@ -400,7 +409,7 @@ var
   I: Integer;
 begin
   inherited;
-  Caption := 'Customer Detail';
+//  Caption := 'Customer Detail';
   Width := 750;
   Height := 610;
   layContactDetails.Align := alClient;
@@ -423,6 +432,7 @@ begin
   styHeaderFont.Style.TextColor := cxLookAndFeels.RootLookAndFeel.SkinPainter.DefaultContentTextColor;
   stySubTitle.Style.Font.Color := cxLookAndFeels.RootLookAndFeel.SkinPainter.DefaultContentTextColor;
   stySubTitle.Style.TextColor := cxLookAndFeels.RootLookAndFeel.SkinPainter.DefaultContentTextColor;
+  pagMain.Visible := False;
   pagMain.Align := alClient;
   pagMain.HideTabs := True;
   btnSave.Enabled := False;
@@ -431,6 +441,7 @@ begin
     pagMain.Pages[I].TabVisible := False;
 
   lucContactType.Properties.ListSource := LookupDM.dtsContactType;
+  lucCDPContactType.Properties.ListSource := LookupDM.dtsContactType;
   lucBank.Properties.ListSource := LookupDM.dtsBank;
   lucAccType.Properties.ListSource := LookupDM.dtsBankAccountType;
   lucPSalutation.Properties.ListSource := LookupDM.dtsSalutation;
@@ -438,7 +449,7 @@ begin
   lucVehicleMake.Properties.ListSource := LookupDM.dtsVehicleMake;
   lucPJobFunction.Properties.ListSource := LookupDM.dtsJobFunction;
   lucDSalutation.Properties.ListSource := LookupDM.dtsDirectorSalutation;
-  PopulateControls(MTDM.FDBAction, MTDM.FDetailIndex);
+  PopulateControls(MTDM.DBAction, MTDM.DetailIndex);
   MTDM.ClearFieldValueArray;
   FMadeChanges := False;
 end;
@@ -492,18 +503,23 @@ begin
 end;
 
 procedure TCustomerEditFrm.FormShow(Sender: TObject);
+const
+  HEIGHT_OFFSET = 195;
+  WIDTH_OFFSET = 40;
 begin
   inherited;
-  pagMain.Pages[MTDM.FDetailIndex].Visible := True;
+//  pagMain.Pages[MTDM.FDetailIndex].Visible := True;
 
-  case MTDM.FDetailIndex of
+  case MTDM.DetailIndex of
     0:
       begin
+          litCustomerDetail.Control :=  pnlContactDetail;
+          Self.Height :=  pnlContactDetail.Height + HEIGHT_OFFSET; // 380; // + 90
+          Self.Width := pnlContactDetail.Width + WIDTH_OFFSET; // 420;   // + 40
+          pnlContactDetail.Visible := True;
+
         if lucContactType.CanFocus then
           lucContactType.SetFocus;
-
-//          Height :=  400;
-//          Width := 650;
 
 //        case MTDM.FDBAction of
 //          acInsert:
@@ -516,8 +532,14 @@ begin
 
     1:
       begin
+          litCustomerDetail.Control :=  pnlAddress;
+          Self.Height :=  pnlAddress.Height + HEIGHT_OFFSET;
+          Self.Width :=  pnlAddress.Width + WIDTH_OFFSET;
+          pnlAddress.Visible := True;
+
         if edtPhysical1.CanFocus then
           edtPhysical1.SetFocus;
+
 //        case MTDM.FDBAction of
 //          acInsert: MTDM.cdsAddress.Insert;
 //          acModify: MTDM.cdsAddress.Edit;
@@ -526,8 +548,14 @@ begin
 
     2:
       begin
+          litCustomerDetail.Control :=  pnlCoContactPerson;
+          Self.Height :=  pnlCoContactPerson.Height + HEIGHT_OFFSET;
+          Self.Width :=  pnlCoContactPerson.Width + WIDTH_OFFSET;
+          pnlCoContactPerson.Visible := True;
+
         if edtPFirstName.CanFocus then
           edtPFirstName.SetFocus;
+
 //        case MTDM.FDBAction of
 //          acInsert: MTDM.cdsContactPerson.Insert;
 //          acModify: MTDM.cdsContactPerson.Edit;
@@ -612,7 +640,7 @@ procedure TCustomerEditFrm.lucContactTypePropertiesChange(Sender: TObject);
 begin
   inherited;
   FMadeChanges := True;
-  ValidateData(MTDM.FDetailIndex);
+  ValidateData(MTDM.DetailIndex);
 end;
 
 procedure TCustomerEditFrm.PopulateControls(DBActionType: TDBActions; DetailID: Integer);
@@ -714,7 +742,7 @@ begin
     acModify:
       begin
         case DetailID of
-          0: // Company contact
+          0: // Company contact details
             begin
               lucContactType.EditValue := MTDM.cdsContactDetailCo.FieldByName('CONTACT_TYPE_ID').AsInteger;
               edtContactDetailValue.Text := MTDM.cdsContactDetailCo.FieldByName('VALUE').AsString;
@@ -756,7 +784,7 @@ begin
               cbxPPrimaryContact.Checked := MTDM.cdsContactPerson.FieldByName('IS_PRIMARY_CONTACT').AsInteger = 1;
             end;
 
-          3: // Contact details person
+          3: // Contact person details
             begin
               lucCDPContactType.EditValue := MTDM.cdsContactDetailPerson.FieldByName('CONTACT_TYPE_ID').AsInteger;
               edtCDPValue.Text := MTDM.cdsContactDetailPerson.FieldByName('VALUE').AsString;

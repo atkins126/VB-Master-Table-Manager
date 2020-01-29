@@ -390,8 +390,8 @@ type
     function FillFieldData(DetailDataSetID: Integer): string;
     procedure OpenReportDataSets;
     // Controls scrolling of embedded loolup comboboxes.
-    procedure DoMyMouseWheel(Sender: TObject; Shift: TShiftState;
-      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+//    procedure DoMyMouseWheel(Sender: TObject; Shift: TShiftState;
+//      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
   protected
     procedure HandleTSAfterPost(var MyMsg: TMessage); message WM_RECORD_ID;
   public
@@ -1927,12 +1927,12 @@ begin
   actDelete.Caption := 'Delete selected address';
 end;
 
-procedure TCustomerFrm.DoMyMouseWheel(Sender: TObject; Shift: TShiftState;
-  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
-begin
-  if not TcxLookupComboBox(Sender).DroppedDown then
-    Handled := True;
-end;
+//procedure TCustomerFrm.DoMyMouseWheel(Sender: TObject; Shift: TShiftState;
+//  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+//begin
+//  if not TcxLookupComboBox(Sender).DroppedDown then
+//    Handled := True;
+//end;
 
 procedure TCustomerFrm.DoSetCoporateAccHolderName(Sender: TObject);
 begin
@@ -2380,4 +2380,4 @@ end;
 
 end.
 
-                                                                                                                                                                                                                                                                                                                                                                     '
+

@@ -47,9 +47,12 @@ type
     litReq4: TdxLayoutItem;
     litReq5: TdxLayoutItem;
     litYear: TdxLayoutItem;
+    litCharCount: TdxLayoutItem;
+    lblCharCount: TcxLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure edtRegNoKeyPress(Sender: TObject; var Key: Char);
+    procedure memCommentPropertiesChange(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -90,6 +93,7 @@ begin
 //  edtYear.Properties.MinValue :=  1950;
   edtYear.Properties.MaxValue :=  YearInt(Date);
 //  edtYear.Value := 0;
+  lblCharCount.Caption :=  'Characters Left: ' + memComment.Properties.MaxLength.ToString;
 
   if VBBaseDM.DBAction = acModify then
   begin
@@ -101,6 +105,13 @@ begin
     cbxMaintenancePlan.Checked := IntegerToBoolean(MTDM.cdsVehicle.FieldByName('MAINTENANCE_PLAN').AsInteger);
     memComment.Text := MTDM.cdsVehicle.FieldByName('COMMENT').AsString;
   end;
+end;
+
+procedure TVehicleDetailFrm.memCommentPropertiesChange(Sender: TObject);
+begin
+  inherited;
+
+  lblCharCount.Caption :=  'Characters left: ' + IntToStr(memComment.Properties.MaxLength - Length(memComment.Text));
 end;
 
 procedure TVehicleDetailFrm.Validate;

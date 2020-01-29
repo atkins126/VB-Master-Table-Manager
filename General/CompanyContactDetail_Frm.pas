@@ -30,8 +30,11 @@ type
     litReq2: TdxLayoutItem;
     grpContactType: TdxLayoutGroup;
     grpValue: TdxLayoutGroup;
+    litCharCount: TdxLayoutItem;
+    lblCharCount: TcxLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
+    procedure memCommentPropertiesChange(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -72,6 +75,7 @@ begin
 //  layMain.Align := alClient;
 
   lucContactType.Properties.ListSource := LookupDM.dtsContactType;
+  lblCharCount.Caption :=  'Characters Left: ' + memComment.Properties.MaxLength.ToString;
 
   if VBBaseDM.DBAction = acModify then
   begin
@@ -79,6 +83,12 @@ begin
     edtValue.Text := MTDM.cdsContactDetailCo.FieldByName('VALUE').AsString;
     memComment.Text := MTDM.cdsContactDetailCo.FieldByName('COMMENT').AsString;
   end;
+end;
+
+procedure TCompanyContactDetailFrm.memCommentPropertiesChange(Sender: TObject);
+begin
+  inherited;
+  lblCharCount.Caption :=  'Characters left: ' + IntToStr(memComment.Properties.MaxLength - Length(memComment.Text));
 end;
 
 procedure TCompanyContactDetailFrm.Validate;
