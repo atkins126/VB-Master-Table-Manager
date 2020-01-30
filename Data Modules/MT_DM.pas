@@ -79,6 +79,11 @@ type
     VehicleRegNo: string;
     LicenceRenewalDate: TDateTime;
     MaintenancePlan: Boolean;
+    // Customer
+    Name: String;
+    TradingAs: String;
+    BillTo: String;
+
   end;
 
   TMTDM = class(TVBBaseDM)
@@ -192,7 +197,6 @@ type
     cdsMasterListNAME: TStringField;
     cdsMasterListDESCRIPTION: TStringField;
     cdsMasterListIS_ACTIVE: TIntegerField;
-    cdsMasterListREAD_ONLY: TIntegerField;
     cdsMasterListSCRIPT_ID: TIntegerField;
     cdsCountry: TFDMemTable;
     dtsCountry: TDataSource;

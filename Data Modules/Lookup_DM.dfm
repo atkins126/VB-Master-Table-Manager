@@ -1,6 +1,6 @@
 inherited LookupDM: TLookupDM
   OldCreateOrder = True
-  Height = 556
+  Height = 772
   Width = 1026
   object cdsCountry: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -451,7 +451,7 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'RATE_UNIT'
     StoreDefs = True
-    Left = 720
+    Left = 630
     Top = 255
     object cdsRateUnitID: TIntegerField
       Alignment = taLeftJustify
@@ -701,7 +701,7 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'VEHICLE_MAKE'
     StoreDefs = True
-    Left = 615
+    Left = 525
     Top = 255
     object cdsVehicleMakeID: TIntegerField
       Alignment = taLeftJustify
@@ -720,7 +720,7 @@ inherited LookupDM: TLookupDM
   end
   object dtsRateUnit: TDataSource
     DataSet = cdsRateUnit
-    Left = 720
+    Left = 630
     Top = 305
   end
   object dtsSalutation: TDataSource
@@ -740,20 +740,20 @@ inherited LookupDM: TLookupDM
   end
   object dtsVehicleMake: TDataSource
     DataSet = cdsVehicleMake
-    Left = 615
+    Left = 525
     Top = 305
   end
   object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
-    Left = 855
+    Left = 925
     Top = 240
   end
   object FDPhysFBDriverLink: TFDPhysFBDriverLink
-    Left = 855
+    Left = 925
     Top = 185
   end
   object FDGUIxWaitCursor: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 855
+    Left = 925
     Top = 125
   end
   object cdsBank: TFDMemTable
@@ -925,7 +925,7 @@ inherited LookupDM: TLookupDM
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
     LoginPrompt = False
-    Left = 844
+    Left = 925
     Top = 12
   end
   object cdsARMonthOfYear: TFDMemTable
@@ -1043,7 +1043,7 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'TAX_OFFICE'
     StoreDefs = True
-    Left = 520
+    Left = 430
     Top = 255
     object IntegerField2: TIntegerField
       Alignment = taLeftJustify
@@ -1062,7 +1062,7 @@ inherited LookupDM: TLookupDM
   end
   object dtsVATOffice: TDataSource
     DataSet = cdsVATOffice
-    Left = 520
+    Left = 430
     Top = 305
   end
   object FDMemTable1: TFDMemTable
@@ -1112,8 +1112,8 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'TAX_OFFICE'
     StoreDefs = True
-    Left = 425
-    Top = 255
+    Left = 590
+    Top = 375
     object IntegerField3: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1131,8 +1131,8 @@ inherited LookupDM: TLookupDM
   end
   object DataSource1: TDataSource
     DataSet = FDMemTable1
-    Left = 420
-    Top = 305
+    Left = 585
+    Top = 425
   end
   object cdsBFSalutation: TFDMemTable
     ActiveStoredUsage = [auDesignTime]

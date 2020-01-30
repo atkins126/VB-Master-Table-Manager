@@ -29,7 +29,8 @@ uses
   FireDAC.Stan.Error, FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.Phys.IBWrapper,
   dxSkinMoneyTwins, dxSkinOffice2019Colorful, dxSkinTheBezier,
   dxScrollbarAnnotations, Report_DM, dxBar, cxDropDownEdit, cxBarEditItem,
-  cxMaskEdit, dxPrnDev, dxPrnDlg, AccountHolder_Frm, cxButtonEdit;
+  cxMaskEdit, dxPrnDev, dxPrnDlg, AccountHolder_Frm, cxButtonEdit,
+  CustomerEdit_Frm;
 
   // To handle TFDGUIxErrordialog
 // FireDAC.UI.Intf, FireDAC.VCLUI.Error,
@@ -325,6 +326,14 @@ type
     viewCustomerReportCUSTOMER_GROUP_ID: TcxGridDBBandedColumn;
     lucAccountHolderName: TcxGridDBBandedColumn;
     actAccountHolderName: TAction;
+    popCustDBAction: TPopupMenu;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    actCustList: TActionList;
+    actInstCust: TAction;
+    actEditCust: TAction;
+    actDeleteCust: TAction;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -351,12 +360,15 @@ type
     procedure lucPrintWhatPropertiesEditValueChanged(Sender: TObject);
     procedure cbxOpenAfterExportPropertiesEditValueChanged(Sender: TObject);
     procedure DoSetCoporateAccHolderName(Sender: TObject);
-    procedure popDBActionPopup(Sender: TObject);
+    procedure grdCustomerEnter(Sender: TObject);
+    procedure grdVCustomerDblClick(Sender: TObject);
+    procedure grdCustomerExit(Sender: TObject);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
     FDetailDataSet: DetailDataSetArray;
     FOpenTableParam: TOpenTableParams;
+
     FCustomerWhereClause: string;
     FCustomerOrderByClause: string;
 
@@ -1184,6 +1196,18 @@ var
 begin
   inherited;
   case AButtonIndex of
+    NBDI_INSERT:
+      begin
+        ADone := True;
+        EditDeleteRecord(VK_INSERT);
+      end;
+
+    NBDI_EDIT:
+      begin
+        ADone := True;
+        EditDeleteRecord(VK_RETURN);
+      end;
+
     16: ReportDM.ReportAction := raPreview;
     17: ReportDM.ReportAction := raPrint;
     18: ReportDM.ReportAction := raExcel;
@@ -1362,7 +1386,7 @@ begin
                       FContactDetailCoWhereClause := ' WHERE O.CUSTOMER_ID IN (';
                       FContactDetailCoOrderByClause := ' ORDER BY O.CUSTOMER_ID, O.CONTACT_TYPE ';
 
-                      FBankingDetailWhereClause := ' WHWERE D.CUSTOMER_ID IN (';
+                      FBankingDetailWhereClause := ' WHERE D.CUSTOMER_ID IN (';
                       FBankingDetailOrderByClause := ' ORDER BY D.CUSTOMER_ID, D.ACCOUNT_TYPE ';
 
                       FContactDetailPersonWhereClause := ' WHERE P.CUSTOMER_ID IN (';
@@ -1592,7 +1616,7 @@ begin
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
   SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Banking Details' + '|PROGRESS=' + Iteration.ToString)), 0);
-  VBBaseDM.GetData(69, ReportDM.cdsBankingDetail, ReportDM.cdsBankingDetail.Name, FBankingDetailWhereClause + FBankingDetailOrderByClause,
+  VBBaseDM.GetData(68, ReportDM.cdsBankingDetail, ReportDM.cdsBankingDetail.Name, FBankingDetailWhereClause + FBankingDetailOrderByClause,
     'C:\Data\Xml\Banking Detail.xml', ReportDM.cdsBankingDetail.UpdateOptions.Generatorname,
     ReportDM.cdsBankingDetail.UpdateOptions.UpdateTableName);
 
@@ -1600,7 +1624,7 @@ begin
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
   SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Person Contact' + '|PROGRESS=' + Iteration.ToString)), 0);
-  VBBaseDM.GetData(71, ReportDM.cdsContactPerson, ReportDM.cdsContactPerson.Name, FContactPersonWhereClause + FContactPersonOrderByClause,
+  VBBaseDM.GetData(70, ReportDM.cdsContactPerson, ReportDM.cdsContactPerson.Name, FContactPersonWhereClause + FContactPersonOrderByClause,
     'C:\Data\Xml\Contact Person.xml', ReportDM.cdsContactPerson.UpdateOptions.Generatorname,
     ReportDM.cdsContactPerson.UpdateOptions.UpdateTableName);
 
@@ -1608,7 +1632,7 @@ begin
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
   SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Person Contact Details' + '|PROGRESS=' + Iteration.ToString)), 0);
-  VBBaseDM.GetData(70, ReportDM.cdsContactDetailPerson, ReportDM.cdsContactDetailPerson.Name, FContactDetailPersonWhereClause + FContactDetailPersonOrderByClause,
+  VBBaseDM.GetData(69, ReportDM.cdsContactDetailPerson, ReportDM.cdsContactDetailPerson.Name, FContactDetailPersonWhereClause + FContactDetailPersonOrderByClause,
     'C:\Data\Xml\Contact Detail Person.xml', ReportDM.cdsContactDetailPerson.UpdateOptions.Generatorname,
     ReportDM.cdsContactDetailPerson.UpdateOptions.UpdateTableName);
 
@@ -1616,7 +1640,7 @@ begin
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
   SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Director Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-  VBBaseDM.GetData(72, ReportDM.cdsDirector, ReportDM.cdsDirector.Name, FDirecterWhereClaue + FDirectorOrderByClause,
+  VBBaseDM.GetData(71, ReportDM.cdsDirector, ReportDM.cdsDirector.Name, FDirecterWhereClaue + FDirectorOrderByClause,
     'C:\Data\Xml\Director.xml', ReportDM.cdsDirector.UpdateOptions.Generatorname,
     ReportDM.cdsDirector.UpdateOptions.UpdateTableName);
 
@@ -1624,7 +1648,7 @@ begin
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
   SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Beneficiary Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-  VBBaseDM.GetData(73, ReportDM.cdsBeneficiary, ReportDM.cdsBeneficiary.Name, FBeneficiaryWhereClaue + FBeneficiaryOrderByClause,
+  VBBaseDM.GetData(72, ReportDM.cdsBeneficiary, ReportDM.cdsBeneficiary.Name, FBeneficiaryWhereClaue + FBeneficiaryOrderByClause,
     'C:\Data\Xml\Beneficiary.xml', ReportDM.cdsBeneficiary.UpdateOptions.Generatorname,
     ReportDM.cdsBeneficiary.UpdateOptions.UpdateTableName);
 
@@ -1632,7 +1656,7 @@ begin
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
   SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Vehicle Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-  VBBaseDM.GetData(75, ReportDM.cdsVehicle, ReportDM.cdsVehicle.Name, FVehicleWhereClause + FVehicleOrderByClaue,
+  VBBaseDM.GetData(73, ReportDM.cdsVehicle, ReportDM.cdsVehicle.Name, FVehicleWhereClause + FVehicleOrderByClaue,
     'C:\Data\Xml\Vehicle.xml', ReportDM.cdsVehicle.UpdateOptions.Generatorname,
     ReportDM.cdsVehicle.UpdateOptions.UpdateTableName);
 end;
@@ -1883,12 +1907,6 @@ begin
   end;
 end;
 
-procedure TCustomerFrm.popDBActionPopup(Sender: TObject);
-begin
-  inherited;
-//mnuEditSelectedContactDetail.Enabled :=  MTDM.cds
-end;
-
 procedure TCustomerFrm.grdContactPersonEnter(Sender: TObject);
 begin
   inherited;
@@ -1907,6 +1925,22 @@ begin
   actDelete.Caption := 'Delete selected person cotact detail';
   MTDM.FormCaption := 'Contact Person Details';
   MTDM.DetailIndex := 3;
+end;
+
+procedure TCustomerFrm.grdCustomerEnter(Sender: TObject);
+begin
+  inherited;
+  MTDM.DetailIndex := 8;
+  actInsert.Caption := 'Add a new customer';
+  actEdit.Caption := 'Edit selected customer';
+  actDelete.Caption := 'Delete selected customer';
+  MTDM.FormCaption := 'Customer Details';
+end;
+
+procedure TCustomerFrm.grdCustomerExit(Sender: TObject);
+begin
+  inherited;
+  grpDetailGridTabChanged(nil);
 end;
 
 procedure TCustomerFrm.grdPhysicalAddressDblClick(Sender: TObject);
@@ -1976,6 +2010,15 @@ begin
   FreeAndNil(AccountHolderFrm);
 end;
 
+procedure TCustomerFrm.grdVCustomerDblClick(Sender: TObject);
+begin
+  inherited;
+  if grdVCustomer.DataController.RecordCount = 0 then
+    EditDeleteRecord(VK_INSERT)
+  else
+    EditDeleteRecord({ VK_F2 }VK_RETURN);
+end;
+
 procedure TCustomerFrm.grdVCustomerInitEdit(Sender, AItem: TObject; AEdit: TcxCustomEdit);
 begin
   inherited;
@@ -1988,12 +2031,11 @@ end;
 
 procedure TCustomerFrm.EditDeleteRecord(Key: Word);
 var
-// ModResult: ShortInt;
   ErrorValues: string;
   ModResult: Integer;
   DataSet: TFDMemTable;
 begin
-//  Screen.Cursor := crHourglass;
+  Screen.Cursor := crHourglass;
   ModResult := mrNone;
   ErrorValues := '';
   DataSet := nil;
@@ -2007,6 +2049,7 @@ begin
     5: DataSet := MTDM.cdsDirector;
     6: DataSet := MTDM.cdsBeneficiary;
     7: DataSet := MTDM.cdsVehicle;
+    8: DataSet := MTDM.cdsCustomer;
   end;
 
   case Key of
@@ -2027,10 +2070,8 @@ begin
         end;
 
         case MTDM.DetailIndex of
-          0:
+          0: // Company conatact detail
             begin
-//              DataSet := MTDM.cdsContactDetailCo;
-
               if CompanyContactDetailFrm = nil then
                 CompanyContactDetailFrm := TCompanyContactDetailFrm.Create(nil);
 
@@ -2047,10 +2088,8 @@ begin
               FreeAndNil(CompanyContactDetailFrm);
             end;
 
-          1:
+          1: // Address
             begin
-//              DataSet := MTDM.cdsAddress;
-
               if AddressDetailFrm = nil then
                 AddressDetailFrm := TAddressDetailFrm.Create(nil);
 
@@ -2067,10 +2106,8 @@ begin
               FreeAndNil(AddressDetailFrm);
             end;
 
-          2:
+          2: // Contact person details
             begin
-//              DataSet := MTDM.cdsContactPerson;
-
               if ContactPersonFrm = nil then
                 ContactPersonFrm := TContactPersonFrm.Create(nil);
 
@@ -2087,15 +2124,13 @@ begin
               FreeAndNil(ContactPersonFrm);
             end;
 
-          3:
+          3: // Contact person
             begin
               if MTDM.cdsContactPerson.IsEmpty then
               begin
                 Screen.Cursor := crDefault;
                 raise ENoDataException.Create('Please add a contact person before adding the details.');
               end;
-
-//              DataSet := MTDM.cdsContactDetailPerson;
 
               if PersonContactDetailFrm = nil then
                 PersonContactDetailFrm := TPersonContactDetailFrm.Create(nil);
@@ -2113,10 +2148,8 @@ begin
               FreeAndNil(PersonContactDetailFrm);
             end;
 
-          4:
+          4: //Banking details
             begin
-//              DataSet := MTDM.cdsBankingDetail;
-
               if BankingDetailFrm = nil then
                 BankingDetailFrm := TBankingDetailFrm.Create(nil);
 
@@ -2133,10 +2166,8 @@ begin
               FreeAndNil(BankingDetailFrm);
             end;
 
-          5:
+          5: // Director
             begin
-//              DataSet := MTDM.cdsDirector;
-
               if DirectorDetailFrm = nil then
                 DirectorDetailFrm := TDirectorDetailFrm.Create(nil);
 
@@ -2153,10 +2184,8 @@ begin
               FreeAndNil(DirectorDetailFrm);
             end;
 
-          6:
+          6: // Beneficiary
             begin
-//              DataSet := MTDM.cdsBeneficiary;
-
               if BeneficiaryDetailFrm = nil then
                 BeneficiaryDetailFrm := TBeneficiaryDetailFrm.Create(nil);
 
@@ -2173,10 +2202,8 @@ begin
               FreeAndNil(BeneficiaryDetailFrm);
             end;
 
-          7:
+          7: // Vehicle
             begin
-//              DataSet := MTDM.cdsVehicle;
-
               if VehicleDetailFrm = nil then
                 VehicleDetailFrm := TVehicleDetailFrm.Create(nil);
 
@@ -2191,6 +2218,30 @@ begin
 
               VehicleDetailFrm.Close;
               FreeAndNil(VehicleDetailFrm);
+            end;
+
+          8: // Customer
+            begin
+              if CustomerEditFrm = nil then
+                CustomerEditFrm := TCustomerEditFrm.Create(nil);
+
+              case VBBaseDM.DBAction of
+                acInsert: CustomerEditFrm.lblCustomerHeader.Caption := 'Adding a New Customer';
+                acModify: CustomerEditFrm.lblCustomerHeader.Caption :=
+                  'Modifying Customer: ' + MTDM.cdsCustomer.FieldByName('NAME').AsString;
+              end;
+
+              ModResult := CustomerEditFrm.ShowModal;
+              if ModResult = mrOK then
+              begin
+                FOpenTableParam.ScriptID := 3;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Customer.xml';
+                FOpenTableParam.FieldName := 'NAME';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.Name;
+              end;
+
+              CustomerEditFrm.Close;
+              FreeAndNil(CustomerEditFrm);
             end;
         end;
 
@@ -2211,7 +2262,7 @@ begin
               VBBaseDM.GetData(FOpenTableParam.ScriptID, FOpenTableParam.DataSet, FOpenTableParam.DataSetName, ONE_SPACE,
                 FOpenTableParam.FileName, FOpenTableParam.GeneratorName, FOpenTableParam.UpdateTableName);
 
-              // Don't do a located for Address
+              // Don't do a locate for Address
               if MTDM.DetailIndex <> 1 then
                 if not FDetailDataSet[MTDM.DetailIndex].Locate(FOpenTableParam.FieldName, FOpenTableParam.LocateValue, [loCaseInsensitive]) then
                   FDetailDataSet[MTDM.DetailIndex].First;
@@ -2379,5 +2430,4 @@ begin
 end;
 
 end.
-
 

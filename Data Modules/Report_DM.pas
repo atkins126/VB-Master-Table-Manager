@@ -111,7 +111,6 @@ type
     cdsMasterListNAME: TStringField;
     cdsMasterListDESCRIPTION: TStringField;
     cdsMasterListIS_ACTIVE: TIntegerField;
-    cdsMasterListREAD_ONLY: TIntegerField;
     cdsMasterListSCRIPT_ID: TIntegerField;
     dtsMasterList: TDataSource;
     cdsCountry: TFDMemTable;
@@ -353,6 +352,10 @@ type
     cdsBeneficiarySALUTATION: TStringField;
     cdsDirectorSALUTATION: TStringField;
     cdsVehicleVEHICLE_MAKE: TStringField;
+    cdsCustomerIS_ACTIVE_STR: TStringField;
+    cdsCustomerIS_PROV_TAX_PAYER_STR: TStringField;
+    cdsCustomerHAS_LIVING_WILL_STR: TStringField;
+    cdsCustomerIS_ORGAN_DONOR_STR: TStringField;
 //    procedure PrintReport(SourceDataSet, TargetDataSet: TFDmemTable;
 //      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
 //      ReportTypeName: string);
@@ -365,6 +368,7 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure cdsBankingDetailCalcFields(DataSet: TDataSet);
+    procedure cdsCustomerCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     FSLTheYear: TStringList;
@@ -407,6 +411,30 @@ begin
     cdsBankingDetail.FieldByName('FIRST_NAME').AsString + ONE_SPACE +
     cdsBankingDetail.FieldByName('LAST_NAME').AsString;
 
+end;
+
+procedure TReportDM.cdsCustomerCalcFields(DataSet: TDataSet);
+begin
+  inherited;
+  if cdsCustomer.FieldByName('IS_ACTIVE').Asinteger = 1 then
+    cdsCustomer.FieldByName('IS_ACTIVE_STR').AsString := 'Y'
+  else
+    cdsCustomer.FieldByName('IS_ACTIVE_STR').AsString := 'N';
+
+  if cdsCustomer.FieldByName('IS_PROV_TAX_PAYER').Asinteger = 1 then
+    cdsCustomer.FieldByName('IS_PROV_TAX_PAYER_STR').AsString := 'Y'
+  else
+    cdsCustomer.FieldByName('IS_PROV_TAX_PAYER_STR').AsString := 'N';
+
+  if cdsCustomer.FieldByName('HAS_LIVING_WILL').Asinteger = 1 then
+    cdsCustomer.FieldByName('HAS_LIVING_WILL_STR').AsString := 'Y'
+  else
+    cdsCustomer.FieldByName('HAS_LIVING_WILL_STR').AsString := 'N';
+
+  if cdsCustomer.FieldByName('IS_ORGAN_DONOR').Asinteger = 1 then
+    cdsCustomer.FieldByName('IS_ORGAN_DONOR_STR').AsString := 'Y'
+  else
+    cdsCustomer.FieldByName('IS_ORGAN_DONOR_STR').AsString := 'N';
 end;
 
 procedure TReportDM.CreatePricehistory;

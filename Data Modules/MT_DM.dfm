@@ -1605,11 +1605,6 @@ inherited MTDM: TMTDM
       Origin = 'IS_ACTIVE'
       Required = True
     end
-    object cdsMasterListREAD_ONLY: TIntegerField
-      FieldName = 'READ_ONLY'
-      Origin = 'READ_ONLY'
-      Required = True
-    end
     object cdsMasterListSCRIPT_ID: TIntegerField
       FieldName = 'SCRIPT_ID'
       Origin = 'SCRIPT_ID'

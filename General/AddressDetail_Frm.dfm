@@ -1,203 +1,173 @@
 inherited AddressDetailFrm: TAddressDetailFrm
   Caption = 'AddressDetailFrm'
-  ClientHeight = 491
+  ClientHeight = 497
   ClientWidth = 609
   ExplicitWidth = 615
-  ExplicitHeight = 520
+  ExplicitHeight = 526
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
     Left = 0
     Top = 0
     Width = 605
-    Height = 460
+    Height = 486
     ExplicitLeft = 0
     ExplicitTop = 0
     ExplicitWidth = 605
-    ExplicitHeight = 460
+    ExplicitHeight = 486
     inherited lblHeaderTitle: TcxLabel
       ExplicitWidth = 583
     end
     inherited btnOK: TcxButton
       Left = 438
-      Top = 424
+      Top = 450
       TabOrder = 25
       OnClick = btnOKClick
       ExplicitLeft = 438
-      ExplicitTop = 424
+      ExplicitTop = 450
     end
     inherited btnCancel: TcxButton
       Left = 519
-      Top = 424
+      Top = 450
       TabOrder = 26
       ExplicitLeft = 519
-      ExplicitTop = 424
+      ExplicitTop = 450
     end
     inherited lblLegend: TcxLabel
-      Top = 428
-      ExplicitTop = 428
+      Top = 454
+      ExplicitTop = 454
     end
     inherited lblRequired: TcxLabel
-      Top = 425
-      ExplicitTop = 425
-      AnchorY = 437
+      Top = 451
+      ExplicitTop = 451
+      AnchorY = 463
     end
     inherited lblSubTitle: TcxDBLabel
       ExplicitWidth = 573
       Width = 573
     end
     object edtPhysical1: TcxTextEdit [6]
-      Left = 88
-      Top = 95
+      Left = 84
+      Top = 107
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 2
       Width = 175
     end
     object edtPhysical2: TcxTextEdit [7]
-      Left = 88
-      Top = 122
+      Left = 84
+      Top = 134
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 3
       Width = 175
     end
     object edtPhysical3: TcxTextEdit [8]
-      Left = 88
-      Top = 149
+      Left = 84
+      Top = 161
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 4
       Width = 175
     end
     object edtPhysical4: TcxTextEdit [9]
-      Left = 88
-      Top = 176
+      Left = 84
+      Top = 188
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 5
       Width = 175
     end
     object edtPhysicalCode: TcxTextEdit [10]
-      Left = 88
-      Top = 203
+      Left = 84
+      Top = 215
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 6
       Width = 175
     end
     object edtPostal1: TcxTextEdit [11]
-      Left = 405
-      Top = 95
+      Left = 393
+      Top = 107
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 11
       Width = 175
     end
     object edtPostal2: TcxTextEdit [12]
-      Left = 405
-      Top = 122
+      Left = 393
+      Top = 134
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 12
       Width = 175
     end
     object edtPostal3: TcxTextEdit [13]
-      Left = 405
-      Top = 149
+      Left = 393
+      Top = 161
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 13
       Width = 175
     end
     object edtPostal4: TcxTextEdit [14]
-      Left = 405
-      Top = 176
+      Left = 393
+      Top = 188
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 14
       Width = 175
     end
     object edtPostalCode: TcxTextEdit [15]
-      Left = 405
-      Top = 203
+      Left = 393
+      Top = 215
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 15
       Width = 175
     end
     object edtBilling1: TcxTextEdit [16]
-      Left = 88
-      Top = 262
+      Left = 84
+      Top = 285
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 16
       Width = 175
     end
     object edtBilling2: TcxTextEdit [17]
-      Left = 88
-      Top = 289
+      Left = 84
+      Top = 312
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 17
       Width = 175
     end
     object edtBilling3: TcxTextEdit [18]
-      Left = 88
-      Top = 316
+      Left = 84
+      Top = 339
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 18
       Width = 175
     end
     object edtBilling4: TcxTextEdit [19]
-      Left = 88
-      Top = 343
+      Left = 84
+      Top = 366
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 19
       Width = 175
     end
     object edtBillingCode: TcxTextEdit [20]
-      Left = 88
-      Top = 370
+      Left = 84
+      Top = 393
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 20
       Width = 175
     end
     object btnPhysicalToPostal: TcxButton [21]
-      Left = 282
+      Left = 274
       Top = 92
       Width = 40
       Height = 25
@@ -214,7 +184,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       OnClick = btnPhysicalToPostalClick
     end
     object btnPostalToPhysical: TcxButton [22]
-      Left = 282
+      Left = 274
       Top = 123
       Width = 40
       Height = 25
@@ -231,7 +201,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       OnClick = btnPostalToPhysicalClick
     end
     object btnPhysicalToBilling: TcxButton [23]
-      Left = 282
+      Left = 274
       Top = 170
       Width = 40
       Height = 25
@@ -248,7 +218,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       OnClick = btnPhysicalToBillingClick
     end
     object btnBillingToPhysical: TcxButton [24]
-      Left = 282
+      Left = 274
       Top = 201
       Width = 40
       Height = 25
@@ -265,8 +235,8 @@ inherited AddressDetailFrm: TAddressDetailFrm
       OnClick = btnBillingToPhysicalClick
     end
     object btnBillingToPostal: TcxButton [25]
-      Left = 282
-      Top = 259
+      Left = 274
+      Top = 270
       Width = 40
       Height = 25
       Caption = 'u'
@@ -282,8 +252,8 @@ inherited AddressDetailFrm: TAddressDetailFrm
       OnClick = btnBillingToPostalClick
     end
     object btnPostalToBilling: TcxButton [26]
-      Left = 282
-      Top = 290
+      Left = 274
+      Top = 301
       Width = 40
       Height = 25
       Caption = 't'

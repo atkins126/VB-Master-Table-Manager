@@ -338,6 +338,7 @@ inherited ReportDM: TReportDM
   end
   object cdsCustomer: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
+    OnCalcFields = cdsCustomerCalcFields
     FilterOptions = [foCaseInsensitive]
     Constraints = <
       item
@@ -618,6 +619,38 @@ inherited ReportDM: TReportDM
       DisplayLabel = 'Status'
       FieldName = 'CUSTOMER_STATUS'
       Origin = 'CUSTOMER_STATUS'
+    end
+    object cdsCustomerIS_ACTIVE_STR: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'Active'
+      FieldKind = fkCalculated
+      FieldName = 'IS_ACTIVE_STR'
+      Size = 1
+      Calculated = True
+    end
+    object cdsCustomerIS_PROV_TAX_PAYER_STR: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'Prov Tax'
+      FieldKind = fkCalculated
+      FieldName = 'IS_PROV_TAX_PAYER_STR'
+      Size = 1
+      Calculated = True
+    end
+    object cdsCustomerHAS_LIVING_WILL_STR: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'Liv Will'
+      FieldKind = fkCalculated
+      FieldName = 'HAS_LIVING_WILL_STR'
+      Size = 1
+      Calculated = True
+    end
+    object cdsCustomerIS_ORGAN_DONOR_STR: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'Org Don'
+      FieldKind = fkCalculated
+      FieldName = 'IS_ORGAN_DONOR_STR'
+      Size = 1
+      Calculated = True
     end
   end
   object cdsCustomerGroup: TFDMemTable
@@ -1524,11 +1557,6 @@ inherited ReportDM: TReportDM
     object cdsMasterListIS_ACTIVE: TIntegerField
       FieldName = 'IS_ACTIVE'
       Origin = 'IS_ACTIVE'
-      Required = True
-    end
-    object cdsMasterListREAD_ONLY: TIntegerField
-      FieldName = 'READ_ONLY'
-      Origin = 'READ_ONLY'
       Required = True
     end
     object cdsMasterListSCRIPT_ID: TIntegerField
@@ -4796,7 +4824,11 @@ inherited ReportDM: TReportDM
       'VAT_COUNTRY=VAT_COUNTRY'
       'VAT_OFFICE=VAT_OFFICE'
       'AR_MONTH=AR_MONTH'
-      'CUSTOMER_STATUS=CUSTOMER_STATUS')
+      'CUSTOMER_STATUS=CUSTOMER_STATUS'
+      'IS_ACTIVE_STR=IS_ACTIVE_STR'
+      'IS_PROV_TAX_PAYER_STR=IS_PROV_TAX_PAYER_STR'
+      'HAS_LIVING_WILL_STR=HAS_LIVING_WILL_STR'
+      'IS_ORGAN_DONOR_STR=IS_ORGAN_DONOR_STR')
     DataSet = cdsCustomer
     BCDToCurrency = False
     Left = 634
@@ -4813,7 +4845,7 @@ inherited ReportDM: TReportDM
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43494.671348414300000000
-    ReportOptions.LastChange = 43858.640132662040000000
+    ReportOptions.LastChange = 43859.694679571760000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -5051,7 +5083,7 @@ inherited ReportDM: TReportDM
         object Memo19: TfrxMemoView
           AllowVectorExport = True
           Left = 854.173780000000000000
-          Top = -0.000012200000000004
+          Top = -0.000012199999986251
           Width = 90.708661420000000000
           Height = 18.897650000000000000
           DataField = 'CUSTOMER_STATUS'
@@ -5095,19 +5127,6 @@ inherited ReportDM: TReportDM
           Memo.UTF8W = (
             'Active:')
           ParentFont = False
-        end
-        object CheckBox1: TfrxCheckBoxView
-          AllowVectorExport = True
-          Left = 1028.032160000000000000
-          Width = 18.897650000000000000
-          Height = 18.897637800000000000
-          CheckColor = clBlack
-          CheckStyle = csCheck
-          DataField = 'IS_ACTIVE'
-          DataSet = fdsCustomer
-          DataSetName = 'Customer'
-          Frame.Typ = []
-          UncheckStyle = usCross
         end
         object Memo18: TfrxMemoView
           AllowVectorExport = True
@@ -5289,6 +5308,18 @@ inherited ReportDM: TReportDM
           Memo.UTF8W = (
             '[(<Customer."VAT_OFFICE">)]')
         end
+        object Memo107: TfrxMemoView
+          AllowVectorExport = True
+          Left = 1024.252630000000000000
+          Width = 18.897637800000000000
+          Height = 18.897650000000000000
+          DataField = 'IS_ACTIVE_STR'
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."IS_ACTIVE_STR"]')
+        end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
@@ -5309,7 +5340,7 @@ inherited ReportDM: TReportDM
         object Memo12: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 854.173780000000000000
+          Left = 854.173780000000100000
           Width = 192.756030000000000000
           Height = 18.897650000000000000
           Frame.Typ = []
@@ -5338,7 +5369,7 @@ inherited ReportDM: TReportDM
         object lblReportTypeName: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 604.724800000000000000
+          Left = 604.724800000000100000
           Width = 442.205010000000000000
           Height = 30.236220470000000000
           Font.Charset = ANSI_CHARSET
@@ -5923,7 +5954,7 @@ inherited ReportDM: TReportDM
         object Memo103: TfrxMemoView
           AllowVectorExport = True
           Left = 744.567414880000000000
-          Top = 18.897650000000000000
+          Top = 18.897649999999990000
           Width = 49.133841180000000000
           Height = 18.897650000000000000
           Font.Charset = ANSI_CHARSET
@@ -5992,20 +6023,6 @@ inherited ReportDM: TReportDM
           Memo.UTF8W = (
             '[(<Customer."PASTEL_ACC_CODE">)]')
         end
-        object CheckBox3: TfrxCheckBoxView
-          AllowVectorExport = True
-          Left = 627.401574803149600000
-          Top = -0.000000000000004181
-          Width = 18.897650000000000000
-          Height = 18.897637800000000000
-          CheckColor = clBlack
-          CheckStyle = csCheck
-          DataField = 'IS_PROV_TAX_PAYER'
-          DataSet = fdsCustomer
-          DataSetName = 'Customer'
-          Frame.Typ = []
-          UncheckStyle = usCross
-        end
         object Memo113: TfrxMemoView
           AllowVectorExport = True
           Left = 593.386210000000000000
@@ -6021,24 +6038,9 @@ inherited ReportDM: TReportDM
             'Prov:')
           ParentFont = False
         end
-        object CheckBox4: TfrxCheckBoxView
-          AllowVectorExport = True
-          Left = 699.213050000000000000
-          Top = -0.000000000000004181
-          Width = 18.897650000000000000
-          Height = 18.897637800000000000
-          CheckColor = clBlack
-          CheckStyle = csCheck
-          DataField = 'HAS_LIVING_WILL'
-          DataSet = fdsCustomer
-          DataSetName = 'Customer'
-          Frame.Typ = []
-          UncheckStyle = usCross
-        end
         object Memo114: TfrxMemoView
           AllowVectorExport = True
           Left = 650.079160000000000000
-          Top = -0.000000000000004181
           Width = 49.133868030000000000
           Height = 18.897650000000000000
           Font.Charset = ANSI_CHARSET
@@ -6050,20 +6052,6 @@ inherited ReportDM: TReportDM
           Memo.UTF8W = (
             'Liv Will:')
           ParentFont = False
-        end
-        object CheckBox5: TfrxCheckBoxView
-          AllowVectorExport = True
-          Left = 774.803149606299200000
-          Top = -0.000000000000004181
-          Width = 18.897650000000000000
-          Height = 18.897637800000000000
-          CheckColor = clBlack
-          CheckStyle = csCheck
-          DataField = 'IS_ORGAN_DONOR'
-          DataSet = fdsCustomer
-          DataSetName = 'Customer'
-          Frame.Typ = []
-          UncheckStyle = usCross
         end
         object Memo115: TfrxMemoView
           AllowVectorExport = True
@@ -6106,6 +6094,39 @@ inherited ReportDM: TReportDM
           Frame.Typ = []
           Memo.UTF8W = (
             '[(<Customer."VB_TAX_ACC_CODE">)]')
+        end
+        object Memo108: TfrxMemoView
+          AllowVectorExport = True
+          Left = 627.401574803149500000
+          Width = 18.897637800000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."IS_PROV_TAX_PAYER_STR"]')
+        end
+        object Memo109: TfrxMemoView
+          AllowVectorExport = True
+          Left = 699.213050000000000000
+          Width = 18.897637800000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."HAS_LIVING_WILL_STR"]')
+        end
+        object Memo110: TfrxMemoView
+          AllowVectorExport = True
+          Left = 778.582679610000000000
+          Width = 18.897637800000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."IS_ORGAN_DONOR_STR"]')
         end
       end
       object Header1: TfrxHeader
