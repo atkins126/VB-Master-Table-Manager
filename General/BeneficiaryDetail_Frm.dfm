@@ -50,8 +50,6 @@ inherited BeneficiaryDetailFrm: TBeneficiaryDetailFrm
       Left = 98
       Top = 76
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 2
       Width = 160
@@ -69,11 +67,7 @@ inherited BeneficiaryDetailFrm: TBeneficiaryDetailFrm
           FieldName = 'NAME'
         end>
       Properties.PostPopupValueOnTab = True
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      Style.ButtonStyle = bts3D
-      Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 6
       Width = 160
     end
@@ -125,8 +119,6 @@ inherited BeneficiaryDetailFrm: TBeneficiaryDetailFrm
       Left = 98
       Top = 134
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 10
       Width = 412
@@ -146,8 +138,6 @@ inherited BeneficiaryDetailFrm: TBeneficiaryDetailFrm
       Left = 350
       Top = 76
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 4
       Width = 160
@@ -156,8 +146,6 @@ inherited BeneficiaryDetailFrm: TBeneficiaryDetailFrm
       Left = 350
       Top = 105
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 8
       Width = 160

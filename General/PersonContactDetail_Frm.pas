@@ -65,7 +65,7 @@ procedure TPersonContactDetailFrm.FormCreate(Sender: TObject);
 begin
   inherited;
   // Width = 390; Height = 335
-
+  MTDM.ClearFieldValues;
   lucContactType.Properties.ListSource := LookupDM.dtsContactType;
   lblCharCount.Caption :=  'Characters Left: ' + memComment.Properties.MaxLength.ToString;
 

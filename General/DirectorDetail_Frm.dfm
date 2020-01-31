@@ -50,8 +50,6 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       Left = 98
       Top = 76
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 2
       Width = 160
@@ -69,11 +67,7 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
           FieldName = 'NAME'
         end>
       Properties.PostPopupValueOnTab = True
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      Style.ButtonStyle = bts3D
-      Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 6
       Width = 160
     end
@@ -81,8 +75,6 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       Left = 359
       Top = 134
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 10
       Width = 160
@@ -113,8 +105,6 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       Left = 359
       Top = 76
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 4
       Width = 160
@@ -123,8 +113,6 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       Left = 359
       Top = 105
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 8
       Width = 160
@@ -133,8 +121,6 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       Left = 98
       Top = 134
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 9
       Width = 160
@@ -143,8 +129,6 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       Left = 98
       Top = 161
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 11
       Width = 421
@@ -289,9 +273,9 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
     end
     object spc1: TdxLayoutEmptySpaceItem
       Parent = grpMobileNo
-      CaptionOptions.Text = 'Empty Space Item'
       SizeOptions.Height = 10
       SizeOptions.Width = 14
+      CaptionOptions.Text = 'Empty Space Item'
       Index = 1
     end
   end

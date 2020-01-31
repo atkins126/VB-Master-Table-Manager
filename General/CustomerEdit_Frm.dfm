@@ -23,6 +23,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       Width = 75
       Height = 25
       Caption = 'OK'
+      Default = True
       ParentShowHint = False
       ShowHint = True
       TabOrder = 34
@@ -276,7 +277,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       TabOrder = 15
       Width = 369
     end
-    object edtCustomsCode: TcxTextEdit [18]
+    object edtVATCustomsCode: TcxTextEdit [18]
       Left = 110
       Top = 564
       BeepOnEnter = False
@@ -647,7 +648,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
     object litCustomsCode: TdxLayoutItem
       Parent = grpVATInfo
       CaptionOptions.Text = 'Customs Code'
-      Control = edtCustomsCode
+      Control = edtVATCustomsCode
       ControlOptions.OriginalHeight = 19
       ControlOptions.OriginalWidth = 121
       ControlOptions.ShowBorder = False

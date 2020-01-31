@@ -12,7 +12,7 @@ inherited CustomerFrm: TCustomerFrm
     ExplicitWidth = 1376
     ExplicitHeight = 731
     object grdCustomer: TcxGrid [0]
-      Left = -200
+      Left = 11
       Top = 125
       Width = 915
       Height = 313
@@ -195,7 +195,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVCustomer: TcxDBVerticalGrid [1]
-      Left = 721
+      Left = 932
       Top = 171
       Width = 444
       Height = 267
@@ -585,7 +585,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object navCustomer: TcxDBNavigator [2]
-      Left = -200
+      Left = 11
       Top = 11
       Width = 360
       Height = 40
@@ -645,7 +645,7 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 0
     end
     object navVCustomer: TcxDBNavigator [3]
-      Left = 721
+      Left = 932
       Top = 125
       Width = 216
       Height = 40
@@ -689,7 +689,7 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 8
     end
     object grdContactDetailCo: TcxGrid [4]
-      Left = -186
+      Left = 25
       Top = 481
       Width = 391
       Height = 170
@@ -871,7 +871,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCDComment: TcxDBMemo [5]
-      Left = -186
+      Left = 25
       Top = 657
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailCo
@@ -2380,7 +2380,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object lblLegend: TcxLabel [16]
-      Left = -200
+      Left = 11
       Top = 704
       Caption = 
         'INS = Add a new record;  ENTER = Edit selected record;  DEL = De' +
@@ -2391,7 +2391,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxOpenAfterExport: TcxCheckBox [17]
-      Left = 477
+      Left = 688
       Top = 88
       Caption = 'Open after export'
       ParentShowHint = False
@@ -2405,7 +2405,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxPersistSelection: TcxCheckBox [18]
-      Left = 172
+      Left = 383
       Top = 21
       Caption = 'Persist Selection'
       ParentShowHint = False
@@ -2419,7 +2419,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxGroupedReport: TcxCheckBox [19]
-      Left = 359
+      Left = 570
       Top = 88
       Caption = 'Grouped Report'
       ParentShowHint = False
@@ -2432,7 +2432,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object lucPrintWhat: TcxComboBox [20]
-      Left = 84
+      Left = 295
       Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
@@ -2450,7 +2450,7 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object lucReportType: TcxComboBox [21]
-      Left = -115
+      Left = 96
       Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
@@ -2467,7 +2467,7 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object cbxPrintContactDetails: TcxCheckBox [22]
-      Left = 220
+      Left = 431
       Top = 88
       Caption = 'Print contact details'
       ParentShowHint = False

@@ -80,10 +80,33 @@ type
     LicenceRenewalDate: TDateTime;
     MaintenancePlan: Boolean;
     // Customer
-    Name: String;
-    TradingAs: String;
-    BillTo: String;
-
+    CustomerTypeID: Integer;
+    YearEndMonthID: Integer;
+    TaxOfficeID: Integer;
+    VATMonthID: Integer;
+    VATCountryID: Integer;
+    VATOfficeID: Integer;
+    ARMonthID: Integer;
+    StatauID: Integer;
+    Name: string;
+    TradingAs: string;
+    BillTo: string;
+    CoNo: string;
+    VATNo: string;
+    VATCustomsCode: string;
+    PayeUifNo: string;
+    SDLNo: string;
+    WCNo: string;
+    ARCompletionDate: TDateTime;
+    PasteAccCode: string;
+    VBTaxAccCode: string;
+    IsProvTaxPayer: Integer;
+    HasLivingWill: Integer;
+    IsOrganDonor: Integer;
+    IsActive: Integer;
+    EFiling: string;
+    EFUserName: string;
+    EFPassword: string;
   end;
 
   TMTDM = class(TVBBaseDM)
@@ -455,6 +478,34 @@ begin
   FFieldValue.VehicleRegNo := '';
   FFieldValue.LicenceRenewalDate := 0.0;
   FFieldValue.MaintenancePlan := False;
+  // Customer
+  FFieldValue.CustomerTypeID := 0;
+  FFieldValue.YearEndMonthID := 0;
+  FFieldValue.TaxOfficeID := 0;
+  FFieldValue.VATMonthID := 0;
+  FFieldValue.VATCountryID := 0;
+  FFieldValue.VATOfficeID := 0;
+  FFieldValue.ARMonthID := 0;
+  FFieldValue.StatauID := 0;
+  FFieldValue.IsActive := 0;
+  FFieldValue.TradingAs := '';
+  FFieldValue.BillTo := '';
+  FFieldValue.CoNo := '';
+  FFieldValue.TaxNo := '';
+  FFieldValue.VATNo := '';
+  FFieldValue.VATCustomsCode := '';
+  FFieldValue.PayeUifNo := '';
+  FFieldValue.SDLNo := '';
+  FFieldValue.WCNo := '';
+  FFieldValue.ARCompletionDate := 0.0;
+  FFieldValue.PasteAccCode := '';
+  FFieldValue.VBTaxAccCode := '';
+  FFieldValue.IsProvTaxPayer := 0;
+  FFieldValue.HasLivingWill := 0;
+  FFieldValue.IsOrganDonor := 0;
+  FFieldValue.EFiling := '';
+  FFieldValue.EFUserName := '';
+  FFieldValue.EFPassword := '';
 end;
 
 procedure TMTDM.DataModuleCreate(Sender: TObject);

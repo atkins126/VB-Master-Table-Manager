@@ -15,9 +15,6 @@ inherited BankingDetailFrm: TBankingDetailFrm
     ExplicitTop = 0
     ExplicitWidth = 660
     ExplicitHeight = 215
-    inherited lblHeaderTitle: TcxLabel
-      ExplicitWidth = 638
-    end
     inherited btnOK: TcxButton
       Left = 493
       Top = 179
@@ -60,11 +57,7 @@ inherited BankingDetailFrm: TBankingDetailFrm
         end>
       Properties.ListSource = LookupDM.dtsBank
       Properties.PostPopupValueOnTab = True
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      Style.ButtonStyle = bts3D
-      Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 2
       Width = 220
     end
@@ -82,11 +75,7 @@ inherited BankingDetailFrm: TBankingDetailFrm
         end>
       Properties.ListSource = LookupDM.dtsBankAccountType
       Properties.PostPopupValueOnTab = True
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      Style.ButtonStyle = bts3D
-      Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 6
       Width = 220
     end
@@ -94,8 +83,6 @@ inherited BankingDetailFrm: TBankingDetailFrm
       Left = 78
       Top = 134
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 10
       Width = 220
@@ -137,8 +124,6 @@ inherited BankingDetailFrm: TBankingDetailFrm
       Left = 404
       Top = 76
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 4
       Width = 220
@@ -147,8 +132,6 @@ inherited BankingDetailFrm: TBankingDetailFrm
       Left = 404
       Top = 105
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 8
       Width = 220
@@ -157,8 +140,6 @@ inherited BankingDetailFrm: TBankingDetailFrm
       Left = 404
       Top = 134
       BeepOnEnter = False
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 12
       Width = 220

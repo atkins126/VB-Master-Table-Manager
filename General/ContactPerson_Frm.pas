@@ -97,6 +97,7 @@ procedure TContactPersonFrm.FormCreate(Sender: TObject);
 begin
   inherited;
   // Width = 550; Height = 310
+  MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
   lucJobFunction.Properties.ListSource := LookupDM.dtsJobFunction;
   dteDOB.Properties.MinDate := StrToDate('10/01/1900');

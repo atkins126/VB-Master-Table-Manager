@@ -89,6 +89,7 @@ procedure TVehicleDetailFrm.FormCreate(Sender: TObject);
 begin
   inherited;
 // Width = 520; Height = 360
+  MTDM.ClearFieldValues;
   lucVehicleMake.Properties.ListSource := LookupDM.dtsVehicleMake;
 //  edtYear.Properties.MinValue :=  1950;
   edtYear.Properties.MaxValue :=  YearInt(Date);

@@ -74,6 +74,7 @@ procedure TDirectorDetailFrm.FormCreate(Sender: TObject);
 begin
   inherited;
 // Width = 560; Height = 285
+  MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
 
   if VBBaseDM.DBAction = acModify then

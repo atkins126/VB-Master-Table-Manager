@@ -79,6 +79,7 @@ begin
 //  Width = 665; Height = 235
   lucBank.Properties.ListSource := LookupDM.dtsBank;
   lucAccType.Properties.ListSource := LookupDM.dtsBankAccountType;
+  MTDM.ClearFieldValues;
 
   if VBBaseDM.DBAction = acModify then
   begin

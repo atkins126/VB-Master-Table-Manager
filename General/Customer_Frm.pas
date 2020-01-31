@@ -530,12 +530,6 @@ begin
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1]]);
-
-// if CompanyContactDetailFrm <> nil then
-// begin
-// CompanyContactDetailFrm.Close;
-// FreeAndNil(CompanyContactDetailFrm);
-// end;
       end;
 
     1: // Address
@@ -675,6 +669,42 @@ begin
             MTDM.ValueArray[2] + CRLF +
             MTDM.ValueArray[3] + CRLF +
             MTDM.ValueArray[4]]);
+      end;
+
+    8: // Customer
+      begin
+        MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').AsInteger := MTDM.FFieldValue.CustomerTypeID;
+        MTDM.cdsCustomer.FieldByName('YEAR_END_MONTH_ID').AsInteger := MTDM.FFieldValue.YearEndMonthID;
+        MTDM.cdsCustomer.FieldByName('TAX_MONTH_ID').AsInteger := MTDM.FFieldValue.TaxOfficeID;
+        MTDM.cdsCustomer.FieldByName('VAT_MONTH_ID').AsInteger := MTDM.FFieldValue.VATMonthID;
+        MTDM.cdsCustomer.FieldByName('VAT_COUNTRY_ID').AsInteger := MTDM.FFieldValue.VATCountryID;
+        MTDM.cdsCustomer.FieldByName('VAT_OFFICE_ID').AsInteger := MTDM.FFieldValue.VATOfficeID;
+        MTDM.cdsCustomer.FieldByName('AR_MONTH_ID').AsInteger := MTDM.FFieldValue.ARMonthID;
+        MTDM.cdsCustomer.FieldByName('STATUS_ID').AsInteger := MTDM.FFieldValue.StatauID;
+        MTDM.cdsCustomer.FieldByName('IS_ACTIVE').AsInteger := MTDM.FFieldValue.IsActive;
+        MTDM.cdsCustomer.FieldByName('INITIALS').AsString := MTDM.FFieldValue.Initials;
+        MTDM.cdsCustomer.FieldByName('TRADING_AS').AsString := MTDM.FFieldValue.TradingAs;
+        MTDM.cdsCustomer.FieldByName('BILL_TO').AsString := MTDM.FFieldValue.BillTo;
+        MTDM.cdsCustomer.FieldByName('CO_NO').AsString := MTDM.FFieldValue.CoNo;
+        MTDM.cdsCustomer.FieldByName('TAX_NO').AsString := MTDM.FFieldValue.TaxNo;
+        MTDM.cdsCustomer.FieldByName('VAT_NO').AsString := MTDM.FFieldValue.VATNo;
+        MTDM.cdsCustomer.FieldByName('VAT_CUSTOMS_CODE').AsString := MTDM.FFieldValue.VATCustomsCode;
+        MTDM.cdsCustomer.FieldByName('PAYE_UIF_NO').AsString := MTDM.FFieldValue.PayeUifNo;
+        MTDM.cdsCustomer.FieldByName('SDL_NO').AsString := MTDM.FFieldValue.SDLNo;
+        MTDM.cdsCustomer.FieldByName('WC_NO').AsString := MTDM.FFieldValue.WCNo;
+        MTDM.cdsCustomer.FieldByName('AR_COMPLETION_DATE').AsDateTime := MTDM.FFieldValue.ARCompletionDate;
+        MTDM.cdsCustomer.FieldByName('PASTEL_ACC_CODE').AsString := MTDM.FFieldValue.PasteAccCode;
+        MTDM.cdsCustomer.FieldByName('VB_TAX_ACC_CODE').AsString := MTDM.FFieldValue.VBTaxAccCode;
+        MTDM.cdsCustomer.FieldByName('IS_PROV_TAX_PAYER').AsInteger := MTDM.FFieldValue.IsProvTaxPayer;
+        MTDM.cdsCustomer.FieldByName('HAS_LIVING_WILL').AsInteger := MTDM.FFieldValue.HasLivingWill;
+        MTDM.cdsCustomer.FieldByName('IS_ORGAN_DONOR').AsInteger := MTDM.FFieldValue.IsOrganDonor;
+        MTDM.cdsCustomer.FieldByName('EFILING').AsString := MTDM.FFieldValue.EFiling;
+        MTDM.cdsCustomer.FieldByName('EF_USER_NAME').AsString := MTDM.FFieldValue.EFUserName;
+        MTDM.cdsCustomer.FieldByName('EF_PASSWORD').AsString := MTDM.FFieldValue.EFPassword;
+
+        MTDM.ValueArray[0] := 'Customer Name:' + TAB + TAB + MTDM.FFieldValue.Name;
+        ErrorValues := Format(ERROR_VALUES, [
+          MTDM.ValueArray[0]]);
       end;
   end;
   Result := ErrorValues;
@@ -1010,7 +1040,7 @@ begin
 // FDetailDataSet[6] := MTDM.cdsBeneficiary;
 // FDetailDataSet[7] := MTDM.cdsVehicle;
 
-  SetLength(FDetailDataSet, 8);
+  SetLength(FDetailDataSet, 9);
   FDetailDataSet[0] := MTDM.cdsContactDetailCo;
   FDetailDataSet[1] := MTDM.cdsAddress;
   FDetailDataSet[2] := MTDM.cdsContactPerson;
@@ -1019,8 +1049,9 @@ begin
   FDetailDataSet[5] := MTDM.cdsDirector;
   FDetailDataSet[6] := MTDM.cdsBeneficiary;
   FDetailDataSet[7] := MTDM.cdsVehicle;
+  FDetailDataSet[8] := MTDM.cdsCustomer;
 
-  SetLength(FDetailFriendlyName, 8);
+  SetLength(FDetailFriendlyName, 9);
   FDetailFriendlyName[0] := 'Company Contact Detail';
   FDetailFriendlyName[1] := 'Address';
   FDetailFriendlyName[2] := 'Contact Person Data';
@@ -1029,6 +1060,7 @@ begin
   FDetailFriendlyName[5] := 'Director';
   FDetailFriendlyName[6] := 'Beneficiary';
   FDetailFriendlyName[7] := 'Vehicle';
+  FDetailFriendlyName[8] := 'Customer';
 
   OpenTables;
 end;

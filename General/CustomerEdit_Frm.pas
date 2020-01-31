@@ -82,7 +82,7 @@ type
     lucVATMonth: TcxLookupComboBox;
     lucVATCountry: TcxLookupComboBox;
     edtVATNo: TcxTextEdit;
-    edtCustomsCode: TcxTextEdit;
+    edtVATCustomsCode: TcxTextEdit;
     edtPAYEUIF: TcxTextEdit;
     edtSDLNo: TcxTextEdit;
     edtWCNo: TcxTextEdit;
@@ -158,7 +158,7 @@ begin
 
   if VBBaseDM.DBAction = acInsert then
   begin
-    litCustomerName.Visible := False;
+    litCustomerName.Visible := True;
     grpIndividual.Visible := False;
     cbxIsActive.Checked := True;
   end;
@@ -183,7 +183,7 @@ begin
     lucVATMonth.EditValue := MTDM.cdsCustomer.FieldByName('VAT_MONTH_ID').AsInteger;
     lucVATOffice.EditValue := MTDM.cdsCustomer.FieldByName('VAT_OFFICE_ID').AsInteger;
     lucVATCountry.EditValue := MTDM.cdsCustomer.FieldByName('VAT_COUNTRY_ID').AsInteger;
-    edtCustomsCode.Text := MTDM.cdsCustomer.FieldByName('VAT_CUSTOMS_CODE').AsString;
+    edtVATCustomsCode.Text := MTDM.cdsCustomer.FieldByName('VAT_CUSTOMS_CODE').AsString;
     edtPAYEUIF.Text := MTDM.cdsCustomer.FieldByName('PAYE_UIF_NO').AsString;
     edtSDLNo.Text := MTDM.cdsCustomer.FieldByName('SDL_NO').AsString;
     edtWCNo.Text := MTDM.cdsCustomer.FieldByName('WC_NO').AsString;
@@ -243,48 +243,46 @@ begin
   if SameText(lucStatus.Text, '') then
     raise EValidateException.Create('Customer status must have a value');
 
-  MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').AsInteger := lucCustomerType.EditValue;
-
   case lucCustomerType.EditValue of
     4:
       begin
-        MTDM.cdsCustomer.FieldByName('FIRST_NAME').AsString := edtFirstName.Text;
-        MTDM.cdsCustomer.FieldByName('LAST_NAME').AsString := edtLastName.Text;
-        MTDM.cdsCustomer.FieldByName('INITIALS').AsString := edtInitials.Text;
-        MTDM.cdsCustomer.FieldByName('NAME').AsString := edtFirstName.Text + ' ' + edtLastName.Text;
+        MTDM.FFieldValue.FirstName := edtFirstName.Text;
+        MTDM.FFieldValue.LastName := edtLastName.Text;
+        MTDM.FFieldValue.Initials := edtInitials.Text;
+        MTDM.FFieldValue.Name := edtFirstName.Text + ' ' + edtLastName.Text;
       end;
   else
-    begin
-      MTDM.cdsCustomer.FieldByName('NAME').AsString := edtCustomerName.Text;
-    end;
+    MTDM.FFieldValue.Name := edtCustomerName.Text;
   end;
 
-  MTDM.cdsCustomer.FieldByName('CO_NO').AsString := edtCoNo.Text;
-  MTDM.cdsCustomer.FieldByName('TRADING_AS').AsString := edtTradingAs.Text;
-  MTDM.cdsCustomer.FieldByName('BILL_TO').AsString := edtBillTo.Text;
-  MTDM.cdsCustomer.FieldByName('IS_ACTIVE').AsInteger := BooleanToInteger(cbxIsActive.Checked);
-  MTDM.cdsCustomer.FieldByName('YEAR_END_MONTH_ID').Asinteger := lucYearEnd.EditValue;
-  MTDM.cdsCustomer.FieldByName('TQX_NO').AsString := edtTaxNo.Text;
-  MTDM.cdsCustomer.FieldByName('TAX_OFFIC_ID').AsInteger := lucTaxOffice.EditValue;
-  MTDM.cdsCustomer.FieldByName('AR_MONTH_ID').Asinteger := lucARMonth.EditValue;
-  MTDM.cdsCustomer.FieldByName('VAT_NO').AsString := edtVATNo.Text;
-  MTDM.cdsCustomer.FieldByName('VAT_MONTH_ID').AsInteger := lucVATMonth.EditValue;
-  MTDM.cdsCustomer.FieldByName('VAT_COUNTRY_ID').AsInteger := lucVATCountry.EditValue;
-  MTDM.cdsCustomer.FieldByName('VAT_CUSTOMS_CODE').AsString := edtCustomsCode.Text;
-  MTDM.cdsCustomer.FieldByName('PAYE_UIF_NO').AsString := edtPAYEUIF.Text;
-  MTDM.cdsCustomer.FieldByName('SDL_NO').AsString := edtSDLNo.Text;
-  MTDM.cdsCustomer.FieldByName('WC_NO').AsString := edtWCNo.Text;
-  MTDM.cdsCustomer.FieldByName('AR_COMPLETIOIN_DATE').AsDateTime := dteARCompletionDate.Date;
-  MTDM.cdsCustomer.FieldByName('EFILING').AsString := edtEFiling.Text;
-  MTDM.cdsCustomer.FieldByName('EF_USER_NAME').AsString := edtEFUserName.Text;
-  MTDM.cdsCustomer.FieldByName('EF_PASSWORD').AsString := edtEFPassword.Text;
-  MTDM.cdsCustomer.FieldByName('PASTEL_ACC_CODE').AsString := edtPastelAccCode.Text;
-  MTDM.cdsCustomer.FieldByName('VB_TAX_ACC_CODE').AsString := edtVBTaxAccCode.Text;
-  MTDM.cdsCustomer.FieldByName('IS_PROV_TAX_PAYER').AsInteger := BooleanToInteger(cbxProvTaxPayer.Checked);
-  MTDM.cdsCustomer.FieldByName('HAS_LIVING_WILL').AsInteger := BooleanToInteger(cbxLivingWill.Checked);
-  MTDM.cdsCustomer.FieldByName('IS_ORGAN_DONOR').Asinteger := BooleanToInteger(cbxOrganDonor.Checked);
-  MTDM.cdsCustomer.FieldByName('DATE_CREAATED').AsDateTime := dteCreated.Date;
-  MTDM.cdsCustomer.FieldByName('DATE_MODIFIED').AsDateTime := dteModified.date;
+  MTDM.FFieldValue.CustomerTypeID := lucCustomerType.EditValue;
+  MTDM.FFieldValue.YearEndMonthID := NullToZero(lucYearEnd.EditValue);
+  MTDM.FFieldValue.TaxOfficeID := NullToZero(lucTaxOffice.EditValue);
+  MTDM.FFieldValue.VATMonthID := NullToZero(lucVATMonth.EditValue);
+  MTDM.FFieldValue.VATCountryID := NullToZero(lucVATCountry.EditValue);
+  MTDM.FFieldValue.VATOfficeID := NullToZero(lucVATOffice.EditValue);
+  MTDM.FFieldValue.ARMonthID := NullToZero(lucARMonth.EditValue);
+  MTDM.FFieldValue.StatauID := NullToZero(lucStatus.EditValue);
+  MTDM.FFieldValue.IsActive := BooleanToInteger(cbxIsActive.Checked);
+  MTDM.FFieldValue.Initials := edtInitials.Text;
+  MTDM.FFieldValue.TradingAs := edtTradingAs.Text;
+  MTDM.FFieldValue.BillTo := edtBillTo.Text;
+  MTDM.FFieldValue.CoNo := edtCoNo.Text;
+  MTDM.FFieldValue.TaxNo := edtTaxNo.Text;
+  MTDM.FFieldValue.VATNo := edtVATNo.Text;
+  MTDM.FFieldValue.VATCustomsCode := edtVATCustomsCode.Text;
+  MTDM.FFieldValue.PayeUifNo := edtPAYEUIF.Text;
+  MTDM.FFieldValue.SDLNo := edtSDLNo.Text;
+  MTDM.FFieldValue.WCNo := edtWCNo.Text;
+  MTDM.FFieldValue.ARCompletionDate := dteARCompletionDate.Date;
+  MTDM.FFieldValue.PasteAccCode := edtPastelAccCode.Text;
+  MTDM.FFieldValue.VBTaxAccCode := edtVBTaxAccCode.Text;
+  MTDM.FFieldValue.IsProvTaxPayer := BooleanToInteger(cbxProvTaxPayer.Checked);
+  MTDM.FFieldValue.HasLivingWill := BooleanToInteger(cbxLivingWill.Checked);
+  MTDM.FFieldValue.IsOrganDonor := BooleanToInteger(cbxOrganDonor.Checked);
+  MTDM.FFieldValue.EFiling := edtEFiling.Text;
+  MTDM.FFieldValue.EFUserName := edtEFUserName.Text;
+  MTDM.FFieldValue.EFPassword := edtEFPassword.Text;
 
   ModalResult := mrOK;
 end;

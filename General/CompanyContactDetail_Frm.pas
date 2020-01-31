@@ -74,6 +74,7 @@ begin
 //  lucContactType.Properties.ListSource := LookupDM.dtsContactType;
 //  layMain.Align := alClient;
 
+  MTDM.ClearFieldValues;
   lucContactType.Properties.ListSource := LookupDM.dtsContactType;
   lblCharCount.Caption :=  'Characters Left: ' + memComment.Properties.MaxLength.ToString;
 

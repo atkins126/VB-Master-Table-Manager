@@ -51,8 +51,6 @@ inherited ContactPersonFrm: TContactPersonFrm
       Top = 76
       BeepOnEnter = False
       Properties.OnChange = edtFirstNamePropertiesChange
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 2
       Width = 160
@@ -72,11 +70,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       Properties.ListSource = LookupDM.dtsSalutation
       Properties.PostPopupValueOnTab = True
       Properties.OnChange = edtFirstNamePropertiesChange
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      Style.ButtonStyle = bts3D
-      Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 6
       Width = 160
     end
@@ -85,8 +79,6 @@ inherited ContactPersonFrm: TContactPersonFrm
       Top = 134
       BeepOnEnter = False
       Properties.OnChange = edtFirstNamePropertiesChange
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 9
       Width = 160
@@ -96,8 +88,6 @@ inherited ContactPersonFrm: TContactPersonFrm
       Top = 163
       BeepOnEnter = False
       Properties.OnChange = edtFirstNamePropertiesChange
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 12
       Width = 160
@@ -117,11 +107,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       Properties.ListSource = LookupDM.dtsJobFunction
       Properties.PostPopupValueOnTab = True
       Properties.OnChange = edtFirstNamePropertiesChange
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      Style.ButtonStyle = bts3D
-      Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 15
       Width = 160
     end
@@ -152,8 +138,6 @@ inherited ContactPersonFrm: TContactPersonFrm
       Top = 76
       BeepOnEnter = False
       Properties.OnChange = edtFirstNamePropertiesChange
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 4
       Width = 160
@@ -163,8 +147,6 @@ inherited ContactPersonFrm: TContactPersonFrm
       Top = 105
       BeepOnEnter = False
       Properties.OnChange = edtFirstNamePropertiesChange
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 8
       Width = 160
@@ -177,11 +159,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       Properties.ShowOnlyValidDates = True
       Properties.ShowTime = False
       Properties.OnChange = edtFirstNamePropertiesChange
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
-      Style.ButtonStyle = bts3D
-      Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 11
       Width = 160
     end
@@ -190,8 +168,6 @@ inherited ContactPersonFrm: TContactPersonFrm
       Top = 163
       BeepOnEnter = False
       Properties.OnChange = edtFirstNamePropertiesChange
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 14
       Width = 160
@@ -205,8 +181,6 @@ inherited ContactPersonFrm: TContactPersonFrm
       Properties.UseAlignmentWhenInplace = True
       Properties.ValueChecked = 1
       Properties.ValueUnchecked = 0
-      Style.BorderColor = clWindowFrame
-      Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 17
       Transparent = True
@@ -371,8 +345,8 @@ inherited ContactPersonFrm: TContactPersonFrm
       CaptionOptions.Text = 'New Item'
       CaptionOptions.Visible = False
       Control = cbxPrimaryContact
-      ControlOptions.OriginalHeight = 21
-      ControlOptions.OriginalWidth = 115
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 114
       ControlOptions.ShowBorder = False
       Index = 2
     end
