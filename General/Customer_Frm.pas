@@ -326,10 +326,6 @@ type
     viewCustomerReportCUSTOMER_GROUP_ID: TcxGridDBBandedColumn;
     lucAccountHolderName: TcxGridDBBandedColumn;
     actAccountHolderName: TAction;
-    popCustDBAction: TPopupMenu;
-    MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
     actCustList: TActionList;
     actInstCust: TAction;
     actEditCust: TAction;
@@ -675,13 +671,16 @@ begin
       begin
         MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').AsInteger := MTDM.FFieldValue.CustomerTypeID;
         MTDM.cdsCustomer.FieldByName('YEAR_END_MONTH_ID').AsInteger := MTDM.FFieldValue.YearEndMonthID;
-        MTDM.cdsCustomer.FieldByName('TAX_MONTH_ID').AsInteger := MTDM.FFieldValue.TaxOfficeID;
+        MTDM.cdsCustomer.FieldByName('TAX_OFFICE_ID').AsInteger := MTDM.FFieldValue.TaxOfficeID;
         MTDM.cdsCustomer.FieldByName('VAT_MONTH_ID').AsInteger := MTDM.FFieldValue.VATMonthID;
         MTDM.cdsCustomer.FieldByName('VAT_COUNTRY_ID').AsInteger := MTDM.FFieldValue.VATCountryID;
         MTDM.cdsCustomer.FieldByName('VAT_OFFICE_ID').AsInteger := MTDM.FFieldValue.VATOfficeID;
         MTDM.cdsCustomer.FieldByName('AR_MONTH_ID').AsInteger := MTDM.FFieldValue.ARMonthID;
         MTDM.cdsCustomer.FieldByName('STATUS_ID').AsInteger := MTDM.FFieldValue.StatauID;
         MTDM.cdsCustomer.FieldByName('IS_ACTIVE').AsInteger := MTDM.FFieldValue.IsActive;
+        MTDM.cdsCustomer.FieldByName('NAME').AsString := MTDM.FFieldValue.Name;
+        MTDM.cdsCustomer.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
+        MTDM.cdsCustomer.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
         MTDM.cdsCustomer.FieldByName('INITIALS').AsString := MTDM.FFieldValue.Initials;
         MTDM.cdsCustomer.FieldByName('TRADING_AS').AsString := MTDM.FFieldValue.TradingAs;
         MTDM.cdsCustomer.FieldByName('BILL_TO').AsString := MTDM.FFieldValue.BillTo;
@@ -692,7 +691,11 @@ begin
         MTDM.cdsCustomer.FieldByName('PAYE_UIF_NO').AsString := MTDM.FFieldValue.PayeUifNo;
         MTDM.cdsCustomer.FieldByName('SDL_NO').AsString := MTDM.FFieldValue.SDLNo;
         MTDM.cdsCustomer.FieldByName('WC_NO').AsString := MTDM.FFieldValue.WCNo;
-        MTDM.cdsCustomer.FieldByName('AR_COMPLETION_DATE').AsDateTime := MTDM.FFieldValue.ARCompletionDate;
+
+        if (FormatDatetime('dd/MM/yyyy', MTDM.FFieldValue.ARCompletionDate) <> '30/12/1899')
+          and (FormatDatetime('dd/MM/yyyy', MTDM.FFieldValue.ARCompletionDate) <> '00/00/0000') then
+          MTDM.cdsCustomer.FieldByName('AR_COMPLETION_DATE').AsDateTime := MTDM.FFieldValue.ARCompletionDate;
+//        MTDM.cdsCustomer.FieldByName('AR_COMPLETION_DATE').Value := MTDM.FFieldValue.ARCompletionDate;
         MTDM.cdsCustomer.FieldByName('PASTEL_ACC_CODE').AsString := MTDM.FFieldValue.PasteAccCode;
         MTDM.cdsCustomer.FieldByName('VB_TAX_ACC_CODE').AsString := MTDM.FFieldValue.VBTaxAccCode;
         MTDM.cdsCustomer.FieldByName('IS_PROV_TAX_PAYER').AsInteger := MTDM.FFieldValue.IsProvTaxPayer;
@@ -702,7 +705,7 @@ begin
         MTDM.cdsCustomer.FieldByName('EF_USER_NAME').AsString := MTDM.FFieldValue.EFUserName;
         MTDM.cdsCustomer.FieldByName('EF_PASSWORD').AsString := MTDM.FFieldValue.EFPassword;
 
-        MTDM.ValueArray[0] := 'Customer Name:' + TAB + TAB + MTDM.FFieldValue.Name;
+        MTDM.ValueArray[0] := 'Customer ' + MTDM.FFieldValue.Name;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0]]);
       end;
@@ -1609,6 +1612,12 @@ begin
             end;
         end;
       end;
+
+    NBDI_DELETE:
+      begin
+        ADone := True;
+        actDelete.Execute;
+      end;
   end;
 end;
 
@@ -2304,10 +2313,17 @@ begin
                 if MTDM.PostError then
                 begin
                   if E.FDCode = 15 then // Duplicate record
-                    raise EDuplicateException.Create('Duplicate records not allowed.' + CRLF + CRLF +
-                      FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + ' already exists.' + CRLF + CRLF +
-                      ErrorValues
-                      );
+                  begin
+                    if MTDM.DetailIndex = 8 then // Customer
+                      raise EDuplicateException.Create('Duplicate records not allowed.' + CRLF + CRLF +
+                        ErrorValues + ' already exists.')
+//                        FDetailFriendlyName[MTDM.DetailIndex] + ' already exists.') // + CRLF + CRLF +
+//                      ErrorValues);
+                    else
+                      raise EDuplicateException.Create('Duplicate records not allowed.' + CRLF + CRLF +
+                        FDetailFriendlyName[MTDM.DetailIndex] + ' for ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + ' already exists.' + CRLF + CRLF +
+                        ErrorValues);
+                  end;
                 end;
               end;
             end;
@@ -2322,14 +2338,30 @@ begin
         if DataSet.IsEmpty then
           raise EValidateException.Create('Dataset is empty. No records to delete.');
 
-        if DisplayMsg(
-          Application.Title,
-          'Delete Confirmaiton',
-          'Are you sure you want to delete the selected ' + FDetailFriendlyName[MTDM.DetailIndex] + '?' + CRLF + CRLF +
-          'This action cannot be undone!',
-          mtConfirmation,
-          [mbYes, mbNo]
-          ) = mrYes then
+        case MTDM.DetailIndex of
+          8: // Customer
+            ModResult :=
+              DisplayMsg(
+              Application.Title,
+              'Delete Confirmaiton',
+              'Deleting a customer will also delete ALL linked data tables. This action cannot be undone!' + CRLF + CRLF +
+              'Are you sure you want to delete customer ' + MTDM.cdsCustomer.FieldByName('NAME').AsString + '?',
+              mtConfirmation,
+              [mbYes, mbNo]
+              );
+        else
+          ModResult :=
+            DisplayMsg(
+            Application.Title,
+            'Delete Confirmaiton',
+            'Are you sure you want to delete the selected ' + FDetailFriendlyName[MTDM.DetailIndex] + '?' + CRLF + CRLF +
+            'This action cannot be undone!',
+            mtConfirmation,
+            [mbYes, mbNo]
+            );
+        end;
+
+        if Modresult = mrYes then
           FDetailDataSet[MTDM.DetailIndex].Delete;
       end;
   end;

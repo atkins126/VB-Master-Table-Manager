@@ -53,6 +53,8 @@ type
     procedure btnOKClick(Sender: TObject);
     procedure edtRegNoKeyPress(Sender: TObject; var Key: Char);
     procedure memCommentPropertiesChange(Sender: TObject);
+    procedure dteRenewlDatePropertiesValidate(Sender: TObject;
+      var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
   private
     { Private declarations }
     procedure Validate;
@@ -76,7 +78,33 @@ uses
 procedure TVehicleDetailFrm.btnOKClick(Sender: TObject);
 begin
   inherited;
+  if ValidationError then
+  begin
+    ValidationError := False;
+    raise EValidateException.Create('A validation error has been detected. Please correct and try again or cancel the transactoin.');
+  end;
+//    DisplayMsg(
+//      Application.Title,
+//      'Input Validation',
+//      'A validation error has been detected. Please correct and try again or cancel the transactoin.',
+//      mtError,
+//      [mbOK]
+//      );
+
   Validate;
+end;
+
+procedure TVehicleDetailFrm.dteRenewlDatePropertiesValidate(Sender: TObject;
+  var DisplayValue: Variant; var ErrorText: TCaption; var Error: Boolean);
+begin
+  inherited;
+  ErrorText := '';
+  ValidationError := Error;
+  if Error then
+  begin
+    ErrorText := 'Invalid date: ' + DisplayValue + ' for renewal date. Please cancel or correct.';
+    raise EValidateException.Create(ErrorText);
+  end;
 end;
 
 procedure TVehicleDetailFrm.edtRegNoKeyPress(Sender: TObject; var Key: Char);
@@ -92,9 +120,10 @@ begin
   MTDM.ClearFieldValues;
   lucVehicleMake.Properties.ListSource := LookupDM.dtsVehicleMake;
 //  edtYear.Properties.MinValue :=  1950;
-  edtYear.Properties.MaxValue :=  YearInt(Date);
+  edtYear.Properties.MaxValue := YearInt(Date);
 //  edtYear.Value := 0;
-  lblCharCount.Caption :=  'Characters Left: ' + memComment.Properties.MaxLength.ToString;
+  lblCharCount.Caption := 'Characters Left: ' + memComment.Properties.MaxLength.ToString;
+  ValidationError := False;
 
   if VBBaseDM.DBAction = acModify then
   begin
@@ -112,7 +141,7 @@ procedure TVehicleDetailFrm.memCommentPropertiesChange(Sender: TObject);
 begin
   inherited;
 
-  lblCharCount.Caption :=  'Characters left: ' + IntToStr(memComment.Properties.MaxLength - Length(memComment.Text));
+  lblCharCount.Caption := 'Characters left: ' + IntToStr(memComment.Properties.MaxLength - Length(memComment.Text));
 end;
 
 procedure TVehicleDetailFrm.Validate;
@@ -138,8 +167,8 @@ begin
   MTDM.FFieldValue.VehicleRegNo := edtRegNo.Text;
   MTDM.FFieldValue.YearOfManufacture := Trunc(edtYear.Value);
   MTDM.FFieldValue.LicenceRenewalDate := dteRenewlDate.Date;
-  MTDM.FFieldValue.MaintenancePlan :=  cbxMaintenancePlan.Checked;
-  MTDM.FFieldValue.Comment :=  memComment.Text;
+  MTDM.FFieldValue.MaintenancePlan := cbxMaintenancePlan.Checked;
+  MTDM.FFieldValue.Comment := memComment.Text;
 
   ModalResult := mrOK;
 end;

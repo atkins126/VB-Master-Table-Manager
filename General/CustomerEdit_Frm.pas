@@ -104,10 +104,13 @@ type
     edtFirstName: TcxTextEdit;
     edtLastName: TcxTextEdit;
     edtInitials: TcxTextEdit;
+    styMandatory: TcxEditStyleController;
+    litLegend: TdxLayoutItem;
     procedure FormCreate(Sender: TObject);
     procedure lucCustomerTypePropertiesEditValueChanged(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
+    procedure edtCoNoKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     procedure Validate;
@@ -132,6 +135,12 @@ procedure TCustomerEditFrm.btnOKClick(Sender: TObject);
 begin
   inherited;
   Validate;
+end;
+
+procedure TCustomerEditFrm.edtCoNoKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  Key := UpCase(Key);
 end;
 
 procedure TCustomerEditFrm.FormCreate(Sender: TObject);
@@ -199,7 +208,46 @@ begin
     cbxOrganDonor.Checked := IntegerToBoolean(MTDM.cdsCustomer.FieldByName('IS_ORGAN_DONOR').Asinteger);
     dteCreated.Date := MTDM.cdsCustomer.FieldByName('DATE_CREATED').AsDateTime;
     dteModified.date := MTDM.cdsCustomer.FieldByName('DATE_MODIFIED').AsDateTime;
+  end
+{$IFDEF DEBUG}
+  else
+  begin
+    lucCustomerType.EditValue := 2;
+    edtCustomerName.Text := 'Flippie Gouws cc';
+//    edtFirstName.Text := '';
+//    edtLastName.Text := '';
+//    edtInitials.Text := '';
+    edtCoNo.Text := 'CK1249/12002';
+    lucStatus.EditValue := 1;
+    edtTradingAs.Text := 'Flippie Gouws cc';
+//    edtBillTo.Text jj
+    cbxIsActive.Checked := True;
+    lucYearEnd.EditValue := 2;
+    edtTaxNo.Text := '987654321';
+    lucTaxOffice.EditValue := 9;
+    lucARMonth.EditValue := 3;
+    edtVATNo.Text := '316497';
+    lucVATMonth.EditValue := 4;
+    lucVATOffice.EditValue := 1;
+    lucVATCountry.EditValue := 2;
+    edtVATCustomsCode.Text := 'ZA2468';
+    edtPAYEUIF.Text := '654258';
+    edtSDLNo.Text := '456852';
+    edtWCNo.Text := '951753';
+//    dteARCompletionDate.Date := EncodeDate(2020, 6, 30);
+    edtEFiling.Text := 'Hello';
+    edtEFUserName.Text := 'flippie';
+    edtEFPassword.Text := 'qwer123';
+    edtPastelAccCode.Text := 'FLIP003';
+    edtVBTaxAccCode.Text := 'FG987';
+    cbxProvTaxPayer.Checked := True;
+    cbxLivingWill.Checked := False;
+    cbxOrganDonor.Checked := False;
+    dteCreated.Date := Now;
+    dteModified.date := Now;
   end;
+{$ENDIF}
+  ;
 end;
 
 procedure TCustomerEditFrm.FormShow(Sender: TObject);
@@ -224,24 +272,44 @@ end;
 procedure TCustomerEditFrm.Validate;
 begin
   if SameText(lucCustomerType.Text, '') then
+  begin
+    if lucCustomerType.CanFocus then
+      lucCustomerType.SetFocus;
     raise EValidateException.Create('Customer type must have a value');
+  end;
 
   case lucCustomerType.EditValue of
     4, 7:
       begin
         if SameText(TrimAll(edtFirstName.Text), '') then
+        begin
+          if edtFirstName.CanFocus then
+            edtFirstName.SetFocus;
           raise EValidateException.Create('First name must have a value');
+        end;
 
         if SameText(TrimAll(edtLastName.Text), '') then
+        begin
+          if edtLastName.CanFocus then
+            edtLastName.SetFocus;
           raise EValidateException.Create('Last name must have a value');
+        end;
       end;
   else
     if SameText(TrimAll(edtCustomerName.Text), '') then
+    begin
+      if edtCustomerName.CanFocus then
+        edtCustomerName.SetFocus;
       raise EValidateException.Create('Customer name must have a value');
+    end;
   end;
 
   if SameText(lucStatus.Text, '') then
+  begin
+    if lucStatus.CanFocus then
+      lucStatus.SetFocus;
     raise EValidateException.Create('Customer status must have a value');
+  end;
 
   case lucCustomerType.EditValue of
     4:
@@ -274,6 +342,19 @@ begin
   MTDM.FFieldValue.PayeUifNo := edtPAYEUIF.Text;
   MTDM.FFieldValue.SDLNo := edtSDLNo.Text;
   MTDM.FFieldValue.WCNo := edtWCNo.Text;
+//  if VarIsNull(dteARCompletionDate.EditValue) then
+
+//  if Length(Trim(dteARCompletionDate.Text)) = 0 then
+//    MTDM.FFieldValue.ARCompletionDate := EncodeDate(1899, 12, 30)
+//  else
+//    MTDM.FFieldValue.ARCompletionDate := dteARCompletionDate.Date;
+
+  if (FormatDatetime('dd/MM/yyyy', dteARCompletionDate.Date) <> '30/12/1899')
+    and (FormatDatetime('dd/MM/yyyy', dteARCompletionDate.Date) <> '00/00/0000') then
+////    MTDM.FFieldValue.ARCompletionDate := -693592
+////  else
+//    MTDM.FFieldValue.ARCompletionDate := dteARCompletionDate.Date;
+
   MTDM.FFieldValue.ARCompletionDate := dteARCompletionDate.Date;
   MTDM.FFieldValue.PasteAccCode := edtPastelAccCode.Text;
   MTDM.FFieldValue.VBTaxAccCode := edtVBTaxAccCode.Text;

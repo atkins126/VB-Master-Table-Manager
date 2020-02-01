@@ -12,7 +12,7 @@ inherited CustomerFrm: TCustomerFrm
     ExplicitWidth = 1376
     ExplicitHeight = 731
     object grdCustomer: TcxGrid [0]
-      Left = 11
+      Left = -339
       Top = 125
       Width = 915
       Height = 313
@@ -35,6 +35,7 @@ inherited CustomerFrm: TCustomerFrm
         DataController.Summary.SummaryGroups = <>
         OptionsBehavior.IncSearch = True
         OptionsCustomize.ColumnsQuickCustomization = True
+        OptionsData.CancelOnExit = False
         OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
         OptionsData.Editing = False
@@ -195,7 +196,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVCustomer: TcxDBVerticalGrid [1]
-      Left = 932
+      Left = 582
       Top = 171
       Width = 444
       Height = 267
@@ -585,7 +586,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object navCustomer: TcxDBNavigator [2]
-      Left = 11
+      Left = -339
       Top = 11
       Width = 360
       Height = 40
@@ -645,7 +646,7 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 0
     end
     object navVCustomer: TcxDBNavigator [3]
-      Left = 932
+      Left = 582
       Top = 125
       Width = 216
       Height = 40
@@ -689,11 +690,12 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 8
     end
     object grdContactDetailCo: TcxGrid [4]
-      Left = 25
-      Top = 481
+      Left = 10000
+      Top = 10000
       Width = 391
       Height = 170
       TabOrder = 10
+      Visible = False
       object viewContactDetailCo: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -871,8 +873,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCDComment: TcxDBMemo [5]
-      Left = 25
-      Top = 657
+      Left = 10000
+      Top = 10000
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailCo
       PopupMenu = popDBAction
@@ -880,6 +882,7 @@ inherited CustomerFrm: TCustomerFrm
       Properties.ScrollBars = ssVertical
       Style.HotTrack = False
       TabOrder = 11
+      Visible = False
       OnDblClick = viewContactDetailCoDblClick
       OnKeyDown = viewContactDetailCoKeyDown
       Height = 24
@@ -1140,12 +1143,11 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdContactPerson: TcxGrid [9]
-      Left = 10000
-      Top = 10000
+      Left = -325
+      Top = 481
       Width = 1250
       Height = 200
       TabOrder = 15
-      Visible = False
       OnEnter = grdContactPersonEnter
       object viewContactPerson: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -1359,12 +1361,11 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdCPContactDetail: TcxGrid [10]
-      Left = 10000
-      Top = 10000
+      Left = 931
+      Top = 481
       Width = 400
       Height = 120
       TabOrder = 16
-      Visible = False
       OnEnter = grdCPContactDetailEnter
       object viewCPContactDetail: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -1519,8 +1520,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCPcontactDetailComment: TcxDBMemo [11]
-      Left = 10000
-      Top = 10000
+      Left = 931
+      Top = 607
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailPerson
       PopupMenu = popDBAction
@@ -1528,7 +1529,6 @@ inherited CustomerFrm: TCustomerFrm
       Properties.ScrollBars = ssVertical
       Style.HotTrack = False
       TabOrder = 17
-      Visible = False
       OnDblClick = viewContactDetailCoDblClick
       OnEnter = grdCPContactDetailEnter
       OnKeyDown = viewContactDetailCoKeyDown
@@ -2380,7 +2380,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object lblLegend: TcxLabel [16]
-      Left = 11
+      Left = -339
       Top = 704
       Caption = 
         'INS = Add a new record;  ENTER = Edit selected record;  DEL = De' +
@@ -2391,7 +2391,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxOpenAfterExport: TcxCheckBox [17]
-      Left = 688
+      Left = 338
       Top = 88
       Caption = 'Open after export'
       ParentShowHint = False
@@ -2405,7 +2405,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxPersistSelection: TcxCheckBox [18]
-      Left = 383
+      Left = 33
       Top = 21
       Caption = 'Persist Selection'
       ParentShowHint = False
@@ -2419,7 +2419,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxGroupedReport: TcxCheckBox [19]
-      Left = 570
+      Left = 220
       Top = 88
       Caption = 'Grouped Report'
       ParentShowHint = False
@@ -2432,7 +2432,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object lucPrintWhat: TcxComboBox [20]
-      Left = 295
+      Left = -55
       Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
@@ -2450,7 +2450,7 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object lucReportType: TcxComboBox [21]
-      Left = 96
+      Left = -254
       Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
@@ -2467,7 +2467,7 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object cbxPrintContactDetails: TcxCheckBox [22]
-      Left = 431
+      Left = 81
       Top = 88
       Caption = 'Print contact details'
       ParentShowHint = False
@@ -2504,6 +2504,7 @@ inherited CustomerFrm: TCustomerFrm
       AlignVert = avClient
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
+      ItemIndex = 2
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpDetailGridTabChanged
@@ -6140,20 +6141,6 @@ inherited CustomerFrm: TCustomerFrm
     OptionsEnabled = [pdoPrintToFile, pdoAllPages, pdoCurrentPage, pdoPageRange]
     Left = 290
     Top = 255
-  end
-  object popCustDBAction: TPopupMenu
-    Images = imgNav16
-    Left = 180
-    Top = 310
-    object MenuItem1: TMenuItem
-      Action = actInsert
-    end
-    object MenuItem2: TMenuItem
-      Action = actEdit
-    end
-    object MenuItem3: TMenuItem
-      Action = actDelete
-    end
   end
   object actCustList: TActionList
     Images = imgNav16

@@ -78,6 +78,8 @@ inherited VehicleDetailFrm: TVehicleDetailFrm
       Properties.ImmediatePost = True
       Properties.SaveTime = False
       Properties.ShowTime = False
+      Properties.ValidationOptions = [evoRaiseException, evoShowErrorIcon]
+      Properties.OnValidate = dteRenewlDatePropertiesValidate
       Style.HotTrack = False
       TabOrder = 10
       Width = 160
@@ -372,6 +374,7 @@ inherited VehicleDetailFrm: TVehicleDetailFrm
     PixelsPerInch = 96
   end
   inherited styMandatory: TcxEditStyleController
+    Left = 379
     PixelsPerInch = 96
   end
 end

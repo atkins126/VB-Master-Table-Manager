@@ -363,22 +363,11 @@ inherited MTDM: TMTDM
   object cdsCustomer: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
+    AfterPost = cdsActivityTypeAfterPost
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
-    Constraints = <
-      item
-        CustomConstraint = 'CUSTOMER_TYPE_ID > 0'
-        ErrorMessage = 'Customer type must have a value'
-        FromDictionary = False
-      end
-      item
-        CustomConstraint = 
-          'CHAR_LENGTH(TRIM(NAME)) > 0 OR (CHAR_LENGTH(TRIM(FIRST_NAME)) > ' +
-          '0 AND CHAR_LENGTH(TRIM(LAST_NAME)) > 0)'
-        FromDictionary = False
-      end>
     FieldDefs = <>
     CachedUpdates = True
     IndexDefs = <>

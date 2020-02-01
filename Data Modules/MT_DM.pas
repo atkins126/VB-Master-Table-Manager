@@ -98,6 +98,7 @@ type
     SDLNo: string;
     WCNo: string;
     ARCompletionDate: TDateTime;
+//    ARCompletionDate: Variant;
     PasteAccCode: string;
     VBTaxAccCode: string;
     IsProvTaxPayer: Integer;
