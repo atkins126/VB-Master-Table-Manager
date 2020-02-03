@@ -226,7 +226,7 @@ type
     lucVVATMonth: TcxDBEditorRow;
     lucVCountry: TcxDBEditorRow;
     edtVCustomsCode: TcxDBEditorRow;
-    edtVPAYEUIF: TcxDBEditorRow;
+    edtVPAYENo: TcxDBEditorRow;
     edtVSDLNo: TcxDBEditorRow;
     edtVWCNo: TcxDBEditorRow;
     lucARCompletionDate: TcxDBEditorRow;
@@ -307,7 +307,6 @@ type
     viewCustomerReportTAX_NO: TcxGridDBBandedColumn;
     viewCustomerReportVAT_NO: TcxGridDBBandedColumn;
     viewCustomerReportVAT_CUSTOMS_CODE: TcxGridDBBandedColumn;
-    viewCustomerReportPAYE_UIF_NO: TcxGridDBBandedColumn;
     viewCustomerReportSDL_NO: TcxGridDBBandedColumn;
     viewCustomerReportWC_NO: TcxGridDBBandedColumn;
     viewCustomerReportAR_COMPLETION_DATE: TcxGridDBBandedColumn;
@@ -330,6 +329,9 @@ type
     actInstCust: TAction;
     actEditCust: TAction;
     actDeleteCust: TAction;
+    edtUIFNo: TcxDBEditorRow;
+    viewCustomerReportPAYE_NO: TcxGridDBBandedColumn;
+    viewCustomerReportUIF_NO: TcxGridDBBandedColumn;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -688,7 +690,8 @@ begin
         MTDM.cdsCustomer.FieldByName('TAX_NO').AsString := MTDM.FFieldValue.TaxNo;
         MTDM.cdsCustomer.FieldByName('VAT_NO').AsString := MTDM.FFieldValue.VATNo;
         MTDM.cdsCustomer.FieldByName('VAT_CUSTOMS_CODE').AsString := MTDM.FFieldValue.VATCustomsCode;
-        MTDM.cdsCustomer.FieldByName('PAYE_UIF_NO').AsString := MTDM.FFieldValue.PayeUifNo;
+        MTDM.cdsCustomer.FieldByName('PAYE_NO').AsString := MTDM.FFieldValue.PayeNo;
+        MTDM.cdsCustomer.FieldByName('UIF_NO').AsString := MTDM.FFieldValue.UifNo;
         MTDM.cdsCustomer.FieldByName('SDL_NO').AsString := MTDM.FFieldValue.SDLNo;
         MTDM.cdsCustomer.FieldByName('WC_NO').AsString := MTDM.FFieldValue.WCNo;
 

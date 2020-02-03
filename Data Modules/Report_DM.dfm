@@ -501,10 +501,15 @@ inherited ReportDM: TReportDM
       FieldName = 'VAT_CUSTOMS_CODE'
       Origin = 'VAT_CUSTOMS_CODE'
     end
-    object cdsCustomerPAYE_UIF_NO: TStringField
-      DisplayLabel = 'PAYE/UIF'
-      FieldName = 'PAYE_UIF_NO'
-      Origin = 'PAYE_UIF_NO'
+    object cdsCustomerPAYE_NO: TStringField
+      DisplayLabel = 'PAYE'
+      FieldName = 'PAYE_NO'
+      Origin = 'PAYE_NO'
+    end
+    object cdsCustomerUIF_NO: TStringField
+      DisplayLabel = 'UIF No'
+      FieldName = 'UIF_NO'
+      Origin = 'UIF_NO'
     end
     object cdsCustomerSDL_NO: TStringField
       DisplayLabel = 'SDL No'
@@ -4803,7 +4808,8 @@ inherited ReportDM: TReportDM
       'TAX_NO=TAX_NO'
       'VAT_NO=VAT_NO'
       'VAT_CUSTOMS_CODE=VAT_CUSTOMS_CODE'
-      'PAYE_UIF_NO=PAYE_UIF_NO'
+      'PAYE_NO=PAYE_NO'
+      'UIF_NO=UIF_NO'
       'SDL_NO=SDL_NO'
       'WC_NO=WC_NO'
       'AR_COMPLETION_DATE=AR_COMPLETION_DATE'
@@ -4845,7 +4851,7 @@ inherited ReportDM: TReportDM
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43494.671348414300000000
-    ReportOptions.LastChange = 43859.694679571760000000
+    ReportOptions.LastChange = 43863.552538645830000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -4910,7 +4916,9 @@ inherited ReportDM: TReportDM
       RightMargin = 10.000000000000000000
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
+      ColumnWidth = 277.000000000000000000
       Frame.Typ = []
+      EndlessHeight = True
       PrintIfEmpty = False
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
@@ -4920,11 +4928,10 @@ inherited ReportDM: TReportDM
       end
       object bndMaster: TfrxMasterData
         FillType = ftBrush
-        Frame.Typ = [ftRight, ftTop, ftBottom]
-        Height = 83.149606300000000000
+        Frame.Typ = [ftLeft, ftRight, ftTop]
+        Height = 98.267692130000000000
         Top = 139.842610000000000000
         Width = 1046.929810000000000000
-        Child = rptCustomer.bndSpace6
         DataSet = fdsCustomer
         DataSetName = 'Customer'
         RowCount = 0
@@ -4932,32 +4939,34 @@ inherited ReportDM: TReportDM
         Stretched = True
         object Memo1: TfrxMemoView
           AllowVectorExport = True
-          Left = 86.929190000000000000
-          Width = 355.275590550000000000
+          Left = 71.811070000000000000
+          Top = 0.000012200000000004
+          Width = 370.393700787402000000
           Height = 18.897650000000000000
           DataField = 'NAME'
           DataSet = fdsCustomer
           DataSetName = 'Customer'
-          Frame.Typ = [ftLeft]
+          Frame.Typ = []
           Memo.UTF8W = (
             '[Customer."NAME"]')
         end
         object Memo2: TfrxMemoView
           AllowVectorExport = True
-          Left = 86.929190000000000000
-          Top = 18.897637800000000000
-          Width = 355.275590550000000000
+          Left = 71.811070000000000000
+          Top = 18.897650000000000000
+          Width = 370.393700787402000000
           Height = 18.897650000000000000
           DataField = 'TRADING_AS'
           DataSet = fdsCustomer
           DataSetName = 'Customer'
-          Frame.Typ = [ftLeft]
+          Frame.Typ = []
           Memo.UTF8W = (
             '[Customer."TRADING_AS"]')
         end
         object Memo3: TfrxMemoView
           AllowVectorExport = True
-          Width = 83.149606300000000000
+          Top = 0.000012200000000004
+          Width = 71.811023622047200000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -4974,8 +4983,8 @@ inherited ReportDM: TReportDM
         end
         object Memo4: TfrxMemoView
           AllowVectorExport = True
-          Top = 18.897637800000000000
-          Width = 83.149606300000000000
+          Top = 18.897650000000000000
+          Width = 71.811023622047200000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -4993,6 +5002,7 @@ inherited ReportDM: TReportDM
         object Memo5: TfrxMemoView
           AllowVectorExport = True
           Left = 680.315400000000000000
+          Top = 0.000012200000000004
           Width = 105.826771650000000000
           Height = 18.897650000000000000
           DataField = 'CO_NO'
@@ -5005,7 +5015,7 @@ inherited ReportDM: TReportDM
         object Memo13: TfrxMemoView
           AllowVectorExport = True
           Left = 495.118102910000000000
-          Top = 18.897637800000000000
+          Top = 18.897650000000000000
           Width = 128.503937007874000000
           Height = 18.897650000000000000
           DataField = 'TAX_NO'
@@ -5018,6 +5028,7 @@ inherited ReportDM: TReportDM
         object Memo14: TfrxMemoView
           AllowVectorExport = True
           Left = 638.740157480000000000
+          Top = 0.000012200000000004
           Width = 41.574803149606300000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
@@ -5035,8 +5046,8 @@ inherited ReportDM: TReportDM
         object Memo15: TfrxMemoView
           AllowVectorExport = True
           Left = 445.984540000000000000
-          Top = 18.897637800000000000
-          Width = 49.133858267716540000
+          Top = 18.897650000000000000
+          Width = 49.133858267716500000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -5053,7 +5064,7 @@ inherited ReportDM: TReportDM
         object Memo16: TfrxMemoView
           AllowVectorExport = True
           Left = 495.118102910000000000
-          Top = 0.000014650000000005
+          Top = 0.000026850000000009
           Width = 132.283464570000000000
           Height = 18.897650000000000000
           DataField = 'CUSTOMER_TYPE'
@@ -5066,6 +5077,7 @@ inherited ReportDM: TReportDM
         object Memo17: TfrxMemoView
           AllowVectorExport = True
           Left = 445.984540000000000000
+          Top = 0.000012200000000004
           Width = 49.133858270000000000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
@@ -5083,7 +5095,7 @@ inherited ReportDM: TReportDM
         object Memo19: TfrxMemoView
           AllowVectorExport = True
           Left = 854.173780000000000000
-          Top = -0.000012199999986251
+          Top = 0.000000000000013753
           Width = 90.708661420000000000
           Height = 18.897650000000000000
           DataField = 'CUSTOMER_STATUS'
@@ -5096,8 +5108,7 @@ inherited ReportDM: TReportDM
         object Memo20: TfrxMemoView
           AllowVectorExport = True
           Left = 808.819420000000000000
-          Top = -0.000012200000000004
-          Width = 45.354330708661420000
+          Width = 45.354330708661400000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -5114,6 +5125,7 @@ inherited ReportDM: TReportDM
         object Memo23: TfrxMemoView
           AllowVectorExport = True
           Left = 982.457330000000000000
+          Top = 0.000012200000000004
           Width = 41.574803150000000000
           Height = 18.897637800000000000
           DataSet = fdsCustomer
@@ -5130,21 +5142,21 @@ inherited ReportDM: TReportDM
         end
         object Memo18: TfrxMemoView
           AllowVectorExport = True
-          Left = 86.929190000000000000
-          Top = 37.795300000000000000
-          Width = 355.275590550000000000
+          Left = 71.811070000000000000
+          Top = 37.795312200000000000
+          Width = 370.393700787402000000
           Height = 18.897650000000000000
           DataField = 'BILL_TO'
           DataSet = fdsCustomer
           DataSetName = 'Customer'
-          Frame.Typ = [ftLeft]
+          Frame.Typ = []
           Memo.UTF8W = (
             '[Customer."BILL_TO"]')
         end
         object Memo21: TfrxMemoView
           AllowVectorExport = True
-          Top = 37.795300000000000000
-          Width = 83.149606300000000000
+          Top = 37.795312200000000000
+          Width = 71.811023622047200000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -5162,7 +5174,7 @@ inherited ReportDM: TReportDM
         object Memo22: TfrxMemoView
           AllowVectorExport = True
           Left = 495.118430000000000000
-          Top = 37.795300000000000000
+          Top = 37.795312200000000000
           Width = 128.503937007874000000
           Height = 18.897650000000000000
           DataField = 'VAT_NO'
@@ -5175,8 +5187,8 @@ inherited ReportDM: TReportDM
         object Memo24: TfrxMemoView
           AllowVectorExport = True
           Left = 445.984540000000000000
-          Top = 37.795300000000000000
-          Width = 49.133858267716540000
+          Top = 37.795312200000000000
+          Width = 49.133858267716500000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -5190,24 +5202,10 @@ inherited ReportDM: TReportDM
             'VAT No:')
           ParentFont = False
         end
-        object Memo25: TfrxMemoView
-          AllowVectorExport = True
-          Top = 60.472480000000000000
-          Width = 1046.929133860000000000
-          Height = 1.889763779527560000
-          Frame.Typ = [ftTop]
-        end
-        object subAddress: TfrxSubreport
-          AllowVectorExport = True
-          Top = 60.850393700000010000
-          Width = 94.488250000000000000
-          Height = 18.897650000000000000
-          Page = rptCustomer.repAddress
-        end
         object Memo116: TfrxMemoView
           AllowVectorExport = True
           Left = 638.740570000000000000
-          Top = 18.897650000000000000
+          Top = 18.897662200000000000
           Width = 71.811023620000000000
           Height = 18.897650000000000000
           Font.Charset = ANSI_CHARSET
@@ -5223,8 +5221,8 @@ inherited ReportDM: TReportDM
         object Memo117: TfrxMemoView
           AllowVectorExport = True
           Left = 808.819420000000000000
-          Top = 18.897650000000000000
-          Width = 68.031496062992130000
+          Top = 18.897662200000000000
+          Width = 68.031496062992100000
           Height = 18.897650000000000000
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
@@ -5239,8 +5237,8 @@ inherited ReportDM: TReportDM
         object Memo118: TfrxMemoView
           AllowVectorExport = True
           Left = 710.551181100000000000
-          Top = 18.897650000000000000
-          Width = 90.708661417322830000
+          Top = 18.897662200000000000
+          Width = 90.708661417322800000
           Height = 18.897650000000000000
           Frame.Typ = []
           Memo.UTF8W = (
@@ -5249,8 +5247,8 @@ inherited ReportDM: TReportDM
         object Memo119: TfrxMemoView
           AllowVectorExport = True
           Left = 876.850960000000000000
-          Top = 18.897650000000000000
-          Width = 151.181102362204700000
+          Top = 18.897662200000000000
+          Width = 151.181102362205000000
           Height = 18.897650000000000000
           Frame.Typ = []
           Memo.UTF8W = (
@@ -5259,7 +5257,7 @@ inherited ReportDM: TReportDM
         object Memo120: TfrxMemoView
           AllowVectorExport = True
           Left = 638.740570000000000000
-          Top = 37.795300000000000000
+          Top = 37.795312200000000000
           Width = 71.811023620000000000
           Height = 18.897650000000000000
           Font.Charset = ANSI_CHARSET
@@ -5275,8 +5273,8 @@ inherited ReportDM: TReportDM
         object Memo121: TfrxMemoView
           AllowVectorExport = True
           Left = 808.819420000000000000
-          Top = 37.795300000000000000
-          Width = 68.031496062992130000
+          Top = 37.795312200000000000
+          Width = 68.031496062992100000
           Height = 18.897650000000000000
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
@@ -5291,8 +5289,8 @@ inherited ReportDM: TReportDM
         object Memo122: TfrxMemoView
           AllowVectorExport = True
           Left = 710.551181100000000000
-          Top = 37.795300000000000000
-          Width = 90.708661417322830000
+          Top = 37.795312200000000000
+          Width = 90.708661417322800000
           Height = 18.897650000000000000
           Frame.Typ = []
           Memo.UTF8W = (
@@ -5301,8 +5299,8 @@ inherited ReportDM: TReportDM
         object Memo123: TfrxMemoView
           AllowVectorExport = True
           Left = 876.850955120000000000
-          Top = 37.795300000000000000
-          Width = 151.181102362204700000
+          Top = 37.795312200000000000
+          Width = 151.181102362205000000
           Height = 18.897650000000000000
           Frame.Typ = []
           Memo.UTF8W = (
@@ -5311,6 +5309,7 @@ inherited ReportDM: TReportDM
         object Memo107: TfrxMemoView
           AllowVectorExport = True
           Left = 1024.252630000000000000
+          Top = 0.000012200000000004
           Width = 18.897637800000000000
           Height = 18.897650000000000000
           DataField = 'IS_ACTIVE_STR'
@@ -5320,12 +5319,276 @@ inherited ReportDM: TReportDM
           Memo.UTF8W = (
             '[Customer."IS_ACTIVE_STR"]')
         end
+        object Memo127: TfrxMemoView
+          AllowVectorExport = True
+          Top = 56.692925585826800000
+          Width = 37.795275590000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'PAYE:')
+          ParentFont = False
+        end
+        object Memo128: TfrxMemoView
+          AllowVectorExport = True
+          Left = 37.794892360000000000
+          Top = 56.692925585826800000
+          Width = 75.590551180000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[(<Customer."PAYE_NO">)]')
+        end
+        object Memo129: TfrxMemoView
+          AllowVectorExport = True
+          Left = 128.504020000000000000
+          Top = 56.692925585826800000
+          Width = 26.456692910000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'UIF:')
+          ParentFont = False
+        end
+        object Memo130: TfrxMemoView
+          AllowVectorExport = True
+          Left = 154.960246690000000000
+          Top = 56.692925585826800000
+          Width = 75.590551180000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[(<Customer."UIF_NO">)]')
+        end
+        object Memo131: TfrxMemoView
+          AllowVectorExport = True
+          Left = 236.330860000000000000
+          Top = 56.692962200000000000
+          Width = 34.015748030000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Prov:')
+          ParentFont = False
+        end
+        object Memo132: TfrxMemoView
+          AllowVectorExport = True
+          Left = 293.023810000000000000
+          Top = 56.692962200000000000
+          Width = 49.133868030000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Liv Will:')
+          ParentFont = False
+        end
+        object Memo133: TfrxMemoView
+          AllowVectorExport = True
+          Left = 364.834880000000000000
+          Top = 56.692962200000000000
+          Width = 52.913398030000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Org Don:')
+          ParentFont = False
+        end
+        object Memo134: TfrxMemoView
+          AllowVectorExport = True
+          Left = 270.346224800000000000
+          Top = 56.692962200000000000
+          Width = 18.897637800000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."IS_PROV_TAX_PAYER_STR"]')
+        end
+        object Memo135: TfrxMemoView
+          AllowVectorExport = True
+          Left = 342.157700000000000000
+          Top = 56.692962200000000000
+          Width = 18.897637800000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."HAS_LIVING_WILL_STR"]')
+        end
+        object Memo136: TfrxMemoView
+          AllowVectorExport = True
+          Left = 421.527329610000000000
+          Top = 56.692962200000000000
+          Width = 18.897637800000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."IS_ORGAN_DONOR_STR"]')
+        end
+        object Memo137: TfrxMemoView
+          AllowVectorExport = True
+          Left = 445.984540000000000000
+          Top = 56.692962200000000000
+          Width = 66.141732280000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Pastel Acc:')
+          ParentFont = False
+        end
+        object Memo138: TfrxMemoView
+          AllowVectorExport = True
+          Left = 512.016075120000000000
+          Top = 56.692962200000000000
+          Width = 102.047244090000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[(<Customer."PASTEL_ACC_CODE">)]')
+        end
+        object Memo139: TfrxMemoView
+          AllowVectorExport = True
+          Left = 642.520095120000000000
+          Top = 56.692962200000000000
+          Width = 45.354330710000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'VB Tax:')
+          ParentFont = False
+        end
+        object Memo140: TfrxMemoView
+          AllowVectorExport = True
+          Left = 687.874450240000000000
+          Top = 56.692962200000000000
+          Width = 102.047244090000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[(<Customer."VB_TAX_ACC_CODE">)]')
+        end
+        object Memo141: TfrxMemoView
+          AllowVectorExport = True
+          Top = 75.590636610000000000
+          Width = 45.354311180000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'EFiling:')
+          ParentFont = False
+        end
+        object Memo142: TfrxMemoView
+          AllowVectorExport = True
+          Left = 321.260050000000000000
+          Top = 75.590612200000000000
+          Width = 45.354330710000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'EF PW:')
+          ParentFont = False
+        end
+        object Memo143: TfrxMemoView
+          AllowVectorExport = True
+          Left = 154.960734880000000000
+          Top = 75.590636610000000000
+          Width = 49.133841180000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'EF User:')
+          ParentFont = False
+        end
+        object Memo144: TfrxMemoView
+          AllowVectorExport = True
+          Left = 49.133890000000000000
+          Top = 75.590636610000000000
+          Width = 94.488188980000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[(<Customer."EFILING">)]')
+        end
+        object Memo145: TfrxMemoView
+          AllowVectorExport = True
+          Left = 207.874150000000000000
+          Top = 75.590636610000000000
+          Width = 94.488188980000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[(<Customer."EF_USER_NAME">)]')
+        end
+        object Memo146: TfrxMemoView
+          AllowVectorExport = True
+          Left = 366.614410000000000000
+          Top = 75.590612200000000000
+          Width = 86.929133860000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[(<Customer."EF_PASSWORD">)]')
+        end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Frame.Typ = [ftTop]
         Height = 22.677180000000000000
-        Top = 737.008350000000000000
+        Top = 771.024120000000000000
         Width = 1046.929810000000000000
         object Memo11: TfrxMemoView
           Align = baLeft
@@ -5340,7 +5603,7 @@ inherited ReportDM: TReportDM
         object Memo12: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 854.173780000000100000
+          Left = 854.173780000000000000
           Width = 192.756030000000000000
           Height = 18.897650000000000000
           Frame.Typ = []
@@ -5369,7 +5632,7 @@ inherited ReportDM: TReportDM
         object lblReportTypeName: TfrxMemoView
           Align = baRight
           AllowVectorExport = True
-          Left = 604.724800000000100000
+          Left = 604.724800000000000000
           Width = 442.205010000000000000
           Height = 30.236220470000000000
           Font.Charset = ANSI_CHARSET
@@ -5399,162 +5662,537 @@ inherited ReportDM: TReportDM
           ParentFont = False
         end
       end
-      object bndContactDetailCo: TfrxChild
-        FillType = ftBrush
-        Frame.Typ = []
-        Height = 22.677180000000000000
-        Top = 275.905690000000000000
-        Width = 1046.929810000000000000
-        Child = rptCustomer.bndSpace1
-        PrintChildIfInvisible = True
-        ToNRows = 0
-        ToNRowsMode = rmCount
-        object subContactDetailCo: TfrxSubreport
-          AllowVectorExport = True
-          Width = 94.488250000000000000
-          Height = 18.897650000000000000
-          Page = rptCustomer.repContactDetailCo
-        end
-      end
       object bndBankingDetail: TfrxChild
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
-        Top = 427.086890000000000000
+        Height = 30.236220472440900000
+        Top = 521.575140000000000000
         Width = 1046.929810000000000000
-        Child = rptCustomer.bndspace3
         ToNRows = 0
         ToNRowsMode = rmCount
         object subBankingDetail: TfrxSubreport
           AllowVectorExport = True
+          Top = 9.448818897637800000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           Page = rptCustomer.repBankingDetail
         end
       end
-      object bndContactDetailPerson: TfrxChild
+      object bndContactDetailCoHead: TfrxChild
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
-        Top = 351.496290000000000000
+        Height = 26.456692910000000000
+        Top = 427.086890000000000000
         Width = 1046.929810000000000000
-        Child = rptCustomer.bndSpace2
         ToNRows = 0
         ToNRowsMode = rmCount
-        object subContactDetailPerson: TfrxSubreport
+        object Memo165: TfrxMemoView
           AllowVectorExport = True
-          Width = 94.488250000000000000
+          Top = 7.559060000000000000
+          Width = 120.944960000000000000
           Height = 18.897650000000000000
-          Page = rptCustomer.repContactDetailPerson
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Contact Details')
+          ParentFont = False
         end
       end
       object bndDirecor: TfrxChild
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
-        Top = 502.677490000000000000
+        Height = 30.236220472440900000
+        Top = 574.488560000000000000
         Width = 1046.929810000000000000
-        Child = rptCustomer.bndSpace4
         ToNRows = 0
         ToNRowsMode = rmCount
         object subDirector: TfrxSubreport
           AllowVectorExport = True
+          Top = 9.448818897637800000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           Page = rptCustomer.repDirector
         end
       end
-      object bndSpace1: TfrxChild
-        FillType = ftBrush
-        Frame.Typ = []
-        Height = 7.559055120000000000
-        Top = 321.260050000000000000
-        Width = 1046.929810000000000000
-        Child = rptCustomer.bndContactDetailPerson
-        ToNRows = 0
-        ToNRowsMode = rmCount
-      end
-      object bndSpace2: TfrxChild
-        FillType = ftBrush
-        Frame.Typ = []
-        Height = 7.559055120000000000
-        Top = 396.850650000000000000
-        Width = 1046.929810000000000000
-        Child = rptCustomer.bndBankingDetail
-        ToNRows = 0
-        ToNRowsMode = rmCount
-      end
-      object bndSpace5: TfrxChild
-        FillType = ftBrush
-        Frame.Typ = []
-        Height = 7.559055120000000000
-        Top = 623.622450000000000000
-        Width = 1046.929810000000000000
-        Child = rptCustomer.bndvehicle
-        ToNRows = 0
-        ToNRowsMode = rmCount
-      end
-      object bndSpace4: TfrxChild
-        FillType = ftBrush
-        Frame.Typ = []
-        Height = 7.559055120000000000
-        Top = 548.031850000000000000
-        Width = 1046.929810000000000000
-        Child = rptCustomer.bndBeneficiary
-        ToNRows = 0
-        ToNRowsMode = rmCount
-      end
       object bndBeneficiary: TfrxChild
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
-        Top = 578.268090000000000000
+        Height = 30.236220472440900000
+        Top = 627.401980000000000000
         Width = 1046.929810000000000000
-        Child = rptCustomer.bndSpace5
         ToNRows = 0
         ToNRowsMode = rmCount
         object subbeneficiary: TfrxSubreport
           AllowVectorExport = True
-          Left = -0.000000000000000210
+          Top = 9.448818897637800000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           Page = rptCustomer.repbeneficiary
         end
       end
-      object bndspace3: TfrxChild
-        FillType = ftBrush
-        Frame.Typ = []
-        Height = 7.559055120000000000
-        Top = 472.441250000000000000
-        Width = 1046.929810000000000000
-        Child = rptCustomer.bndDirecor
-        ToNRows = 0
-        ToNRowsMode = rmCount
-      end
       object bndvehicle: TfrxChild
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
-        Top = 653.858690000000000000
+        Height = 30.236220472440900000
+        Top = 680.315400000000000000
         Width = 1046.929810000000000000
         ToNRows = 0
         ToNRowsMode = rmCount
         object subvehicle: TfrxSubreport
           AllowVectorExport = True
+          Top = 9.448818897637800000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
           Page = rptCustomer.repvehicle
         end
       end
-      object bndSpace6: TfrxChild
+      object bndAddress: TfrxDetailData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 7.559055120000000000
-        Top = 245.669450000000000000
+        Height = 98.267716540000000000
+        Top = 306.141930000000000000
         Width = 1046.929810000000000000
-        Child = rptCustomer.bndContactDetailCo
-        ToNRows = 0
-        ToNRowsMode = rmCount
+        Child = rptCustomer.bndContactDetailCoHead
+        DataSet = fdsAddress
+        DataSetName = 'Address'
+        PrintIfDetailEmpty = True
+        RowCount = 0
+        object Memo126: TfrxMemoView
+          AllowVectorExport = True
+          Left = 391.181058430000000000
+          Width = 192.755905510000000000
+          Height = 98.267716540000000000
+          StretchMode = smMaxHeight
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftRight]
+          ParentFont = False
+        end
+        object Memo147: TfrxMemoView
+          AllowVectorExport = True
+          Left = 198.425177320000000000
+          Width = 192.755905510000000000
+          Height = 98.267716540000000000
+          StretchMode = smMaxHeight
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight]
+          ParentFont = False
+        end
+        object Memo148: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'PHYSICAL1'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."PHYSICAL1"]')
+          ParentFont = False
+        end
+        object Memo149: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Top = 18.897637800000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'PHYSICAL2'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."PHYSICAL2"]')
+          ParentFont = False
+        end
+        object Memo150: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Top = 37.795275590000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'PHYSICAL3'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."PHYSICAL3"]')
+          ParentFont = False
+        end
+        object Memo151: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Top = 56.692913390000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'PHYSICAL4'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."PHYSICAL4"]')
+          ParentFont = False
+        end
+        object Memo152: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Top = 75.590551180000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'PHYSICAL_CODE'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."PHYSICAL_CODE"]')
+          ParentFont = False
+        end
+        object Memo153: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 200.315090000000000000
+          Top = 56.692913390000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'POSTAL4'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."POSTAL4"]')
+          ParentFont = False
+        end
+        object Memo154: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 200.315090000000000000
+          Top = 75.590551180000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'POSTAL_CODE'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."POSTAL_CODE"]')
+          ParentFont = False
+        end
+        object Memo155: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 200.315090000000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'POSTAL1'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."POSTAL1"]')
+          ParentFont = False
+        end
+        object Memo156: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 200.315090000000000000
+          Top = 18.897637800000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'POSTAL2'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."POSTAL2"]')
+          ParentFont = False
+        end
+        object Memo157: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 200.315090000000000000
+          Top = 37.795275590000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'POSTAL3'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."POSTAL3"]')
+          ParentFont = False
+        end
+        object Memo158: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 393.071120000000000000
+          Top = 56.692913390000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'BILLING4'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."BILLING4"]')
+          ParentFont = False
+        end
+        object Memo159: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 393.071120000000000000
+          Top = 75.590551180000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'BILLING_CODE'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."BILLING_CODE"]')
+          ParentFont = False
+        end
+        object Memo160: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 393.071120000000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'BILLING1'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."BILLING1"]')
+          ParentFont = False
+        end
+        object Memo161: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 393.071120000000000000
+          Top = 18.897637800000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'BILLING2'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."BILLING2"]')
+          ParentFont = False
+        end
+        object Memo162: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 393.071120000000000000
+          Top = 37.795275590000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'BILLING3'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."BILLING3"]')
+          ParentFont = False
+        end
+      end
+      object bndAddressHeader: TfrxHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 260.787570000000000000
+        Width = 1046.929810000000000000
+        object Memo108: TfrxMemoView
+          AllowVectorExport = True
+          Width = 124.724490000000000000
+          Height = 22.677165354330700000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          GapX = 3.000000000000000000
+          Memo.UTF8W = (
+            'Physical Address')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo124: TfrxMemoView
+          AllowVectorExport = True
+          Left = 202.094488190000000000
+          Width = 124.724490000000000000
+          Height = 22.677165354330700000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          GapX = 3.000000000000000000
+          Memo.UTF8W = (
+            'Postal Address')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo125: TfrxMemoView
+          AllowVectorExport = True
+          Left = 394.850393700000000000
+          Width = 193.511811020000000000
+          Height = 22.677165354330700000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight]
+          GapX = 3.000000000000000000
+          Memo.UTF8W = (
+            'Billing Address')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+      end
+      object bndContactDetailCo: TfrxDetailData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 476.220780000000000000
+        Width = 1046.929810000000000000
+        Columns = 4
+        ColumnWidth = 261.732283464566900000
+        ColumnGap = 7.559055118110236000
+        DataSet = fdsContactDetailCo
+        DataSetName = 'ContactDetailCo'
+        RowCount = 0
+        object Memo163: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Width = 86.929133860000000000
+          Height = 18.897650000000000000
+          DataSet = fdsContactDetailCo
+          DataSetName = 'ContactDetailCo'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[ContactDetailCo."CONTACT_TYPE"]:')
+          ParentFont = False
+        end
+        object Memo164: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 90.708656540000000000
+          Width = 170.078740160000000000
+          Height = 18.897650000000000000
+          DataField = 'VALUE'
+          DataSet = fdsContactDetailCo
+          DataSetName = 'ContactDetailCo'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[ContactDetailCo."VALUE"]')
+        end
       end
     end
     object repAddress: TfrxReportPage
@@ -5572,14 +6210,16 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
+      EndlessHeight = True
       object bndSubAddress: TfrxMasterData
         FillType = ftBrush
-        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
         Height = 98.267780000000000000
-        Top = 60.472480000000000000
+        Top = 68.031540000000000000
         Width = 1046.929810000000000000
         DataSet = fdsAddress
         DataSetName = 'Address'
+        PrintIfDetailEmpty = True
         RowCount = 0
         Stretched = True
         object Memo40: TfrxMemoView
@@ -5919,232 +6559,23 @@ inherited ReportDM: TReportDM
             '[Address."BILLING3"]')
           ParentFont = False
         end
-        object Memo101: TfrxMemoView
-          AllowVectorExport = True
-          Left = 593.386210000000000000
-          Top = 18.897650000000000000
-          Width = 45.354311180000000000
-          Height = 18.897650000000000000
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Calibri'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Memo.UTF8W = (
-            'EFiling:')
-          ParentFont = False
-        end
-        object Memo102: TfrxMemoView
-          AllowVectorExport = True
-          Left = 914.646260000000000000
-          Top = 18.897650000000000000
-          Width = 45.354330710000000000
-          Height = 18.897650000000000000
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Calibri'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Memo.UTF8W = (
-            'EF PW:')
-          ParentFont = False
-        end
-        object Memo103: TfrxMemoView
-          AllowVectorExport = True
-          Left = 744.567414880000000000
-          Top = 18.897649999999990000
-          Width = 49.133841180000000000
-          Height = 18.897650000000000000
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Calibri'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Memo.UTF8W = (
-            'EF User:')
-          ParentFont = False
-        end
-        object Memo104: TfrxMemoView
-          AllowVectorExport = True
-          Left = 593.386214880000000000
-          Top = 37.795300000000000000
-          Width = 66.141732280000000000
-          Height = 18.897650000000000000
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Calibri'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Memo.UTF8W = (
-            'Pastel Acc:')
-          ParentFont = False
-        end
-        object Memo95: TfrxMemoView
-          AllowVectorExport = True
-          Left = 642.520100000000000000
-          Top = 18.897650000000000000
-          Width = 94.488188980000000000
-          Height = 18.897650000000000000
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[(<Customer."EFILING">)]')
-        end
-        object Memo96: TfrxMemoView
-          AllowVectorExport = True
-          Left = 797.480830000000000000
-          Top = 18.897650000000000000
-          Width = 94.488188980000000000
-          Height = 18.897650000000000000
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[(<Customer."EF_USER_NAME">)]')
-        end
-        object Memo98: TfrxMemoView
-          AllowVectorExport = True
-          Left = 960.000620000000000000
-          Top = 18.897650000000000000
-          Width = 86.929133860000000000
-          Height = 18.897650000000000000
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[(<Customer."EF_PASSWORD">)]')
-        end
-        object Memo99: TfrxMemoView
-          AllowVectorExport = True
-          Left = 659.417750000000000000
-          Top = 37.795300000000000000
-          Width = 102.047244090000000000
-          Height = 18.897650000000000000
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[(<Customer."PASTEL_ACC_CODE">)]')
-        end
-        object Memo113: TfrxMemoView
-          AllowVectorExport = True
-          Left = 593.386210000000000000
-          Width = 34.015748030000000000
-          Height = 18.897650000000000000
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Calibri'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Memo.UTF8W = (
-            'Prov:')
-          ParentFont = False
-        end
-        object Memo114: TfrxMemoView
-          AllowVectorExport = True
-          Left = 650.079160000000000000
-          Width = 49.133868030000000000
-          Height = 18.897650000000000000
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Calibri'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Memo.UTF8W = (
-            'Liv Will:')
-          ParentFont = False
-        end
-        object Memo115: TfrxMemoView
-          AllowVectorExport = True
-          Left = 721.890230000000000000
-          Top = -0.000000000000004181
-          Width = 52.913398030000000000
-          Height = 18.897650000000000000
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Calibri'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Memo.UTF8W = (
-            'Org Don:')
-          ParentFont = False
-        end
-        object Memo105: TfrxMemoView
-          AllowVectorExport = True
-          Left = 789.921770000000000000
-          Top = 37.795300000000000000
-          Width = 45.354330710000000000
-          Height = 18.897650000000000000
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Calibri'
-          Font.Style = [fsBold]
-          Frame.Typ = []
-          Memo.UTF8W = (
-            'VB Tax:')
-          ParentFont = False
-        end
-        object Memo106: TfrxMemoView
-          AllowVectorExport = True
-          Left = 835.276125120000000000
-          Top = 37.795300000000000000
-          Width = 102.047244090000000000
-          Height = 18.897650000000000000
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[(<Customer."VB_TAX_ACC_CODE">)]')
-        end
-        object Memo108: TfrxMemoView
-          AllowVectorExport = True
-          Left = 627.401574803149500000
-          Width = 18.897637800000000000
-          Height = 18.897650000000000000
-          DataSet = fdsCustomer
-          DataSetName = 'Customer'
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[Customer."IS_PROV_TAX_PAYER_STR"]')
-        end
-        object Memo109: TfrxMemoView
-          AllowVectorExport = True
-          Left = 699.213050000000000000
-          Width = 18.897637800000000000
-          Height = 18.897650000000000000
-          DataSet = fdsCustomer
-          DataSetName = 'Customer'
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[Customer."HAS_LIVING_WILL_STR"]')
-        end
-        object Memo110: TfrxMemoView
-          AllowVectorExport = True
-          Left = 778.582679610000000000
-          Width = 18.897637800000000000
-          Height = 18.897650000000000000
-          DataSet = fdsCustomer
-          DataSetName = 'Customer'
-          Frame.Typ = []
-          Memo.UTF8W = (
-            '[Customer."IS_ORGAN_DONOR_STR"]')
-        end
       end
       object Header1: TfrxHeader
         FillType = ftBrush
-        Frame.Typ = [ftLeft, ftRight]
+        Frame.Typ = [ftLeft, ftRight, ftBottom]
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -13
         Font.Name = 'Calibri'
         Font.Style = []
-        Height = 18.897637800000000000
+        Height = 26.456695350000000000
         ParentFont = False
         Top = 18.897650000000000000
         Width = 1046.929810000000000000
         object lblPhysicalTitle: TfrxMemoView
           AllowVectorExport = True
           Width = 124.724490000000000000
-          Height = 18.897637800000000000
+          Height = 26.456692910000000000
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -6155,12 +6586,13 @@ inherited ReportDM: TReportDM
           Memo.UTF8W = (
             'Physical Address')
           ParentFont = False
+          VAlign = vaBottom
         end
         object lblPostalTitle: TfrxMemoView
           AllowVectorExport = True
           Left = 202.094488190000000000
           Width = 124.724490000000000000
-          Height = 18.897637800000000000
+          Height = 26.456692910000000000
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -6171,12 +6603,13 @@ inherited ReportDM: TReportDM
           Memo.UTF8W = (
             'Postal Address')
           ParentFont = False
+          VAlign = vaBottom
         end
         object lblBillingTitle: TfrxMemoView
           AllowVectorExport = True
           Left = 394.850393700000000000
-          Width = 193.511811023622000000
-          Height = 18.897637800000000000
+          Width = 193.511811020000000000
+          Height = 26.456692910000000000
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -13
@@ -6187,6 +6620,7 @@ inherited ReportDM: TReportDM
           Memo.UTF8W = (
             'Billing Address')
           ParentFont = False
+          VAlign = vaBottom
         end
       end
     end
@@ -6205,6 +6639,7 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
+      EndlessHeight = True
       PrintIfEmpty = False
       object bndSubContactDetailCo: TfrxMasterData
         FillType = ftBrush
@@ -6280,6 +6715,7 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
+      EndlessHeight = True
       PrintIfEmpty = False
       object bndBankingDetailHeader: TfrxHeader
         FillType = ftBrush
@@ -6481,6 +6917,7 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = [ftLeft, ftRight]
+      EndlessHeight = True
       PrintIfEmpty = False
       object bndContactDetailPersonHeader: TfrxHeader
         FillType = ftBrush
@@ -6586,6 +7023,7 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = [ftTop]
+      EndlessHeight = True
       PrintIfEmpty = False
       object bndDirectorHeader: TfrxHeader
         FillType = ftBrush
@@ -6805,6 +7243,7 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
+      EndlessHeight = True
       PrintIfEmpty = False
       object bndbeneficiaryheader: TfrxHeader
         FillType = ftBrush
@@ -6996,6 +7435,7 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
+      EndlessHeight = True
       PrintIfEmpty = False
       object bndVehicleHeader: TfrxHeader
         FillType = ftBrush
@@ -7283,221 +7723,16 @@ inherited ReportDM: TReportDM
         end
       end
     end
-  end
-  object View_customerView: TFDQuery
-    Connection = VbdevConnection
-    SQL.Strings = (
-      'SELECT * FROM VIEW_CUSTOMER')
-    Left = 1055
-    Top = 325
-    object View_customerViewID: TIntegerField
-      FieldName = 'ID'
-      Origin = 'ID'
-    end
-    object View_customerViewCUSTOMER_TYPE_ID: TIntegerField
-      FieldName = 'CUSTOMER_TYPE_ID'
-      Origin = 'CUSTOMER_TYPE_ID'
-    end
-    object View_customerViewYEAR_END_MONTH_ID: TIntegerField
-      FieldName = 'YEAR_END_MONTH_ID'
-      Origin = 'YEAR_END_MONTH_ID'
-    end
-    object View_customerViewTAX_OFFICE_ID: TIntegerField
-      FieldName = 'TAX_OFFICE_ID'
-      Origin = 'TAX_OFFICE_ID'
-    end
-    object View_customerViewAR_MONTH_ID: TIntegerField
-      FieldName = 'AR_MONTH_ID'
-      Origin = 'AR_MONTH_ID'
-    end
-    object View_customerViewVAT_MONTH_ID: TIntegerField
-      FieldName = 'VAT_MONTH_ID'
-      Origin = 'VAT_MONTH_ID'
-    end
-    object View_customerViewVAT_COUNTRY_ID: TIntegerField
-      FieldName = 'VAT_COUNTRY_ID'
-      Origin = 'VAT_COUNTRY_ID'
-    end
-    object View_customerViewVAT_OFFICE_ID: TIntegerField
-      FieldName = 'VAT_OFFICE_ID'
-      Origin = 'VAT_OFFICE_ID'
-    end
-    object View_customerViewSTATUS_ID: TIntegerField
-      FieldName = 'STATUS_ID'
-      Origin = 'STATUS_ID'
-    end
-    object View_customerViewCUSTOMER_TYPE: TStringField
-      FieldName = 'CUSTOMER_TYPE'
-      Origin = 'CUSTOMER_TYPE'
-      Size = 30
-    end
-    object View_customerViewNAME: TStringField
-      FieldName = 'NAME'
-      Origin = 'NAME'
-      Size = 100
-    end
-    object View_customerViewFIRST_NAME: TStringField
-      FieldName = 'FIRST_NAME'
-      Origin = 'FIRST_NAME'
-      Size = 30
-    end
-    object View_customerViewLAST_NAME: TStringField
-      FieldName = 'LAST_NAME'
-      Origin = 'LAST_NAME'
-      Size = 30
-    end
-    object View_customerViewINITIALS: TStringField
-      FieldName = 'INITIALS'
-      Origin = 'INITIALS'
-      Size = 5
-    end
-    object View_customerViewTRADING_AS: TStringField
-      FieldName = 'TRADING_AS'
-      Origin = 'TRADING_AS'
-      Size = 100
-    end
-    object View_customerViewBILL_TO: TStringField
-      FieldName = 'BILL_TO'
-      Origin = 'BILL_TO'
-      Size = 100
-    end
-    object View_customerViewCO_NO: TStringField
-      FieldName = 'CO_NO'
-      Origin = 'CO_NO'
-    end
-    object View_customerViewTAX_NO: TStringField
-      FieldName = 'TAX_NO'
-      Origin = 'TAX_NO'
-    end
-    object View_customerViewVAT_NO: TStringField
-      FieldName = 'VAT_NO'
-      Origin = 'VAT_NO'
-    end
-    object View_customerViewVAT_CUSTOMS_CODE: TStringField
-      FieldName = 'VAT_CUSTOMS_CODE'
-      Origin = 'VAT_CUSTOMS_CODE'
-    end
-    object View_customerViewPAYE_UIF_NO: TStringField
-      FieldName = 'PAYE_UIF_NO'
-      Origin = 'PAYE_UIF_NO'
-    end
-    object View_customerViewSDL_NO: TStringField
-      FieldName = 'SDL_NO'
-      Origin = 'SDL_NO'
-    end
-    object View_customerViewWC_NO: TStringField
-      FieldName = 'WC_NO'
-      Origin = 'WC_NO'
-    end
-    object View_customerViewAR_COMPLETION_DATE: TSQLTimeStampField
-      FieldName = 'AR_COMPLETION_DATE'
-      Origin = 'AR_COMPLETION_DATE'
-    end
-    object View_customerViewPASTEL_ACC_CODE: TStringField
-      FieldName = 'PASTEL_ACC_CODE'
-      Origin = 'PASTEL_ACC_CODE'
-      Size = 25
-    end
-    object View_customerViewVB_TAX_ACC_CODE: TStringField
-      FieldName = 'VB_TAX_ACC_CODE'
-      Origin = 'VB_TAX_ACC_CODE'
-      Size = 25
-    end
-    object View_customerViewIS_PROV_TAX_PAYER: TIntegerField
-      FieldName = 'IS_PROV_TAX_PAYER'
-      Origin = 'IS_PROV_TAX_PAYER'
-    end
-    object View_customerViewHAS_LIVING_WILL: TIntegerField
-      FieldName = 'HAS_LIVING_WILL'
-      Origin = 'HAS_LIVING_WILL'
-    end
-    object View_customerViewIS_ORGAN_DONOR: TIntegerField
-      FieldName = 'IS_ORGAN_DONOR'
-      Origin = 'IS_ORGAN_DONOR'
-    end
-    object View_customerViewDATE_CREATED: TSQLTimeStampField
-      FieldName = 'DATE_CREATED'
-      Origin = 'DATE_CREATED'
-    end
-    object View_customerViewDATE_MODIFIED: TSQLTimeStampField
-      FieldName = 'DATE_MODIFIED'
-      Origin = 'DATE_MODIFIED'
-    end
-    object View_customerViewIS_ACTIVE: TIntegerField
-      FieldName = 'IS_ACTIVE'
-      Origin = 'IS_ACTIVE'
-    end
-    object View_customerViewEFILING: TStringField
-      FieldName = 'EFILING'
-      Origin = 'EFILING'
-      Size = 30
-    end
-    object View_customerViewEF_USER_NAME: TStringField
-      FieldName = 'EF_USER_NAME'
-      Origin = 'EF_USER_NAME'
-      Size = 30
-    end
-    object View_customerViewEF_PASSWORD: TStringField
-      FieldName = 'EF_PASSWORD'
-      Origin = 'EF_PASSWORD'
-    end
-    object View_customerViewYEAR_END_MONTH: TStringField
-      FieldName = 'YEAR_END_MONTH'
-      Origin = 'YEAR_END_MONTH'
-      Size = 10
-    end
-    object View_customerViewTAX_OFFICE: TStringField
-      FieldName = 'TAX_OFFICE'
-      Origin = 'TAX_OFFICE'
-      Size = 40
-    end
-    object View_customerViewVAT_MONTH: TStringField
-      FieldName = 'VAT_MONTH'
-      Origin = 'VAT_MONTH'
-      Size = 10
-    end
-    object View_customerViewVAT_COUNTRY: TStringField
-      FieldName = 'VAT_COUNTRY'
-      Origin = 'VAT_COUNTRY'
-      Size = 50
-    end
-    object View_customerViewVAT_OFFICE: TStringField
-      FieldName = 'VAT_OFFICE'
-      Origin = 'VAT_OFFICE'
-      Size = 40
-    end
-    object View_customerViewAR_MONTH: TStringField
-      FieldName = 'AR_MONTH'
-      Origin = 'AR_MONTH'
-      Size = 10
-    end
-    object View_customerViewCUSTOMER_STATUS: TStringField
-      FieldName = 'CUSTOMER_STATUS'
-      Origin = 'CUSTOMER_STATUS'
-    end
-    object View_customerViewIS_ACTIVE_STR: TStringField
-      FieldName = 'IS_ACTIVE_STR'
-      Origin = 'IS_ACTIVE_STR'
-      FixedChar = True
-      Size = 1
-    end
-    object View_customerViewIS_PROV_TAX_PAYER_STR: TStringField
-      FieldName = 'IS_PROV_TAX_PAYER_STR'
-      Origin = 'IS_PROV_TAX_PAYER_STR'
-      FixedChar = True
-      Size = 1
-    end
-    object View_customerViewHAS_LIVING_WILL_STR: TStringField
-      FieldName = 'HAS_LIVING_WILL_STR'
-      Origin = 'HAS_LIVING_WILL_STR'
-      FixedChar = True
-      Size = 1
-    end
-    object View_customerViewIS_ORGAN_DONOR_STR: TStringField
-      FieldName = 'IS_ORGAN_DONOR_STR'
-      Origin = 'IS_ORGAN_DONOR_STR'
-      FixedChar = True
-      Size = 1
+    object repFiscalInfo: TfrxReportPage
+      Orientation = poLandscape
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = []
     end
   end
   object fdsContactDetailCo: TfrxDBDataset

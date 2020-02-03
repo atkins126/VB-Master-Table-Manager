@@ -94,7 +94,8 @@ type
     CoNo: string;
     VATNo: string;
     VATCustomsCode: string;
-    PayeUifNo: string;
+    PayeNo: string;
+    UifNo: string;
     SDLNo: string;
     WCNo: string;
     ARCompletionDate: TDateTime;
@@ -198,7 +199,7 @@ type
     cdsCustomerTAX_NO: TStringField;
     cdsCustomerVAT_NO: TStringField;
     cdsCustomerVAT_CUSTOMS_CODE: TStringField;
-    cdsCustomerPAYE_UIF_NO: TStringField;
+    cdsCustomerPAYE_NO: TStringField;
     cdsCustomerSDL_NO: TStringField;
     cdsCustomerWC_NO: TStringField;
     cdsCustomerAR_COMPLETION_DATE: TSQLTimeStampField;
@@ -323,6 +324,7 @@ type
     Age_periodTableNAME: TStringField;
     cdsAgePeriodID: TIntegerField;
     cdsAgePeriodNAME: TStringField;
+    cdsCustomerUIF_NO: TStringField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);
@@ -495,7 +497,8 @@ begin
   FFieldValue.TaxNo := '';
   FFieldValue.VATNo := '';
   FFieldValue.VATCustomsCode := '';
-  FFieldValue.PayeUifNo := '';
+  FFieldValue.PayeNo := '';
+  FFieldValue.UifNo := '';
   FFieldValue.SDLNo := '';
   FFieldValue.WCNo := '';
   FFieldValue.ARCompletionDate := 0.0;

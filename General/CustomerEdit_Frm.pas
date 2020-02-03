@@ -42,7 +42,7 @@ type
     litCustomsCode: TdxLayoutItem;
     litVATMonth: TdxLayoutItem;
     grpSARS: TdxLayoutGroup;
-    litPAYEUIF: TdxLayoutItem;
+    litPAYENo: TdxLayoutItem;
     litSDLNo: TdxLayoutItem;
     litWCNo: TdxLayoutItem;
     litARCmpletionDate: TdxLayoutItem;
@@ -83,7 +83,7 @@ type
     lucVATCountry: TcxLookupComboBox;
     edtVATNo: TcxTextEdit;
     edtVATCustomsCode: TcxTextEdit;
-    edtPAYEUIF: TcxTextEdit;
+    edtPAYENo: TcxTextEdit;
     edtSDLNo: TcxTextEdit;
     edtWCNo: TcxTextEdit;
     edtEFiling: TcxTextEdit;
@@ -106,6 +106,8 @@ type
     edtInitials: TcxTextEdit;
     styMandatory: TcxEditStyleController;
     litLegend: TdxLayoutItem;
+    litUIFNo: TdxLayoutItem;
+    edtUIFNo: TcxTextEdit;
     procedure FormCreate(Sender: TObject);
     procedure lucCustomerTypePropertiesEditValueChanged(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -193,7 +195,8 @@ begin
     lucVATOffice.EditValue := MTDM.cdsCustomer.FieldByName('VAT_OFFICE_ID').AsInteger;
     lucVATCountry.EditValue := MTDM.cdsCustomer.FieldByName('VAT_COUNTRY_ID').AsInteger;
     edtVATCustomsCode.Text := MTDM.cdsCustomer.FieldByName('VAT_CUSTOMS_CODE').AsString;
-    edtPAYEUIF.Text := MTDM.cdsCustomer.FieldByName('PAYE_UIF_NO').AsString;
+    edtPAYENo.Text := MTDM.cdsCustomer.FieldByName('PAYE_NO').AsString;
+    edtUIFNo.Text := MTDM.cdsCustomer.FieldByName('UIF_NO').AsString;
     edtSDLNo.Text := MTDM.cdsCustomer.FieldByName('SDL_NO').AsString;
     edtWCNo.Text := MTDM.cdsCustomer.FieldByName('WC_NO').AsString;
     if FormatDatetime('dd/MM/yyyy', MTDM.cdsCustomer.FieldByName('AR_COMPLETION_DATE').AsDateTime) <> '30/12/1899' then
@@ -231,7 +234,8 @@ begin
     lucVATOffice.EditValue := 1;
     lucVATCountry.EditValue := 2;
     edtVATCustomsCode.Text := 'ZA2468';
-    edtPAYEUIF.Text := '654258';
+    edtPAYENo.Text := '654258';
+    edtUIFNo.Text := '467153';
     edtSDLNo.Text := '456852';
     edtWCNo.Text := '951753';
 //    dteARCompletionDate.Date := EncodeDate(2020, 6, 30);
@@ -339,7 +343,8 @@ begin
   MTDM.FFieldValue.TaxNo := edtTaxNo.Text;
   MTDM.FFieldValue.VATNo := edtVATNo.Text;
   MTDM.FFieldValue.VATCustomsCode := edtVATCustomsCode.Text;
-  MTDM.FFieldValue.PayeUifNo := edtPAYEUIF.Text;
+  MTDM.FFieldValue.PayeNo := edtPAYENo.Text;
+  MTDM.FFieldValue.UifNo := edtUIFNo.Text;
   MTDM.FFieldValue.SDLNo := edtSDLNo.Text;
   MTDM.FFieldValue.WCNo := edtWCNo.Text;
 //  if VarIsNull(dteARCompletionDate.EditValue) then

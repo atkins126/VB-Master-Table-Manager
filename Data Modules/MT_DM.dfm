@@ -525,10 +525,15 @@ inherited MTDM: TMTDM
       FieldName = 'VAT_CUSTOMS_CODE'
       Origin = 'VAT_CUSTOMS_CODE'
     end
-    object cdsCustomerPAYE_UIF_NO: TStringField
-      DisplayLabel = 'PAYE/UIF No'
-      FieldName = 'PAYE_UIF_NO'
-      Origin = 'PAYE_UIF_NO'
+    object cdsCustomerPAYE_NO: TStringField
+      DisplayLabel = 'PAYE No'
+      FieldName = 'PAYE_NO'
+      Origin = 'PAYE_NO'
+    end
+    object cdsCustomerUIF_NO: TStringField
+      DisplayLabel = 'UIF No'
+      FieldName = 'UIF_NO'
+      Origin = 'UIF_NO'
     end
     object cdsCustomerSDL_NO: TStringField
       DisplayLabel = 'SDL No'

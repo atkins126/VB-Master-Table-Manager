@@ -12,8 +12,8 @@ inherited CustomerFrm: TCustomerFrm
     ExplicitWidth = 1376
     ExplicitHeight = 731
     object grdCustomer: TcxGrid [0]
-      Left = -339
-      Top = 125
+      Left = -321
+      Top = 102
       Width = 915
       Height = 313
       TabOrder = 7
@@ -196,8 +196,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVCustomer: TcxDBVerticalGrid [1]
-      Left = 582
-      Top = 171
+      Left = 600
+      Top = 148
       Width = 444
       Height = 267
       OptionsView.ScrollBars = ssVertical
@@ -417,6 +417,7 @@ inherited CustomerFrm: TCustomerFrm
       object edtVCustomsCode: TcxDBEditorRow
         Properties.Caption = 'Customs Code'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
+        Properties.DataBinding.ValueType = 'String'
         Properties.DataBinding.FieldName = 'Text'
         ID = 18
         ParentID = 13
@@ -430,12 +431,22 @@ inherited CustomerFrm: TCustomerFrm
         Index = 3
         Version = 1
       end
-      object edtVPAYEUIF: TcxDBEditorRow
+      object edtVPAYENo: TcxDBEditorRow
+        Properties.Caption = 'PAYE No'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
+        Properties.DataBinding.ValueType = 'String'
         Properties.DataBinding.FieldName = 'PAYE_UIF_NO'
         ID = 20
         ParentID = 19
         Index = 0
+        Version = 1
+      end
+      object edtUIFNo: TcxDBEditorRow
+        Properties.EditPropertiesClassName = 'TcxTextEditProperties'
+        Properties.DataBinding.FieldName = 'UIF_NO'
+        ID = 35
+        ParentID = 19
+        Index = 1
         Version = 1
       end
       object edtVSDLNo: TcxDBEditorRow
@@ -443,7 +454,7 @@ inherited CustomerFrm: TCustomerFrm
         Properties.DataBinding.FieldName = 'SDL_NO'
         ID = 21
         ParentID = 19
-        Index = 1
+        Index = 2
         Version = 1
       end
       object edtVWCNo: TcxDBEditorRow
@@ -451,7 +462,7 @@ inherited CustomerFrm: TCustomerFrm
         Properties.DataBinding.FieldName = 'WC_NO'
         ID = 22
         ParentID = 19
-        Index = 2
+        Index = 3
         Version = 1
       end
       object lucARCompletionDate: TcxDBEditorRow
@@ -464,7 +475,7 @@ inherited CustomerFrm: TCustomerFrm
         Properties.DataBinding.FieldName = 'AR_COMPLETION_DATE'
         ID = 23
         ParentID = 19
-        Index = 3
+        Index = 4
         Version = 1
       end
       object edtVEFiling: TcxDBEditorRow
@@ -472,7 +483,7 @@ inherited CustomerFrm: TCustomerFrm
         Properties.DataBinding.FieldName = 'EFILING'
         ID = 24
         ParentID = 19
-        Index = 4
+        Index = 5
         Version = 1
       end
       object edtVEFUserName: TcxDBEditorRow
@@ -480,7 +491,7 @@ inherited CustomerFrm: TCustomerFrm
         Properties.DataBinding.FieldName = 'EF_USER_NAME'
         ID = 25
         ParentID = 19
-        Index = 5
+        Index = 6
         Version = 1
       end
       object edtVEFPassword: TcxDBEditorRow
@@ -488,7 +499,7 @@ inherited CustomerFrm: TCustomerFrm
         Properties.DataBinding.FieldName = 'EF_PASSWORD'
         ID = 26
         ParentID = 19
-        Index = 6
+        Index = 7
         Version = 1
       end
       object grpMiscellaneous: TcxCategoryRow
@@ -586,8 +597,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object navCustomer: TcxDBNavigator [2]
-      Left = -339
-      Top = 11
+      Left = -321
+      Top = -12
       Width = 360
       Height = 40
       BorderStyle = nbsNone
@@ -646,8 +657,8 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 0
     end
     object navVCustomer: TcxDBNavigator [3]
-      Left = 582
-      Top = 125
+      Left = 600
+      Top = 102
       Width = 216
       Height = 40
       BorderStyle = nbsNone
@@ -1143,8 +1154,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdContactPerson: TcxGrid [9]
-      Left = -325
-      Top = 481
+      Left = -307
+      Top = 458
       Width = 1250
       Height = 200
       TabOrder = 15
@@ -1361,8 +1372,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdCPContactDetail: TcxGrid [10]
-      Left = 931
-      Top = 481
+      Left = 949
+      Top = 458
       Width = 400
       Height = 120
       TabOrder = 16
@@ -1520,8 +1531,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCPcontactDetailComment: TcxDBMemo [11]
-      Left = 931
-      Top = 607
+      Left = 949
+      Top = 584
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailPerson
       PopupMenu = popDBAction
@@ -2380,8 +2391,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object lblLegend: TcxLabel [16]
-      Left = -339
-      Top = 704
+      Left = -321
+      Top = 681
       Caption = 
         'INS = Add a new record;  ENTER = Edit selected record;  DEL = De' +
         'lete selected record'
@@ -2391,8 +2402,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxOpenAfterExport: TcxCheckBox [17]
-      Left = 338
-      Top = 88
+      Left = 356
+      Top = 65
       Caption = 'Open after export'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2405,8 +2416,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxPersistSelection: TcxCheckBox [18]
-      Left = 33
-      Top = 21
+      Left = 51
+      Top = -1
       Caption = 'Persist Selection'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2419,8 +2430,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxGroupedReport: TcxCheckBox [19]
-      Left = 220
-      Top = 88
+      Left = 238
+      Top = 65
       Caption = 'Grouped Report'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2432,8 +2443,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object lucPrintWhat: TcxComboBox [20]
-      Left = -55
-      Top = 88
+      Left = -37
+      Top = 65
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -2450,8 +2461,8 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object lucReportType: TcxComboBox [21]
-      Left = -254
-      Top = 88
+      Left = -236
+      Top = 65
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -2467,8 +2478,8 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object cbxPrintContactDetails: TcxCheckBox [22]
-      Left = 81
-      Top = 88
+      Left = 99
+      Top = 65
       Caption = 'Print contact details'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2797,8 +2808,8 @@ inherited CustomerFrm: TCustomerFrm
     end
   end
   object grdCustomerReport: TcxGrid [1]
-    Left = 1406
-    Top = 67
+    Left = 296
+    Top = 8
     Width = 915
     Height = 313
     Font.Charset = ANSI_CHARSET
@@ -2951,106 +2962,113 @@ inherited CustomerFrm: TCustomerFrm
         Position.ColIndex = 18
         Position.RowIndex = 0
       end
-      object viewCustomerReportPAYE_UIF_NO: TcxGridDBBandedColumn
-        DataBinding.FieldName = 'PAYE_UIF_NO'
+      object viewCustomerReportPAYE_NO: TcxGridDBBandedColumn
+        DataBinding.FieldName = 'PAYE_NO'
         Position.BandIndex = 0
-        Position.ColIndex = 19
+        Position.ColIndex = 35
+        Position.RowIndex = 0
+      end
+      object viewCustomerReportUIF_NO: TcxGridDBBandedColumn
+        Caption = 'UIF'
+        DataBinding.FieldName = 'UIF_NO'
+        Position.BandIndex = 0
+        Position.ColIndex = 36
         Position.RowIndex = 0
       end
       object viewCustomerReportSDL_NO: TcxGridDBBandedColumn
         DataBinding.FieldName = 'SDL_NO'
         Position.BandIndex = 0
-        Position.ColIndex = 20
+        Position.ColIndex = 19
         Position.RowIndex = 0
       end
       object viewCustomerReportWC_NO: TcxGridDBBandedColumn
         DataBinding.FieldName = 'WC_NO'
         Position.BandIndex = 0
-        Position.ColIndex = 21
+        Position.ColIndex = 20
         Position.RowIndex = 0
       end
       object viewCustomerReportAR_COMPLETION_DATE: TcxGridDBBandedColumn
         DataBinding.FieldName = 'AR_COMPLETION_DATE'
         Position.BandIndex = 0
-        Position.ColIndex = 22
+        Position.ColIndex = 21
         Position.RowIndex = 0
       end
       object viewCustomerReportSARS_AUTHORIZATION_SHEET: TcxGridDBBandedColumn
         DataBinding.FieldName = 'SARS_AUTHORIZATION_SHEET'
         Position.BandIndex = 0
-        Position.ColIndex = 23
+        Position.ColIndex = 22
         Position.RowIndex = 0
       end
       object viewCustomerReportPASTEL_ACC_CODE: TcxGridDBBandedColumn
         DataBinding.FieldName = 'PASTEL_ACC_CODE'
         Position.BandIndex = 0
-        Position.ColIndex = 24
+        Position.ColIndex = 23
         Position.RowIndex = 0
       end
       object viewCustomerReportVB_TAX_ACC_CODE: TcxGridDBBandedColumn
         DataBinding.FieldName = 'VB_TAX_ACC_CODE'
         Position.BandIndex = 0
-        Position.ColIndex = 25
+        Position.ColIndex = 24
         Position.RowIndex = 0
       end
       object viewCustomerReportIS_PROV_TAX_PAYER: TcxGridDBBandedColumn
         DataBinding.FieldName = 'IS_PROV_TAX_PAYER'
         Position.BandIndex = 0
-        Position.ColIndex = 26
+        Position.ColIndex = 25
         Position.RowIndex = 0
       end
       object viewCustomerReportHAS_LIVING_WILL: TcxGridDBBandedColumn
         DataBinding.FieldName = 'HAS_LIVING_WILL'
         Position.BandIndex = 0
-        Position.ColIndex = 27
+        Position.ColIndex = 26
         Position.RowIndex = 0
       end
       object viewCustomerReportIS_ORGAN_DONOR: TcxGridDBBandedColumn
         DataBinding.FieldName = 'IS_ORGAN_DONOR'
         Position.BandIndex = 0
-        Position.ColIndex = 28
+        Position.ColIndex = 27
         Position.RowIndex = 0
       end
       object viewCustomerReportDATE_CREATED: TcxGridDBBandedColumn
         DataBinding.FieldName = 'DATE_CREATED'
         Position.BandIndex = 0
-        Position.ColIndex = 29
+        Position.ColIndex = 28
         Position.RowIndex = 0
       end
       object viewCustomerReportDATE_MODIFIED: TcxGridDBBandedColumn
         DataBinding.FieldName = 'DATE_MODIFIED'
         Position.BandIndex = 0
-        Position.ColIndex = 30
+        Position.ColIndex = 29
         Position.RowIndex = 0
       end
       object viewCustomerReportIS_ACTIVE: TcxGridDBBandedColumn
         DataBinding.FieldName = 'IS_ACTIVE'
         Position.BandIndex = 0
-        Position.ColIndex = 31
+        Position.ColIndex = 30
         Position.RowIndex = 0
       end
       object viewCustomerReportEFILING: TcxGridDBBandedColumn
         DataBinding.FieldName = 'EFILING'
         Position.BandIndex = 0
-        Position.ColIndex = 32
+        Position.ColIndex = 31
         Position.RowIndex = 0
       end
       object viewCustomerReportEF_USER_NAME: TcxGridDBBandedColumn
         DataBinding.FieldName = 'EF_USER_NAME'
         Position.BandIndex = 0
-        Position.ColIndex = 33
+        Position.ColIndex = 32
         Position.RowIndex = 0
       end
       object viewCustomerReportEF_PASSWORD: TcxGridDBBandedColumn
         DataBinding.FieldName = 'EF_PASSWORD'
         Position.BandIndex = 0
-        Position.ColIndex = 34
+        Position.ColIndex = 33
         Position.RowIndex = 0
       end
       object viewCustomerReportCUSTOMER_GROUP_ID: TcxGridDBBandedColumn
         DataBinding.FieldName = 'CUSTOMER_GROUP_ID'
         Position.BandIndex = 0
-        Position.ColIndex = 35
+        Position.ColIndex = 34
         Position.RowIndex = 0
       end
     end
