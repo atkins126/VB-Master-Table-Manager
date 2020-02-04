@@ -203,7 +203,6 @@ type
     cdsCustomerSDL_NO: TStringField;
     cdsCustomerWC_NO: TStringField;
     cdsCustomerAR_COMPLETION_DATE: TSQLTimeStampField;
-    cdsCustomerSARS_AUTHORIZATION_SHEET: TStringField;
     cdsCustomerPASTEL_ACC_CODE: TStringField;
     cdsCustomerVB_TAX_ACC_CODE: TStringField;
     cdsCustomerIS_PROV_TAX_PAYER: TIntegerField;
@@ -325,6 +324,20 @@ type
     cdsAgePeriodID: TIntegerField;
     cdsAgePeriodNAME: TStringField;
     cdsCustomerUIF_NO: TStringField;
+    cdsTrustee: TFDMemTable;
+    dtsTrustee: TDataSource;
+    cdsTrusteeID: TIntegerField;
+    cdsTrusteeCUSTOMER_ID: TIntegerField;
+    cdsTrusteeSALUTATION_ID: TIntegerField;
+    cdsTrusteeFIRST_NAME: TStringField;
+    cdsTrusteeLAST_NAME: TStringField;
+    cdsTrusteeMOBILE_PHONE: TStringField;
+    cdsTrusteeEMAIL_ADDRESS: TStringField;
+    cdsDirectorOfCompany: TFDMemTable;
+    cdsDirectorOfCompanyID: TIntegerField;
+    cdsDirectorOfCompanyCUSTOMER_ID: TIntegerField;
+    dtsDirectorOfCompany: TDataSource;
+    cdsDirectorOfCompanyCOMPANY: TStringField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);

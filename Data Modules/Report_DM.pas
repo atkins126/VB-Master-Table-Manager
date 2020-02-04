@@ -310,6 +310,16 @@ type
     cdsCustomerHAS_LIVING_WILL_STR: TStringField;
     cdsCustomerIS_ORGAN_DONOR_STR: TStringField;
     cdsCustomerUIF_NO: TStringField;
+    cdsTrustee: TFDMemTable;
+    cdsTrusteeID: TIntegerField;
+    cdsTrusteeCUSTOMER_ID: TIntegerField;
+    cdsTrusteeSALUTATION_ID: TIntegerField;
+    cdsTrusteeFIRST_NAME: TStringField;
+    cdsTrusteeLAST_NAME: TStringField;
+    cdsTrusteeMOBILE_PHONE: TStringField;
+    cdsTrusteeEMAIL_ADDRESS: TStringField;
+    dtsTrustee: TDataSource;
+    cdsTrusteeSALUTATION: TStringField;
 //    procedure PrintReport(SourceDataSet, TargetDataSet: TFDmemTable;
 //      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
 //      ReportTypeName: string);

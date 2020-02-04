@@ -21,15 +21,9 @@ type
     lucBank: TcxLookupComboBox;
     lucAccType: TcxLookupComboBox;
     edtFirstName: TcxTextEdit;
-    lblReq1: TcxLabel;
-    lblreq2: TcxLabel;
-    lblReq3: TcxLabel;
     edtBranchCode: TcxTextEdit;
     edtAccNo: TcxTextEdit;
     edtLastName: TcxTextEdit;
-    lblReq4: TcxLabel;
-    lblReq5: TcxLabel;
-    lblReq6: TcxLabel;
     grpBankName: TdxLayoutGroup;
     grpBankAccount: TdxLayoutGroup;
     grpName: TdxLayoutGroup;
@@ -39,12 +33,6 @@ type
     litAccounto: TdxLayoutItem;
     litFirstName: TdxLayoutItem;
     litLastname: TdxLayoutItem;
-    litReq1: TdxLayoutItem;
-    litReq2: TdxLayoutItem;
-    litReq3: TdxLayoutItem;
-    litReq4: TdxLayoutItem;
-    litReq5: TdxLayoutItem;
-    litReq6: TdxLayoutItem;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
   private

@@ -310,7 +310,6 @@ type
     viewCustomerReportSDL_NO: TcxGridDBBandedColumn;
     viewCustomerReportWC_NO: TcxGridDBBandedColumn;
     viewCustomerReportAR_COMPLETION_DATE: TcxGridDBBandedColumn;
-    viewCustomerReportSARS_AUTHORIZATION_SHEET: TcxGridDBBandedColumn;
     viewCustomerReportPASTEL_ACC_CODE: TcxGridDBBandedColumn;
     viewCustomerReportVB_TAX_ACC_CODE: TcxGridDBBandedColumn;
     viewCustomerReportIS_PROV_TAX_PAYER: TcxGridDBBandedColumn;
@@ -332,6 +331,25 @@ type
     edtUIFNo: TcxDBEditorRow;
     viewCustomerReportPAYE_NO: TcxGridDBBandedColumn;
     viewCustomerReportUIF_NO: TcxGridDBBandedColumn;
+    litTrusteeDetail: TdxLayoutItem;
+    grdTrustee: TcxGrid;
+    viewTrustee: TcxGridDBBandedTableView;
+    edtTID: TcxGridDBBandedColumn;
+    edtTCustomerID: TcxGridDBBandedColumn;
+    lucTSalutationID: TcxGridDBBandedColumn;
+    edtTFirstName: TcxGridDBBandedColumn;
+    edtTLastName: TcxGridDBBandedColumn;
+    edtTMobilePhone: TcxGridDBBandedColumn;
+    edtTEmailAddress: TcxGridDBBandedColumn;
+    lvlTrustee: TcxGridLevel;
+    grpDirector: TdxLayoutGroup;
+    litDirectorOfCompany: TdxLayoutItem;
+    grdDirectorOfCompany: TcxGrid;
+    viewDirectorOfCompany: TcxGridDBBandedTableView;
+    lvlDirectorOfCompany: TcxGridLevel;
+    edtDOCID: TcxGridDBBandedColumn;
+    edtDOCCustomerID: TcxGridDBBandedColumn;
+    edtDOCCompany: TcxGridDBBandedColumn;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -393,6 +411,9 @@ type
 
     FVehicleWhereClause: string;
     FVehicleOrderByClaue: string;
+
+    FTrusteeWhereClause: string;
+    FTrusteeOrderByClause: string;
 
     procedure CmDrawBorder(var Msg: TMessage); message CM_DRAWBORDER;
     procedure OpenTables;
@@ -712,6 +733,28 @@ begin
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0]]);
       end;
+
+    9: // Trustee
+      begin
+        MTDM.cdsTrustee.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
+        MTDM.cdsTrustee.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
+        MTDM.cdsTrustee.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
+        MTDM.cdsTrustee.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
+        MTDM.cdsTrustee.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FFieldValue.EmailAddress;
+
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
+        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
+        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FFieldValue.MobileNo;
+        MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FFieldValue.EmailAddress;
+        ErrorValues := Format(ERROR_VALUES, [
+          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[1] + CRLF +
+            MTDM.ValueArray[2] + CRLF +
+            MTDM.ValueArray[3] + CRLF +
+            MTDM.ValueArray[4]]);
+      end;
+
   end;
   Result := ErrorValues;
 
@@ -1036,17 +1079,11 @@ begin
   viewBankingDetail.DataController.DataSource := MTDM.dtsBankingDetail;
   viewDirector.DataController.DataSource := MTDM.dtsDirector;
   viewBeneficiary.DataController.DataSource := MTDM.dtsBeneficiary;
+  viewTrustee.DataController.DataSource := MTDM.dtsTrustee;
   viewVehicle.DataController.DataSource := MTDM.dtsVehicle;
-// FDetailDataSet[0] := MTDM.cdsContactDetailCo;
-// FDetailDataSet[1] := MTDM.cdsAddress;
-// FDetailDataSet[2] := MTDM.cdsContactPerson;
-// FDetailDataSet[3] := MTDM.cdsContactDetailPerson;
-// FDetailDataSet[4] := MTDM.cdsBankingDetail;
-// FDetailDataSet[5] := MTDM.cdsDirector;
-// FDetailDataSet[6] := MTDM.cdsBeneficiary;
-// FDetailDataSet[7] := MTDM.cdsVehicle;
+  viewDirectorOfCompany.DataController.DataSource :=  MTDM.dtsDirectorOfCompany;
 
-  SetLength(FDetailDataSet, 9);
+  SetLength(FDetailDataSet, 11);
   FDetailDataSet[0] := MTDM.cdsContactDetailCo;
   FDetailDataSet[1] := MTDM.cdsAddress;
   FDetailDataSet[2] := MTDM.cdsContactPerson;
@@ -1056,8 +1093,10 @@ begin
   FDetailDataSet[6] := MTDM.cdsBeneficiary;
   FDetailDataSet[7] := MTDM.cdsVehicle;
   FDetailDataSet[8] := MTDM.cdsCustomer;
+  FDetailDataSet[9] := MTDM.cdsCustomer;
+  FDetailDataSet[10] := MTDM.cdsDirectorOfCompany;
 
-  SetLength(FDetailFriendlyName, 9);
+  SetLength(FDetailFriendlyName, 11);
   FDetailFriendlyName[0] := 'Company Contact Detail';
   FDetailFriendlyName[1] := 'Address';
   FDetailFriendlyName[2] := 'Contact Person Data';
@@ -1067,6 +1106,8 @@ begin
   FDetailFriendlyName[6] := 'Beneficiary';
   FDetailFriendlyName[7] := 'Vehicle';
   FDetailFriendlyName[8] := 'Customer';
+  FDetailFriendlyName[9] := 'Turstee';
+  FDetailFriendlyName[10] := 'Director of Company';
 
   OpenTables;
 end;
@@ -1176,6 +1217,16 @@ begin
           actEdit.Caption := 'Edit selected vehicle';
           actDelete.Caption := 'Delete selected vehicle';
           MTDM.FormCaption := 'Vehicle Details';
+        end;
+
+      9:
+        begin
+          grdTrustee.SetFocus;
+          viewTrustee.Focused := True;
+          actInsert.Caption := 'Add a new trustee';
+          actEdit.Caption := 'Edit selected trustee';
+          actDelete.Caption := 'Delete selected trustee';
+          MTDM.FormCaption := 'trustee Details';
         end;
     end;
   end;
@@ -1442,6 +1493,9 @@ begin
                       FVehicleWhereClause := ' WHERE V.CUSTOMER_ID IN (';
                       FVehicleOrderByClaue := ' ORDER BY V.CUSTOMER_ID, V.VEHICLE_MAKE, V.VEHICLE_MODEL ';
 
+                      FTrusteeWhereClause := ' WHERE T.CUSTOMER_ID IN (';
+                      FTrusteeOrderByClause := ' ORDER BY T.CUSTOMER_ID, T.FIRST_NAME, T.LAST_NAME ';
+
                       case lucPrintWhat.ItemIndex of
                         0:
                           begin
@@ -1476,6 +1530,7 @@ begin
                                 FDirecterWhereClaue := FDirecterWhereClaue + ',';
                                 FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + ',';
                                 FVehicleWhereClause := FVehicleWhereClause + ',';
+                                FTrusteeWhereClause :=  FTrusteeWhereClause + ','
                               end;
                             end;
                             FCustomerWhereClause := FCustomerWhereClause + ') ';
@@ -1487,7 +1542,7 @@ begin
                             FDirecterWhereClaue := FDirecterWhereClaue + ') ';
                             FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + ') ';
                             FVehicleWhereClause := FVehicleWhereClause + ') ';
-
+                            FTrusteeWhereClause :=  FTrusteeWhereClause + ') ';
                           end;
 
                         2:
@@ -1510,6 +1565,7 @@ begin
                                 FDirecterWhereClaue := FDirecterWhereClaue + ',';
                                 FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + ',';
                                 FVehicleWhereClause := FVehicleWhereClause + ',';
+                                FTrusteeWhereClause :=  FTrusteeWhereClause + ','
                               end;
                             end;
                             FCustomerWhereClause := FCustomerWhereClause + ') ';
@@ -1521,6 +1577,7 @@ begin
                             FDirecterWhereClaue := FDirecterWhereClaue + ') ';
                             FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + ') ';
                             FVehicleWhereClause := FVehicleWhereClause + ') ';
+                            FTrusteeWhereClause :=  FTrusteeWhereClause + ') ';
                           end;
                       end;
 //                      FCustomerWhereClause := FCustomerWhereClause + FCustomerOrderByClause;
@@ -1630,7 +1687,7 @@ var
   Iteration: Extended;
 
 const
-  REPORT_TABLE_COUNT = 9;
+  REPORT_TABLE_COUNT = 10;
 begin
   // Customer
   Counter := 1;
@@ -1703,6 +1760,14 @@ begin
   VBBaseDM.GetData(73, ReportDM.cdsVehicle, ReportDM.cdsVehicle.Name, FVehicleWhereClause + FVehicleOrderByClaue,
     'C:\Data\Xml\Vehicle.xml', ReportDM.cdsVehicle.UpdateOptions.Generatorname,
     ReportDM.cdsVehicle.UpdateOptions.UpdateTableName);
+
+  // Trustees
+  Inc(Counter);
+  Iteration := Counter / REPORT_TABLE_COUNT * 100;
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Trustee Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+  VBBaseDM.GetData(76, ReportDM.cdsTrustee, ReportDM.cdsTrustee.Name, FBeneficiaryWhereClaue + FBeneficiaryOrderByClause,
+    'C:\Data\Xml\Trustee.xml', ReportDM.cdsTrustee.UpdateOptions.Generatorname,
+    ReportDM.cdsTrustee.UpdateOptions.UpdateTableName);
 end;
 
 procedure TCustomerFrm.OpenTables;
@@ -1711,7 +1776,7 @@ var
   Iteration: Extended;
 
 const
-  TABLE_COUNT = 21;
+  TABLE_COUNT = 23;
 begin
   if ProgressFrm = nil then
     ProgressFrm := TProgressFrm.Create(nil);
@@ -1828,6 +1893,30 @@ begin
 
     if not MTDM.cdsVehicle.Active then
       MTDM.cdsVehicle.CreateDataSet;
+
+    // Trustee
+    Inc(Counter);
+    Iteration := Counter / TABLE_COUNT * 100;
+
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Trustee Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    VBBaseDM.GetData(50, MTDM.cdsTrustee, MTDM.cdsTrustee.Name, ONE_SPACE,
+      'C:\Data\Xml\Trustee.xml', MTDM.cdsTrustee.UpdateOptions.Generatorname,
+      MTDM.cdsTrustee.UpdateOptions.UpdateTableName);
+
+    if not MTDM.cdsTrustee.Active then
+      MTDM.cdsTrustee.CreateDataSet;
+
+    // Director of Company
+    Inc(Counter);
+    Iteration := Counter / TABLE_COUNT * 100;
+
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director of Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    VBBaseDM.GetData(78, MTDM.cdsDirectorOfCompany, MTDM.cdsDirectorOfCompany.Name, ONE_SPACE,
+      'C:\Data\Xml\Director Of Company.xml', MTDM.cdsDirectorOfCompany.UpdateOptions.Generatorname,
+      MTDM.cdsDirectorOfCompany.UpdateOptions.UpdateTableName);
+
+    if not MTDM.cdsDirectorOfCompany.Active then
+      MTDM.cdsDirectorOfCompany.CreateDataSet;
 
 // Open all lookup tables  -----------------------------------------------------
 

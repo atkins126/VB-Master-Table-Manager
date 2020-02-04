@@ -26,10 +26,6 @@ type
     litComment: TdxLayoutItem;
     grpContactType: TdxLayoutGroup;
     grpgrpValue: TdxLayoutGroup;
-    litReq1: TdxLayoutItem;
-    litReq2: TdxLayoutItem;
-    lblReq1: TcxLabel;
-    lblReq2: TcxLabel;
     litCharCount: TdxLayoutItem;
     lblCharCount: TcxLabel;
     procedure FormCreate(Sender: TObject);

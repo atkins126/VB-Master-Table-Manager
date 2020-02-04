@@ -4966,7 +4966,7 @@ inherited ReportDM: TReportDM
         object Memo3: TfrxMemoView
           AllowVectorExport = True
           Top = 0.000012200000000004
-          Width = 71.811023622047200000
+          Width = 71.811023622047210000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -4984,7 +4984,7 @@ inherited ReportDM: TReportDM
         object Memo4: TfrxMemoView
           AllowVectorExport = True
           Top = 18.897650000000000000
-          Width = 71.811023622047200000
+          Width = 71.811023622047210000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -5156,7 +5156,7 @@ inherited ReportDM: TReportDM
         object Memo21: TfrxMemoView
           AllowVectorExport = True
           Top = 37.795312200000000000
-          Width = 71.811023622047200000
+          Width = 71.811023622047210000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -7968,5 +7968,134 @@ inherited ReportDM: TReportDM
       Origin = 'BILLING_CODE'
       Size = 10
     end
+  end
+  object cdsTrustee: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    Constraints = <
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(FIRST_NAME)) > 0'
+        ErrorMessage = 'Beneficiary first hame must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(LAST_NAME)) > 0'
+        ErrorMessage = 'Beneficiary last name must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(MOBILE_PHONE)) > 0'
+        ErrorMessage = 'Beneficiary mobile phone must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(EMAIL_ADDRESS)) > 0'
+        ErrorMessage = 'Beneficiary email address must have a value'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <>
+    Indexes = <
+      item
+        Active = True
+        Name = 'idxBID'
+        Fields = 'ID'
+        Options = [soPrimary]
+      end
+      item
+        Name = 'idxBCustID'
+        Fields = 'CUSTOMER_ID'
+      end
+      item
+        Active = True
+        Selected = True
+        Name = 'idxBName'
+        Fields = 'CUSTOMER_ID;FIRST_NAME;LAST_NAME'
+        Options = [soUnique]
+      end>
+    IndexName = 'idxBName'
+    ConstraintsEnabled = True
+    MasterSource = dtsCustomer
+    MasterFields = 'ID'
+    DetailFields = 'CUSTOMER_ID'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FetchOptions.DetailDelay = 450
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'BENEFICIARY_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'BENEFICIARY'
+    StoreDefs = True
+    Left = 905
+    Top = 575
+    object cdsTrusteeID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsTrusteeCUSTOMER_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_ID'
+      Origin = 'CUSTOMER_ID'
+      Required = True
+    end
+    object cdsTrusteeSALUTATION_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Salutation'
+      FieldName = 'SALUTATION_ID'
+      Origin = 'SALUTATION_ID'
+      Required = True
+    end
+    object cdsTrusteeSALUTATION: TStringField
+      DisplayLabel = 'Sal'
+      FieldName = 'SALUTATION'
+    end
+    object cdsTrusteeFIRST_NAME: TStringField
+      DisplayLabel = 'First Name'
+      FieldName = 'FIRST_NAME'
+      Origin = 'FIRST_NAME'
+      Required = True
+      Size = 30
+    end
+    object cdsTrusteeLAST_NAME: TStringField
+      DisplayLabel = 'Last Name'
+      FieldName = 'LAST_NAME'
+      Origin = 'LAST_NAME'
+      Required = True
+      Size = 30
+    end
+    object cdsTrusteeMOBILE_PHONE: TStringField
+      DisplayLabel = 'Mobile Phone'
+      FieldName = 'MOBILE_PHONE'
+      Origin = 'MOBILE_PHONE'
+      Size = 15
+    end
+    object cdsTrusteeEMAIL_ADDRESS: TStringField
+      DisplayLabel = 'Email Address'
+      FieldName = 'EMAIL_ADDRESS'
+      Origin = 'EMAIL_ADDRESS'
+      Size = 100
+    end
+  end
+  object dtsTrustee: TDataSource
+    DataSet = cdsTrustee
+    Left = 905
+    Top = 625
   end
 end

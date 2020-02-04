@@ -21,13 +21,10 @@ type
     edtFirstName: TcxTextEdit;
     lucSalutation: TcxLookupComboBox;
     edtMobileNo: TcxTextEdit;
-    lblReq1: TcxLabel;
-    lblReq2: TcxLabel;
     edtLastName: TcxTextEdit;
     edtOtherName: TcxTextEdit;
     edtTaxNo: TcxTextEdit;
     edtEmailAddress: TcxTextEdit;
-    lblReq3: TcxLabel;
     grpName: TdxLayoutGroup;
     grpSalutation: TdxLayoutGroup;
     grpMobileNo: TdxLayoutGroup;
@@ -37,9 +34,6 @@ type
     litTaxNo: TdxLayoutItem;
     litMobileNo: TdxLayoutItem;
     litEmailAddress: TdxLayoutItem;
-    litReq1: TdxLayoutItem;
-    litReq2: TdxLayoutItem;
-    LitReq3: TdxLayoutItem;
     litOtherName: TdxLayoutItem;
     spc1: TdxLayoutEmptySpaceItem;
     procedure FormCreate(Sender: TObject);

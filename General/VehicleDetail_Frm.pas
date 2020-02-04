@@ -24,14 +24,9 @@ type
     edtRegNo: TcxTextEdit;
     dteRenewlDate: TcxDateEdit;
     memComment: TcxMemo;
-    lblReq1: TcxLabel;
-    lblReq2: TcxLabel;
-    lblReq3: TcxLabel;
     edtModel: TcxTextEdit;
     edtYear: TcxCurrencyEdit;
     cbxMaintenancePlan: TcxCheckBox;
-    lblReq4: TcxLabel;
-    lblReq5: TcxLabel;
     grpMake: TdxLayoutGroup;
     grpRegNo: TdxLayoutGroup;
     grpRenewalDate: TdxLayoutGroup;
@@ -41,11 +36,6 @@ type
     litRenewalDate: TdxLayoutItem;
     litMaintenancePlan: TdxLayoutItem;
     litComment: TdxLayoutItem;
-    litReq1: TdxLayoutItem;
-    litReq2: TdxLayoutItem;
-    litReq3: TdxLayoutItem;
-    litReq4: TdxLayoutItem;
-    litReq5: TdxLayoutItem;
     litYear: TdxLayoutItem;
     litCharCount: TdxLayoutItem;
     lblCharCount: TcxLabel;

@@ -65,7 +65,8 @@ uses
   BaseGrid_Frm in '..\Lib\BaseGrid_Frm.pas' {BaseGridFrm},
   CustomerReportSelection_Frm in 'General\CustomerReportSelection_Frm.pas' {CustomerReportSelectionFrm},
   AccountHolder_Frm in 'General\AccountHolder_Frm.pas' {AccountHolderFrm},
-  CustomerEdit_Frm in 'General\CustomerEdit_Frm.pas' {CustomerEditFrm};
+  CustomerEdit_Frm in 'General\CustomerEdit_Frm.pas' {CustomerEditFrm},
+  TrusteeDetail_Frm in 'General\TrusteeDetail_Frm.pas' {TrusteeDetailFrm};
 
 {$R *.res}
 

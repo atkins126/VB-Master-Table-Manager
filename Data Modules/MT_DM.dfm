@@ -550,10 +550,6 @@ inherited MTDM: TMTDM
       FieldName = 'AR_COMPLETION_DATE'
       Origin = 'AR_COMPLETION_DATE'
     end
-    object cdsCustomerSARS_AUTHORIZATION_SHEET: TStringField
-      FieldName = 'SARS_AUTHORIZATION_SHEET'
-      Origin = 'SARS_AUTHORIZATION_SHEET'
-    end
     object cdsCustomerPASTEL_ACC_CODE: TStringField
       DisplayLabel = 'Pastel Acc'
       FieldName = 'PASTEL_ACC_CODE'
@@ -2810,5 +2806,223 @@ inherited MTDM: TMTDM
       Origin = 'NAME'
       Required = True
     end
+  end
+  object cdsTrustee: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    BeforePost = cdsActivityTypeBeforePost
+    AfterPost = cdsActivityTypeAfterPost
+    AfterDelete = cdsActivityTypeAfterDelete
+    OnNewRecord = cdsActivityTypeNewRecord
+    OnPostError = cdsActivityTypePostError
+    FilterOptions = [foCaseInsensitive]
+    Constraints = <
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(FIRST_NAME)) > 0'
+        ErrorMessage = 'Beneficiary first hame must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(LAST_NAME)) > 0'
+        ErrorMessage = 'Beneficiary last name must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(MOBILE_PHONE)) > 0'
+        ErrorMessage = 'Beneficiary mobile phone must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(EMAIL_ADDRESS)) > 0'
+        ErrorMessage = 'Beneficiary email address must have a value'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <>
+    Indexes = <
+      item
+        Active = True
+        Name = 'idxBID'
+        Fields = 'ID'
+        Options = [soPrimary]
+      end
+      item
+        Active = True
+        Selected = True
+        Name = 'idxName'
+        Fields = 'CUSTOMER_ID;FIRST_NAME;LAST_NAME'
+        Options = [soUnique]
+      end>
+    IndexName = 'idxName'
+    ConstraintsEnabled = True
+    MasterSource = dtsCustomer
+    MasterFields = 'ID'
+    DetailFields = 'CUSTOMER_ID'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FetchOptions.DetailDelay = 450
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'TRUSTEE_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'TRUSTEE'
+    StoreDefs = True
+    Left = 870
+    Top = 425
+    object cdsTrusteeID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsTrusteeCUSTOMER_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_ID'
+      Origin = 'CUSTOMER_ID'
+      Required = True
+    end
+    object cdsTrusteeSALUTATION_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Salutation'
+      FieldName = 'SALUTATION_ID'
+      Origin = 'SALUTATION_ID'
+      Required = True
+    end
+    object cdsTrusteeFIRST_NAME: TStringField
+      DisplayLabel = 'First Name'
+      FieldName = 'FIRST_NAME'
+      Origin = 'FIRST_NAME'
+      Required = True
+      Size = 30
+    end
+    object cdsTrusteeLAST_NAME: TStringField
+      DisplayLabel = 'Last Name'
+      FieldName = 'LAST_NAME'
+      Origin = 'LAST_NAME'
+      Required = True
+      Size = 30
+    end
+    object cdsTrusteeMOBILE_PHONE: TStringField
+      DisplayLabel = 'Mobile Phone'
+      FieldName = 'MOBILE_PHONE'
+      Origin = 'MOBILE_PHONE'
+      Size = 15
+    end
+    object cdsTrusteeEMAIL_ADDRESS: TStringField
+      DisplayLabel = 'Email Address'
+      FieldName = 'EMAIL_ADDRESS'
+      Origin = 'EMAIL_ADDRESS'
+      Size = 100
+    end
+  end
+  object dtsTrustee: TDataSource
+    DataSet = cdsTrustee
+    Left = 870
+    Top = 485
+  end
+  object cdsDirectorOfCompany: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    Constraints = <
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(FIRST_NAME)) > 0'
+        ErrorMessage = 'Beneficiary first hame must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(LAST_NAME)) > 0'
+        ErrorMessage = 'Beneficiary last name must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(MOBILE_PHONE)) > 0'
+        ErrorMessage = 'Beneficiary mobile phone must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(EMAIL_ADDRESS)) > 0'
+        ErrorMessage = 'Beneficiary email address must have a value'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <>
+    Indexes = <
+      item
+        Active = True
+        Name = 'idxBID'
+        Fields = 'ID'
+        Options = [soPrimary]
+      end
+      item
+        Active = True
+        Selected = True
+        Name = 'idxCompany'
+        Fields = 'CUSTOMER_ID;COMPANY'
+      end>
+    IndexName = 'idxCompany'
+    ConstraintsEnabled = True
+    MasterSource = dtsCustomer
+    MasterFields = 'ID'
+    DetailFields = 'CUSTOMER_ID'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FetchOptions.DetailDelay = 450
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'VIEW_DIRECTOR_OF_COMPANY'
+    StoreDefs = True
+    Left = 965
+    Top = 425
+    object cdsDirectorOfCompanyID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsDirectorOfCompanyCUSTOMER_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_ID'
+      Origin = 'CUSTOMER_ID'
+      Required = True
+    end
+    object cdsDirectorOfCompanyCOMPANY: TStringField
+      DisplayLabel = 'Company'
+      FieldName = 'COMPANY'
+      Origin = 'COMPANY'
+      Size = 100
+    end
+  end
+  object dtsDirectorOfCompany: TDataSource
+    DataSet = cdsDirectorOfCompany
+    Left = 965
+    Top = 485
   end
 end

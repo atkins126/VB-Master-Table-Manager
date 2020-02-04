@@ -1,4 +1,4 @@
-unit BeneficiaryDetail_Frm;
+unit TrusteeDetail_Frm;
 
 interface
 
@@ -17,7 +17,7 @@ uses
   cxDBLookupEdit, cxDBLookupComboBox, cxTextEdit;
 
 type
-  TBeneficiaryDetailFrm = class(TBaseCustomerEditFrm)
+  TTrusteeDetailFrm = class(TBaseCustomerEditFrm)
     edtFirstname: TcxTextEdit;
     lucSalutation: TcxLookupComboBox;
     edtEmailAddress: TcxTextEdit;
@@ -25,23 +25,22 @@ type
     edtMobileNo: TcxTextEdit;
     grpName: TdxLayoutGroup;
     grpSalutation: TdxLayoutGroup;
+    grpEmailAddress: TdxLayoutGroup;
     litFirstName: TdxLayoutItem;
     litLastName: TdxLayoutItem;
     litSalutation: TdxLayoutItem;
     litMobileNo: TdxLayoutItem;
     litEmailAddress: TdxLayoutItem;
-    grpEmailAddress: TdxLayoutGroup;
     procedure FormCreate(Sender: TObject);
-    procedure btnOKClick(Sender: TObject);
   private
     { Private declarations }
-    procedure Validate;
+    Procedure Validate;
   public
     { Public declarations }
   end;
 
 var
-  BeneficiaryDetailFrm: TBeneficiaryDetailFrm;
+  TrusteeDetailFrm: TTrusteeDetailFrm;
 
 implementation
 
@@ -53,16 +52,9 @@ uses
   Lookup_DM,
   RUtils;
 
-procedure TBeneficiaryDetailFrm.btnOKClick(Sender: TObject);
+procedure TTrusteeDetailFrm.FormCreate(Sender: TObject);
 begin
   inherited;
-  Validate;
-end;
-
-procedure TBeneficiaryDetailFrm.FormCreate(Sender: TObject);
-begin
-  inherited;
-// Width = 560; Height = 255
   MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
 
@@ -76,7 +68,7 @@ begin
   end;
 end;
 
-procedure TBeneficiaryDetailFrm.Validate;
+procedure TTrusteeDetailFrm.Validate;
 begin
   if SameText(TrimAll(edtFirstName.Text), '') then
     raise EValidateException.Create('First name must have a value');
@@ -104,4 +96,3 @@ begin
 end;
 
 end.
-

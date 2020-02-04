@@ -20,14 +20,10 @@ type
   TCompanyContactDetailFrm = class(TBaseCustomerEditFrm)
     edtValue: TcxTextEdit;
     memComment: TcxMemo;
-    lblReq1: TcxLabel;
-    lblReq2: TcxLabel;
     litConatctType: TdxLayoutItem;
     lucContactType: TcxLookupComboBox;
     litValue: TdxLayoutItem;
     litComment: TdxLayoutItem;
-    litReq1: TdxLayoutItem;
-    litReq2: TdxLayoutItem;
     grpContactType: TdxLayoutGroup;
     grpValue: TdxLayoutGroup;
     litCharCount: TdxLayoutItem;

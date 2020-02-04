@@ -21,7 +21,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
     inherited btnOK: TcxButton
       Left = 438
       Top = 450
-      TabOrder = 25
+      TabOrder = 23
       OnClick = btnOKClick
       ExplicitLeft = 438
       ExplicitTop = 450
@@ -29,24 +29,15 @@ inherited AddressDetailFrm: TAddressDetailFrm
     inherited btnCancel: TcxButton
       Left = 519
       Top = 450
-      TabOrder = 26
+      TabOrder = 24
       ExplicitLeft = 519
       ExplicitTop = 450
-    end
-    inherited lblLegend: TcxLabel
-      Top = 454
-      ExplicitTop = 454
-    end
-    inherited lblRequired: TcxLabel
-      Top = 451
-      ExplicitTop = 451
-      AnchorY = 463
     end
     inherited lblSubTitle: TcxDBLabel
       ExplicitWidth = 573
       Width = 573
     end
-    object edtPhysical1: TcxTextEdit [6]
+    object edtPhysical1: TcxTextEdit [4]
       Left = 84
       Top = 107
       BeepOnEnter = False
@@ -54,7 +45,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 2
       Width = 175
     end
-    object edtPhysical2: TcxTextEdit [7]
+    object edtPhysical2: TcxTextEdit [5]
       Left = 84
       Top = 134
       BeepOnEnter = False
@@ -62,7 +53,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 3
       Width = 175
     end
-    object edtPhysical3: TcxTextEdit [8]
+    object edtPhysical3: TcxTextEdit [6]
       Left = 84
       Top = 161
       BeepOnEnter = False
@@ -70,7 +61,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 4
       Width = 175
     end
-    object edtPhysical4: TcxTextEdit [9]
+    object edtPhysical4: TcxTextEdit [7]
       Left = 84
       Top = 188
       BeepOnEnter = False
@@ -78,7 +69,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 5
       Width = 175
     end
-    object edtPhysicalCode: TcxTextEdit [10]
+    object edtPhysicalCode: TcxTextEdit [8]
       Left = 84
       Top = 215
       BeepOnEnter = False
@@ -86,7 +77,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 6
       Width = 175
     end
-    object edtPostal1: TcxTextEdit [11]
+    object edtPostal1: TcxTextEdit [9]
       Left = 393
       Top = 107
       BeepOnEnter = False
@@ -94,7 +85,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 11
       Width = 175
     end
-    object edtPostal2: TcxTextEdit [12]
+    object edtPostal2: TcxTextEdit [10]
       Left = 393
       Top = 134
       BeepOnEnter = False
@@ -102,7 +93,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 12
       Width = 175
     end
-    object edtPostal3: TcxTextEdit [13]
+    object edtPostal3: TcxTextEdit [11]
       Left = 393
       Top = 161
       BeepOnEnter = False
@@ -110,7 +101,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 13
       Width = 175
     end
-    object edtPostal4: TcxTextEdit [14]
+    object edtPostal4: TcxTextEdit [12]
       Left = 393
       Top = 188
       BeepOnEnter = False
@@ -118,7 +109,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 14
       Width = 175
     end
-    object edtPostalCode: TcxTextEdit [15]
+    object edtPostalCode: TcxTextEdit [13]
       Left = 393
       Top = 215
       BeepOnEnter = False
@@ -126,7 +117,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 15
       Width = 175
     end
-    object edtBilling1: TcxTextEdit [16]
+    object edtBilling1: TcxTextEdit [14]
       Left = 84
       Top = 285
       BeepOnEnter = False
@@ -134,7 +125,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 16
       Width = 175
     end
-    object edtBilling2: TcxTextEdit [17]
+    object edtBilling2: TcxTextEdit [15]
       Left = 84
       Top = 312
       BeepOnEnter = False
@@ -142,7 +133,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 17
       Width = 175
     end
-    object edtBilling3: TcxTextEdit [18]
+    object edtBilling3: TcxTextEdit [16]
       Left = 84
       Top = 339
       BeepOnEnter = False
@@ -150,7 +141,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 18
       Width = 175
     end
-    object edtBilling4: TcxTextEdit [19]
+    object edtBilling4: TcxTextEdit [17]
       Left = 84
       Top = 366
       BeepOnEnter = False
@@ -158,7 +149,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 19
       Width = 175
     end
-    object edtBillingCode: TcxTextEdit [20]
+    object edtBillingCode: TcxTextEdit [18]
       Left = 84
       Top = 393
       BeepOnEnter = False
@@ -166,7 +157,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       TabOrder = 20
       Width = 175
     end
-    object btnPhysicalToPostal: TcxButton [21]
+    object btnPhysicalToPostal: TcxButton [19]
       Left = 274
       Top = 92
       Width = 40
@@ -183,7 +174,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       ParentFont = False
       OnClick = btnPhysicalToPostalClick
     end
-    object btnPostalToPhysical: TcxButton [22]
+    object btnPostalToPhysical: TcxButton [20]
       Left = 274
       Top = 123
       Width = 40
@@ -200,7 +191,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       ParentFont = False
       OnClick = btnPostalToPhysicalClick
     end
-    object btnPhysicalToBilling: TcxButton [23]
+    object btnPhysicalToBilling: TcxButton [21]
       Left = 274
       Top = 170
       Width = 40
@@ -217,7 +208,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       ParentFont = False
       OnClick = btnPhysicalToBillingClick
     end
-    object btnBillingToPhysical: TcxButton [24]
+    object btnBillingToPhysical: TcxButton [22]
       Left = 274
       Top = 201
       Width = 40
@@ -234,7 +225,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       ParentFont = False
       OnClick = btnBillingToPhysicalClick
     end
-    object btnBillingToPostal: TcxButton [25]
+    object btnBillingToPostal: TcxButton [23]
       Left = 274
       Top = 270
       Width = 40
@@ -251,7 +242,7 @@ inherited AddressDetailFrm: TAddressDetailFrm
       ParentFont = False
       OnClick = btnBillingToPostalClick
     end
-    object btnPostalToBilling: TcxButton [26]
+    object btnPostalToBilling: TcxButton [24]
       Left = 274
       Top = 301
       Width = 40

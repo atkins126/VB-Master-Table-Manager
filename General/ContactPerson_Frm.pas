@@ -25,14 +25,11 @@ type
     edtOtherName: TcxTextEdit;
     edtIDNo: TcxTextEdit;
     lucJobFunction: TcxLookupComboBox;
-    lblReq1: TcxLabel;
-    lblReq2: TcxLabel;
     edtLastName: TcxTextEdit;
     edtInitials: TcxTextEdit;
     dteDOB: TcxDateEdit;
     edtPassportNo: TcxTextEdit;
     cbxPrimaryContact: TcxCheckBox;
-    lblReq3: TcxLabel;
     grpName: TdxLayoutGroup;
     grpSalutation: TdxLayoutGroup;
     grpOtherName: TdxLayoutGroup;
@@ -46,9 +43,6 @@ type
     litIDNo: TdxLayoutItem;
     litPassportNo: TdxLayoutItem;
     litPrimaryContact: TdxLayoutItem;
-    litReq1: TdxLayoutItem;
-    litReq2: TdxLayoutItem;
-    litReq3: TdxLayoutItem;
     litJobFunction: TdxLayoutItem;
     grpJobFunction: TdxLayoutGroup;
     litLabel1: TdxLayoutItem;
