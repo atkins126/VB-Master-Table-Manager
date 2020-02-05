@@ -347,9 +347,9 @@ type
     grdDirectorOfCompany: TcxGrid;
     viewDirectorOfCompany: TcxGridDBBandedTableView;
     lvlDirectorOfCompany: TcxGridLevel;
-    edtDOCID: TcxGridDBBandedColumn;
     edtDOCCustomerID: TcxGridDBBandedColumn;
     edtDOCCompany: TcxGridDBBandedColumn;
+    edtDOCDirectorID: TcxGridDBBandedColumn;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -1765,7 +1765,7 @@ begin
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
   SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Trustee Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-  VBBaseDM.GetData(76, ReportDM.cdsTrustee, ReportDM.cdsTrustee.Name, FBeneficiaryWhereClaue + FBeneficiaryOrderByClause,
+  VBBaseDM.GetData(74, ReportDM.cdsTrustee, ReportDM.cdsTrustee.Name, FBeneficiaryWhereClaue + FBeneficiaryOrderByClause,
     'C:\Data\Xml\Trustee.xml', ReportDM.cdsTrustee.UpdateOptions.Generatorname,
     ReportDM.cdsTrustee.UpdateOptions.UpdateTableName);
 end;
@@ -1911,7 +1911,7 @@ begin
     Iteration := Counter / TABLE_COUNT * 100;
 
     SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director of Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-    VBBaseDM.GetData(78, MTDM.cdsDirectorOfCompany, MTDM.cdsDirectorOfCompany.Name, ONE_SPACE,
+    VBBaseDM.GetData(75, MTDM.cdsDirectorOfCompany, MTDM.cdsDirectorOfCompany.Name, ONE_SPACE,
       'C:\Data\Xml\Director Of Company.xml', MTDM.cdsDirectorOfCompany.UpdateOptions.Generatorname,
       MTDM.cdsDirectorOfCompany.UpdateOptions.UpdateTableName);
 

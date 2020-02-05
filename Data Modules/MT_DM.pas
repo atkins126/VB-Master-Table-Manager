@@ -333,10 +333,10 @@ type
     cdsTrusteeLAST_NAME: TStringField;
     cdsTrusteeMOBILE_PHONE: TStringField;
     cdsTrusteeEMAIL_ADDRESS: TStringField;
-    cdsDirectorOfCompany: TFDMemTable;
-    cdsDirectorOfCompanyID: TIntegerField;
-    cdsDirectorOfCompanyCUSTOMER_ID: TIntegerField;
     dtsDirectorOfCompany: TDataSource;
+    cdsDirectorOfCompany: TFDMemTable;
+    cdsDirectorOfCompanyDIRECTOR_ID: TIntegerField;
+    cdsDirectorOfCompanyCUSTOMER_ID: TIntegerField;
     cdsDirectorOfCompanyCOMPANY: TStringField;
     procedure ClearFieldValueArray;
 

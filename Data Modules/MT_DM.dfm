@@ -2400,14 +2400,10 @@ inherited MTDM: TMTDM
         Active = True
         Selected = True
         Name = 'idxDirName'
-        Fields = 'CUSTOMER_ID;FIRST_NAME;LAST_NAME'
-        Options = [soUnique]
+        Fields = 'FIRST_NAME;LAST_NAME'
       end>
     IndexName = 'idxDirName'
     ConstraintsEnabled = True
-    MasterSource = dtsCustomer
-    MasterFields = 'ID'
-    DetailFields = 'CUSTOMER_ID'
     FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
     FetchOptions.Mode = fmAll
     FetchOptions.RecordCountMode = cmTotal
@@ -2767,6 +2763,7 @@ inherited MTDM: TMTDM
   end
   object VbtestConnection: TFDConnection
     Params.Strings = (
+      'Database=C:\Data\Firebird\VB\VB.FDB'
       'ConnectionDef=VB Live')
     FormatOptions.AssignedValues = [fvMapRules]
     FormatOptions.OwnMapRules = True
@@ -2933,85 +2930,54 @@ inherited MTDM: TMTDM
     Left = 870
     Top = 485
   end
+  object dtsDirectorOfCompany: TDataSource
+    DataSet = cdsDirectorOfCompany
+    Left = 965
+    Top = 485
+  end
   object cdsDirectorOfCompany: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     FilterOptions = [foCaseInsensitive]
-    Constraints = <
-      item
-        CustomConstraint = 'CHAR_LENGTH(TRIM(FIRST_NAME)) > 0'
-        ErrorMessage = 'Beneficiary first hame must have a value'
-        FromDictionary = False
-      end
-      item
-        CustomConstraint = 'CHAR_LENGTH(TRIM(LAST_NAME)) > 0'
-        ErrorMessage = 'Beneficiary last name must have a value'
-        FromDictionary = False
-      end
-      item
-        CustomConstraint = 'CHAR_LENGTH(TRIM(MOBILE_PHONE)) > 0'
-        ErrorMessage = 'Beneficiary mobile phone must have a value'
-        FromDictionary = False
-      end
-      item
-        CustomConstraint = 'CHAR_LENGTH(TRIM(EMAIL_ADDRESS)) > 0'
-        ErrorMessage = 'Beneficiary email address must have a value'
-        FromDictionary = False
-      end>
     FieldDefs = <>
     CachedUpdates = True
     IndexDefs = <>
     Indexes = <
       item
         Active = True
-        Name = 'idxBID'
-        Fields = 'ID'
-        Options = [soPrimary]
-      end
-      item
-        Active = True
         Selected = True
-        Name = 'idxCompany'
-        Fields = 'CUSTOMER_ID;COMPANY'
+        Name = 'IdxDirector'
+        Fields = 'DIRECTOR_ID;COMPANY'
       end>
-    IndexName = 'idxCompany'
+    IndexName = 'IdxDirector'
     ConstraintsEnabled = True
-    MasterSource = dtsCustomer
+    MasterSource = dtsDirector
     MasterFields = 'ID'
-    DetailFields = 'CUSTOMER_ID'
-    FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
+    DetailFields = 'DIRECTOR_ID'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
     FetchOptions.Mode = fmAll
     FetchOptions.RecordCountMode = cmTotal
-    FetchOptions.DetailDelay = 450
-    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
-    FormatOptions.MaxBcdPrecision = 2147483647
-    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.AssignedValues = [fvDataSnapCompatibility]
     FormatOptions.DataSnapCompatibility = True
-    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
-    ResourceOptions.Persistent = True
+    ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
     ResourceOptions.StorePrettyPrint = True
     ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
-    UpdateOptions.LockWait = True
-    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    UpdateOptions.UpdateTableName = 'VIEW_DIRECTOR_OF_COMPANY'
     StoreDefs = True
-    Left = 965
+    Left = 960
     Top = 425
-    object cdsDirectorOfCompanyID: TIntegerField
+    object cdsDirectorOfCompanyDIRECTOR_ID: TIntegerField
       Alignment = taLeftJustify
-      FieldName = 'ID'
-      Origin = 'ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
+      DisplayLabel = 'D ID'
+      FieldName = 'DIRECTOR_ID'
+      Origin = 'DIRECTOR_ID'
     end
     object cdsDirectorOfCompanyCUSTOMER_ID: TIntegerField
       Alignment = taLeftJustify
       DisplayLabel = 'C ID'
       FieldName = 'CUSTOMER_ID'
       Origin = 'CUSTOMER_ID'
-      Required = True
     end
     object cdsDirectorOfCompanyCOMPANY: TStringField
       DisplayLabel = 'Company'
@@ -3019,10 +2985,5 @@ inherited MTDM: TMTDM
       Origin = 'COMPANY'
       Size = 100
     end
-  end
-  object dtsDirectorOfCompany: TDataSource
-    DataSet = cdsDirectorOfCompany
-    Left = 965
-    Top = 485
   end
 end
