@@ -350,6 +350,20 @@ type
     edtDOCCustomerID: TcxGridDBBandedColumn;
     edtDOCCompany: TcxGridDBBandedColumn;
     edtDOCDirectorID: TcxGridDBBandedColumn;
+    grpOtherDetails: TdxLayoutGroup;
+    grpDirectorVerticalGrid: TdxLayoutGroup;
+    litDirectorVerticalGrid: TdxLayoutItem;
+    grdVDirector: TcxDBVerticalGrid;
+    edtVDDirectorID: TcxDBEditorRow;
+    edtVDCustomerID: TcxDBEditorRow;
+    lucVDSalutationID: TcxDBEditorRow;
+    edtVDFirstname: TcxDBEditorRow;
+    edtVDLastName: TcxDBEditorRow;
+    edtVDMiddleName: TcxDBEditorRow;
+    edtVDTaxNo: TcxDBEditorRow;
+    edtVDMobilePhone: TcxDBEditorRow;
+    edtVDEmailAddress: TcxDBEditorRow;
+    grpPersonAttribute: TcxCategoryRow;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -379,6 +393,9 @@ type
     procedure grdCustomerEnter(Sender: TObject);
     procedure grdVCustomerDblClick(Sender: TObject);
     procedure grdCustomerExit(Sender: TObject);
+    procedure viewCustomerFocusedRecordChanged(Sender: TcxCustomGridTableView;
+      APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
+      ANewItemRecordFocusingChanged: Boolean);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
@@ -1042,6 +1059,7 @@ begin
   viewCustomerListing.DataController.DataSource := ReportDM.dtsCustomerListing;
   navCustomer.DataSource := MTDM.dtsCustomer;
   navVCustomer.DataSource := MTDM.dtsCustomer;
+  grdVDirector.DataController.DataSource := MTDM.dtsDirector;
 
   TcxLookupComboBoxProperties(lucCustomerType.Properties).ListSource := LookupDM.dtsCustomerType;
   TcxLookupComboBoxProperties(lucCustomerType.Properties).Buttons.Items[0].Visible := False;
@@ -1081,7 +1099,7 @@ begin
   viewBeneficiary.DataController.DataSource := MTDM.dtsBeneficiary;
   viewTrustee.DataController.DataSource := MTDM.dtsTrustee;
   viewVehicle.DataController.DataSource := MTDM.dtsVehicle;
-  viewDirectorOfCompany.DataController.DataSource :=  MTDM.dtsDirectorOfCompany;
+  viewDirectorOfCompany.DataController.DataSource := MTDM.dtsDirectorOfCompany;
 
   SetLength(FDetailDataSet, 11);
   FDetailDataSet[0] := MTDM.cdsContactDetailCo;
@@ -1116,6 +1134,7 @@ procedure TCustomerFrm.FormShow(Sender: TObject);
 begin
   inherited;
   grpDetailGrid.ItemIndex := 0;
+  grpOtherDetails.ItemIndex := 0;
   grdCustomer.SetFocus;
   viewCustomer.Focused := True;
 
@@ -1530,7 +1549,7 @@ begin
                                 FDirecterWhereClaue := FDirecterWhereClaue + ',';
                                 FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + ',';
                                 FVehicleWhereClause := FVehicleWhereClause + ',';
-                                FTrusteeWhereClause :=  FTrusteeWhereClause + ','
+                                FTrusteeWhereClause := FTrusteeWhereClause + ','
                               end;
                             end;
                             FCustomerWhereClause := FCustomerWhereClause + ') ';
@@ -1542,7 +1561,7 @@ begin
                             FDirecterWhereClaue := FDirecterWhereClaue + ') ';
                             FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + ') ';
                             FVehicleWhereClause := FVehicleWhereClause + ') ';
-                            FTrusteeWhereClause :=  FTrusteeWhereClause + ') ';
+                            FTrusteeWhereClause := FTrusteeWhereClause + ') ';
                           end;
 
                         2:
@@ -1565,7 +1584,7 @@ begin
                                 FDirecterWhereClaue := FDirecterWhereClaue + ',';
                                 FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + ',';
                                 FVehicleWhereClause := FVehicleWhereClause + ',';
-                                FTrusteeWhereClause :=  FTrusteeWhereClause + ','
+                                FTrusteeWhereClause := FTrusteeWhereClause + ','
                               end;
                             end;
                             FCustomerWhereClause := FCustomerWhereClause + ') ';
@@ -1577,7 +1596,7 @@ begin
                             FDirecterWhereClaue := FDirecterWhereClaue + ') ';
                             FBeneficiaryWhereClaue := FBeneficiaryWhereClaue + ') ';
                             FVehicleWhereClause := FVehicleWhereClause + ') ';
-                            FTrusteeWhereClause :=  FTrusteeWhereClause + ') ';
+                            FTrusteeWhereClause := FTrusteeWhereClause + ') ';
                           end;
                       end;
 //                      FCustomerWhereClause := FCustomerWhereClause + FCustomerOrderByClause;
@@ -2583,6 +2602,17 @@ begin
         PostMessage(Handle, CM_DRAWBORDER, Integer(ACanvas), Integer(AViewInfo));
       end;
   end;
+end;
+
+procedure TCustomerFrm.viewCustomerFocusedRecordChanged(
+  Sender: TcxCustomGridTableView; APrevFocusedRecord,
+  AFocusedRecord: TcxCustomGridRecord; ANewItemRecordFocusingChanged: Boolean);
+begin
+  inherited;
+  if AFocusedRecord = nil then
+    Exit;
+
+  grpPersonAttribute.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [4, 7];
 end;
 
 end.

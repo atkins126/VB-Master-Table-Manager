@@ -2967,6 +2967,10 @@ inherited MTDM: TMTDM
     StoreDefs = True
     Left = 960
     Top = 425
+    object cdsDirectorOfCompanyID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+    end
     object cdsDirectorOfCompanyDIRECTOR_ID: TIntegerField
       Alignment = taLeftJustify
       DisplayLabel = 'D ID'
@@ -2975,15 +2979,9 @@ inherited MTDM: TMTDM
     end
     object cdsDirectorOfCompanyCUSTOMER_ID: TIntegerField
       Alignment = taLeftJustify
-      DisplayLabel = 'C ID'
+      DisplayLabel = 'Company'
       FieldName = 'CUSTOMER_ID'
       Origin = 'CUSTOMER_ID'
-    end
-    object cdsDirectorOfCompanyCOMPANY: TStringField
-      DisplayLabel = 'Company'
-      FieldName = 'COMPANY'
-      Origin = 'COMPANY'
-      Size = 100
     end
   end
 end

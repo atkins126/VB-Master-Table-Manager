@@ -1,41 +1,42 @@
 inherited DirectorDetailFrm: TDirectorDetailFrm
   Caption = 'DirectorDetailFrm'
-  ClientHeight = 256
-  ClientWidth = 529
-  ExplicitWidth = 535
-  ExplicitHeight = 285
+  ClientHeight = 524
+  ClientWidth = 674
+  ExplicitWidth = 680
+  ExplicitHeight = 553
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 530
-    Height = 250
+    Width = 545
+    Height = 395
     ExplicitLeft = 0
     ExplicitTop = 0
-    ExplicitWidth = 530
-    ExplicitHeight = 250
+    ExplicitWidth = 545
+    ExplicitHeight = 395
     inherited lblHeaderTitle: TcxLabel
-      ExplicitWidth = 508
+      Caption = 'Director Details'
+      ExplicitWidth = 523
     end
     inherited btnOK: TcxButton
-      Left = 363
-      Top = 214
-      TabOrder = 9
+      Left = 378
+      Top = 359
+      TabOrder = 10
       OnClick = btnOKClick
-      ExplicitLeft = 363
-      ExplicitTop = 214
+      ExplicitLeft = 378
+      ExplicitTop = 359
     end
     inherited btnCancel: TcxButton
-      Left = 444
-      Top = 214
-      TabOrder = 10
-      ExplicitLeft = 444
-      ExplicitTop = 214
+      Left = 459
+      Top = 359
+      TabOrder = 11
+      ExplicitLeft = 459
+      ExplicitTop = 359
     end
     inherited lblSubTitle: TcxDBLabel
-      ExplicitWidth = 498
-      Width = 498
+      ExplicitWidth = 513
+      Width = 513
     end
     object edtFirstName: TcxTextEdit [4]
       Left = 99
@@ -102,11 +103,70 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       TabOrder = 8
       Width = 412
     end
+    object grdDirectorOfCompany: TcxGrid [11]
+      Left = 11
+      Top = 184
+      Width = 523
+      Height = 150
+      TabOrder = 9
+      object viewDirectorOfCompany: TcxGridDBBandedTableView
+        Navigator.Buttons.CustomButtons = <>
+        ScrollbarAnnotations.CustomAnnotations = <>
+        DataController.DataSource = MTDM.dtsDirectorOfCompany
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.FocusCellOnTab = True
+        OptionsBehavior.NavigatorHints = True
+        OptionsBehavior.FocusCellOnCycle = True
+        OptionsView.NoDataToDisplayInfoText = '<No Company data to display>'
+        OptionsView.ColumnAutoWidth = True
+        OptionsView.GroupByBox = False
+        Bands = <
+          item
+            Caption = 'Company'
+          end>
+        object edtDirectorID: TcxGridDBBandedColumn
+          DataBinding.FieldName = 'DIRECTOR_ID'
+          PropertiesClassName = 'TcxCurrencyEditProperties'
+          Properties.DecimalPlaces = 0
+          Properties.DisplayFormat = '###0'
+          Properties.EditFormat = '###0'
+          Properties.ReadOnly = True
+          Visible = False
+          MinWidth = 40
+          Options.Editing = False
+          Options.Filtering = False
+          Options.Grouping = False
+          Options.HorzSizing = False
+          Options.Moving = False
+          Width = 40
+          Position.BandIndex = 0
+          Position.ColIndex = 0
+          Position.RowIndex = 0
+        end
+        object lucCompanyID: TcxGridDBBandedColumn
+          DataBinding.FieldName = 'CUSTOMER_ID'
+          Position.BandIndex = 0
+          Position.ColIndex = 1
+          Position.RowIndex = 0
+        end
+      end
+      object lvlDirectorOfCompany: TcxGridLevel
+        GridView = viewDirectorOfCompany
+      end
+    end
     inherited layMainGroup_Root: TdxLayoutGroup
-      ItemIndex = 1
+      ItemIndex = 2
     end
     inherited grpData: TdxLayoutGroup
       ItemIndex = 1
+    end
+    inherited grpButtons: TdxLayoutGroup
+      Index = 4
+    end
+    inherited sep01: TdxLayoutSeparatorItem
+      Index = 3
     end
     object grpName: TdxLayoutGroup
       Parent = grpData
@@ -293,11 +353,22 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       CaptionOptions.Text = 'Empty Space Item'
       Index = 1
     end
+    object litCompany: TdxLayoutItem
+      Parent = layMainGroup_Root
+      CaptionOptions.Visible = False
+      Control = grdDirectorOfCompany
+      ControlOptions.OriginalHeight = 150
+      ControlOptions.OriginalWidth = 401
+      ControlOptions.ShowBorder = False
+      Index = 2
+    end
   end
   inherited styRepository: TcxStyleRepository
     PixelsPerInch = 96
   end
   inherited lafLayoutList: TdxLayoutLookAndFeelList
+    Left = 245
+    Top = 250
     inherited lafCustomSkin: TdxLayoutSkinLookAndFeel
       PixelsPerInch = 96
     end
@@ -308,16 +379,23 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
   inherited img32: TcxImageList
     FormatVersion = 1
   end
+  inherited styHintController: TcxHintStyleController
+    Left = 165
+    Top = 249
+  end
   inherited repScreenTip: TdxScreenTipRepository
+    Left = 90
+    Top = 250
     PixelsPerInch = 96
   end
   inherited stySubTitle: TcxEditStyleController
+    Left = 75
+    Top = 380
     PixelsPerInch = 96
   end
   inherited styHeaderFont: TcxEditStyleController
-    PixelsPerInch = 96
-  end
-  inherited styMandatory: TcxEditStyleController
+    Left = 150
+    Top = 380
     PixelsPerInch = 96
   end
 end

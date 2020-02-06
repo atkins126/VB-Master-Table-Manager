@@ -337,7 +337,7 @@ type
     cdsDirectorOfCompany: TFDMemTable;
     cdsDirectorOfCompanyDIRECTOR_ID: TIntegerField;
     cdsDirectorOfCompanyCUSTOMER_ID: TIntegerField;
-    cdsDirectorOfCompanyCOMPANY: TStringField;
+    cdsDirectorOfCompanyID: TIntegerField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);

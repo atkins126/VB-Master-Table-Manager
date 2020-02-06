@@ -912,22 +912,6 @@ inherited LookupDM: TLookupDM
     Left = 340
     Top = 60
   end
-  object VbliveConnection: TFDConnection
-    Params.Strings = (
-      'ConnectionDef=VB Live')
-    FormatOptions.AssignedValues = [fvMapRules]
-    FormatOptions.OwnMapRules = True
-    FormatOptions.MapRules = <
-      item
-        SourceDataType = dtWideString
-        TargetDataType = dtAnsiString
-      end>
-    ResourceOptions.AssignedValues = [rvAutoReconnect]
-    ResourceOptions.AutoReconnect = True
-    LoginPrompt = False
-    Left = 925
-    Top = 12
-  end
   object cdsARMonthOfYear: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     Constraints = <
@@ -1064,75 +1048,6 @@ inherited LookupDM: TLookupDM
     DataSet = cdsVATOffice
     Left = 430
     Top = 305
-  end
-  object FDMemTable1: TFDMemTable
-    ActiveStoredUsage = [auDesignTime]
-    Constraints = <
-      item
-        CustomConstraint = 'CHAR_LENGTH(NAME) > 0'
-        ErrorMessage = 'Tax Office name must have a value'
-        FromDictionary = False
-      end>
-    FieldDefs = <>
-    CachedUpdates = True
-    IndexDefs = <>
-    Indexes = <
-      item
-        Active = True
-        Name = 'idxID'
-        Fields = 'ID'
-        Options = [soPrimary]
-      end
-      item
-        Active = True
-        Selected = True
-        Name = 'idxName'
-        Fields = 'NAME'
-        CaseInsFields = 'NAME'
-        Options = [soNoCase, soUnique]
-        FilterOptions = [ekNoCase]
-      end>
-    IndexName = 'idxName'
-    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
-    FetchOptions.Mode = fmAll
-    FetchOptions.RecordCountMode = cmTotal
-    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
-    FormatOptions.MaxBcdPrecision = 2147483647
-    FormatOptions.MaxBcdScale = 1073741823
-    FormatOptions.DataSnapCompatibility = True
-    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
-    ResourceOptions.Persistent = True
-    ResourceOptions.StorePrettyPrint = True
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
-    UpdateOptions.LockWait = True
-    UpdateOptions.FetchGeneratorsPoint = gpNone
-    UpdateOptions.GeneratorName = 'TAX_OFFICE_ID_GEN'
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    UpdateOptions.UpdateTableName = 'TAX_OFFICE'
-    StoreDefs = True
-    Left = 590
-    Top = 375
-    object IntegerField3: TIntegerField
-      Alignment = taLeftJustify
-      FieldName = 'ID'
-      Origin = 'ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object StringField3: TStringField
-      DisplayLabel = 'Name'
-      FieldName = 'NAME'
-      Origin = 'NAME'
-      Required = True
-      Size = 40
-    end
-  end
-  object DataSource1: TDataSource
-    DataSet = FDMemTable1
-    Left = 585
-    Top = 425
   end
   object cdsBFSalutation: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -1322,5 +1237,78 @@ inherited LookupDM: TLookupDM
     DataSet = cdsVATMonth
     Left = 625
     Top = 180
+  end
+  object cdsCompany: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    CachedUpdates = True
+    ConstraintsEnabled = True
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvDataSnapCompatibility]
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 325
+    Top = 370
+  end
+  object dtsCompany: TDataSource
+    Left = 320
+    Top = 420
+  end
+  object View_companyView: TFDQuery
+    Connection = VbtestConnection
+    SQL.Strings = (
+      'SELECT * FROM VIEW_COMPANY')
+    Left = 855
+    Top = 395
+    object View_companyViewID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+    end
+    object View_companyViewCUSTOMER_TYPE_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_TYPE_ID'
+      Origin = 'CUSTOMER_TYPE_ID'
+    end
+    object View_companyViewCOMPANY: TStringField
+      DisplayLabel = 'Company'
+      FieldName = 'COMPANY'
+      Origin = 'COMPANY'
+      Size = 100
+    end
+  end
+  object VbtestConnection: TFDConnection
+    Params.Strings = (
+      'Database=C:\Data\Firebird\VB\VB.FDB'
+      'ConnectionDef=VB Live')
+    FormatOptions.AssignedValues = [fvMapRules]
+    FormatOptions.OwnMapRules = True
+    FormatOptions.MapRules = <
+      item
+        SourceDataType = dtWideString
+        TargetDataType = dtAnsiString
+      end
+      item
+        SourceDataType = dtFmtBCD
+        TargetDataType = dtCurrency
+      end
+      item
+        SourceDataType = dtSingle
+        TargetDataType = dtDouble
+      end>
+    ResourceOptions.AssignedValues = [rvAutoReconnect]
+    ResourceOptions.AutoReconnect = True
+    Connected = True
+    LoginPrompt = False
+    Left = 919
+    Top = 7
   end
 end

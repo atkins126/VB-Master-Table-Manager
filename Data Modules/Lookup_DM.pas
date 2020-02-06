@@ -13,7 +13,7 @@ uses
   FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteDef, FireDAC.Phys.FBDef, FireDAC.UI.Intf,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, FireDAC.Phys.IBBase, FireDAC.Phys.FB,
   FireDAC.Phys, FireDAC.Phys.SQLite, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async;
+  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.DApt;
 
 type
   TLookupDM = class(TBaseDM)
@@ -74,7 +74,6 @@ type
     dtsBank: TDataSource;
     dtsBankAccountType: TDataSource;
     dtsContactType: TDataSource;
-    VbliveConnection: TFDConnection;
     cdsARMonthOfYear: TFDMemTable;
     IntegerField1: TIntegerField;
     StringField1: TStringField;
@@ -83,10 +82,6 @@ type
     IntegerField2: TIntegerField;
     StringField2: TStringField;
     dtsVATOffice: TDataSource;
-    FDMemTable1: TFDMemTable;
-    IntegerField3: TIntegerField;
-    StringField3: TStringField;
-    DataSource1: TDataSource;
     cdsBFSalutation: TFDMemTable;
     IntegerField4: TIntegerField;
     StringField4: TStringField;
@@ -102,6 +97,13 @@ type
     cdsCountryID: TIntegerField;
     cdsCountryNAME: TStringField;
     cdsCountryDIALING_CODE: TStringField;
+    cdsCompany: TFDMemTable;
+    dtsCompany: TDataSource;
+    View_companyView: TFDQuery;
+    VbtestConnection: TFDConnection;
+    View_companyViewID: TIntegerField;
+    View_companyViewCUSTOMER_TYPE_ID: TIntegerField;
+    View_companyViewCOMPANY: TStringField;
   private
     { Private declarations }
   public

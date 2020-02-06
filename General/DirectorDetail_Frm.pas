@@ -14,7 +14,11 @@ uses
   dxLayoutcxEditAdapters, dxScreenTip, dxCustomHint, cxHint, cxImageList,
   dxLayoutLookAndFeels, cxClasses, cxStyles, dxLayoutContainer, cxDBLabel,
   cxButtons, cxLabel, dxLayoutControl, cxMaskEdit, cxDropDownEdit, cxLookupEdit,
-  cxDBLookupEdit, cxDBLookupComboBox, cxTextEdit;
+  cxDBLookupEdit, cxDBLookupComboBox, cxTextEdit, cxCustomData, cxFilter,
+  cxData, cxDataStorage, cxNavigator, dxDateRanges, dxScrollbarAnnotations,
+  Data.DB, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
+  cxGridTableView, cxGridBandedTableView, cxGridDBBandedTableView, cxGrid,
+  cxCurrencyEdit;
 
 type
   TDirectorDetailFrm = class(TBaseCustomerEditFrm)
@@ -36,6 +40,12 @@ type
     litEmailAddress: TdxLayoutItem;
     litOtherName: TdxLayoutItem;
     spc1: TdxLayoutEmptySpaceItem;
+    litCompany: TdxLayoutItem;
+    grdDirectorOfCompany: TcxGrid;
+    viewDirectorOfCompany: TcxGridDBBandedTableView;
+    lvlDirectorOfCompany: TcxGridLevel;
+    edtDirectorID: TcxGridDBBandedColumn;
+    lucCompanyID: TcxGridDBBandedColumn;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
   private
@@ -67,9 +77,11 @@ end;
 procedure TDirectorDetailFrm.FormCreate(Sender: TObject);
 begin
   inherited;
-// Width = 560; Height = 285
+  Width = 545;
+  Height = 425;
   MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
+  viewDirectorOfCompany.DataController.DataSource := MTDM.dtsDirectorOfCompany;
 
   if VBBaseDM.DBAction = acModify then
   begin
