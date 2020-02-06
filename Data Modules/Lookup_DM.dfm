@@ -1256,36 +1256,29 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AutoCommitUpdates = True
     Left = 325
     Top = 370
-  end
-  object dtsCompany: TDataSource
-    Left = 320
-    Top = 420
-  end
-  object View_companyView: TFDQuery
-    Connection = VbtestConnection
-    SQL.Strings = (
-      'SELECT * FROM VIEW_COMPANY')
-    Left = 855
-    Top = 395
-    object View_companyViewID: TIntegerField
+    object cdsCompanyID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
       Origin = 'ID'
     end
-    object View_companyViewCUSTOMER_TYPE_ID: TIntegerField
+    object cdsCompanyCUSTOMER_TYPE_ID: TIntegerField
       Alignment = taLeftJustify
       DisplayLabel = 'C ID'
       FieldName = 'CUSTOMER_TYPE_ID'
       Origin = 'CUSTOMER_TYPE_ID'
     end
-    object View_companyViewCOMPANY: TStringField
+    object cdsCompanyCOMPANY: TStringField
       DisplayLabel = 'Company'
       FieldName = 'COMPANY'
       Origin = 'COMPANY'
       Size = 100
     end
   end
-  object VbtestConnection: TFDConnection
+  object dtsCompany: TDataSource
+    Left = 325
+    Top = 420
+  end
+  object VbdevConnection: TFDConnection
     Params.Strings = (
       'Database=C:\Data\Firebird\VB\VB.FDB'
       'ConnectionDef=VB Live')
@@ -1306,7 +1299,6 @@ inherited LookupDM: TLookupDM
       end>
     ResourceOptions.AssignedValues = [rvAutoReconnect]
     ResourceOptions.AutoReconnect = True
-    Connected = True
     LoginPrompt = False
     Left = 919
     Top = 7

@@ -76,7 +76,7 @@ inherited ContactPersonFrm: TContactPersonFrm
     end
     object edtIDNo: TcxTextEdit [7]
       Left = 98
-      Top = 159
+      Top = 157
       BeepOnEnter = False
       Properties.OnChange = edtFirstNamePropertiesChange
       Style.HotTrack = False
@@ -85,7 +85,7 @@ inherited ContactPersonFrm: TContactPersonFrm
     end
     object lucJobFunction: TcxLookupComboBox [8]
       Left = 98
-      Top = 188
+      Top = 184
       BeepOnEnter = False
       Properties.DropDownAutoSize = True
       Properties.DropDownListStyle = lsFixedList
@@ -121,7 +121,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       Width = 160
     end
     object dteDOB: TcxDateEdit [11]
-      Left = 353
+      Left = 351
       Top = 130
       Properties.ImmediatePost = True
       Properties.SaveTime = False
@@ -133,8 +133,8 @@ inherited ContactPersonFrm: TContactPersonFrm
       Width = 160
     end
     object edtPassportNo: TcxTextEdit [12]
-      Left = 353
-      Top = 159
+      Left = 351
+      Top = 157
       BeepOnEnter = False
       Properties.OnChange = edtFirstNamePropertiesChange
       Style.HotTrack = False
@@ -142,8 +142,8 @@ inherited ContactPersonFrm: TContactPersonFrm
       Width = 160
     end
     object cbxPrimaryContact: TcxCheckBox [13]
-      Left = 279
-      Top = 188
+      Left = 277
+      Top = 184
       Caption = 'Primary Contact'
       Properties.Alignment = taLeftJustify
       Properties.ImmediatePost = True
@@ -160,32 +160,29 @@ inherited ContactPersonFrm: TContactPersonFrm
       Caption = ' '
       ParentFont = False
       Style.HotTrack = False
-      Style.StyleController = styMandatory
       Properties.Alignment.Vert = taVCenter
       Transparent = True
-      AnchorY = 142
+      AnchorY = 139
     end
     object lbl2: TcxLabel [15]
       Left = 264
-      Top = 159
+      Top = 157
       Caption = ' '
       ParentFont = False
       Style.HotTrack = False
-      Style.StyleController = styMandatory
       Properties.Alignment.Vert = taVCenter
       Transparent = True
-      AnchorY = 171
+      AnchorY = 166
     end
     object lbl3: TcxLabel [16]
       Left = 264
-      Top = 188
+      Top = 184
       Caption = ' '
       ParentFont = False
       Style.HotTrack = False
-      Style.StyleController = styMandatory
       Properties.Alignment.Vert = taVCenter
       Transparent = True
-      AnchorY = 200
+      AnchorY = 193
     end
     inherited layMainGroup_Root: TdxLayoutGroup
       ItemIndex = 1
@@ -420,8 +417,8 @@ inherited ContactPersonFrm: TContactPersonFrm
       Parent = grpOtherName
       CaptionOptions.Visible = False
       Control = lbl1
-      ControlOptions.OriginalHeight = 23
-      ControlOptions.OriginalWidth = 9
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 7
       ControlOptions.ShowBorder = False
       Index = 1
     end
@@ -429,8 +426,8 @@ inherited ContactPersonFrm: TContactPersonFrm
       Parent = grpIDNo
       CaptionOptions.Visible = False
       Control = lbl2
-      ControlOptions.OriginalHeight = 23
-      ControlOptions.OriginalWidth = 9
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 7
       ControlOptions.ShowBorder = False
       Index = 1
     end
@@ -438,8 +435,8 @@ inherited ContactPersonFrm: TContactPersonFrm
       Parent = grpJobFunction
       CaptionOptions.Visible = False
       Control = lbl3
-      ControlOptions.OriginalHeight = 23
-      ControlOptions.OriginalWidth = 9
+      ControlOptions.OriginalHeight = 17
+      ControlOptions.OriginalWidth = 7
       ControlOptions.ShowBorder = False
       Index = 1
     end
@@ -465,9 +462,6 @@ inherited ContactPersonFrm: TContactPersonFrm
     PixelsPerInch = 96
   end
   inherited styHeaderFont: TcxEditStyleController
-    PixelsPerInch = 96
-  end
-  inherited styMandatory: TcxEditStyleController
     PixelsPerInch = 96
   end
 end

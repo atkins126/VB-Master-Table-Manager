@@ -99,11 +99,10 @@ type
     cdsCountryDIALING_CODE: TStringField;
     cdsCompany: TFDMemTable;
     dtsCompany: TDataSource;
-    View_companyView: TFDQuery;
-    VbtestConnection: TFDConnection;
-    View_companyViewID: TIntegerField;
-    View_companyViewCUSTOMER_TYPE_ID: TIntegerField;
-    View_companyViewCOMPANY: TStringField;
+    VbdevConnection: TFDConnection;
+    cdsCompanyID: TIntegerField;
+    cdsCompanyCUSTOMER_TYPE_ID: TIntegerField;
+    cdsCompanyCOMPANY: TStringField;
   private
     { Private declarations }
   public

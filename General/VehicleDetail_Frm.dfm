@@ -404,8 +404,4 @@ inherited VehicleDetailFrm: TVehicleDetailFrm
   inherited styHeaderFont: TcxEditStyleController
     PixelsPerInch = 96
   end
-  inherited styMandatory: TcxEditStyleController
-    Left = 379
-    PixelsPerInch = 96
-  end
 end

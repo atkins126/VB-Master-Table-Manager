@@ -2932,7 +2932,7 @@ inherited MTDM: TMTDM
   end
   object dtsDirectorOfCompany: TDataSource
     DataSet = cdsDirectorOfCompany
-    Left = 965
+    Left = 960
     Top = 485
   end
   object cdsDirectorOfCompany: TFDMemTable
@@ -2946,7 +2946,8 @@ inherited MTDM: TMTDM
         Active = True
         Selected = True
         Name = 'IdxDirector'
-        Fields = 'DIRECTOR_ID;COMPANY'
+        Fields = 'DIRECTOR_ID;CUSTOMER_ID'
+        Options = [soUnique]
       end>
     IndexName = 'IdxDirector'
     ConstraintsEnabled = True

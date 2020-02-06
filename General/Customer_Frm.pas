@@ -347,9 +347,6 @@ type
     grdDirectorOfCompany: TcxGrid;
     viewDirectorOfCompany: TcxGridDBBandedTableView;
     lvlDirectorOfCompany: TcxGridLevel;
-    edtDOCCustomerID: TcxGridDBBandedColumn;
-    edtDOCCompany: TcxGridDBBandedColumn;
-    edtDOCDirectorID: TcxGridDBBandedColumn;
     grpOtherDetails: TdxLayoutGroup;
     grpDirectorVerticalGrid: TdxLayoutGroup;
     litDirectorVerticalGrid: TdxLayoutItem;
@@ -364,6 +361,9 @@ type
     edtVDMobilePhone: TcxDBEditorRow;
     edtVDEmailAddress: TcxDBEditorRow;
     grpPersonAttribute: TcxCategoryRow;
+    edtCoID: TcxGridDBBandedColumn;
+    edtCoDirectorID: TcxGridDBBandedColumn;
+    lucCoCustomerID: TcxGridDBBandedColumn;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -396,6 +396,7 @@ type
     procedure viewCustomerFocusedRecordChanged(Sender: TcxCustomGridTableView;
       APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
       ANewItemRecordFocusingChanged: Boolean);
+    procedure grdDirectorEnter(Sender: TObject);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
@@ -1100,6 +1101,7 @@ begin
   viewTrustee.DataController.DataSource := MTDM.dtsTrustee;
   viewVehicle.DataController.DataSource := MTDM.dtsVehicle;
   viewDirectorOfCompany.DataController.DataSource := MTDM.dtsDirectorOfCompany;
+  TcxLookupComboBoxProperties(lucCoCustomerID.Properties).ListSource :=  LookupDM.dtsCompany;
 
   SetLength(FDetailDataSet, 11);
   FDetailDataSet[0] := MTDM.cdsContactDetailCo;
@@ -1925,17 +1927,17 @@ begin
     if not MTDM.cdsTrustee.Active then
       MTDM.cdsTrustee.CreateDataSet;
 
-    // Director of Company
-    Inc(Counter);
-    Iteration := Counter / TABLE_COUNT * 100;
-
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director of Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-    VBBaseDM.GetData(75, MTDM.cdsDirectorOfCompany, MTDM.cdsDirectorOfCompany.Name, ONE_SPACE,
-      'C:\Data\Xml\Director Of Company.xml', MTDM.cdsDirectorOfCompany.UpdateOptions.Generatorname,
-      MTDM.cdsDirectorOfCompany.UpdateOptions.UpdateTableName);
-
-    if not MTDM.cdsDirectorOfCompany.Active then
-      MTDM.cdsDirectorOfCompany.CreateDataSet;
+//    // Director of Company
+//    Inc(Counter);
+//    Iteration := Counter / TABLE_COUNT * 100;
+//
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director of Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    VBBaseDM.GetData(76, MTDM.cdsDirectorOfCompany, MTDM.cdsDirectorOfCompany.Name, ONE_SPACE,
+//      'C:\Data\Xml\Director Of Company.xml', MTDM.cdsDirectorOfCompany.UpdateOptions.Generatorname,
+//      MTDM.cdsDirectorOfCompany.UpdateOptions.UpdateTableName);
+//
+//    if not MTDM.cdsDirectorOfCompany.Active then
+//      MTDM.cdsDirectorOfCompany.CreateDataSet;
 
 // Open all lookup tables  -----------------------------------------------------
 
@@ -1981,7 +1983,7 @@ begin
     LookupDM.cdsBFSalutation.Data := LookupDM.cdsSalutation.Data;
     LookupDM.cdsDirectorSalutation.Data := LookupDM.cdsSalutation.Data;
 
-   // Job function
+     // Job function
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
@@ -2053,6 +2055,19 @@ begin
 
     LookupDM.cdsARMonthOfYear.Data := LookupDM.cdsMonthOfYear.Data;
     LookupDM.cdsVATMonth.Data := LookupDM.cdsMonthOfYear.Data;
+
+    // Company
+    Inc(Counter);
+    Iteration := Counter / TABLE_COUNT * 100;
+
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    VBBaseDM.GetData(75, LookupDM.cdsCompany, LookupDM.cdsCompany.Name, ONE_SPACE,
+      'C:\Data\Xml\Company.xml', LookupDM.cdsCompany.UpdateOptions.Generatorname,
+      LookupDM.cdsCompany.UpdateOptions.UpdateTableName);
+
+    if not LookupDM.cdsCompany.Active then
+      LookupDM.cdsCompany.CreateDataSet;
+
   finally
     ProgressFrm.Close;
     FreeAndNil(ProgressFrm);
@@ -2093,6 +2108,16 @@ procedure TCustomerFrm.grdCustomerExit(Sender: TObject);
 begin
   inherited;
   grpDetailGridTabChanged(nil);
+end;
+
+procedure TCustomerFrm.grdDirectorEnter(Sender: TObject);
+begin
+  inherited;
+  MTDM.DetailIndex := 5;
+  actInsert.Caption := 'Add a new director';
+  actEdit.Caption := 'Edit selected director';
+  actDelete.Caption := 'Delete selected director';
+  MTDM.FormCaption := 'Director Details';
 end;
 
 procedure TCustomerFrm.grdPhysicalAddressDblClick(Sender: TObject);

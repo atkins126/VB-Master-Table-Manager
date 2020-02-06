@@ -275,7 +275,4 @@ inherited TrusteeDetailFrm: TTrusteeDetailFrm
   inherited styHeaderFont: TcxEditStyleController
     PixelsPerInch = 96
   end
-  inherited styMandatory: TcxEditStyleController
-    PixelsPerInch = 96
-  end
 end

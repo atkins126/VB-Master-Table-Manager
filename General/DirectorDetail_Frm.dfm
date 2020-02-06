@@ -10,29 +10,29 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
     Left = 0
     Top = 0
     Width = 545
-    Height = 395
+    Height = 450
     ExplicitLeft = 0
     ExplicitTop = 0
     ExplicitWidth = 545
-    ExplicitHeight = 395
+    ExplicitHeight = 450
     inherited lblHeaderTitle: TcxLabel
       Caption = 'Director Details'
       ExplicitWidth = 523
     end
     inherited btnOK: TcxButton
       Left = 378
-      Top = 359
+      Top = 414
       TabOrder = 10
       OnClick = btnOKClick
       ExplicitLeft = 378
-      ExplicitTop = 359
+      ExplicitTop = 414
     end
     inherited btnCancel: TcxButton
       Left = 459
-      Top = 359
+      Top = 414
       TabOrder = 11
       ExplicitLeft = 459
-      ExplicitTop = 359
+      ExplicitTop = 414
     end
     inherited lblSubTitle: TcxDBLabel
       ExplicitWidth = 513
@@ -104,9 +104,9 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       Width = 412
     end
     object grdDirectorOfCompany: TcxGrid [11]
-      Left = 11
-      Top = 184
-      Width = 523
+      Left = 20
+      Top = 227
+      Width = 505
       Height = 150
       TabOrder = 9
       object viewDirectorOfCompany: TcxGridDBBandedTableView
@@ -147,6 +147,9 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
         end
         object lucCompanyID: TcxGridDBBandedColumn
           DataBinding.FieldName = 'CUSTOMER_ID'
+          PropertiesClassName = 'TcxLookupComboBoxProperties'
+          Properties.ListColumns = <>
+          Properties.ListSource = LookupDM.dtsCompany
           Position.BandIndex = 0
           Position.ColIndex = 1
           Position.RowIndex = 0
@@ -163,10 +166,10 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       ItemIndex = 1
     end
     inherited grpButtons: TdxLayoutGroup
-      Index = 4
+      Index = 5
     end
     inherited sep01: TdxLayoutSeparatorItem
-      Index = 3
+      Index = 4
     end
     object grpName: TdxLayoutGroup
       Parent = grpData
@@ -354,12 +357,23 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       Index = 1
     end
     object litCompany: TdxLayoutItem
-      Parent = layMainGroup_Root
+      Parent = grpCompany
       CaptionOptions.Visible = False
       Control = grdDirectorOfCompany
       ControlOptions.OriginalHeight = 150
       ControlOptions.OriginalWidth = 401
       ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object grpCompany: TdxLayoutGroup
+      Parent = layMainGroup_Root
+      CaptionOptions.Text = 'This diriector is curently linked to the following company(s)'
+      ButtonOptions.Buttons = <>
+      Index = 3
+    end
+    object sep3: TdxLayoutSeparatorItem
+      Parent = layMainGroup_Root
+      CaptionOptions.Text = 'Separator'
       Index = 2
     end
   end

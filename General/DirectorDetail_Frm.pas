@@ -46,6 +46,8 @@ type
     lvlDirectorOfCompany: TcxGridLevel;
     edtDirectorID: TcxGridDBBandedColumn;
     lucCompanyID: TcxGridDBBandedColumn;
+    grpCompany: TdxLayoutGroup;
+    sep3: TdxLayoutSeparatorItem;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
   private
@@ -77,11 +79,12 @@ end;
 procedure TDirectorDetailFrm.FormCreate(Sender: TObject);
 begin
   inherited;
-  Width = 545;
-  Height = 425;
+  Width := 545;
+  Height := 460;
   MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
   viewDirectorOfCompany.DataController.DataSource := MTDM.dtsDirectorOfCompany;
+  TcxLookupComboBoxProperties(lucCompanyID.Properties).ListSource := LookupDM.dtsCompany;
 
   if VBBaseDM.DBAction = acModify then
   begin
