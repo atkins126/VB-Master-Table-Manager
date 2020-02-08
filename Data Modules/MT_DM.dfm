@@ -2393,11 +2393,6 @@ inherited MTDM: TMTDM
       end
       item
         Active = True
-        Name = 'idxDirCustID'
-        Fields = 'CUSTOMER_ID'
-      end
-      item
-        Active = True
         Selected = True
         Name = 'idxDirName'
         Fields = 'FIRST_NAME;LAST_NAME'
@@ -2431,13 +2426,6 @@ inherited MTDM: TMTDM
       FieldName = 'ID'
       Origin = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object cdsDirectorCUSTOMER_ID: TIntegerField
-      Alignment = taLeftJustify
-      DisplayLabel = 'C ID'
-      FieldName = 'CUSTOMER_ID'
-      Origin = 'CUSTOMER_ID'
       Required = True
     end
     object cdsDirectorSALUTATION_ID: TIntegerField
@@ -2564,7 +2552,7 @@ inherited MTDM: TMTDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'BENEFICIARY'
     StoreDefs = True
-    Left = 720
+    Left = 845
     Top = 425
     object cdsBeneficiaryID: TIntegerField
       Alignment = taLeftJustify
@@ -2616,7 +2604,7 @@ inherited MTDM: TMTDM
   end
   object dtsBeneficiary: TDataSource
     DataSet = cdsBeneficiary
-    Left = 720
+    Left = 845
     Top = 485
   end
   object cdsVehicle: TFDMemTable
@@ -2691,7 +2679,7 @@ inherited MTDM: TMTDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'VEHICLE'
     StoreDefs = True
-    Left = 795
+    Left = 920
     Top = 425
     object cdsVehicleID: TIntegerField
       Alignment = taLeftJustify
@@ -2758,51 +2746,8 @@ inherited MTDM: TMTDM
   end
   object dtsVehicle: TDataSource
     DataSet = cdsVehicle
-    Left = 795
+    Left = 920
     Top = 485
-  end
-  object VbtestConnection: TFDConnection
-    Params.Strings = (
-      'Database=C:\Data\Firebird\VB\VB.FDB'
-      'ConnectionDef=VB Live')
-    FormatOptions.AssignedValues = [fvMapRules]
-    FormatOptions.OwnMapRules = True
-    FormatOptions.MapRules = <
-      item
-        SourceDataType = dtWideString
-        TargetDataType = dtAnsiString
-      end
-      item
-        SourceDataType = dtFmtBCD
-        TargetDataType = dtCurrency
-      end
-      item
-        SourceDataType = dtSingle
-        TargetDataType = dtDouble
-      end>
-    ResourceOptions.AssignedValues = [rvAutoReconnect]
-    ResourceOptions.AutoReconnect = True
-    LoginPrompt = False
-    Left = 997
-    Top = 12
-  end
-  object Age_periodTable: TFDQuery
-    Connection = VbtestConnection
-    SQL.Strings = (
-      'SELECT * FROM AGE_PERIOD')
-    Left = 997
-    Top = 69
-    object Age_periodTableID: TIntegerField
-      FieldName = 'ID'
-      Origin = 'ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object Age_periodTableNAME: TStringField
-      FieldName = 'NAME'
-      Origin = 'NAME'
-      Required = True
-    end
   end
   object cdsTrustee: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2875,7 +2820,7 @@ inherited MTDM: TMTDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'TRUSTEE'
     StoreDefs = True
-    Left = 870
+    Left = 995
     Top = 425
     object cdsTrusteeID: TIntegerField
       Alignment = taLeftJustify
@@ -2927,16 +2872,17 @@ inherited MTDM: TMTDM
   end
   object dtsTrustee: TDataSource
     DataSet = cdsTrustee
-    Left = 870
+    Left = 995
     Top = 485
   end
   object dtsDirectorOfCompany: TDataSource
     DataSet = cdsDirectorOfCompany
-    Left = 960
+    Left = 735
     Top = 485
   end
   object cdsDirectorOfCompany: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
+    OnCalcFields = cdsDirectorOfCompanyCalcFields
     FilterOptions = [foCaseInsensitive]
     FieldDefs = <>
     CachedUpdates = True
@@ -2946,8 +2892,7 @@ inherited MTDM: TMTDM
         Active = True
         Selected = True
         Name = 'IdxDirector'
-        Fields = 'DIRECTOR_ID;CUSTOMER_ID'
-        Options = [soUnique]
+        Fields = 'DIRECTOR_ID'
       end>
     IndexName = 'IdxDirector'
     ConstraintsEnabled = True
@@ -2966,7 +2911,7 @@ inherited MTDM: TMTDM
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 960
+    Left = 735
     Top = 425
     object cdsDirectorOfCompanyID: TIntegerField
       Alignment = taLeftJustify
@@ -2984,5 +2929,35 @@ inherited MTDM: TMTDM
       FieldName = 'CUSTOMER_ID'
       Origin = 'CUSTOMER_ID'
     end
+    object cdsDirectorOfCompanyCUST_ID: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'CUST_ID'
+      Calculated = True
+    end
+  end
+  object VbdevConnection: TFDConnection
+    Params.Strings = (
+      'Database=C:\Data\Firebird\VB\VB.FDB'
+      'ConnectionDef=VB Live')
+    FormatOptions.AssignedValues = [fvMapRules]
+    FormatOptions.OwnMapRules = True
+    FormatOptions.MapRules = <
+      item
+        SourceDataType = dtWideString
+        TargetDataType = dtAnsiString
+      end
+      item
+        SourceDataType = dtFmtBCD
+        TargetDataType = dtCurrency
+      end
+      item
+        SourceDataType = dtSingle
+        TargetDataType = dtDouble
+      end>
+    ResourceOptions.AssignedValues = [rvAutoReconnect]
+    ResourceOptions.AutoReconnect = True
+    LoginPrompt = False
+    Left = 994
+    Top = 17
   end
 end

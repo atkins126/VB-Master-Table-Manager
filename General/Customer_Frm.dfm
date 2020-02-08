@@ -2,6 +2,7 @@ inherited CustomerFrm: TCustomerFrm
   Caption = 'CustomerFrm'
   ClientHeight = 765
   ClientWidth = 1490
+  OnClose = FormClose
   ExplicitWidth = 1506
   ExplicitHeight = 804
   PixelsPerInch = 96
@@ -12,7 +13,7 @@ inherited CustomerFrm: TCustomerFrm
     ExplicitWidth = 1376
     ExplicitHeight = 731
     object grdCustomer: TcxGrid [0]
-      Left = -264
+      Left = -39
       Top = 125
       Width = 915
       Height = 367
@@ -604,7 +605,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object navCustomer: TcxDBNavigator [2]
-      Left = -264
+      Left = -39
       Top = 11
       Width = 360
       Height = 40
@@ -1791,7 +1792,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdDirector: TcxGrid [13]
-      Left = 671
+      Left = 896
       Top = 162
       Width = 305
       Height = 139
@@ -1867,26 +1868,6 @@ inherited CustomerFrm: TCustomerFrm
           Position.ColIndex = 0
           Position.RowIndex = 0
         end
-        object edtDrCustomerID: TcxGridDBBandedColumn
-          DataBinding.FieldName = 'CUSTOMER_ID'
-          PropertiesClassName = 'TcxCurrencyEditProperties'
-          Properties.DecimalPlaces = 0
-          Properties.DisplayFormat = '#,###,##0'
-          Properties.EditFormat = '#,###,##0'
-          Properties.ReadOnly = True
-          Visible = False
-          MinWidth = 60
-          Options.Editing = False
-          Options.Filtering = False
-          Options.IncSearch = False
-          Options.Grouping = False
-          Options.HorzSizing = False
-          Options.Moving = False
-          Width = 60
-          Position.BandIndex = 0
-          Position.ColIndex = 1
-          Position.RowIndex = 0
-        end
         object lucDrSalutation: TcxGridDBBandedColumn
           DataBinding.FieldName = 'SALUTATION_ID'
           PropertiesClassName = 'TcxLookupComboBoxProperties'
@@ -1905,7 +1886,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Moving = False
           Width = 75
           Position.BandIndex = 0
-          Position.ColIndex = 2
+          Position.ColIndex = 1
           Position.RowIndex = 0
         end
         object edtDrFirstName: TcxGridDBBandedColumn
@@ -1920,7 +1901,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Moving = False
           Width = 170
           Position.BandIndex = 0
-          Position.ColIndex = 3
+          Position.ColIndex = 2
           Position.RowIndex = 0
         end
         object edtDrLastName: TcxGridDBBandedColumn
@@ -1936,7 +1917,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Moving = False
           Width = 150
           Position.BandIndex = 0
-          Position.ColIndex = 4
+          Position.ColIndex = 3
           Position.RowIndex = 0
         end
         object edtDrMiddleName: TcxGridDBBandedColumn
@@ -1953,7 +1934,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Moving = False
           Width = 150
           Position.BandIndex = 0
-          Position.ColIndex = 5
+          Position.ColIndex = 4
           Position.RowIndex = 0
         end
         object edtDrTaxNo: TcxGridDBBandedColumn
@@ -1970,7 +1951,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Moving = False
           Width = 130
           Position.BandIndex = 0
-          Position.ColIndex = 6
+          Position.ColIndex = 5
           Position.RowIndex = 0
         end
         object edtDrMobilePhone: TcxGridDBBandedColumn
@@ -1987,7 +1968,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Moving = False
           Width = 130
           Position.BandIndex = 0
-          Position.ColIndex = 7
+          Position.ColIndex = 6
           Position.RowIndex = 0
         end
         object edtDrEmailAddress: TcxGridDBBandedColumn
@@ -2001,7 +1982,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.Moving = False
           Position.BandIndex = 0
-          Position.ColIndex = 8
+          Position.ColIndex = 7
           Position.RowIndex = 0
         end
       end
@@ -2010,7 +1991,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdBeneficiary: TcxGrid [14]
-      Left = -250
+      Left = -25
       Top = 535
       Width = 1656
       Height = 200
@@ -2112,6 +2093,7 @@ inherited CustomerFrm: TCustomerFrm
             item
               FieldName = 'NAME'
             end>
+          Properties.ListSource = LookupDM.dtsBFSalutation
           Properties.ReadOnly = True
           MinWidth = 75
           Options.Grouping = False
@@ -2406,7 +2388,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object lblLegend: TcxLabel [16]
-      Left = -264
+      Left = -39
       Top = 758
       Caption = 
         'INS = Add a new record;  ENTER = Edit selected record;  DEL = De' +
@@ -2417,7 +2399,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxOpenAfterExport: TcxCheckBox [17]
-      Left = 413
+      Left = 638
       Top = 88
       Caption = 'Open after export'
       ParentShowHint = False
@@ -2431,7 +2413,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxPersistSelection: TcxCheckBox [18]
-      Left = 108
+      Left = 333
       Top = 21
       Caption = 'Persist Selection'
       ParentShowHint = False
@@ -2445,7 +2427,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxGroupedReport: TcxCheckBox [19]
-      Left = 295
+      Left = 520
       Top = 88
       Caption = 'Grouped Report'
       ParentShowHint = False
@@ -2458,7 +2440,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object lucPrintWhat: TcxComboBox [20]
-      Left = 20
+      Left = 245
       Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
@@ -2476,7 +2458,7 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object lucReportType: TcxComboBox [21]
-      Left = -179
+      Left = 46
       Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
@@ -2493,7 +2475,7 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object cbxPrintContactDetails: TcxCheckBox [22]
-      Left = 156
+      Left = 381
       Top = 88
       Caption = 'Print contact details'
       ParentShowHint = False
@@ -2680,9 +2662,9 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdDirectorOfCompany: TcxGrid [24]
-      Left = 671
+      Left = 896
       Top = 307
-      Width = 597
+      Width = 661
       Height = 168
       TabOrder = 12
       object viewDirectorOfCompany: TcxGridDBBandedTableView
@@ -2697,6 +2679,8 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnTab = True
         OptionsBehavior.NavigatorHints = True
         OptionsBehavior.FocusCellOnCycle = True
+        OptionsBehavior.ImmediateEditor = False
+        OptionsCustomize.ColumnsQuickCustomization = True
         OptionsView.NoDataToDisplayInfoText = '<No Company Director to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -2749,10 +2733,23 @@ inherited CustomerFrm: TCustomerFrm
         object lucCoCustomerID: TcxGridDBBandedColumn
           DataBinding.FieldName = 'CUSTOMER_ID'
           PropertiesClassName = 'TcxLookupComboBoxProperties'
-          Properties.ListColumns = <>
+          Properties.KeyFieldNames = 'ID'
+          Properties.ListColumns = <
+            item
+              FieldName = 'COMPANY'
+            end>
           Properties.ListSource = LookupDM.dtsCompany
+          Properties.ReadOnly = False
+          Width = 589
           Position.BandIndex = 0
           Position.ColIndex = 2
+          Position.RowIndex = 0
+        end
+        object viewDirectorOfCompanyCUST_ID: TcxGridDBBandedColumn
+          DataBinding.FieldName = 'CUST_ID'
+          Width = 58
+          Position.BandIndex = 0
+          Position.ColIndex = 3
           Position.RowIndex = 0
         end
       end
@@ -2761,9 +2758,9 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVDirector: TcxDBVerticalGrid [25]
-      Left = 982
+      Left = 1207
       Top = 162
-      Width = 286
+      Width = 350
       Height = 139
       OptionsView.CellAutoHeight = True
       OptionsView.ScrollBars = ssNone
@@ -2812,7 +2809,12 @@ inherited CustomerFrm: TCustomerFrm
       end
       object lucVDSalutationID: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxLookupComboBoxProperties'
-        Properties.EditProperties.ListColumns = <>
+        Properties.EditProperties.KeyFieldNames = 'ID'
+        Properties.EditProperties.ListColumns = <
+          item
+            FieldName = 'NAME'
+          end>
+        Properties.EditProperties.ListSource = LookupDM.dtsDirectorSalutation
         Properties.DataBinding.FieldName = 'SALUTATION_ID'
         ID = 2
         ParentID = -1
@@ -3234,7 +3236,7 @@ inherited CustomerFrm: TCustomerFrm
       CaptionOptions.Visible = False
       Control = grdVDirector
       ControlOptions.OriginalHeight = 139
-      ControlOptions.OriginalWidth = 286
+      ControlOptions.OriginalWidth = 350
       ControlOptions.ShowBorder = False
       Index = 1
     end

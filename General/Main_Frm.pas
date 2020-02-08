@@ -337,6 +337,7 @@ begin
     Exit;
 
   ActionTag := StrToInt(AnsiRightStr(pagMain.ActivePage.Name, 2));
+
   case ActionTag of
     0: CloseTheForm(pagMain.ActivePageIndex, ActivityTypeFrm, actActivityType.Tag, actActivityType);
     1: CloseTheForm(pagMain.ActivePageIndex, AgePeriodFrm, actAgePeriod.Tag, actAgePeriod);

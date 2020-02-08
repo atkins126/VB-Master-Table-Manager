@@ -1275,6 +1275,7 @@ inherited LookupDM: TLookupDM
     end
   end
   object dtsCompany: TDataSource
+    DataSet = cdsCompany
     Left = 325
     Top = 420
   end

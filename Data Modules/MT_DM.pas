@@ -285,7 +285,6 @@ type
     cdsBankingDetailFIRST_NAME: TStringField;
     cdsBankingDetailLAST_NAME: TStringField;
     cdsDirectorID: TIntegerField;
-    cdsDirectorCUSTOMER_ID: TIntegerField;
     cdsDirectorSALUTATION_ID: TIntegerField;
     cdsDirectorFIRST_NAME: TStringField;
     cdsDirectorLAST_NAME: TStringField;
@@ -315,12 +314,8 @@ type
     cdsContactDetailCoCONTACT_PERSON_ID: TIntegerField;
     cdsContactDetailCoVALUE: TStringField;
     cdsContactDetailCoCOMMENT: TStringField;
-    VbtestConnection: TFDConnection;
     cdsActivityTypeID: TIntegerField;
     cdsActivityTypeNAME: TStringField;
-    Age_periodTable: TFDQuery;
-    Age_periodTableID: TIntegerField;
-    Age_periodTableNAME: TStringField;
     cdsAgePeriodID: TIntegerField;
     cdsAgePeriodNAME: TStringField;
     cdsCustomerUIF_NO: TStringField;
@@ -338,6 +333,8 @@ type
     cdsDirectorOfCompanyDIRECTOR_ID: TIntegerField;
     cdsDirectorOfCompanyCUSTOMER_ID: TIntegerField;
     cdsDirectorOfCompanyID: TIntegerField;
+    VbdevConnection: TFDConnection;
+    cdsDirectorOfCompanyCUST_ID: TIntegerField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);
@@ -346,6 +343,7 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsActivityTypePostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
     procedure cdsActivityTypeNewRecord(DataSet: TDataSet);
+    procedure cdsDirectorOfCompanyCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     FID: Integer;
@@ -435,6 +433,13 @@ begin
   MTDM.FPostError := True;
   DataSet.Cancel;
 //  Action :=  daAbort;
+end;
+
+procedure TMTDM.cdsDirectorOfCompanyCalcFields(DataSet: TDataSet);
+begin
+  inherited;
+  cdsDirectorOfCompany.FieldByName('CUST_ID').AsInteger :=
+    cdsDirectorOfCompany.FieldByName('CUSTOMER_ID').AsInteger;
 end;
 
 procedure TMTDM.ClearFieldValueArray;
