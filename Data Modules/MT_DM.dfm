@@ -1,5 +1,5 @@
 inherited MTDM: TMTDM
-  Height = 672
+  Height = 777
   Width = 1097
   object cdsActivityType: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -1140,7 +1140,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'RATE_UNIT'
     StoreDefs = True
     Left = 130
-    Top = 285
+    Top = 265
     object cdsRateUnitID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1211,7 +1211,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'SALUTATION'
     StoreDefs = True
     Left = 230
-    Top = 285
+    Top = 265
     object cdsSalutationID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1281,7 +1281,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'STD_ACTIVITY'
     StoreDefs = True
     Left = 330
-    Top = 285
+    Top = 265
     object cdsStdActivityID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1347,7 +1347,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'TAX_OFFICE'
     StoreDefs = True
     Left = 430
-    Top = 285
+    Top = 265
     object cdsTaxOfficeID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1418,7 +1418,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'VEHICLE_MAKE'
     StoreDefs = True
     Left = 530
-    Top = 285
+    Top = 265
     object cdsVehicleMakeID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1497,27 +1497,27 @@ inherited MTDM: TMTDM
   object dtsRateUnit: TDataSource
     DataSet = cdsRateUnit
     Left = 130
-    Top = 335
+    Top = 315
   end
   object dtsSalutation: TDataSource
     DataSet = cdsSalutation
     Left = 230
-    Top = 335
+    Top = 315
   end
   object dtsStdActivityType: TDataSource
     DataSet = cdsStdActivity
     Left = 330
-    Top = 335
+    Top = 315
   end
   object dtsTaxOffice: TDataSource
     DataSet = cdsTaxOffice
     Left = 430
-    Top = 335
+    Top = 315
   end
   object dtsVehicleMake: TDataSource
     DataSet = cdsVehicleMake
     Left = 530
-    Top = 335
+    Top = 315
   end
   object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
     Left = 990
@@ -1735,7 +1735,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'CONTACT_DETAIL_CO'
     StoreDefs = True
     Left = 130
-    Top = 425
+    Top = 385
     object cdsContactDetailCoID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1781,7 +1781,7 @@ inherited MTDM: TMTDM
   object dtsContactDetailCo: TDataSource
     DataSet = cdsContactDetailCo
     Left = 130
-    Top = 485
+    Top = 435
   end
   object cdsAddress: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -1832,7 +1832,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'ADDRESS'
     StoreDefs = True
     Left = 240
-    Top = 425
+    Top = 385
     object cdsAddressID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1941,7 +1941,7 @@ inherited MTDM: TMTDM
   object dtsAddress: TDataSource
     DataSet = cdsAddress
     Left = 235
-    Top = 485
+    Top = 435
   end
   object cdsContactDetailPerson: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2004,7 +2004,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'CONTACT_DETAIL_PERSON'
     StoreDefs = True
     Left = 540
-    Top = 425
+    Top = 385
     object cdsContactDetailPersonID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2048,7 +2048,7 @@ inherited MTDM: TMTDM
   object dtsContactDetailPerson: TDataSource
     DataSet = cdsContactDetailPerson
     Left = 540
-    Top = 485
+    Top = 435
   end
   object cdsBankingDetail: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2137,7 +2137,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'BANKING_DETAIL'
     StoreDefs = True
     Left = 325
-    Top = 425
+    Top = 385
     object cdsBankingDetailID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2195,7 +2195,7 @@ inherited MTDM: TMTDM
   object dtsBankingDetail: TDataSource
     DataSet = cdsBankingDetail
     Left = 320
-    Top = 485
+    Top = 435
   end
   object cdsContactPerson: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2258,7 +2258,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'CONTACT_PERSON'
     StoreDefs = True
     Left = 430
-    Top = 425
+    Top = 385
     object cdsContactPersonID: TIntegerField
       Alignment = taLeftJustify
       DisplayWidth = 10
@@ -2350,7 +2350,7 @@ inherited MTDM: TMTDM
   object dtsContactPerson: TDataSource
     DataSet = cdsContactPerson
     Left = 425
-    Top = 485
+    Top = 435
   end
   object cdsDirector: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2420,7 +2420,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'DIRECTOR'
     StoreDefs = True
     Left = 645
-    Top = 425
+    Top = 385
     object cdsDirectorID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2475,7 +2475,7 @@ inherited MTDM: TMTDM
   object dtsDirector: TDataSource
     DataSet = cdsDirector
     Left = 640
-    Top = 485
+    Top = 435
   end
   object cdsBeneficiary: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2553,7 +2553,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'BENEFICIARY'
     StoreDefs = True
     Left = 845
-    Top = 425
+    Top = 385
     object cdsBeneficiaryID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2605,7 +2605,7 @@ inherited MTDM: TMTDM
   object dtsBeneficiary: TDataSource
     DataSet = cdsBeneficiary
     Left = 845
-    Top = 485
+    Top = 435
   end
   object cdsVehicle: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2680,7 +2680,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'VEHICLE'
     StoreDefs = True
     Left = 920
-    Top = 425
+    Top = 385
     object cdsVehicleID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2747,7 +2747,7 @@ inherited MTDM: TMTDM
   object dtsVehicle: TDataSource
     DataSet = cdsVehicle
     Left = 920
-    Top = 485
+    Top = 435
   end
   object cdsTrustee: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2821,7 +2821,7 @@ inherited MTDM: TMTDM
     UpdateOptions.UpdateTableName = 'TRUSTEE'
     StoreDefs = True
     Left = 995
-    Top = 425
+    Top = 385
     object cdsTrusteeID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2873,12 +2873,12 @@ inherited MTDM: TMTDM
   object dtsTrustee: TDataSource
     DataSet = cdsTrustee
     Left = 995
-    Top = 485
+    Top = 435
   end
   object dtsDirectorOfCompany: TDataSource
     DataSet = cdsDirectorOfCompany
     Left = 735
-    Top = 485
+    Top = 435
   end
   object cdsDirectorOfCompany: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
@@ -2912,7 +2912,7 @@ inherited MTDM: TMTDM
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
     Left = 735
-    Top = 425
+    Top = 385
     object cdsDirectorOfCompanyID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2959,5 +2959,397 @@ inherited MTDM: TMTDM
     LoginPrompt = False
     Left = 994
     Top = 17
+  end
+  object cdsHeir: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    CachedUpdates = True
+    Indexes = <
+      item
+        Active = True
+        Selected = True
+        Name = 'idxHeirName'
+        Fields = 'CUSTOMER_ID;FIRST_NAME;LAST_NAME'
+        Options = [soNoCase]
+        FilterOptions = [ekNoCase]
+      end
+      item
+        Active = True
+        Name = 'idxID'
+        Fields = 'ID'
+        Options = [soPrimary]
+      end>
+    IndexName = 'idxHeirName'
+    ConstraintsEnabled = True
+    MasterSource = dtsCustomer
+    MasterFields = 'ID'
+    DetailFields = 'CUSTOMER_ID'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvDataSnapCompatibility]
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 130
+    Top = 515
+    object cdsHeirID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsHeirCUSTOMER_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_ID'
+      Origin = 'CUSTOMER_ID'
+      Required = True
+    end
+    object cdsHeirSALUTATION_ID: TIntegerField
+      DisplayLabel = 'Salutation'
+      FieldName = 'SALUTATION_ID'
+    end
+    object cdsHeirFIRST_NAME: TStringField
+      DisplayLabel = 'First Name'
+      FieldName = 'FIRST_NAME'
+      Origin = 'FIRST_NAME'
+      Required = True
+      Size = 30
+    end
+    object cdsHeirLAST_NAME: TStringField
+      DisplayLabel = 'Last Name'
+      FieldName = 'LAST_NAME'
+      Origin = 'LAST_NAME'
+      Required = True
+      Size = 30
+    end
+    object cdsHeirID_NUMBER: TStringField
+      DisplayLabel = 'ID Number'
+      FieldName = 'ID_NUMBER'
+      Origin = 'ID_NUMBER'
+    end
+    object cdsHeirPHYSICAL1: TStringField
+      DisplayLabel = 'Physical 1'
+      FieldName = 'PHYSICAL1'
+      Origin = 'PHYSICAL1'
+      Size = 50
+    end
+    object cdsHeirPHYSICAL2: TStringField
+      DisplayLabel = 'Physical 2'
+      FieldName = 'PHYSICAL2'
+      Origin = 'PHYSICAL2'
+      Size = 50
+    end
+    object cdsHeirPHYSICAL3: TStringField
+      DisplayLabel = 'Physical 3'
+      FieldName = 'PHYSICAL3'
+      Origin = 'PHYSICAL3'
+      Size = 50
+    end
+    object cdsHeirPHYSICAL4: TStringField
+      DisplayLabel = 'Physical 4'
+      FieldName = 'PHYSICAL4'
+      Origin = 'PHYSICAL4'
+      Size = 50
+    end
+    object cdsHeirPHYSICAL_CODE: TStringField
+      DisplayLabel = 'Code'
+      FieldName = 'PHYSICAL_CODE'
+      Origin = 'PHYSICAL_CODE'
+      Size = 10
+    end
+    object cdsHeirPOSTAL1: TStringField
+      DisplayLabel = 'Postal 1'
+      FieldName = 'POSTAL1'
+      Origin = 'POSTAL1'
+      Size = 50
+    end
+    object cdsHeirPOSTAL2: TStringField
+      DisplayLabel = 'Postal 2'
+      FieldName = 'POSTAL2'
+      Origin = 'POSTAL2'
+      Size = 50
+    end
+    object cdsHeirPOSTAL3: TStringField
+      DisplayLabel = 'Postal 3'
+      FieldName = 'POSTAL3'
+      Origin = 'POSTAL3'
+      Size = 50
+    end
+    object cdsHeirPOSTAL4: TStringField
+      DisplayLabel = 'Postal 4'
+      FieldName = 'POSTAL4'
+      Origin = 'POSTAL4'
+      Size = 50
+    end
+    object cdsHeirPOSTAL_CODE: TStringField
+      DisplayLabel = 'Code'
+      FieldName = 'POSTAL_CODE'
+      Origin = 'POSTAL_CODE'
+      Size = 10
+    end
+    object cdsHeirACC_HOLDER_SALUTATION_ID: TIntegerField
+      DisplayLabel = 'Salutation'
+      FieldName = 'ACC_HOLDER_SALUTATION_ID'
+    end
+    object cdsHeirHEIR_ACC_HOLDER_FIRST_NAME: TStringField
+      DisplayLabel = 'First Name'
+      FieldName = 'HEIR_ACC_HOLDER_FIRST_NAME'
+      Origin = 'HEIR_ACC_HOLDER_FIRST_NAME'
+      Required = True
+      Size = 30
+    end
+    object cdsHeirHEIR_ACC_HOLDER_LAST_NAME: TStringField
+      DisplayLabel = 'Last Name'
+      FieldName = 'HEIR_ACC_HOLDER_LAST_NAME'
+      Origin = 'HEIR_ACC_HOLDER_LAST_NAME'
+      Required = True
+      Size = 30
+    end
+    object cdsHeirBANK_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Bank'
+      FieldName = 'BANK_ID'
+      Origin = 'BANK_ID'
+    end
+    object cdsHeirBRANCH_CODE: TStringField
+      DisplayLabel = 'Branch'
+      FieldName = 'BRANCH_CODE'
+      Origin = 'BRANCH_CODE'
+      Size = 10
+    end
+    object cdsHeirACCOUNT_TYPE_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Account Type'
+      FieldName = 'ACCOUNT_TYPE_ID'
+      Origin = 'ACCOUNT_TYPE_ID'
+    end
+    object cdsHeirACCOUNT_N0: TStringField
+      DisplayLabel = 'Acc No'
+      FieldName = 'ACCOUNT_N0'
+      Origin = 'ACCOUNT_N0'
+    end
+  end
+  object cdsShareHolder: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    CachedUpdates = True
+    Indexes = <
+      item
+        Active = True
+        Selected = True
+        Name = 'idxShareholderName'
+        Fields = 'CUSTOMER_ID;FIRST_NAME;LAST_NAME'
+        Options = [soNoCase]
+        FilterOptions = [ekNoCase]
+      end
+      item
+        Active = True
+        Name = 'idxID'
+        Fields = 'ID'
+        Options = [soPrimary]
+      end>
+    IndexName = 'idxShareholderName'
+    ConstraintsEnabled = True
+    MasterSource = dtsCustomer
+    MasterFields = 'ID'
+    DetailFields = 'CUSTOMER_ID'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvDataSnapCompatibility]
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 235
+    Top = 515
+    object cdsShareHolderID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsShareHolderCUSTOMER_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_ID'
+      Origin = 'CUSTOMER_ID'
+      Required = True
+    end
+    object cdsShareHolderSALUTATION_ID: TIntegerField
+      DisplayLabel = 'Salutation'
+      FieldName = 'SALUTATION_ID'
+    end
+    object cdsShareHolderFIRST_NAME: TStringField
+      DisplayLabel = 'First Name'
+      FieldName = 'FIRST_NAME'
+      Origin = 'FIRST_NAME'
+      Required = True
+      Size = 30
+    end
+    object cdsShareHolderLAST_NAME: TStringField
+      DisplayLabel = 'Last Name'
+      FieldName = 'LAST_NAME'
+      Origin = 'LAST_NAME'
+      Required = True
+      Size = 30
+    end
+    object cdsShareHolderMOBILE_PHONE: TStringField
+      DisplayLabel = 'Mobile Phone'
+      FieldName = 'MOBILE_PHONE'
+      Origin = 'MOBILE_PHONE'
+      Size = 15
+    end
+    object cdsShareHolderEMAIL_ADDRESS: TStringField
+      DisplayLabel = 'Email Address'
+      FieldName = 'EMAIL_ADDRESS'
+      Origin = 'EMAIL_ADDRESS'
+      Size = 100
+    end
+    object cdsShareHolderPERCENT_SHARE: TFloatField
+      DisplayLabel = '% Share'
+      FieldName = 'PERCENT_SHARE'
+      Origin = 'PERCENT_SHARE'
+      Required = True
+    end
+  end
+  object dtsHeir: TDataSource
+    DataSet = cdsHeir
+    Left = 130
+    Top = 565
+  end
+  object dtsShareHolder: TDataSource
+    DataSet = cdsShareHolder
+    Left = 235
+    Top = 565
+  end
+  object HeirTable: TFDQuery
+    Connection = VbdevConnection
+    SQL.Strings = (
+      'SELECT * FROM HEIR')
+    Left = 925
+    Top = 68
+    object HeirTableID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object HeirTableCUSTOMER_ID: TIntegerField
+      FieldName = 'CUSTOMER_ID'
+      Origin = 'CUSTOMER_ID'
+      Required = True
+    end
+    object HeirTableSALUTATION_ID: TIntegerField
+      FieldName = 'SALUTATION_ID'
+      Origin = 'SALUTATION_ID'
+      Required = True
+    end
+    object HeirTableFIRST_NAME: TStringField
+      FieldName = 'FIRST_NAME'
+      Origin = 'FIRST_NAME'
+      Required = True
+      Size = 30
+    end
+    object HeirTableLAST_NAME: TStringField
+      FieldName = 'LAST_NAME'
+      Origin = 'LAST_NAME'
+      Required = True
+      Size = 30
+    end
+    object HeirTableID_NUMBER: TStringField
+      FieldName = 'ID_NUMBER'
+      Origin = 'ID_NUMBER'
+    end
+    object HeirTablePHYSICAL1: TStringField
+      FieldName = 'PHYSICAL1'
+      Origin = 'PHYSICAL1'
+      Size = 50
+    end
+    object HeirTablePHYSICAL2: TStringField
+      FieldName = 'PHYSICAL2'
+      Origin = 'PHYSICAL2'
+      Size = 50
+    end
+    object HeirTablePHYSICAL3: TStringField
+      FieldName = 'PHYSICAL3'
+      Origin = 'PHYSICAL3'
+      Size = 50
+    end
+    object HeirTablePHYSICAL4: TStringField
+      FieldName = 'PHYSICAL4'
+      Origin = 'PHYSICAL4'
+      Size = 50
+    end
+    object HeirTablePHYSICAL_CODE: TStringField
+      FieldName = 'PHYSICAL_CODE'
+      Origin = 'PHYSICAL_CODE'
+      Size = 10
+    end
+    object HeirTablePOSTAL1: TStringField
+      FieldName = 'POSTAL1'
+      Origin = 'POSTAL1'
+      Size = 50
+    end
+    object HeirTablePOSTAL2: TStringField
+      FieldName = 'POSTAL2'
+      Origin = 'POSTAL2'
+      Size = 50
+    end
+    object HeirTablePOSTAL3: TStringField
+      FieldName = 'POSTAL3'
+      Origin = 'POSTAL3'
+      Size = 50
+    end
+    object HeirTablePOSTAL4: TStringField
+      FieldName = 'POSTAL4'
+      Origin = 'POSTAL4'
+      Size = 50
+    end
+    object HeirTablePOSTAL_CODE: TStringField
+      FieldName = 'POSTAL_CODE'
+      Origin = 'POSTAL_CODE'
+      Size = 10
+    end
+    object HeirTableHEIR_ACC_HOLDER_FIRST_NAME: TStringField
+      FieldName = 'HEIR_ACC_HOLDER_FIRST_NAME'
+      Origin = 'HEIR_ACC_HOLDER_FIRST_NAME'
+      Required = True
+      Size = 30
+    end
+    object HeirTableHEIR_ACC_HOLDER_LAST_NAME: TStringField
+      FieldName = 'HEIR_ACC_HOLDER_LAST_NAME'
+      Origin = 'HEIR_ACC_HOLDER_LAST_NAME'
+      Required = True
+      Size = 30
+    end
+    object HeirTableBANK_ID: TIntegerField
+      FieldName = 'BANK_ID'
+      Origin = 'BANK_ID'
+    end
+    object HeirTableBRANCH_CODE: TStringField
+      FieldName = 'BRANCH_CODE'
+      Origin = 'BRANCH_CODE'
+      Size = 10
+    end
+    object HeirTableACCOUNT_TYPE_ID: TIntegerField
+      FieldName = 'ACCOUNT_TYPE_ID'
+      Origin = 'ACCOUNT_TYPE_ID'
+    end
+    object HeirTableACCOUNT_N0: TStringField
+      FieldName = 'ACCOUNT_N0'
+      Origin = 'ACCOUNT_N0'
+    end
   end
 end

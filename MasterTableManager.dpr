@@ -66,7 +66,9 @@ uses
   CustomerReportSelection_Frm in 'General\CustomerReportSelection_Frm.pas' {CustomerReportSelectionFrm},
   AccountHolder_Frm in 'General\AccountHolder_Frm.pas' {AccountHolderFrm},
   CustomerEdit_Frm in 'General\CustomerEdit_Frm.pas' {CustomerEditFrm},
-  TrusteeDetail_Frm in 'General\TrusteeDetail_Frm.pas' {TrusteeDetailFrm};
+  TrusteeDetail_Frm in 'General\TrusteeDetail_Frm.pas' {TrusteeDetailFrm},
+  ShareHolderDetail_Frm in 'General\ShareHolderDetail_Frm.pas' {ShareHolderDetailFrm},
+  HeirDetail_Frm in 'General\HeirDetail_Frm.pas' {HeirDetailFrm};
 
 {$R *.res}
 

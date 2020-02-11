@@ -10,7 +10,8 @@ uses
 
   BaseLayout_Frm, CommonValues, VBCommonValues,
 
-  FireDAC.Comp.Client,
+  FireDAC.Comp.Client, FireDAC.UI.Intf, FireDAC.VCLUI.Error, FireDAC.Stan.Error,
+  FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.Phys.IBWrapper,
 
   frxClass,
 
@@ -22,15 +23,9 @@ uses
   cxGridBandedTableView, cxGridDBBandedTableView, cxGrid, cxCurrencyEdit,
   cxDBLookupComboBox, cxTextEdit, cxInplaceContainer, cxVGrid, cxDBVGrid,
   cxDBNavigator, cxButtons, dxLayoutControlAdapters, dxLayoutcxEditAdapters,
-  cxContainer, cxMemo, cxDBEdit, cxCalendar, cxCheckBox, cxLabel,
-  cxGridInplaceEditForm,
-
-  FireDAC.UI.Intf, FireDAC.VCLUI.Error,
-  FireDAC.Stan.Error, FireDAC.Stan.Intf, FireDAC.Comp.UI, FireDAC.Phys.IBWrapper,
-  dxSkinMoneyTwins, dxSkinOffice2019Colorful, dxSkinTheBezier,
-  dxScrollbarAnnotations, Report_DM, dxBar, cxDropDownEdit, cxBarEditItem,
-  cxMaskEdit, dxPrnDev, dxPrnDlg, AccountHolder_Frm, cxButtonEdit,
-  CustomerEdit_Frm;
+  cxContainer, cxMemo, cxDBEdit, cxCalendar, cxCheckBox, cxLabel, cxButtonEdit,
+  cxGridInplaceEditForm, dxScrollbarAnnotations, dxBar, cxDropDownEdit, dxPrnDev,
+  cxBarEditItem, cxMaskEdit, dxPrnDlg, cxSpinEdit;
 
   // To handle TFDGUIxErrordialog
 // FireDAC.UI.Intf, FireDAC.VCLUI.Error,
@@ -153,8 +148,8 @@ type
     lvlBankingDetail: TcxGridLevel;
     edtBankDID: TcxGridDBBandedColumn;
     edtBankDCustomerID: TcxGridDBBandedColumn;
-    lucBankDBankID: TcxGridDBBandedColumn;
-    lucBankDAccountTypeID: TcxGridDBBandedColumn;
+    lucBankDBank: TcxGridDBBandedColumn;
+    lucBankDAccountType: TcxGridDBBandedColumn;
     edtBankDBranchCode: TcxGridDBBandedColumn;
     edtBankDAccountNo: TcxGridDBBandedColumn;
     edtBankDFirstName: TcxGridDBBandedColumn;
@@ -175,10 +170,10 @@ type
     lvlBeneficiary: TcxGridLevel;
     edtBFID: TcxGridDBBandedColumn;
     edtBFCustomerID: TcxGridDBBandedColumn;
-    lucBFSalutationID: TcxGridDBBandedColumn;
+    lucBFSalutation: TcxGridDBBandedColumn;
     edtBFFirstName: TcxGridDBBandedColumn;
     edtBFLaastName: TcxGridDBBandedColumn;
-    edtBFMobileNo: TcxGridDBBandedColumn;
+    edtBFMobilePhone: TcxGridDBBandedColumn;
     edtBFEmailAddress: TcxGridDBBandedColumn;
     grdVehicle: TcxGrid;
     viewVehicle: TcxGridDBBandedTableView;
@@ -335,7 +330,7 @@ type
     viewTrustee: TcxGridDBBandedTableView;
     edtTID: TcxGridDBBandedColumn;
     edtTCustomerID: TcxGridDBBandedColumn;
-    lucTSalutationID: TcxGridDBBandedColumn;
+    lucTSalutation: TcxGridDBBandedColumn;
     edtTFirstName: TcxGridDBBandedColumn;
     edtTLastName: TcxGridDBBandedColumn;
     edtTMobilePhone: TcxGridDBBandedColumn;
@@ -364,11 +359,70 @@ type
     edtCoDirectorID: TcxGridDBBandedColumn;
     lucCoCustomerID: TcxGridDBBandedColumn;
     viewDirectorOfCompanyCUST_ID: TcxGridDBBandedColumn;
+    litHeir: TdxLayoutItem;
+    litShareHolder: TdxLayoutItem;
+    grdHeir: TcxGrid;
+    viewHeir: TcxGridDBBandedTableView;
+    lvlHeir: TcxGridLevel;
+    grdShareHolder: TcxGrid;
+    viewShareHolder: TcxGridDBBandedTableView;
+    lvlShareHolder: TcxGridLevel;
+    edtSHID: TcxGridDBBandedColumn;
+    edtSHCustomerID: TcxGridDBBandedColumn;
+    edtSHFirstName: TcxGridDBBandedColumn;
+    edtSHLastName: TcxGridDBBandedColumn;
+    edtSHMobilePhone: TcxGridDBBandedColumn;
+    edtSHEmailAddress: TcxGridDBBandedColumn;
+    edtSHPerecentShare: TcxGridDBBandedColumn;
+    edtHID: TcxGridDBBandedColumn;
+    edtHCustomerID: TcxGridDBBandedColumn;
+    lucHSalutation: TcxGridDBBandedColumn;
+    edtHFirstName: TcxGridDBBandedColumn;
+    edtHLastName: TcxGridDBBandedColumn;
+    edtHIDNumber: TcxGridDBBandedColumn;
+    edtHPhysical1: TcxGridDBBandedColumn;
+    edtHPhysical2: TcxGridDBBandedColumn;
+    edtHPhysical3: TcxGridDBBandedColumn;
+    edtHPhysical4: TcxGridDBBandedColumn;
+    edtHPhysicalCode: TcxGridDBBandedColumn;
+    edtHPostal1: TcxGridDBBandedColumn;
+    edtHPostal2: TcxGridDBBandedColumn;
+    edtHPostal3: TcxGridDBBandedColumn;
+    edtHPostal4: TcxGridDBBandedColumn;
+    edtHPostalCode: TcxGridDBBandedColumn;
+    edtHBranchCode: TcxGridDBBandedColumn;
+    edtHAccountNo: TcxGridDBBandedColumn;
+    edtAccHolderFirstName: TcxGridDBBandedColumn;
+    edtAccHolderlastName: TcxGridDBBandedColumn;
+    lucSHSalutation: TcxGridDBBandedColumn;
+    grpHeir: TdxLayoutGroup;
+    litHeirVert: TdxLayoutItem;
+    grdHeirVertical: TcxDBVerticalGrid;
+    grdHeirVerticalPHYSICAL1: TcxDBEditorRow;
+    grdHeirVerticalPHYSICAL2: TcxDBEditorRow;
+    grdHeirVerticalPHYSICAL3: TcxDBEditorRow;
+    grdHeirVerticalPHYSICAL4: TcxDBEditorRow;
+    grdHeirVerticalPHYSICAL_CODE: TcxDBEditorRow;
+    grdHeirVerticalPOSTAL1: TcxDBEditorRow;
+    grdHeirVerticalPOSTAL2: TcxDBEditorRow;
+    grdHeirVerticalPOSTAL3: TcxDBEditorRow;
+    grdHeirVerticalPOSTAL4: TcxDBEditorRow;
+    grdHeirVerticalPOSTAL_CODE: TcxDBEditorRow;
+    lucVAccHolderSalutation: TcxDBEditorRow;
+    grdHeirVerticalHEIR_ACC_HOLDER_FIRST_NAME: TcxDBEditorRow;
+    grdHeirVerticalHEIR_ACC_HOLDER_LAST_NAME: TcxDBEditorRow;
+    lucVHBank: TcxDBEditorRow;
+    grdHeirVerticalBRANCH_CODE: TcxDBEditorRow;
+    lucVHAccountType: TcxDBEditorRow;
+    grdHeirVerticalACCOUNT_N0: TcxDBEditorRow;
+    catPhysicalAddress: TcxCategoryRow;
+    catPostalAddress: TcxCategoryRow;
+    catAccountHolder: TcxCategoryRow;
+    styCellBackground: TcxStyle;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
     procedure grpDetailGridTabChanged(Sender: TObject);
-    procedure viewContactDetailCoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure DoDBAction(Sender: TObject);
     procedure grdPhysicalAddressEnter(Sender: TObject);
     procedure viewContactDetailCoDblClick(Sender: TObject);
@@ -398,6 +452,13 @@ type
       ANewItemRecordFocusingChanged: Boolean);
     procedure grdDirectorEnter(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure grdHeirVerticalEnter(Sender: TObject);
+    procedure grdHeirVerticalDrawRowHeader(Sender: TObject; ACanvas: TcxCanvas;
+      APainter: TcxvgPainter; AHeaderViewInfo: TcxCustomRowHeaderInfo;
+      var Done: Boolean);
+    procedure grdHeirVerticalStylesGetContentStyle(Sender: TObject;
+      AEditProp: TcxCustomEditorRowProperties; AFocused: Boolean;
+      ARecordIndex: Integer; var AStyle: TcxStyle);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
@@ -463,6 +524,7 @@ uses
   VBBase_DM,
   Lookup_DM,
   MT_DM,
+  Report_DM,
   MsgDialog_Frm,
   Progress_Frm,
   RUtils,
@@ -474,7 +536,12 @@ uses
   DirectorDetail_Frm,
   BeneficiaryDetail_Frm,
   VehicleDetail_Frm,
-  ContactPerson_Frm;
+  CustomerEdit_Frm,
+  ContactPerson_Frm,
+  AccountHolder_Frm, 
+  TrusteeDetail_Frm, 
+  ShareHolderDetail_Frm, 
+  HeirDetail_Frm;
 
 procedure TCustomerFrm.cbxOpenAfterExportPropertiesEditValueChanged(Sender: TObject);
 begin
@@ -1081,26 +1148,73 @@ begin
   TcxLookupComboBoxProperties(lucCDContactTypeID.Properties).Buttons.Items[0].Visible := False;
 
   TcxLookupComboBoxProperties(lucCPSalutation.Properties).ListSource := LookupDM.dtsSalutation;
+  TcxLookupComboBoxProperties(lucCPSalutation.Properties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucDrSalutation.Properties).ListSource := LookupDM.dtsDirectorSalutation;
-  TcxLookupComboBoxProperties(lucBFSalutationID.Properties).ListSource := LookupDM.dtsBFSalutation;
+  TcxLookupComboBoxProperties(lucDrSalutation.Properties).Buttons.Items[0].Visible := False;
+
+  TcxLookupComboBoxProperties(lucBFSalutation.Properties).ListSource := LookupDM.dtsBFSalutation;
+  TcxLookupComboBoxProperties(lucBFSalutation.Properties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucVMakeID.Properties).ListSource := LookupDM.dtsVehicleMake;
+  TcxLookupComboBoxProperties(lucVMakeID.Properties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucDrSalutation.Properties).ListSource := LookupDM.dtsDirectorSalutation;
+  TcxLookupComboBoxProperties(lucDrSalutation.Properties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucVDSalutationID.Properties.EditProperties).ListSource := LookupDM.dtsDirectorSalutation;
+  TcxLookupComboBoxProperties(lucVDSalutationID.Properties.EditProperties).Buttons.Items[0].Visible := False;
+
+  TcxLookupComboBoxProperties(lucSHSalutation.Properties).ListSource := LookupDM.dtsSHSalutation;
+  TcxLookupComboBoxProperties(lucSHSalutation.Properties).Buttons.Items[0].Visible := False;
+
+  TcxLookupComboBoxProperties(lucHSalutation.Properties).ListSource := LookupDM.dtsHeirSalutation;
+  TcxLookupComboBoxProperties(lucHSalutation.Properties).Buttons.Items[0].Visible := False;
+
+  TcxLookupComboBoxProperties(lucVAccHolderSalutation.Properties.EditProperties).ListSource := LookupDM.dtsAccHolderSalutation;
+  TcxLookupComboBoxProperties(lucVAccHolderSalutation.Properties.EditProperties).Buttons.Items[0].Visible := False;
 
   TcxLookupComboBoxProperties(lucCPJobFunction.Properties).ListSource := LookupDM.dtsJobFunction;
+  TcxLookupComboBoxProperties(lucCPJobFunction.Properties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucCPContactDetailTypeID.Properties).ListSource := LookupDM.dtsContactType;
-  TcxLookupComboBoxProperties(lucBankDBankID.Properties).ListSource := LookupDM.dtsBank;
-  TcxLookupComboBoxProperties(lucBankDAccountTypeID.Properties).ListSource := LookupDM.dtsBankAccountType;
+  TcxLookupComboBoxProperties(lucCPContactDetailTypeID.Properties).Buttons.Items[0].Visible := False;
+
+  TcxLookupComboBoxProperties(lucBankDBank.Properties).ListSource := LookupDM.dtsBank;
+  TcxLookupComboBoxProperties(lucBankDBank.Properties).Buttons.Items[0].Visible := False;
+
+  TcxLookupComboBoxProperties(lucBankDAccountType.Properties).ListSource := LookupDM.dtsBankAccountType;
+  TcxLookupComboBoxProperties(lucBankDAccountType.Properties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucVCustomerType.Properties.EditProperties).ListSource := LookupDM.dtsCustomerType;
+  TcxLookupComboBoxProperties(lucVCustomerType.Properties.EditProperties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucVStatus.Properties.EditProperties).ListSource := LookupDM.dtsCustomerStatus;
+  TcxLookupComboBoxProperties(lucVStatus.Properties.EditProperties).Buttons.Items[0].Visible := False;
 
   TcxLookupComboBoxProperties(lucVYearEndmonth.Properties.EditProperties).ListSource := LookupDM.dtsMonthOfyear;
+  TcxLookupComboBoxProperties(lucVYearEndmonth.Properties.EditProperties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucVARMonth.Properties.EditProperties).ListSource := LookupDM.dtsARMonthOfyear;
+  TcxLookupComboBoxProperties(lucVARMonth.Properties.EditProperties).Buttons.Items[0].Visible := False;
 
   TcxLookupComboBoxProperties(lucVTaxOffice.Properties.EditProperties).ListSource := LookupDM.dtsTaxOffice;
+  TcxLookupComboBoxProperties(lucVTaxOffice.Properties.EditProperties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucVVATOffice.Properties.EditProperties).ListSource := LookupDM.dtsVATOffice;
+  TcxLookupComboBoxProperties(lucVVATOffice.Properties.EditProperties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucVVATMonth.Properties.EditProperties).ListSource := LookupDM.dtsVATMonth;
+  TcxLookupComboBoxProperties(lucVVATMonth.Properties.EditProperties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucVCountry.Properties.EditProperties).ListSource := LookupDM.dtsCountry;
+  TcxLookupComboBoxProperties(lucVCountry.Properties.EditProperties).Buttons.Items[0].Visible := False;
+
+  TcxLookupComboBoxProperties(lucVHBank.Properties.EditProperties).ListSource := LookupDM.dtsHeirBank;
+  TcxLookupComboBoxProperties(lucVHBank.Properties.EditProperties).Buttons.Items[0].Visible := False;
+
+  TcxLookupComboBoxProperties(lucVHAccountType.Properties.EditProperties).ListSource := LookupDM.dtsHeirBankAccountType;
+  TcxLookupComboBoxProperties(lucVHAccountType.Properties.EditProperties).Buttons.Items[0].Visible := False;
 
   viewContactDetailCo.DataController.DataSource := MTDM.dtsContactDetailCo;
   viewContactPerson.DataController.DataSource := MTDM.dtsContactPerson;
@@ -1111,9 +1225,12 @@ begin
   viewTrustee.DataController.DataSource := MTDM.dtsTrustee;
   viewVehicle.DataController.DataSource := MTDM.dtsVehicle;
   viewDirectorOfCompany.DataController.DataSource := MTDM.dtsDirectorOfCompany;
+  viewHeir.DataController.DataSource := MTDM.dtsHeir;
+  grdHeirVertical.DataController.DataSource := MTDM.dtsHeir;
+  viewShareHolder.DataController.DataSource := MTDM.dtsShareHolder;
   TcxLookupComboBoxProperties(lucCoCustomerID.Properties).ListSource := LookupDM.dtsCompany;
 
-  SetLength(FDetailDataSet, 11);
+  SetLength(FDetailDataSet, 13);
   FDetailDataSet[0] := MTDM.cdsContactDetailCo;
   FDetailDataSet[1] := MTDM.cdsAddress;
   FDetailDataSet[2] := MTDM.cdsContactPerson;
@@ -1123,10 +1240,12 @@ begin
   FDetailDataSet[6] := MTDM.cdsBeneficiary;
   FDetailDataSet[7] := MTDM.cdsVehicle;
   FDetailDataSet[8] := MTDM.cdsCustomer;
-  FDetailDataSet[9] := MTDM.cdsCustomer;
+  FDetailDataSet[9] := MTDM.cdsTrustee;
   FDetailDataSet[10] := MTDM.cdsDirectorOfCompany;
+  FDetailDataSet[11] := MTDM.cdsShareHolder;
+  FDetailDataSet[12] := MTDM.cdsHeir;
 
-  SetLength(FDetailFriendlyName, 11);
+  SetLength(FDetailFriendlyName, 13);
   FDetailFriendlyName[0] := 'Company Contact Detail';
   FDetailFriendlyName[1] := 'Address';
   FDetailFriendlyName[2] := 'Contact Person Data';
@@ -1138,6 +1257,8 @@ begin
   FDetailFriendlyName[8] := 'Customer';
   FDetailFriendlyName[9] := 'Turstee';
   FDetailFriendlyName[10] := 'Director of Company';
+  FDetailFriendlyName[11] := 'Shareholder';
+  FDetailFriendlyName[12] := 'Heir';
 
   OpenTables;
 end;
@@ -1223,17 +1344,17 @@ begin
           MTDM.FormCaption := 'Banking  Details';
         end;
 
-      5:
-        begin
-          grdDirector.SetFocus;
-          viewDirector.Focused := True;
-          actInsert.Caption := 'Add a new director';
-          actEdit.Caption := 'Edit selected director';
-          actDelete.Caption := 'Delete selected director';
-          MTDM.FormCaption := 'Director Details';
-        end;
+//      5:
+//        begin
+//          grdDirector.SetFocus;
+//          viewDirector.Focused := True;
+//          actInsert.Caption := 'Add a new director';
+//          actEdit.Caption := 'Edit selected director';
+//          actDelete.Caption := 'Delete selected director';
+//          MTDM.FormCaption := 'Director Details';
+//        end;
 
-      6:
+      5:
         begin
           grdBeneficiary.SetFocus;
           viewBeneficiary.Focused := True;
@@ -1243,7 +1364,37 @@ begin
           MTDM.FormCaption := 'Beneficiary Details';
         end;
 
+      6:
+        begin
+          grdTrustee.SetFocus;
+          viewTrustee.Focused := True;
+          actInsert.Caption := 'Add a new trustee';
+          actEdit.Caption := 'Edit selected trustee';
+          actDelete.Caption := 'Delete selected trustee';
+          MTDM.FormCaption := 'trustee Details';
+        end;
+
       7:
+        begin
+          grdShareHolder.SetFocus;
+          viewShareHolder.Focused := True;
+          actInsert.Caption := 'Add a new Shareholder';
+          actEdit.Caption := 'Edit selected Shareholder';
+          actDelete.Caption := 'Delete selected Shareholder';
+          MTDM.FormCaption := 'Shareholder Details';
+        end;
+
+      8:
+        begin
+          grdHeir.SetFocus;
+          viewHeir.Focused := True;
+          actInsert.Caption := 'Add a new Heir';
+          actEdit.Caption := 'Edit selected Heir';
+          actDelete.Caption := 'Delete selected Heir';
+          MTDM.FormCaption := 'Heir Details';
+        end;
+
+      9:
         begin
           grdVehicle.SetFocus;
           viewVehicle.Focused := True;
@@ -1253,15 +1404,6 @@ begin
           MTDM.FormCaption := 'Vehicle Details';
         end;
 
-      9:
-        begin
-          grdTrustee.SetFocus;
-          viewTrustee.Focused := True;
-          actInsert.Caption := 'Add a new trustee';
-          actEdit.Caption := 'Edit selected trustee';
-          actDelete.Caption := 'Delete selected trustee';
-          MTDM.FormCaption := 'trustee Details';
-        end;
     end;
   end;
 end;
@@ -1810,7 +1952,7 @@ var
   Iteration: Extended;
 
 const
-  TABLE_COUNT = 24;
+  TABLE_COUNT = 26;
 begin
   if ProgressFrm = nil then
     ProgressFrm := TProgressFrm.Create(nil);
@@ -1952,6 +2094,30 @@ begin
     if not MTDM.cdsDirectorOfCompany.Active then
       MTDM.cdsDirectorOfCompany.CreateDataSet;
 
+    // Shareholder
+    Inc(Counter);
+    Iteration := Counter / TABLE_COUNT * 100;
+
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director of Shareholder Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    VBBaseDM.GetData(77, MTDM.cdsShareHolder, MTDM.cdsShareHolder.Name, ONE_SPACE,
+      'C:\Data\Xml\Shareholder.xml', MTDM.cdsShareHolder.UpdateOptions.Generatorname,
+      MTDM.cdsShareHolder.UpdateOptions.UpdateTableName);
+
+    if not MTDM.cdsShareHolder.Active then
+      MTDM.cdsShareHolder.CreateDataSet;
+
+    // Heir
+    Inc(Counter);
+    Iteration := Counter / TABLE_COUNT * 100;
+
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director of Heir Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    VBBaseDM.GetData(78, MTDM.cdsHeir, MTDM.cdsHeir.Name, ONE_SPACE,
+      'C:\Data\Xml\Heir.xml', MTDM.cdsHeir.UpdateOptions.Generatorname,
+      MTDM.cdsHeir.UpdateOptions.UpdateTableName);
+
+    if not MTDM.cdsHeir.Active then
+      MTDM.cdsHeir.CreateDataSet;
+
 // Open all lookup tables  -----------------------------------------------------
 
     // Customer type
@@ -1992,11 +2158,17 @@ begin
 
     LookupDM.cdsBFSalutation.Close;
     LookupDM.cdsDirectorSalutation.Close;
+    LookupDM.cdsHeirSalutation.Close;
+    LookupDM.cdsSHSalutation.Close;
+    LookupDM.cdsAccHolderSalutation.Close;
 
     LookupDM.cdsBFSalutation.Data := LookupDM.cdsSalutation.Data;
     LookupDM.cdsDirectorSalutation.Data := LookupDM.cdsSalutation.Data;
+    LookupDM.cdsHeirSalutation.Data := LookupDM.cdsSalutation.Data;
+    LookupDM.cdsSHSalutation.Data := LookupDM.cdsSalutation.Data;
+    LookupDM.cdsAccHolderSalutation.Data := LookupDM.cdsSalutation.Data;
 
-     // Job function
+    // Job function
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
@@ -2014,6 +2186,9 @@ begin
       'C:\Data\Xml\Bank.xml', LookupDM.cdsBank.UpdateOptions.Generatorname,
       LookupDM.cdsBank.UpdateOptions.UpdateTableName);
 
+    LookupDM.cdsHeirBank.Close;
+    LookupDM.cdsHeirBank.Data := LookupDM.cdsBank.Data;
+
     // Bank account type
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
@@ -2022,6 +2197,9 @@ begin
     VBBaseDM.GetData(6, LookupDM.cdsBankAccountType, LookupDM.cdsBankAccountType.Name, ONE_SPACE,
       'C:\Data\Xml\Bank Account Type.xml', LookupDM.cdsBankAccountType.UpdateOptions.Generatorname,
       LookupDM.cdsBankAccountType.UpdateOptions.UpdateTableName);
+
+    LookupDM.cdsHeirBankAccountType.Close;
+    LookupDM.cdsHeirBankAccountType.Data := LookupDM.cdsBankAccountType.Data;
 
     // Tax/VAT Office
     Inc(Counter);
@@ -2133,6 +2311,40 @@ begin
   MTDM.FormCaption := 'Director Details';
 end;
 
+procedure TCustomerFrm.grdHeirVerticalDrawRowHeader(Sender: TObject;
+  ACanvas: TcxCanvas; APainter: TcxvgPainter;
+  AHeaderViewInfo: TcxCustomRowHeaderInfo; var Done: Boolean);
+//var
+//  ARect: TRect;
+//  AColor: TColor;
+begin
+//  ARect := AHeaderViewInfo.HeaderRect;
+//  AColor := AHeaderViewInfo.ViewParams.Color;
+//  ACanvas.FillRect(ARect, AColor);
+//  ARect.Left := ARect.Left + 12;
+//  if AHeaderViewInfo.Focused then
+//    ACanvas.Font.Color := clWhite;
+//  ACanvas.DrawText(TcxDBEditorRow(AHeaderViewInfo.Row).Properties.Caption, ARect, cxAlignLeft or cxAlignVCenter);
+//  Done := true;
+end;
+
+procedure TCustomerFrm.grdHeirVerticalEnter(Sender: TObject);
+begin
+  inherited;
+  actInsert.Caption := 'Add a new Heir';
+  actEdit.Caption := 'Edit selected Heir';
+  actDelete.Caption := 'Delete selected Heir';
+end;
+
+procedure TCustomerFrm.grdHeirVerticalStylesGetContentStyle(Sender: TObject;
+  AEditProp: TcxCustomEditorRowProperties; AFocused: Boolean;
+  ARecordIndex: Integer; var AStyle: TcxStyle);
+begin
+  inherited;
+  if AFocused then
+    AStyle := styCellBackground;
+end;
+
 procedure TCustomerFrm.grdPhysicalAddressDblClick(Sender: TObject);
 begin
   inherited;
@@ -2240,6 +2452,10 @@ begin
     6: DataSet := MTDM.cdsBeneficiary;
     7: DataSet := MTDM.cdsVehicle;
     8: DataSet := MTDM.cdsCustomer;
+    9: DataSet := MTDM.cdsTrustee;
+    10: DataSet := MTDM.cdsDirectorOfCompany;
+    11: DataSet := MTDM.cdsShareHolder;
+    12: DataSet := MTDM.cdsHeir;
   end;
 
   case Key of
@@ -2433,6 +2649,60 @@ begin
               CustomerEditFrm.Close;
               FreeAndNil(CustomerEditFrm);
             end;
+
+          9: // Trustee
+            begin
+              if TrusteeDetailFrm = nil then
+                TrusteeDetailFrm := TTrusteeDetailFrm.Create(nil);
+
+              ModResult := TrusteeDetailFrm.ShowModal;
+              if ModResult = mrOK then
+              begin
+                FOpenTableParam.ScriptID := 50;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Trustee.xml';
+                FOpenTableParam.FieldName := 'FIRST_NAME';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+              end;
+
+              TrusteeDetailFrm.Close;
+              FreeAndNil(TrusteeDetailFrm);
+            end;
+
+          11: // Shareholder
+            begin
+              if ShareHolderDetailFrm = nil then
+                ShareHolderDetailFrm := TShareHolderDetailFrm.Create(nil);
+
+              ModResult := ShareHolderDetailFrm.ShowModal;
+              if ModResult = mrOK then
+              begin
+                FOpenTableParam.ScriptID := 77;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Shareholder.xml';
+                FOpenTableParam.FieldName := 'FIRST_NAME';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+              end;
+
+              ShareHolderDetailFrm.Close;
+              FreeAndNil(ShareHolderDetailFrm);
+            end;
+
+          12: // Heir
+            begin
+              if HeirDetailFrm = nil then
+                HeirDetailFrm := THeirDetailFrm.Create(nil);
+
+              ModResult := HeirDetailFrm.ShowModal;
+              if ModResult = mrOK then
+              begin
+                FOpenTableParam.ScriptID := 78;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Vehicle.xml';
+                FOpenTableParam.FieldName := 'FIRST_NAME';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+              end;
+
+              HeirDetailFrm.Close;
+              FreeAndNil(HeirDetailFrm);
+            end;
         end;
 
 // SELECT GEN_ID( <GeneratorName>, 0 ) FROM RDB$DATABASE;
@@ -2525,27 +2795,6 @@ begin
     EditDeleteRecord({ VK_F2 }VK_RETURN);
 end;
 
-procedure TCustomerFrm.viewContactDetailCoKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-// var
-// KeyPressed: Word;
-begin
-  inherited;
-// KeyPressed := Key;
-// case KeyPressed of
-// VK_INSERT, VK_F2, VK_DELETE:
-// begin
-// // We handle key pressed ourselves from here.
-// Key := 0;
-// if Sender is TcxDBVerticalGrid then
-// case KeyPressed of
-// VK_INSERT, VK_F2: KeyPressed := VK_F2;
-// end;
-//
-// EditDeleteRecord(KeyPressed);
-// end;
-// end;
-end;
-
 procedure TCustomerFrm.viewContactDetailNavigatorButtonsButtonClick(Sender: TObject;
   AButtonIndex: Integer; var ADone: Boolean);
 var
@@ -2606,7 +2855,6 @@ begin
   inherited;
 // if AFocusedRecord <> nil then
 // begin
-  viewCPContactDetail.OnKeyDown := viewContactDetailCoKeyDown;
   viewCPContactDetail.OnDblClick := viewContactDetailCoDblClick;
   viewCPContactDetail.Navigator.Visible := viewContactPerson.DataController.RecordCount > 0;
 
@@ -2651,6 +2899,8 @@ begin
     Exit;
 
   grpPersonAttribute.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [4, 7];
+  litShareHolder.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [1, 2, 5, 8];
+  grpHeir.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [6];
 end;
 
 end.

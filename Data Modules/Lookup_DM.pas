@@ -103,6 +103,26 @@ type
     cdsCompanyID: TIntegerField;
     cdsCompanyCUSTOMER_TYPE_ID: TIntegerField;
     cdsCompanyCOMPANY: TStringField;
+    cdsHeirSalutation: TFDMemTable;
+    dtsHeirSalutation: TDataSource;
+    cdsHeirSalutationID: TIntegerField;
+    cdsHeirSalutationNAME: TStringField;
+    cdsSHSalutation: TFDMemTable;
+    dtsSHSalutation: TDataSource;
+    cdsSHSalutationID: TIntegerField;
+    cdsSHSalutationNAME: TStringField;
+    cdsAccHolderSalutation: TFDMemTable;
+    IntegerField3: TIntegerField;
+    StringField3: TStringField;
+    dtsAccHolderSalutation: TDataSource;
+    cdsHeirBank: TFDMemTable;
+    dtsHeirBank: TDataSource;
+    cdsHeirBankID: TIntegerField;
+    cdsHeirBankNAME: TStringField;
+    cdsHeirBankAccountType: TFDMemTable;
+    dtsHeirBankAccountType: TDataSource;
+    cdsHeirBankAccountTypeID: TIntegerField;
+    cdsHeirBankAccountTypeNAME: TStringField;
   private
     { Private declarations }
   public

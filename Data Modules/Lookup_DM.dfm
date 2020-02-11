@@ -49,7 +49,7 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'COUNTRY'
     StoreDefs = True
-    Left = 435
+    Left = 530
     Top = 10
     object cdsCountryID: TIntegerField
       FieldName = 'ID'
@@ -73,7 +73,7 @@ inherited LookupDM: TLookupDM
   end
   object dtsCountry: TDataSource
     DataSet = cdsCountry
-    Left = 435
+    Left = 530
     Top = 60
   end
   object cdsCustomerGroup: TFDMemTable
@@ -123,7 +123,7 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'CUSTOMER_GROUP'
     StoreDefs = True
-    Left = 525
+    Left = 620
     Top = 10
     object cdsCustomerGroupID: TIntegerField
       Alignment = taLeftJustify
@@ -381,7 +381,7 @@ inherited LookupDM: TLookupDM
   end
   object dtsCustomerGroup: TDataSource
     DataSet = cdsCustomerGroup
-    Left = 525
+    Left = 620
     Top = 60
   end
   object dtsCustomerStatus: TDataSource
@@ -451,7 +451,7 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'RATE_UNIT'
     StoreDefs = True
-    Left = 630
+    Left = 685
     Top = 255
     object cdsRateUnitID: TIntegerField
       Alignment = taLeftJustify
@@ -720,7 +720,7 @@ inherited LookupDM: TLookupDM
   end
   object dtsRateUnit: TDataSource
     DataSet = cdsRateUnit
-    Left = 630
+    Left = 685
     Top = 305
   end
   object dtsSalutation: TDataSource
@@ -833,7 +833,7 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'BANK_ACCOUNT_TYPE'
     StoreDefs = True
-    Left = 240
+    Left = 335
     Top = 10
     object cdsBankAccountTypeID: TIntegerField
       Alignment = taLeftJustify
@@ -880,7 +880,7 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'CONTACT_TYPE'
     StoreDefs = True
-    Left = 340
+    Left = 435
     Top = 10
     object cdsContactTypeID: TIntegerField
       Alignment = taLeftJustify
@@ -904,12 +904,12 @@ inherited LookupDM: TLookupDM
   end
   object dtsBankAccountType: TDataSource
     DataSet = cdsBankAccountType
-    Left = 240
+    Left = 335
     Top = 60
   end
   object dtsContactType: TDataSource
     DataSet = cdsContactType
-    Left = 340
+    Left = 435
     Top = 60
   end
   object cdsARMonthOfYear: TFDMemTable
@@ -1154,7 +1154,7 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AutoCommitUpdates = True
     UpdateOptions.UpdateTableName = 'SALUTATION'
     StoreDefs = True
-    Left = 220
+    Left = 237
     Top = 370
     object IntegerField5: TIntegerField
       Alignment = taLeftJustify
@@ -1172,7 +1172,7 @@ inherited LookupDM: TLookupDM
   end
   object dtsDirectorSalutation: TDataSource
     DataSet = cdsDirectorSalutation
-    Left = 220
+    Left = 237
     Top = 420
   end
   object cdsVATMonth: TFDMemTable
@@ -1254,7 +1254,7 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 325
+    Left = 685
     Top = 370
     object cdsCompanyID: TIntegerField
       Alignment = taLeftJustify
@@ -1276,7 +1276,7 @@ inherited LookupDM: TLookupDM
   end
   object dtsCompany: TDataSource
     DataSet = cdsCompany
-    Left = 325
+    Left = 685
     Top = 420
   end
   object VbdevConnection: TFDConnection
@@ -1303,5 +1303,298 @@ inherited LookupDM: TLookupDM
     LoginPrompt = False
     Left = 919
     Top = 7
+  end
+  object cdsHeirSalutation: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    Constraints = <
+      item
+        CustomConstraint = 'CHAR_LENGTH(NAME) > 0'
+        ErrorMessage = 'Salutation name must have a value'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <
+      item
+        Name = 'idxID'
+        Fields = 'ID'
+        Options = [ixPrimary]
+      end
+      item
+        Name = 'idxName'
+        CaseInsFields = 'NAME'
+        Fields = 'NAME'
+        Options = [ixUnique]
+      end>
+    IndexName = 'idxName'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'SALUTATION_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'SALUTATION'
+    StoreDefs = True
+    Left = 349
+    Top = 370
+    object cdsHeirSalutationID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsHeirSalutationNAME: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+    end
+  end
+  object dtsHeirSalutation: TDataSource
+    DataSet = cdsHeirSalutation
+    Left = 349
+    Top = 420
+  end
+  object cdsSHSalutation: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    Constraints = <
+      item
+        CustomConstraint = 'CHAR_LENGTH(NAME) > 0'
+        ErrorMessage = 'Salutation name must have a value'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <
+      item
+        Name = 'idxID'
+        Fields = 'ID'
+        Options = [ixPrimary]
+      end
+      item
+        Name = 'idxName'
+        CaseInsFields = 'NAME'
+        Fields = 'NAME'
+        Options = [ixUnique]
+      end>
+    IndexName = 'idxName'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'SALUTATION_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'SALUTATION'
+    StoreDefs = True
+    Left = 461
+    Top = 370
+    object cdsSHSalutationID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsSHSalutationNAME: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+    end
+  end
+  object dtsSHSalutation: TDataSource
+    DataSet = cdsSHSalutation
+    Left = 461
+    Top = 420
+  end
+  object cdsAccHolderSalutation: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    Constraints = <
+      item
+        CustomConstraint = 'CHAR_LENGTH(NAME) > 0'
+        ErrorMessage = 'Salutation name must have a value'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <
+      item
+        Name = 'idxID'
+        Fields = 'ID'
+        Options = [ixPrimary]
+      end
+      item
+        Name = 'idxName'
+        CaseInsFields = 'NAME'
+        Fields = 'NAME'
+        Options = [ixUnique]
+      end>
+    IndexName = 'idxName'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'SALUTATION_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'SALUTATION'
+    StoreDefs = True
+    Left = 573
+    Top = 370
+    object IntegerField3: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object StringField3: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+    end
+  end
+  object dtsAccHolderSalutation: TDataSource
+    DataSet = cdsAccHolderSalutation
+    Left = 573
+    Top = 420
+  end
+  object cdsHeirBank: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    Constraints = <
+      item
+        CustomConstraint = 'CHAR_LENGTH(NAME) > 0'
+        ErrorMessage = 'Bank name must have a value'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'BANK_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'BANK'
+    StoreDefs = True
+    Left = 225
+    Top = 10
+    object cdsHeirBankID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsHeirBankNAME: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+      Size = 50
+    end
+  end
+  object dtsHeirBank: TDataSource
+    DataSet = cdsHeirBank
+    Left = 225
+    Top = 60
+  end
+  object cdsHeirBankAccountType: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    Constraints = <
+      item
+        CustomConstraint = 'CHAR_LENGTH(NAME) > 0'
+        ErrorMessage = 'Bank  Account Type name must have a value'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'BANK_ACCOUNT_TYPE_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'BANK_ACCOUNT_TYPE'
+    StoreDefs = True
+    Left = 120
+    Top = 490
+    object cdsHeirBankAccountTypeID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsHeirBankAccountTypeNAME: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+      Size = 50
+    end
+  end
+  object dtsHeirBankAccountType: TDataSource
+    DataSet = cdsHeirBankAccountType
+    Left = 120
+    Top = 540
   end
 end
