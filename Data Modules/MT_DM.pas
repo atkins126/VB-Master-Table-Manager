@@ -334,7 +334,6 @@ type
     cdsDirectorOfCompanyCUSTOMER_ID: TIntegerField;
     cdsDirectorOfCompanyID: TIntegerField;
     VbdevConnection: TFDConnection;
-    cdsDirectorOfCompanyCUST_ID: TIntegerField;
     cdsHeir: TFDMemTable;
     cdsShareHolder: TFDMemTable;
     dtsHeir: TDataSource;
@@ -401,7 +400,9 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsActivityTypePostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
     procedure cdsActivityTypeNewRecord(DataSet: TDataSet);
-    procedure cdsDirectorOfCompanyCalcFields(DataSet: TDataSet);
+    procedure cdsDirectorOfCompanyNewRecord(DataSet: TDataSet);
+    procedure cdsDirectorOfCompanyPostError(DataSet: TDataSet;
+      E: EDatabaseError; var Action: TDataAction);
   private
     { Private declarations }
     FID: Integer;
@@ -482,6 +483,26 @@ begin
     DataSet.FieldByName('MAINTENANCE_PLAN').AsInteger := 0;
 end;
 
+procedure TMTDM.cdsDirectorOfCompanyNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  DataSet.FieldByName('ID').AsInteger := 0;
+  DataSet.FieldByName('DIRECTOR_ID').AsInteger := cdsDirector.FieldByName('ID').AsInteger;
+end;
+
+procedure TMTDM.cdsDirectorOfCompanyPostError(DataSet: TDataSet;
+  E: EDatabaseError; var Action: TDataAction);
+begin
+  inherited;
+  if EFDException.FDCode = 15 then // Duplicate record
+  begin
+    DataSet.Cancel;
+    raise EDuplicateException.Create('Duplicate records not allowed.' + CRLF + CRLF +
+      'Company linked director ' + MTDM.cdsDirector.FieldByName('NAME').AsString + ' already exists.' + CRLF + CRLF +
+      MTDM.ValueArray[0] + ' ' + MTDM.ValueArray[1]);
+  end;
+end;
+
 procedure TMTDM.cdsActivityTypePostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
 begin
   inherited;
@@ -491,13 +512,6 @@ begin
   MTDM.FPostError := True;
   DataSet.Cancel;
 //  Action :=  daAbort;
-end;
-
-procedure TMTDM.cdsDirectorOfCompanyCalcFields(DataSet: TDataSet);
-begin
-  inherited;
-  cdsDirectorOfCompany.FieldByName('CUST_ID').AsInteger :=
-    cdsDirectorOfCompany.FieldByName('CUSTOMER_ID').AsInteger;
 end;
 
 procedure TMTDM.ClearFieldValueArray;

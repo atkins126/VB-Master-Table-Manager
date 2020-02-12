@@ -1838,6 +1838,7 @@ inherited CustomerFrm: TCustomerFrm
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
         OptionsBehavior.FocusCellOnTab = True
+        OptionsBehavior.IncSearch = True
         OptionsBehavior.NavigatorHints = True
         OptionsBehavior.FocusCellOnCycle = True
         OptionsCustomize.ColumnsQuickCustomization = True
@@ -1900,7 +1901,6 @@ inherited CustomerFrm: TCustomerFrm
           MinWidth = 150
           Options.Editing = False
           Options.Filtering = False
-          Options.IncSearch = False
           Options.Grouping = False
           Options.Moving = False
           Width = 150
@@ -1915,7 +1915,6 @@ inherited CustomerFrm: TCustomerFrm
           MinWidth = 150
           Options.Editing = False
           Options.Filtering = False
-          Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
@@ -1995,12 +1994,11 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdBeneficiary: TcxGrid [14]
-      Left = 10000
-      Top = 10000
+      Left = -325
+      Top = 535
       Width = 1656
       Height = 200
       TabOrder = 22
-      Visible = False
       object viewBeneficiary: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -2170,11 +2168,12 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVehicle: TcxGrid [15]
-      Left = -325
-      Top = 535
+      Left = 10000
+      Top = 10000
       Width = 1656
       Height = 200
       TabOrder = 27
+      Visible = False
       object viewVehicle: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -2748,13 +2747,6 @@ inherited CustomerFrm: TCustomerFrm
           Width = 589
           Position.BandIndex = 0
           Position.ColIndex = 2
-          Position.RowIndex = 0
-        end
-        object viewDirectorOfCompanyCUST_ID: TcxGridDBBandedColumn
-          DataBinding.FieldName = 'CUST_ID'
-          Width = 58
-          Position.BandIndex = 0
-          Position.ColIndex = 3
           Position.RowIndex = 0
         end
       end
@@ -3814,7 +3806,7 @@ inherited CustomerFrm: TCustomerFrm
       AlignVert = avClient
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
-      ItemIndex = 8
+      ItemIndex = 4
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpDetailGridTabChanged
@@ -4146,6 +4138,7 @@ inherited CustomerFrm: TCustomerFrm
       ItemIndex = 1
       LayoutDirection = ldTabbed
       ShowBorder = False
+      OnTabChanged = grpOtherDetailsTabChanged
       Index = 1
     end
     object grpDirectorVerticalGrid: TdxLayoutGroup

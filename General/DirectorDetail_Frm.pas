@@ -45,9 +45,10 @@ type
     viewDirectorOfCompany: TcxGridDBBandedTableView;
     lvlDirectorOfCompany: TcxGridLevel;
     edtDirectorID: TcxGridDBBandedColumn;
-    lucCompanyID: TcxGridDBBandedColumn;
+    lucCompany: TcxGridDBBandedColumn;
     grpCompany: TdxLayoutGroup;
     sep3: TdxLayoutSeparatorItem;
+    imgNav16: TcxImageList;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
   private
@@ -79,12 +80,12 @@ end;
 procedure TDirectorDetailFrm.FormCreate(Sender: TObject);
 begin
   inherited;
-  Width := 545;
-  Height := 460;
+  Width := 555;
+  Height := 480;
   MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
   viewDirectorOfCompany.DataController.DataSource := MTDM.dtsDirectorOfCompany;
-  TcxLookupComboBoxProperties(lucCompanyID.Properties).ListSource := LookupDM.dtsCompany;
+  TcxLookupComboBoxProperties(lucCompany.Properties).ListSource := LookupDM.dtsCompany;
 
   if VBBaseDM.DBAction = acModify then
   begin
@@ -109,6 +110,7 @@ begin
   if SameText(lucSalutation.Text, '') then
     raise EValidateException.Create('Salutation must have a value');
 
+  MTDM.FFieldValue.SalutationID := lucSalutation.EditValue;
   MTDM.FFieldValue.FirstName := edtFirstName.Text;
   MTDM.FFieldValue.LastName := edtLastName.Text;
   MTDM.FFieldValue.OtherName := edtOtherName.Text;

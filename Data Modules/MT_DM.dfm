@@ -2882,7 +2882,11 @@ inherited MTDM: TMTDM
   end
   object cdsDirectorOfCompany: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
-    OnCalcFields = cdsDirectorOfCompanyCalcFields
+    BeforePost = cdsActivityTypeBeforePost
+    AfterPost = cdsActivityTypeAfterPost
+    AfterDelete = cdsActivityTypeAfterDelete
+    OnNewRecord = cdsDirectorOfCompanyNewRecord
+    OnPostError = cdsDirectorOfCompanyPostError
     FilterOptions = [foCaseInsensitive]
     FieldDefs = <>
     CachedUpdates = True
@@ -2893,6 +2897,12 @@ inherited MTDM: TMTDM
         Selected = True
         Name = 'IdxDirector'
         Fields = 'DIRECTOR_ID'
+      end
+      item
+        Active = True
+        Name = 'idxCustDir'
+        Fields = 'DIRECTOR_ID;CUSTOMER_ID'
+        Options = [soUnique]
       end>
     IndexName = 'IdxDirector'
     ConstraintsEnabled = True
@@ -2928,11 +2938,6 @@ inherited MTDM: TMTDM
       DisplayLabel = 'Company'
       FieldName = 'CUSTOMER_ID'
       Origin = 'CUSTOMER_ID'
-    end
-    object cdsDirectorOfCompanyCUST_ID: TIntegerField
-      FieldKind = fkCalculated
-      FieldName = 'CUST_ID'
-      Calculated = True
     end
   end
   object VbdevConnection: TFDConnection

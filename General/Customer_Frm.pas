@@ -358,7 +358,6 @@ type
     edtCoID: TcxGridDBBandedColumn;
     edtCoDirectorID: TcxGridDBBandedColumn;
     lucCoCustomerID: TcxGridDBBandedColumn;
-    viewDirectorOfCompanyCUST_ID: TcxGridDBBandedColumn;
     litHeir: TdxLayoutItem;
     litShareHolder: TdxLayoutItem;
     grdHeir: TcxGrid;
@@ -459,6 +458,7 @@ type
     procedure grdHeirVerticalStylesGetContentStyle(Sender: TObject;
       AEditProp: TcxCustomEditorRowProperties; AFocused: Boolean;
       ARecordIndex: Integer; var AStyle: TcxStyle);
+    procedure grpOtherDetailsTabChanged(Sender: TObject);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
@@ -538,9 +538,9 @@ uses
   VehicleDetail_Frm,
   CustomerEdit_Frm,
   ContactPerson_Frm,
-  AccountHolder_Frm, 
-  TrusteeDetail_Frm, 
-  ShareHolderDetail_Frm, 
+  AccountHolder_Frm,
+  TrusteeDetail_Frm,
+  ShareHolderDetail_Frm,
   HeirDetail_Frm;
 
 procedure TCustomerFrm.cbxOpenAfterExportPropertiesEditValueChanged(Sender: TObject);
@@ -726,11 +726,11 @@ begin
 
         MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
         MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
-        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
+//        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
-            MTDM.ValueArray[1] + CRLF +
-            MTDM.ValueArray[2]]);
+            MTDM.ValueArray[1]]);
+  //          MTDM.ValueArray[2]]);
       end;
 
     6: // Beneficiary
@@ -841,6 +841,74 @@ begin
             MTDM.ValueArray[3] + CRLF +
             MTDM.ValueArray[4]]);
       end;
+
+    10: // Director
+      begin
+        MTDM.cdsDirector.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
+        MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
+        MTDM.cdsDirector.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
+        MTDM.cdsDirector.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
+        MTDM.cdsDirector.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FFieldValue.EmailAddress;
+
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
+        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
+        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FFieldValue.MobileNo;
+        MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FFieldValue.EmailAddress;
+        ErrorValues := Format(ERROR_VALUES, [
+          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[1] + CRLF +
+            MTDM.ValueArray[2] + CRLF +
+            MTDM.ValueArray[3] + CRLF +
+            MTDM.ValueArray[4]]);
+      end;
+
+    11: // Shareholder
+      begin
+        MTDM.cdsTrustee.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
+        MTDM.cdsTrustee.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
+        MTDM.cdsTrustee.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
+        MTDM.cdsTrustee.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
+        MTDM.cdsTrustee.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FFieldValue.EmailAddress;
+
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
+        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
+        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FFieldValue.MobileNo;
+        MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FFieldValue.EmailAddress;
+        ErrorValues := Format(ERROR_VALUES, [
+          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[1] + CRLF +
+            MTDM.ValueArray[2] + CRLF +
+            MTDM.ValueArray[3] + CRLF +
+            MTDM.ValueArray[4]]);
+      end;
+
+    12: // Heir
+      begin
+        MTDM.cdsTrustee.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
+        MTDM.cdsTrustee.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
+        MTDM.cdsTrustee.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
+        MTDM.cdsTrustee.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
+        MTDM.cdsTrustee.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FFieldValue.EmailAddress;
+
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
+        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
+        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FFieldValue.MobileNo;
+        MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FFieldValue.EmailAddress;
+        ErrorValues := Format(ERROR_VALUES, [
+          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[1] + CRLF +
+            MTDM.ValueArray[2] + CRLF +
+            MTDM.ValueArray[3] + CRLF +
+            MTDM.ValueArray[4]]);
+      end;
+
+//  FDetailDataSet[9] := MTDM.cdsTrustee;
+//  FDetailDataSet[10] := MTDM.cdsDirectorOfCompany;
+//  FDetailDataSet[11] := MTDM.cdsShareHolder;
+//  FDetailDataSet[12] := MTDM.cdsHeir;
 
   end;
   Result := ErrorValues;
@@ -1294,7 +1362,7 @@ begin
 
   if Self.Showing then
   begin
-    case MTDM.DetailIndex { grpDetailGrid.ItemIndex } of
+    case MTDM.DetailIndex of
       0:
         begin
           grdContactDetailCo.SetFocus;
@@ -1405,6 +1473,38 @@ begin
         end;
 
     end;
+  end;
+end;
+
+procedure TCustomerFrm.grpOtherDetailsTabChanged(Sender: TObject);
+begin
+  inherited;
+  case grpOtherDetails.ItemIndex of
+    1:
+      begin
+        MTDM.DetailIndex := 5;
+
+        if FClosingFrm then
+          Exit;
+
+        if Self.Showing then
+        begin
+          grdDirector.SetFocus;
+          viewDirector.Focused := True;
+
+          if viewDirector.DataController.RecordCount > 0 then
+          begin
+            viewDirector.Controller.FocusedRecordIndex := 0;
+            viewDirector.Controller.FocusedRecord.Selected := True;
+          end;
+
+          viewDirector.Controller.FocusedColumn := edtDrFirstName;
+          actInsert.Caption := 'Add a new director';
+          actEdit.Caption := 'Edit selected contact detail';
+          actDelete.Caption := 'Delete selected cotact detail';
+          MTDM.FormCaption := 'Director details';
+        end;
+      end;
   end;
 end;
 
@@ -2331,6 +2431,7 @@ end;
 procedure TCustomerFrm.grdHeirVerticalEnter(Sender: TObject);
 begin
   inherited;
+  MTDM.DetailIndex := 78;
   actInsert.Caption := 'Add a new Heir';
   actEdit.Caption := 'Edit selected Heir';
   actDelete.Caption := 'Delete selected Heir';
@@ -2668,6 +2769,24 @@ begin
               FreeAndNil(TrusteeDetailFrm);
             end;
 
+          10: // Dierector
+            begin
+              if DirectorDetailFrm = nil then
+                DirectorDetailFrm := TDirectorDetailFrm.Create(nil);
+
+              ModResult := DirectorDetailFrm.ShowModal;
+              if ModResult = mrOK then
+              begin
+                FOpenTableParam.ScriptID := 76;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Director Of Company.xml';
+                FOpenTableParam.FieldName := 'FIRST_NAME';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+              end;
+
+              DirectorDetailFrm.Close;
+              FreeAndNil(DirectorDetailFrm);
+            end;
+
           11: // Shareholder
             begin
               if ShareHolderDetailFrm = nil then
@@ -2714,6 +2833,14 @@ begin
             FOpenTableParam.DataSetName := DataSet.Name;
             FOpenTableParam.GeneratorName := DataSet.UpdateOptions.Generatorname;
             FOpenTableParam.UpdateTableName := DataSet.UpdateOptions.UpdateTableName;
+
+//            // If posting Director of company data
+//            if MTDM.DetailIndex = 5 then
+//            begin
+//              if MTDM.cdsDirectorOfCompany.State in dsEditModes then
+//                MTDM.cdsDirectorOfCompany.Post;
+//              MTDM.cdsActivityTypeAfterDelete(MTDM.cdsDirectorOfCompany);
+//            end;
 
             // Post the data
             try
