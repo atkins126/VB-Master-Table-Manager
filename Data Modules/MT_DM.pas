@@ -392,6 +392,7 @@ type
     cdsHeirHEIR_ACC_HOLDER_LAST_NAME: TStringField;
     cdsHeirACC_HOLDER_SALUTATION_ID: TIntegerField;
     cdsShareHolderSALUTATION_ID: TIntegerField;
+    cdsDirectorFULL_NAME: TStringField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);
@@ -403,6 +404,7 @@ type
     procedure cdsDirectorOfCompanyNewRecord(DataSet: TDataSet);
     procedure cdsDirectorOfCompanyPostError(DataSet: TDataSet;
       E: EDatabaseError; var Action: TDataAction);
+    procedure cdsDirectorCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     FID: Integer;
@@ -418,6 +420,7 @@ type
     FFormCaption: string;
     FHeaderCaptionArray: HeaderCaptionArray;
     FMasterDataSet: TMasterDataSets;
+    FCompanyName: string;
   public
     { Public declarations }
     FFieldValue: FieldValues;
@@ -435,6 +438,7 @@ type
     procedure ClearFieldValues;
     property HeaderCaptionArray: HeaderCaptionArray read FHeaderCaptionArray write FHeaderCaptionArray;
     property MasterDataSet: TMasterDataSets read FMasterDataSet write FMasterDataSet;
+    property CompanyName: string read FCompanyName write FCompanyName;
   end;
 
 var
@@ -483,6 +487,14 @@ begin
     DataSet.FieldByName('MAINTENANCE_PLAN').AsInteger := 0;
 end;
 
+procedure TMTDM.cdsDirectorCalcFields(DataSet: TDataSet);
+begin
+  inherited;
+  cdsDirector.FieldByName('FULL_NAME').AsString :=
+    cdsDirector.FieldByName('FIRST_NAME').AsString +
+    cdsDirector.FieldByName('LAST_NAME').AsString;
+end;
+
 procedure TMTDM.cdsDirectorOfCompanyNewRecord(DataSet: TDataSet);
 begin
   inherited;
@@ -494,13 +506,19 @@ procedure TMTDM.cdsDirectorOfCompanyPostError(DataSet: TDataSet;
   E: EDatabaseError; var Action: TDataAction);
 begin
   inherited;
-  if EFDException.FDCode = 15 then // Duplicate record
+//  EFDException(E).FDCode;
+  MTDM.FPostError := True;
+
+  if EFDException(E).FDCode = 15 then // Duplicate record
   begin
     DataSet.Cancel;
     raise EDuplicateException.Create('Duplicate records not allowed.' + CRLF + CRLF +
-      'Company linked director ' + MTDM.cdsDirector.FieldByName('NAME').AsString + ' already exists.' + CRLF + CRLF +
-      MTDM.ValueArray[0] + ' ' + MTDM.ValueArray[1]);
+      'Company: ' + FCompanyName + CRLF +
+      ' is already linked to director: ' + MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString + ' ' +
+      MTDM.cdsDirector.FieldByName('LAST_NAME').AsString);
+//      ' is already linked to director ' + MTDM.ValueArray[0] + ' ' + MTDM.ValueArray[1]);
   end;
+  DataSet.Cancel;
 end;
 
 procedure TMTDM.cdsActivityTypePostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);

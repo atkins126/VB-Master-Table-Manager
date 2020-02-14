@@ -136,6 +136,7 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
         Navigator.Buttons.Filter.Visible = False
         Navigator.Visible = True
         ScrollbarAnnotations.CustomAnnotations = <>
+        OnCustomDrawCell = viewDirectorOfCompanyCustomDrawCell
         DataController.DataSource = MTDM.dtsDirectorOfCompany
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
@@ -174,12 +175,14 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
         object lucCompany: TcxGridDBBandedColumn
           DataBinding.FieldName = 'CUSTOMER_ID'
           PropertiesClassName = 'TcxLookupComboBoxProperties'
+          Properties.ImmediatePost = True
           Properties.KeyFieldNames = 'ID'
           Properties.ListColumns = <
             item
               FieldName = 'COMPANY'
             end>
           Properties.ListSource = LookupDM.dtsCompany
+          OnGetDisplayText = lucCompanyGetDisplayText
           Options.Filtering = False
           Options.Grouping = False
           Options.Moving = False

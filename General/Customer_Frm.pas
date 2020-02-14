@@ -341,7 +341,6 @@ type
     grdDirectorOfCompany: TcxGrid;
     viewDirectorOfCompany: TcxGridDBBandedTableView;
     lvlDirectorOfCompany: TcxGridLevel;
-    grpOtherDetails: TdxLayoutGroup;
     grpDirectorVerticalGrid: TdxLayoutGroup;
     litDirectorVerticalGrid: TdxLayoutItem;
     grdVDirector: TcxDBVerticalGrid;
@@ -418,6 +417,11 @@ type
     catPostalAddress: TcxCategoryRow;
     catAccountHolder: TcxCategoryRow;
     styCellBackground: TcxStyle;
+    grpBeneficiary: TdxLayoutGroup;
+    grpTrustee: TdxLayoutGroup;
+    grpVehicle: TdxLayoutGroup;
+    grpShareholder: TdxLayoutGroup;
+    grpBankingDetail: TdxLayoutGroup;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -428,6 +432,19 @@ type
     procedure grdCPContactDetailEnter(Sender: TObject);
     procedure grdPhysicalAddressDblClick(Sender: TObject);
 
+    procedure grdContactPersonEnter(Sender: TObject);
+    procedure grdVCustomerInitEdit(Sender, AItem: TObject; AEdit: TcxCustomEdit);
+    procedure cbxPersistSelectionPropertiesEditValueChanged(Sender: TObject);
+    procedure lucPrintWhatPropertiesEditValueChanged(Sender: TObject);
+    procedure cbxOpenAfterExportPropertiesEditValueChanged(Sender: TObject);
+    procedure DoSetCoporateAccHolderName(Sender: TObject);
+    procedure grdCustomerEnter(Sender: TObject);
+    procedure grdVCustomerDblClick(Sender: TObject);
+    procedure grdCustomerExit(Sender: TObject);
+    procedure grdDirectorEnter(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure grdHeirVerticalEnter(Sender: TObject);
+
     procedure viewCustomerCustomDrawCell(Sender: TcxCustomGridTableView;
       ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
 
@@ -436,35 +453,24 @@ type
 
     procedure navCustomerButtonsButtonClick(Sender: TObject;
       AButtonIndex: Integer; var ADone: Boolean);
-    procedure grdContactPersonEnter(Sender: TObject);
-    procedure grdVCustomerInitEdit(Sender, AItem: TObject;
-      AEdit: TcxCustomEdit);
-    procedure cbxPersistSelectionPropertiesEditValueChanged(Sender: TObject);
-    procedure lucPrintWhatPropertiesEditValueChanged(Sender: TObject);
-    procedure cbxOpenAfterExportPropertiesEditValueChanged(Sender: TObject);
-    procedure DoSetCoporateAccHolderName(Sender: TObject);
-    procedure grdCustomerEnter(Sender: TObject);
-    procedure grdVCustomerDblClick(Sender: TObject);
-    procedure grdCustomerExit(Sender: TObject);
+
     procedure viewCustomerFocusedRecordChanged(Sender: TcxCustomGridTableView;
       APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
       ANewItemRecordFocusingChanged: Boolean);
-    procedure grdDirectorEnter(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure grdHeirVerticalEnter(Sender: TObject);
+
     procedure grdHeirVerticalDrawRowHeader(Sender: TObject; ACanvas: TcxCanvas;
-      APainter: TcxvgPainter; AHeaderViewInfo: TcxCustomRowHeaderInfo;
-      var Done: Boolean);
+      APainter: TcxvgPainter; AHeaderViewInfo: TcxCustomRowHeaderInfo; var Done: Boolean);
+
     procedure grdHeirVerticalStylesGetContentStyle(Sender: TObject;
       AEditProp: TcxCustomEditorRowProperties; AFocused: Boolean;
       ARecordIndex: Integer; var AStyle: TcxStyle);
-    procedure grpOtherDetailsTabChanged(Sender: TObject);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
     FDetailDataSet: DetailDataSetArray;
     FOpenTableParam: TOpenTableParams;
     FClosingFrm: Boolean;
+    FCurrentItemIndex: Integer;
 
     FCustomerWhereClause: string;
     FCustomerOrderByClause: string;
@@ -1198,6 +1204,9 @@ begin
   litLegend.LayoutLookAndFeel := lafCustomSkin;
   styLegend.Style.Font.Color := cxLookAndFeels.RootLookAndFeel.SkinPainter.DefaultContentTextColor;
   styLegend.Style.TextColor := cxLookAndFeels.RootLookAndFeel.SkinPainter.DefaultContentTextColor;
+  FCurrentItemIndex := 0;
+//  grdHeirVertical.FullCollapse;
+//  grdHeirVertical.ViewInfo.
 
   viewCustomer.DataController.DataSource := MTDM.dtsCustomer;
   viewCustomerReport.DataController.DataSource := ReportDM.dtsCustomer;
@@ -1306,12 +1315,12 @@ begin
   FDetailDataSet[4] := MTDM.cdsBankingDetail;
   FDetailDataSet[5] := MTDM.cdsDirector;
   FDetailDataSet[6] := MTDM.cdsBeneficiary;
-  FDetailDataSet[7] := MTDM.cdsVehicle;
-  FDetailDataSet[8] := MTDM.cdsCustomer;
-  FDetailDataSet[9] := MTDM.cdsTrustee;
-  FDetailDataSet[10] := MTDM.cdsDirectorOfCompany;
-  FDetailDataSet[11] := MTDM.cdsShareHolder;
-  FDetailDataSet[12] := MTDM.cdsHeir;
+  FDetailDataSet[7] := MTDM.cdsTrustee;
+  FDetailDataSet[8] := MTDM.cdsShareHolder;
+  FDetailDataSet[9] := MTDM.cdsHeir;
+  FDetailDataSet[10] := MTDM.cdsVehicle;
+  FDetailDataSet[11] := MTDM.cdsDirectorOfCompany;
+  FDetailDataSet[12] := MTDM.cdsCustomer;
 
   SetLength(FDetailFriendlyName, 13);
   FDetailFriendlyName[0] := 'Company Contact Detail';
@@ -1321,12 +1330,12 @@ begin
   FDetailFriendlyName[4] := 'Banking Details';
   FDetailFriendlyName[5] := 'Director';
   FDetailFriendlyName[6] := 'Beneficiary';
-  FDetailFriendlyName[7] := 'Vehicle';
-  FDetailFriendlyName[8] := 'Customer';
-  FDetailFriendlyName[9] := 'Turstee';
-  FDetailFriendlyName[10] := 'Director of Company';
-  FDetailFriendlyName[11] := 'Shareholder';
-  FDetailFriendlyName[12] := 'Heir';
+  FDetailFriendlyName[7] := 'Turstee';
+  FDetailFriendlyName[8] := 'Shareholder';
+  FDetailFriendlyName[9] := 'Heir';
+  FDetailFriendlyName[10] := 'Vehicle';
+  FDetailFriendlyName[11] := 'Director of Company';
+  FDetailFriendlyName[12] := 'Customer';
 
   OpenTables;
 end;
@@ -1335,7 +1344,6 @@ procedure TCustomerFrm.FormShow(Sender: TObject);
 begin
   inherited;
   grpDetailGrid.ItemIndex := 0;
-  grpOtherDetails.ItemIndex := 0;
   grdCustomer.SetFocus;
   viewCustomer.Focused := True;
 
@@ -1355,10 +1363,17 @@ begin
   if FClosingFrm then
     Exit;
 
+//  FCurrentItemIndex := grpDetailGrid.ItemIndex;
+
+//  if grpDetailGrid.ItemIndex <= 2 then
+//    MTDM.DetailIndex := grpDetailGrid.ItemIndex
+//  else
+//    MTDM.DetailIndex := grpDetailGrid.ItemIndex + 1;
+
   if grpDetailGrid.ItemIndex <= 2 then
-    MTDM.DetailIndex := grpDetailGrid.ItemIndex
+    MTDM.DetailIndex := grpDetailGrid.Items[grpDetailGrid.ItemIndex].Tag
   else
-    MTDM.DetailIndex := grpDetailGrid.ItemIndex + 1;
+    MTDM.DetailIndex := grpDetailGrid.Items[grpDetailGrid.ItemIndex].Tag + 1;
 
   if Self.Showing then
   begin
@@ -1382,17 +1397,16 @@ begin
           MTDM.FormCaption := 'Address Details';
         end;
 
-//      2:
-//        begin
-//          grdContactPerson.SetFocus;
-//          viewContactPerson.Focused := True;
-//          actInsert.Caption := 'Add a new contact person';
-//          actEdit.Caption := 'Edit selected contact person';
-//          actDelete.Caption := 'Delete selected cotact person';
-//          MTDM.FormCaption := 'Contact Person Details';
-//        end;
+      2:
+        begin
+          grdContactPerson.SetFocus;
+          viewContactPerson.Focused := True;
+          actInsert.Caption := 'Add a new contact person';
+          actEdit.Caption := 'Edit selected contact person';
+          actDelete.Caption := 'Delete selected cotact person';
+          MTDM.FormCaption := 'Contact Person Details';
+        end;
 
-        {TODO: Not setting form caption correctly here!!}
 // 3:
 // begin
 // grdCPContactDetail.SetFocus;
@@ -1412,17 +1426,18 @@ begin
           MTDM.FormCaption := 'Banking  Details';
         end;
 
-//      5:
-//        begin
-//          grdDirector.SetFocus;
-//          viewDirector.Focused := True;
-//          actInsert.Caption := 'Add a new director';
-//          actEdit.Caption := 'Edit selected director';
-//          actDelete.Caption := 'Delete selected director';
-//          MTDM.FormCaption := 'Director Details';
-//        end;
-
       5:
+        begin
+          grdDirector.SetFocus;
+          viewDirector.Focused := True;
+          viewDirector.Controller.FocusedColumn := edtDrFirstName;
+          actInsert.Caption := 'Add a new director';
+          actEdit.Caption := 'Edit selected director';
+          actDelete.Caption := 'Delete selected director';
+          MTDM.FormCaption := 'Director Details';
+        end;
+
+      6:
         begin
           grdBeneficiary.SetFocus;
           viewBeneficiary.Focused := True;
@@ -1432,7 +1447,7 @@ begin
           MTDM.FormCaption := 'Beneficiary Details';
         end;
 
-      6:
+      7:
         begin
           grdTrustee.SetFocus;
           viewTrustee.Focused := True;
@@ -1442,7 +1457,7 @@ begin
           MTDM.FormCaption := 'trustee Details';
         end;
 
-      7:
+      8:
         begin
           grdShareHolder.SetFocus;
           viewShareHolder.Focused := True;
@@ -1452,7 +1467,7 @@ begin
           MTDM.FormCaption := 'Shareholder Details';
         end;
 
-      8:
+      9:
         begin
           grdHeir.SetFocus;
           viewHeir.Focused := True;
@@ -1462,7 +1477,7 @@ begin
           MTDM.FormCaption := 'Heir Details';
         end;
 
-      9:
+      10:
         begin
           grdVehicle.SetFocus;
           viewVehicle.Focused := True;
@@ -1473,38 +1488,6 @@ begin
         end;
 
     end;
-  end;
-end;
-
-procedure TCustomerFrm.grpOtherDetailsTabChanged(Sender: TObject);
-begin
-  inherited;
-  case grpOtherDetails.ItemIndex of
-    1:
-      begin
-        MTDM.DetailIndex := 5;
-
-        if FClosingFrm then
-          Exit;
-
-        if Self.Showing then
-        begin
-          grdDirector.SetFocus;
-          viewDirector.Focused := True;
-
-          if viewDirector.DataController.RecordCount > 0 then
-          begin
-            viewDirector.Controller.FocusedRecordIndex := 0;
-            viewDirector.Controller.FocusedRecord.Selected := True;
-          end;
-
-          viewDirector.Controller.FocusedColumn := edtDrFirstName;
-          actInsert.Caption := 'Add a new director';
-          actEdit.Caption := 'Edit selected contact detail';
-          actDelete.Caption := 'Delete selected cotact detail';
-          MTDM.FormCaption := 'Director details';
-        end;
-      end;
   end;
 end;
 
@@ -2368,27 +2351,28 @@ end;
 procedure TCustomerFrm.grdContactPersonEnter(Sender: TObject);
 begin
   inherited;
+  MTDM.DetailIndex := 2;
   actInsert.Caption := 'Add a new contact person';
   actEdit.Caption := 'Edit selected contact person';
   actDelete.Caption := 'Delete selected contact person';
   MTDM.FormCaption := 'Contact Person';
-  MTDM.DetailIndex := 2;
 end;
 
 procedure TCustomerFrm.grdCPContactDetailEnter(Sender: TObject);
 begin
   inherited;
+  MTDM.DetailIndex := 3;
   actInsert.Caption := 'Add a new person contact detail';
   actEdit.Caption := 'Edit selected person contact detail';
   actDelete.Caption := 'Delete selected person cotact detail';
   MTDM.FormCaption := 'Contact Person Details';
-  MTDM.DetailIndex := 3;
 end;
 
 procedure TCustomerFrm.grdCustomerEnter(Sender: TObject);
 begin
   inherited;
-  MTDM.DetailIndex := 8;
+  MTDM.DetailIndex := 12;
+  FCurrentItemIndex := grpDetailGrid.ItemIndex;
   actInsert.Caption := 'Add a new customer';
   actEdit.Caption := 'Edit selected customer';
   actDelete.Caption := 'Delete selected customer';
@@ -2398,13 +2382,14 @@ end;
 procedure TCustomerFrm.grdCustomerExit(Sender: TObject);
 begin
   inherited;
-  grpDetailGridTabChanged(nil);
+  if FCurrentItemIndex <> grpDetailGrid.ItemIndex then
+    grpDetailGridTabChanged(nil);
 end;
 
 procedure TCustomerFrm.grdDirectorEnter(Sender: TObject);
 begin
   inherited;
-  MTDM.DetailIndex := 5;
+//  MTDM.DetailIndex := 5;
   actInsert.Caption := 'Add a new director';
   actEdit.Caption := 'Edit selected director';
   actDelete.Caption := 'Delete selected director';
@@ -2418,6 +2403,10 @@ procedure TCustomerFrm.grdHeirVerticalDrawRowHeader(Sender: TObject;
 //  ARect: TRect;
 //  AColor: TColor;
 begin
+//  // xRow.Properties.Caption := szBuild; //<<<<<<< don't use this string
+//   ACanvas.DrawTexT('Hello', AHeaderViewInfo.HeaderCellsRect, cxSingleLine or cxAlignVCenter,True);
+//   Done := True;
+
 //  ARect := AHeaderViewInfo.HeaderRect;
 //  AColor := AHeaderViewInfo.ViewParams.Color;
 //  ACanvas.FillRect(ARect, AColor);
@@ -2431,7 +2420,7 @@ end;
 procedure TCustomerFrm.grdHeirVerticalEnter(Sender: TObject);
 begin
   inherited;
-  MTDM.DetailIndex := 78;
+//  MTDM.DetailIndex := 8;
   actInsert.Caption := 'Add a new Heir';
   actEdit.Caption := 'Edit selected Heir';
   actDelete.Caption := 'Delete selected Heir';
@@ -2551,12 +2540,12 @@ begin
     4: DataSet := MTDM.cdsBankingDetail;
     5: DataSet := MTDM.cdsDirector;
     6: DataSet := MTDM.cdsBeneficiary;
-    7: DataSet := MTDM.cdsVehicle;
-    8: DataSet := MTDM.cdsCustomer;
-    9: DataSet := MTDM.cdsTrustee;
-    10: DataSet := MTDM.cdsDirectorOfCompany;
-    11: DataSet := MTDM.cdsShareHolder;
-    12: DataSet := MTDM.cdsHeir;
+    7: DataSet := MTDM.cdsTrustee;
+    8: DataSet := MTDM.cdsShareHolder;
+    9: DataSet := MTDM.cdsHeir;
+    10: DataSet := MTDM.cdsVehicle;
+    11: DataSet := MTDM.cdsDirectorOfCompany;
+    12: DataSet := MTDM.cdsCustomer;
   end;
 
   case Key of
@@ -2709,7 +2698,61 @@ begin
               FreeAndNil(BeneficiaryDetailFrm);
             end;
 
-          7: // Vehicle
+          7: // Trustee
+            begin
+              if TrusteeDetailFrm = nil then
+                TrusteeDetailFrm := TTrusteeDetailFrm.Create(nil);
+
+              ModResult := TrusteeDetailFrm.ShowModal;
+              if ModResult = mrOK then
+              begin
+                FOpenTableParam.ScriptID := 50;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Trustee.xml';
+                FOpenTableParam.FieldName := 'FIRST_NAME';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+              end;
+
+              TrusteeDetailFrm.Close;
+              FreeAndNil(TrusteeDetailFrm);
+            end;
+
+          8: // Shareholder
+            begin
+              if ShareHolderDetailFrm = nil then
+                ShareHolderDetailFrm := TShareHolderDetailFrm.Create(nil);
+
+              ModResult := ShareHolderDetailFrm.ShowModal;
+              if ModResult = mrOK then
+              begin
+                FOpenTableParam.ScriptID := 77;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Shareholder.xml';
+                FOpenTableParam.FieldName := 'FIRST_NAME';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+              end;
+
+              ShareHolderDetailFrm.Close;
+              FreeAndNil(ShareHolderDetailFrm);
+            end;
+
+          9: // Heir
+            begin
+              if HeirDetailFrm = nil then
+                HeirDetailFrm := THeirDetailFrm.Create(nil);
+
+              ModResult := HeirDetailFrm.ShowModal;
+              if ModResult = mrOK then
+              begin
+                FOpenTableParam.ScriptID := 78;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Vehicle.xml';
+                FOpenTableParam.FieldName := 'FIRST_NAME';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+              end;
+
+              HeirDetailFrm.Close;
+              FreeAndNil(HeirDetailFrm);
+            end;
+
+          10: // Vehicle
             begin
               if VehicleDetailFrm = nil then
                 VehicleDetailFrm := TVehicleDetailFrm.Create(nil);
@@ -2727,7 +2770,7 @@ begin
               FreeAndNil(VehicleDetailFrm);
             end;
 
-          8: // Customer
+          11: // Customer
             begin
               if CustomerEditFrm = nil then
                 CustomerEditFrm := TCustomerEditFrm.Create(nil);
@@ -2751,77 +2794,6 @@ begin
               FreeAndNil(CustomerEditFrm);
             end;
 
-          9: // Trustee
-            begin
-              if TrusteeDetailFrm = nil then
-                TrusteeDetailFrm := TTrusteeDetailFrm.Create(nil);
-
-              ModResult := TrusteeDetailFrm.ShowModal;
-              if ModResult = mrOK then
-              begin
-                FOpenTableParam.ScriptID := 50;
-                FOpenTableParam.FileName := 'C:\Data\Xml\Trustee.xml';
-                FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
-              end;
-
-              TrusteeDetailFrm.Close;
-              FreeAndNil(TrusteeDetailFrm);
-            end;
-
-          10: // Dierector
-            begin
-              if DirectorDetailFrm = nil then
-                DirectorDetailFrm := TDirectorDetailFrm.Create(nil);
-
-              ModResult := DirectorDetailFrm.ShowModal;
-              if ModResult = mrOK then
-              begin
-                FOpenTableParam.ScriptID := 76;
-                FOpenTableParam.FileName := 'C:\Data\Xml\Director Of Company.xml';
-                FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
-              end;
-
-              DirectorDetailFrm.Close;
-              FreeAndNil(DirectorDetailFrm);
-            end;
-
-          11: // Shareholder
-            begin
-              if ShareHolderDetailFrm = nil then
-                ShareHolderDetailFrm := TShareHolderDetailFrm.Create(nil);
-
-              ModResult := ShareHolderDetailFrm.ShowModal;
-              if ModResult = mrOK then
-              begin
-                FOpenTableParam.ScriptID := 77;
-                FOpenTableParam.FileName := 'C:\Data\Xml\Shareholder.xml';
-                FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
-              end;
-
-              ShareHolderDetailFrm.Close;
-              FreeAndNil(ShareHolderDetailFrm);
-            end;
-
-          12: // Heir
-            begin
-              if HeirDetailFrm = nil then
-                HeirDetailFrm := THeirDetailFrm.Create(nil);
-
-              ModResult := HeirDetailFrm.ShowModal;
-              if ModResult = mrOK then
-              begin
-                FOpenTableParam.ScriptID := 78;
-                FOpenTableParam.FileName := 'C:\Data\Xml\Vehicle.xml';
-                FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
-              end;
-
-              HeirDetailFrm.Close;
-              FreeAndNil(HeirDetailFrm);
-            end;
         end;
 
 // SELECT GEN_ID( <GeneratorName>, 0 ) FROM RDB$DATABASE;
@@ -3025,9 +2997,11 @@ begin
   if AFocusedRecord = nil then
     Exit;
 
+{$IFDEF RELEASE}
   grpPersonAttribute.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [4, 7];
   litShareHolder.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [1, 2, 5, 8];
   grpHeir.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [6];
+{$ENDIF}
 end;
 
 end.

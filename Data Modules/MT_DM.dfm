@@ -2357,6 +2357,7 @@ inherited MTDM: TMTDM
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
     AfterDelete = cdsActivityTypeAfterDelete
+    OnCalcFields = cdsDirectorCalcFields
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
@@ -2430,7 +2431,7 @@ inherited MTDM: TMTDM
     end
     object cdsDirectorSALUTATION_ID: TIntegerField
       Alignment = taLeftJustify
-      DisplayLabel = 'Salutation'
+      DisplayLabel = 'Sal'
       FieldName = 'SALUTATION_ID'
       Origin = 'SALUTATION_ID'
     end
@@ -2470,6 +2471,13 @@ inherited MTDM: TMTDM
       FieldName = 'EMAIL_ADDRESS'
       Origin = 'EMAIL_ADDRESS'
       Size = 100
+    end
+    object cdsDirectorFULL_NAME: TStringField
+      DisplayLabel = 'Name'
+      FieldKind = fkCalculated
+      FieldName = 'FULL_NAME'
+      Size = 60
+      Calculated = True
     end
   end
   object dtsDirector: TDataSource

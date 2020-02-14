@@ -51,9 +51,15 @@ type
     imgNav16: TcxImageList;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
+    procedure lucCompanyGetDisplayText(Sender: TcxCustomGridTableItem;
+      ARecord: TcxCustomGridRecord; var AText: string);
+    procedure viewDirectorOfCompanyCustomDrawCell(
+      Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+      AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
   private
     { Private declarations }
     procedure Validate;
+    procedure CmDrawBorder(var Msg: TMessage); message CM_DRAWBORDER;
   public
     { Public declarations }
   end;
@@ -75,6 +81,13 @@ procedure TDirectorDetailFrm.btnOKClick(Sender: TObject);
 begin
   inherited;
   Validate;
+end;
+
+procedure TDirectorDetailFrm.CmDrawBorder(var Msg: TMessage);
+begin
+  if (TObject(Msg.WParam) is TcxCanvas)
+    and (TObject(Msg.LParam) is TcxGridTableDataCellViewInfo) then
+    TcxCanvas(Msg.WParam).DrawComplexFrame(TcxGridTableDataCellViewInfo(Msg.LParam).ClientBounds, clRed, clRed, cxBordersAll, 1);
 end;
 
 procedure TDirectorDetailFrm.FormCreate(Sender: TObject);
@@ -99,6 +112,13 @@ begin
   end;
 end;
 
+procedure TDirectorDetailFrm.lucCompanyGetDisplayText(
+  Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord; var AText: string);
+begin
+  inherited;
+  MTDM.CompanyName := AText;
+end;
+
 procedure TDirectorDetailFrm.Validate;
 begin
   if SameText(TrimAll(edtFirstName.Text), '') then
@@ -119,6 +139,28 @@ begin
   MTDM.FFieldValue.EmailAddress := edtEmailAddress.Text;
 
   ModalResult := mrOK;
+end;
+
+procedure TDirectorDetailFrm.viewDirectorOfCompanyCustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+  inherited;
+  if AViewInfo.GridRecord = nil then
+    Exit;
+
+  if AViewInfo.GridRecord.Focused then
+  // This renders the background and font colours of the focused record
+  begin
+    if AViewInfo.Item <> nil then
+      if AViewInfo.Item.Focused then
+      begin
+        // This renders the background and border colour of the focused cell
+        ACanvas.Brush.Color := $B6EDFA;
+        ACanvas.Font.Color := RootLookAndFeel.SkinPainter.DefaultSelectionColor;
+        PostMessage(Handle, CM_DRAWBORDER, Integer(ACanvas), Integer(AViewInfo));
+      end;
+  end;
 end;
 
 end.
