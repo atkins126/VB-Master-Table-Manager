@@ -109,6 +109,7 @@ type
     EFiling: string;
     EFUserName: string;
     EFPassword: string;
+    PercenShare: Real;
   end;
 
   TMTDM = class(TVBBaseDM)
@@ -446,7 +447,7 @@ var
 
 const
   FIELD_VALUES = 5;
-  CUSTOMER_DETAIL_FORMS = 8;
+  CUSTOMER_DETAIL_COUNT = 13;
 
 implementation
 
@@ -485,6 +486,9 @@ begin
 
   else if (TFDMemTable(DataSet) = cdsVehicle) then
     DataSet.FieldByName('MAINTENANCE_PLAN').AsInteger := 0;
+
+  if (TFDMemTable(DataSet) = cdsShareHolder) then
+    cdsShareHolder.FieldByName('PERCENT_SHARE').AsFloat := 0;
 end;
 
 procedure TMTDM.cdsDirectorCalcFields(DataSet: TDataSet);
@@ -618,6 +622,7 @@ begin
   FFieldValue.EFiling := '';
   FFieldValue.EFUserName := '';
   FFieldValue.EFPassword := '';
+  FFieldValue.PercenShare := 0.0;
 end;
 
 procedure TMTDM.DataModuleCreate(Sender: TObject);
@@ -643,7 +648,7 @@ begin
   FMasterItem[16] := 'Tax Office';
   FMasterItem[17] := 'Vehicle make';
 
-  Setlength(FHeaderCaptionArray, CUSTOMER_DETAIL_FORMS);
+  Setlength(FHeaderCaptionArray, CUSTOMER_DETAIL_COUNT);
   FHeaderCaptionArray[0] := 'Company Contact Detail';
   FHeaderCaptionArray[1] := 'Address Information';
   FHeaderCaptionArray[2] := 'Contact Person';
@@ -651,7 +656,22 @@ begin
   FHeaderCaptionArray[4] := 'Banking Details';
   FHeaderCaptionArray[5] := 'Director Details';
   FHeaderCaptionArray[6] := 'Beneficiary Details';
-  FHeaderCaptionArray[7] := 'Veicle Details';
+  FHeaderCaptionArray[7] := 'Trustee Details';
+  FHeaderCaptionArray[8] := 'Shareholder Details';
+  FHeaderCaptionArray[9] := 'Heir Details';
+  FHeaderCaptionArray[10] := 'Vehicle Details';
+  FHeaderCaptionArray[11] := 'Directo Company Link Details';
+  FHeaderCaptionArray[12] := 'Customer Details';
+
+//  Setlength(FHeaderCaptionArray, CUSTOMER_DETAIL_FORMS);
+//  FHeaderCaptionArray[0] := 'Company Contact Detail';
+//  FHeaderCaptionArray[1] := 'Address Information';
+//  FHeaderCaptionArray[2] := 'Contact Person';
+//  FHeaderCaptionArray[3] := 'Contact Person Detail';
+//  FHeaderCaptionArray[4] := 'Banking Details';
+//  FHeaderCaptionArray[5] := 'Director Details';
+//  FHeaderCaptionArray[6] := 'Beneficiary Details';
+//  FHeaderCaptionArray[7] := 'Veicle Details';
 
   SetLength(FValueArray, FIELD_VALUES);
   ClearFieldValueArray;

@@ -2975,6 +2975,11 @@ inherited MTDM: TMTDM
   end
   object cdsHeir: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
+    BeforePost = cdsActivityTypeBeforePost
+    AfterPost = cdsActivityTypeAfterPost
+    AfterDelete = cdsActivityTypeAfterDelete
+    OnNewRecord = cdsActivityTypeNewRecord
+    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     CachedUpdates = True
     Indexes = <
@@ -3005,9 +3010,11 @@ inherited MTDM: TMTDM
     ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
     ResourceOptions.StorePrettyPrint = True
     ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.AssignedValues = [uvGeneratorName, uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.GeneratorName = 'HEIR_ID_GEN'
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'HEIR'
     Left = 130
     Top = 515
     object cdsHeirID: TIntegerField
@@ -3151,6 +3158,11 @@ inherited MTDM: TMTDM
   end
   object cdsShareHolder: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
+    BeforePost = cdsActivityTypeBeforePost
+    AfterPost = cdsActivityTypeAfterPost
+    AfterDelete = cdsActivityTypeAfterDelete
+    OnNewRecord = cdsActivityTypeNewRecord
+    OnPostError = cdsActivityTypePostError
     FilterOptions = [foCaseInsensitive]
     CachedUpdates = True
     Indexes = <
@@ -3181,9 +3193,11 @@ inherited MTDM: TMTDM
     ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
     ResourceOptions.StorePrettyPrint = True
     ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.AssignedValues = [uvGeneratorName, uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.GeneratorName = 'SHARE_HOLDER_ID_GEN'
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'SHARE_HOLDER'
     Left = 235
     Top = 515
     object cdsShareHolderID: TIntegerField

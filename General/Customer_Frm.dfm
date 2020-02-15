@@ -13,8 +13,8 @@ inherited CustomerFrm: TCustomerFrm
     ExplicitWidth = 1376
     ExplicitHeight = 731
     object grdCustomer: TcxGrid [0]
-      Left = 11
-      Top = 102
+      Left = -339
+      Top = 125
       Width = 915
       Height = 313
       TabOrder = 7
@@ -199,8 +199,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVCustomer: TcxDBVerticalGrid [1]
-      Left = 932
-      Top = 148
+      Left = 582
+      Top = 171
       Width = 444
       Height = 267
       OptionsView.ScrollBars = ssVertical
@@ -605,8 +605,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object navCustomer: TcxDBNavigator [2]
-      Left = 11
-      Top = -12
+      Left = -339
+      Top = 11
       Width = 360
       Height = 40
       BorderStyle = nbsNone
@@ -665,8 +665,8 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 0
     end
     object navVCustomer: TcxDBNavigator [3]
-      Left = 932
-      Top = 102
+      Left = 582
+      Top = 125
       Width = 216
       Height = 40
       BorderStyle = nbsNone
@@ -2387,8 +2387,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object lblLegend: TcxLabel [16]
-      Left = 11
-      Top = 681
+      Left = -339
+      Top = 704
       Caption = 
         'INS = Add a new record;  ENTER = Edit selected record;  DEL = De' +
         'lete selected record'
@@ -2398,8 +2398,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxOpenAfterExport: TcxCheckBox [17]
-      Left = 688
-      Top = 65
+      Left = 338
+      Top = 88
       Caption = 'Open after export'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2412,8 +2412,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxPersistSelection: TcxCheckBox [18]
-      Left = 383
-      Top = -1
+      Left = 33
+      Top = 21
       Caption = 'Persist Selection'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2426,8 +2426,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxGroupedReport: TcxCheckBox [19]
-      Left = 570
-      Top = 65
+      Left = 220
+      Top = 88
       Caption = 'Grouped Report'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2439,8 +2439,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object lucPrintWhat: TcxComboBox [20]
-      Left = 295
-      Top = 65
+      Left = -55
+      Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -2457,8 +2457,8 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object lucReportType: TcxComboBox [21]
-      Left = 96
-      Top = 65
+      Left = -254
+      Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -2474,8 +2474,8 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object cbxPrintContactDetails: TcxCheckBox [22]
-      Left = 431
-      Top = 65
+      Left = 81
+      Top = 88
       Caption = 'Print contact details'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -3268,8 +3268,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdShareHolder: TcxGrid [27]
-      Left = 25
-      Top = 458
+      Left = -325
+      Top = 481
       Width = 1656
       Height = 200
       TabOrder = 23
