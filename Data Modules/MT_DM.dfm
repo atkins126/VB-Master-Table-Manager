@@ -3118,17 +3118,17 @@ inherited MTDM: TMTDM
       DisplayLabel = 'Salutation'
       FieldName = 'ACC_HOLDER_SALUTATION_ID'
     end
-    object cdsHeirHEIR_ACC_HOLDER_FIRST_NAME: TStringField
+    object cdsHeirACC_HOLDER_FIRST_NAME: TStringField
       DisplayLabel = 'First Name'
-      FieldName = 'HEIR_ACC_HOLDER_FIRST_NAME'
-      Origin = 'HEIR_ACC_HOLDER_FIRST_NAME'
+      FieldName = 'ACC_HOLDER_FIRST_NAME'
+      Origin = 'ACC_HOLDER_FIRST_NAME'
       Required = True
       Size = 30
     end
-    object cdsHeirHEIR_ACC_HOLDER_LAST_NAME: TStringField
+    object cdsHeirACC_HOLDER_LAST_NAME: TStringField
       DisplayLabel = 'Last Name'
-      FieldName = 'HEIR_ACC_HOLDER_LAST_NAME'
-      Origin = 'HEIR_ACC_HOLDER_LAST_NAME'
+      FieldName = 'ACC_HOLDER_LAST_NAME'
+      Origin = 'ACC_HOLDER_LAST_NAME'
       Required = True
       Size = 30
     end
@@ -3150,10 +3150,10 @@ inherited MTDM: TMTDM
       FieldName = 'ACCOUNT_TYPE_ID'
       Origin = 'ACCOUNT_TYPE_ID'
     end
-    object cdsHeirACCOUNT_N0: TStringField
+    object cdsHeirACCOUNT_NO: TStringField
       DisplayLabel = 'Acc No'
-      FieldName = 'ACCOUNT_N0'
-      Origin = 'ACCOUNT_N0'
+      FieldName = 'ACCOUNT_NO'
+      Origin = 'ACCOUNT_NO'
     end
   end
   object cdsShareHolder: TFDMemTable
@@ -3378,5 +3378,12 @@ inherited MTDM: TMTDM
       FieldName = 'ACCOUNT_N0'
       Origin = 'ACCOUNT_N0'
     end
+  end
+  object FDQuery1: TFDQuery
+    Connection = VbdevConnection
+    SQL.Strings = (
+      'SELECT * FROM HEIR')
+    Left = 865
+    Top = 340
   end
 end

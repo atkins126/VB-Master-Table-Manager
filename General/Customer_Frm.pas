@@ -342,17 +342,6 @@ type
     viewDirectorOfCompany: TcxGridDBBandedTableView;
     lvlDirectorOfCompany: TcxGridLevel;
     grpDirectorVerticalGrid: TdxLayoutGroup;
-    litDirectorVerticalGrid: TdxLayoutItem;
-    grdVDirector: TcxDBVerticalGrid;
-    edtVDDirectorID: TcxDBEditorRow;
-    edtVDCustomerID: TcxDBEditorRow;
-    lucVDSalutationID: TcxDBEditorRow;
-    edtVDFirstname: TcxDBEditorRow;
-    edtVDLastName: TcxDBEditorRow;
-    edtVDMiddleName: TcxDBEditorRow;
-    edtVDTaxNo: TcxDBEditorRow;
-    edtVDMobilePhone: TcxDBEditorRow;
-    edtVDEmailAddress: TcxDBEditorRow;
     grpPersonAttribute: TcxCategoryRow;
     edtCoID: TcxGridDBBandedColumn;
     edtCoDirectorID: TcxGridDBBandedColumn;
@@ -407,12 +396,12 @@ type
     grdHeirVerticalPOSTAL4: TcxDBEditorRow;
     grdHeirVerticalPOSTAL_CODE: TcxDBEditorRow;
     lucVAccHolderSalutation: TcxDBEditorRow;
-    grdHeirVerticalHEIR_ACC_HOLDER_FIRST_NAME: TcxDBEditorRow;
-    grdHeirVerticalHEIR_ACC_HOLDER_LAST_NAME: TcxDBEditorRow;
+    grdHeirVerticalACC_HOLDER_FIRST_NAME: TcxDBEditorRow;
+    grdHeirVerticalACC_HOLDER_LAST_NAME: TcxDBEditorRow;
     lucVHBank: TcxDBEditorRow;
     grdHeirVerticalBRANCH_CODE: TcxDBEditorRow;
     lucVHAccountType: TcxDBEditorRow;
-    grdHeirVerticalACCOUNT_N0: TcxDBEditorRow;
+    grdHeirVerticalACCOUNT_NO: TcxDBEditorRow;
     catPhysicalAddress: TcxCategoryRow;
     catPostalAddress: TcxCategoryRow;
     catAccountHolder: TcxCategoryRow;
@@ -422,6 +411,9 @@ type
     grpVehicle: TdxLayoutGroup;
     grpShareholder: TdxLayoutGroup;
     grpBankingDetail: TdxLayoutGroup;
+    grpPhysicalAddress: TdxLayoutGroup;
+    grpPostalAddress: TdxLayoutGroup;
+    grpBillingAddress: TdxLayoutGroup;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -808,20 +800,37 @@ begin
         MTDM.cdsHeir.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
         MTDM.cdsHeir.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
         MTDM.cdsHeir.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
-        MTDM.cdsHeir.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
-        MTDM.cdsHeir.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FFieldValue.EmailAddress;
+        MTDM.cdsHeir.FieldByName('ID_NUMBER').AsString := MTDM.FFieldValue.IDNo;
+
+        MTDM.cdsHeir.FieldByName('PHYSICAL1').AsString := MTDM.FFieldValue.Physical1;
+        MTDM.cdsHeir.FieldByName('PHYSICAL2').AsString := MTDM.FFieldValue.Physical2;
+        MTDM.cdsHeir.FieldByName('PHYSICAL3').AsString := MTDM.FFieldValue.Physical3;
+        MTDM.cdsHeir.FieldByName('PHYSICAL4').AsString := MTDM.FFieldValue.Physical4;
+        MTDM.cdsHeir.FieldByName('PHYSICAL_CODE').AsString := MTDM.FFieldValue.PhysicalCode;
+
+        MTDM.cdsHeir.FieldByName('POSTAL1').AsString := MTDM.FFieldValue.Postal1;
+        MTDM.cdsHeir.FieldByName('POSTAL2').AsString := MTDM.FFieldValue.Postal2;
+        MTDM.cdsHeir.FieldByName('POSTAL3').AsString := MTDM.FFieldValue.Postal3;
+        MTDM.cdsHeir.FieldByName('POSTAL4').AsString := MTDM.FFieldValue.Postal4;
+        MTDM.cdsHeir.FieldByName('POSTAL_CODE').AsString := MTDM.FFieldValue.PostalCode;
+
+        MTDM.cdsHeir.FieldByName('ACC_HOLDER_SALUTATION_ID').AsInteger := MTDM.FFieldValue.HAHKSalutatioinID;
+        MTDM.cdsHeir.FieldByName('ACC_HOLDER_FIRST_NAME').AsString := MTDM.FFieldValue.HAHFirstName;
+        MTDM.cdsHeir.FieldByName('ACC_HOLDER_LAST_NAME').AsString := MTDM.FFieldValue.HAHLastName;
+        MTDM.cdsHeir.FieldByName('BANK_ID').AsInteger := MTDM.FFieldValue.BankID;
+        MTDM.cdsHeir.FieldByName('ACCOUNT_TYPE_ID').AsInteger := MTDM.FFieldValue.AccountTypeID;
+        MTDM.cdsHeir.FieldByName('BRANCH_CODE').AsString := MTDM.FFieldValue.BranchCode;
+        MTDM.cdsHeir.FieldByName('ACCOUNT_NO').AsString := MTDM.FFieldValue.AccountNo;
 
         MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
         MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
         MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
-        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FFieldValue.MobileNo;
-        MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FFieldValue.EmailAddress;
+        MTDM.ValueArray[3] := 'ID No:' + TAB + MTDM.FFieldValue.IDNo;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
             MTDM.ValueArray[2] + CRLF +
-            MTDM.ValueArray[3] + CRLF +
-            MTDM.ValueArray[4]]);
+            MTDM.ValueArray[3]]);
       end;
 
     10: // Vehicle
@@ -1216,7 +1225,6 @@ begin
   viewCustomerListing.DataController.DataSource := ReportDM.dtsCustomerListing;
   navCustomer.DataSource := MTDM.dtsCustomer;
   navVCustomer.DataSource := MTDM.dtsCustomer;
-  grdVDirector.DataController.DataSource := MTDM.dtsDirector;
 
   TcxLookupComboBoxProperties(lucCustomerType.Properties).ListSource := LookupDM.dtsCustomerType;
   TcxLookupComboBoxProperties(lucCustomerType.Properties).Buttons.Items[0].Visible := False;
@@ -1241,9 +1249,6 @@ begin
 
   TcxLookupComboBoxProperties(lucDrSalutation.Properties).ListSource := LookupDM.dtsDirectorSalutation;
   TcxLookupComboBoxProperties(lucDrSalutation.Properties).Buttons.Items[0].Visible := False;
-
-  TcxLookupComboBoxProperties(lucVDSalutationID.Properties.EditProperties).ListSource := LookupDM.dtsDirectorSalutation;
-  TcxLookupComboBoxProperties(lucVDSalutationID.Properties.EditProperties).Buttons.Items[0].Visible := False;
 
   TcxLookupComboBoxProperties(lucSHSalutation.Properties).ListSource := LookupDM.dtsSHSalutation;
   TcxLookupComboBoxProperties(lucSHSalutation.Properties).Buttons.Items[0].Visible := False;

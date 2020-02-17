@@ -5,17 +5,10 @@ inherited ShareHolderDetailFrm: TShareHolderDetailFrm
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
-    Left = 0
-    Top = 0
     Width = 525
     Height = 230
-    ExplicitLeft = 0
-    ExplicitTop = 0
     ExplicitWidth = 525
     ExplicitHeight = 230
-    inherited lblHeaderTitle: TcxLabel
-      ExplicitWidth = 503
-    end
     inherited btnOK: TcxButton
       Left = 358
       Top = 194

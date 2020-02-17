@@ -110,6 +110,9 @@ type
     EFUserName: string;
     EFPassword: string;
     PercenShare: Real;
+    HAHKSalutatioinID: Integer;
+    HAHFirstName: String;
+    HAHLastName: String;
   end;
 
   TMTDM = class(TVBBaseDM)
@@ -357,7 +360,6 @@ type
     cdsHeirBANK_ID: TIntegerField;
     cdsHeirBRANCH_CODE: TStringField;
     cdsHeirACCOUNT_TYPE_ID: TIntegerField;
-    cdsHeirACCOUNT_N0: TStringField;
     cdsShareHolderID: TIntegerField;
     cdsShareHolderCUSTOMER_ID: TIntegerField;
     cdsShareHolderFIRST_NAME: TStringField;
@@ -388,12 +390,13 @@ type
     HeirTableBANK_ID: TIntegerField;
     HeirTableBRANCH_CODE: TStringField;
     HeirTableACCOUNT_TYPE_ID: TIntegerField;
-    HeirTableACCOUNT_N0: TStringField;
-    cdsHeirHEIR_ACC_HOLDER_FIRST_NAME: TStringField;
-    cdsHeirHEIR_ACC_HOLDER_LAST_NAME: TStringField;
+    cdsHeirACC_HOLDER_FIRST_NAME: TStringField;
+    cdsHeirACC_HOLDER_LAST_NAME: TStringField;
     cdsHeirACC_HOLDER_SALUTATION_ID: TIntegerField;
     cdsShareHolderSALUTATION_ID: TIntegerField;
     cdsDirectorFULL_NAME: TStringField;
+    FDQuery1: TFDQuery;
+    cdsHeirACCOUNT_NO: TStringField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);

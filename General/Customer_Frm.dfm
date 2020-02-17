@@ -13,7 +13,7 @@ inherited CustomerFrm: TCustomerFrm
     ExplicitWidth = 1376
     ExplicitHeight = 731
     object grdCustomer: TcxGrid [0]
-      Left = -339
+      Left = 11
       Top = 125
       Width = 915
       Height = 313
@@ -199,7 +199,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVCustomer: TcxDBVerticalGrid [1]
-      Left = 582
+      Left = 932
       Top = 171
       Width = 444
       Height = 267
@@ -605,7 +605,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object navCustomer: TcxDBNavigator [2]
-      Left = -339
+      Left = 11
       Top = 11
       Width = 360
       Height = 40
@@ -665,7 +665,7 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 0
     end
     object navVCustomer: TcxDBNavigator [3]
-      Left = 582
+      Left = 932
       Top = 125
       Width = 216
       Height = 40
@@ -903,7 +903,7 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 11
       Visible = False
       OnDblClick = viewContactDetailCoDblClick
-      Height = 24
+      Height = 67
       Width = 391
     end
     object grdPhysicalAddress: TcxDBVerticalGrid [6]
@@ -958,6 +958,7 @@ inherited CustomerFrm: TCustomerFrm
       Version = 1
       object edtPhysical1: TcxDBEditorRow
         Options.Moving = False
+        Properties.Caption = 'Line 1'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
         Properties.DataBinding.FieldName = 'PHYSICAL1'
@@ -968,6 +969,7 @@ inherited CustomerFrm: TCustomerFrm
       end
       object edtPhysical2: TcxDBEditorRow
         Options.Moving = False
+        Properties.Caption = 'Line 2'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
         Properties.DataBinding.FieldName = 'PHYSICAL2'
@@ -978,6 +980,7 @@ inherited CustomerFrm: TCustomerFrm
       end
       object edtPhysical3: TcxDBEditorRow
         Options.Moving = False
+        Properties.Caption = 'Line 3'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
         Properties.DataBinding.FieldName = 'PHYSICAL3'
@@ -988,6 +991,7 @@ inherited CustomerFrm: TCustomerFrm
       end
       object edtPhysical4: TcxDBEditorRow
         Options.Moving = False
+        Properties.Caption = 'Line 4'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
         Properties.DataBinding.FieldName = 'PHYSICAL4'
@@ -1037,6 +1041,7 @@ inherited CustomerFrm: TCustomerFrm
       Version = 1
       object edtPostal1: TcxDBEditorRow
         Options.Moving = False
+        Properties.Caption = 'Line 1'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
         Properties.DataBinding.FieldName = 'POSTAL1'
@@ -1047,6 +1052,7 @@ inherited CustomerFrm: TCustomerFrm
       end
       object edtPostal2: TcxDBEditorRow
         Options.Moving = False
+        Properties.Caption = 'Line 2'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
         Properties.DataBinding.FieldName = 'POSTAL2'
@@ -1057,6 +1063,7 @@ inherited CustomerFrm: TCustomerFrm
       end
       object edtPostal3: TcxDBEditorRow
         Options.Moving = False
+        Properties.Caption = 'Line 3'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
         Properties.DataBinding.FieldName = 'POSTAL3'
@@ -1067,7 +1074,7 @@ inherited CustomerFrm: TCustomerFrm
       end
       object edtPostal4: TcxDBEditorRow
         Options.Moving = False
-        Properties.Caption = 'Postal 3'
+        Properties.Caption = 'Line 4'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
         Properties.DataBinding.FieldName = 'POSTAL4'
@@ -1117,6 +1124,7 @@ inherited CustomerFrm: TCustomerFrm
       Version = 1
       object edtBilling1: TcxDBEditorRow
         Options.Moving = False
+        Properties.Caption = 'Line 1'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
         Properties.DataBinding.FieldName = 'BILLING1'
@@ -1127,6 +1135,7 @@ inherited CustomerFrm: TCustomerFrm
       end
       object edtBilling2: TcxDBEditorRow
         Options.Moving = False
+        Properties.Caption = 'Line 2'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
         Properties.DataBinding.FieldName = 'BILLING2'
@@ -1137,6 +1146,7 @@ inherited CustomerFrm: TCustomerFrm
       end
       object edtBilling3: TcxDBEditorRow
         Options.Moving = False
+        Properties.Caption = 'Line 3'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
         Properties.DataBinding.FieldName = 'BILLING3'
@@ -1147,6 +1157,7 @@ inherited CustomerFrm: TCustomerFrm
       end
       object edtBilling4: TcxDBEditorRow
         Options.Moving = False
+        Properties.Caption = 'Line 4'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
         Properties.DataBinding.FieldName = 'BILLING4'
@@ -2387,8 +2398,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object lblLegend: TcxLabel [16]
-      Left = -339
-      Top = 704
+      Left = 11
+      Top = 747
       Caption = 
         'INS = Add a new record;  ENTER = Edit selected record;  DEL = De' +
         'lete selected record'
@@ -2398,7 +2409,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxOpenAfterExport: TcxCheckBox [17]
-      Left = 338
+      Left = 688
       Top = 88
       Caption = 'Open after export'
       ParentShowHint = False
@@ -2412,7 +2423,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxPersistSelection: TcxCheckBox [18]
-      Left = 33
+      Left = 383
       Top = 21
       Caption = 'Persist Selection'
       ParentShowHint = False
@@ -2426,7 +2437,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxGroupedReport: TcxCheckBox [19]
-      Left = 220
+      Left = 570
       Top = 88
       Caption = 'Grouped Report'
       ParentShowHint = False
@@ -2439,7 +2450,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object lucPrintWhat: TcxComboBox [20]
-      Left = -55
+      Left = 295
       Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
@@ -2457,7 +2468,7 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object lucReportType: TcxComboBox [21]
-      Left = -254
+      Left = 96
       Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
@@ -2474,7 +2485,7 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object cbxPrintContactDetails: TcxCheckBox [22]
-      Left = 81
+      Left = 431
       Top = 88
       Caption = 'Print contact details'
       ParentShowHint = False
@@ -2664,7 +2675,7 @@ inherited CustomerFrm: TCustomerFrm
       Left = 10000
       Top = 10000
       Width = 430
-      Height = 55
+      Height = 98
       TabOrder = 20
       Visible = False
       object viewDirectorOfCompany: TcxGridDBBandedTableView
@@ -2751,129 +2762,12 @@ inherited CustomerFrm: TCustomerFrm
         GridView = viewDirectorOfCompany
       end
     end
-    object grdVDirector: TcxDBVerticalGrid [25]
-      Left = 10000
-      Top = 10000
-      Width = 350
-      Height = 139
-      OptionsView.CellAutoHeight = True
-      OptionsView.ScrollBars = ssNone
-      OptionsView.RowHeaderWidth = 115
-      OptionsBehavior.GoToNextCellOnTab = True
-      OptionsBehavior.FocusCellOnCycle = True
-      OptionsData.CancelOnExit = False
-      OptionsData.Editing = False
-      OptionsData.Appending = False
-      OptionsData.Deleting = False
-      OptionsData.DeletingConfirmation = False
-      OptionsData.Inserting = False
-      Navigator.Buttons.CustomButtons = <>
-      PopupMenu = popDBAction
-      ScrollbarAnnotations.CustomAnnotations = <>
-      Styles.OnGetContentStyle = grdHeirVerticalStylesGetContentStyle
-      TabOrder = 31
-      Visible = False
-      OnDblClick = grdPhysicalAddressDblClick
-      OnEnter = grdDirectorEnter
-      OnExit = grdCustomerExit
-      DataController.DataSource = MTDM.dtsDirector
-      Version = 1
-      object edtVDDirectorID: TcxDBEditorRow
-        Properties.EditPropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.EditProperties.DecimalPlaces = 0
-        Properties.EditProperties.DisplayFormat = '###0'
-        Properties.EditProperties.EditFormat = '###0'
-        Properties.EditProperties.ReadOnly = True
-        Properties.DataBinding.FieldName = 'ID'
-        Visible = False
-        ID = 0
-        ParentID = -1
-        Index = 0
-        Version = 1
-      end
-      object edtVDCustomerID: TcxDBEditorRow
-        Properties.EditPropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.EditProperties.DecimalPlaces = 0
-        Properties.EditProperties.DisplayFormat = '###0'
-        Properties.EditProperties.EditFormat = '###0'
-        Properties.EditProperties.ReadOnly = True
-        Properties.DataBinding.FieldName = 'CUSTOMER_ID'
-        Visible = False
-        ID = 1
-        ParentID = -1
-        Index = 1
-        Version = 1
-      end
-      object lucVDSalutationID: TcxDBEditorRow
-        Properties.EditPropertiesClassName = 'TcxLookupComboBoxProperties'
-        Properties.EditProperties.KeyFieldNames = 'ID'
-        Properties.EditProperties.ListColumns = <
-          item
-            FieldName = 'NAME'
-          end>
-        Properties.EditProperties.ListSource = LookupDM.dtsDirectorSalutation
-        Properties.DataBinding.FieldName = 'SALUTATION_ID'
-        ID = 2
-        ParentID = -1
-        Index = 2
-        Version = 1
-      end
-      object edtVDFirstname: TcxDBEditorRow
-        Properties.EditPropertiesClassName = 'TcxTextEditProperties'
-        Properties.DataBinding.FieldName = 'FIRST_NAME'
-        ID = 3
-        ParentID = -1
-        Index = 3
-        Version = 1
-      end
-      object edtVDLastName: TcxDBEditorRow
-        Properties.EditPropertiesClassName = 'TcxTextEditProperties'
-        Properties.DataBinding.FieldName = 'LAST_NAME'
-        ID = 4
-        ParentID = -1
-        Index = 4
-        Version = 1
-      end
-      object edtVDMiddleName: TcxDBEditorRow
-        Properties.EditPropertiesClassName = 'TcxTextEditProperties'
-        Properties.DataBinding.FieldName = 'MIDDLE_NAME'
-        ID = 5
-        ParentID = -1
-        Index = 5
-        Version = 1
-      end
-      object edtVDTaxNo: TcxDBEditorRow
-        Properties.EditPropertiesClassName = 'TcxTextEditProperties'
-        Properties.DataBinding.FieldName = 'TAX_NO'
-        ID = 6
-        ParentID = -1
-        Index = 6
-        Version = 1
-      end
-      object edtVDMobilePhone: TcxDBEditorRow
-        Properties.EditPropertiesClassName = 'TcxTextEditProperties'
-        Properties.DataBinding.FieldName = 'MOBILE_PHONE'
-        ID = 7
-        ParentID = -1
-        Index = 7
-        Version = 1
-      end
-      object edtVDEmailAddress: TcxDBEditorRow
-        Properties.EditPropertiesClassName = 'TcxTextEditProperties'
-        Properties.DataBinding.FieldName = 'EMAIL_ADDRESS'
-        ID = 8
-        ParentID = -1
-        Index = 8
-        Version = 1
-      end
-    end
-    object grdHeir: TcxGrid [26]
-      Left = 10000
-      Top = 10000
+    object grdHeir: TcxGrid [25]
+      Left = 25
+      Top = 481
       Width = 550
-      Height = 200
+      Height = 243
       TabOrder = 24
-      Visible = False
       object viewHeir: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -3267,12 +3161,13 @@ inherited CustomerFrm: TCustomerFrm
         GridView = viewHeir
       end
     end
-    object grdShareHolder: TcxGrid [27]
-      Left = -325
-      Top = 481
+    object grdShareHolder: TcxGrid [26]
+      Left = 10000
+      Top = 10000
       Width = 1656
       Height = 200
       TabOrder = 23
+      Visible = False
       object viewShareHolder: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -3451,11 +3346,11 @@ inherited CustomerFrm: TCustomerFrm
         GridView = viewShareHolder
       end
     end
-    object grdHeirVertical: TcxDBVerticalGrid [28]
-      Left = 10000
-      Top = 10000
+    object grdHeirVertical: TcxDBVerticalGrid [27]
+      Left = 581
+      Top = 481
       Width = 360
-      Height = 200
+      Height = 243
       OptionsView.CellAutoHeight = True
       OptionsView.ScrollBars = ssVertical
       OptionsView.RowHeaderWidth = 124
@@ -3465,7 +3360,6 @@ inherited CustomerFrm: TCustomerFrm
       ScrollbarAnnotations.CustomAnnotations = <>
       Styles.OnGetContentStyle = grdHeirVerticalStylesGetContentStyle
       TabOrder = 25
-      Visible = False
       OnDblClick = grdPhysicalAddressDblClick
       OnDrawRowHeader = grdHeirVerticalDrawRowHeader
       OnEnter = grdHeirVerticalEnter
@@ -3499,13 +3393,13 @@ inherited CustomerFrm: TCustomerFrm
         Index = 0
         Version = 1
       end
-      object grdHeirVerticalHEIR_ACC_HOLDER_FIRST_NAME: TcxDBEditorRow
+      object grdHeirVerticalACC_HOLDER_FIRST_NAME: TcxDBEditorRow
         Options.CanMovedToCustomizationForm = False
         Options.Moving = False
         Options.ShowInCustomizationForm = False
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
-        Properties.DataBinding.FieldName = 'HEIR_ACC_HOLDER_FIRST_NAME'
+        Properties.DataBinding.FieldName = 'ACC_HOLDER_FIRST_NAME'
         Properties.Options.Editing = False
         Properties.Options.Filtering = False
         Properties.Options.IncSearch = False
@@ -3515,13 +3409,13 @@ inherited CustomerFrm: TCustomerFrm
         Index = 1
         Version = 1
       end
-      object grdHeirVerticalHEIR_ACC_HOLDER_LAST_NAME: TcxDBEditorRow
+      object grdHeirVerticalACC_HOLDER_LAST_NAME: TcxDBEditorRow
         Options.CanMovedToCustomizationForm = False
         Options.Moving = False
         Options.ShowInCustomizationForm = False
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
-        Properties.DataBinding.FieldName = 'HEIR_ACC_HOLDER_LAST_NAME'
+        Properties.DataBinding.FieldName = 'ACC_HOLDER_LAST_NAME'
         Properties.Options.Editing = False
         Properties.Options.Filtering = False
         Properties.Options.IncSearch = False
@@ -3592,7 +3486,7 @@ inherited CustomerFrm: TCustomerFrm
         Options.ShowInCustomizationForm = False
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.EditProperties.ReadOnly = True
-        Properties.DataBinding.FieldName = 'ACCOUNT_N0'
+        Properties.DataBinding.FieldName = 'ACCOUNT_NO'
         Properties.Options.Editing = False
         Properties.Options.Filtering = False
         Properties.Options.IncSearch = False
@@ -3803,7 +3697,7 @@ inherited CustomerFrm: TCustomerFrm
       AlignVert = avClient
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
-      ItemIndex = 7
+      ItemIndex = 8
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpDetailGridTabChanged
@@ -3918,7 +3812,7 @@ inherited CustomerFrm: TCustomerFrm
       Index = 0
     end
     object litPhysicalAddress: TdxLayoutItem
-      Parent = grpAddress
+      Parent = grpPhysicalAddress
       Control = grdPhysicalAddress
       ControlOptions.OriginalHeight = 200
       ControlOptions.OriginalWidth = 280
@@ -3926,20 +3820,20 @@ inherited CustomerFrm: TCustomerFrm
       Index = 0
     end
     object litPostalAddress: TdxLayoutItem
-      Parent = grpAddress
+      Parent = grpPostalAddress
       Control = grdPostalAddress
       ControlOptions.OriginalHeight = 200
       ControlOptions.OriginalWidth = 280
       ControlOptions.ShowBorder = False
-      Index = 1
+      Index = 0
     end
     object litBillingAddress: TdxLayoutItem
-      Parent = grpAddress
+      Parent = grpBillingAddress
       Control = grdBillingAddress
       ControlOptions.OriginalHeight = 200
       ControlOptions.OriginalWidth = 280
       ControlOptions.ShowBorder = False
-      Index = 2
+      Index = 0
     end
     object litlitCDComment: TdxLayoutItem
       Parent = grpCDComment
@@ -4134,15 +4028,6 @@ inherited CustomerFrm: TCustomerFrm
       ShowBorder = False
       Index = 0
     end
-    object litDirectorVerticalGrid: TdxLayoutItem
-      Visible = False
-      CaptionOptions.Visible = False
-      Control = grdVDirector
-      ControlOptions.OriginalHeight = 139
-      ControlOptions.OriginalWidth = 350
-      ControlOptions.ShowBorder = False
-      Index = -1
-    end
     object litHeir: TdxLayoutItem
       Tag = 12
       Parent = grpHeir
@@ -4219,6 +4104,24 @@ inherited CustomerFrm: TCustomerFrm
       CaptionOptions.Text = 'Banking Details'
       ButtonOptions.Buttons = <>
       Index = 3
+    end
+    object grpPhysicalAddress: TdxLayoutGroup
+      Parent = grpAddress
+      CaptionOptions.Text = 'Physical Address'
+      ButtonOptions.Buttons = <>
+      Index = 0
+    end
+    object grpPostalAddress: TdxLayoutGroup
+      Parent = grpAddress
+      CaptionOptions.Text = 'Postal Address'
+      ButtonOptions.Buttons = <>
+      Index = 1
+    end
+    object grpBillingAddress: TdxLayoutGroup
+      Parent = grpAddress
+      CaptionOptions.Text = 'Billing Address'
+      ButtonOptions.Buttons = <>
+      Index = 2
     end
   end
   object grdCustomerReport: TcxGrid [1]
