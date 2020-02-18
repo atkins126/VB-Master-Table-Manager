@@ -7,12 +7,8 @@ inherited TrusteeDetailFrm: TTrusteeDetailFrm
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
-    Left = 0
-    Top = 0
     Width = 560
     Height = 220
-    ExplicitLeft = 0
-    ExplicitTop = 0
     ExplicitWidth = 560
     ExplicitHeight = 220
     inherited lblHeaderTitle: TcxLabel
@@ -23,6 +19,7 @@ inherited TrusteeDetailFrm: TTrusteeDetailFrm
       Left = 393
       Top = 184
       TabOrder = 7
+      OnClick = btnOKClick
       ExplicitLeft = 393
       ExplicitTop = 184
     end

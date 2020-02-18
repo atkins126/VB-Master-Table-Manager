@@ -4851,7 +4851,7 @@ inherited ReportDM: TReportDM
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43494.671348414300000000
-    ReportOptions.LastChange = 43863.552538645830000000
+    ReportOptions.LastChange = 43878.599485694450000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -4859,6 +4859,1721 @@ inherited ReportDM: TReportDM
       'end.')
     Left = 634
     Top = 170
+    Datasets = <
+      item
+        DataSet = fdsAddress
+        DataSetName = 'Address'
+      end
+      item
+        DataSet = fdsBankingDetail
+        DataSetName = 'BankingDetail'
+      end
+      item
+        DataSet = fdsBeneficiary
+        DataSetName = 'Beneficiary'
+      end
+      item
+        DataSet = fdsContactDetailCo
+        DataSetName = 'ContactDetailCo'
+      end
+      item
+        DataSet = fdsContactDetailPerson
+        DataSetName = 'ContactDetailPerson'
+      end
+      item
+        DataSet = fdsContactPerson
+        DataSetName = 'ContactPerson'
+      end
+      item
+        DataSet = fdsCustomer
+        DataSetName = 'Customer'
+      end
+      item
+        DataSet = fdsDirector
+        DataSetName = 'Director'
+      end
+      item
+        DataSet = fdsVehicle
+        DataSetName = 'Vehicle'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object repCustomer: TfrxReportPage
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Calibri'
+      Font.Style = []
+      Orientation = poLandscape
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      ColumnWidth = 277.000000000000000000
+      Frame.Typ = []
+      PrintIfEmpty = False
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Top = 18.897650000000000000
+        Width = 1046.929810000000000000
+      end
+      object bndMaster: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = [ftLeft, ftRight, ftTop]
+        Frame.TopLine.Style = fsDashDot
+        Height = 75.590551181102360000
+        Top = 139.842610000000000000
+        Width = 1046.929810000000000000
+        DataSet = fdsCustomer
+        DataSetName = 'Customer'
+        KeepFooter = True
+        KeepHeader = True
+        KeepTogether = True
+        RowCount = 0
+        Stretched = True
+        object Memo1: TfrxMemoView
+          AllowVectorExport = True
+          Left = 71.811070000000000000
+          Top = 18.897662200000000000
+          Width = 370.393700787402000000
+          Height = 18.897650000000000000
+          DataField = 'NAME'
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."NAME"]')
+        end
+        object Memo2: TfrxMemoView
+          AllowVectorExport = True
+          Left = 71.811070000000000000
+          Top = 37.795300000000000000
+          Width = 370.393700787402000000
+          Height = 18.897650000000000000
+          DataField = 'TRADING_AS'
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."TRADING_AS"]')
+        end
+        object Memo3: TfrxMemoView
+          AllowVectorExport = True
+          Top = 18.897662200000000000
+          Width = 71.811023622047200000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          GapX = 4.000000000000000000
+          Memo.UTF8W = (
+            'Customer:')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          AllowVectorExport = True
+          Top = 37.795300000000000000
+          Width = 71.811023622047200000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          GapX = 4.000000000000000000
+          Memo.UTF8W = (
+            'Trading As:')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          AllowVectorExport = True
+          Left = 680.315400000000000000
+          Top = 18.897662200000000000
+          Width = 105.826771650000000000
+          Height = 18.897650000000000000
+          DataField = 'CO_NO'
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."CO_NO"]')
+        end
+        object Memo13: TfrxMemoView
+          AllowVectorExport = True
+          Left = 495.118102910000000000
+          Top = 37.795300000000000000
+          Width = 128.503937010000000000
+          Height = 18.897650000000000000
+          DataField = 'TAX_NO'
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."TAX_NO"]')
+        end
+        object Memo14: TfrxMemoView
+          AllowVectorExport = True
+          Left = 638.740157480000000000
+          Top = 18.897662200000000000
+          Width = 41.574803150000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Co No:')
+          ParentFont = False
+        end
+        object Memo15: TfrxMemoView
+          AllowVectorExport = True
+          Left = 445.984540000000000000
+          Top = 37.795300000000000000
+          Width = 49.133858270000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Tax No:')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          AllowVectorExport = True
+          Left = 495.118102910000000000
+          Top = 18.897676850000000000
+          Width = 132.283464570000000000
+          Height = 18.897650000000000000
+          DataField = 'CUSTOMER_TYPE'
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."CUSTOMER_TYPE"]')
+        end
+        object Memo17: TfrxMemoView
+          AllowVectorExport = True
+          Left = 445.984540000000000000
+          Top = 18.897662200000000000
+          Width = 49.133858270000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Type')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          AllowVectorExport = True
+          Left = 854.173780000000000000
+          Top = 18.897650000000010000
+          Width = 90.708661420000000000
+          Height = 18.897650000000000000
+          DataField = 'CUSTOMER_STATUS'
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."CUSTOMER_STATUS"]')
+        end
+        object Memo20: TfrxMemoView
+          AllowVectorExport = True
+          Left = 808.819420000000000000
+          Top = 18.897650000000000000
+          Width = 45.354330708661400000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Status:')
+          ParentFont = False
+        end
+        object Memo23: TfrxMemoView
+          AllowVectorExport = True
+          Left = 982.457330000000000000
+          Top = 18.897662200000000000
+          Width = 41.574803150000000000
+          Height = 18.897637800000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Active:')
+          ParentFont = False
+        end
+        object Memo18: TfrxMemoView
+          AllowVectorExport = True
+          Left = 71.811070000000000000
+          Top = 56.692962200000000000
+          Width = 370.393700787402000000
+          Height = 18.897650000000000000
+          DataField = 'BILL_TO'
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."BILL_TO"]')
+        end
+        object Memo21: TfrxMemoView
+          AllowVectorExport = True
+          Top = 56.692962200000000000
+          Width = 71.811023622047200000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          GapX = 4.000000000000000000
+          Memo.UTF8W = (
+            'Bill To:')
+          ParentFont = False
+        end
+        object Memo22: TfrxMemoView
+          AllowVectorExport = True
+          Left = 495.118430000000000000
+          Top = 56.692962200000000000
+          Width = 128.503937010000000000
+          Height = 18.897650000000000000
+          DataField = 'VAT_NO'
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."VAT_NO"]')
+        end
+        object Memo24: TfrxMemoView
+          AllowVectorExport = True
+          Left = 445.984540000000000000
+          Top = 56.692962200000000000
+          Width = 49.133858270000000000
+          Height = 18.897650000000000000
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'VAT No:')
+          ParentFont = False
+        end
+        object Memo116: TfrxMemoView
+          AllowVectorExport = True
+          Left = 638.740570000000000000
+          Top = 37.795312200000000000
+          Width = 71.811023620000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Tax Month:')
+          ParentFont = False
+        end
+        object Memo117: TfrxMemoView
+          AllowVectorExport = True
+          Left = 808.819420000000000000
+          Top = 37.795312200000000000
+          Width = 68.031496062992100000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Tax Office:')
+          ParentFont = False
+        end
+        object Memo118: TfrxMemoView
+          AllowVectorExport = True
+          Left = 710.551181100000000000
+          Top = 37.795312200000000000
+          Width = 90.708661417322800000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[(<Customer."YEAR_END_MONTH">)]')
+        end
+        object Memo119: TfrxMemoView
+          AllowVectorExport = True
+          Left = 876.850960000000000000
+          Top = 37.795312200000000000
+          Width = 151.181102362205000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[(<Customer."TAX_OFFICE">)]')
+        end
+        object Memo120: TfrxMemoView
+          AllowVectorExport = True
+          Left = 638.740570000000000000
+          Top = 56.692962200000000000
+          Width = 71.811023620000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'VAT Month:')
+          ParentFont = False
+        end
+        object Memo121: TfrxMemoView
+          AllowVectorExport = True
+          Left = 808.819420000000000000
+          Top = 56.692962200000000000
+          Width = 68.031496062992100000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'VAT Office:')
+          ParentFont = False
+        end
+        object Memo122: TfrxMemoView
+          AllowVectorExport = True
+          Left = 710.551181100000000000
+          Top = 56.692962200000000000
+          Width = 90.708661417322800000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[(<Customer."VAT_MONTH">)]')
+        end
+        object Memo123: TfrxMemoView
+          AllowVectorExport = True
+          Left = 876.850955120000000000
+          Top = 56.692962200000000000
+          Width = 151.181102362205000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[(<Customer."VAT_OFFICE">)]')
+        end
+        object Memo107: TfrxMemoView
+          AllowVectorExport = True
+          Left = 1024.252630000000000000
+          Top = 18.897662200000000000
+          Width = 18.897637800000000000
+          Height = 18.897650000000000000
+          DataField = 'IS_ACTIVE_STR'
+          DataSet = fdsCustomer
+          DataSetName = 'Customer'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Customer."IS_ACTIVE_STR"]')
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Frame.Typ = [ftTop]
+        Height = 22.677180000000000000
+        Top = 634.961040000000000000
+        Width = 1046.929810000000000000
+        object Memo11: TfrxMemoView
+          Align = baLeft
+          AllowVectorExport = True
+          Top = 3.779530000000000000
+          Width = 207.874150000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Printed on: [(Date)] at: [(Time)]')
+        end
+        object Memo12: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 854.173780000000000000
+          Width = 192.756030000000000000
+          Height = 18.897650000000000000
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Page [Page] of [TotalPages]')
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+      end
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'Calibri'
+        Font.Style = [fsBold]
+        Height = 37.795275590000000000
+        ParentFont = False
+        Top = 41.574830000000000000
+        Width = 1046.929810000000000000
+        object lblReportTypeName: TfrxMemoView
+          Align = baRight
+          AllowVectorExport = True
+          Left = 604.724800000000000000
+          Width = 442.205010000000000000
+          Height = 30.236220470000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Report Type')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Align = baLeft
+          AllowVectorExport = True
+          Width = 257.008040000000000000
+          Height = 30.236240000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -21
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'van Brakel and Associates')
+          ParentFont = False
+        end
+      end
+      object bndContactDetailCoHead: TfrxChild
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 26.456692910000000000
+        Top = 404.409710000000000000
+        Width = 1046.929810000000000000
+        ToNRows = 0
+        ToNRowsMode = rmCount
+        object Memo165: TfrxMemoView
+          AllowVectorExport = True
+          Top = 7.559060000000000000
+          Width = 120.944960000000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Contact Details')
+          ParentFont = False
+        end
+      end
+      object bndAddress: TfrxDetailData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 98.267716540000000000
+        Top = 283.464750000000000000
+        Width = 1046.929810000000000000
+        Child = rptCustomer.bndContactDetailCoHead
+        DataSet = fdsAddress
+        DataSetName = 'Address'
+        RowCount = 0
+        object Memo126: TfrxMemoView
+          AllowVectorExport = True
+          Left = 391.181058430000000000
+          Width = 192.755905510000000000
+          Height = 98.267716540000000000
+          StretchMode = smMaxHeight
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftRight]
+          ParentFont = False
+        end
+        object Memo147: TfrxMemoView
+          AllowVectorExport = True
+          Left = 198.425177320000000000
+          Width = 192.755905510000000000
+          Height = 98.267716540000000000
+          StretchMode = smMaxHeight
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = [ftLeft, ftRight]
+          ParentFont = False
+        end
+        object Memo148: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'PHYSICAL1'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."PHYSICAL1"]')
+          ParentFont = False
+        end
+        object Memo149: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Top = 18.897637800000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'PHYSICAL2'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."PHYSICAL2"]')
+          ParentFont = False
+        end
+        object Memo150: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Top = 37.795275590000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'PHYSICAL3'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."PHYSICAL3"]')
+          ParentFont = False
+        end
+        object Memo151: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Top = 56.692913390000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'PHYSICAL4'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."PHYSICAL4"]')
+          ParentFont = False
+        end
+        object Memo152: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Top = 75.590551180000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'PHYSICAL_CODE'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."PHYSICAL_CODE"]')
+          ParentFont = False
+        end
+        object Memo153: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 200.315090000000000000
+          Top = 56.692913390000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'POSTAL4'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."POSTAL4"]')
+          ParentFont = False
+        end
+        object Memo154: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 200.315090000000000000
+          Top = 75.590551180000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'POSTAL_CODE'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."POSTAL_CODE"]')
+          ParentFont = False
+        end
+        object Memo155: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 200.315090000000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'POSTAL1'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."POSTAL1"]')
+          ParentFont = False
+        end
+        object Memo156: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 200.315090000000000000
+          Top = 18.897637800000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'POSTAL2'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."POSTAL2"]')
+          ParentFont = False
+        end
+        object Memo157: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 200.315090000000000000
+          Top = 37.795275590000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'POSTAL3'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."POSTAL3"]')
+          ParentFont = False
+        end
+        object Memo158: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 393.071120000000000000
+          Top = 56.692913390000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'BILLING4'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."BILLING4"]')
+          ParentFont = False
+        end
+        object Memo159: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 393.071120000000000000
+          Top = 75.590551180000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'BILLING_CODE'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."BILLING_CODE"]')
+          ParentFont = False
+        end
+        object Memo160: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 393.071120000000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'BILLING1'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."BILLING1"]')
+          ParentFont = False
+        end
+        object Memo161: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 393.071120000000000000
+          Top = 18.897637800000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'BILLING2'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."BILLING2"]')
+          ParentFont = False
+        end
+        object Memo162: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 393.071120000000000000
+          Top = 37.795275590000000000
+          Width = 188.976377950000000000
+          Height = 18.897650000000000000
+          StretchMode = smMaxHeight
+          DataField = 'BILLING3'
+          DataSet = fdsAddress
+          DataSetName = 'Address'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = []
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[Address."BILLING3"]')
+          ParentFont = False
+        end
+      end
+      object bndAddressHeader: TfrxHeader
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 238.110390000000000000
+        Width = 1046.929810000000000000
+        object Memo108: TfrxMemoView
+          AllowVectorExport = True
+          Width = 124.724490000000000000
+          Height = 22.677165354330700000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          GapX = 3.000000000000000000
+          Memo.UTF8W = (
+            'Physical Address')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo124: TfrxMemoView
+          AllowVectorExport = True
+          Left = 202.094488190000000000
+          Width = 124.724490000000000000
+          Height = 22.677165354330700000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          GapX = 3.000000000000000000
+          Memo.UTF8W = (
+            'Postal Address')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo125: TfrxMemoView
+          AllowVectorExport = True
+          Left = 394.850393700000000000
+          Width = 193.511811020000000000
+          Height = 22.677165354330700000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight]
+          GapX = 3.000000000000000000
+          Memo.UTF8W = (
+            'Billing Address')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+      end
+      object bndContactDetailCo: TfrxDetailData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 18.897637800000000000
+        Top = 453.543600000000000000
+        Width = 1046.929810000000000000
+        Child = rptCustomer.bndBankingDetailHeader
+        Columns = 4
+        ColumnWidth = 261.732283464567000000
+        ColumnGap = 7.559055118110240000
+        DataSet = fdsContactDetailCo
+        DataSetName = 'ContactDetailCo'
+        RowCount = 0
+        object Memo163: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Width = 86.929133860000000000
+          Height = 18.897650000000000000
+          DataSet = fdsContactDetailCo
+          DataSetName = 'ContactDetailCo'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[ContactDetailCo."CONTACT_TYPE"]:')
+          ParentFont = False
+        end
+        object Memo164: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 90.708656540000000000
+          Width = 170.078740160000000000
+          Height = 18.897650000000000000
+          DataField = 'VALUE'
+          DataSet = fdsContactDetailCo
+          DataSetName = 'ContactDetailCo'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[ContactDetailCo."VALUE"]')
+        end
+      end
+      object bndBankingDetails: TfrxDetailData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 18.897637800000000000
+        Top = 555.590910000000000000
+        Width = 1046.929810000000000000
+        Columns = 2
+        ColumnWidth = 510.236220472440900000
+        ColumnGap = 18.897637795275590000
+        DataSet = fdsBankingDetail
+        DataSetName = 'BankingDetail'
+        RowCount = 0
+        object Memo52: TfrxMemoView
+          AllowVectorExport = True
+          Width = 154.960730000000000000
+          Height = 18.897650000000000000
+          DataField = 'BANK_NAME'
+          DataSet = fdsBankingDetail
+          DataSetName = 'BankingDetail'
+          Frame.Typ = [ftLeft]
+          Memo.UTF8W = (
+            '[BankingDetail."BANK_NAME"]')
+        end
+        object Memo53: TfrxMemoView
+          AllowVectorExport = True
+          Left = 154.960730000000000000
+          Width = 58.582677165354300000
+          Height = 18.897650000000000000
+          DataField = 'BRANCH_CODE'
+          DataSet = fdsBankingDetail
+          DataSetName = 'BankingDetail'
+          Frame.Typ = [ftLeft]
+          Memo.UTF8W = (
+            '[BankingDetail."BRANCH_CODE"]')
+        end
+        object Memo54: TfrxMemoView
+          AllowVectorExport = True
+          Left = 213.543307086614000000
+          Width = 120.944881890000000000
+          Height = 18.897650000000000000
+          DataField = 'ACCOUNT_TYPE'
+          DataSet = fdsBankingDetail
+          DataSetName = 'BankingDetail'
+          Frame.Typ = [ftLeft]
+          Memo.UTF8W = (
+            '[BankingDetail."ACCOUNT_TYPE"]')
+        end
+        object Memo55: TfrxMemoView
+          AllowVectorExport = True
+          Left = 334.488188976378000000
+          Width = 86.929133860000000000
+          Height = 18.897650000000000000
+          DataField = 'ACCOUNT_NO'
+          DataSet = fdsBankingDetail
+          DataSetName = 'BankingDetail'
+          Frame.Typ = [ftLeft, ftRight]
+          Memo.UTF8W = (
+            '[BankingDetail."ACCOUNT_NO"]')
+        end
+      end
+      object bndBankingDetailHeader: TfrxChild
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 37.795275590000000000
+        Top = 495.118430000000000000
+        Width = 1046.929810000000000000
+        ToNRows = 0
+        ToNRowsMode = rmCount
+        object Memo56: TfrxMemoView
+          AllowVectorExport = True
+          Width = 120.944960000000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Banking Details')
+          ParentFont = False
+        end
+        object Memo57: TfrxMemoView
+          AllowVectorExport = True
+          Top = 18.897650000000000000
+          Width = 154.960629920000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          Memo.UTF8W = (
+            'Bank')
+          ParentFont = False
+        end
+        object Memo58: TfrxMemoView
+          AllowVectorExport = True
+          Left = 154.960730000000000000
+          Top = 18.897650000000000000
+          Width = 58.582677170000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          Memo.UTF8W = (
+            'Branch')
+          ParentFont = False
+        end
+        object Memo59: TfrxMemoView
+          AllowVectorExport = True
+          Left = 213.543307090000000000
+          Top = 18.897650000000000000
+          Width = 120.944881890000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          Memo.UTF8W = (
+            'Acc Type')
+          ParentFont = False
+        end
+        object Memo60: TfrxMemoView
+          AllowVectorExport = True
+          Left = 334.488188976378000000
+          Top = 18.897650000000000000
+          Width = 86.929133860000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight]
+          Memo.UTF8W = (
+            'Acc No')
+          ParentFont = False
+        end
+        object Memo61: TfrxMemoView
+          AllowVectorExport = True
+          Left = 532.913730000000000000
+          Top = 18.897637800000000000
+          Width = 154.960629920000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          Memo.UTF8W = (
+            'Bank')
+          ParentFont = False
+        end
+        object Memo62: TfrxMemoView
+          AllowVectorExport = True
+          Left = 687.874460000000000000
+          Top = 18.897637795275590000
+          Width = 58.582677170000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          Memo.UTF8W = (
+            'Branch')
+          ParentFont = False
+        end
+        object Memo63: TfrxMemoView
+          AllowVectorExport = True
+          Left = 746.457037090000000000
+          Top = 18.897637795275590000
+          Width = 120.944881890000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft]
+          Memo.UTF8W = (
+            'Acc Type')
+          ParentFont = False
+        end
+        object Memo64: TfrxMemoView
+          AllowVectorExport = True
+          Left = 867.401918980000000000
+          Top = 18.897637795275590000
+          Width = 86.929133860000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight]
+          Memo.UTF8W = (
+            'Acc No')
+          ParentFont = False
+        end
+      end
+    end
+    object repContactDetailPerson: TfrxReportPage
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Calibri'
+      Font.Style = []
+      Orientation = poLandscape
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = [ftLeft, ftRight]
+      EndlessHeight = True
+      PrintIfEmpty = False
+      object bndContactDetailPersonHeader: TfrxHeader
+        FillType = ftBrush
+        Frame.Typ = [ftLeft, ftRight, ftTop]
+        Height = 18.897637795275600000
+        Top = 18.897650000000000000
+        Width = 1046.929810000000000000
+        PrintChildIfInvisible = True
+        object Memo51: TfrxMemoView
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Width = 219.212740000000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            'Contact Person Contact details')
+          ParentFont = False
+        end
+      end
+      object bndContactDetailPersonMaster: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        Height = 18.897637800000000000
+        Top = 60.472480000000000000
+        Width = 1046.929810000000000000
+        DataSet = fdsContactPerson
+        DataSetName = 'ContactPerson'
+        PrintChildIfInvisible = True
+        PrintIfDetailEmpty = True
+        RowCount = 0
+        object Memo47: TfrxMemoView
+          AllowVectorExport = True
+          Left = 7.559060000000000000
+          Width = 291.023810000000000000
+          Height = 18.897650000000000000
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Calibri'
+          Font.Style = [fsBold]
+          Frame.Typ = []
+          Memo.UTF8W = (
+            
+              '[(<ContactPerson."FIRST_NAME">)]  [(<ContactPerson."LAST_NAME">)' +
+              ']')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+      end
+      object bndContactDetailPersonDetail: TfrxDetailData
+        FillType = ftBrush
+        Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+        Height = 18.897637800000000000
+        Top = 102.047310000000000000
+        Width = 1046.929810000000000000
+        DataSet = fdsContactDetailPerson
+        DataSetName = 'ContactDetailPerson'
+        PrintChildIfInvisible = True
+        PrintIfDetailEmpty = True
+        RowCount = 0
+        object Memo49: TfrxMemoView
+          AllowVectorExport = True
+          Left = 7.559060000000000000
+          Width = 132.283550000000000000
+          Height = 18.897650000000000000
+          DataField = 'CONTACT_TYPE'
+          DataSet = fdsContactDetailPerson
+          DataSetName = 'ContactDetailPerson'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[ContactDetailPerson."CONTACT_TYPE"]')
+        end
+        object Memo50: TfrxMemoView
+          AllowVectorExport = True
+          Left = 139.842610000000000000
+          Width = 132.283550000000000000
+          Height = 18.897650000000000000
+          DataField = 'VALUE'
+          DataSet = fdsContactDetailPerson
+          DataSetName = 'ContactDetailPerson'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[ContactDetailPerson."VALUE"]')
+        end
+      end
+    end
+  end
+  object fdsContactDetailCo: TfrxDBDataset
+    UserName = 'ContactDetailCo'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'CONTACT_DETAIL_CO_ID=CONTACT_DETAIL_CO_ID'
+      'CONTACT_TYPE_ID=CONTACT_TYPE_ID'
+      'CUSTOMER_ID=CUSTOMER_ID'
+      'CONTACT_TYPE=CONTACT_TYPE'
+      'VALUE=VALUE')
+    DataSet = cdsContactDetailCo
+    BCDToCurrency = False
+    Left = 85
+    Top = 675
+  end
+  object fdsAddress: TfrxDBDataset
+    UserName = 'Address'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ADDRESS_ID=ADDRESS_ID'
+      'CUSTOMER_ID=CUSTOMER_ID'
+      'CUSTOMER_TYPE_ID=CUSTOMER_TYPE_ID'
+      'CUSTOMER_TYPE=CUSTOMER_TYPE'
+      'NAME=NAME'
+      'TRADING_AS=TRADING_AS'
+      'PHYSICAL1=PHYSICAL1'
+      'PHYSICAL2=PHYSICAL2'
+      'PHYSICAL3=PHYSICAL3'
+      'PHYSICAL4=PHYSICAL4'
+      'PHYSICAL_CODE=PHYSICAL_CODE'
+      'POSTAL1=POSTAL1'
+      'POSTAL2=POSTAL2'
+      'POSTAL3=POSTAL3'
+      'POSTAL4=POSTAL4'
+      'POSTAL_CODE=POSTAL_CODE'
+      'BILLING1=BILLING1'
+      'BILLING2=BILLING2'
+      'BILLING3=BILLING3'
+      'BILLING4=BILLING4'
+      'BILLING_CODE=BILLING_CODE')
+    DataSet = cdsAddress
+    BCDToCurrency = False
+    Left = 186
+    Top = 675
+  end
+  object fdsBankingDetail: TfrxDBDataset
+    UserName = 'BankingDetail'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'BANK_ID=BANK_ID'
+      'CUSTOMER_ID=CUSTOMER_ID'
+      'BRANCH_CODE=BRANCH_CODE'
+      'ACCOUNT_TYPE_ID=ACCOUNT_TYPE_ID'
+      'ACCOUNT_NO=ACCOUNT_NO'
+      'FIRST_NAME=FIRST_NAME'
+      'LAST_NAME=LAST_NAME'
+      'BANK_NAME=BANK_NAME'
+      'ACCOUNT_TYPE=ACCOUNT_TYPE'
+      'ACCOUNT_HOLDER=ACCOUNT_HOLDER')
+    DataSet = cdsBankingDetail
+    BCDToCurrency = False
+    Left = 287
+    Top = 675
+  end
+  object fdsContactPerson: TfrxDBDataset
+    UserName = 'ContactPerson'
+    CloseDataSource = False
+    DataSet = cdsContactPerson
+    BCDToCurrency = False
+    Left = 389
+    Top = 675
+  end
+  object fdsContactDetailPerson: TfrxDBDataset
+    UserName = 'ContactDetailPerson'
+    CloseDataSource = False
+    DataSet = cdsContactDetailPerson
+    BCDToCurrency = False
+    Left = 515
+    Top = 675
+  end
+  object fdsDirector: TfrxDBDataset
+    UserName = 'Director'
+    CloseDataSource = False
+    DataSet = cdsDirector
+    BCDToCurrency = False
+    Left = 617
+    Top = 675
+  end
+  object fdsBeneficiary: TfrxDBDataset
+    UserName = 'Beneficiary'
+    CloseDataSource = False
+    DataSet = cdsBeneficiary
+    BCDToCurrency = False
+    Left = 718
+    Top = 675
+  end
+  object fdsVehicle: TfrxDBDataset
+    UserName = 'Vehicle'
+    CloseDataSource = False
+    DataSet = cdsVehicle
+    BCDToCurrency = False
+    Left = 820
+    Top = 675
+  end
+  object cdsAddress: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <
+      item
+        Name = 'idxCustID'
+        Fields = 'CUSTOMER_ID'
+      end>
+    IndexName = 'idxCustID'
+    MasterSource = dtsCustomer
+    MasterFields = 'ID'
+    DetailFields = 'CUSTOMER_ID'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvDataSnapCompatibility]
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
+    Left = 185
+    Top = 575
+    object cdsAddressID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsAddressCUSTOMER_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_ID'
+      Origin = 'CUSTOMER_ID'
+      Required = True
+    end
+    object cdsAddressPHYSICAL1: TStringField
+      DisplayLabel = 'Physical 1'
+      FieldName = 'PHYSICAL1'
+      Origin = 'PHYSICAL1'
+      Size = 50
+    end
+    object cdsAddressPHYSICAL2: TStringField
+      DisplayLabel = 'Physical 2'
+      FieldName = 'PHYSICAL2'
+      Origin = 'PHYSICAL2'
+      Size = 50
+    end
+    object cdsAddressPHYSICAL3: TStringField
+      DisplayLabel = 'Physical 3'
+      FieldName = 'PHYSICAL3'
+      Origin = 'PHYSICAL3'
+      Size = 50
+    end
+    object cdsAddressPHYSICAL4: TStringField
+      DisplayLabel = 'Physical 4'
+      FieldName = 'PHYSICAL4'
+      Origin = 'PHYSICAL4'
+      Size = 50
+    end
+    object cdsAddressPHYSICAL_CODE: TStringField
+      DisplayLabel = 'Post Code'
+      FieldName = 'PHYSICAL_CODE'
+      Origin = 'PHYSICAL_CODE'
+      Size = 10
+    end
+    object cdsAddressPOSTAL1: TStringField
+      DisplayLabel = 'Postal 1'
+      FieldName = 'POSTAL1'
+      Origin = 'POSTAL1'
+      Size = 50
+    end
+    object cdsAddressPOSTAL2: TStringField
+      DisplayLabel = 'Postal 2'
+      FieldName = 'POSTAL2'
+      Origin = 'POSTAL2'
+      Size = 50
+    end
+    object cdsAddressPOSTAL3: TStringField
+      DisplayLabel = 'Postal 3'
+      FieldName = 'POSTAL3'
+      Origin = 'POSTAL3'
+      Size = 50
+    end
+    object cdsAddressPOSTAL4: TStringField
+      DisplayLabel = 'Postal 4'
+      FieldName = 'POSTAL4'
+      Origin = 'POSTAL4'
+      Size = 50
+    end
+    object cdsAddressPOSTAL_CODE: TStringField
+      DisplayLabel = 'Post Code'
+      FieldName = 'POSTAL_CODE'
+      Origin = 'POSTAL_CODE'
+      Size = 10
+    end
+    object cdsAddressBILLING1: TStringField
+      DisplayLabel = 'Billing 1'
+      FieldName = 'BILLING1'
+      Origin = 'BILLING1'
+      Size = 50
+    end
+    object cdsAddressBILLING2: TStringField
+      DisplayLabel = 'Billing 2'
+      FieldName = 'BILLING2'
+      Origin = 'BILLING2'
+      Size = 50
+    end
+    object cdsAddressBILLING3: TStringField
+      DisplayLabel = 'Billing 3'
+      FieldName = 'BILLING3'
+      Origin = 'BILLING3'
+      Size = 50
+    end
+    object cdsAddressBILLING4: TStringField
+      DisplayLabel = 'Billing 4'
+      FieldName = 'BILLING4'
+      Origin = 'BILLING4'
+      Size = 50
+    end
+    object cdsAddressBILLING_CODE: TStringField
+      DisplayLabel = 'Post Code'
+      FieldName = 'BILLING_CODE'
+      Origin = 'BILLING_CODE'
+      Size = 10
+    end
+  end
+  object cdsTrustee: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    Constraints = <
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(FIRST_NAME)) > 0'
+        ErrorMessage = 'Beneficiary first hame must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(LAST_NAME)) > 0'
+        ErrorMessage = 'Beneficiary last name must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(MOBILE_PHONE)) > 0'
+        ErrorMessage = 'Beneficiary mobile phone must have a value'
+        FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(EMAIL_ADDRESS)) > 0'
+        ErrorMessage = 'Beneficiary email address must have a value'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <>
+    Indexes = <
+      item
+        Active = True
+        Name = 'idxBID'
+        Fields = 'ID'
+        Options = [soPrimary]
+      end
+      item
+        Name = 'idxBCustID'
+        Fields = 'CUSTOMER_ID'
+      end
+      item
+        Active = True
+        Selected = True
+        Name = 'idxBName'
+        Fields = 'CUSTOMER_ID;FIRST_NAME;LAST_NAME'
+        Options = [soUnique]
+      end>
+    IndexName = 'idxBName'
+    ConstraintsEnabled = True
+    MasterSource = dtsCustomer
+    MasterFields = 'ID'
+    DetailFields = 'CUSTOMER_ID'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FetchOptions.DetailDelay = 450
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'BENEFICIARY_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'BENEFICIARY'
+    StoreDefs = True
+    Left = 905
+    Top = 575
+    object cdsTrusteeID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsTrusteeCUSTOMER_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_ID'
+      Origin = 'CUSTOMER_ID'
+      Required = True
+    end
+    object cdsTrusteeSALUTATION_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Salutation'
+      FieldName = 'SALUTATION_ID'
+      Origin = 'SALUTATION_ID'
+      Required = True
+    end
+    object cdsTrusteeSALUTATION: TStringField
+      DisplayLabel = 'Sal'
+      FieldName = 'SALUTATION'
+    end
+    object cdsTrusteeFIRST_NAME: TStringField
+      DisplayLabel = 'First Name'
+      FieldName = 'FIRST_NAME'
+      Origin = 'FIRST_NAME'
+      Required = True
+      Size = 30
+    end
+    object cdsTrusteeLAST_NAME: TStringField
+      DisplayLabel = 'Last Name'
+      FieldName = 'LAST_NAME'
+      Origin = 'LAST_NAME'
+      Required = True
+      Size = 30
+    end
+    object cdsTrusteeMOBILE_PHONE: TStringField
+      DisplayLabel = 'Mobile Phone'
+      FieldName = 'MOBILE_PHONE'
+      Origin = 'MOBILE_PHONE'
+      Size = 15
+    end
+    object cdsTrusteeEMAIL_ADDRESS: TStringField
+      DisplayLabel = 'Email Address'
+      FieldName = 'EMAIL_ADDRESS'
+      Origin = 'EMAIL_ADDRESS'
+      Size = 100
+    end
+  end
+  object dtsTrustee: TDataSource
+    DataSet = cdsTrustee
+    Left = 905
+    Top = 625
+  end
+  object frxReport1: TfrxReport
+    Version = '6.2.1'
+    DotMatrixReport = False
+    EngineOptions.DoublePass = True
+    EngineOptions.PrintIfEmpty = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 43494.671348414300000000
+    ReportOptions.LastChange = 43863.552538645800000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 429
+    Top = 175
     Datasets = <
       item
         DataSet = fdsAddress
@@ -4966,7 +6681,7 @@ inherited ReportDM: TReportDM
         object Memo3: TfrxMemoView
           AllowVectorExport = True
           Top = 0.000012200000000004
-          Width = 71.811023622047210000
+          Width = 71.811023622047200000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -4984,7 +6699,7 @@ inherited ReportDM: TReportDM
         object Memo4: TfrxMemoView
           AllowVectorExport = True
           Top = 18.897650000000000000
-          Width = 71.811023622047210000
+          Width = 71.811023622047200000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -5156,7 +6871,7 @@ inherited ReportDM: TReportDM
         object Memo21: TfrxMemoView
           AllowVectorExport = True
           Top = 37.795312200000000000
-          Width = 71.811023622047210000
+          Width = 71.811023622047200000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -5675,7 +7390,7 @@ inherited ReportDM: TReportDM
           Top = 9.448818897637800000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
-          Page = rptCustomer.repBankingDetail
+          Page = frxReport1.repBankingDetail
         end
       end
       object bndContactDetailCoHead: TfrxChild
@@ -5715,7 +7430,7 @@ inherited ReportDM: TReportDM
           Top = 9.448818897637800000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
-          Page = rptCustomer.repDirector
+          Page = frxReport1.repDirector
         end
       end
       object bndBeneficiary: TfrxChild
@@ -5731,7 +7446,7 @@ inherited ReportDM: TReportDM
           Top = 9.448818897637800000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
-          Page = rptCustomer.repbeneficiary
+          Page = frxReport1.repbeneficiary
         end
       end
       object bndvehicle: TfrxChild
@@ -5747,7 +7462,7 @@ inherited ReportDM: TReportDM
           Top = 9.448818897637800000
           Width = 94.488250000000000000
           Height = 18.897650000000000000
-          Page = rptCustomer.repvehicle
+          Page = frxReport1.repvehicle
         end
       end
       object bndAddress: TfrxDetailData
@@ -5756,7 +7471,7 @@ inherited ReportDM: TReportDM
         Height = 98.267716540000000000
         Top = 306.141930000000000000
         Width = 1046.929810000000000000
-        Child = rptCustomer.bndContactDetailCoHead
+        Child = frxReport1.bndContactDetailCoHead
         DataSet = fdsAddress
         DataSetName = 'Address'
         PrintIfDetailEmpty = True
@@ -6158,15 +7873,15 @@ inherited ReportDM: TReportDM
         Top = 476.220780000000000000
         Width = 1046.929810000000000000
         Columns = 4
-        ColumnWidth = 261.732283464566900000
-        ColumnGap = 7.559055118110236000
+        ColumnWidth = 261.732283464567000000
+        ColumnGap = 7.559055118110240000
         DataSet = fdsContactDetailCo
         DataSetName = 'ContactDetailCo'
         RowCount = 0
         object Memo163: TfrxMemoView
           IndexTag = 1
           AllowVectorExport = True
-          Width = 86.929133860000000000
+          Width = 86.929133858267700000
           Height = 18.897650000000000000
           DataSet = fdsContactDetailCo
           DataSetName = 'ContactDetailCo'
@@ -7734,368 +9449,5 @@ inherited ReportDM: TReportDM
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
     end
-  end
-  object fdsContactDetailCo: TfrxDBDataset
-    UserName = 'ContactDetailCo'
-    CloseDataSource = False
-    FieldAliases.Strings = (
-      'CONTACT_DETAIL_CO_ID=CONTACT_DETAIL_CO_ID'
-      'CONTACT_TYPE_ID=CONTACT_TYPE_ID'
-      'CUSTOMER_ID=CUSTOMER_ID'
-      'CONTACT_TYPE=CONTACT_TYPE'
-      'VALUE=VALUE')
-    DataSet = cdsContactDetailCo
-    BCDToCurrency = False
-    Left = 85
-    Top = 675
-  end
-  object fdsAddress: TfrxDBDataset
-    UserName = 'Address'
-    CloseDataSource = False
-    FieldAliases.Strings = (
-      'ADDRESS_ID=ADDRESS_ID'
-      'CUSTOMER_ID=CUSTOMER_ID'
-      'CUSTOMER_TYPE_ID=CUSTOMER_TYPE_ID'
-      'CUSTOMER_TYPE=CUSTOMER_TYPE'
-      'NAME=NAME'
-      'TRADING_AS=TRADING_AS'
-      'PHYSICAL1=PHYSICAL1'
-      'PHYSICAL2=PHYSICAL2'
-      'PHYSICAL3=PHYSICAL3'
-      'PHYSICAL4=PHYSICAL4'
-      'PHYSICAL_CODE=PHYSICAL_CODE'
-      'POSTAL1=POSTAL1'
-      'POSTAL2=POSTAL2'
-      'POSTAL3=POSTAL3'
-      'POSTAL4=POSTAL4'
-      'POSTAL_CODE=POSTAL_CODE'
-      'BILLING1=BILLING1'
-      'BILLING2=BILLING2'
-      'BILLING3=BILLING3'
-      'BILLING4=BILLING4'
-      'BILLING_CODE=BILLING_CODE')
-    DataSet = cdsAddress
-    BCDToCurrency = False
-    Left = 186
-    Top = 675
-  end
-  object fdsBankingDetail: TfrxDBDataset
-    UserName = 'BankingDetail'
-    CloseDataSource = False
-    FieldAliases.Strings = (
-      'ID=ID'
-      'BANK_ID=BANK_ID'
-      'CUSTOMER_ID=CUSTOMER_ID'
-      'BRANCH_CODE=BRANCH_CODE'
-      'ACCOUNT_TYPE_ID=ACCOUNT_TYPE_ID'
-      'ACCOUNT_NO=ACCOUNT_NO'
-      'FIRST_NAME=FIRST_NAME'
-      'LAST_NAME=LAST_NAME'
-      'BANK_NAME=BANK_NAME'
-      'ACCOUNT_TYPE=ACCOUNT_TYPE'
-      'ACCOUNT_HOLDER=ACCOUNT_HOLDER')
-    DataSet = cdsBankingDetail
-    BCDToCurrency = False
-    Left = 287
-    Top = 675
-  end
-  object fdsContactPerson: TfrxDBDataset
-    UserName = 'ContactPerson'
-    CloseDataSource = False
-    DataSet = cdsContactPerson
-    BCDToCurrency = False
-    Left = 389
-    Top = 675
-  end
-  object fdsContactDetailPerson: TfrxDBDataset
-    UserName = 'ContactDetailPerson'
-    CloseDataSource = False
-    DataSet = cdsContactDetailPerson
-    BCDToCurrency = False
-    Left = 515
-    Top = 675
-  end
-  object fdsDirector: TfrxDBDataset
-    UserName = 'Director'
-    CloseDataSource = False
-    DataSet = cdsDirector
-    BCDToCurrency = False
-    Left = 617
-    Top = 675
-  end
-  object fdsBeneficiary: TfrxDBDataset
-    UserName = 'Beneficiary'
-    CloseDataSource = False
-    DataSet = cdsBeneficiary
-    BCDToCurrency = False
-    Left = 718
-    Top = 675
-  end
-  object fdsVehicle: TfrxDBDataset
-    UserName = 'Vehicle'
-    CloseDataSource = False
-    DataSet = cdsVehicle
-    BCDToCurrency = False
-    Left = 820
-    Top = 675
-  end
-  object cdsAddress: TFDMemTable
-    ActiveStoredUsage = [auDesignTime]
-    FilterOptions = [foCaseInsensitive]
-    FieldDefs = <>
-    CachedUpdates = True
-    IndexDefs = <
-      item
-        Name = 'idxCustID'
-        Fields = 'CUSTOMER_ID'
-      end>
-    IndexName = 'idxCustID'
-    MasterSource = dtsCustomer
-    MasterFields = 'ID'
-    DetailFields = 'CUSTOMER_ID'
-    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
-    FetchOptions.Mode = fmAll
-    FetchOptions.RecordCountMode = cmTotal
-    FormatOptions.AssignedValues = [fvDataSnapCompatibility]
-    FormatOptions.DataSnapCompatibility = True
-    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
-    ResourceOptions.Persistent = True
-    ResourceOptions.StorePrettyPrint = True
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    StoreDefs = True
-    Left = 185
-    Top = 575
-    object cdsAddressID: TIntegerField
-      FieldName = 'ID'
-    end
-    object cdsAddressCUSTOMER_ID: TIntegerField
-      Alignment = taLeftJustify
-      DisplayLabel = 'C ID'
-      FieldName = 'CUSTOMER_ID'
-      Origin = 'CUSTOMER_ID'
-      Required = True
-    end
-    object cdsAddressPHYSICAL1: TStringField
-      DisplayLabel = 'Physical 1'
-      FieldName = 'PHYSICAL1'
-      Origin = 'PHYSICAL1'
-      Size = 50
-    end
-    object cdsAddressPHYSICAL2: TStringField
-      DisplayLabel = 'Physical 2'
-      FieldName = 'PHYSICAL2'
-      Origin = 'PHYSICAL2'
-      Size = 50
-    end
-    object cdsAddressPHYSICAL3: TStringField
-      DisplayLabel = 'Physical 3'
-      FieldName = 'PHYSICAL3'
-      Origin = 'PHYSICAL3'
-      Size = 50
-    end
-    object cdsAddressPHYSICAL4: TStringField
-      DisplayLabel = 'Physical 4'
-      FieldName = 'PHYSICAL4'
-      Origin = 'PHYSICAL4'
-      Size = 50
-    end
-    object cdsAddressPHYSICAL_CODE: TStringField
-      DisplayLabel = 'Post Code'
-      FieldName = 'PHYSICAL_CODE'
-      Origin = 'PHYSICAL_CODE'
-      Size = 10
-    end
-    object cdsAddressPOSTAL1: TStringField
-      DisplayLabel = 'Postal 1'
-      FieldName = 'POSTAL1'
-      Origin = 'POSTAL1'
-      Size = 50
-    end
-    object cdsAddressPOSTAL2: TStringField
-      DisplayLabel = 'Postal 2'
-      FieldName = 'POSTAL2'
-      Origin = 'POSTAL2'
-      Size = 50
-    end
-    object cdsAddressPOSTAL3: TStringField
-      DisplayLabel = 'Postal 3'
-      FieldName = 'POSTAL3'
-      Origin = 'POSTAL3'
-      Size = 50
-    end
-    object cdsAddressPOSTAL4: TStringField
-      DisplayLabel = 'Postal 4'
-      FieldName = 'POSTAL4'
-      Origin = 'POSTAL4'
-      Size = 50
-    end
-    object cdsAddressPOSTAL_CODE: TStringField
-      DisplayLabel = 'Post Code'
-      FieldName = 'POSTAL_CODE'
-      Origin = 'POSTAL_CODE'
-      Size = 10
-    end
-    object cdsAddressBILLING1: TStringField
-      DisplayLabel = 'Billing 1'
-      FieldName = 'BILLING1'
-      Origin = 'BILLING1'
-      Size = 50
-    end
-    object cdsAddressBILLING2: TStringField
-      DisplayLabel = 'Billing 2'
-      FieldName = 'BILLING2'
-      Origin = 'BILLING2'
-      Size = 50
-    end
-    object cdsAddressBILLING3: TStringField
-      DisplayLabel = 'Billing 3'
-      FieldName = 'BILLING3'
-      Origin = 'BILLING3'
-      Size = 50
-    end
-    object cdsAddressBILLING4: TStringField
-      DisplayLabel = 'Billing 4'
-      FieldName = 'BILLING4'
-      Origin = 'BILLING4'
-      Size = 50
-    end
-    object cdsAddressBILLING_CODE: TStringField
-      DisplayLabel = 'Post Code'
-      FieldName = 'BILLING_CODE'
-      Origin = 'BILLING_CODE'
-      Size = 10
-    end
-  end
-  object cdsTrustee: TFDMemTable
-    ActiveStoredUsage = [auDesignTime]
-    FilterOptions = [foCaseInsensitive]
-    Constraints = <
-      item
-        CustomConstraint = 'CHAR_LENGTH(TRIM(FIRST_NAME)) > 0'
-        ErrorMessage = 'Beneficiary first hame must have a value'
-        FromDictionary = False
-      end
-      item
-        CustomConstraint = 'CHAR_LENGTH(TRIM(LAST_NAME)) > 0'
-        ErrorMessage = 'Beneficiary last name must have a value'
-        FromDictionary = False
-      end
-      item
-        CustomConstraint = 'CHAR_LENGTH(TRIM(MOBILE_PHONE)) > 0'
-        ErrorMessage = 'Beneficiary mobile phone must have a value'
-        FromDictionary = False
-      end
-      item
-        CustomConstraint = 'CHAR_LENGTH(TRIM(EMAIL_ADDRESS)) > 0'
-        ErrorMessage = 'Beneficiary email address must have a value'
-        FromDictionary = False
-      end>
-    FieldDefs = <>
-    CachedUpdates = True
-    IndexDefs = <>
-    Indexes = <
-      item
-        Active = True
-        Name = 'idxBID'
-        Fields = 'ID'
-        Options = [soPrimary]
-      end
-      item
-        Name = 'idxBCustID'
-        Fields = 'CUSTOMER_ID'
-      end
-      item
-        Active = True
-        Selected = True
-        Name = 'idxBName'
-        Fields = 'CUSTOMER_ID;FIRST_NAME;LAST_NAME'
-        Options = [soUnique]
-      end>
-    IndexName = 'idxBName'
-    ConstraintsEnabled = True
-    MasterSource = dtsCustomer
-    MasterFields = 'ID'
-    DetailFields = 'CUSTOMER_ID'
-    FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
-    FetchOptions.Mode = fmAll
-    FetchOptions.RecordCountMode = cmTotal
-    FetchOptions.DetailDelay = 450
-    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
-    FormatOptions.MaxBcdPrecision = 2147483647
-    FormatOptions.MaxBcdScale = 1073741823
-    FormatOptions.DataSnapCompatibility = True
-    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
-    ResourceOptions.Persistent = True
-    ResourceOptions.StorePrettyPrint = True
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
-    UpdateOptions.LockWait = True
-    UpdateOptions.FetchGeneratorsPoint = gpNone
-    UpdateOptions.GeneratorName = 'BENEFICIARY_ID_GEN'
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    UpdateOptions.UpdateTableName = 'BENEFICIARY'
-    StoreDefs = True
-    Left = 905
-    Top = 575
-    object cdsTrusteeID: TIntegerField
-      Alignment = taLeftJustify
-      FieldName = 'ID'
-      Origin = 'ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object cdsTrusteeCUSTOMER_ID: TIntegerField
-      Alignment = taLeftJustify
-      DisplayLabel = 'C ID'
-      FieldName = 'CUSTOMER_ID'
-      Origin = 'CUSTOMER_ID'
-      Required = True
-    end
-    object cdsTrusteeSALUTATION_ID: TIntegerField
-      Alignment = taLeftJustify
-      DisplayLabel = 'Salutation'
-      FieldName = 'SALUTATION_ID'
-      Origin = 'SALUTATION_ID'
-      Required = True
-    end
-    object cdsTrusteeSALUTATION: TStringField
-      DisplayLabel = 'Sal'
-      FieldName = 'SALUTATION'
-    end
-    object cdsTrusteeFIRST_NAME: TStringField
-      DisplayLabel = 'First Name'
-      FieldName = 'FIRST_NAME'
-      Origin = 'FIRST_NAME'
-      Required = True
-      Size = 30
-    end
-    object cdsTrusteeLAST_NAME: TStringField
-      DisplayLabel = 'Last Name'
-      FieldName = 'LAST_NAME'
-      Origin = 'LAST_NAME'
-      Required = True
-      Size = 30
-    end
-    object cdsTrusteeMOBILE_PHONE: TStringField
-      DisplayLabel = 'Mobile Phone'
-      FieldName = 'MOBILE_PHONE'
-      Origin = 'MOBILE_PHONE'
-      Size = 15
-    end
-    object cdsTrusteeEMAIL_ADDRESS: TStringField
-      DisplayLabel = 'Email Address'
-      FieldName = 'EMAIL_ADDRESS'
-      Origin = 'EMAIL_ADDRESS'
-      Size = 100
-    end
-  end
-  object dtsTrustee: TDataSource
-    DataSet = cdsTrustee
-    Left = 905
-    Top = 625
   end
 end

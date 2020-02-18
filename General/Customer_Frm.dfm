@@ -1808,12 +1808,11 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdDirector: TcxGrid [13]
-      Left = 10000
-      Top = 10000
+      Left = 25
+      Top = 481
       Width = 1656
       Height = 139
       TabOrder = 19
-      Visible = False
       OnEnter = grdDirectorEnter
       object viewDirector: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -2672,12 +2671,11 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdDirectorOfCompany: TcxGrid [24]
-      Left = 10000
-      Top = 10000
+      Left = 25
+      Top = 626
       Width = 430
       Height = 98
       TabOrder = 20
-      Visible = False
       object viewDirectorOfCompany: TcxGridDBBandedTableView
         OnDblClick = viewContactDetailCoDblClick
         Navigator.Buttons.CustomButtons = <>
@@ -2763,11 +2761,12 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdHeir: TcxGrid [25]
-      Left = 25
-      Top = 481
+      Left = 10000
+      Top = 10000
       Width = 550
       Height = 243
       TabOrder = 24
+      Visible = False
       object viewHeir: TcxGridDBBandedTableView
         PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
@@ -3347,8 +3346,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdHeirVertical: TcxDBVerticalGrid [27]
-      Left = 581
-      Top = 481
+      Left = 10000
+      Top = 10000
       Width = 360
       Height = 243
       OptionsView.CellAutoHeight = True
@@ -3360,6 +3359,7 @@ inherited CustomerFrm: TCustomerFrm
       ScrollbarAnnotations.CustomAnnotations = <>
       Styles.OnGetContentStyle = grdHeirVerticalStylesGetContentStyle
       TabOrder = 25
+      Visible = False
       OnDblClick = grdPhysicalAddressDblClick
       OnDrawRowHeader = grdHeirVerticalDrawRowHeader
       OnEnter = grdHeirVerticalEnter
@@ -3697,7 +3697,7 @@ inherited CustomerFrm: TCustomerFrm
       AlignVert = avClient
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
-      ItemIndex = 8
+      ItemIndex = 4
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpDetailGridTabChanged

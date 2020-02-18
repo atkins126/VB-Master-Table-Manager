@@ -320,6 +320,7 @@ type
     cdsTrusteeEMAIL_ADDRESS: TStringField;
     dtsTrustee: TDataSource;
     cdsTrusteeSALUTATION: TStringField;
+    frxReport1: TfrxReport;
 //    procedure PrintReport(SourceDataSet, TargetDataSet: TFDmemTable;
 //      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
 //      ReportTypeName: string);

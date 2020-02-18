@@ -1597,4 +1597,394 @@ inherited LookupDM: TLookupDM
     Left = 120
     Top = 540
   end
+  object cdsTrusteeSalutation: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    Constraints = <
+      item
+        CustomConstraint = 'CHAR_LENGTH(NAME) > 0'
+        ErrorMessage = 'Salutation name must have a value'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <
+      item
+        Name = 'idxID'
+        Fields = 'ID'
+        Options = [ixPrimary]
+      end
+      item
+        Name = 'idxName'
+        CaseInsFields = 'NAME'
+        Fields = 'NAME'
+        Options = [ixUnique]
+      end>
+    IndexName = 'idxName'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'SALUTATION_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'SALUTATION'
+    StoreDefs = True
+    Left = 250
+    Top = 490
+    object cdsTrusteeSalutationID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsTrusteeSalutationNAME: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+    end
+  end
+  object dtsTrusteeSalutation: TDataSource
+    DataSet = cdsTrusteeSalutation
+    Left = 250
+    Top = 540
+  end
+  object cdsCustomer: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <>
+    Indexes = <
+      item
+        Active = True
+        Name = 'idxCustomerID'
+        Fields = 'ID'
+        Options = [soPrimary]
+      end
+      item
+        Active = True
+        Selected = True
+        Name = 'idxCustName'
+        Fields = 'NAME'
+        CaseInsFields = 'NAME'
+        Options = [soNoCase, soUnique]
+        FilterOptions = [ekNoCase]
+      end>
+    IndexName = 'idxCustName'
+    ConstraintsEnabled = True
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'CUSTOMER_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'CUSTOMER'
+    StoreDefs = True
+    Left = 730
+    Top = 10
+    object cdsCustomerID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsCustomerCUSTOMER_TYPE_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_TYPE_ID'
+      Origin = 'CUSTOMER_TYPE_ID'
+      Required = True
+    end
+    object cdsCustomerYEAR_END_MONTH_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Year End'
+      FieldName = 'YEAR_END_MONTH_ID'
+      Origin = 'YEAR_END_MONTH_ID'
+      Required = True
+    end
+    object cdsCustomerTAX_OFFICE_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Tax Office'
+      FieldName = 'TAX_OFFICE_ID'
+      Origin = 'TAX_OFFICE_ID'
+    end
+    object cdsCustomerVAT_MONTH_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'VAT Month'
+      FieldName = 'VAT_MONTH_ID'
+      Origin = 'VAT_MONTH_ID'
+    end
+    object cdsCustomerVAT_COUNTRY_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'VAT Country'
+      FieldName = 'VAT_COUNTRY_ID'
+      Origin = 'VAT_COUNTRY_ID'
+    end
+    object cdsCustomerVAT_OFFICE_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'VAT Office'
+      FieldName = 'VAT_OFFICE_ID'
+      Origin = 'VAT_OFFICE_ID'
+    end
+    object cdsCustomerAR_MONTH_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'AR Month'
+      FieldName = 'AR_MONTH_ID'
+      Origin = 'AR_MONTH_ID'
+    end
+    object cdsCustomerSTATUS_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Status'
+      FieldName = 'STATUS_ID'
+      Origin = 'STATUS_ID'
+      Required = True
+    end
+    object cdsCustomerNAME: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+      Size = 100
+    end
+    object cdsCustomerFIRST_NAME: TStringField
+      DisplayLabel = 'First Name'
+      FieldName = 'FIRST_NAME'
+      Origin = 'FIRST_NAME'
+      Size = 30
+    end
+    object cdsCustomerLAST_NAME: TStringField
+      DisplayLabel = 'Last Name'
+      FieldName = 'LAST_NAME'
+      Origin = 'LAST_NAME'
+      Size = 30
+    end
+    object cdsCustomerINITIALS: TStringField
+      DisplayLabel = 'Init'
+      FieldName = 'INITIALS'
+      Origin = 'INITIALS'
+      Size = 5
+    end
+    object cdsCustomerTRADING_AS: TStringField
+      DisplayLabel = 'Trading As'
+      FieldName = 'TRADING_AS'
+      Origin = 'TRADING_AS'
+      Size = 100
+    end
+    object cdsCustomerBILL_TO: TStringField
+      DisplayLabel = 'Bill To Name'
+      FieldName = 'BILL_TO'
+      Origin = 'BILL_TO'
+      Size = 100
+    end
+    object cdsCustomerCO_NO: TStringField
+      DisplayLabel = 'Company No'
+      FieldName = 'CO_NO'
+      Origin = 'CO_NO'
+    end
+    object cdsCustomerTAX_NO: TStringField
+      DisplayLabel = 'Tax No'
+      FieldName = 'TAX_NO'
+      Origin = 'TAX_NO'
+    end
+    object cdsCustomerVAT_NO: TStringField
+      DisplayLabel = 'VAT No'
+      FieldName = 'VAT_NO'
+      Origin = 'VAT_NO'
+    end
+    object cdsCustomerVAT_CUSTOMS_CODE: TStringField
+      DisplayLabel = 'VAT Customs Code'
+      FieldName = 'VAT_CUSTOMS_CODE'
+      Origin = 'VAT_CUSTOMS_CODE'
+    end
+    object cdsCustomerPAYE_NO: TStringField
+      DisplayLabel = 'PAYE No'
+      FieldName = 'PAYE_NO'
+      Origin = 'PAYE_NO'
+    end
+    object cdsCustomerUIF_NO: TStringField
+      DisplayLabel = 'UIF No'
+      FieldName = 'UIF_NO'
+      Origin = 'UIF_NO'
+    end
+    object cdsCustomerSDL_NO: TStringField
+      DisplayLabel = 'SDL No'
+      FieldName = 'SDL_NO'
+      Origin = 'SDL_NO'
+    end
+    object cdsCustomerWC_NO: TStringField
+      DisplayLabel = 'WC No'
+      FieldName = 'WC_NO'
+      Origin = 'WC_NO'
+    end
+    object cdsCustomerAR_COMPLETION_DATE: TSQLTimeStampField
+      DisplayLabel = 'AR Comp Date'
+      FieldName = 'AR_COMPLETION_DATE'
+      Origin = 'AR_COMPLETION_DATE'
+    end
+    object cdsCustomerPASTEL_ACC_CODE: TStringField
+      DisplayLabel = 'Pastel Acc'
+      FieldName = 'PASTEL_ACC_CODE'
+      Origin = 'PASTEL_ACC_CODE'
+      Size = 25
+    end
+    object cdsCustomerVB_TAX_ACC_CODE: TStringField
+      DisplayLabel = 'VB Tax Acc Code'
+      FieldName = 'VB_TAX_ACC_CODE'
+      Origin = 'VB_TAX_ACC_CODE'
+      Size = 25
+    end
+    object cdsCustomerIS_PROV_TAX_PAYER: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Prov'
+      FieldName = 'IS_PROV_TAX_PAYER'
+      Origin = 'IS_PROV_TAX_PAYER'
+      Required = True
+    end
+    object cdsCustomerHAS_LIVING_WILL: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Liv Will'
+      FieldName = 'HAS_LIVING_WILL'
+      Origin = 'HAS_LIVING_WILL'
+      Required = True
+    end
+    object cdsCustomerIS_ORGAN_DONOR: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Org Donr'
+      FieldName = 'IS_ORGAN_DONOR'
+      Origin = 'IS_ORGAN_DONOR'
+      Required = True
+    end
+    object cdsCustomerDATE_CREATED: TSQLTimeStampField
+      DisplayLabel = 'Created'
+      FieldName = 'DATE_CREATED'
+      Origin = 'DATE_CREATED'
+    end
+    object cdsCustomerDATE_MODIFIED: TSQLTimeStampField
+      DisplayLabel = 'Modified'
+      FieldName = 'DATE_MODIFIED'
+      Origin = 'DATE_MODIFIED'
+    end
+    object cdsCustomerIS_ACTIVE: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = 'Act'
+      FieldName = 'IS_ACTIVE'
+      Origin = 'IS_ACTIVE'
+      Required = True
+    end
+    object cdsCustomerEFILING: TStringField
+      DisplayLabel = 'EFiling'
+      FieldName = 'EFILING'
+      Origin = 'EFILING'
+      Size = 30
+    end
+    object cdsCustomerEF_USER_NAME: TStringField
+      DisplayLabel = 'EF User Name'
+      FieldName = 'EF_USER_NAME'
+      Origin = 'EF_USER_NAME'
+      Size = 30
+    end
+    object cdsCustomerEF_PASSWORD: TStringField
+      DisplayLabel = 'EF Password'
+      FieldName = 'EF_PASSWORD'
+      Origin = 'EF_PASSWORD'
+    end
+    object cdsCustomerCUSTOMER_GROUP_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'CG ID'
+      FieldName = 'CUSTOMER_GROUP_ID'
+      Origin = 'CUSTOMER_GROUP_ID'
+    end
+  end
+  object dtsCustomer: TDataSource
+    DataSet = cdsCustomer
+    Left = 730
+    Top = 60
+  end
+  object cdsCustomerStatusRpt: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    Constraints = <
+      item
+        CustomConstraint = 'CHAR_LENGTH(NAME) > 0'
+        ErrorMessage = 'Customer Status name must have a value'
+        FromDictionary = False
+      end>
+    FieldDefs = <>
+    CachedUpdates = True
+    IndexDefs = <
+      item
+        Name = 'idxID'
+        Fields = 'ID'
+        Options = [ixPrimary]
+      end
+      item
+        Name = 'idxName'
+        CaseInsFields = 'NAME'
+        Fields = 'NAME'
+        Options = [ixUnique, ixCaseInsensitive]
+      end>
+    IndexName = 'idxName'
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
+    FormatOptions.MaxBcdPrecision = 2147483647
+    FormatOptions.MaxBcdScale = 1073741823
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvUpdateChngFields, uvUpdateMode, uvLockMode, uvLockPoint, uvLockWait, uvRefreshMode, uvFetchGeneratorsPoint, uvGeneratorName, uvCheckRequired, uvCheckReadOnly, uvCheckUpdatable, uvAutoCommitUpdates]
+    UpdateOptions.LockWait = True
+    UpdateOptions.FetchGeneratorsPoint = gpNone
+    UpdateOptions.GeneratorName = 'CUSTOMER_STATUS_ID_GEN'
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'CUSTOMER_STATUS'
+    StoreDefs = True
+    Left = 25
+    Top = 130
+    object cdsCustomerStatusRptID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsCustomerStatusRptNAME: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+    end
+  end
+  object dtsCustomerStatusRpt: TDataSource
+    DataSet = cdsCustomerStatusRpt
+    Left = 25
+    Top = 180
+  end
 end

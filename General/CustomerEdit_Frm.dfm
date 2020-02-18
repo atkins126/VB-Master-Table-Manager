@@ -135,7 +135,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
     object cbxIsActive: TcxCheckBox [9]
       Left = 20
       Top = 253
-      Caption = 'Is Active'
+      Caption = 'Is Active (For transactions and reports)'
       ParentShowHint = False
       Properties.Alignment = taLeftJustify
       Properties.ImmediatePost = True
@@ -629,7 +629,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       CaptionOptions.Visible = False
       Control = cbxIsActive
       ControlOptions.OriginalHeight = 19
-      ControlOptions.OriginalWidth = 71
+      ControlOptions.OriginalWidth = 246
       ControlOptions.ShowBorder = False
       Index = 7
     end

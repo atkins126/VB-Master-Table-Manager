@@ -32,9 +32,10 @@ type
     litMobileNo: TdxLayoutItem;
     litEmailAddress: TdxLayoutItem;
     procedure FormCreate(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
   private
     { Private declarations }
-    Procedure Validate;
+    procedure Validate;
   public
     { Public declarations }
   end;
@@ -51,6 +52,12 @@ uses
   MT_DM,
   Lookup_DM,
   RUtils;
+
+procedure TTrusteeDetailFrm.btnOKClick(Sender: TObject);
+begin
+  inherited;
+  Validate;
+end;
 
 procedure TTrusteeDetailFrm.FormCreate(Sender: TObject);
 begin
@@ -96,3 +103,4 @@ begin
 end;
 
 end.
+

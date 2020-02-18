@@ -401,7 +401,6 @@ type
     lucVHBank: TcxDBEditorRow;
     grdHeirVerticalBRANCH_CODE: TcxDBEditorRow;
     lucVHAccountType: TcxDBEditorRow;
-    grdHeirVerticalACCOUNT_NO: TcxDBEditorRow;
     catPhysicalAddress: TcxCategoryRow;
     catPostalAddress: TcxCategoryRow;
     catAccountHolder: TcxCategoryRow;
@@ -539,7 +538,7 @@ uses
   AccountHolder_Frm,
   TrusteeDetail_Frm,
   ShareHolderDetail_Frm,
-  HeirDetail_Frm;
+  HeirDetail_Frm, CustomerReportSelection_Frm;
 
 procedure TCustomerFrm.cbxOpenAfterExportPropertiesEditValueChanged(Sender: TObject);
 begin
@@ -1250,6 +1249,9 @@ begin
   TcxLookupComboBoxProperties(lucDrSalutation.Properties).ListSource := LookupDM.dtsDirectorSalutation;
   TcxLookupComboBoxProperties(lucDrSalutation.Properties).Buttons.Items[0].Visible := False;
 
+  TcxLookupComboBoxProperties(lucTSalutation.Properties).ListSource := LookupDM.dtsTrusteeSalutation;
+  TcxLookupComboBoxProperties(lucTSalutation.Properties).Buttons.Items[0].Visible := False;
+
   TcxLookupComboBoxProperties(lucSHSalutation.Properties).ListSource := LookupDM.dtsSHSalutation;
   TcxLookupComboBoxProperties(lucSHSalutation.Properties).Buttons.Items[0].Visible := False;
 
@@ -1579,6 +1581,15 @@ begin
           MTDM.cdsCustomer.First;
       end;
 
+//    16:
+//      begin
+//        if CustomerReportSelectionFrm = nil then
+//          CustomerReportSelectionFrm := TCustomerReportSelectionFrm.Create(nil);
+//        CustomerReportSelectionFrm.ShowModal;
+//        CustomerReportSelectionFrm.Close;
+//        FreeAndNil(CustomerReportSelectionFrm);
+//      end;
+
     16, 17, 18, 19:
       begin
         ReportDM.PrintExporting := True;
@@ -1628,6 +1639,7 @@ begin
                             FContactPersonWhereClause := '';
                             FDirecterWhereClaue := '';
                             FBeneficiaryWhereClaue := '';
+                            FTrusteeWhereClause := '';
                             FVehicleWhereClause := '';
                           end;
 
@@ -1660,7 +1672,7 @@ begin
                           end;
                       end;
 
-                      FCustomerWhereClause := FCustomerWhereClause {+ FCustomerOrderByClause};
+                      FCustomerWhereClause := FCustomerWhereClause + FCustomerOrderByClause;
 
                       // Customer data
                       VBBaseDM.GetData(66, ReportDM.cdsCustomerListing, ReportDM.cdsCustomerListing.Name, FCustomerWhereClause,
@@ -1756,6 +1768,9 @@ begin
                       FBeneficiaryWhereClaue := ' WHERE B.CUSTOMER_ID IN (';
                       FBeneficiaryOrderByClause := ' ORDER BY B.CUSTOMER_ID, B.FIRST_NAME, B.LAST_NAME ';
 
+                      FTrusteeWhereClause := ' WHERE T.CUSTOMER_ID IN (';
+                      FTrusteeOrderByClause := ' ORDER BY T.CUSTOMER_ID, T.FIRST_NAME, T.LAST_NAME ';
+
                       FVehicleWhereClause := ' WHERE V.CUSTOMER_ID IN (';
                       FVehicleOrderByClaue := ' ORDER BY V.CUSTOMER_ID, V.VEHICLE_MAKE, V.VEHICLE_MODEL ';
 
@@ -1773,6 +1788,7 @@ begin
                             FContactPersonWhereClause := '';
                             FDirecterWhereClaue := '';
                             FBeneficiaryWhereClaue := '';
+                            FTrusteeWhereClause := '';
                             FVehicleWhereClause := '';
                           end;
 
@@ -2031,7 +2047,7 @@ begin
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
   SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Trustee Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-  VBBaseDM.GetData(74, ReportDM.cdsTrustee, ReportDM.cdsTrustee.Name, FBeneficiaryWhereClaue + FBeneficiaryOrderByClause,
+  VBBaseDM.GetData(74, ReportDM.cdsTrustee, ReportDM.cdsTrustee.Name, FTrusteeWhereClause + FTrusteeOrderByClause,
     'C:\Data\Xml\Trustee.xml', ReportDM.cdsTrustee.UpdateOptions.Generatorname,
     ReportDM.cdsTrustee.UpdateOptions.UpdateTableName);
 end;
@@ -2177,7 +2193,7 @@ begin
     Iteration := Counter / TABLE_COUNT * 100;
 
     SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director of Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-    VBBaseDM.GetData(76, MTDM.cdsDirectorOfCompany, MTDM.cdsDirectorOfCompany.Name, ONE_SPACE,
+    VBBaseDM.GetData(75, MTDM.cdsDirectorOfCompany, MTDM.cdsDirectorOfCompany.Name, ONE_SPACE,
       'C:\Data\Xml\Director Of Company.xml', MTDM.cdsDirectorOfCompany.UpdateOptions.Generatorname,
       MTDM.cdsDirectorOfCompany.UpdateOptions.UpdateTableName);
 
@@ -2251,12 +2267,14 @@ begin
     LookupDM.cdsHeirSalutation.Close;
     LookupDM.cdsSHSalutation.Close;
     LookupDM.cdsAccHolderSalutation.Close;
+    LookupDM.cdsTrusteeSalutation.Close;
 
     LookupDM.cdsBFSalutation.Data := LookupDM.cdsSalutation.Data;
     LookupDM.cdsDirectorSalutation.Data := LookupDM.cdsSalutation.Data;
     LookupDM.cdsHeirSalutation.Data := LookupDM.cdsSalutation.Data;
     LookupDM.cdsSHSalutation.Data := LookupDM.cdsSalutation.Data;
     LookupDM.cdsAccHolderSalutation.Data := LookupDM.cdsSalutation.Data;
+    LookupDM.cdsTrusteeSalutation.Data := LookupDM.cdsSalutation.Data;
 
     // Job function
     Inc(Counter);
@@ -2342,7 +2360,7 @@ begin
     Iteration := Counter / TABLE_COUNT * 100;
 
     SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-    VBBaseDM.GetData(75, LookupDM.cdsCompany, LookupDM.cdsCompany.Name, ONE_SPACE,
+    VBBaseDM.GetData(76, LookupDM.cdsCompany, LookupDM.cdsCompany.Name, ONE_SPACE,
       'C:\Data\Xml\Company.xml', LookupDM.cdsCompany.UpdateOptions.Generatorname,
       LookupDM.cdsCompany.UpdateOptions.UpdateTableName);
 
@@ -2777,7 +2795,7 @@ begin
               FreeAndNil(VehicleDetailFrm);
             end;
 
-          11: // Customer
+          12: // Customer
             begin
               if CustomerEditFrm = nil then
                 CustomerEditFrm := TCustomerEditFrm.Create(nil);
@@ -2800,7 +2818,6 @@ begin
               CustomerEditFrm.Close;
               FreeAndNil(CustomerEditFrm);
             end;
-
         end;
 
 // SELECT GEN_ID( <GeneratorName>, 0 ) FROM RDB$DATABASE;
@@ -3015,11 +3032,23 @@ begin
   if AFocusedRecord = nil then
     Exit;
 
-{$IFDEF RELEASE}
+// Customer Types
+//1	Company (Pty) Ltd
+//2	Close Corporation
+//3	Trust
+//4	Individual
+//5	Non Profit Company (NPC)
+//6	Estate
+//7	Sole Proprietor
+//8	Internal Work
+
+//{$IFDEF RELEASE}
   grpPersonAttribute.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [4, 7];
   litShareHolder.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [1, 2, 5, 8];
+  grpDirector.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [1, 2, 5, 8];
   grpHeir.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [6];
-{$ENDIF}
+  grpPersonAttribute.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [4, 7];
+//{$ENDIF}
 end;
 
 end.

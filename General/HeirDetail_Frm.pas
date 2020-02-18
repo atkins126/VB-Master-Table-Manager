@@ -124,18 +124,19 @@ begin
     edtBranchCode.Text := MTDM.cdsHeir.FieldByName('BRANCH_CODE').AsString;
     lucAccType.EditValue := MTDM.cdsHeir.FieldByName('ACCOUNT_TYPE_ID').AsInteger;
     edtAccNo.Text := MTDM.cdsHeir.FieldByName('ACCOUNT_NO').AsString;
-
     edtIDNo.Text := MTDM.cdsHeir.FieldByName('ID_NUMBER').AsString;
+
     edtPhysical1.Text := MTDM.cdsHeir.FieldByName('PHYSICAL1').AsString;
     edtPhysical2.Text := MTDM.cdsHeir.FieldByName('PHYSICAL2').AsString;
     edtPhysical3.Text := MTDM.cdsHeir.FieldByName('PHYSICAL3').AsString;
     edtPhysical4.Text := MTDM.cdsHeir.FieldByName('PHYSICAL4').AsString;
-    edtPhysicalCode.Text := MTDM.cdsHeir.FieldByName('PHYSICAL_code').AsString;
+    edtPhysicalCode.Text := MTDM.cdsHeir.FieldByName('PHYSICAL_CODE').AsString;
+
     edtPostal1.Text := MTDM.cdsHeir.FieldByName('POSTAL1').AsString;
     edtPostal2.Text := MTDM.cdsHeir.FieldByName('POSTAL2').AsString;
     edtPostal3.Text := MTDM.cdsHeir.FieldByName('POSTAL3').AsString;
     edtPostal4.Text := MTDM.cdsHeir.FieldByName('POSTAL4').AsString;
-    edtPostalCode.Text := MTDM.cdsHeir.FieldByName('POSTAL_code').AsString;
+    edtPostalCode.Text := MTDM.cdsHeir.FieldByName('POSTAL_CODE').AsString;
   end;
 end;
 
