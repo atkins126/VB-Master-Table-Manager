@@ -174,7 +174,7 @@ end;
 procedure TMainFrm.FormShow(Sender: TObject);
 var
   VBShell: string;
-{$IFDEF DEBUG}ErrorMsg, {$ENDIF}SkinResourceFileName, SkinName: string;
+  {$IFDEF DEBUG}ErrorMsg, {$ENDIF}SkinResourceFileName, SkinName: string;
 //  Day, Month, Year: Word;
 begin
   inherited;
@@ -189,7 +189,7 @@ begin
     MsgDialogFrm := TMsgDialogFrm.Create(nil);
 
   try
-{$IFDEF DEBUG}
+    {$IFDEF DEBUG}
     Self.BorderStyle := bsSizeable;
     ErrorMsg := '';
     if not LocalDSServerIsRunning(LOCAL_VB_SHELL_DS_SERVER, ErrorMsg) then
@@ -206,7 +206,7 @@ begin
         [mbOK]
         );
     end;
-{$ENDIF}
+    {$ENDIF}
 
     if VBBaseDM = nil then
       VBBaseDM := TVBBaseDM.Create(nil);
@@ -242,6 +242,8 @@ begin
     VBBaseDM.GetData(35, MTDM.cdsMasterList, MTDM.cdsMasterList.Name, ONE_SPACE,
       'C:\Data\Xml\Master list.xml', MTDM.cdsMasterList.UpdateOptions.Generatorname,
       MTDM.cdsMasterList.UpdateOptions.UpdateTableName);
+
+    VBBaseDM.CheckForUpdates(4);
 
     BorderIcons := [];
     BorderStyle := bsNone;
