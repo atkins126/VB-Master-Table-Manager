@@ -1,7 +1,7 @@
 inherited MTDM: TMTDM
   Height = 777
   Width = 1097
-  object cdsActivityType: TFDMemTable [1]
+  object cdsActivityType: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -64,7 +64,7 @@ inherited MTDM: TMTDM
       Size = 50
     end
   end
-  object cdsAgePeriod: TFDMemTable [2]
+  object cdsAgePeriod: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterDelete = cdsActivityTypeAfterDelete
@@ -154,7 +154,7 @@ inherited MTDM: TMTDM
       Required = True
     end
   end
-  object cdsBank: TFDMemTable [3]
+  object cdsBank: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterDelete = cdsActivityTypeAfterDelete
@@ -223,7 +223,7 @@ inherited MTDM: TMTDM
       Size = 50
     end
   end
-  object cdsBankAccountType: TFDMemTable [4]
+  object cdsBankAccountType: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterDelete = cdsActivityTypeAfterDelete
@@ -292,7 +292,7 @@ inherited MTDM: TMTDM
       Size = 50
     end
   end
-  object cdsContactType: TFDMemTable [5]
+  object cdsContactType: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterDelete = cdsActivityTypeAfterDelete
@@ -360,7 +360,7 @@ inherited MTDM: TMTDM
       Size = 30
     end
   end
-  object cdsCustomer: TFDMemTable [6]
+  object cdsCustomer: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -624,7 +624,7 @@ inherited MTDM: TMTDM
       Origin = 'CUSTOMER_GROUP_ID'
     end
   end
-  object cdsCustomerGroup: TFDMemTable [7]
+  object cdsCustomerGroup: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -695,7 +695,7 @@ inherited MTDM: TMTDM
       Size = 50
     end
   end
-  object cdsCustomerStatus: TFDMemTable [8]
+  object cdsCustomerStatus: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -765,7 +765,7 @@ inherited MTDM: TMTDM
       Required = True
     end
   end
-  object cdsCustomerType: TFDMemTable [9]
+  object cdsCustomerType: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -836,7 +836,7 @@ inherited MTDM: TMTDM
       Size = 30
     end
   end
-  object cdsJobFunction: TFDMemTable [10]
+  object cdsJobFunction: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -907,7 +907,7 @@ inherited MTDM: TMTDM
       Size = 50
     end
   end
-  object cdsMonthOfYear: TFDMemTable [11]
+  object cdsMonthOfYear: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -981,7 +981,7 @@ inherited MTDM: TMTDM
       Size = 10
     end
   end
-  object cdsPricelist: TFDMemTable [12]
+  object cdsPricelist: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1085,7 +1085,7 @@ inherited MTDM: TMTDM
       Size = 500
     end
   end
-  object cdsRateUnit: TFDMemTable [13]
+  object cdsRateUnit: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1156,7 +1156,7 @@ inherited MTDM: TMTDM
       Size = 30
     end
   end
-  object cdsSalutation: TFDMemTable [14]
+  object cdsSalutation: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1226,7 +1226,7 @@ inherited MTDM: TMTDM
       Required = True
     end
   end
-  object cdsStdActivity: TFDMemTable [15]
+  object cdsStdActivity: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1297,7 +1297,7 @@ inherited MTDM: TMTDM
       Size = 100
     end
   end
-  object cdsTaxOffice: TFDMemTable [16]
+  object cdsTaxOffice: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1363,7 +1363,7 @@ inherited MTDM: TMTDM
       Size = 40
     end
   end
-  object cdsVehicleMake: TFDMemTable [17]
+  object cdsVehicleMake: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1434,105 +1434,105 @@ inherited MTDM: TMTDM
       Size = 30
     end
   end
-  object dtsActivityType: TDataSource [18]
+  object dtsActivityType: TDataSource
     DataSet = cdsActivityType
     Left = 135
     Top = 60
   end
-  object dtsAgePeriod: TDataSource [19]
+  object dtsAgePeriod: TDataSource
     DataSet = cdsAgePeriod
     Left = 235
     Top = 60
   end
-  object dtsBank: TDataSource [20]
+  object dtsBank: TDataSource
     DataSet = cdsBank
     Left = 335
     Top = 60
   end
-  object dtsBankAccountType: TDataSource [21]
+  object dtsBankAccountType: TDataSource
     DataSet = cdsBankAccountType
     Left = 435
     Top = 60
   end
-  object dtsContactType: TDataSource [22]
+  object dtsContactType: TDataSource
     DataSet = cdsContactType
     Left = 535
     Top = 60
   end
-  object dtsCustomer: TDataSource [23]
+  object dtsCustomer: TDataSource
     DataSet = cdsCustomer
     Left = 635
     Top = 60
   end
-  object dtsCustomerGroup: TDataSource [24]
+  object dtsCustomerGroup: TDataSource
     DataSet = cdsCustomerGroup
     Left = 135
     Top = 190
   end
-  object dtsCustomerStatus: TDataSource [25]
+  object dtsCustomerStatus: TDataSource
     DataSet = cdsCustomerStatus
     Left = 235
     Top = 190
   end
-  object dtsCustomerType: TDataSource [26]
+  object dtsCustomerType: TDataSource
     DataSet = cdsCustomerType
     Left = 335
     Top = 190
   end
-  object dtsJobFunction: TDataSource [27]
+  object dtsJobFunction: TDataSource
     DataSet = cdsJobFunction
     Left = 435
     Top = 190
   end
-  object dtsMonthOfyear: TDataSource [28]
+  object dtsMonthOfyear: TDataSource
     DataSet = cdsMonthOfYear
     Left = 635
     Top = 190
   end
-  object dtsPriceList: TDataSource [29]
+  object dtsPriceList: TDataSource
     DataSet = cdsPricelist
     Left = 720
     Top = 190
   end
-  object dtsRateUnit: TDataSource [30]
+  object dtsRateUnit: TDataSource
     DataSet = cdsRateUnit
     Left = 130
     Top = 315
   end
-  object dtsSalutation: TDataSource [31]
+  object dtsSalutation: TDataSource
     DataSet = cdsSalutation
     Left = 230
     Top = 315
   end
-  object dtsStdActivityType: TDataSource [32]
+  object dtsStdActivityType: TDataSource
     DataSet = cdsStdActivity
     Left = 330
     Top = 315
   end
-  object dtsTaxOffice: TDataSource [33]
+  object dtsTaxOffice: TDataSource
     DataSet = cdsTaxOffice
     Left = 430
     Top = 315
   end
-  object dtsVehicleMake: TDataSource [34]
+  object dtsVehicleMake: TDataSource
     DataSet = cdsVehicleMake
     Left = 530
     Top = 315
   end
-  object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink [35]
+  object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
     Left = 990
     Top = 255
   end
-  object FDPhysFBDriverLink: TFDPhysFBDriverLink [36]
+  object FDPhysFBDriverLink: TFDPhysFBDriverLink
     Left = 990
     Top = 200
   end
-  object FDGUIxWaitCursor: TFDGUIxWaitCursor [37]
+  object FDGUIxWaitCursor: TFDGUIxWaitCursor
     Provider = 'Forms'
     Left = 990
     Top = 140
   end
-  object cdsMasterList: TFDMemTable [38]
+  object cdsMasterList: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1601,12 +1601,12 @@ inherited MTDM: TMTDM
       Required = True
     end
   end
-  object dtsMasterList: TDataSource [39]
+  object dtsMasterList: TDataSource
     DataSet = cdsMasterList
     Left = 535
     Top = 190
   end
-  object cdsCountry: TFDMemTable [40]
+  object cdsCountry: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterDelete = cdsActivityTypeAfterDelete
@@ -1662,12 +1662,12 @@ inherited MTDM: TMTDM
     Left = 720
     Top = 10
   end
-  object dtsCountry: TDataSource [41]
+  object dtsCountry: TDataSource
     DataSet = cdsCountry
     Left = 720
     Top = 60
   end
-  object cdsContactDetailCo: TFDMemTable [42]
+  object cdsContactDetailCo: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1778,12 +1778,12 @@ inherited MTDM: TMTDM
       Size = 255
     end
   end
-  object dtsContactDetailCo: TDataSource [43]
+  object dtsContactDetailCo: TDataSource
     DataSet = cdsContactDetailCo
     Left = 130
     Top = 435
   end
-  object cdsAddress: TFDMemTable [44]
+  object cdsAddress: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1938,12 +1938,12 @@ inherited MTDM: TMTDM
       Size = 10
     end
   end
-  object dtsAddress: TDataSource [45]
+  object dtsAddress: TDataSource
     DataSet = cdsAddress
     Left = 235
     Top = 435
   end
-  object cdsContactDetailPerson: TFDMemTable [46]
+  object cdsContactDetailPerson: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2045,12 +2045,12 @@ inherited MTDM: TMTDM
       Size = 255
     end
   end
-  object dtsContactDetailPerson: TDataSource [47]
+  object dtsContactDetailPerson: TDataSource
     DataSet = cdsContactDetailPerson
     Left = 540
     Top = 435
   end
-  object cdsBankingDetail: TFDMemTable [48]
+  object cdsBankingDetail: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2192,12 +2192,12 @@ inherited MTDM: TMTDM
       Size = 30
     end
   end
-  object dtsBankingDetail: TDataSource [49]
+  object dtsBankingDetail: TDataSource
     DataSet = cdsBankingDetail
     Left = 320
     Top = 435
   end
-  object cdsContactPerson: TFDMemTable [50]
+  object cdsContactPerson: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2347,12 +2347,12 @@ inherited MTDM: TMTDM
       Origin = 'JOB_FUNCTION_ID'
     end
   end
-  object dtsContactPerson: TDataSource [51]
+  object dtsContactPerson: TDataSource
     DataSet = cdsContactPerson
     Left = 425
     Top = 435
   end
-  object cdsDirector: TFDMemTable [52]
+  object cdsDirector: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2480,12 +2480,12 @@ inherited MTDM: TMTDM
       Calculated = True
     end
   end
-  object dtsDirector: TDataSource [53]
+  object dtsDirector: TDataSource
     DataSet = cdsDirector
     Left = 640
     Top = 435
   end
-  object cdsBeneficiary: TFDMemTable [54]
+  object cdsBeneficiary: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2610,12 +2610,12 @@ inherited MTDM: TMTDM
       Size = 100
     end
   end
-  object dtsBeneficiary: TDataSource [55]
+  object dtsBeneficiary: TDataSource
     DataSet = cdsBeneficiary
     Left = 845
     Top = 435
   end
-  object cdsVehicle: TFDMemTable [56]
+  object cdsVehicle: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2752,12 +2752,12 @@ inherited MTDM: TMTDM
       Size = 100
     end
   end
-  object dtsVehicle: TDataSource [57]
+  object dtsVehicle: TDataSource
     DataSet = cdsVehicle
     Left = 920
     Top = 435
   end
-  object cdsTrustee: TFDMemTable [58]
+  object cdsTrustee: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2878,17 +2878,17 @@ inherited MTDM: TMTDM
       Size = 100
     end
   end
-  object dtsTrustee: TDataSource [59]
+  object dtsTrustee: TDataSource
     DataSet = cdsTrustee
     Left = 995
     Top = 435
   end
-  object dtsDirectorOfCompany: TDataSource [60]
+  object dtsDirectorOfCompany: TDataSource
     DataSet = cdsDirectorOfCompany
     Left = 735
     Top = 435
   end
-  object cdsDirectorOfCompany: TFDMemTable [61]
+  object cdsDirectorOfCompany: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2948,7 +2948,7 @@ inherited MTDM: TMTDM
       Origin = 'CUSTOMER_ID'
     end
   end
-  object VbdevConnection: TFDConnection [62]
+  object VbdevConnection: TFDConnection
     Params.Strings = (
       'Database=C:\Data\Firebird\VB\VB.FDB'
       'ConnectionDef=VB Live')
@@ -2973,7 +2973,7 @@ inherited MTDM: TMTDM
     Left = 994
     Top = 17
   end
-  object cdsHeir: TFDMemTable [63]
+  object cdsHeir: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -3156,7 +3156,7 @@ inherited MTDM: TMTDM
       Origin = 'ACCOUNT_NO'
     end
   end
-  object cdsShareHolder: TFDMemTable [64]
+  object cdsShareHolder: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -3251,139 +3251,14 @@ inherited MTDM: TMTDM
       Required = True
     end
   end
-  object dtsHeir: TDataSource [65]
+  object dtsHeir: TDataSource
     DataSet = cdsHeir
     Left = 130
     Top = 565
   end
-  object dtsShareHolder: TDataSource [66]
+  object dtsShareHolder: TDataSource
     DataSet = cdsShareHolder
     Left = 235
     Top = 565
-  end
-  object HeirTable: TFDQuery [67]
-    Connection = VbdevConnection
-    SQL.Strings = (
-      'SELECT * FROM HEIR')
-    Left = 925
-    Top = 68
-    object HeirTableID: TIntegerField
-      FieldName = 'ID'
-      Origin = 'ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object HeirTableCUSTOMER_ID: TIntegerField
-      FieldName = 'CUSTOMER_ID'
-      Origin = 'CUSTOMER_ID'
-      Required = True
-    end
-    object HeirTableSALUTATION_ID: TIntegerField
-      FieldName = 'SALUTATION_ID'
-      Origin = 'SALUTATION_ID'
-      Required = True
-    end
-    object HeirTableFIRST_NAME: TStringField
-      FieldName = 'FIRST_NAME'
-      Origin = 'FIRST_NAME'
-      Required = True
-      Size = 30
-    end
-    object HeirTableLAST_NAME: TStringField
-      FieldName = 'LAST_NAME'
-      Origin = 'LAST_NAME'
-      Required = True
-      Size = 30
-    end
-    object HeirTableID_NUMBER: TStringField
-      FieldName = 'ID_NUMBER'
-      Origin = 'ID_NUMBER'
-    end
-    object HeirTablePHYSICAL1: TStringField
-      FieldName = 'PHYSICAL1'
-      Origin = 'PHYSICAL1'
-      Size = 50
-    end
-    object HeirTablePHYSICAL2: TStringField
-      FieldName = 'PHYSICAL2'
-      Origin = 'PHYSICAL2'
-      Size = 50
-    end
-    object HeirTablePHYSICAL3: TStringField
-      FieldName = 'PHYSICAL3'
-      Origin = 'PHYSICAL3'
-      Size = 50
-    end
-    object HeirTablePHYSICAL4: TStringField
-      FieldName = 'PHYSICAL4'
-      Origin = 'PHYSICAL4'
-      Size = 50
-    end
-    object HeirTablePHYSICAL_CODE: TStringField
-      FieldName = 'PHYSICAL_CODE'
-      Origin = 'PHYSICAL_CODE'
-      Size = 10
-    end
-    object HeirTablePOSTAL1: TStringField
-      FieldName = 'POSTAL1'
-      Origin = 'POSTAL1'
-      Size = 50
-    end
-    object HeirTablePOSTAL2: TStringField
-      FieldName = 'POSTAL2'
-      Origin = 'POSTAL2'
-      Size = 50
-    end
-    object HeirTablePOSTAL3: TStringField
-      FieldName = 'POSTAL3'
-      Origin = 'POSTAL3'
-      Size = 50
-    end
-    object HeirTablePOSTAL4: TStringField
-      FieldName = 'POSTAL4'
-      Origin = 'POSTAL4'
-      Size = 50
-    end
-    object HeirTablePOSTAL_CODE: TStringField
-      FieldName = 'POSTAL_CODE'
-      Origin = 'POSTAL_CODE'
-      Size = 10
-    end
-    object HeirTableHEIR_ACC_HOLDER_FIRST_NAME: TStringField
-      FieldName = 'HEIR_ACC_HOLDER_FIRST_NAME'
-      Origin = 'HEIR_ACC_HOLDER_FIRST_NAME'
-      Required = True
-      Size = 30
-    end
-    object HeirTableHEIR_ACC_HOLDER_LAST_NAME: TStringField
-      FieldName = 'HEIR_ACC_HOLDER_LAST_NAME'
-      Origin = 'HEIR_ACC_HOLDER_LAST_NAME'
-      Required = True
-      Size = 30
-    end
-    object HeirTableBANK_ID: TIntegerField
-      FieldName = 'BANK_ID'
-      Origin = 'BANK_ID'
-    end
-    object HeirTableBRANCH_CODE: TStringField
-      FieldName = 'BRANCH_CODE'
-      Origin = 'BRANCH_CODE'
-      Size = 10
-    end
-    object HeirTableACCOUNT_TYPE_ID: TIntegerField
-      FieldName = 'ACCOUNT_TYPE_ID'
-      Origin = 'ACCOUNT_TYPE_ID'
-    end
-    object HeirTableACCOUNT_N0: TStringField
-      FieldName = 'ACCOUNT_N0'
-      Origin = 'ACCOUNT_N0'
-    end
-  end
-  object FDQuery1: TFDQuery [68]
-    Connection = VbdevConnection
-    SQL.Strings = (
-      'SELECT * FROM HEIR')
-    Left = 865
-    Top = 340
   end
 end
