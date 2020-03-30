@@ -2,6 +2,7 @@ inherited MTDM: TMTDM
   Height = 777
   Width = 1097
   object cdsActivityType: TFDMemTable
+    Tag = 39
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -65,6 +66,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsAgePeriod: TFDMemTable
+    Tag = 13
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterDelete = cdsActivityTypeAfterDelete
@@ -155,6 +157,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsBank: TFDMemTable
+    Tag = 5
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterDelete = cdsActivityTypeAfterDelete
@@ -224,6 +227,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsBankAccountType: TFDMemTable
+    Tag = 6
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterDelete = cdsActivityTypeAfterDelete
@@ -293,6 +297,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsContactType: TFDMemTable
+    Tag = 11
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterDelete = cdsActivityTypeAfterDelete
@@ -361,6 +366,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsCustomer: TFDMemTable
+    Tag = 3
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -625,6 +631,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsCustomerGroup: TFDMemTable
+    Tag = 56
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -696,6 +703,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsCustomerStatus: TFDMemTable
+    Tag = 14
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -766,6 +774,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsCustomerType: TFDMemTable
+    Tag = 15
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -837,6 +846,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsJobFunction: TFDMemTable
+    Tag = 19
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -908,6 +918,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsMonthOfYear: TFDMemTable
+    Tag = 20
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -982,6 +993,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsPricelist: TFDMemTable
+    Tag = 22
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1086,6 +1098,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsRateUnit: TFDMemTable
+    Tag = 38
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1155,8 +1168,14 @@ inherited MTDM: TMTDM
       Required = True
       Size = 30
     end
+    object cdsRateUnitABBREVIATION: TStringField
+      DisplayLabel = 'Abbr'
+      FieldName = 'ABBREVIATION'
+      Size = 5
+    end
   end
   object cdsSalutation: TFDMemTable
+    Tag = 23
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1227,6 +1246,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsStdActivity: TFDMemTable
+    Tag = 52
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1298,6 +1318,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsTaxOffice: TFDMemTable
+    Tag = 25
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1364,6 +1385,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsVehicleMake: TFDMemTable
+    Tag = 48
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1519,20 +1541,8 @@ inherited MTDM: TMTDM
     Left = 530
     Top = 315
   end
-  object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
-    Left = 990
-    Top = 255
-  end
-  object FDPhysFBDriverLink: TFDPhysFBDriverLink
-    Left = 990
-    Top = 200
-  end
-  object FDGUIxWaitCursor: TFDGUIxWaitCursor
-    Provider = 'Forms'
-    Left = 990
-    Top = 140
-  end
   object cdsMasterList: TFDMemTable
+    Tag = 35
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1607,6 +1617,7 @@ inherited MTDM: TMTDM
     Top = 190
   end
   object cdsCountry: TFDMemTable
+    Tag = 12
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterDelete = cdsActivityTypeAfterDelete
@@ -1668,6 +1679,7 @@ inherited MTDM: TMTDM
     Top = 60
   end
   object cdsContactDetailCo: TFDMemTable
+    Tag = 9
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1784,6 +1796,7 @@ inherited MTDM: TMTDM
     Top = 435
   end
   object cdsAddress: TFDMemTable
+    Tag = 4
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -1944,6 +1957,7 @@ inherited MTDM: TMTDM
     Top = 435
   end
   object cdsContactDetailPerson: TFDMemTable
+    Tag = 37
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2051,6 +2065,7 @@ inherited MTDM: TMTDM
     Top = 435
   end
   object cdsBankingDetail: TFDMemTable
+    Tag = 7
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2198,6 +2213,7 @@ inherited MTDM: TMTDM
     Top = 435
   end
   object cdsContactPerson: TFDMemTable
+    Tag = 10
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2353,6 +2369,7 @@ inherited MTDM: TMTDM
     Top = 435
   end
   object cdsDirector: TFDMemTable
+    Tag = 16
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2486,6 +2503,7 @@ inherited MTDM: TMTDM
     Top = 435
   end
   object cdsBeneficiary: TFDMemTable
+    Tag = 8
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2616,6 +2634,7 @@ inherited MTDM: TMTDM
     Top = 435
   end
   object cdsVehicle: TFDMemTable
+    Tag = 49
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2758,6 +2777,7 @@ inherited MTDM: TMTDM
     Top = 435
   end
   object cdsTrustee: TFDMemTable
+    Tag = 50
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2889,6 +2909,7 @@ inherited MTDM: TMTDM
     Top = 435
   end
   object cdsDirectorOfCompany: TFDMemTable
+    Tag = 74
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -2974,6 +2995,7 @@ inherited MTDM: TMTDM
     Top = 17
   end
   object cdsHeir: TFDMemTable
+    Tag = 77
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -3157,6 +3179,7 @@ inherited MTDM: TMTDM
     end
   end
   object cdsShareHolder: TFDMemTable
+    Tag = 76
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
@@ -3260,5 +3283,18 @@ inherited MTDM: TMTDM
     DataSet = cdsShareHolder
     Left = 235
     Top = 565
+  end
+  object FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink
+    Left = 990
+    Top = 255
+  end
+  object FDPhysFBDriverLink: TFDPhysFBDriverLink
+    Left = 990
+    Top = 200
+  end
+  object FDGUIxWaitCursor: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 990
+    Top = 140
   end
 end

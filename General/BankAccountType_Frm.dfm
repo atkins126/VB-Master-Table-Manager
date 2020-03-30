@@ -53,6 +53,7 @@ inherited BankAccountTypeFrm: TBankAccountTypeFrm
     inherited navMaster: TcxDBNavigator
       Width = 324
       DataSource = MTDM.dtsBankAccountType
+      ExplicitWidth = 324
     end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324

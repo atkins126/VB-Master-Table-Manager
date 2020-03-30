@@ -58,6 +58,7 @@ inherited AgePeriodFrm: TAgePeriodFrm
     inherited navMaster: TcxDBNavigator
       Tag = 1
       Width = 324
+      ExplicitWidth = 324
     end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324

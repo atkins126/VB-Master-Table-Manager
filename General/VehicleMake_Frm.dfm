@@ -51,11 +51,12 @@ inherited VehicleMakeFrm: TVehicleMakeFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 342
+      Width = 324
       DataSource = MTDM.dtsVehicleMake
+      ExplicitWidth = 324
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 342
+      ControlOptions.OriginalWidth = 324
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450

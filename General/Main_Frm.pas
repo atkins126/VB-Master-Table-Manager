@@ -19,7 +19,7 @@ uses
   System.Classes, Vcl.Graphics, System.ImageList, Vcl.ImgList, Vcl.Controls,
   Vcl.Dialogs, System.Actions, Vcl.ActnList, System.StrUtils, System.Types,
 
-  VBProxyClass, BaseLayout_Frm, VBCommonValues, CommonMethods, CommonFunction,
+  VBProxyClass, BaseLayout_Frm, VBCommonValues, CommonMethods, CommonFunctions,
 
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
   dxSkinsDefaultPainters, cxImageList, dxLayoutLookAndFeels, cxClasses, cxStyles,
@@ -220,7 +220,7 @@ begin
     if ReportDM = nil then
       ReportDM := TReportDM.Create(nil);
 
-    sbrMain.Panels[1].Text := 'User: ' + VBBaseDM.FUserData.UserName;
+    sbrMain.Panels[1].Text := 'User: ' + VBBaseDM.UserData.UserName;
     VBBaseDM.SetConnectionProperties;
     VBBaseDM.sqlConnection.Open;
     VBBaseDM.Client := TVBServerMethodsClient.Create(VBBaseDM.sqlConnection.DBXConnection);
@@ -237,13 +237,14 @@ begin
       BaseFrm := TBaseFrm.Create(nil);
 
     VBBaseDM.CurrentPeriod := RUtils.CurrentPeriod(Date);
+    VBBaseDM.CurrentYear := Trunc(VBBaseDM.CurrentPeriod div 100);
     VBBaseDM.CurrentMonth := RUtils.MonthInt(Date);
 
     VBBaseDM.GetData(35, MTDM.cdsMasterList, MTDM.cdsMasterList.Name, ONE_SPACE,
       'C:\Data\Xml\Master list.xml', MTDM.cdsMasterList.UpdateOptions.Generatorname,
       MTDM.cdsMasterList.UpdateOptions.UpdateTableName);
 
-    VBBaseDM.CheckForUpdates(4);
+    VBBaseDM.CheckForUpdates(4, '');
 
     BorderIcons := [];
     BorderStyle := bsNone;

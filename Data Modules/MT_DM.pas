@@ -12,7 +12,7 @@ interface
 uses
   System.SysUtils, System.Classes, Winapi.Windows, Vcl.Forms, Vcl.Dialogs,
 
-  VBBase_DM, CommonValues, VBCommonValues,
+  Base_DM, VBBase_DM, CommonValues, VBCommonValues,
 
   IPPeerClient, Data.DBXDataSnap, Data.DBXCommon, Data.DB, Data.SqlExpr,
 
@@ -111,8 +111,8 @@ type
     EFPassword: string;
     PercenShare: Real;
     HAHKSalutatioinID: Integer;
-    HAHFirstName: String;
-    HAHLastName: String;
+    HAHFirstName: string;
+    HAHLastName: string;
   end;
 
   TMTDM = class(TVBBaseDM)
@@ -150,9 +150,6 @@ type
     dtsStdActivityType: TDataSource;
     dtsTaxOffice: TDataSource;
     dtsVehicleMake: TDataSource;
-    FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink;
-    FDPhysFBDriverLink: TFDPhysFBDriverLink;
-    FDGUIxWaitCursor: TFDGUIxWaitCursor;
     cdsBankAccountTypeID: TIntegerField;
     cdsBankAccountTypeNAME: TStringField;
     cdsBankID: TIntegerField;
@@ -374,6 +371,10 @@ type
     cdsShareHolderSALUTATION_ID: TIntegerField;
     cdsDirectorFULL_NAME: TStringField;
     cdsHeirACCOUNT_NO: TStringField;
+    FDPhysSQLiteDriverLink: TFDPhysSQLiteDriverLink;
+    FDPhysFBDriverLink: TFDPhysFBDriverLink;
+    FDGUIxWaitCursor: TFDGUIxWaitCursor;
+    cdsRateUnitABBREVIATION: TStringField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);
@@ -678,19 +679,28 @@ begin
 end;
 
 procedure TMTDM.cdsActivityTypeAfterDelete(DataSet: TDataSet);
+var
+  DSArray: TDataSetArray;
 begin
   inherited;
-  SetLength(VBBaseDM.FDataSetArray, 1);
-  VBBaseDM.FDataSetArray[0] := TFDMemTable(DataSet);
-  VBBaseDM.ApplyUpdates(VBBaseDM.FDataSetArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName);
+  SetLength(DSArray, 1);
+  DSArray[0] := TFDMemTable(DataSet);
+
+  VBBaseDM.ApplyUpdates(DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
+    TFDMemTable(DataSet).Tag);
 end;
 
 procedure TMTDM.cdsActivityTypeAfterPost(DataSet: TDataSet);
+var
+  DSArray: TDataSetArray;
 begin
   inherited;
-  SetLength(VBBaseDM.FDataSetArray, 1);
-  VBBaseDM.FDataSetArray[0] := TFDMemTable(DataSet);
-  VBBaseDM.ApplyUpdates(VBBaseDM.FDataSetArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName);
+  SetLength(DSArray, 1);
+  DSArray[0] := TFDMemTable(DataSet);
+
+  VBBaseDM.ApplyUpdates(DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
+    TFDMemTable(DataSet).Tag);
+
   SendMessage(Application.MainForm.Handle, WM_RECORD_ID, DWORD(PChar('REQUEST=REFRESH_DATA' + '|ID=' + FID.ToString)), 0);
 end;
 

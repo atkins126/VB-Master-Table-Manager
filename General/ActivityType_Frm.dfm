@@ -57,6 +57,11 @@ inherited ActivityTypeFrm: TActivityTypeFrm
     inherited navMaster: TcxDBNavigator
       Width = 324
       DataSource = MTDM.dtsActivityType
+      ExplicitWidth = 324
+    end
+    inherited cbxOpenAfterExport: TcxCheckBox
+      Left = 341
+      ExplicitLeft = 341
     end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324

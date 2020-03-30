@@ -79,7 +79,7 @@ uses
 //  MsgDialog_Frm,
 //  Progress_Frm,
 //  RUtils,
-//  CommonFunction;
+//  CommonFunctions;
 
 procedure TCustomerReportSelectionFrm.FormCreate(Sender: TObject);
 begin

@@ -53,6 +53,7 @@ inherited TaxOfficeFrm: TTaxOfficeFrm
     inherited navMaster: TcxDBNavigator
       Width = 342
       DataSource = MTDM.dtsTaxOffice
+      ExplicitWidth = 342
     end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 342

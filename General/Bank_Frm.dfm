@@ -52,11 +52,12 @@ inherited BankFrm: TBankFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 333
+      Width = 324
       DataSource = MTDM.dtsBank
+      ExplicitWidth = 324
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 333
+      ControlOptions.OriginalWidth = 324
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450

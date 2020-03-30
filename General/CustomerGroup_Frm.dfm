@@ -50,6 +50,7 @@ inherited CustomerGroupFrm: TCustomerGroupFrm
     inherited navMaster: TcxDBNavigator
       Width = 324
       DataSource = MTDM.dtsCustomerGroup
+      ExplicitWidth = 324
     end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324

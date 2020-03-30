@@ -53,6 +53,7 @@ inherited ContactTypeFrm: TContactTypeFrm
     inherited navMaster: TcxDBNavigator
       Width = 324
       DataSource = MTDM.dtsContactType
+      ExplicitWidth = 324
     end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324

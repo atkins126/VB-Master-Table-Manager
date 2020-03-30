@@ -129,7 +129,7 @@
         <DCCReference Include="..\..\..\..\Lib\BaseLayout_Frm.pas">
             <Form>BaseLayoutFrm</Form>
         </DCCReference>
-        <DCCReference Include="..\..\..\..\Lib\CommonFunction.pas"/>
+        <DCCReference Include="..\..\..\..\Lib\CommonFunctions.pas"/>
         <DCCReference Include="..\..\..\..\Lib\CommonMethods.pas"/>
         <DCCReference Include="..\..\..\..\Lib\CommonValues.pas"/>
         <DCCReference Include="..\..\..\..\Lib\MsgDialog_Frm.pas">
@@ -214,75 +214,58 @@
         </DCCReference>
         <DCCReference Include="..\..\Lib\BaseCustomerEdit_Frm.pas">
             <Form>BaseCustomerEditFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\CompanyContactDetail_Frm.pas">
             <Form>CompanyContactDetailFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\AddressDetail_Frm.pas">
             <Form>AddressDetailFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\PersonContactDetail_Frm.pas">
             <Form>PersonContactDetailFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\BankingDetail_Frm.pas">
             <Form>BankingDetailFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\DirectorDetail_Frm.pas">
             <Form>DirectorDetailFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\BeneficiaryDetail_Frm.pas">
             <Form>BeneficiaryDetailFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\VehicleDetail_Frm.pas">
             <Form>VehicleDetailFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\ContactPerson_Frm.pas">
             <Form>ContactPersonFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Data Modules\Report_DM.pas">
             <Form>ReportDM</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\..\..\Lib\Classes\MyClasses.pas"/>
         <DCCReference Include="..\..\Lib\VBPrintExportData.pas"/>
         <DCCReference Include="..\Lib\VBProxyClass.pas"/>
-        <DCCReference Include="..\Lib\BaseGrid_Frm.pas">
+        <DCCReference Include="Lib\BaseGrid_Frm.pas">
             <Form>BaseGridFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\CustomerReportSelection_Frm.pas">
             <Form>CustomerReportSelectionFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\AccountHolder_Frm.pas">
             <Form>AccountHolderFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\CustomerEdit_Frm.pas">
             <Form>CustomerEditFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\TrusteeDetail_Frm.pas">
             <Form>TrusteeDetailFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\ShareHolderDetail_Frm.pas">
             <Form>ShareHolderDetailFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="General\HeirDetail_Frm.pas">
             <Form>HeirDetailFrm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

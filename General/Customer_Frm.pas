@@ -525,7 +525,7 @@ uses
   MsgDialog_Frm,
   Progress_Frm,
   RUtils,
-  CommonFunction,
+  CommonFunctions,
   CompanyContactDetail_Frm,
   AddressDetail_Frm,
   PersonContactDetail_Frm,

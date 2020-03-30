@@ -169,6 +169,7 @@ type
     dtsCustomerStatusRpt: TDataSource;
     cdsCustomerStatusRptID: TIntegerField;
     cdsCustomerStatusRptNAME: TStringField;
+    cdsRateUnitABBREVIATION: TStringField;
   private
     { Private declarations }
   public

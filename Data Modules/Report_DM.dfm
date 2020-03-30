@@ -1147,6 +1147,11 @@ inherited ReportDM: TReportDM
       Required = True
       Size = 30
     end
+    object cdsRateUnitABBREVIATION: TStringField
+      DisplayLabel = 'Abbr'
+      FieldName = 'ABBREVIATION'
+      Size = 5
+    end
   end
   object cdsSalutation: TFDMemTable
     ActiveStoredUsage = [auDesignTime]

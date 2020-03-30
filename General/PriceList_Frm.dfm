@@ -14,14 +14,14 @@ inherited PriceListFrm: TPriceListFrm
     ExplicitWidth = 1421
     ExplicitHeight = 691
     inherited grdMaster: TcxGrid
-      Left = 22
-      Top = 92
-      Width = 1377
-      Height = 577
-      ExplicitLeft = 22
-      ExplicitTop = 92
-      ExplicitWidth = 1377
-      ExplicitHeight = 577
+      Left = 25
+      Top = 94
+      Width = 1368
+      Height = 569
+      ExplicitLeft = 25
+      ExplicitTop = 94
+      ExplicitWidth = 1368
+      ExplicitHeight = 569
       inherited viewMaster: TcxGridDBBandedTableView
         DataController.DataSource = MTDM.dtsPriceList
         OptionsView.NoDataToDisplayInfoText = '<No Price List data to display>'
@@ -115,8 +115,9 @@ inherited PriceListFrm: TPriceListFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 351
+      Width = 342
       DataSource = MTDM.dtsPriceList
+      ExplicitWidth = 342
     end
     object grdPriceHistory: TcxGrid [3]
       Left = 10000
@@ -129,7 +130,6 @@ inherited PriceListFrm: TPriceListFrm
         Navigator.Buttons.CustomButtons = <>
         ScrollbarAnnotations.CustomAnnotations = <>
         OnCustomDrawCell = viewMasterCustomDrawCell
-        DataController.DataSource = ReportDM.dtsPriceHistory
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
@@ -149,7 +149,7 @@ inherited PriceListFrm: TPriceListFrm
       end
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 351
+      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       Parent = grpPricelist

@@ -42,7 +42,7 @@ implementation
 uses
   MT_DM,
   VBBase_DM,
-  CommonFunction,
+  CommonFunctions,
   VBCommonValues,
   RUtils,
   Report_DM;

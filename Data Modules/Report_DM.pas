@@ -321,6 +321,7 @@ type
     dtsTrustee: TDataSource;
     cdsTrusteeSALUTATION: TStringField;
     frxReport1: TfrxReport;
+    cdsRateUnitABBREVIATION: TStringField;
 //    procedure PrintReport(SourceDataSet, TargetDataSet: TFDmemTable;
 //      ReportFileName: string; Report: TfrxReport; ReportDataSet: TfrxDBDataset;
 //      ReportTypeName: string);
@@ -461,8 +462,9 @@ var
   PrintExportReport: TVBPrintExportData;
 begin
   ReportDM.PrintExporting := True;
+  PrintExportReport := PrepareReport;
+
   try
-    PrintExportReport := PrepareReport;
     PrintExportReport.ExportFileName := FileName;
     PrintExportReport.OpenAfterExport := OpenAfterExport;
     PrintExportReport.ExportToPDF;
@@ -476,9 +478,10 @@ var
   PrintExportReport: TVBPrintExportData;
 begin
   ReportDM.PrintExporting := True;
+  PrintExportReport := PrepareReport;
+
   try
     ReportDM.PrintExporting := True;
-    PrintExportReport := PrepareReport;
     PrintExportReport.PrintPreview;
   finally
     PrintExportReport.Free;
@@ -486,9 +489,9 @@ begin
 end;
 
 function TReportDM.PrepareReport: TVBPrintExportData;
-var
-  TheYear: Integer;
-  YearClause, TheYearStr: string;
+//var
+//  TheYear: Integer;
+//  YearClause, TheYearStr: string;
 begin
   Result := TVBPrintExportData.Create;
   Result.ReportAction := ReportDM.ReportAction;

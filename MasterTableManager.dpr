@@ -2,24 +2,24 @@ program MasterTableManager;
 
 uses
   Vcl.Forms,
-  Vcl.Dialogs,
-  System.Classes,
-  Winapi.Windows,
-  System.IOUtils,
   System.SysUtils,
-  Vcl.Controls,
-  System.Types,
-  System.DateUtils,
-  System.Win.Registry,
-  Vcl.Graphics,
-  Winapi.ShellApi,
-  System.Variants,
+  Vcl.Dialogs,
+//  System.Classes,
+  Winapi.Windows,
+//  System.IOUtils,
+//  Vcl.Controls,
+//  System.Types,
+//  System.DateUtils,
+//  System.Win.Registry,
+//  Vcl.Graphics,
+//  Winapi.ShellApi,
+//  System.Variants,
   System.UITypes,
-  ShlObj,
+//  ShlObj,
   Base_DM in '..\..\..\..\Lib\Base_DM.pas' {BaseDM: TDataModule},
   Base_Frm in '..\..\..\..\Lib\Base_Frm.pas' {BaseFrm},
   BaseLayout_Frm in '..\..\..\..\Lib\BaseLayout_Frm.pas' {BaseLayoutFrm},
-  CommonFunction in '..\..\..\..\Lib\CommonFunction.pas',
+  CommonFunctions in '..\..\..\..\Lib\CommonFunctions.pas',
   CommonMethods in '..\..\..\..\Lib\CommonMethods.pas',
   CommonValues in '..\..\..\..\Lib\CommonValues.pas',
   MsgDialog_Frm in '..\..\..\..\Lib\MsgDialog_Frm.pas' {msgDialogFrm},
@@ -62,7 +62,7 @@ uses
   MyClasses in '..\..\..\..\Lib\Classes\MyClasses.pas',
   VBPrintExportData in '..\..\Lib\VBPrintExportData.pas',
   VBProxyClass in '..\Lib\VBProxyClass.pas',
-  BaseGrid_Frm in '..\Lib\BaseGrid_Frm.pas' {BaseGridFrm},
+  BaseGrid_Frm in 'Lib\BaseGrid_Frm.pas' {BaseGridFrm},
   CustomerReportSelection_Frm in 'General\CustomerReportSelection_Frm.pas' {CustomerReportSelectionFrm},
   AccountHolder_Frm in 'General\AccountHolder_Frm.pas' {AccountHolderFrm},
   CustomerEdit_Frm in 'General\CustomerEdit_Frm.pas' {CustomerEditFrm},
@@ -80,13 +80,13 @@ const
   APP_NAME = 'MasterTableManager.exe';
 
 begin
-{$IFDEF DEBUG}
+  {$IFDEF DEBUG}
   ReportMemoryLeaksOnShutdown := True;
-{$ENDIF}
+  {$ENDIF}
   Application.Title := 'Master Table Manager';
   LaunchDrive := ExtractFileDrive(Application.ExeName);
   SwitchPrefix := ['/'];
-{$IFDEF RELEASE}
+  {$IFDEF RELEASE}
   if not FindCmdLineSwitch('VB_SHELL', SwitchPrefix, True) then
   begin
     Beep;
@@ -100,9 +100,9 @@ begin
     Application.ShowMainForm := False;
   end
   else
-{$ENDIF}if (AnsiCompareText(LaunchDrive, 'C:') <> 0) then
+    {$ENDIF}if (AnsiCompareText(LaunchDrive, 'C:') <> 0) then
     begin
-      Beep;
+      System.SysUtils.Beep;
       TaskMessageDlg('Applicaton Launch Error',
         'You cannot run ' + Application.Title + ' from drive ' + LaunchDrive, mtError,
         [mbOK], 0);
