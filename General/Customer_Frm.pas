@@ -1974,7 +1974,9 @@ begin
   // Customer
   Counter := 1;
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
-  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Customer Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Customer Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Preparing Report: Customer')), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
   VBBaseDM.GetData(53, ReportDM.cdsCustomer, ReportDM.cdsCustomer.Name, FCustomerWhereClause + FCustomerOrderByClause,
     'C:\Data\Xml\Customer Detail.xml', ReportDM.cdsCustomer.UpdateOptions.Generatorname,
     ReportDM.cdsCustomer.UpdateOptions.UpdateTableName);
@@ -1982,7 +1984,9 @@ begin
   // Address
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
-  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Address Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Address Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Preparing Report: Address')), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
   VBBaseDM.GetData(4, ReportDM.cdsAddress, ReportDM.cdsAddress.Name, FAddressWhereClause {+ FAddressOrderByClause},
     'C:\Data\Xml\Address.xml', ReportDM.cdsAddress.UpdateOptions.Generatorname,
     ReportDM.cdsAddress.UpdateOptions.UpdateTableName);
@@ -1990,7 +1994,9 @@ begin
   // Company contact details
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
-  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Company Contact Details' + '|PROGRESS=' + Iteration.ToString)), 0);
+//  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Company Contact Details' + '|PROGRESS=' + Iteration.ToString)), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Preparing Report: Company Contact Details')), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
   VBBaseDM.GetData(54, ReportDM.cdsContactDetailCo, ReportDM.cdsContactDetailCo.Name, FContactDetailCoWhereClause + FContactDetailCoOrderByClause,
     'C:\Data\Xml\Contact Detail Co.xml', ReportDM.cdsContactDetailCo.UpdateOptions.Generatorname,
     ReportDM.cdsContactDetailCo.UpdateOptions.UpdateTableName);
@@ -1998,7 +2004,9 @@ begin
   // Banking details
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
-  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Banking Details' + '|PROGRESS=' + Iteration.ToString)), 0);
+//  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Banking Details' + '|PROGRESS=' + Iteration.ToString)), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Preparing Report: Banking Details')), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
   VBBaseDM.GetData(68, ReportDM.cdsBankingDetail, ReportDM.cdsBankingDetail.Name, FBankingDetailWhereClause + FBankingDetailOrderByClause,
     'C:\Data\Xml\Banking Detail.xml', ReportDM.cdsBankingDetail.UpdateOptions.Generatorname,
     ReportDM.cdsBankingDetail.UpdateOptions.UpdateTableName);
@@ -2006,7 +2014,9 @@ begin
   // Contact person
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
-  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Person Contact' + '|PROGRESS=' + Iteration.ToString)), 0);
+//  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Person Contact' + '|PROGRESS=' + Iteration.ToString)), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Preparing Report: Person Contact')), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
   VBBaseDM.GetData(70, ReportDM.cdsContactPerson, ReportDM.cdsContactPerson.Name, FContactPersonWhereClause + FContactPersonOrderByClause,
     'C:\Data\Xml\Contact Person.xml', ReportDM.cdsContactPerson.UpdateOptions.Generatorname,
     ReportDM.cdsContactPerson.UpdateOptions.UpdateTableName);
@@ -2014,7 +2024,9 @@ begin
   // Contact person contact details
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
-  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Person Contact Details' + '|PROGRESS=' + Iteration.ToString)), 0);
+//  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Person Contact Details' + '|PROGRESS=' + Iteration.ToString)), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Preparing Report: Person Contact Details')), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
   VBBaseDM.GetData(69, ReportDM.cdsContactDetailPerson, ReportDM.cdsContactDetailPerson.Name, FContactDetailPersonWhereClause + FContactDetailPersonOrderByClause,
     'C:\Data\Xml\Contact Detail Person.xml', ReportDM.cdsContactDetailPerson.UpdateOptions.Generatorname,
     ReportDM.cdsContactDetailPerson.UpdateOptions.UpdateTableName);
@@ -2022,7 +2034,9 @@ begin
   // Directors
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
-  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Director Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Director Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Preparing Report: Director')), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
   VBBaseDM.GetData(71, ReportDM.cdsDirector, ReportDM.cdsDirector.Name, FDirecterWhereClaue + FDirectorOrderByClause,
     'C:\Data\Xml\Director.xml', ReportDM.cdsDirector.UpdateOptions.Generatorname,
     ReportDM.cdsDirector.UpdateOptions.UpdateTableName);
@@ -2030,7 +2044,9 @@ begin
   // Beneficiaries
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
-  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Beneficiary Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Beneficiary Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Preparing Report: Beneficiary')), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
   VBBaseDM.GetData(72, ReportDM.cdsBeneficiary, ReportDM.cdsBeneficiary.Name, FBeneficiaryWhereClaue + FBeneficiaryOrderByClause,
     'C:\Data\Xml\Beneficiary.xml', ReportDM.cdsBeneficiary.UpdateOptions.Generatorname,
     ReportDM.cdsBeneficiary.UpdateOptions.UpdateTableName);
@@ -2038,7 +2054,9 @@ begin
   // Vehicles
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
-  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Vehicle Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Vehicle Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Preparing Report: Vehicle')), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
   VBBaseDM.GetData(73, ReportDM.cdsVehicle, ReportDM.cdsVehicle.Name, FVehicleWhereClause + FVehicleOrderByClaue,
     'C:\Data\Xml\Vehicle.xml', ReportDM.cdsVehicle.UpdateOptions.Generatorname,
     ReportDM.cdsVehicle.UpdateOptions.UpdateTableName);
@@ -2046,7 +2064,9 @@ begin
   // Trustees
   Inc(Counter);
   Iteration := Counter / REPORT_TABLE_COUNT * 100;
-  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Trustee Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Preparing Report: Trustee Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Preparing Report: Trustee')), 0);
+  SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
   VBBaseDM.GetData(74, ReportDM.cdsTrustee, ReportDM.cdsTrustee.Name, FTrusteeWhereClause + FTrusteeOrderByClause,
     'C:\Data\Xml\Trustee.xml', ReportDM.cdsTrustee.UpdateOptions.Generatorname,
     ReportDM.cdsTrustee.UpdateOptions.UpdateTableName);
@@ -2072,7 +2092,10 @@ begin
 // Open all master tables  -----------------------------------------------------
 
     // Customer
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Customer Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Customer Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Customer Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
+
     VBBaseDM.GetData(3, MTDM.cdsCustomer, MTDM.cdsCustomer.Name, ONE_SPACE,
       'C:\Data\Xml\Customer.xml', MTDM.cdsCustomer.UpdateOptions.Generatorname,
       MTDM.cdsCustomer.UpdateOptions.UpdateTableName);
@@ -2084,7 +2107,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Company Contact Detail Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Company Contact Detail Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Company Contact Detail Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(9, MTDM.cdsContactDetailCo, MTDM.cdsContactDetailCo.Name, ONE_SPACE,
       'C:\Data\Xml\Contact Detail Co.xml', MTDM.cdsContactDetailCo.UpdateOptions.Generatorname,
       MTDM.cdsContactDetailCo.UpdateOptions.UpdateTableName);
@@ -2096,7 +2121,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Address Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Address Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Address Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(4, MTDM.cdsAddress, MTDM.cdsAddress.Name, ONE_SPACE,
       'C:\Data\Xml\Address.xml', MTDM.cdsAddress.UpdateOptions.Generatorname,
       MTDM.cdsAddress.UpdateOptions.UpdateTableName);
@@ -2108,7 +2135,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Contact Person Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Contact Person Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Contact Person Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(10, MTDM.cdsContactPerson, MTDM.cdsContactPerson.Name, ONE_SPACE,
       'C:\Data\Xml\Contact Person.xml', MTDM.cdsContactPerson.UpdateOptions.Generatorname,
       MTDM.cdsContactPerson.UpdateOptions.UpdateTableName);
@@ -2120,7 +2149,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Contact Detail Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Contact Detail Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Contact Detail Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(37, MTDM.cdsContactDetailPerson, MTDM.cdsContactDetailPerson.Name, ONE_SPACE,
       'C:\Data\Xml\Contact Detail Person Customer.xml', MTDM.cdsContactDetailPerson.UpdateOptions.Generatorname,
       MTDM.cdsContactDetailPerson.UpdateOptions.UpdateTableName);
@@ -2132,7 +2163,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Banking Detail Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Banking Detail Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Banking Detail Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(7, MTDM.cdsBankingDetail, MTDM.cdsBankingDetail.Name, ONE_SPACE,
       'C:\Data\Xml\Banking Detail.xml', MTDM.cdsBankingDetail.UpdateOptions.Generatorname,
       MTDM.cdsBankingDetail.UpdateOptions.UpdateTableName);
@@ -2144,7 +2177,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Director Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(16, MTDM.cdsDirector, MTDM.cdsDirector.Name, ONE_SPACE,
       'C:\Data\Xml\Director.xml', MTDM.cdsDirector.UpdateOptions.Generatorname,
       MTDM.cdsDirector.UpdateOptions.UpdateTableName);
@@ -2156,7 +2191,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Beneficiary Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Beneficiary Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Beneficiary Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(8, MTDM.cdsBeneficiary, MTDM.cdsBeneficiary.Name, ONE_SPACE,
       'C:\Data\Xml\Beneficiary.xml', MTDM.cdsBeneficiary.UpdateOptions.Generatorname,
       MTDM.cdsBeneficiary.UpdateOptions.UpdateTableName);
@@ -2168,7 +2205,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Vehicle Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Vehicle Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Vehicle Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(49, MTDM.cdsVehicle, MTDM.cdsVehicle.Name, ONE_SPACE,
       'C:\Data\Xml\Vehicle.xml', MTDM.cdsVehicle.UpdateOptions.Generatorname,
       MTDM.cdsVehicle.UpdateOptions.UpdateTableName);
@@ -2180,7 +2219,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Trustee Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Trustee Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Turstee Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(50, MTDM.cdsTrustee, MTDM.cdsTrustee.Name, ONE_SPACE,
       'C:\Data\Xml\Trustee.xml', MTDM.cdsTrustee.UpdateOptions.Generatorname,
       MTDM.cdsTrustee.UpdateOptions.UpdateTableName);
@@ -2192,8 +2233,10 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director of Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-    VBBaseDM.GetData(75, MTDM.cdsDirectorOfCompany, MTDM.cdsDirectorOfCompany.Name, ONE_SPACE,
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director of Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Director of Company Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
+    VBBaseDM.GetData(74, MTDM.cdsDirectorOfCompany, MTDM.cdsDirectorOfCompany.Name, ONE_SPACE,
       'C:\Data\Xml\Director Of Company.xml', MTDM.cdsDirectorOfCompany.UpdateOptions.Generatorname,
       MTDM.cdsDirectorOfCompany.UpdateOptions.UpdateTableName);
 
@@ -2204,8 +2247,10 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director of Shareholder Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-    VBBaseDM.GetData(77, MTDM.cdsShareHolder, MTDM.cdsShareHolder.Name, ONE_SPACE,
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Shareholder Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Shareholder Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
+    VBBaseDM.GetData(76, MTDM.cdsShareHolder, MTDM.cdsShareHolder.Name, ONE_SPACE,
       'C:\Data\Xml\Shareholder.xml', MTDM.cdsShareHolder.UpdateOptions.Generatorname,
       MTDM.cdsShareHolder.UpdateOptions.UpdateTableName);
 
@@ -2216,8 +2261,10 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director of Heir Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-    VBBaseDM.GetData(78, MTDM.cdsHeir, MTDM.cdsHeir.Name, ONE_SPACE,
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Heir Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Heir Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
+    VBBaseDM.GetData(77, MTDM.cdsHeir, MTDM.cdsHeir.Name, ONE_SPACE,
       'C:\Data\Xml\Heir.xml', MTDM.cdsHeir.UpdateOptions.Generatorname,
       MTDM.cdsHeir.UpdateOptions.UpdateTableName);
 
@@ -2230,7 +2277,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Customer Type Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Customer Type Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Customer Type Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(15, LookupDM.cdsCustomerType, LookupDM.cdsCustomerType.Name, ONE_SPACE,
       'C:\Data\Xml\Customer Type.xml', LookupDM.cdsCustomerType.UpdateOptions.Generatorname,
       LookupDM.cdsCustomerType.UpdateOptions.UpdateTableName);
@@ -2239,7 +2288,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Customer Status Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Customer Status Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Customer Status Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(14, LookupDM.cdsCustomerStatus, LookupDM.cdsCustomerStatus.Name, ONE_SPACE,
       'C:\Data\Xml\Customer Status.xml', LookupDM.cdsCustomerStatus.UpdateOptions.Generatorname,
       LookupDM.cdsCustomerStatus.UpdateOptions.UpdateTableName);
@@ -2248,7 +2299,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Contact Type Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Contact Type Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Contact Type Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(11, LookupDM.cdsContactType, LookupDM.cdsContactType.Name, ONE_SPACE,
       'C:\Data\Xml\Contact Type.xml', LookupDM.cdsContactType.UpdateOptions.Generatorname,
       LookupDM.cdsContactType.UpdateOptions.UpdateTableName);
@@ -2257,7 +2310,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Salutation Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Salutation Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Salutation Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(23, LookupDM.cdsSalutation, LookupDM.cdsSalutation.Name, ONE_SPACE,
       'C:\Data\Xml\Slutation.xml', LookupDM.cdsSalutation.UpdateOptions.Generatorname,
       LookupDM.cdsSalutation.UpdateOptions.UpdateTableName);
@@ -2280,7 +2335,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Job Function Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Job Function Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Job Function Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(19, LookupDM.cdsJobFunction, LookupDM.cdsJobFunction.Name, ONE_SPACE,
       'C:\Data\Xml\Job Function.xml', LookupDM.cdsJobFunction.UpdateOptions.Generatorname,
       LookupDM.cdsJobFunction.UpdateOptions.UpdateTableName);
@@ -2289,7 +2346,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Bank Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Bank Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Bank Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(5, LookupDM.cdsBank, LookupDM.cdsBank.Name, ONE_SPACE,
       'C:\Data\Xml\Bank.xml', LookupDM.cdsBank.UpdateOptions.Generatorname,
       LookupDM.cdsBank.UpdateOptions.UpdateTableName);
@@ -2301,7 +2360,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Bank Account Type Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Bank Account Type Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Bank Account Type Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(6, LookupDM.cdsBankAccountType, LookupDM.cdsBankAccountType.Name, ONE_SPACE,
       'C:\Data\Xml\Bank Account Type.xml', LookupDM.cdsBankAccountType.UpdateOptions.Generatorname,
       LookupDM.cdsBankAccountType.UpdateOptions.UpdateTableName);
@@ -2313,20 +2374,23 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Tax/VAT Office Tables' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Tax/VAT Office Tables' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Tax/VAT Office Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(25, LookupDM.cdsTaxOffice, LookupDM.cdsTaxOffice.Name, ONE_SPACE,
       'C:\Data\Xml\Tax Office.xml', LookupDM.cdsTaxOffice.UpdateOptions.Generatorname,
       LookupDM.cdsTaxOffice.UpdateOptions.UpdateTableName);
 
     LookupDM.cdsVATOffice.Close;
-
     LookupDM.cdsVATOffice.Data := LookupDM.cdsTaxOffice.Data;
 
     // Country
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Country Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Country Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Country Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(12, LookupDM.cdsCountry, LookupDM.cdsCountry.Name, ONE_SPACE,
       'C:\Data\Xml\Country.xml', LookupDM.cdsCountry.UpdateOptions.Generatorname,
       LookupDM.cdsCountry.UpdateOptions.UpdateTableName);
@@ -2335,7 +2399,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Vehicle Make Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Vehicle Make Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Vehicle Make Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(48, LookupDM.cdsVehicleMake, LookupDM.cdsVehicleMake.Name, ONE_SPACE,
       'C:\Data\Xml\Vehicle Make.xml', LookupDM.cdsVehicleMake.UpdateOptions.Generatorname,
       LookupDM.cdsVehicleMake.UpdateOptions.UpdateTableName);
@@ -2344,7 +2410,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Month of Year Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Month of Year Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Month of Year Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(20, LookupDM.cdsMonthOfYear, LookupDM.cdsMonthOfYear.Name, ONE_SPACE,
       'C:\Data\Xml\Month of Year.xml', LookupDM.cdsMonthOfYear.UpdateOptions.Generatorname,
       LookupDM.cdsMonthOfYear.UpdateOptions.UpdateTableName);
@@ -2359,7 +2427,9 @@ begin
     Inc(Counter);
     Iteration := Counter / TABLE_COUNT * 100;
 
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Company Table')), 0);
+    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
     VBBaseDM.GetData(76, LookupDM.cdsCompany, LookupDM.cdsCompany.Name, ONE_SPACE,
       'C:\Data\Xml\Company.xml', LookupDM.cdsCompany.UpdateOptions.Generatorname,
       LookupDM.cdsCompany.UpdateOptions.UpdateTableName);

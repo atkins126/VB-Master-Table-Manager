@@ -2365,7 +2365,7 @@ inherited MTDM: TMTDM
   end
   object dtsContactPerson: TDataSource
     DataSet = cdsContactPerson
-    Left = 425
+    Left = 430
     Top = 435
   end
   object cdsDirector: TFDMemTable

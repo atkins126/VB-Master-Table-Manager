@@ -236,7 +236,7 @@ begin
     if BaseFrm = nil then
       BaseFrm := TBaseFrm.Create(nil);
 
-    VBBaseDM.CurrentPeriod := RUtils.CurrentPeriod(Date);
+    VBBaseDM.CurrentPeriod := RUtils.GetCurrentPeriod(Date);
     VBBaseDM.CurrentYear := Trunc(VBBaseDM.CurrentPeriod div 100);
     VBBaseDM.CurrentMonth := RUtils.MonthInt(Date);
 
