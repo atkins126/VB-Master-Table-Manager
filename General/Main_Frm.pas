@@ -113,6 +113,7 @@ type
     procedure CloseTheForm(PageIndex: Integer; FormToClose: TForm; ActionTag: Integer; Action: TAction);
   protected
     procedure HandleTSAfterPost(var MyMsg: TMessage); message WM_RECORD_ID;
+    procedure HandlerPostError(var MyMsg: TMessage); message WM_POST_DATA_ERROR;
   public
     { Public declarations }
   end;
@@ -1019,6 +1020,33 @@ begin
 //    pagMain.OnChange := pagMainChange;
     actCloseScreen.Enabled := pagMain.PageCount > 0;
   end;
+end;
+
+procedure TMainFrm.HandlerPostError(var MyMsg: TMessage);
+begin
+
+  Beep;
+  DisplayMsg(
+    Application.Title,
+    'Datasnap Server Error',
+    PChar(MyMsg.WParam),
+    mtError,
+    [mbOK]
+    );
+
+  MyMsg.Result := 1;
+
+//  SL := TStringList.Create;
+//  SL.Delimiter := PIPE;
+//  SL.QuoteChar := '"';
+//  SL.DelimitedText := PChar(MyMsg.WParam);
+//
+//  try
+//    if SL.Values['REQUEST'] = 'REFRESH_DATA' then
+//      SendMessage(CustomerFrm.Handle, WM_RECORD_ID, DWORD(PChar(SL.DelimitedText)), 0);
+//  finally
+//    MyMsg.Result := -1;
+//  end;
 end;
 
 procedure TMainFrm.HandleTSAfterPost(var MyMsg: TMessage);

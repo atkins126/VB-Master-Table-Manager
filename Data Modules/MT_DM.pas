@@ -395,7 +395,6 @@ type
     FMasterItem: MasterItemArray;
 //    FDBAction: TDBActions;
     FDetailIndex: Integer;
-    FPostError: Boolean;
     FValueArray: FieldValueArray;
     FHeaderTitle: string;
     FSubTitle: string;
@@ -412,7 +411,6 @@ type
     property TableReadOnlyArray: TableReadOnlyArray read FTableReadOnlyArray write FTableReadOnlyArray;
 //    property DBAction: TDBActions read FDBAction write FDBAction;
     property DetailIndex: Integer read FDetailIndex write FDetailIndex;
-    property PostError: Boolean read FPostError write FPostError;
     property ValueArray: FieldValueArray read FValueArray write FValueArray;
     property HeaderTitle: string read FHeaderTitle write FHeaderTitle;
     property SubTitle: string read FSubTitle write FSubTitle;
@@ -434,13 +432,9 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-{$R *.dfm}
+uses RUtils;
 
-procedure TMTDM.cdsActivityTypeBeforePost(DataSet: TDataSet);
-begin
-  inherited;
-  FID := DataSet.FieldByName('ID').AsInteger;
-end;
+{$R *.dfm}
 
 procedure TMTDM.cdsActivityTypeNewRecord(DataSet: TDataSet);
 begin
@@ -492,7 +486,7 @@ procedure TMTDM.cdsDirectorOfCompanyPostError(DataSet: TDataSet;
 begin
   inherited;
 //  EFDException(E).FDCode;
-  MTDM.FPostError := True;
+  PostError := True;
 
   if EFDException(E).FDCode = 15 then // Duplicate record
   begin
@@ -512,7 +506,7 @@ begin
 //  ShowMessage('Class name: ' + E.ClassName);
 //  ShowMessage('Class name: ' + EFDDBEngineException(E).Message);
 
-  MTDM.FPostError := True;
+  PostError := True;
   DataSet.Cancel;
 //  Action :=  daAbort;
 end;
@@ -690,18 +684,57 @@ begin
     TFDMemTable(DataSet).Tag);
 end;
 
-procedure TMTDM.cdsActivityTypeAfterPost(DataSet: TDataSet);
+procedure TMTDM.cdsActivityTypeBeforePost(DataSet: TDataSet);
 var
-  DSArray: TDataSetArray;
+  SQLStatement, Value, TableName, Response: string;
+  NextID: Integer;
+  ResponseList: TStringList;
 begin
   inherited;
-  SetLength(DSArray, 1);
-  DSArray[0] := TFDMemTable(DataSet);
+  Value := AnsiQuotedStr(DataSet.FieldByName('NAME').AsString, '''');
+  TableName := TFDMemTable(DataSet).UpdateOptions.UpdateTableName;
+  SQLStatement := Format(INSERT_RECORD, [TableName, 'NAME', Value]);
+  PostError := False;
+//  SQLStatement := ' INSERT INTO TEST(FIRST_NAME) VALUES(' + Value + ') RETURNING ID';
 
-  VBBaseDM.ApplyUpdates(DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
-    TFDMemTable(DataSet).Tag);
+//  try
+  FID := StrToInt(VBBaseDM.InsertRecord(SQLStatement, Response));
+  ServerErrorMsg := 'RESPONSE=SUCCESS';
+  ResponseList := RUtils.CreateStringList(PIPE, DOUBLE_QUOTE);
+  ResponseList.DelimitedText := Response;
 
-  SendMessage(Application.MainForm.Handle, WM_RECORD_ID, DWORD(PChar('REQUEST=REFRESH_DATA' + '|ID=' + FID.ToString)), 0);
+  try
+    if SameText(ResponseList.Values['RESPONSE'], 'ERROR') then
+    begin
+      PostError := True;
+      ServerErrorMsg := 'One of mroe errors occurred when trying to insert a new record into the ' + TableName +
+        ' table.' + CRLF + CRLF +
+        'Server error message: ' + CRLF + ResponseList.Values['ERROR_MESSAGE'];
+
+      DataSet.Cancel;
+      SendMessage(Application.MainForm.Handle, WM_POST_DATA_ERROR, DWORD(PChar(ServerErrorMsg)), 0);
+//      Abort;
+    end;
+  finally
+    ResponseList.Free;
+  end;
+
+  if VBBaseDM.DBAction = acInsert then
+    DataSet.FieldByName('ID').AsInteger := FID;
+end;
+
+procedure TMTDM.cdsActivityTypeAfterPost(DataSet: TDataSet);
+//var
+//  DSArray: TDataSetArray;
+begin
+  inherited;
+//  SetLength(DSArray, 1);
+//  DSArray[0] := TFDMemTable(DataSet);
+//
+//  VBBaseDM.ApplyUpdates(DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
+//    TFDMemTable(DataSet).Tag);
+//
+//  SendMessage(Application.MainForm.Handle, WM_RECORD_ID, DWORD(PChar('REQUEST=REFRESH_DATA' + '|ID=' + FID.ToString)), 0);
 end;
 
 end.
