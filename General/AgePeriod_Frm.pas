@@ -63,7 +63,6 @@ end;
 
 procedure TAgePeriodFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 begin
-  Screen.Cursor := crHourglass;
   ReportDM.MasterFormType := ftAgePeriod;
   inherited;
   case AButtonIndex of
@@ -73,6 +72,7 @@ begin
     16, 17, 18, 19:
       begin
         inherited;
+        Screen.Cursor := crHourglass;
         try
           ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
           case ReportDM.ReportAction of

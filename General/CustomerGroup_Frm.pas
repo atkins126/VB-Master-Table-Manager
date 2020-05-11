@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, System.ImageList, System.Actions, Vcl.ActnList,
   Vcl.ImgList, Vcl.Controls, Vcl.Dialogs, Data.DB, sYSTEM.iouTILS,
 
-  BaseGrid_Frm,VBPrintExportData, CommonValues,
+  BaseGrid_Frm, VBPrintExportData, CommonValues,
 
   frxClass, frxDBSet,
 
@@ -63,7 +63,6 @@ end;
 
 procedure TCustomerGroupFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 begin
-  Screen.Cursor := crHourglass;
   ReportDM.MasterFormType := ftCustomerGroup;
   case AButtonIndex of
     NBDI_DELETE:
@@ -78,7 +77,9 @@ begin
     16, 17, 18, 19:
       begin
         inherited;
-          ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
+        Screen.Cursor := crHourglass;
+        ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
+
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:

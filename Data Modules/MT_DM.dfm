@@ -1111,6 +1111,11 @@ inherited MTDM: TMTDM
         CustomConstraint = 'CHAR_LENGTH(TRIM(NAME)) > 0'
         ErrorMessage = 'Rate Unit name must have a value'
         FromDictionary = False
+      end
+      item
+        CustomConstraint = 'CHAR_LENGTH(TRIM(ABBREVIATION)) > 0'
+        ErrorMessage = 'Abbreviation must have a value'
+        FromDictionary = False
       end>
     FieldDefs = <>
     CachedUpdates = True
@@ -1171,6 +1176,8 @@ inherited MTDM: TMTDM
     object cdsRateUnitABBREVIATION: TStringField
       DisplayLabel = 'Abbr'
       FieldName = 'ABBREVIATION'
+      Origin = 'ABBREVIATION'
+      Required = True
       Size = 5
     end
   end

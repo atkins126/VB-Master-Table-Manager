@@ -86,7 +86,6 @@ inherited PriceListFrm: TPriceListFrm
               FieldName = 'NAME'
             end>
           Properties.ListOptions.SyncMode = True
-          Properties.ListSource = LookupDM.dtsRateUnit
           MinWidth = 130
           Options.Grouping = False
           Options.HorzSizing = False
@@ -115,15 +114,13 @@ inherited PriceListFrm: TPriceListFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 342
       DataSource = MTDM.dtsPriceList
-      ExplicitWidth = 342
     end
     object grdPriceHistory: TcxGrid [3]
       Left = 10000
       Top = 10000
-      Width = 1377
-      Height = 577
+      Width = 1368
+      Height = 569
       TabOrder = 3
       Visible = False
       object viewPriceHistory: TcxGridDBBandedTableView
@@ -133,6 +130,8 @@ inherited PriceListFrm: TPriceListFrm
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.FocusCellOnTab = True
+        OptionsBehavior.FocusCellOnCycle = True
         OptionsView.NoDataToDisplayInfoText = '<No Price History data to display>'
         OptionsView.CellAutoHeight = True
         OptionsView.GroupByBox = False
@@ -147,9 +146,6 @@ inherited PriceListFrm: TPriceListFrm
       object lvlPriceHistory: TcxGridLevel
         GridView = viewPriceHistory
       end
-    end
-    inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 342
     end
     inherited litGrid: TdxLayoutItem
       Parent = grpPricelist

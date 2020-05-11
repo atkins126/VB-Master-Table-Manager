@@ -249,7 +249,6 @@ procedure TPriceListFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonInde
 var
   ID: Integer;
 begin
-  Screen.Cursor := crHourglass;
   ReportDM.MasterFormType := ftPricelist;
   case AButtonIndex of
     NBDI_DELETE:
@@ -264,10 +263,13 @@ begin
     16, 17, 18, 19:
       begin
         inherited;
+        Screen.Cursor := crHourglass;
+
         if grpPricelist.ItemIndex = 0 then
           ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'PriceList.fr3'
         else
           ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'PriceHistory.fr3';
+
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:
@@ -369,39 +371,4 @@ end;
 
 end.
 
-{
-SELECT
-P.ID,
-P.RATE_UNIT_ID,
-P."NAME",
-P.DESCRIPTION,
-P.INVOICE_DESCRIPTION,
-R."NAME" AS "RATE_UNIT",
-
-(SELECT
-  H.RATE
- FROM
-  PRICE_HISTORY H
- WHERE
-  H.THE_YEAR = 2020
-  AND H.PRICE_LIST_ITEM_ID = P.ID
- ) AS "2020",
-
-(SELECT
-  H.RATE
- FROM
-  PRICE_HISTORY H
- WHERE
-  H.THE_YEAR = 2019
-  AND H.PRICE_LIST_ITEM_ID = P.ID
- )
- AS "2019"
-
-FROM
- PRICE_LIST P
-LEFT JOIN RATE_UNIT R
-ON P.RATE_UNIT_ID = R.ID
-ORDER BY
- P."NAME"
-}
 

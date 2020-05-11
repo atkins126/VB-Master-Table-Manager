@@ -64,8 +64,8 @@ end;
 
 procedure TTaxOfficeFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
 begin
-  Screen.Cursor := crHourglass;
   ReportDM.MasterFormType := ftTaxoffice;
+
   case AButtonIndex of
     NBDI_DELETE:
       begin
@@ -89,7 +89,9 @@ begin
     16, 17, 18, 19:
       begin
         inherited;
+        Screen.Cursor := crHourglass;
         ReportDM.ReportFileName := MTDM.ShellResource.ReportFolder + 'MasterGenericReport.fr3';
+
         try
           case ReportDM.ReportAction of
             raPreview, raPrint:

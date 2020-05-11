@@ -24,6 +24,8 @@ inherited BaseGridFrm: TBaseGridFrm
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.FocusCellOnTab = True
+        OptionsBehavior.FocusCellOnCycle = True
         OptionsView.NoDataToDisplayInfoText = '<No Master data to display>'
         OptionsView.GroupByBox = False
         Bands = <
@@ -37,7 +39,7 @@ inherited BaseGridFrm: TBaseGridFrm
     object navMaster: TcxDBNavigator [1]
       Left = 11
       Top = 11
-      Width = 360
+      Width = 342
       Height = 40
       BorderStyle = nbsNone
       Buttons.OnButtonClick = navMasterButtonsButtonClick
@@ -94,7 +96,7 @@ inherited BaseGridFrm: TBaseGridFrm
       TabOrder = 0
     end
     object cbxOpenAfterExport: TcxCheckBox [2]
-      Left = 377
+      Left = 359
       Top = 21
       Caption = 'Open document after export'
       Properties.ImmediatePost = True
@@ -121,7 +123,7 @@ inherited BaseGridFrm: TBaseGridFrm
       CaptionOptions.Visible = False
       Control = navMaster
       ControlOptions.OriginalHeight = 40
-      ControlOptions.OriginalWidth = 360
+      ControlOptions.OriginalWidth = 342
       ControlOptions.ShowBorder = False
       Index = 0
     end

@@ -334,10 +334,10 @@ begin
   navMaster.Buttons[10].Enabled := not (DataSet.State in [dsEdit, dsInsert]);
   navMaster.Buttons[11].Enabled := not (DataSet.State in [dsEdit, dsInsert]);
 
-  // Don't allow printing or exporting data whilst editing data.
-  if DataSet.State in [dsEdit, dsInsert] then
-    raise EExecutionException.Create('Cannot use the print/export functions whilst editing data.' + CRLF +
-      'Please post or cancel the current transaction and try again.');
+//  // Don't allow printing or exporting data whilst editing data.
+//  if DataSet.State in [dsEdit, dsInsert] then
+//    raise EExecutionException.Create('Cannot use the print/export functions whilst editing data.' + CRLF +
+//      'Please post or cancel the current transaction and try again.');
 end;
 
 procedure TBaseGridFrm.viewMasterCustomDrawCell(Sender: TcxCustomGridTableView;

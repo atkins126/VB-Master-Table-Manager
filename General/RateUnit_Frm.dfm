@@ -48,12 +48,19 @@ inherited RateUnitFrm: TRateUnitFrm
           Position.ColIndex = 1
           Position.RowIndex = 0
         end
+        object edtAbbreviation: TcxGridDBBandedColumn
+          DataBinding.FieldName = 'ABBREVIATION'
+          PropertiesClassName = 'TcxTextEditProperties'
+          Width = 30
+          Position.BandIndex = 0
+          Position.ColIndex = 2
+          Position.RowIndex = 0
+        end
       end
     end
     inherited navMaster: TcxDBNavigator
       Width = 324
       DataSource = MTDM.dtsRateUnit
-      ExplicitWidth = 324
     end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324

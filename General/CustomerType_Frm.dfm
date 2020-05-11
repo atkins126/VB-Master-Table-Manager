@@ -54,6 +54,7 @@ inherited CustomerTypeFrm: TCustomerTypeFrm
     end
     inherited navMaster: TcxDBNavigator
       Width = 324
+      ExplicitWidth = 324
     end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324

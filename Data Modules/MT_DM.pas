@@ -686,22 +686,35 @@ end;
 
 procedure TMTDM.cdsActivityTypeBeforePost(DataSet: TDataSet);
 var
-  SQLStatement, Value, TableName, Response: string;
+  SQLStatement, Response: string;
+  FieldList, FieldValues, WhereClause, TableName, FieldListValues: String;
   NextID: Integer;
   ResponseList: TStringList;
 begin
   inherited;
-  Value := AnsiQuotedStr(DataSet.FieldByName('NAME').AsString, '''');
+  Fieldlist := '';
+  FieldValues := '';
   TableName := TFDMemTable(DataSet).UpdateOptions.UpdateTableName;
-  SQLStatement := Format(INSERT_RECORD, [TableName, 'NAME', Value]);
-  PostError := False;
-//  SQLStatement := ' INSERT INTO TEST(FIRST_NAME) VALUES(' + Value + ') RETURNING ID';
 
-//  try
+  case VBBaseDM.DBAction of
+    acInsert:
+      begin
+        BuildInsertStatement(DataSet.Tag, FieldList, FieldValues, TFDMemTable(DataSet));
+        SQLStatement := Format(INSERT_RECORD, [TableName, FieldList, FieldValues]);
+      end;
+
+    acModify:
+      begin
+        BuildUpdateStatement(DataSet.Tag, FieldListValues, WhereClause, TFDMemTable(DataSet));
+        SQLStatement := Format(UPDATE_RECORD, [TableName, FieldListValues, WhereClause]);
+      end;
+  end;
+
+  PostError := False;
   FID := StrToInt(VBBaseDM.InsertRecord(SQLStatement, Response));
-  ServerErrorMsg := 'RESPONSE=SUCCESS';
   ResponseList := RUtils.CreateStringList(PIPE, DOUBLE_QUOTE);
   ResponseList.DelimitedText := Response;
+  ServerErrorMsg := Responselist.Values['RESPONSE'];
 
   try
     if SameText(ResponseList.Values['RESPONSE'], 'ERROR') then
@@ -713,7 +726,6 @@ begin
 
       DataSet.Cancel;
       SendMessage(Application.MainForm.Handle, WM_POST_DATA_ERROR, DWORD(PChar(ServerErrorMsg)), 0);
-//      Abort;
     end;
   finally
     ResponseList.Free;
