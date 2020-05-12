@@ -15,7 +15,8 @@ uses
   dxLayoutControl, dxLayoutControlAdapters, Vcl.Menus, Vcl.StdCtrls, cxButtons,
   dxLayoutcxEditAdapters, cxContainer, cxEdit, cxLabel, cxTextEdit, cxCheckBox,
   cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
-  Vcl.ComCtrls, dxCore, cxDateUtils, cxCalendar, RUtils;
+  Vcl.ComCtrls, dxCore, cxDateUtils, cxCalendar, RUtils, dxScreenTip,
+  dxCustomHint, cxHint;
 
 type
   TCustomerEditFrm = class(TBaseLayoutFrm)
@@ -95,8 +96,8 @@ type
     cbxProvTaxPayer: TcxCheckBox;
     cbxLivingWill: TcxCheckBox;
     cbxOrganDonor: TcxCheckBox;
-    dteCreated: TcxDateEdit;
-    dteModified: TcxDateEdit;
+    edtCreated: TcxDateEdit;
+    edtModified: TcxDateEdit;
     grpIndividual: TdxLayoutGroup;
     litFirstName: TdxLayoutItem;
     litLastName: TdxLayoutItem;
@@ -108,11 +109,25 @@ type
     litLegend: TdxLayoutItem;
     litUIFNo: TdxLayoutItem;
     edtUIFNo: TcxTextEdit;
+    grpTradingAs: TdxLayoutGroup;
+    litTradingAsSameAsName: TdxLayoutItem;
+    btnTradingAsSameAsName: TcxButton;
+    styHintController: TcxHintStyleController;
+    repScreenTip: TdxScreenTipRepository;
+    tipTradingAsSameAsName: TdxScreenTip;
+    actTradingAsSameAsName: TAction;
+    btnBillToSameAsName: TcxButton;
+    grpBillTo: TdxLayoutGroup;
+    litBillToSameAsName: TdxLayoutItem;
+    tipBillToSameAsName: TdxScreenTip;
+    actBillToSameAsName: TAction;
     procedure FormCreate(Sender: TObject);
     procedure lucCustomerTypePropertiesEditValueChanged(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure edtCoNoKeyPress(Sender: TObject; var Key: Char);
+    procedure DoTradingAsSameAsCompanyName(Sender: TObject);
+    procedure DoBillToSameAsCompanyName(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -139,6 +154,18 @@ begin
   Validate;
 end;
 
+procedure TCustomerEditFrm.DoTradingAsSameAsCompanyName(Sender: TObject);
+begin
+  inherited;
+  edtTradingAs.EditValue :=  edtCustomerName.EditValue;
+end;
+
+procedure TCustomerEditFrm.DoBillToSameAsCompanyName(Sender: TObject);
+begin
+  inherited;
+  edtBillTo.EditValue :=  edtCustomerName.EditValue;
+end;
+
 procedure TCustomerEditFrm.edtCoNoKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
@@ -150,7 +177,7 @@ begin
   inherited;
   Caption := 'Customer Insert/Edit Form';
   Self.Height := 660;
-  Self.Width := 830;
+  Self.Width := 850;
   layMain.Align := alClient;
   lblCustomerHeader.Style.TextColor := RootLookAndFeel.SkinPainter.DefaultSelectionColor;
   lblCustomerHeader.Style.Font.Color := RootLookAndFeel.SkinPainter.DefaultSelectionColor;
@@ -164,8 +191,8 @@ begin
   lucVATCountry.Properties.ListSource := LookupDM.dtsCountry;
 
 //  TcxLookupComboBoxProperties(lucCustomerType.Properties).Buttons.Items[0].Visible := False;
-  TcxDateEditProperties(dteCreated.Properties).Buttons.Items[0].Visible := False;
-  TcxDateEditProperties(dteModified.Properties).Buttons.Items[0].Visible := False;
+  TcxDateEditProperties(edtCreated.Properties).Buttons.Items[0].Visible := False;
+  TcxDateEditProperties(edtModified.Properties).Buttons.Items[0].Visible := False;
 
   if VBBaseDM.DBAction = acInsert then
   begin
@@ -174,7 +201,12 @@ begin
     cbxIsActive.Checked := True;
   end;
 
-  if VBBaseDM.DBAction = acModify then
+  if VBBaseDM.DBAction = acInsert then
+  begin
+    edtCreated.Date := Now;
+    edtModified.date := Now;
+  end
+  else
   begin
     lucCustomerType.EditValue := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').AsInteger;
     edtCustomerName.Text := MTDM.cdsCustomer.FieldByName('NAME').AsString;
@@ -209,49 +241,49 @@ begin
     cbxProvTaxPayer.Checked := IntegerToBoolean(MTDM.cdsCustomer.FieldByName('IS_PROV_TAX_PAYER').AsInteger);
     cbxLivingWill.Checked := IntegerToBoolean(MTDM.cdsCustomer.FieldByName('HAS_LIVING_WILL').AsInteger);
     cbxOrganDonor.Checked := IntegerToBoolean(MTDM.cdsCustomer.FieldByName('IS_ORGAN_DONOR').Asinteger);
-    dteCreated.Date := MTDM.cdsCustomer.FieldByName('DATE_CREATED').AsDateTime;
-    dteModified.date := MTDM.cdsCustomer.FieldByName('DATE_MODIFIED').AsDateTime;
+    edtCreated.Date := MTDM.cdsCustomer.FieldByName('DATE_CREATED').AsDateTime;
+    edtModified.date := MTDM.cdsCustomer.FieldByName('DATE_MODIFIED').AsDateTime;
   end
-{$IFDEF DEBUG}
-  else
-  begin
-    lucCustomerType.EditValue := 2;
-    edtCustomerName.Text := 'Flippie Gouws cc';
-//    edtFirstName.Text := '';
-//    edtLastName.Text := '';
-//    edtInitials.Text := '';
-    edtCoNo.Text := 'CK1249/12002';
-    lucStatus.EditValue := 1;
-    edtTradingAs.Text := 'Flippie Gouws cc';
-//    edtBillTo.Text jj
-    cbxIsActive.Checked := True;
-    lucYearEnd.EditValue := 2;
-    edtTaxNo.Text := '987654321';
-    lucTaxOffice.EditValue := 9;
-    lucARMonth.EditValue := 3;
-    edtVATNo.Text := '316497';
-    lucVATMonth.EditValue := 4;
-    lucVATOffice.EditValue := 1;
-    lucVATCountry.EditValue := 2;
-    edtVATCustomsCode.Text := 'ZA2468';
-    edtPAYENo.Text := '654258';
-    edtUIFNo.Text := '467153';
-    edtSDLNo.Text := '456852';
-    edtWCNo.Text := '951753';
-//    dteARCompletionDate.Date := EncodeDate(2020, 6, 30);
-    edtEFiling.Text := 'Hello';
-    edtEFUserName.Text := 'flippie';
-    edtEFPassword.Text := 'qwer123';
-    edtPastelAccCode.Text := 'FLIP003';
-    edtVBTaxAccCode.Text := 'FG987';
-    cbxProvTaxPayer.Checked := True;
-    cbxLivingWill.Checked := False;
-    cbxOrganDonor.Checked := False;
-    dteCreated.Date := Now;
-    dteModified.date := Now;
-  end;
-{$ENDIF}
-  ;
+//{$IFDEF DEBUG}
+//  else
+//  begin
+//    lucCustomerType.EditValue := 2;
+//    edtCustomerName.Text := 'Flippie Gouws cc';
+////    edtFirstName.Text := '';
+////    edtLastName.Text := '';
+////    edtInitials.Text := '';
+//    edtCoNo.Text := 'CK1249/12002';
+//    lucStatus.EditValue := 1;
+//    edtTradingAs.Text := 'Flippie Gouws cc';
+////    edtBillTo.Text jj
+//    cbxIsActive.Checked := True;
+//    lucYearEnd.EditValue := 2;
+//    edtTaxNo.Text := '987654321';
+//    lucTaxOffice.EditValue := 9;
+//    lucARMonth.EditValue := 3;
+//    edtVATNo.Text := '316497';
+//    lucVATMonth.EditValue := 4;
+//    lucVATOffice.EditValue := 1;
+//    lucVATCountry.EditValue := 2;
+//    edtVATCustomsCode.Text := 'ZA2468';
+//    edtPAYENo.Text := '654258';
+//    edtUIFNo.Text := '467153';
+//    edtSDLNo.Text := '456852';
+//    edtWCNo.Text := '951753';
+////    dteARCompletionDate.Date := EncodeDate(2020, 6, 30);
+//    edtEFiling.Text := 'Hello';
+//    edtEFUserName.Text := 'flippie';
+//    edtEFPassword.Text := 'qwer123';
+//    edtPastelAccCode.Text := 'FLIP003';
+//    edtVBTaxAccCode.Text := 'FG987';
+//    cbxProvTaxPayer.Checked := True;
+//    cbxLivingWill.Checked := False;
+//    cbxOrganDonor.Checked := False;
+//    dteCreated.Date := Now;
+//    dteModified.date := Now;
+//  end;
+//{$ENDIF}
+    ;
 end;
 
 procedure TCustomerEditFrm.FormShow(Sender: TObject);
@@ -360,7 +392,7 @@ begin
 ////  else
 //    MTDM.FFieldValue.ARCompletionDate := dteARCompletionDate.Date;
 
-  MTDM.FFieldValue.ARCompletionDate := dteARCompletionDate.Date;
+    MTDM.FFieldValue.ARCompletionDate := dteARCompletionDate.Date;
   MTDM.FFieldValue.PasteAccCode := edtPastelAccCode.Text;
   MTDM.FFieldValue.VBTaxAccCode := edtVBTaxAccCode.Text;
   MTDM.FFieldValue.IsProvTaxPayer := BooleanToInteger(cbxProvTaxPayer.Checked);

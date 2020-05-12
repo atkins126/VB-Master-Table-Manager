@@ -1679,6 +1679,26 @@ inherited MTDM: TMTDM
     StoreDefs = True
     Left = 720
     Top = 10
+    object cdsCountryID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsCountryNAME: TStringField
+      DisplayLabel = 'Name'
+      DisplayWidth = 50
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+      Size = 50
+    end
+    object cdsCountryDIALING_CODE: TStringField
+      DisplayLabel = 'Dial Code'
+      FieldName = 'DIALING_CODE'
+      Size = 10
+    end
   end
   object dtsCountry: TDataSource
     DataSet = cdsCountry

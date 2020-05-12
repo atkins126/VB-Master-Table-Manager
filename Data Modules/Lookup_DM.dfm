@@ -330,19 +330,19 @@ inherited LookupDM: TLookupDM
     Indexes = <
       item
         Active = True
+        Selected = True
         Name = 'idxID'
         Fields = 'ID'
         Options = [soPrimary]
       end
       item
         Active = True
-        Selected = True
         Name = 'idxName'
         Fields = 'NAME'
         CaseInsFields = 'NAME'
         Options = [soUnique]
       end>
-    IndexName = 'idxName'
+    IndexName = 'idxID'
     FetchOptions.AssignedValues = [evMode, evRecordCountMode]
     FetchOptions.Mode = fmAll
     FetchOptions.RecordCountMode = cmTotal
@@ -931,19 +931,19 @@ inherited LookupDM: TLookupDM
     Indexes = <
       item
         Active = True
+        Selected = True
         Name = 'idxID'
         Fields = 'ID'
         Options = [soPrimary]
       end
       item
         Active = True
-        Selected = True
         Name = 'idxName'
         Fields = 'NAME'
         CaseInsFields = 'NAME'
         Options = [soUnique]
       end>
-    IndexName = 'idxName'
+    IndexName = 'idxID'
     FetchOptions.AssignedValues = [evMode, evRecordCountMode]
     FetchOptions.Mode = fmAll
     FetchOptions.RecordCountMode = cmTotal
@@ -1190,19 +1190,22 @@ inherited LookupDM: TLookupDM
       end>
     FieldDefs = <>
     CachedUpdates = True
-    IndexDefs = <
+    IndexDefs = <>
+    Indexes = <
       item
+        Active = True
+        Selected = True
         Name = 'idxID'
         Fields = 'ID'
-        Options = [ixPrimary]
       end
       item
+        Active = True
         Name = 'idxName'
-        CaseInsFields = 'NAME'
         Fields = 'NAME'
-        Options = [ixUnique]
+        Options = [soNoCase]
+        FilterOptions = [ekNoCase]
       end>
-    IndexName = 'idxName'
+    IndexName = 'idxID'
     FetchOptions.AssignedValues = [evMode, evRecordCountMode]
     FetchOptions.Mode = fmAll
     FetchOptions.RecordCountMode = cmTotal

@@ -455,6 +455,7 @@ type
     procedure grdHeirVerticalStylesGetContentStyle(Sender: TObject;
       AEditProp: TcxCustomEditorRowProperties; AFocused: Boolean;
       ARecordIndex: Integer; var AStyle: TcxStyle);
+    procedure grdContactDetailCoEnter(Sender: TObject);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
@@ -495,7 +496,8 @@ type
 
     procedure CmDrawBorder(var Msg: TMessage); message CM_DRAWBORDER;
     procedure OpenTables;
-    procedure EditDeleteRecord(Key: Word);
+    procedure EditDeleteRecord;
+//    procedure EditDeleteRecord(DataAction: TDBActions);
     function FillFieldData(DetailDataSetID: Integer): string;
     procedure OpenReportDataSets;
     // Controls scrolling of embedded loolup comboboxes.
@@ -581,23 +583,24 @@ begin
   case TAction(Sender).Tag of
     0:
       begin
-        Key := VK_INSERT;
         VBBaseDM.DBAction := acInsert;
+//        Key := VK_INSERT;
       end;
 
     1:
       begin
-        Key := VK_RETURN; // VK_F2;
         VBBaseDM.DBAction := acModify;
+//        Key := VK_RETURN; // VK_F2;
       end;
 
     2:
       begin
-        Key := VK_DELETE;
         VBBaseDM.DBAction := acDelete;
+//        Key := VK_DELETE;
       end;
   end;
-  EditDeleteRecord(Key);
+  EditDeleteRecord;
+//  EditDeleteRecord(Key);
 end;
 
 function TCustomerFrm.FillFieldData(DetailDataSetID: Integer): string;
@@ -1555,14 +1558,18 @@ begin
   case AButtonIndex of
     NBDI_INSERT:
       begin
+        VBBaseDM.DBAction := acInsert;
         ADone := True;
-        EditDeleteRecord(VK_INSERT);
+        EditDeleteRecord;
+//        EditDeleteRecord(VK_INSERT);
       end;
 
     NBDI_EDIT:
       begin
+        VBBaseDM.DBAction := acModify;
         ADone := True;
-        EditDeleteRecord(VK_RETURN);
+        EditDeleteRecord;
+//        EditDeleteRecord(VK_RETURN);
       end;
 
     16: ReportDM.ReportAction := raPreview;
@@ -1957,6 +1964,7 @@ begin
 
     NBDI_DELETE:
       begin
+        VBBaseDM.DBAction := acDelete;
         ADone := True;
         actDelete.Execute;
       end;
@@ -2443,6 +2451,16 @@ begin
   end;
 end;
 
+procedure TCustomerFrm.grdContactDetailCoEnter(Sender: TObject);
+begin
+  inherited;
+  MTDM.DetailIndex := 0;
+  actInsert.Caption := 'Add a new company contact detail';
+  actEdit.Caption := 'Edit selected contact detail';
+  actDelete.Caption := 'Delete selected cotact detail';
+  MTDM.FormCaption := 'Company Contact Details';
+end;
+
 procedure TCustomerFrm.grdContactPersonEnter(Sender: TObject);
 begin
   inherited;
@@ -2534,10 +2552,10 @@ procedure TCustomerFrm.grdPhysicalAddressDblClick(Sender: TObject);
 begin
   inherited;
 // if TcxGridSite(TcxDBVerticalGrid(Sender)).GridView.DataController.RecordCount = 0 then
-  if TcxDBVerticalGrid(Sender).DataController.RecordCount = 0 then
-    EditDeleteRecord(VK_INSERT)
-  else
-    EditDeleteRecord({ VK_F2 }VK_RETURN);
+//  if TcxDBVerticalGrid(Sender).DataController.RecordCount = 0 then
+//    EditDeleteRecord(VBBaseDM.DBAction)
+//  else
+  EditDeleteRecord;
 end;
 
 procedure TCustomerFrm.grdPhysicalAddressEnter(Sender: TObject);
@@ -2600,10 +2618,12 @@ end;
 procedure TCustomerFrm.grdVCustomerDblClick(Sender: TObject);
 begin
   inherited;
-  if grdVCustomer.DataController.RecordCount = 0 then
-    EditDeleteRecord(VK_INSERT)
-  else
-    EditDeleteRecord({ VK_F2 }VK_RETURN);
+//  if grdVCustomer.DataController.RecordCount = 0 then
+//    EditDeleteRecord(VK_INSERT)
+//  else
+//    EditDeleteRecord({ VK_F2 }VK_RETURN);
+
+  EditDeleteRecord;
 end;
 
 procedure TCustomerFrm.grdVCustomerInitEdit(Sender, AItem: TObject; AEdit: TcxCustomEdit);
@@ -2616,7 +2636,9 @@ begin
       TcxLookupComboBox(AEdit).Properties.UseMouseWheel := False;
 end;
 
-procedure TCustomerFrm.EditDeleteRecord(Key: Word);
+//procedure TCustomerFrm.EditDeleteRecord(Key: Word);
+
+procedure TCustomerFrm.EditDeleteRecord;
 var
   ErrorValues: string;
   ModResult: Integer;
@@ -2643,8 +2665,8 @@ begin
     12: DataSet := MTDM.cdsCustomer;
   end;
 
-  case Key of
-    VK_INSERT, VK_RETURN { VK_F2 }:
+  case VBBaseDM.DBAction of
+    acInsert, acModify:
       begin
         FOpenTableParam.ScriptID := 0;
         FOpenTableParam.DataSet := nil;
@@ -2655,10 +2677,10 @@ begin
         FOpenTableParam.FieldName := '';
         FOpenTableParam.LocateValue := '';
 
-        case Key of
-          VK_INSERT: VBBaseDM.DBAction := acInsert;
-          { VK_F2 }VK_RETURN: VBBaseDM.DBAction := acModify;
-        end;
+//        case DataAction of
+//          VK_INSERT: VBBaseDM.DBAction := acInsert;
+//          { VK_F2 }VK_RETURN: VBBaseDM.DBAction := acModify;
+//        end;
 
         case MTDM.DetailIndex of
           0: // Company conatact detail
@@ -2955,7 +2977,7 @@ begin
           end;
       end;
 
-    VK_DELETE:
+    acDelete:
       begin
         Beep;
         if DataSet.IsEmpty then
@@ -2993,10 +3015,12 @@ end;
 procedure TCustomerFrm.viewContactDetailCoDblClick(Sender: TObject);
 begin
   inherited;
-  if TcxGridSite(Sender).GridView.DataController.RecordCount = 0 then
-    EditDeleteRecord(VK_INSERT)
-  else
-    EditDeleteRecord({ VK_F2 }VK_RETURN);
+//  if TcxGridSite(Sender).GridView.DataController.RecordCount = 0 then
+//    EditDeleteRecord(VK_INSERT)
+//  else
+//    EditDeleteRecord({ VK_F2 }VK_RETURN);
+
+  EditDeleteRecord;
 end;
 
 procedure TCustomerFrm.viewContactDetailNavigatorButtonsButtonClick(Sender: TObject;
@@ -3007,15 +3031,21 @@ begin
   inherited;
   ADone := True;
 
+//  case AButtonIndex of
+//    NBDI_INSERT: Key := VK_INSERT;
+//    NBDI_EDIT: Key := VK_RETURN { VK_F2 };
+//    NBDI_DELETE: Key := VK_DELETE;
+//  else
+//    Key := 0;
+//  end;
+
   case AButtonIndex of
-    NBDI_INSERT: Key := VK_INSERT;
-    NBDI_EDIT: Key := VK_RETURN { VK_F2 };
-    NBDI_DELETE: Key := VK_DELETE;
-  else
-    Key := 0;
+    NBDI_INSERT: VBBaseDM.DBAction := acInsert;
+    NBDI_EDIT: VBBaseDM.DBAction := acModify;
+    NBDI_DELETE: VBBaseDM.DBAction := acDelete;
   end;
 
-  EditDeleteRecord(Key);
+  EditDeleteRecord;
 
 // case AButtonIndex of
 // NBDI_DELETE:

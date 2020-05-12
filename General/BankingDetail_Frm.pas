@@ -54,7 +54,7 @@ uses
   MT_DM,
   Lookup_DM,
   RUtils;
-
+{TODO: Add OnChange event to enable OK button}
 procedure TBankingDetailFrm.btnOKClick(Sender: TObject);
 begin
   inherited;

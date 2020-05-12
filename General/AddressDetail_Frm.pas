@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics, Vcl.Menus, System.ImageList, Vcl.ImgList,
   Vcl.Controls, Vcl.Dialogs, System.Actions, Vcl.ActnList, Vcl.StdCtrls,
 
-  BaseCustomerEdit_Frm, CommonValues,
+  VBBase_DM, BaseCustomerEdit_Frm, CommonValues, VBCommonValues,
 
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
   dxSkinsDefaultPainters, cxContainer, cxEdit, dxLayoutControlAdapters, cxLabel,
@@ -82,6 +82,7 @@ type
     procedure btnBillingToPostalClick(Sender: TObject);
     procedure btnPostalToBillingClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
+    procedure edtPhysical1PropertiesEditValueChanged(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -97,9 +98,7 @@ implementation
 {$R *.dfm}
 
 uses
-  VBBase_DM,
-  MT_DM,
-  VBCommonValues;
+  MT_DM;
 
 procedure TAddressDetailFrm.btnPhysicalToPostalClick(Sender: TObject);
 begin
@@ -119,6 +118,13 @@ begin
   edtPhysical3.Text := edtPostal3.Text;
   edtPhysical4.Text := edtPostal4.Text;
   edtPhysicalCode.Text := EdtPostalCode.Text;
+end;
+
+procedure TAddressDetailFrm.edtPhysical1PropertiesEditValueChanged(  Sender: TObject);
+begin
+  inherited;
+VBBaseDM.MadeChanges := True;
+btnOK.Enabled :=  VBBaseDM.MadeChanges;
 end;
 
 procedure TAddressDetailFrm.btnPhysicalToBillingClick(Sender: TObject);
@@ -172,6 +178,7 @@ begin
   inherited;
   //  Width = 615, Height = 495
   MTDM.ClearFieldValues;
+
   if VBBaseDM.DBAction = acModify then
   begin
     edtPhysical1.Text := MTDM.cdsAddress.FieldByName('PHYSICAL1').AsString;

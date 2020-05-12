@@ -375,6 +375,9 @@ type
     FDPhysFBDriverLink: TFDPhysFBDriverLink;
     FDGUIxWaitCursor: TFDGUIxWaitCursor;
     cdsRateUnitABBREVIATION: TStringField;
+    cdsCountryID: TIntegerField;
+    cdsCountryNAME: TStringField;
+    cdsCountryDIALING_CODE: TStringField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);
