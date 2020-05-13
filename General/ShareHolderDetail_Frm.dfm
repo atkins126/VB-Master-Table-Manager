@@ -55,6 +55,7 @@ inherited ShareHolderDetailFrm: TShareHolderDetailFrm
       Left = 99
       Top = 101
       BeepOnEnter = False
+      Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True

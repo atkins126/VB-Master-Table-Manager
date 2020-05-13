@@ -16,9 +16,9 @@ inherited MainFrm: TMainFrm
     object docToolbar: TdxBarDockControl [0]
       Left = 11
       Top = 11
-      Width = 895
+      Width = 904
       Height = 54
-      Align = dalNone
+      Align = dalTop
       AllowDocking = False
       BarManager = barManager
     end
@@ -48,6 +48,7 @@ inherited MainFrm: TMainFrm
     end
     object litToolbar: TdxLayoutItem
       Parent = grpToolbar
+      AlignHorz = ahClient
       Control = docToolbar
       ControlOptions.AutoColor = True
       ControlOptions.OriginalHeight = 54
@@ -4517,6 +4518,7 @@ inherited MainFrm: TMainFrm
       FloatTop = 2
       FloatClientWidth = 0
       FloatClientHeight = 0
+      IsMainMenu = True
       ItemLinks = <
         item
           Visible = True
@@ -4530,6 +4532,7 @@ inherited MainFrm: TMainFrm
           Visible = True
           ItemName = 'btnClosemasterTable'
         end>
+      MultiLine = True
       NotDocking = [dsNone, dsLeft, dsTop, dsRight, dsBottom]
       OneOnRow = True
       Row = 0
@@ -4537,7 +4540,7 @@ inherited MainFrm: TMainFrm
       SizeGrip = False
       UseOwnFont = False
       Visible = True
-      WholeRow = False
+      WholeRow = True
     end
     object btnExit: TdxBarLargeButton
       Action = actExitApp

@@ -138,6 +138,32 @@ begin
     edtPostal4.Text := MTDM.cdsHeir.FieldByName('POSTAL4').AsString;
     edtPostalCode.Text := MTDM.cdsHeir.FieldByName('POSTAL_CODE').AsString;
   end;
+
+  edtFirstName.Properties.OnChange := ValueChanged;
+  edtLastName.Properties.OnChange := ValueChanged;
+  lucSalutation.Properties.OnChange := ValueChanged;
+
+  edtHAHFirstName.Properties.OnChange := ValueChanged;
+  edtHAHLastName.Properties.OnChange := ValueChanged;
+  lucHAHSalutation.Properties.OnChange := ValueChanged;
+
+  lucBank.Properties.OnChange := ValueChanged;
+  edtBranchCode.Properties.OnChange := ValueChanged;
+  lucAccType.Properties.OnChange := ValueChanged;
+  edtAccNo.Properties.OnChange := ValueChanged;
+  edtIDNo.Properties.OnChange := ValueChanged;
+
+  edtPhysical1.Properties.OnChange := ValueChanged;
+  edtPhysical2.Properties.OnChange := ValueChanged;
+  edtPhysical3.Properties.OnChange := ValueChanged;
+  edtPhysical4.Properties.OnChange := ValueChanged;
+  edtPhysicalCode.Properties.OnChange := ValueChanged;
+
+  edtPostal1.Properties.OnChange := ValueChanged;
+  edtPostal2.Properties.OnChange := ValueChanged;
+  edtPostal3.Properties.OnChange := ValueChanged;
+  edtPostal4.Properties.OnChange := ValueChanged;
+  edtPostalCode.Properties.OnChange := ValueChanged;
 end;
 
 procedure THeirDetailFrm.btnAccHolderNameSameAsHeirNameClick(Sender: TObject);

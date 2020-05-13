@@ -87,6 +87,7 @@ inherited ContactPersonFrm: TContactPersonFrm
       Left = 98
       Top = 184
       BeepOnEnter = False
+      Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True

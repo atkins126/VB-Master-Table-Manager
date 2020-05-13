@@ -37,7 +37,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 84
       Top = 107
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 2
       Width = 175
@@ -46,7 +45,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 84
       Top = 134
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 3
       Width = 175
@@ -55,7 +53,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 84
       Top = 161
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 4
       Width = 175
@@ -64,7 +61,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 84
       Top = 188
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 5
       Width = 175
@@ -73,7 +69,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 84
       Top = 215
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 6
       Width = 175
@@ -82,7 +77,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 393
       Top = 107
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 11
       Width = 175
@@ -91,7 +85,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 393
       Top = 134
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 12
       Width = 175
@@ -100,7 +93,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 393
       Top = 161
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 13
       Width = 175
@@ -109,7 +101,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 393
       Top = 188
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 14
       Width = 175
@@ -118,7 +109,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 393
       Top = 215
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 15
       Width = 175
@@ -127,7 +117,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 84
       Top = 285
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 16
       Width = 175
@@ -136,7 +125,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 84
       Top = 312
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 17
       Width = 175
@@ -145,7 +133,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 84
       Top = 339
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 18
       Width = 175
@@ -154,7 +141,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 84
       Top = 366
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 19
       Width = 175
@@ -163,7 +149,6 @@ inherited AddressDetailFrm: TAddressDetailFrm
       Left = 84
       Top = 393
       BeepOnEnter = False
-      Properties.OnEditValueChanged = edtPhysical1PropertiesEditValueChanged
       Style.HotTrack = False
       TabOrder = 20
       Width = 175

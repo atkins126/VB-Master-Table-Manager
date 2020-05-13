@@ -72,7 +72,7 @@ begin
 
   MTDM.ClearFieldValues;
   lucContactType.Properties.ListSource := LookupDM.dtsContactType;
-  lblCharCount.Caption :=  'Characters Left: ' + memComment.Properties.MaxLength.ToString;
+  lblCharCount.Caption := 'Characters Left: ' + memComment.Properties.MaxLength.ToString;
 
   if VBBaseDM.DBAction = acModify then
   begin
@@ -80,12 +80,16 @@ begin
     edtValue.Text := MTDM.cdsContactDetailCo.FieldByName('VALUE').AsString;
     memComment.Text := MTDM.cdsContactDetailCo.FieldByName('COMMENT').AsString;
   end;
+
+  lucContactType.Properties.OnChange := ValueChanged;
+  edtValue.Properties.OnChange := ValueChanged;
+  memComment.Properties.OnChange := ValueChanged;
 end;
 
 procedure TCompanyContactDetailFrm.memCommentPropertiesChange(Sender: TObject);
 begin
   inherited;
-  lblCharCount.Caption :=  'Characters left: ' + IntToStr(memComment.Properties.MaxLength - Length(memComment.Text));
+  lblCharCount.Caption := 'Characters left: ' + IntToStr(memComment.Properties.MaxLength - Length(memComment.Text));
 end;
 
 procedure TCompanyContactDetailFrm.Validate;

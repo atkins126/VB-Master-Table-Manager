@@ -2027,7 +2027,6 @@ inherited MTDM: TMTDM
     FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
     FetchOptions.Mode = fmAll
     FetchOptions.RecordCountMode = cmTotal
-    FetchOptions.DetailDelay = 450
     FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
     FormatOptions.MaxBcdPrecision = 2147483647
     FormatOptions.MaxBcdScale = 1073741823
@@ -2283,7 +2282,6 @@ inherited MTDM: TMTDM
     FetchOptions.AssignedValues = [evMode, evRecordCountMode, evDetailDelay]
     FetchOptions.Mode = fmAll
     FetchOptions.RecordCountMode = cmTotal
-    FetchOptions.DetailDelay = 450
     FormatOptions.AssignedValues = [fvMaxBcdPrecision, fvMaxBcdScale, fvDataSnapCompatibility]
     FormatOptions.MaxBcdPrecision = 2147483647
     FormatOptions.MaxBcdScale = 1073741823
@@ -2952,7 +2950,7 @@ inherited MTDM: TMTDM
         Active = True
         Selected = True
         Name = 'IdxDirector'
-        Fields = 'DIRECTOR_ID'
+        Fields = 'DIRECTOR_ID;CUSTOMER_ID'
       end
       item
         Active = True
@@ -2970,7 +2968,8 @@ inherited MTDM: TMTDM
     FetchOptions.RecordCountMode = cmTotal
     FormatOptions.AssignedValues = [fvDataSnapCompatibility]
     FormatOptions.DataSnapCompatibility = True
-    ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
     ResourceOptions.StorePrettyPrint = True
     ResourceOptions.SilentMode = True
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]

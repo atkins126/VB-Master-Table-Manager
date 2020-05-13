@@ -110,6 +110,14 @@ begin
     edtMobileNo.Text := MTDM.cdsDirector.FieldByName('MOBILE_PHONE').AsString;
     edtEmailAddress.Text := MTDM.cdsDirector.FieldByName('EMAIL_ADDRESS').AsString;
   end;
+
+  edtFirstName.Properties.OnChange := ValueChanged;
+  edtLastName.Properties.OnChange := ValueChanged;
+  lucSalutation.Properties.OnChange := ValueChanged;
+  edtOtherName.Properties.OnChange := ValueChanged;
+  edtTaxNo.Properties.OnChange := ValueChanged;
+  edtMobileNo.Properties.OnChange := ValueChanged;
+  edtEmailAddress.Properties.OnChange := ValueChanged;
 end;
 
 procedure TDirectorDetailFrm.lucCompanyGetDisplayText(

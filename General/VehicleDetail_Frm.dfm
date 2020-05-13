@@ -37,6 +37,7 @@ inherited VehicleDetailFrm: TVehicleDetailFrm
       Left = 117
       Top = 76
       BeepOnEnter = False
+      Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -62,6 +63,7 @@ inherited VehicleDetailFrm: TVehicleDetailFrm
     object dteRenewlDate: TcxDateEdit [6]
       Left = 117
       Top = 130
+      Properties.ClearKey = 46
       Properties.ImmediatePost = True
       Properties.SaveTime = False
       Properties.ShowTime = False

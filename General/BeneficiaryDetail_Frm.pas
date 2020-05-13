@@ -74,6 +74,12 @@ begin
     edtMobileNo.Text := MTDM.cdsBeneficiary.FieldByName('MOBILE_PHONE').AsString;
     edtEmailAddress.Text := MTDM.cdsBeneficiary.FieldByName('EMAIL_ADDRESS').AsString;
   end;
+
+  edtFirstName.Properties.OnChange := ValueChanged;
+  edtLastName.Properties.OnChange := ValueChanged;
+  lucSalutation.Properties.OnChange := ValueChanged;
+  edtMobileNo.Properties.OnChange := ValueChanged;
+  edtEmailAddress.Properties.OnChange := ValueChanged;
 end;
 
 procedure TBeneficiaryDetailFrm.Validate;

@@ -58,7 +58,8 @@ uses
   CustomerEdit_Frm in 'General\CustomerEdit_Frm.pas' {CustomerEditFrm},
   TrusteeDetail_Frm in 'General\TrusteeDetail_Frm.pas' {TrusteeDetailFrm},
   ShareHolderDetail_Frm in 'General\ShareHolderDetail_Frm.pas' {ShareHolderDetailFrm},
-  HeirDetail_Frm in 'General\HeirDetail_Frm.pas' {HeirDetailFrm};
+  HeirDetail_Frm in 'General\HeirDetail_Frm.pas' {HeirDetailFrm},
+  DirectorCompanyLink_Frm in 'General\DirectorCompanyLink_Frm.pas' {DirectorCompanyLinkFrm};
 
 {$R *.res}
 

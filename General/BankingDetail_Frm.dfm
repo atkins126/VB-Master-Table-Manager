@@ -1,34 +1,37 @@
 inherited BankingDetailFrm: TBankingDetailFrm
   Caption = 'BankingDetailFrm'
-  ClientHeight = 221
-  ClientWidth = 664
-  ExplicitWidth = 670
-  ExplicitHeight = 250
+  ClientHeight = 325
+  ClientWidth = 726
+  ExplicitWidth = 732
+  ExplicitHeight = 354
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
-    Width = 660
-    Height = 215
-    ExplicitWidth = 660
-    ExplicitHeight = 215
+    Width = 370
+    Height = 291
+    ExplicitWidth = 370
+    ExplicitHeight = 291
+    inherited lblHeaderTitle: TcxLabel
+      ExplicitWidth = 348
+    end
     inherited btnOK: TcxButton
-      Left = 493
-      Top = 179
+      Left = 203
+      Top = 255
       TabOrder = 8
       OnClick = btnOKClick
-      ExplicitLeft = 493
-      ExplicitTop = 179
+      ExplicitLeft = 203
+      ExplicitTop = 255
     end
     inherited btnCancel: TcxButton
-      Left = 574
-      Top = 179
+      Left = 284
+      Top = 255
       TabOrder = 9
-      ExplicitLeft = 574
-      ExplicitTop = 179
+      ExplicitLeft = 284
+      ExplicitTop = 255
     end
     inherited lblSubTitle: TcxDBLabel
-      ExplicitWidth = 628
-      Width = 628
+      ExplicitWidth = 338
+      Width = 338
     end
     object lucBank: TcxLookupComboBox [4]
       Left = 99
@@ -46,11 +49,11 @@ inherited BankingDetailFrm: TBankingDetailFrm
       Properties.PostPopupValueOnTab = True
       Style.HotTrack = False
       TabOrder = 2
-      Width = 220
+      Width = 260
     end
     object lucAccType: TcxLookupComboBox [5]
       Left = 99
-      Top = 103
+      Top = 130
       BeepOnEnter = False
       Properties.DropDownAutoSize = True
       Properties.DropDownListStyle = lsFixedList
@@ -64,72 +67,65 @@ inherited BankingDetailFrm: TBankingDetailFrm
       Properties.PostPopupValueOnTab = True
       Style.HotTrack = False
       TabOrder = 4
-      Width = 220
+      Width = 260
     end
     object edtFirstName: TcxTextEdit [6]
       Left = 99
-      Top = 130
+      Top = 184
       BeepOnEnter = False
       Style.HotTrack = False
       TabOrder = 6
-      Width = 220
+      Width = 260
     end
     object edtBranchCode: TcxTextEdit [7]
-      Left = 412
-      Top = 76
-      BeepOnEnter = False
-      Style.HotTrack = False
-      TabOrder = 3
-      Width = 220
-    end
-    object edtAccNo: TcxTextEdit [8]
-      Left = 412
+      Left = 99
       Top = 103
       BeepOnEnter = False
       Style.HotTrack = False
+      TabOrder = 3
+      Width = 260
+    end
+    object edtAccNo: TcxTextEdit [8]
+      Left = 99
+      Top = 157
+      BeepOnEnter = False
+      Style.HotTrack = False
       TabOrder = 5
-      Width = 220
+      Width = 260
     end
     object edtLastName: TcxTextEdit [9]
-      Left = 412
-      Top = 130
+      Left = 99
+      Top = 211
       BeepOnEnter = False
       Style.HotTrack = False
       TabOrder = 7
-      Width = 220
+      Width = 260
     end
-    inherited grpData: TdxLayoutGroup
-      ItemIndex = 2
+    inherited layMainGroup_Root: TdxLayoutGroup
+      ItemIndex = 1
     end
     object grpBankName: TdxLayoutGroup
-      Parent = grpData
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
-      ItemIndex = 1
       LayoutDirection = ldHorizontal
-      ShowBorder = False
-      Index = 0
+      Index = -1
     end
     object grpBankAccount: TdxLayoutGroup
-      Parent = grpData
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
-      ItemIndex = 1
       LayoutDirection = ldHorizontal
       ShowBorder = False
-      Index = 1
+      Index = -1
     end
     object grpName: TdxLayoutGroup
-      Parent = grpData
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
-      ItemIndex = 1
       LayoutDirection = ldHorizontal
       ShowBorder = False
-      Index = 2
+      Index = -1
     end
     object litBank: TdxLayoutItem
-      Parent = grpBankName
+      Parent = grpData
       CaptionOptions.Glyph.SourceDPI = 96
       CaptionOptions.Glyph.Data = {
         89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
@@ -161,7 +157,7 @@ inherited BankingDetailFrm: TBankingDetailFrm
       Index = 0
     end
     object litBranchCode: TdxLayoutItem
-      Parent = grpBankName
+      Parent = grpData
       CaptionOptions.Text = 'Branch Code'
       Control = edtBranchCode
       ControlOptions.OriginalHeight = 21
@@ -170,7 +166,7 @@ inherited BankingDetailFrm: TBankingDetailFrm
       Index = 1
     end
     object litAccountType: TdxLayoutItem
-      Parent = grpBankAccount
+      Parent = grpData
       CaptionOptions.Glyph.SourceDPI = 96
       CaptionOptions.Glyph.Data = {
         89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
@@ -199,10 +195,10 @@ inherited BankingDetailFrm: TBankingDetailFrm
       ControlOptions.OriginalHeight = 21
       ControlOptions.OriginalWidth = 220
       ControlOptions.ShowBorder = False
-      Index = 0
+      Index = 2
     end
     object litAccounto: TdxLayoutItem
-      Parent = grpBankAccount
+      Parent = grpData
       CaptionOptions.Glyph.SourceDPI = 96
       CaptionOptions.Glyph.Data = {
         89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
@@ -231,10 +227,10 @@ inherited BankingDetailFrm: TBankingDetailFrm
       ControlOptions.OriginalHeight = 21
       ControlOptions.OriginalWidth = 220
       ControlOptions.ShowBorder = False
-      Index = 1
+      Index = 3
     end
     object litFirstName: TdxLayoutItem
-      Parent = grpName
+      Parent = grpData
       CaptionOptions.Glyph.SourceDPI = 96
       CaptionOptions.Glyph.Data = {
         89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
@@ -263,10 +259,10 @@ inherited BankingDetailFrm: TBankingDetailFrm
       ControlOptions.OriginalHeight = 21
       ControlOptions.OriginalWidth = 220
       ControlOptions.ShowBorder = False
-      Index = 0
+      Index = 4
     end
     object litLastname: TdxLayoutItem
-      Parent = grpName
+      Parent = grpData
       CaptionOptions.Glyph.SourceDPI = 96
       CaptionOptions.Glyph.Data = {
         89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
@@ -295,7 +291,7 @@ inherited BankingDetailFrm: TBankingDetailFrm
       ControlOptions.OriginalHeight = 21
       ControlOptions.OriginalWidth = 220
       ControlOptions.ShowBorder = False
-      Index = 1
+      Index = 5
     end
   end
   inherited styRepository: TcxStyleRepository

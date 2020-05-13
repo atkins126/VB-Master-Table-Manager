@@ -46,6 +46,7 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       Left = 99
       Top = 103
       BeepOnEnter = False
+      Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True

@@ -55,6 +55,7 @@ inherited CompanyContactDetailFrm: TCompanyContactDetailFrm
       Left = 114
       Top = 76
       BeepOnEnter = False
+      Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True

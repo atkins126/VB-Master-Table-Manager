@@ -110,6 +110,17 @@ begin
     lucJobFunction.EditValue := MTDM.cdsContactPerson.FieldByName('JOB_FUNCTION_ID').AsInteger;
     cbxPrimaryContact.Checked := MTDM.cdsContactPerson.FieldByName('IS_PRIMARY_CONTACT').AsInteger = 1;
   end;
+
+  edtFirstName.Properties.OnChange := ValueChanged;
+  edtLastName.Properties.OnChange := ValueChanged;
+  edtOtherName.Properties.OnChange := ValueChanged;
+  edtIDNo.Properties.OnChange := ValueChanged;
+  edtPassportNo.Properties.OnChange := ValueChanged;
+  lucSalutation.Properties.OnChange := ValueChanged;
+  edtInitials.Properties.OnChange := ValueChanged;
+  dteDOB.Properties.OnChange := ValueChanged;
+  lucJobFunction.Properties.OnChange := ValueChanged;
+  cbxPrimaryContact.Properties.OnChange := ValueChanged;
 end;
 
 procedure TContactPersonFrm.Validate;

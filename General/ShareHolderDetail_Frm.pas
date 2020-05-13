@@ -73,6 +73,13 @@ begin
     edtMobileNo.Text := MTDM.cdsShareHolder.FieldByName('MOBILE_PHONE').AsString;
     edtEmailAddress.Text := MTDM.cdsShareHolder.FieldByName('EMAIL_ADDRESS').AsString;
   end;
+
+  edtFirstName.Properties.OnChange := ValueChanged;
+  edtLastName.Properties.OnChange := ValueChanged;
+  lucSalutation.Properties.OnChange := ValueChanged;
+  spnPercentShare.Properties.OnChange := ValueChanged;
+  edtMobileNo.Properties.OnChange := ValueChanged;
+  edtEmailAddress.Properties.OnChange := ValueChanged;
 end;
 
 procedure TShareHolderDetailFrm.Validate;
@@ -99,7 +106,7 @@ end;
 procedure TShareHolderDetailFrm.btnOKClick(Sender: TObject);
 begin
   inherited;
-Validate;
+  Validate;
 end;
 
 end.

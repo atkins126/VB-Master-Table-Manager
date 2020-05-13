@@ -1249,19 +1249,23 @@ inherited LookupDM: TLookupDM
   object cdsCompany: TFDMemTable
     ActiveStoredUsage = [auDesignTime]
     FilterOptions = [foCaseInsensitive]
+    FieldDefs = <>
     CachedUpdates = True
+    IndexDefs = <>
     ConstraintsEnabled = True
     FetchOptions.AssignedValues = [evMode, evRecordCountMode]
     FetchOptions.Mode = fmAll
     FetchOptions.RecordCountMode = cmTotal
     FormatOptions.AssignedValues = [fvDataSnapCompatibility]
     FormatOptions.DataSnapCompatibility = True
-    ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.Persistent = True
     ResourceOptions.StorePrettyPrint = True
     ResourceOptions.SilentMode = True
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
     Left = 685
     Top = 370
     object cdsCompanyID: TIntegerField
@@ -1994,5 +1998,46 @@ inherited LookupDM: TLookupDM
     DataSet = cdsCustomerStatusRpt
     Left = 25
     Top = 180
+  end
+  object cdsDirectorCompanyLink: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    CachedUpdates = True
+    ConstraintsEnabled = True
+    FetchOptions.AssignedValues = [evMode, evRecordCountMode]
+    FetchOptions.Mode = fmAll
+    FetchOptions.RecordCountMode = cmTotal
+    FormatOptions.AssignedValues = [fvDataSnapCompatibility]
+    FormatOptions.DataSnapCompatibility = True
+    ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 785
+    Top = 370
+    object cdsDirectorCompanyLinkID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+    end
+    object cdsDirectorCompanyLinkCUSTOMER_TYPE_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_TYPE_ID'
+      Origin = 'CUSTOMER_TYPE_ID'
+    end
+    object cdsDirectorCompanyLinkCOMPANY: TStringField
+      DisplayLabel = 'Company'
+      FieldName = 'COMPANY'
+      Origin = 'COMPANY'
+      Size = 100
+    end
+  end
+  object dtsDirectorCompanyLink: TDataSource
+    DataSet = cdsDirectorCompanyLink
+    Left = 785
+    Top = 420
   end
 end

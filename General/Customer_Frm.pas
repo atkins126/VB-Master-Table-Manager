@@ -456,6 +456,7 @@ type
       AEditProp: TcxCustomEditorRowProperties; AFocused: Boolean;
       ARecordIndex: Integer; var AStyle: TcxStyle);
     procedure grdContactDetailCoEnter(Sender: TObject);
+    procedure grdDirectorOfCompanyEnter(Sender: TObject);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
@@ -540,7 +541,7 @@ uses
   AccountHolder_Frm,
   TrusteeDetail_Frm,
   ShareHolderDetail_Frm,
-  HeirDetail_Frm, CustomerReportSelection_Frm;
+  HeirDetail_Frm, CustomerReportSelection_Frm, DirectorCompanyLink_Frm;
 
 procedure TCustomerFrm.cbxOpenAfterExportPropertiesEditValueChanged(Sender: TObject);
 begin
@@ -1498,9 +1499,85 @@ begin
           actDelete.Caption := 'Delete selected vehicle';
           MTDM.FormCaption := 'Vehicle Details';
         end;
-
     end;
   end;
+end;
+
+procedure TCustomerFrm.grdContactDetailCoEnter(Sender: TObject);
+begin
+  inherited;
+  MTDM.DetailIndex := 0;
+  actInsert.Caption := 'Add a new company contact detail';
+  actEdit.Caption := 'Edit selected contact detail';
+  actDelete.Caption := 'Delete selected cotact detail';
+  MTDM.FormCaption := 'Company Contact Details';
+end;
+
+procedure TCustomerFrm.grdContactPersonEnter(Sender: TObject);
+begin
+  inherited;
+  MTDM.DetailIndex := 2;
+  actInsert.Caption := 'Add a new contact person';
+  actEdit.Caption := 'Edit selected contact person';
+  actDelete.Caption := 'Delete selected contact person';
+  MTDM.FormCaption := 'Contact Person';
+end;
+
+procedure TCustomerFrm.grdCPContactDetailEnter(Sender: TObject);
+begin
+  inherited;
+  MTDM.DetailIndex := 3;
+  actInsert.Caption := 'Add a new person contact detail';
+  actEdit.Caption := 'Edit selected person contact detail';
+  actDelete.Caption := 'Delete selected person cotact detail';
+  MTDM.FormCaption := 'Contact Person Details';
+end;
+
+procedure TCustomerFrm.grdCustomerEnter(Sender: TObject);
+begin
+  inherited;
+  MTDM.DetailIndex := 12;
+  FCurrentItemIndex := grpDetailGrid.ItemIndex;
+  actInsert.Caption := 'Add a new customer';
+  actEdit.Caption := 'Edit selected customer';
+  actDelete.Caption := 'Delete selected customer';
+  MTDM.FormCaption := 'Customer Details';
+end;
+
+procedure TCustomerFrm.grdCustomerExit(Sender: TObject);
+begin
+  inherited;
+  if FCurrentItemIndex <> grpDetailGrid.ItemIndex then
+    grpDetailGridTabChanged(nil);
+end;
+
+procedure TCustomerFrm.grdDirectorEnter(Sender: TObject);
+begin
+  inherited;
+//  MTDM.DetailIndex := 5;
+  actInsert.Caption := 'Add a new director';
+  actEdit.Caption := 'Edit selected director';
+  actDelete.Caption := 'Delete selected director';
+  MTDM.FormCaption := 'Director Details';
+end;
+
+procedure TCustomerFrm.grdDirectorOfCompanyEnter(Sender: TObject);
+begin
+  inherited;
+  MTDM.DetailIndex := 13;
+  actInsert.Caption := 'Add a new director company link';
+  actEdit.Caption := 'Edit selected director company link';
+  actDelete.Caption := 'Delete selected director company link';
+  MTDM.FormCaption := 'Director Company Link';
+end;
+
+procedure TCustomerFrm.grdHeirVerticalEnter(Sender: TObject);
+begin
+  inherited;
+//  MTDM.DetailIndex := 8;
+  actInsert.Caption := 'Add a new Heir';
+  actEdit.Caption := 'Edit selected Heir';
+  actDelete.Caption := 'Delete selected Heir';
 end;
 
 procedure TCustomerFrm.HandleTSAfterPost(var MyMsg: TMessage);
@@ -2438,75 +2515,16 @@ begin
 //    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
     SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Company Table')), 0);
     SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
-    VBBaseDM.GetData(76, LookupDM.cdsCompany, LookupDM.cdsCompany.Name, ONE_SPACE,
+    VBBaseDM.GetData(75, LookupDM.cdsCompany, LookupDM.cdsCompany.Name, ONE_SPACE,
       'C:\Data\Xml\Company.xml', LookupDM.cdsCompany.UpdateOptions.Generatorname,
       LookupDM.cdsCompany.UpdateOptions.UpdateTableName);
 
     if not LookupDM.cdsCompany.Active then
       LookupDM.cdsCompany.CreateDataSet;
-
   finally
     ProgressFrm.Close;
     FreeAndNil(ProgressFrm);
   end;
-end;
-
-procedure TCustomerFrm.grdContactDetailCoEnter(Sender: TObject);
-begin
-  inherited;
-  MTDM.DetailIndex := 0;
-  actInsert.Caption := 'Add a new company contact detail';
-  actEdit.Caption := 'Edit selected contact detail';
-  actDelete.Caption := 'Delete selected cotact detail';
-  MTDM.FormCaption := 'Company Contact Details';
-end;
-
-procedure TCustomerFrm.grdContactPersonEnter(Sender: TObject);
-begin
-  inherited;
-  MTDM.DetailIndex := 2;
-  actInsert.Caption := 'Add a new contact person';
-  actEdit.Caption := 'Edit selected contact person';
-  actDelete.Caption := 'Delete selected contact person';
-  MTDM.FormCaption := 'Contact Person';
-end;
-
-procedure TCustomerFrm.grdCPContactDetailEnter(Sender: TObject);
-begin
-  inherited;
-  MTDM.DetailIndex := 3;
-  actInsert.Caption := 'Add a new person contact detail';
-  actEdit.Caption := 'Edit selected person contact detail';
-  actDelete.Caption := 'Delete selected person cotact detail';
-  MTDM.FormCaption := 'Contact Person Details';
-end;
-
-procedure TCustomerFrm.grdCustomerEnter(Sender: TObject);
-begin
-  inherited;
-  MTDM.DetailIndex := 12;
-  FCurrentItemIndex := grpDetailGrid.ItemIndex;
-  actInsert.Caption := 'Add a new customer';
-  actEdit.Caption := 'Edit selected customer';
-  actDelete.Caption := 'Delete selected customer';
-  MTDM.FormCaption := 'Customer Details';
-end;
-
-procedure TCustomerFrm.grdCustomerExit(Sender: TObject);
-begin
-  inherited;
-  if FCurrentItemIndex <> grpDetailGrid.ItemIndex then
-    grpDetailGridTabChanged(nil);
-end;
-
-procedure TCustomerFrm.grdDirectorEnter(Sender: TObject);
-begin
-  inherited;
-//  MTDM.DetailIndex := 5;
-  actInsert.Caption := 'Add a new director';
-  actEdit.Caption := 'Edit selected director';
-  actDelete.Caption := 'Delete selected director';
-  MTDM.FormCaption := 'Director Details';
 end;
 
 procedure TCustomerFrm.grdHeirVerticalDrawRowHeader(Sender: TObject;
@@ -2530,15 +2548,6 @@ begin
 //  Done := true;
 end;
 
-procedure TCustomerFrm.grdHeirVerticalEnter(Sender: TObject);
-begin
-  inherited;
-//  MTDM.DetailIndex := 8;
-  actInsert.Caption := 'Add a new Heir';
-  actEdit.Caption := 'Edit selected Heir';
-  actDelete.Caption := 'Delete selected Heir';
-end;
-
 procedure TCustomerFrm.grdHeirVerticalStylesGetContentStyle(Sender: TObject;
   AEditProp: TcxCustomEditorRowProperties; AFocused: Boolean;
   ARecordIndex: Integer; var AStyle: TcxStyle);
@@ -2555,6 +2564,11 @@ begin
 //  if TcxDBVerticalGrid(Sender).DataController.RecordCount = 0 then
 //    EditDeleteRecord(VBBaseDM.DBAction)
 //  else
+  VBBaseDM.DBAction := acModify;
+
+  if TcxDBVerticalGrid(Sender).DataController.RecordCount = 0 then
+    VBBaseDM.DBAction := acInsert;
+
   EditDeleteRecord;
 end;
 
@@ -2663,6 +2677,7 @@ begin
     10: DataSet := MTDM.cdsVehicle;
     11: DataSet := MTDM.cdsDirectorOfCompany;
     12: DataSet := MTDM.cdsCustomer;
+    13: DataSet :=  LookupDM.cdsDirectorCompanyLink;
   end;
 
   case VBBaseDM.DBAction of
@@ -2910,6 +2925,25 @@ begin
               CustomerEditFrm.Close;
               FreeAndNil(CustomerEditFrm);
             end;
+
+          13: // Director company link
+            begin
+              if DirectorCompanyLinkFrm = nil then
+                DirectorCompanyLinkFrm := TDirectorCompanyLinkFrm.Create(nil);
+
+              ModResult := DirectorCompanyLinkFrm.ShowModal;
+              if ModResult = mrOK then
+              begin
+                FOpenTableParam.ScriptID := 49;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Director Company Link.xml';
+                FOpenTableParam.FieldName := 'REG_NO';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.VehicleRegNo;
+              end;
+
+              DirectorCompanyLinkFrm.Close;
+              FreeAndNil(DirectorCompanyLinkFrm);
+            end;
+
         end;
 
 // SELECT GEN_ID( <GeneratorName>, 0 ) FROM RDB$DATABASE;
@@ -2933,25 +2967,25 @@ begin
             // Post the data
             try
               FDetailDataSet[MTDM.DetailIndex].Post;
-              if Length(Trim(VBBaseDM.ServerErrorMsg)) > 0 then
-              begin
-                FDetailDataSet[MTDM.DetailIndex].AfterDelete := nil;
-                try
-                  FDetailDataSet[MTDM.DetailIndex].Delete;
-                finally
-                  FDetailDataSet[MTDM.DetailIndex].AfterDelete := MTDM.cdsActivityTypeAfterDelete;
-                end;
-                raise EServerError.Create('An error occurred when posting data. Server error message:' + CRLF + CRLF +
-                  VBBaseDM.ServerErrorMsg);
-              end;
+//              if Length(Trim(VBBaseDM.ServerErrorMsg)) > 0 then
+//              begin
+//                FDetailDataSet[MTDM.DetailIndex].AfterDelete := nil;
+//                try
+//                  FDetailDataSet[MTDM.DetailIndex].Delete;
+//                finally
+//                  FDetailDataSet[MTDM.DetailIndex].AfterDelete := MTDM.cdsActivityTypeAfterDelete;
+//                end;
+//                raise EServerError.Create('An error occurred when posting data. Server error message:' + CRLF + CRLF +
+//                  VBBaseDM.ServerErrorMsg);
+//              end;
 
-              VBBaseDM.GetData(FOpenTableParam.ScriptID, FOpenTableParam.DataSet, FOpenTableParam.DataSetName, ONE_SPACE,
-                FOpenTableParam.FileName, FOpenTableParam.GeneratorName, FOpenTableParam.UpdateTableName);
-
-              // Don't do a locate for Address
-              if MTDM.DetailIndex <> 1 then
-                if not FDetailDataSet[MTDM.DetailIndex].Locate(FOpenTableParam.FieldName, FOpenTableParam.LocateValue, [loCaseInsensitive]) then
-                  FDetailDataSet[MTDM.DetailIndex].First;
+//              VBBaseDM.GetData(FOpenTableParam.ScriptID, FOpenTableParam.DataSet, FOpenTableParam.DataSetName, ONE_SPACE,
+//                FOpenTableParam.FileName, FOpenTableParam.GeneratorName, FOpenTableParam.UpdateTableName);
+//
+//              // Don't do a locate for Address
+//              if MTDM.DetailIndex <> 1 then
+//                if not FDetailDataSet[MTDM.DetailIndex].Locate(FOpenTableParam.FieldName, FOpenTableParam.LocateValue, [loCaseInsensitive]) then
+//                  FDetailDataSet[MTDM.DetailIndex].First;
             except
               on E: EFDException do
               begin
@@ -3015,10 +3049,10 @@ end;
 procedure TCustomerFrm.viewContactDetailCoDblClick(Sender: TObject);
 begin
   inherited;
-//  if TcxGridSite(Sender).GridView.DataController.RecordCount = 0 then
-//    EditDeleteRecord(VK_INSERT)
-//  else
-//    EditDeleteRecord({ VK_F2 }VK_RETURN);
+  VBBaseDM.DBAction := acModify;
+
+  if TcxGridSite(Sender).GridView.DataController.RecordCount = 0 then
+    VBBaseDM.DBAction := acInsert;
 
   EditDeleteRecord;
 end;

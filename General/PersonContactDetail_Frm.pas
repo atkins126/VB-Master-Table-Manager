@@ -63,7 +63,7 @@ begin
   // Width = 390; Height = 335
   MTDM.ClearFieldValues;
   lucContactType.Properties.ListSource := LookupDM.dtsContactType;
-  lblCharCount.Caption :=  'Characters Left: ' + memComment.Properties.MaxLength.ToString;
+  lblCharCount.Caption := 'Characters Left: ' + memComment.Properties.MaxLength.ToString;
 
   if VBBaseDM.DBAction = acModify then
   begin
@@ -71,12 +71,16 @@ begin
     edtValue.Text := MTDM.cdsContactDetailPerson.FieldByName('VALUE').AsString;
     memComment.Text := MTDM.cdsContactDetailPerson.FieldByName('COMMENT').AsString;
   end;
+
+  lucContactType.Properties.OnChange := ValueChanged;
+  edtValue.Properties.OnChange := ValueChanged;
+  memComment.Properties.OnChange := ValueChanged;
 end;
 
 procedure TPersonContactDetailFrm.memCommentPropertiesChange(Sender: TObject);
 begin
   inherited;
-  lblCharCount.Caption :=  'Characters left: ' + IntToStr(memComment.Properties.MaxLength - Length(memComment.Text));
+  lblCharCount.Caption := 'Characters left: ' + IntToStr(memComment.Properties.MaxLength - Length(memComment.Text));
 end;
 
 procedure TPersonContactDetailFrm.Validate;

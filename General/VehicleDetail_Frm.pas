@@ -125,6 +125,14 @@ begin
     cbxMaintenancePlan.Checked := IntegerToBoolean(MTDM.cdsVehicle.FieldByName('MAINTENANCE_PLAN').AsInteger);
     memComment.Text := MTDM.cdsVehicle.FieldByName('COMMENT').AsString;
   end;
+
+  lucVehicleMake.Properties.OnChange := ValueChanged;
+  edtModel.Properties.OnChange := ValueChanged;
+  edtRegNo.Properties.OnChange := ValueChanged;
+  edtYear.Properties.OnChange := ValueChanged;
+  dteRenewlDate.Properties.OnChange := ValueChanged;
+  cbxMaintenancePlan.Properties.OnChange := ValueChanged;
+  memComment.Properties.OnChange := ValueChanged;
 end;
 
 procedure TVehicleDetailFrm.memCommentPropertiesChange(Sender: TObject);

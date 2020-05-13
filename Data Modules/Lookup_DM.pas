@@ -170,6 +170,11 @@ type
     cdsCustomerStatusRptID: TIntegerField;
     cdsCustomerStatusRptNAME: TStringField;
     cdsRateUnitABBREVIATION: TStringField;
+    cdsDirectorCompanyLink: TFDMemTable;
+    dtsDirectorCompanyLink: TDataSource;
+    cdsDirectorCompanyLinkID: TIntegerField;
+    cdsDirectorCompanyLinkCUSTOMER_TYPE_ID: TIntegerField;
+    cdsDirectorCompanyLinkCOMPANY: TStringField;
   private
     { Private declarations }
   public

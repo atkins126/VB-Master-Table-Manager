@@ -55,6 +55,7 @@ uses
   Lookup_DM,
   RUtils;
 {TODO: Add OnChange event to enable OK button}
+
 procedure TBankingDetailFrm.btnOKClick(Sender: TObject);
 begin
   inherited;
@@ -64,7 +65,8 @@ end;
 procedure TBankingDetailFrm.FormCreate(Sender: TObject);
 begin
   inherited;
-//  Width = 665; Height = 235
+  Width := 345;
+  Height := 325;
   lucBank.Properties.ListSource := LookupDM.dtsBank;
   lucAccType.Properties.ListSource := LookupDM.dtsBankAccountType;
   MTDM.ClearFieldValues;
@@ -78,6 +80,13 @@ begin
     edtFirstName.Text := MTDM.cdsBankingDetail.FieldByName('FIRST_NAME').AsString;
     edtLastName.Text := MTDM.cdsBankingDetail.FieldByName('LAST_NAME').AsString;
   end;
+
+  lucBank.Properties.OnChange := ValueChanged;
+  edtBranchCode.Properties.OnChange := ValueChanged;
+  lucAccType.Properties.OnChange := ValueChanged;
+  edtAccNo.Properties.OnChange := ValueChanged;
+  edtFirstName.Properties.OnChange := ValueChanged;
+  edtLastName.Properties.OnChange := ValueChanged;
 end;
 
 procedure TBankingDetailFrm.Validate;

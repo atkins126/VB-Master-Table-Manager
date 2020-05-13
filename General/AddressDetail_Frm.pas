@@ -82,7 +82,6 @@ type
     procedure btnBillingToPostalClick(Sender: TObject);
     procedure btnPostalToBillingClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
-    procedure edtPhysical1PropertiesEditValueChanged(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -118,13 +117,6 @@ begin
   edtPhysical3.Text := edtPostal3.Text;
   edtPhysical4.Text := edtPostal4.Text;
   edtPhysicalCode.Text := EdtPostalCode.Text;
-end;
-
-procedure TAddressDetailFrm.edtPhysical1PropertiesEditValueChanged(  Sender: TObject);
-begin
-  inherited;
-VBBaseDM.MadeChanges := True;
-btnOK.Enabled :=  VBBaseDM.MadeChanges;
 end;
 
 procedure TAddressDetailFrm.btnPhysicalToBillingClick(Sender: TObject);
@@ -199,6 +191,24 @@ begin
     edtBilling4.Text := MTDM.cdsAddress.FieldByName('BILLING4').AsString;
     edtBillingCode.Text := MTDM.cdsAddress.FieldByName('BILLING_CODE').AsString;
   end;
+
+  edtPhysical1.Properties.OnChange :=  ValueChanged;
+  edtPhysical2.Properties.OnChange :=  ValueChanged;
+  edtPhysical3.Properties.OnChange :=  ValueChanged;
+  edtPhysical4.Properties.OnChange :=  ValueChanged;
+  edtPhysicalCode.Properties.OnChange :=  ValueChanged;
+
+  edtPostal1.Properties.OnChange :=  ValueChanged;
+  edtPostal2.Properties.OnChange :=  ValueChanged;
+  edtPostal3.Properties.OnChange :=  ValueChanged;
+  edtPostal4.Properties.OnChange :=  ValueChanged;
+  edtPostalCode.Properties.OnChange :=  ValueChanged;
+
+  edtBilling1.Properties.OnChange :=  ValueChanged;
+  edtBilling2.Properties.OnChange :=  ValueChanged;
+  edtBilling3.Properties.OnChange :=  ValueChanged;
+  edtBilling4.Properties.OnChange :=  ValueChanged;
+  edtBillingCode.Properties.OnChange :=  ValueChanged;
 end;
 
 procedure TAddressDetailFrm.Validate;

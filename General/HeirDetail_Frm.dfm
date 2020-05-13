@@ -47,6 +47,7 @@ inherited HeirDetailFrm: THeirDetailFrm
       Left = 108
       Top = 132
       BeepOnEnter = False
+      Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -211,6 +212,7 @@ inherited HeirDetailFrm: THeirDetailFrm
       Left = 108
       Top = 268
       BeepOnEnter = False
+      Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -230,6 +232,7 @@ inherited HeirDetailFrm: THeirDetailFrm
       Left = 108
       Top = 293
       BeepOnEnter = False
+      Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True

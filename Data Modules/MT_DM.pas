@@ -113,6 +113,7 @@ type
     HAHKSalutatioinID: Integer;
     HAHFirstName: string;
     HAHLastName: string;
+    CompanyID: Integer;
   end;
 
   TMTDM = class(TVBBaseDM)
@@ -717,18 +718,18 @@ begin
   FID := StrToInt(VBBaseDM.InsertRecord(SQLStatement, Response));
   ResponseList := RUtils.CreateStringList(PIPE, DOUBLE_QUOTE);
   ResponseList.DelimitedText := Response;
-  ServerErrorMsg := Responselist.Values['RESPONSE'];
+  VBBaseDM.ServerErrorMsg := Responselist.Values['RESPONSE'];
 
   try
     if SameText(ResponseList.Values['RESPONSE'], 'ERROR') then
     begin
       PostError := True;
-      ServerErrorMsg := 'One of mroe errors occurred when trying to insert a new record into the ' + TableName +
+      VBBaseDM.ServerErrorMsg := 'One of mroe errors occurred when trying to insert a new record into the ' + TableName +
         ' table.' + CRLF + CRLF +
         'Server error message: ' + CRLF + ResponseList.Values['ERROR_MESSAGE'];
 
       DataSet.Cancel;
-      SendMessage(Application.MainForm.Handle, WM_POST_DATA_ERROR, DWORD(PChar(ServerErrorMsg)), 0);
+      SendMessage(Application.MainForm.Handle, WM_POST_DATA_ERROR, DWORD(PChar(VBBaseDM.ServerErrorMsg)), 0);
     end;
   finally
     ResponseList.Free;
