@@ -74,7 +74,7 @@ begin
   lucContactType.Properties.ListSource := LookupDM.dtsContactType;
   lblCharCount.Caption := 'Characters Left: ' + memComment.Properties.MaxLength.ToString;
 
-  if VBBaseDM.DBAction = acModify then
+  if VBBaseDM.DBAction = acEdit then
   begin
     lucContactType.EditValue := MTDM.cdsContactDetailCo.FieldByName('CONTACT_TYPE_ID').AsInteger;
     edtValue.Text := MTDM.cdsContactDetailCo.FieldByName('VALUE').AsString;

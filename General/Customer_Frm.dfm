@@ -13,8 +13,8 @@ inherited CustomerFrm: TCustomerFrm
     ExplicitWidth = 1376
     ExplicitHeight = 731
     object grdCustomer: TcxGrid [0]
-      Left = 11
-      Top = 125
+      Left = -339
+      Top = 102
       Width = 915
       Height = 313
       TabOrder = 7
@@ -199,8 +199,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVCustomer: TcxDBVerticalGrid [1]
-      Left = 932
-      Top = 171
+      Left = 582
+      Top = 148
       Width = 444
       Height = 267
       OptionsView.ScrollBars = ssVertical
@@ -605,8 +605,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object navCustomer: TcxDBNavigator [2]
-      Left = 11
-      Top = 11
+      Left = -339
+      Top = -12
       Width = 360
       Height = 40
       BorderStyle = nbsNone
@@ -665,8 +665,8 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 0
     end
     object navVCustomer: TcxDBNavigator [3]
-      Left = 932
-      Top = 125
+      Left = 582
+      Top = 102
       Width = 216
       Height = 40
       BorderStyle = nbsNone
@@ -758,8 +758,6 @@ inherited CustomerFrm: TCustomerFrm
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
         OptionsData.DeletingConfirmation = False
-        OptionsData.Editing = False
-        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Contact Detail data to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -904,14 +902,14 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 11
       Visible = False
       OnDblClick = viewContactDetailCoDblClick
-      Height = 67
+      Height = 24
       Width = 391
     end
     object grdPhysicalAddress: TcxDBVerticalGrid [6]
       Left = 10000
       Top = 10000
       Width = 280
-      Height = 200
+      Height = 125
       OptionsView.CellAutoHeight = True
       OptionsView.ScrollBars = ssNone
       OptionsView.RowHeaderWidth = 90
@@ -919,11 +917,8 @@ inherited CustomerFrm: TCustomerFrm
       OptionsBehavior.ImmediateEditor = False
       OptionsBehavior.FocusCellOnCycle = True
       OptionsData.CancelOnExit = False
-      OptionsData.Editing = False
       OptionsData.Appending = False
-      OptionsData.Deleting = False
       OptionsData.DeletingConfirmation = False
-      OptionsData.Inserting = False
       Navigator.Buttons.OnButtonClick = viewContactDetailNavigatorButtonsButtonClick
       Navigator.Buttons.CustomButtons = <>
       Navigator.Buttons.Images = imgNav16
@@ -935,7 +930,7 @@ inherited CustomerFrm: TCustomerFrm
       Navigator.Buttons.Last.Visible = False
       Navigator.Buttons.Insert.Hint = 'Add new address information for selected customer'
       Navigator.Buttons.Insert.ImageIndex = 9
-      Navigator.Buttons.Insert.Visible = False
+      Navigator.Buttons.Insert.Visible = True
       Navigator.Buttons.Delete.Hint = 'Delete address information for selected customer'
       Navigator.Buttons.Delete.ImageIndex = 10
       Navigator.Buttons.Edit.Hint = 'Edit address information for selected customer'
@@ -1017,7 +1012,7 @@ inherited CustomerFrm: TCustomerFrm
       Left = 10000
       Top = 10000
       Width = 280
-      Height = 200
+      Height = 125
       OptionsView.CellAutoHeight = True
       OptionsView.ScrollBars = ssNone
       OptionsView.RowHeaderWidth = 88
@@ -1100,7 +1095,7 @@ inherited CustomerFrm: TCustomerFrm
       Left = 10000
       Top = 10000
       Width = 280
-      Height = 200
+      Height = 125
       OptionsView.CellAutoHeight = True
       OptionsView.ScrollBars = ssNone
       OptionsView.RowHeaderWidth = 89
@@ -1179,10 +1174,10 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdContactPerson: TcxGrid [9]
-      Left = 25
-      Top = 481
+      Left = -325
+      Top = 458
       Width = 1250
-      Height = 243
+      Height = 200
       TabOrder = 15
       OnEnter = grdContactPersonEnter
       object viewContactPerson: TcxGridDBBandedTableView
@@ -1225,10 +1220,7 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.ImmediateEditor = False
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
-        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
-        OptionsData.Editing = False
-        OptionsData.Inserting = False
         OptionsView.GroupByBox = False
         Bands = <
           item
@@ -1398,8 +1390,8 @@ inherited CustomerFrm: TCustomerFrm
     end
     object grdCPContactDetail: TcxGrid [10]
       Tag = 3
-      Left = 1281
-      Top = 481
+      Left = 931
+      Top = 458
       Width = 400
       Height = 145
       TabOrder = 16
@@ -1446,10 +1438,7 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnCycle = True
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
-        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
-        OptionsData.Editing = False
-        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Contact Detail data to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -1558,8 +1547,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCPcontactDetailComment: TcxDBMemo [11]
-      Left = 1281
-      Top = 632
+      Left = 931
+      Top = 609
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailPerson
       PopupMenu = popDBAction
@@ -1569,7 +1558,7 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 17
       OnDblClick = viewContactDetailCoDblClick
       OnEnter = grdCPContactDetailEnter
-      Height = 92
+      Height = 49
       Width = 400
     end
     object grdBankingDetail: TcxGrid [12]
@@ -1619,9 +1608,7 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.ImmediateEditor = False
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
-        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
-        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Banking Detail data to display>'
         OptionsView.GroupByBox = False
         Bands = <
@@ -1809,7 +1796,7 @@ inherited CustomerFrm: TCustomerFrm
       Left = 10000
       Top = 10000
       Width = 1656
-      Height = 139
+      Height = 113
       TabOrder = 19
       Visible = False
       OnEnter = grdDirectorEnter
@@ -1852,10 +1839,7 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnCycle = True
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
-        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
-        OptionsData.Editing = False
-        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Director data to display>'
         OptionsView.GroupByBox = False
         Bands = <
@@ -2042,10 +2026,7 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnCycle = True
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
-        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
-        OptionsData.Editing = False
-        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Beneficiary data to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -2217,10 +2198,7 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnCycle = True
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
-        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
-        OptionsData.Editing = False
-        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Vehicle data to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -2395,8 +2373,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object lblLegend: TcxLabel [16]
-      Left = 11
-      Top = 747
+      Left = -339
+      Top = 681
       Caption = 
         'INS = Add a new record;  ENTER = Edit selected record;  DEL = De' +
         'lete selected record'
@@ -2406,8 +2384,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxOpenAfterExport: TcxCheckBox [17]
-      Left = 688
-      Top = 88
+      Left = 338
+      Top = 65
       Caption = 'Open after export'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2420,8 +2398,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxPersistSelection: TcxCheckBox [18]
-      Left = 383
-      Top = 21
+      Left = 33
+      Top = -1
       Caption = 'Persist Selection'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2434,8 +2412,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxGroupedReport: TcxCheckBox [19]
-      Left = 570
-      Top = 88
+      Left = 220
+      Top = 65
       Caption = 'Grouped Report'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2447,8 +2425,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object lucPrintWhat: TcxComboBox [20]
-      Left = 295
-      Top = 88
+      Left = -55
+      Top = 65
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -2465,8 +2443,8 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object lucReportType: TcxComboBox [21]
-      Left = 96
-      Top = 88
+      Left = -254
+      Top = 65
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -2482,8 +2460,8 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object cbxPrintContactDetails: TcxCheckBox [22]
-      Left = 431
-      Top = 88
+      Left = 81
+      Top = 65
       Caption = 'Print contact details'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2539,10 +2517,7 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnCycle = True
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
-        OptionsData.Deleting = False
         OptionsData.DeletingConfirmation = False
-        OptionsData.Editing = False
-        OptionsData.Inserting = False
         OptionsView.NoDataToDisplayInfoText = '<No Trustee data to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -2668,20 +2643,42 @@ inherited CustomerFrm: TCustomerFrm
         GridView = viewTrustee
       end
     end
-    object grdDirectorOfCompany: TcxGrid [24]
+    object grdDirectorCompanyLink: TcxGrid [24]
       Left = 10000
       Top = 10000
       Width = 430
-      Height = 98
+      Height = 81
       TabOrder = 20
       Visible = False
-      OnEnter = grdDirectorOfCompanyEnter
-      object viewDirectorOfCompany: TcxGridDBBandedTableView
+      OnEnter = grdDirectorCompanyLinkEnter
+      object viewDirectorCompanyLink: TcxGridDBBandedTableView
+        PopupMenu = popDBAction
         OnDblClick = viewContactDetailCoDblClick
+        Navigator.Buttons.OnButtonClick = viewContactDetailNavigatorButtonsButtonClick
         Navigator.Buttons.CustomButtons = <>
+        Navigator.Buttons.Images = imgNav16
+        Navigator.Buttons.First.Visible = False
+        Navigator.Buttons.PriorPage.Visible = False
+        Navigator.Buttons.Prior.Visible = False
+        Navigator.Buttons.Next.Visible = False
+        Navigator.Buttons.NextPage.Visible = False
+        Navigator.Buttons.Last.Visible = False
+        Navigator.Buttons.Insert.Hint = 'Add a new company link'
+        Navigator.Buttons.Insert.ImageIndex = 9
+        Navigator.Buttons.Delete.Hint = 'Delete selected company link'
+        Navigator.Buttons.Delete.ImageIndex = 10
+        Navigator.Buttons.Edit.Hint = 'Edit selected company link'
+        Navigator.Buttons.Edit.ImageIndex = 13
+        Navigator.Buttons.Post.Visible = False
+        Navigator.Buttons.Cancel.Visible = False
+        Navigator.Buttons.Refresh.ImageIndex = 14
+        Navigator.Buttons.SaveBookmark.Visible = False
+        Navigator.Buttons.GotoBookmark.Visible = False
+        Navigator.Buttons.Filter.Visible = False
+        Navigator.Visible = True
         ScrollbarAnnotations.CustomAnnotations = <>
         OnCustomDrawCell = viewCustomerCustomDrawCell
-        DataController.DataSource = MTDM.dtsDirectorOfCompany
+        DataController.DataSource = MTDM.dtsDirectorCompanyLink
         DataController.Options = [dcoCaseInsensitive, dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoSortByDisplayText]
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
@@ -2691,6 +2688,8 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnCycle = True
         OptionsBehavior.ImmediateEditor = False
         OptionsCustomize.ColumnsQuickCustomization = True
+        OptionsData.CancelOnExit = False
+        OptionsData.DeletingConfirmation = False
         OptionsView.NoDataToDisplayInfoText = '<No Company Director to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -2749,22 +2748,26 @@ inherited CustomerFrm: TCustomerFrm
               FieldName = 'COMPANY'
             end>
           Properties.ListSource = LookupDM.dtsCompany
-          Properties.ReadOnly = False
+          Properties.ReadOnly = True
+          Options.Editing = False
+          Options.Filtering = False
+          Options.Grouping = False
+          Options.Moving = False
           Width = 589
           Position.BandIndex = 0
           Position.ColIndex = 2
           Position.RowIndex = 0
         end
       end
-      object lvlDirectorOfCompany: TcxGridLevel
-        GridView = viewDirectorOfCompany
+      object lvlDirectorCompanyLink: TcxGridLevel
+        GridView = viewDirectorCompanyLink
       end
     end
     object grdHeir: TcxGrid [25]
       Left = 10000
       Top = 10000
       Width = 550
-      Height = 243
+      Height = 200
       TabOrder = 24
       Visible = False
       object viewHeir: TcxGridDBBandedTableView
@@ -2802,6 +2805,8 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnTab = True
         OptionsBehavior.NavigatorHints = True
         OptionsBehavior.FocusCellOnCycle = True
+        OptionsData.CancelOnExit = False
+        OptionsData.DeletingConfirmation = False
         OptionsView.NoDataToDisplayInfoText = '<No Heir data to display>'
         OptionsView.GroupByBox = False
         Bands = <
@@ -3201,6 +3206,8 @@ inherited CustomerFrm: TCustomerFrm
         OptionsBehavior.FocusCellOnTab = True
         OptionsBehavior.NavigatorHints = True
         OptionsBehavior.FocusCellOnCycle = True
+        OptionsData.CancelOnExit = False
+        OptionsData.DeletingConfirmation = False
         OptionsView.NoDataToDisplayInfoText = '<No Shareholder data to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
@@ -3347,7 +3354,7 @@ inherited CustomerFrm: TCustomerFrm
       Left = 10000
       Top = 10000
       Width = 360
-      Height = 243
+      Height = 200
       OptionsView.CellAutoHeight = True
       OptionsView.ScrollBars = ssVertical
       OptionsView.RowHeaderWidth = 124
@@ -3776,10 +3783,11 @@ inherited CustomerFrm: TCustomerFrm
     object litDirector: TdxLayoutItem
       Parent = grpDirectorVerticalGrid
       AlignHorz = ahClient
+      AlignVert = avClient
       CaptionOptions.Text = 'Directors'
       CaptionOptions.Visible = False
       Control = grdDirector
-      ControlOptions.OriginalHeight = 139
+      ControlOptions.OriginalHeight = 160
       ControlOptions.OriginalWidth = 340
       ControlOptions.ShowBorder = False
       Index = 0
@@ -3809,7 +3817,7 @@ inherited CustomerFrm: TCustomerFrm
     object litPhysicalAddress: TdxLayoutItem
       Parent = grpPhysicalAddress
       Control = grdPhysicalAddress
-      ControlOptions.OriginalHeight = 200
+      ControlOptions.OriginalHeight = 125
       ControlOptions.OriginalWidth = 280
       ControlOptions.ShowBorder = False
       Index = 0
@@ -3817,7 +3825,7 @@ inherited CustomerFrm: TCustomerFrm
     object litPostalAddress: TdxLayoutItem
       Parent = grpPostalAddress
       Control = grdPostalAddress
-      ControlOptions.OriginalHeight = 200
+      ControlOptions.OriginalHeight = 125
       ControlOptions.OriginalWidth = 280
       ControlOptions.ShowBorder = False
       Index = 0
@@ -3825,7 +3833,7 @@ inherited CustomerFrm: TCustomerFrm
     object litBillingAddress: TdxLayoutItem
       Parent = grpBillingAddress
       Control = grdBillingAddress
-      ControlOptions.OriginalHeight = 200
+      ControlOptions.OriginalHeight = 125
       ControlOptions.OriginalWidth = 280
       ControlOptions.ShowBorder = False
       Index = 0
@@ -4009,7 +4017,7 @@ inherited CustomerFrm: TCustomerFrm
       AlignHorz = ahLeft
       AlignVert = avClient
       CaptionOptions.Visible = False
-      Control = grdDirectorOfCompany
+      Control = grdDirectorCompanyLink
       ControlOptions.OriginalHeight = 114
       ControlOptions.OriginalWidth = 430
       ControlOptions.ShowBorder = False
@@ -4017,6 +4025,7 @@ inherited CustomerFrm: TCustomerFrm
     end
     object grpDirectorVerticalGrid: TdxLayoutGroup
       Parent = grpDirector
+      AlignVert = avClient
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
       LayoutDirection = ldHorizontal

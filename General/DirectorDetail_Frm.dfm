@@ -134,7 +134,6 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
         Navigator.Visible = True
         ScrollbarAnnotations.CustomAnnotations = <>
         OnCustomDrawCell = viewDirectorOfCompanyCustomDrawCell
-        DataController.DataSource = MTDM.dtsDirectorOfCompany
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>

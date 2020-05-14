@@ -71,7 +71,7 @@ begin
   lucAccType.Properties.ListSource := LookupDM.dtsBankAccountType;
   MTDM.ClearFieldValues;
 
-  if VBBaseDM.DBAction = acModify then
+  if VBBaseDM.DBAction = acEdit then
   begin
     lucBank.EditValue := MTDM.cdsBankingDetail.FieldByName('BANK_ID').AsInteger;
     edtBranchCode.Text := MTDM.cdsBankingDetail.FieldByName('BRANCH_CODE').AsString;

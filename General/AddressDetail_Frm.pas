@@ -171,7 +171,7 @@ begin
   //  Width = 615, Height = 495
   MTDM.ClearFieldValues;
 
-  if VBBaseDM.DBAction = acModify then
+  if VBBaseDM.DBAction = acEdit then
   begin
     edtPhysical1.Text := MTDM.cdsAddress.FieldByName('PHYSICAL1').AsString;
     edtPhysical2.Text := MTDM.cdsAddress.FieldByName('PHYSICAL2').AsString;

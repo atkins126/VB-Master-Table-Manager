@@ -24,6 +24,7 @@ type
     litCompany: TdxLayoutItem;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
@@ -45,14 +46,20 @@ uses
 procedure TDirectorCompanyLinkFrm.FormCreate(Sender: TObject);
 begin
   inherited;
-  Self.Width := 350;
-  Self.Height := 185;
+  Self.Width := 450;
+  Self.Height := 200;
   lucCompany.Properties.ListSource := LookupDM.dtsDirectorCompanyLink;
 
-  if VBBaseDM.DBAction = acModify then
+  if VBBaseDM.DBAction = acEdit then
     lucCompany.EditValue := LookupDM.cdsDirectorCompanyLink.FieldByName('ID').AsInteger;
 
   lucCompany.Properties.OnChange := ValueChanged;
+end;
+
+procedure TDirectorCompanyLinkFrm.FormShow(Sender: TObject);
+begin
+  inherited;
+  lucCompany.SetFocus;
 end;
 
 procedure TDirectorCompanyLinkFrm.btnOKClick(Sender: TObject);
@@ -66,7 +73,8 @@ begin
   if SameText(lucCompany.Text, '') then
     raise EValidateException.Create('Please select a company to link to this director');
 
-  MTDM.FFieldValue.CompanyID := VarAsType(lucCompany.EditValue, varInteger);
+  MTDM.FFieldValue.CustomerID := VarAsType(lucCompany.EditValue, varInteger);
+  MTDM.FFieldValue.DirectorID := MTDM.cdsDirector.FieldByName('ID').AsInteger;
 
   ModalResult := mrOK;
 end;

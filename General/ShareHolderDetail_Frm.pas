@@ -64,7 +64,7 @@ begin
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
   TcxLookupComboBoxProperties(lucSalutation.Properties).ListSource := LookupDM.dtsSHSalutation;
 
-  if VBBaseDM.DBAction = acModify then
+  if VBBaseDM.DBAction = acEdit then
   begin
     edtFirstName.Text := MTDM.cdsShareHolder.FieldByName('FIRST_NAME').AsString;
     edtLastName.Text := MTDM.cdsShareHolder.FieldByName('LAST_NAME').AsString;

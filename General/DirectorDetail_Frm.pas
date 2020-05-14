@@ -97,10 +97,10 @@ begin
   Height := 480;
   MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
-  viewDirectorOfCompany.DataController.DataSource := MTDM.dtsDirectorOfCompany;
+  viewDirectorOfCompany.DataController.DataSource := MTDM.dtsDirectorCompanyLink;
   TcxLookupComboBoxProperties(lucCompany.Properties).ListSource := LookupDM.dtsCompany;
 
-  if VBBaseDM.DBAction = acModify then
+  if VBBaseDM.DBAction = acEdit then
   begin
     edtFirstName.Text := MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString;
     edtLastName.Text := MTDM.cdsDirector.FieldByName('LAST_NAME').AsString;

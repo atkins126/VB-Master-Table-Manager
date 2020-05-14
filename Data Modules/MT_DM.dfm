@@ -2928,19 +2928,19 @@ inherited MTDM: TMTDM
     Left = 995
     Top = 435
   end
-  object dtsDirectorOfCompany: TDataSource
-    DataSet = cdsDirectorOfCompany
+  object dtsDirectorCompanyLink: TDataSource
+    DataSet = cdsDirectorCompanyLink
     Left = 735
     Top = 435
   end
-  object cdsDirectorOfCompany: TFDMemTable
+  object cdsDirectorCompanyLink: TFDMemTable
     Tag = 74
     ActiveStoredUsage = [auDesignTime]
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
     AfterDelete = cdsActivityTypeAfterDelete
-    OnNewRecord = cdsDirectorOfCompanyNewRecord
-    OnPostError = cdsDirectorOfCompanyPostError
+    OnNewRecord = cdsActivityTypeNewRecord
+    OnPostError = cdsDirectorCompanyLinkPostError
     FilterOptions = [foCaseInsensitive]
     FieldDefs = <>
     CachedUpdates = True
@@ -2972,23 +2972,25 @@ inherited MTDM: TMTDM
     ResourceOptions.Persistent = True
     ResourceOptions.StorePrettyPrint = True
     ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.AssignedValues = [uvGeneratorName, uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.GeneratorName = 'DIRECTOR_OF_COMPANY_ID_GEN'
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
+    UpdateOptions.UpdateTableName = 'DIRECTOR_OF_COMPANY'
     StoreDefs = True
     Left = 735
     Top = 385
-    object cdsDirectorOfCompanyID: TIntegerField
+    object cdsDirectorCompanyLinkID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
     end
-    object cdsDirectorOfCompanyDIRECTOR_ID: TIntegerField
+    object cdsDirectorCompanyLinkDIRECTOR_ID: TIntegerField
       Alignment = taLeftJustify
       DisplayLabel = 'D ID'
       FieldName = 'DIRECTOR_ID'
       Origin = 'DIRECTOR_ID'
     end
-    object cdsDirectorOfCompanyCUSTOMER_ID: TIntegerField
+    object cdsDirectorCompanyLinkCUSTOMER_ID: TIntegerField
       Alignment = taLeftJustify
       DisplayLabel = 'Company'
       FieldName = 'CUSTOMER_ID'

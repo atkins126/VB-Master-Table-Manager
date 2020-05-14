@@ -338,9 +338,9 @@ type
     lvlTrustee: TcxGridLevel;
     grpDirector: TdxLayoutGroup;
     litDirectorOfCompany: TdxLayoutItem;
-    grdDirectorOfCompany: TcxGrid;
-    viewDirectorOfCompany: TcxGridDBBandedTableView;
-    lvlDirectorOfCompany: TcxGridLevel;
+    grdDirectorCompanyLink: TcxGrid;
+    viewDirectorCompanyLink: TcxGridDBBandedTableView;
+    lvlDirectorCompanyLink: TcxGridLevel;
     grpDirectorVerticalGrid: TdxLayoutGroup;
     grpPersonAttribute: TcxCategoryRow;
     edtCoID: TcxGridDBBandedColumn;
@@ -456,7 +456,7 @@ type
       AEditProp: TcxCustomEditorRowProperties; AFocused: Boolean;
       ARecordIndex: Integer; var AStyle: TcxStyle);
     procedure grdContactDetailCoEnter(Sender: TObject);
-    procedure grdDirectorOfCompanyEnter(Sender: TObject);
+    procedure grdDirectorCompanyLinkEnter(Sender: TObject);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
@@ -590,7 +590,7 @@ begin
 
     1:
       begin
-        VBBaseDM.DBAction := acModify;
+        VBBaseDM.DBAction := acEdit;
 //        Key := VK_RETURN; // VK_F2;
       end;
 
@@ -620,7 +620,7 @@ begin
   Result := '';
   case VBBaseDM.DBAction of
     acInsert: FDetailDataSet[MTDM.DetailIndex].Insert;
-    acModify: FDetailDataSet[MTDM.DetailIndex].Edit;
+    acEdit: FDetailDataSet[MTDM.DetailIndex].Edit;
   end;
 
   case DetailDataSetID of
@@ -859,27 +859,14 @@ begin
             MTDM.ValueArray[4]]);
       end;
 
-    11: // Director of Company
+    11: // Director company link
       begin
-        MTDM.cdsDirectorOfCompany.FieldByName('THE_YEAR').AsInteger := MTDM.FFieldValue.YearOfManufacture;
-        MTDM.cdsDirectorOfCompany.FieldByName('VEHICLE_MAKE_ID').AsInteger := MTDM.FFieldValue.VehicleMakeID;
-        MTDM.cdsDirectorOfCompany.FieldByName('VEHICLE_MODEL').AsString := MTDM.FFieldValue.VehicleModel;
-        MTDM.cdsDirectorOfCompany.FieldByName('REG_NO').AsString := MTDM.FFieldValue.VehicleRegNo;
-        MTDM.cdsDirectorOfCompany.FieldByName('RENEWAL_DATE').AsDateTime := MTDM.FFieldValue.LicenceRenewalDate;
-        MTDM.cdsDirectorOfCompany.FieldByName('MAINTENANCE_PLAN').AsInteger := BooleanToInteger(MTDM.FFieldValue.MaintenancePlan);
-        MTDM.cdsDirectorOfCompany.FieldByName('COMMENT').AsString := MTDM.FFieldValue.Comment;
+        MTDM.cdsDirectorCompanyLink.FieldByName('CUSTOMER_ID').AsInteger := MTDM.FFieldValue.CustomerID;
+        MTDM.cdsDirectorCompanyLink.FieldByName('DIRECTOR_ID').AsInteger := MTDM.FFieldValue.DirectorID;
 
-        MTDM.ValueArray[0] := 'Make:' + TAB + TAB + MTDM.FFieldValue.VehicleMake;
-        MTDM.ValueArray[1] := 'Model:' + TAB + TAB + MTDM.FFieldValue.VehicleModel;
-        MTDM.ValueArray[2] := 'Year:' + TAB + TAB + MTDM.FFieldValue.YearOfManufacture.ToString;
-        MTDM.ValueArray[3] := 'Reg No:' + TAB + TAB + MTDM.FFieldValue.VehicleRegNo;
-        MTDM.ValueArray[4] := 'Renewal Date: ' + TAB + FormatDateTime('dd/MM/yyyy', MTDM.FFieldValue.LicenceRenewalDate);
-        ErrorValues := Format(ERROR_VALUES, [
-          MTDM.ValueArray[0] + CRLF +
-            MTDM.ValueArray[1] + CRLF +
-            MTDM.ValueArray[2] + CRLF +
-            MTDM.ValueArray[3] + CRLF +
-            MTDM.ValueArray[4]]);
+//        MTDM.ValueArray[0] := 'Customer ' + MTDM.FFieldValue.Name;
+//        ErrorValues := Format(ERROR_VALUES, [
+//          MTDM.ValueArray[0]]);
       end;
 
     12: // Customer
@@ -925,12 +912,6 @@ begin
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0]]);
       end;
-
-//  FDetailDataSet[9] := MTDM.cdsTrustee;
-//  FDetailDataSet[10] := MTDM.cdsDirectorOfCompany;
-//  FDetailDataSet[11] := MTDM.cdsShareHolder;
-//  FDetailDataSet[12] := MTDM.cdsHeir;
-
   end;
   Result := ErrorValues;
 
@@ -982,7 +963,7 @@ end;
 //
 // case DBAction of
 // acInsert: FDetailDataSet[MTDM.DetailIndex].Insert;
-// acModify: FDetailDataSet[MTDM.DetailIndex].Edit;
+// acEdit: FDetailDataSet[MTDM.DetailIndex].Edit;
 // end;
 //
 // case DetailDataSetID of
@@ -1315,7 +1296,7 @@ begin
   viewBeneficiary.DataController.DataSource := MTDM.dtsBeneficiary;
   viewTrustee.DataController.DataSource := MTDM.dtsTrustee;
   viewVehicle.DataController.DataSource := MTDM.dtsVehicle;
-  viewDirectorOfCompany.DataController.DataSource := MTDM.dtsDirectorOfCompany;
+  viewDirectorCompanyLink.DataController.DataSource := MTDM.dtsDirectorCompanyLink;
   viewHeir.DataController.DataSource := MTDM.dtsHeir;
   grdHeirVertical.DataController.DataSource := MTDM.dtsHeir;
   viewShareHolder.DataController.DataSource := MTDM.dtsShareHolder;
@@ -1333,7 +1314,7 @@ begin
   FDetailDataSet[8] := MTDM.cdsShareHolder;
   FDetailDataSet[9] := MTDM.cdsHeir;
   FDetailDataSet[10] := MTDM.cdsVehicle;
-  FDetailDataSet[11] := MTDM.cdsDirectorOfCompany;
+  FDetailDataSet[11] := MTDM.cdsDirectorCompanyLink;
   FDetailDataSet[12] := MTDM.cdsCustomer;
 
   SetLength(FDetailFriendlyName, CUSTOMER_DETAIL_COUNT);
@@ -1348,7 +1329,7 @@ begin
   FDetailFriendlyName[8] := 'Shareholder';
   FDetailFriendlyName[9] := 'Heir';
   FDetailFriendlyName[10] := 'Vehicle';
-  FDetailFriendlyName[11] := 'Director of Company';
+  FDetailFriendlyName[11] := 'Director of Company Link';
   FDetailFriendlyName[12] := 'Customer';
   OpenTables;
 end;
@@ -1554,17 +1535,17 @@ end;
 procedure TCustomerFrm.grdDirectorEnter(Sender: TObject);
 begin
   inherited;
-//  MTDM.DetailIndex := 5;
+  MTDM.DetailIndex := 5;
   actInsert.Caption := 'Add a new director';
   actEdit.Caption := 'Edit selected director';
   actDelete.Caption := 'Delete selected director';
   MTDM.FormCaption := 'Director Details';
 end;
 
-procedure TCustomerFrm.grdDirectorOfCompanyEnter(Sender: TObject);
+procedure TCustomerFrm.grdDirectorCompanyLinkEnter(Sender: TObject);
 begin
   inherited;
-  MTDM.DetailIndex := 13;
+  MTDM.DetailIndex := 11;
   actInsert.Caption := 'Add a new director company link';
   actEdit.Caption := 'Edit selected director company link';
   actDelete.Caption := 'Delete selected director company link';
@@ -1643,7 +1624,7 @@ begin
 
     NBDI_EDIT:
       begin
-        VBBaseDM.DBAction := acModify;
+        VBBaseDM.DBAction := acEdit;
         ADone := True;
         EditDeleteRecord;
 //        EditDeleteRecord(VK_RETURN);
@@ -2321,12 +2302,12 @@ begin
 //    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director of Company Table' + '|PROGRESS=' + Iteration.ToString)), 0);
     SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Director of Company Table')), 0);
     SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
-    VBBaseDM.GetData(74, MTDM.cdsDirectorOfCompany, MTDM.cdsDirectorOfCompany.Name, ONE_SPACE,
-      'C:\Data\Xml\Director Of Company.xml', MTDM.cdsDirectorOfCompany.UpdateOptions.Generatorname,
-      MTDM.cdsDirectorOfCompany.UpdateOptions.UpdateTableName);
+    VBBaseDM.GetData(74, MTDM.cdsDirectorCompanyLink, MTDM.cdsDirectorCompanyLink.Name, ONE_SPACE,
+      'C:\Data\Xml\Director Of Company Link.xml', MTDM.cdsDirectorCompanyLink.UpdateOptions.Generatorname,
+      MTDM.cdsDirectorCompanyLink.UpdateOptions.UpdateTableName);
 
-    if not MTDM.cdsDirectorOfCompany.Active then
-      MTDM.cdsDirectorOfCompany.CreateDataSet;
+    if not MTDM.cdsDirectorCompanyLink.Active then
+      MTDM.cdsDirectorCompanyLink.CreateDataSet;
 
     // Shareholder
     Inc(Counter);
@@ -2521,6 +2502,9 @@ begin
 
     if not LookupDM.cdsCompany.Active then
       LookupDM.cdsCompany.CreateDataSet;
+
+    LookupDM.cdsDirectorCompanyLink.Close;
+    LookupDM.cdsDirectorCompanyLink.Data := LookupDM.cdsCompany.Data;
   finally
     ProgressFrm.Close;
     FreeAndNil(ProgressFrm);
@@ -2564,7 +2548,7 @@ begin
 //  if TcxDBVerticalGrid(Sender).DataController.RecordCount = 0 then
 //    EditDeleteRecord(VBBaseDM.DBAction)
 //  else
-  VBBaseDM.DBAction := acModify;
+  VBBaseDM.DBAction := acEdit;
 
   if TcxDBVerticalGrid(Sender).DataController.RecordCount = 0 then
     VBBaseDM.DBAction := acInsert;
@@ -2675,13 +2659,12 @@ begin
     8: DataSet := MTDM.cdsShareHolder;
     9: DataSet := MTDM.cdsHeir;
     10: DataSet := MTDM.cdsVehicle;
-    11: DataSet := MTDM.cdsDirectorOfCompany;
+    11: DataSet := MTDM.cdsDirectorCompanyLink;
     12: DataSet := MTDM.cdsCustomer;
-    13: DataSet :=  LookupDM.cdsDirectorCompanyLink;
   end;
 
   case VBBaseDM.DBAction of
-    acInsert, acModify:
+    acInsert, acEdit:
       begin
         FOpenTableParam.ScriptID := 0;
         FOpenTableParam.DataSet := nil;
@@ -2694,7 +2677,7 @@ begin
 
 //        case DataAction of
 //          VK_INSERT: VBBaseDM.DBAction := acInsert;
-//          { VK_F2 }VK_RETURN: VBBaseDM.DBAction := acModify;
+//          { VK_F2 }VK_RETURN: VBBaseDM.DBAction := acEdit;
 //        end;
 
         case MTDM.DetailIndex of
@@ -2902,6 +2885,24 @@ begin
               FreeAndNil(VehicleDetailFrm);
             end;
 
+          11: // Director company link
+            begin
+              if DirectorCompanyLinkFrm = nil then
+                DirectorCompanyLinkFrm := TDirectorCompanyLinkFrm.Create(nil);
+
+              ModResult := DirectorCompanyLinkFrm.ShowModal;
+              if ModResult = mrOK then
+              begin
+                FOpenTableParam.ScriptID := 74;
+                FOpenTableParam.FileName := 'C:\Data\Xml\Director Company Link.xml';
+                FOpenTableParam.FieldName := 'DIRECTOR_ID';
+                FOpenTableParam.LocateValue := MTDM.FFieldValue.VehicleRegNo;
+              end;
+
+              DirectorCompanyLinkFrm.Close;
+              FreeAndNil(DirectorCompanyLinkFrm);
+            end;
+
           12: // Customer
             begin
               if CustomerEditFrm = nil then
@@ -2909,7 +2910,7 @@ begin
 
               case VBBaseDM.DBAction of
                 acInsert: CustomerEditFrm.lblCustomerHeader.Caption := 'Adding a New Customer';
-                acModify: CustomerEditFrm.lblCustomerHeader.Caption :=
+                acEdit: CustomerEditFrm.lblCustomerHeader.Caption :=
                   'Modifying Customer: ' + MTDM.cdsCustomer.FieldByName('NAME').AsString;
               end;
 
@@ -2925,25 +2926,6 @@ begin
               CustomerEditFrm.Close;
               FreeAndNil(CustomerEditFrm);
             end;
-
-          13: // Director company link
-            begin
-              if DirectorCompanyLinkFrm = nil then
-                DirectorCompanyLinkFrm := TDirectorCompanyLinkFrm.Create(nil);
-
-              ModResult := DirectorCompanyLinkFrm.ShowModal;
-              if ModResult = mrOK then
-              begin
-                FOpenTableParam.ScriptID := 49;
-                FOpenTableParam.FileName := 'C:\Data\Xml\Director Company Link.xml';
-                FOpenTableParam.FieldName := 'REG_NO';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.VehicleRegNo;
-              end;
-
-              DirectorCompanyLinkFrm.Close;
-              FreeAndNil(DirectorCompanyLinkFrm);
-            end;
-
         end;
 
 // SELECT GEN_ID( <GeneratorName>, 0 ) FROM RDB$DATABASE;
@@ -2955,14 +2937,6 @@ begin
             FOpenTableParam.DataSetName := DataSet.Name;
             FOpenTableParam.GeneratorName := DataSet.UpdateOptions.Generatorname;
             FOpenTableParam.UpdateTableName := DataSet.UpdateOptions.UpdateTableName;
-
-//            // If posting Director of company data
-//            if MTDM.DetailIndex = 5 then
-//            begin
-//              if MTDM.cdsDirectorOfCompany.State in dsEditModes then
-//                MTDM.cdsDirectorOfCompany.Post;
-//              MTDM.cdsActivityTypeAfterDelete(MTDM.cdsDirectorOfCompany);
-//            end;
 
             // Post the data
             try
@@ -3049,7 +3023,7 @@ end;
 procedure TCustomerFrm.viewContactDetailCoDblClick(Sender: TObject);
 begin
   inherited;
-  VBBaseDM.DBAction := acModify;
+  VBBaseDM.DBAction := acEdit;
 
   if TcxGridSite(Sender).GridView.DataController.RecordCount = 0 then
     VBBaseDM.DBAction := acInsert;
@@ -3074,8 +3048,8 @@ begin
 //  end;
 
   case AButtonIndex of
-    NBDI_INSERT: VBBaseDM.DBAction := acInsert;
-    NBDI_EDIT: VBBaseDM.DBAction := acModify;
+    NBDI_INSERT, NBDI_APPEND: VBBaseDM.DBAction := acInsert;
+    NBDI_EDIT: VBBaseDM.DBAction := acEdit;
     NBDI_DELETE: VBBaseDM.DBAction := acDelete;
   end;
 
@@ -3103,7 +3077,7 @@ begin
 // MTDM.DetailIndex := 0;
 // case AButtonIndex of
 // NBDI_INSERT: DBAction := acInsert;
-// NBDI_EDIT: DBAction := acModify;
+// NBDI_EDIT: DBAction := acEdit;
 // end;
 //
 // if CustomerEditFrm.ShowModal = mrOK then

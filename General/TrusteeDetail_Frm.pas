@@ -65,7 +65,7 @@ begin
   MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
 
-  if VBBaseDM.DBAction = acModify then
+  if VBBaseDM.DBAction = acEdit then
   begin
     edtFirstName.Text := MTDM.cdsBeneficiary.FieldByName('FIRST_NAME').AsString;
     edtLastName.Text := MTDM.cdsBeneficiary.FieldByName('LAST_NAME').AsString;

@@ -115,7 +115,7 @@ begin
   lblCharCount.Caption := 'Characters Left: ' + memComment.Properties.MaxLength.ToString;
   ValidationError := False;
 
-  if VBBaseDM.DBAction = acModify then
+  if VBBaseDM.DBAction = acEdit then
   begin
     lucVehicleMake.EditValue := MTDM.cdsVehicle.FieldByName('VEHICLE_MAKE_ID').AsInteger;
     edtModel.Text := MTDM.cdsVehicle.FieldByName('VEHICLE_MODEL').AsString;

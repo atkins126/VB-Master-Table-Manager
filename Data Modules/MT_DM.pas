@@ -79,6 +79,8 @@ type
     VehicleRegNo: string;
     LicenceRenewalDate: TDateTime;
     MaintenancePlan: Boolean;
+    CustomerID: Integer;
+    DirectorID: Integer;
     // Customer
     CustomerTypeID: Integer;
     YearEndMonthID: Integer;
@@ -113,7 +115,6 @@ type
     HAHKSalutatioinID: Integer;
     HAHFirstName: string;
     HAHLastName: string;
-    CompanyID: Integer;
   end;
 
   TMTDM = class(TVBBaseDM)
@@ -330,11 +331,11 @@ type
     cdsTrusteeLAST_NAME: TStringField;
     cdsTrusteeMOBILE_PHONE: TStringField;
     cdsTrusteeEMAIL_ADDRESS: TStringField;
-    dtsDirectorOfCompany: TDataSource;
-    cdsDirectorOfCompany: TFDMemTable;
-    cdsDirectorOfCompanyDIRECTOR_ID: TIntegerField;
-    cdsDirectorOfCompanyCUSTOMER_ID: TIntegerField;
-    cdsDirectorOfCompanyID: TIntegerField;
+    dtsDirectorCompanyLink: TDataSource;
+    cdsDirectorCompanyLink: TFDMemTable;
+    cdsDirectorCompanyLinkDIRECTOR_ID: TIntegerField;
+    cdsDirectorCompanyLinkCUSTOMER_ID: TIntegerField;
+    cdsDirectorCompanyLinkID: TIntegerField;
     VbdevConnection: TFDConnection;
     cdsHeir: TFDMemTable;
     cdsShareHolder: TFDMemTable;
@@ -387,8 +388,7 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsActivityTypePostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
     procedure cdsActivityTypeNewRecord(DataSet: TDataSet);
-    procedure cdsDirectorOfCompanyNewRecord(DataSet: TDataSet);
-    procedure cdsDirectorOfCompanyPostError(DataSet: TDataSet;
+    procedure cdsDirectorCompanyLinkPostError(DataSet: TDataSet;
       E: EDatabaseError; var Action: TDataAction);
     procedure cdsDirectorCalcFields(DataSet: TDataSet);
   private
@@ -468,6 +468,9 @@ begin
 
   if (TFDMemTable(DataSet) = cdsShareHolder) then
     cdsShareHolder.FieldByName('PERCENT_SHARE').AsFloat := 0;
+
+  if (TFDMemTable(DataSet) = cdsDirectorCompanyLink) then
+    DataSet.FieldByName('DIRECTOR_ID').AsInteger := cdsDirector.FieldByName('ID').AsInteger;
 end;
 
 procedure TMTDM.cdsDirectorCalcFields(DataSet: TDataSet);
@@ -478,14 +481,7 @@ begin
     cdsDirector.FieldByName('LAST_NAME').AsString;
 end;
 
-procedure TMTDM.cdsDirectorOfCompanyNewRecord(DataSet: TDataSet);
-begin
-  inherited;
-  DataSet.FieldByName('ID').AsInteger := 0;
-  DataSet.FieldByName('DIRECTOR_ID').AsInteger := cdsDirector.FieldByName('ID').AsInteger;
-end;
-
-procedure TMTDM.cdsDirectorOfCompanyPostError(DataSet: TDataSet;
+procedure TMTDM.cdsDirectorCompanyLinkPostError(DataSet: TDataSet;
   E: EDatabaseError; var Action: TDataAction);
 begin
   inherited;
@@ -572,6 +568,8 @@ begin
   FFieldValue.VehicleRegNo := '';
   FFieldValue.LicenceRenewalDate := 0.0;
   FFieldValue.MaintenancePlan := False;
+  FFieldValue.CustomerID := 0;
+  FFieldValue.DirectorID := 0;
   // Customer
   FFieldValue.CustomerTypeID := 0;
   FFieldValue.YearEndMonthID := 0;
@@ -625,7 +623,8 @@ begin
   FMasterItem[14] := 'STD Acrtivity';
   FMasterItem[15] := 'Salutaion';
   FMasterItem[16] := 'Tax Office';
-  FMasterItem[17] := 'Vehicle make';
+  FMasterItem[17] := 'Vehicle Make';
+  FMasterItem[18] := 'Director of Company Link';
 
   Setlength(FHeaderCaptionArray, CUSTOMER_DETAIL_COUNT);
   FHeaderCaptionArray[0] := 'Company Contact Detail';
@@ -639,7 +638,7 @@ begin
   FHeaderCaptionArray[8] := 'Shareholder Details';
   FHeaderCaptionArray[9] := 'Heir Details';
   FHeaderCaptionArray[10] := 'Vehicle Details';
-  FHeaderCaptionArray[11] := 'Directo Company Link Details';
+  FHeaderCaptionArray[11] := 'Directo Company Link';
   FHeaderCaptionArray[12] := 'Customer Details';
 
 //  Setlength(FHeaderCaptionArray, CUSTOMER_DETAIL_FORMS);
@@ -674,6 +673,7 @@ begin
   FMasterDataSet[15] := cdsStdActivity;
   FMasterDataSet[16] := cdsTaxoffice;
   FMasterDataSet[17] := cdsVehicleMake;
+  FMasterDataSet[18] := cdsDirectorCompanyLink;
 end;
 
 procedure TMTDM.cdsActivityTypeAfterDelete(DataSet: TDataSet);
@@ -691,7 +691,7 @@ end;
 procedure TMTDM.cdsActivityTypeBeforePost(DataSet: TDataSet);
 var
   SQLStatement, Response: string;
-  FieldList, FieldValues, WhereClause, TableName, FieldListValues: String;
+  FieldList, FieldValues, WhereClause, TableName, FieldListValues: string;
   NextID: Integer;
   ResponseList: TStringList;
 begin
@@ -705,38 +705,62 @@ begin
       begin
         BuildInsertStatement(DataSet.Tag, FieldList, FieldValues, TFDMemTable(DataSet));
         SQLStatement := Format(INSERT_RECORD, [TableName, FieldList, FieldValues]);
+
+        PostError := False;
+        Response := 'INSERT';
+        FID := StrToInt(VBBaseDM.ModifyRecord(SQLStatement, Response));
+        ResponseList := RUtils.CreateStringList(PIPE, DOUBLE_QUOTE);
+        ResponseList.DelimitedText := Response;
+        VBBaseDM.ServerErrorMsg := Responselist.Values['RESPONSE'];
+
+        try
+          if SameText(ResponseList.Values['RESPONSE'], 'ERROR') then
+          begin
+            PostError := True;
+            VBBaseDM.ServerErrorMsg := 'One of mroe errors occurred when trying to insert a new record into the ' + TableName +
+              ' table.' + CRLF + CRLF +
+              'Server error message: ' + CRLF + ResponseList.Values['ERROR_MESSAGE'];
+
+            DataSet.Cancel;
+            SendMessage(Application.MainForm.Handle, WM_POST_DATA_ERROR, DWORD(PChar(VBBaseDM.ServerErrorMsg)), 0);
+          end;
+        finally
+          ResponseList.Free;
+        end;
+
+//  if VBBaseDM.DBAction = acInsert then
+//    DataSet.FieldByName('ID').AsInteger := FID;
       end;
 
-    acModify:
+    acEdit:
       begin
         BuildUpdateStatement(DataSet.Tag, FieldListValues, WhereClause, TFDMemTable(DataSet));
         SQLStatement := Format(UPDATE_RECORD, [TableName, FieldListValues, WhereClause]);
+
+        PostError := False;
+        Response := 'UPDATE';
+        FID := StrToInt(VBBaseDM.ModifyRecord(SQLStatement, Response));
+        ResponseList := RUtils.CreateStringList(PIPE, DOUBLE_QUOTE);
+        ResponseList.DelimitedText := Response;
+        VBBaseDM.ServerErrorMsg := Responselist.Values['RESPONSE'];
+
+        try
+          if SameText(ResponseList.Values['RESPONSE'], 'ERROR') then
+          begin
+            PostError := True;
+            VBBaseDM.ServerErrorMsg := 'One of mroe errors occurred when trying to update a record in the ' + TableName +
+              ' table.' + CRLF + CRLF +
+              'Server error message: ' + CRLF + ResponseList.Values['ERROR_MESSAGE'];
+
+            DataSet.Cancel;
+            SendMessage(Application.MainForm.Handle, WM_POST_DATA_ERROR, DWORD(PChar(VBBaseDM.ServerErrorMsg)), 0);
+          end;
+        finally
+          ResponseList.Free;
+        end;
       end;
   end;
 
-  PostError := False;
-  FID := StrToInt(VBBaseDM.InsertRecord(SQLStatement, Response));
-  ResponseList := RUtils.CreateStringList(PIPE, DOUBLE_QUOTE);
-  ResponseList.DelimitedText := Response;
-  VBBaseDM.ServerErrorMsg := Responselist.Values['RESPONSE'];
-
-  try
-    if SameText(ResponseList.Values['RESPONSE'], 'ERROR') then
-    begin
-      PostError := True;
-      VBBaseDM.ServerErrorMsg := 'One of mroe errors occurred when trying to insert a new record into the ' + TableName +
-        ' table.' + CRLF + CRLF +
-        'Server error message: ' + CRLF + ResponseList.Values['ERROR_MESSAGE'];
-
-      DataSet.Cancel;
-      SendMessage(Application.MainForm.Handle, WM_POST_DATA_ERROR, DWORD(PChar(VBBaseDM.ServerErrorMsg)), 0);
-    end;
-  finally
-    ResponseList.Free;
-  end;
-
-  if VBBaseDM.DBAction = acInsert then
-    DataSet.FieldByName('ID').AsInteger := FID;
 end;
 
 procedure TMTDM.cdsActivityTypeAfterPost(DataSet: TDataSet);
@@ -744,13 +768,18 @@ procedure TMTDM.cdsActivityTypeAfterPost(DataSet: TDataSet);
 //  DSArray: TDataSetArray;
 begin
   inherited;
-//  SetLength(DSArray, 1);
-//  DSArray[0] := TFDMemTable(DataSet);
+//  case VBBaseDM.DBAction of
+//    acEdit, acDelete:
+//      begin
+//        SetLength(DSArray, 1);
+//        DSArray[0] := TFDMemTable(DataSet);
 //
-//  VBBaseDM.ApplyUpdates(DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
-//    TFDMemTable(DataSet).Tag);
+//        VBBaseDM.ApplyUpdates(DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
+//          TFDMemTable(DataSet).Tag);
 //
-//  SendMessage(Application.MainForm.Handle, WM_RECORD_ID, DWORD(PChar('REQUEST=REFRESH_DATA' + '|ID=' + FID.ToString)), 0);
+////    SendMessage(Application.MainForm.Handle, WM_RECORD_ID, DWORD(PChar('REQUEST=REFRESH_DATA' + '|ID=' + FID.ToString)), 0);
+//      end;
+//  end;
 end;
 
 end.
