@@ -18,7 +18,7 @@ inherited MainFrm: TMainFrm
       Top = 11
       Width = 904
       Height = 54
-      Align = dalTop
+      Align = dalNone
       AllowDocking = False
       BarManager = barManager
     end

@@ -58,7 +58,7 @@ uses
 procedure TShareHolderDetailFrm.FormCreate(Sender: TObject);
 begin
   inherited;
-  Self.Height := 260;
+  Self.Height := 280;
   Self.Width := 540;
   MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;

@@ -67,11 +67,11 @@ begin
 
   if VBBaseDM.DBAction = acEdit then
   begin
-    edtFirstName.Text := MTDM.cdsBeneficiary.FieldByName('FIRST_NAME').AsString;
-    edtLastName.Text := MTDM.cdsBeneficiary.FieldByName('LAST_NAME').AsString;
-    lucSalutation.EditValue := MTDM.cdsBeneficiary.FieldByName('SALUTATION_ID').AsInteger;
-    edtMobileNo.Text := MTDM.cdsBeneficiary.FieldByName('MOBILE_PHONE').AsString;
-    edtEmailAddress.Text := MTDM.cdsBeneficiary.FieldByName('EMAIL_ADDRESS').AsString;
+    edtFirstName.Text := MTDM.cdsTrustee.FieldByName('FIRST_NAME').AsString;
+    edtLastName.Text := MTDM.cdsTrustee.FieldByName('LAST_NAME').AsString;
+    lucSalutation.EditValue := MTDM.cdsTrustee.FieldByName('SALUTATION_ID').AsInteger;
+    edtMobileNo.Text := MTDM.cdsTrustee.FieldByName('MOBILE_PHONE').AsString;
+    edtEmailAddress.Text := MTDM.cdsTrustee.FieldByName('EMAIL_ADDRESS').AsString;
   end;
 
   edtFirstName.Properties.OnChange := ValueChanged;

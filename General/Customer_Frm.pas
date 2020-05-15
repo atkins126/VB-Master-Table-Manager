@@ -457,6 +457,7 @@ type
       ARecordIndex: Integer; var AStyle: TcxStyle);
     procedure grdContactDetailCoEnter(Sender: TObject);
     procedure grdDirectorCompanyLinkEnter(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FDetailFriendlyName: DetailFriendlyNames;
@@ -1332,6 +1333,22 @@ begin
   FDetailFriendlyName[11] := 'Director of Company Link';
   FDetailFriendlyName[12] := 'Customer';
   OpenTables;
+end;
+
+procedure TCustomerFrm.FormDestroy(Sender: TObject);
+var
+  I: Integer;
+begin
+  inherited;
+//  for I := 0 to CUSTOMER_DETAIL_COUNT - 1 do
+//    FDetailDataSet[I] := nil;
+
+  FDetailDataSet := nil;
+  FDetailFriendlyName := nil;
+//  SetLength(FDetailDataSet, CUSTOMER_DETAIL_COUNT);
+//  SetLength(FDetailFriendlyName, CUSTOMER_DETAIL_COUNT);
+
+//  Finalize(FDetailDataSet);
 end;
 
 procedure TCustomerFrm.FormShow(Sender: TObject);

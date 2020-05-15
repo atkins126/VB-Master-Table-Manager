@@ -111,6 +111,7 @@ type
     function CreateNewTabSheet(TabSheetName, TabSheetCaption: string; PageControl: TcxPageControl; Action: TAction): TcxTabSheet;
     procedure UpdateApplicationSkin(SkinResourceFileName, SkinName: string);
     procedure CloseTheForm(PageIndex: Integer; FormToClose: TForm; ActionTag: Integer; Action: TAction);
+    procedure CloseAllForms;
   protected
     procedure HandleTSAfterPost(var MyMsg: TMessage); message WM_RECORD_ID;
     procedure HandlerPostError(var MyMsg: TMessage); message WM_POST_DATA_ERROR;
@@ -372,6 +373,7 @@ end;
 procedure TMainFrm.DoExitApp(Sender: TObject);
 begin
 //  inherited;
+  CloseAllForms;
   MainFrm.Close;
 end;
 
@@ -862,6 +864,14 @@ begin
   APopupPoint := Point(aControl.ItemBounds.Left, aControl.ItemBounds.Bottom);
   APopupPoint := aControl.Parent.ClientToScreen(APopupPoint);
   popMasterTable.Popup(APopupPoint.X, APopupPoint.Y);
+end;
+
+procedure TMainFrm.CloseAllForms;
+var
+  I: Integer;
+begin
+  for I := 0 to pagMain.PageCount - 1 do
+    actCloseScreen.Execute;
 end;
 
 procedure TMainFrm.CloseTheForm(PageIndex: Integer; FormToClose: TForm;

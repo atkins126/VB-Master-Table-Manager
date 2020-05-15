@@ -1,9 +1,9 @@
 inherited DirectorDetailFrm: TDirectorDetailFrm
   Caption = 'DirectorDetailFrm'
-  ClientHeight = 524
-  ClientWidth = 674
-  ExplicitWidth = 680
-  ExplicitHeight = 553
+  ClientHeight = 240
+  ClientWidth = 568
+  ExplicitWidth = 574
+  ExplicitHeight = 269
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
@@ -18,7 +18,7 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
     inherited btnOK: TcxButton
       Left = 378
       Top = 414
-      TabOrder = 10
+      TabOrder = 9
       OnClick = btnOKClick
       ExplicitLeft = 378
       ExplicitTop = 414
@@ -26,7 +26,7 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
     inherited btnCancel: TcxButton
       Left = 459
       Top = 414
-      TabOrder = 11
+      TabOrder = 10
       ExplicitLeft = 459
       ExplicitTop = 414
     end
@@ -100,108 +100,11 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       TabOrder = 8
       Width = 412
     end
-    object grdDirectorOfCompany: TcxGrid [11]
-      Left = 20
-      Top = 227
-      Width = 505
-      Height = 150
-      TabOrder = 9
-      object viewDirectorOfCompany: TcxGridDBBandedTableView
-        Navigator.Buttons.CustomButtons = <>
-        Navigator.Buttons.Images = imgNav16
-        Navigator.Buttons.First.Visible = False
-        Navigator.Buttons.PriorPage.Visible = False
-        Navigator.Buttons.Prior.Visible = False
-        Navigator.Buttons.Next.Visible = False
-        Navigator.Buttons.NextPage.Visible = False
-        Navigator.Buttons.Last.Visible = False
-        Navigator.Buttons.Insert.Hint = 'Add a new company'
-        Navigator.Buttons.Insert.ImageIndex = 9
-        Navigator.Buttons.Delete.Hint = 'Delete selected company'
-        Navigator.Buttons.Delete.ImageIndex = 10
-        Navigator.Buttons.Edit.Hint = 'Edit selected company'
-        Navigator.Buttons.Edit.ImageIndex = 13
-        Navigator.Buttons.Edit.Visible = False
-        Navigator.Buttons.Post.Hint = 'Save changes'
-        Navigator.Buttons.Post.ImageIndex = 11
-        Navigator.Buttons.Cancel.Hint = 'Cancel changes'
-        Navigator.Buttons.Cancel.ImageIndex = 12
-        Navigator.Buttons.Refresh.ImageIndex = 14
-        Navigator.Buttons.Refresh.Visible = False
-        Navigator.Buttons.SaveBookmark.Visible = False
-        Navigator.Buttons.GotoBookmark.Visible = False
-        Navigator.Buttons.Filter.Visible = False
-        Navigator.Visible = True
-        ScrollbarAnnotations.CustomAnnotations = <>
-        OnCustomDrawCell = viewDirectorOfCompanyCustomDrawCell
-        DataController.Summary.DefaultGroupSummaryItems = <>
-        DataController.Summary.FooterSummaryItems = <>
-        DataController.Summary.SummaryGroups = <>
-        OptionsBehavior.FocusCellOnTab = True
-        OptionsBehavior.IncSearch = True
-        OptionsBehavior.NavigatorHints = True
-        OptionsBehavior.FocusCellOnCycle = True
-        OptionsBehavior.ImmediateEditor = False
-        OptionsView.NoDataToDisplayInfoText = '<No Company data to display>'
-        OptionsView.ColumnAutoWidth = True
-        OptionsView.GroupByBox = False
-        Bands = <
-          item
-            Caption = 'Company'
-          end>
-        object edtDirectorID: TcxGridDBBandedColumn
-          DataBinding.FieldName = 'DIRECTOR_ID'
-          PropertiesClassName = 'TcxCurrencyEditProperties'
-          Properties.DecimalPlaces = 0
-          Properties.DisplayFormat = '###0'
-          Properties.EditFormat = '###0'
-          Properties.ReadOnly = True
-          Visible = False
-          MinWidth = 40
-          Options.Editing = False
-          Options.Filtering = False
-          Options.Grouping = False
-          Options.HorzSizing = False
-          Options.Moving = False
-          Width = 40
-          Position.BandIndex = 0
-          Position.ColIndex = 0
-          Position.RowIndex = 0
-        end
-        object lucCompany: TcxGridDBBandedColumn
-          DataBinding.FieldName = 'CUSTOMER_ID'
-          PropertiesClassName = 'TcxLookupComboBoxProperties'
-          Properties.ImmediatePost = True
-          Properties.KeyFieldNames = 'ID'
-          Properties.ListColumns = <
-            item
-              FieldName = 'COMPANY'
-            end>
-          Properties.ListSource = LookupDM.dtsCompany
-          OnGetDisplayText = lucCompanyGetDisplayText
-          Options.Filtering = False
-          Options.Grouping = False
-          Options.Moving = False
-          Position.BandIndex = 0
-          Position.ColIndex = 1
-          Position.RowIndex = 0
-        end
-      end
-      object lvlDirectorOfCompany: TcxGridLevel
-        GridView = viewDirectorOfCompany
-      end
-    end
     inherited layMainGroup_Root: TdxLayoutGroup
       ItemIndex = 2
     end
     inherited grpData: TdxLayoutGroup
       ItemIndex = 1
-    end
-    inherited grpButtons: TdxLayoutGroup
-      Index = 5
-    end
-    inherited sep01: TdxLayoutSeparatorItem
-      Index = 4
     end
     object grpName: TdxLayoutGroup
       Parent = grpData
@@ -369,26 +272,6 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       SizeOptions.Width = 8
       CaptionOptions.Text = 'Empty Space Item'
       Index = 1
-    end
-    object litCompany: TdxLayoutItem
-      Parent = grpCompany
-      CaptionOptions.Visible = False
-      Control = grdDirectorOfCompany
-      ControlOptions.OriginalHeight = 150
-      ControlOptions.OriginalWidth = 401
-      ControlOptions.ShowBorder = False
-      Index = 0
-    end
-    object grpCompany: TdxLayoutGroup
-      Parent = layMainGroup_Root
-      CaptionOptions.Text = 'This diriector is curently linked to the following company(s)'
-      ButtonOptions.Buttons = <>
-      Index = 3
-    end
-    object sep3: TdxLayoutSeparatorItem
-      Parent = layMainGroup_Root
-      CaptionOptions.Text = 'Separator'
-      Index = 2
     end
   end
   inherited styRepository: TcxStyleRepository

@@ -3,6 +3,7 @@ inherited CustomerFrm: TCustomerFrm
   ClientHeight = 765
   ClientWidth = 1490
   OnClose = FormClose
+  OnDestroy = FormDestroy
   ExplicitWidth = 1506
   ExplicitHeight = 804
   PixelsPerInch = 96
@@ -13,8 +14,8 @@ inherited CustomerFrm: TCustomerFrm
     ExplicitWidth = 1376
     ExplicitHeight = 731
     object grdCustomer: TcxGrid [0]
-      Left = -339
-      Top = 102
+      Left = -273
+      Top = 125
       Width = 915
       Height = 313
       TabOrder = 7
@@ -199,8 +200,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVCustomer: TcxDBVerticalGrid [1]
-      Left = 582
-      Top = 148
+      Left = 648
+      Top = 171
       Width = 444
       Height = 267
       OptionsView.ScrollBars = ssVertical
@@ -605,8 +606,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object navCustomer: TcxDBNavigator [2]
-      Left = -339
-      Top = -12
+      Left = -273
+      Top = 11
       Width = 360
       Height = 40
       BorderStyle = nbsNone
@@ -665,8 +666,8 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 0
     end
     object navVCustomer: TcxDBNavigator [3]
-      Left = 582
-      Top = 102
+      Left = 648
+      Top = 125
       Width = 216
       Height = 40
       BorderStyle = nbsNone
@@ -1174,11 +1175,12 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdContactPerson: TcxGrid [9]
-      Left = -325
-      Top = 458
+      Left = 10000
+      Top = 10000
       Width = 1250
       Height = 200
       TabOrder = 15
+      Visible = False
       OnEnter = grdContactPersonEnter
       object viewContactPerson: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -1390,11 +1392,12 @@ inherited CustomerFrm: TCustomerFrm
     end
     object grdCPContactDetail: TcxGrid [10]
       Tag = 3
-      Left = 931
-      Top = 458
+      Left = 10000
+      Top = 10000
       Width = 400
       Height = 145
       TabOrder = 16
+      Visible = False
       OnEnter = grdCPContactDetailEnter
       object viewCPContactDetail: TcxGridDBBandedTableView
         Tag = 3
@@ -1547,8 +1550,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCPcontactDetailComment: TcxDBMemo [11]
-      Left = 931
-      Top = 609
+      Left = 10000
+      Top = 10000
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailPerson
       PopupMenu = popDBAction
@@ -1556,6 +1559,7 @@ inherited CustomerFrm: TCustomerFrm
       Properties.ScrollBars = ssVertical
       Style.HotTrack = False
       TabOrder = 17
+      Visible = False
       OnDblClick = viewContactDetailCoDblClick
       OnEnter = grdCPContactDetailEnter
       Height = 49
@@ -1793,12 +1797,11 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdDirector: TcxGrid [13]
-      Left = 10000
-      Top = 10000
+      Left = -259
+      Top = 481
       Width = 1656
       Height = 113
       TabOrder = 19
-      Visible = False
       OnEnter = grdDirectorEnter
       object viewDirector: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -2216,10 +2219,12 @@ inherited CustomerFrm: TCustomerFrm
           Visible = False
           MinWidth = 74
           Options.Editing = False
+          Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Position.BandIndex = 0
           Position.ColIndex = 0
           Position.RowIndex = 0
@@ -2234,10 +2239,12 @@ inherited CustomerFrm: TCustomerFrm
           Visible = False
           MinWidth = 74
           Options.Editing = False
+          Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Position.BandIndex = 0
           Position.ColIndex = 1
           Position.RowIndex = 0
@@ -2251,10 +2258,12 @@ inherited CustomerFrm: TCustomerFrm
           Properties.ReadOnly = True
           MinWidth = 50
           Options.Editing = False
+          Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 50
           Position.BandIndex = 0
           Position.ColIndex = 2
@@ -2271,10 +2280,12 @@ inherited CustomerFrm: TCustomerFrm
           Properties.ReadOnly = True
           MinWidth = 150
           Options.Editing = False
+          Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 150
           Position.BandIndex = 0
           Position.ColIndex = 3
@@ -2287,10 +2298,12 @@ inherited CustomerFrm: TCustomerFrm
           Properties.ReadOnly = True
           MinWidth = 250
           Options.Editing = False
+          Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 250
           Position.BandIndex = 0
           Position.ColIndex = 4
@@ -2308,6 +2321,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 120
           Position.BandIndex = 0
           Position.ColIndex = 5
@@ -2322,10 +2336,12 @@ inherited CustomerFrm: TCustomerFrm
           Properties.ShowTime = False
           MinWidth = 90
           Options.Editing = False
+          Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 90
           Position.BandIndex = 0
           Position.ColIndex = 6
@@ -2344,10 +2360,12 @@ inherited CustomerFrm: TCustomerFrm
           HeaderHint = 'Maintenance plan'
           MinWidth = 50
           Options.Editing = False
+          Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 50
           Position.BandIndex = 0
           Position.ColIndex = 7
@@ -2373,8 +2391,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object lblLegend: TcxLabel [16]
-      Left = -339
-      Top = 681
+      Left = -273
+      Top = 704
       Caption = 
         'INS = Add a new record;  ENTER = Edit selected record;  DEL = De' +
         'lete selected record'
@@ -2384,8 +2402,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxOpenAfterExport: TcxCheckBox [17]
-      Left = 338
-      Top = 65
+      Left = 404
+      Top = 88
       Caption = 'Open after export'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2398,8 +2416,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxPersistSelection: TcxCheckBox [18]
-      Left = 33
-      Top = -1
+      Left = 99
+      Top = 21
       Caption = 'Persist Selection'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2412,8 +2430,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxGroupedReport: TcxCheckBox [19]
-      Left = 220
-      Top = 65
+      Left = 286
+      Top = 88
       Caption = 'Grouped Report'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2425,8 +2443,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object lucPrintWhat: TcxComboBox [20]
-      Left = -55
-      Top = 65
+      Left = 11
+      Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -2443,8 +2461,8 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object lucReportType: TcxComboBox [21]
-      Left = -254
-      Top = 65
+      Left = -188
+      Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -2460,8 +2478,8 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object cbxPrintContactDetails: TcxCheckBox [22]
-      Left = 81
-      Top = 65
+      Left = 147
+      Top = 88
       Caption = 'Print contact details'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2549,8 +2567,8 @@ inherited CustomerFrm: TCustomerFrm
           DataBinding.FieldName = 'CUSTOMER_ID'
           PropertiesClassName = 'TcxCurrencyEditProperties'
           Properties.DecimalPlaces = 0
-          Properties.DisplayFormat = '#,###,##0'
-          Properties.EditFormat = '#,###,##0'
+          Properties.DisplayFormat = '###,##0'
+          Properties.EditFormat = '###,##0'
           Properties.ReadOnly = True
           Visible = False
           MinWidth = 60
@@ -2573,10 +2591,13 @@ inherited CustomerFrm: TCustomerFrm
             item
               FieldName = 'NAME'
             end>
+          Properties.ListSource = LookupDM.dtsTrusteeSalutation
           Properties.ReadOnly = True
           MinWidth = 75
+          Options.Editing = False
+          Options.Filtering = False
+          Options.IncSearch = False
           Options.Grouping = False
-          Options.HorzSizing = False
           Options.Moving = False
           Width = 75
           Position.BandIndex = 0
@@ -2588,8 +2609,10 @@ inherited CustomerFrm: TCustomerFrm
           PropertiesClassName = 'TcxTextEditProperties'
           Properties.ReadOnly = True
           MinWidth = 150
+          Options.Editing = False
+          Options.Filtering = False
+          Options.IncSearch = False
           Options.Grouping = False
-          Options.HorzSizing = False
           Options.Moving = False
           Width = 150
           Position.BandIndex = 0
@@ -2601,10 +2624,10 @@ inherited CustomerFrm: TCustomerFrm
           PropertiesClassName = 'TcxTextEditProperties'
           Properties.ReadOnly = True
           MinWidth = 150
+          Options.Editing = False
           Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
-          Options.HorzSizing = False
           Options.Moving = False
           Width = 150
           Position.BandIndex = 0
@@ -2616,10 +2639,10 @@ inherited CustomerFrm: TCustomerFrm
           PropertiesClassName = 'TcxTextEditProperties'
           Properties.ReadOnly = True
           MinWidth = 130
+          Options.Editing = False
           Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
-          Options.HorzSizing = False
           Options.Moving = False
           Width = 130
           Position.BandIndex = 0
@@ -2630,9 +2653,12 @@ inherited CustomerFrm: TCustomerFrm
           DataBinding.FieldName = 'EMAIL_ADDRESS'
           PropertiesClassName = 'TcxTextEditProperties'
           Properties.ReadOnly = True
+          MinWidth = 704
+          Options.Editing = False
           Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
+          Options.HorzSizing = False
           Options.Moving = False
           Position.BandIndex = 0
           Position.ColIndex = 6
@@ -2644,12 +2670,11 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdDirectorCompanyLink: TcxGrid [24]
-      Left = 10000
-      Top = 10000
+      Left = -259
+      Top = 600
       Width = 430
       Height = 81
       TabOrder = 20
-      Visible = False
       OnEnter = grdDirectorCompanyLinkEnter
       object viewDirectorCompanyLink: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -2808,6 +2833,7 @@ inherited CustomerFrm: TCustomerFrm
         OptionsData.CancelOnExit = False
         OptionsData.DeletingConfirmation = False
         OptionsView.NoDataToDisplayInfoText = '<No Heir data to display>'
+        OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
         Bands = <
           item
@@ -2828,6 +2854,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 50
           Position.BandIndex = 0
           Position.ColIndex = 0
@@ -2848,6 +2875,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 50
           Position.BandIndex = 0
           Position.ColIndex = 1
@@ -2869,6 +2897,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 75
           Position.BandIndex = 0
           Position.ColIndex = 2
@@ -2885,6 +2914,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 150
           Position.BandIndex = 0
           Position.ColIndex = 3
@@ -2901,6 +2931,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 150
           Position.BandIndex = 0
           Position.ColIndex = 4
@@ -2915,8 +2946,8 @@ inherited CustomerFrm: TCustomerFrm
           Options.Filtering = False
           Options.IncSearch = False
           Options.Grouping = False
-          Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Position.BandIndex = 0
           Position.ColIndex = 5
           Position.RowIndex = 0
@@ -2933,6 +2964,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 225
           Position.BandIndex = 0
           Position.ColIndex = 6
@@ -2950,6 +2982,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 225
           Position.BandIndex = 0
           Position.ColIndex = 7
@@ -2967,6 +3000,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 225
           Position.BandIndex = 0
           Position.ColIndex = 8
@@ -2984,6 +3018,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 225
           Position.BandIndex = 0
           Position.ColIndex = 9
@@ -3001,6 +3036,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 60
           Position.BandIndex = 0
           Position.ColIndex = 10
@@ -3018,6 +3054,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 225
           Position.BandIndex = 0
           Position.ColIndex = 11
@@ -3035,6 +3072,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 225
           Position.BandIndex = 0
           Position.ColIndex = 12
@@ -3052,6 +3090,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 225
           Position.BandIndex = 0
           Position.ColIndex = 13
@@ -3069,6 +3108,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 225
           Position.BandIndex = 0
           Position.ColIndex = 14
@@ -3086,6 +3126,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 60
           Position.BandIndex = 0
           Position.ColIndex = 15
@@ -3103,6 +3144,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 150
           Position.BandIndex = 0
           Position.ColIndex = 16
@@ -3120,6 +3162,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 150
           Position.BandIndex = 0
           Position.ColIndex = 17
@@ -3137,6 +3180,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 80
           Position.BandIndex = 0
           Position.ColIndex = 18
@@ -3154,6 +3198,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
+          Options.Sorting = False
           Width = 130
           Position.BandIndex = 0
           Position.ColIndex = 19
@@ -3229,6 +3274,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
+          Options.Sorting = False
           Width = 50
           Position.BandIndex = 0
           Position.ColIndex = 0
@@ -3248,6 +3294,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
+          Options.Sorting = False
           Width = 50
           Position.BandIndex = 0
           Position.ColIndex = 2
@@ -3261,7 +3308,16 @@ inherited CustomerFrm: TCustomerFrm
             item
               FieldName = 'NAME'
             end>
-          Width = 50
+          Properties.ReadOnly = True
+          Properties.UseLeftAlignmentOnEditing = False
+          MinWidth = 75
+          Options.Editing = False
+          Options.Filtering = False
+          Options.IncSearch = False
+          Options.Grouping = False
+          Options.HorzSizing = False
+          Options.Sorting = False
+          Width = 75
           Position.BandIndex = 0
           Position.ColIndex = 1
           Position.RowIndex = 0
@@ -3273,9 +3329,10 @@ inherited CustomerFrm: TCustomerFrm
           MinWidth = 150
           Options.Editing = False
           Options.Filtering = False
+          Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
-          Options.Moving = False
+          Options.Sorting = False
           Width = 150
           Position.BandIndex = 0
           Position.ColIndex = 3
@@ -3288,9 +3345,10 @@ inherited CustomerFrm: TCustomerFrm
           MinWidth = 150
           Options.Editing = False
           Options.Filtering = False
+          Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
-          Options.Moving = False
+          Options.Sorting = False
           Width = 150
           Position.BandIndex = 0
           Position.ColIndex = 4
@@ -3303,6 +3361,7 @@ inherited CustomerFrm: TCustomerFrm
           Properties.EditFormat = '##0.00'
           Properties.ImmediatePost = True
           Properties.MaxValue = 100.000000000000000000
+          Properties.ReadOnly = True
           Properties.UseDisplayFormatWhenEditing = True
           Properties.UseLeftAlignmentOnEditing = False
           HeaderAlignmentHorz = taRightJustify
@@ -3312,7 +3371,7 @@ inherited CustomerFrm: TCustomerFrm
           Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
-          Options.Moving = False
+          Options.Sorting = False
           Width = 60
           Position.BandIndex = 0
           Position.ColIndex = 5
@@ -3325,9 +3384,10 @@ inherited CustomerFrm: TCustomerFrm
           MinWidth = 130
           Options.Editing = False
           Options.Filtering = False
+          Options.IncSearch = False
           Options.Grouping = False
           Options.HorzSizing = False
-          Options.Moving = False
+          Options.Sorting = False
           Width = 130
           Position.BandIndex = 0
           Position.ColIndex = 6
@@ -3339,8 +3399,9 @@ inherited CustomerFrm: TCustomerFrm
           Properties.ReadOnly = True
           Options.Editing = False
           Options.Filtering = False
+          Options.IncSearch = False
           Options.Grouping = False
-          Options.Moving = False
+          Options.Sorting = False
           Position.BandIndex = 0
           Position.ColIndex = 7
           Position.RowIndex = 0
@@ -3699,7 +3760,7 @@ inherited CustomerFrm: TCustomerFrm
       AlignVert = avClient
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
-      ItemIndex = 2
+      ItemIndex = 4
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpDetailGridTabChanged

@@ -40,22 +40,11 @@ type
     litEmailAddress: TdxLayoutItem;
     litOtherName: TdxLayoutItem;
     spc1: TdxLayoutEmptySpaceItem;
-    litCompany: TdxLayoutItem;
-    grdDirectorOfCompany: TcxGrid;
-    viewDirectorOfCompany: TcxGridDBBandedTableView;
-    lvlDirectorOfCompany: TcxGridLevel;
-    edtDirectorID: TcxGridDBBandedColumn;
-    lucCompany: TcxGridDBBandedColumn;
-    grpCompany: TdxLayoutGroup;
-    sep3: TdxLayoutSeparatorItem;
     imgNav16: TcxImageList;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure lucCompanyGetDisplayText(Sender: TcxCustomGridTableItem;
       ARecord: TcxCustomGridRecord; var AText: string);
-    procedure viewDirectorOfCompanyCustomDrawCell(
-      Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
-      AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
   private
     { Private declarations }
     procedure Validate;
@@ -93,12 +82,12 @@ end;
 procedure TDirectorDetailFrm.FormCreate(Sender: TObject);
 begin
   inherited;
-  Width := 555;
-  Height := 480;
+//  Width := 555;
+//  Height := 480;
+  Self.Height := 280;
+  Self.Width := 540;
   MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
-  viewDirectorOfCompany.DataController.DataSource := MTDM.dtsDirectorCompanyLink;
-  TcxLookupComboBoxProperties(lucCompany.Properties).ListSource := LookupDM.dtsCompany;
 
   if VBBaseDM.DBAction = acEdit then
   begin
@@ -147,28 +136,6 @@ begin
   MTDM.FFieldValue.EmailAddress := edtEmailAddress.Text;
 
   ModalResult := mrOK;
-end;
-
-procedure TDirectorDetailFrm.viewDirectorOfCompanyCustomDrawCell(
-  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
-  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
-begin
-  inherited;
-  if AViewInfo.GridRecord = nil then
-    Exit;
-
-  if AViewInfo.GridRecord.Focused then
-  // This renders the background and font colours of the focused record
-  begin
-    if AViewInfo.Item <> nil then
-      if AViewInfo.Item.Focused then
-      begin
-        // This renders the background and border colour of the focused cell
-        ACanvas.Brush.Color := $B6EDFA;
-        ACanvas.Font.Color := RootLookAndFeel.SkinPainter.DefaultSelectionColor;
-        PostMessage(Handle, CM_DRAWBORDER, Integer(ACanvas), Integer(AViewInfo));
-      end;
-  end;
 end;
 
 end.

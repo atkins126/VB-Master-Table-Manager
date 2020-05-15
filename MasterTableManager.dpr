@@ -59,7 +59,8 @@ uses
   TrusteeDetail_Frm in 'General\TrusteeDetail_Frm.pas' {TrusteeDetailFrm},
   ShareHolderDetail_Frm in 'General\ShareHolderDetail_Frm.pas' {ShareHolderDetailFrm},
   HeirDetail_Frm in 'General\HeirDetail_Frm.pas' {HeirDetailFrm},
-  DirectorCompanyLink_Frm in 'General\DirectorCompanyLink_Frm.pas' {DirectorCompanyLinkFrm};
+  DirectorCompanyLink_Frm in 'General\DirectorCompanyLink_Frm.pas' {DirectorCompanyLinkFrm},
+  Director_Frm in 'General\Director_Frm.pas' {DirectorFrm};
 
 {$R *.res}
 
