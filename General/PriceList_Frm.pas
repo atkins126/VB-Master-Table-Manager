@@ -279,8 +279,9 @@ begin
                   raise EFileNotFoundException.Create('Report file: ' + ReportDM.ReportFileName + ' not found. Cannot load report.');
 
                 viewPriceHistory.DataController.BeginUpdate;
+                ID := ReportDM.cdsPriceHistory.FieldByName('ID').AsInteger;
+
                 try
-                  ID := ReportDM.cdsPriceHistory.FieldByName('ID').AsInteger;
                   ReportDM.PrintReport;
                 finally
                   if not ReportDM.cdsPriceHistory.Locate('ID', ID, []) then

@@ -81,7 +81,7 @@ begin
   {$IFDEF RELEASE}
   if not FindCmdLineSwitch('VB_SHELL', SwitchPrefix, True) then
   begin
-    Beep;
+    System.SysUtils.Beep;
     TaskMessageDlg('Task Launch Error',
       Application.Title + ' can only run through VB Shell.' + CRLF +
       'Please launch RC Shell to access this task.',

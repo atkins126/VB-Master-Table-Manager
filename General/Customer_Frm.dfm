@@ -14,8 +14,8 @@ inherited CustomerFrm: TCustomerFrm
     ExplicitWidth = 1376
     ExplicitHeight = 731
     object grdCustomer: TcxGrid [0]
-      Left = -273
-      Top = 125
+      Left = 0
+      Top = 102
       Width = 915
       Height = 313
       TabOrder = 7
@@ -200,8 +200,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVCustomer: TcxDBVerticalGrid [1]
-      Left = 648
-      Top = 171
+      Left = 921
+      Top = 148
       Width = 444
       Height = 267
       OptionsView.ScrollBars = ssVertical
@@ -606,8 +606,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object navCustomer: TcxDBNavigator [2]
-      Left = -273
-      Top = 11
+      Left = 0
+      Top = -12
       Width = 360
       Height = 40
       BorderStyle = nbsNone
@@ -666,8 +666,8 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 0
     end
     object navVCustomer: TcxDBNavigator [3]
-      Left = 648
-      Top = 125
+      Left = 921
+      Top = 102
       Width = 216
       Height = 40
       BorderStyle = nbsNone
@@ -710,12 +710,11 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 8
     end
     object grdContactDetailCo: TcxGrid [4]
-      Left = 10000
-      Top = 10000
+      Left = 14
+      Top = 458
       Width = 391
       Height = 170
       TabOrder = 10
-      Visible = False
       OnEnter = grdContactDetailCoEnter
       object viewContactDetailCo: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -892,8 +891,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCDComment: TcxDBMemo [5]
-      Left = 10000
-      Top = 10000
+      Left = 14
+      Top = 634
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailCo
       PopupMenu = popDBAction
@@ -901,7 +900,6 @@ inherited CustomerFrm: TCustomerFrm
       Properties.ScrollBars = ssVertical
       Style.HotTrack = False
       TabOrder = 11
-      Visible = False
       OnDblClick = viewContactDetailCoDblClick
       Height = 24
       Width = 391
@@ -1797,11 +1795,12 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdDirector: TcxGrid [13]
-      Left = -259
-      Top = 481
+      Left = 10000
+      Top = 10000
       Width = 1656
       Height = 113
       TabOrder = 19
+      Visible = False
       OnEnter = grdDirectorEnter
       object viewDirector: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -2391,8 +2390,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object lblLegend: TcxLabel [16]
-      Left = -273
-      Top = 704
+      Left = 0
+      Top = 681
       Caption = 
         'INS = Add a new record;  ENTER = Edit selected record;  DEL = De' +
         'lete selected record'
@@ -2402,8 +2401,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxOpenAfterExport: TcxCheckBox [17]
-      Left = 404
-      Top = 88
+      Left = 677
+      Top = 65
       Caption = 'Open after export'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2416,8 +2415,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxPersistSelection: TcxCheckBox [18]
-      Left = 99
-      Top = 21
+      Left = 372
+      Top = -1
       Caption = 'Persist Selection'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2430,8 +2429,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxGroupedReport: TcxCheckBox [19]
-      Left = 286
-      Top = 88
+      Left = 559
+      Top = 65
       Caption = 'Grouped Report'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2443,8 +2442,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object lucPrintWhat: TcxComboBox [20]
-      Left = 11
-      Top = 88
+      Left = 284
+      Top = 65
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -2461,8 +2460,8 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object lucReportType: TcxComboBox [21]
-      Left = -188
-      Top = 88
+      Left = 85
+      Top = 65
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -2478,8 +2477,8 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object cbxPrintContactDetails: TcxCheckBox [22]
-      Left = 147
-      Top = 88
+      Left = 420
+      Top = 65
       Caption = 'Print contact details'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2670,11 +2669,12 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdDirectorCompanyLink: TcxGrid [24]
-      Left = -259
-      Top = 600
+      Left = 10000
+      Top = 10000
       Width = 430
       Height = 81
       TabOrder = 20
+      Visible = False
       OnEnter = grdDirectorCompanyLinkEnter
       object viewDirectorCompanyLink: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -3735,7 +3735,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     inherited layMainGroup_Root: TdxLayoutGroup
-      ItemIndex = 3
+      ItemIndex = 2
     end
     object grpToolbar: TdxLayoutGroup
       Parent = layMainGroup_Root
@@ -3760,7 +3760,6 @@ inherited CustomerFrm: TCustomerFrm
       AlignVert = avClient
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
-      ItemIndex = 4
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpDetailGridTabChanged

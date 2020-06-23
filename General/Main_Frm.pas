@@ -18,6 +18,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, Vcl.Forms,
   System.Classes, Vcl.Graphics, System.ImageList, Vcl.ImgList, Vcl.Controls,
   Vcl.Dialogs, System.Actions, Vcl.ActnList, System.StrUtils, System.Types,
+  System.Win.Registry,
 
   VBProxyClass, BaseLayout_Frm, VBCommonValues, CommonMethods, CommonFunctions,
 
@@ -108,13 +109,17 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
+    FSkinResourceFileName: string;
+
     function CreateNewTabSheet(TabSheetName, TabSheetCaption: string; PageControl: TcxPageControl; Action: TAction): TcxTabSheet;
-    procedure UpdateApplicationSkin(SkinResourceFileName, SkinName: string);
+    procedure UpdateApplicationSkin(SkinResourceFileName {, SkinName}: string);
     procedure CloseTheForm(PageIndex: Integer; FormToClose: TForm; ActionTag: Integer; Action: TAction);
     procedure CloseAllForms;
   protected
     procedure HandleTSAfterPost(var MyMsg: TMessage); message WM_RECORD_ID;
     procedure HandlerPostError(var MyMsg: TMessage); message WM_POST_DATA_ERROR;
+    procedure WMCopyData(var Msg: TWMCopyData); message WM_COPYDATA;
+    procedure HandleIncomingMessage(DataStructure: PCopyDataStruct; Msg: TWMCopyData);
   public
     { Public declarations }
   end;
@@ -165,7 +170,8 @@ procedure TMainFrm.FormCreate(Sender: TObject);
 begin
   inherited;
   Caption := Application.Title;
-  layMain.LayoutLookAndFeel := lafCustomSkin;
+//  layMain.Align :=  alClient;
+//  layMain.LayoutLookAndFeel := lafCustomSkin;
 //  cntShowMasterList.Control := cbxShowMasterList;
   Application.HintPause := 0;
   Application.HintShortPause := 0;
@@ -176,7 +182,7 @@ end;
 procedure TMainFrm.FormShow(Sender: TObject);
 var
   VBShell: string;
-  {$IFDEF DEBUG}ErrorMsg, {$ENDIF}SkinResourceFileName, SkinName: string;
+  {$IFDEF DEBUG}ErrorMsg, {$ENDIF} {SkinResourceFileName,}SkinName: string;
 //  Day, Month, Year: Word;
 begin
   inherited;
@@ -227,13 +233,13 @@ begin
     VBBaseDM.sqlConnection.Open;
     VBBaseDM.Client := TVBServerMethodsClient.Create(VBBaseDM.sqlConnection.DBXConnection);
     MTDM.ShellResource := VBBaseDM.GetShellResource;
-    SkinResourceFileName := RESOURCE_FOLDER + SKIN_RESOURCE_FILE;
-    SkinName := MTDM.ShellResource.SkinName;
+    FSkinResourceFileName := RESOURCE_FOLDER + SKIN_RESOURCE_FILE;
+//    SkinName := MTDM.ShellResource.SkinName;
+//
+//    if Length(Trim(SkinName)) = 0 then
+//      SkinName := DEFAULT_SKIN_NAME;
 
-    if Length(Trim(SkinName)) = 0 then
-      SkinName := DEFAULT_SKIN_NAME;
-
-    UpdateApplicationSkin(SkinResourceFileName, SkinName);
+    UpdateApplicationSkin(FSkinResourceFileName {, SkinName});
 
     if BaseFrm = nil then
       BaseFrm := TBaseFrm.Create(nil);
@@ -250,6 +256,7 @@ begin
 
     BorderIcons := [];
     BorderStyle := bsNone;
+
     if FCallingFromShell then
     begin
       if not SendMessageToApp('VB Shell', 'App Ready') then
@@ -299,8 +306,15 @@ begin
     FreeAndNil(ReportDM);
 end;
 
-procedure TMainFrm.UpdateApplicationSkin(SkinResourceFileName, SkinName: string);
+procedure TMainFrm.UpdateApplicationSkin(SkinResourceFileName {, SkinName}: string);
+var
+  SkinName: string;
 begin
+  SkinName := VBBaseDM.GetSkinFromRegistry;
+
+//  if Length(Trim(SkinName)) = 0 then
+//    SkinName := DEFAULT_SKIN_NAME;
+
   sknController.BeginUpdate;
   try
     sknController.NativeStyle := False;
@@ -1074,6 +1088,37 @@ begin
 //  finally
 //    MyMsg.Result := -1;
 //  end;
+end;
+
+procedure TMainFrm.WMCopyData(var Msg: TWMCopyData);
+begin
+  HandleIncomingMessage(Msg.CopyDataStruct, Msg);
+end;
+
+procedure TMainFrm.HandleIncomingMessage(DataStructure: PCopyDataStruct; Msg: TWMCopyData);
+var
+  S, SkinName: string;
+  ID: Integer;
+  RegKey: TRegistry;
+begin
+  // Get the message sent from the client app.
+  S := PChar(DataStructure.lpData);
+  ID := StrToInt(PChar(DataStructure.lpData));
+  case ID of
+    1: // Change Skin
+      begin
+        RegKey := TRegistry.Create(KEY_ALL_ACCESS or KEY_WRITE or KEY_WOW64_64KEY);
+        RegKey.RootKey := HKEY_CURRENT_USER;
+        try
+          RegKey.OpenKey(KEY_USER_PREFERENCES, True);
+          SkinName := RegKey.ReadString('Skin Name');
+          UpdateApplicationSkin(FSkinResourceFileName {, SkinName});
+          RegKey.CloseKey;
+        finally
+          RegKey.Free;
+        end;
+      end;
+  end;
 end;
 
 end.

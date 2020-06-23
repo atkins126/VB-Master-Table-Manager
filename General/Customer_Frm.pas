@@ -1357,6 +1357,8 @@ begin
   grpDetailGrid.ItemIndex := 0;
   grdCustomer.SetFocus;
   viewCustomer.Focused := True;
+//  layMain.Align :=  alClient;
+//  layMain.LayoutLookAndFeel :=  lafCustomSkin;
 
   if viewCustomer.DataController.RecordCount > 0 then
   begin

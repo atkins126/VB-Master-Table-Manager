@@ -692,7 +692,6 @@ procedure TMTDM.cdsActivityTypeBeforePost(DataSet: TDataSet);
 var
   SQLStatement, Response: string;
   FieldList, FieldValues, WhereClause, TableName, FieldListValues: string;
-  NextID: Integer;
   ResponseList: TStringList;
 begin
   inherited;
@@ -760,7 +759,6 @@ begin
         end;
       end;
   end;
-
 end;
 
 procedure TMTDM.cdsActivityTypeAfterPost(DataSet: TDataSet);
