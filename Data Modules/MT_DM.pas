@@ -22,7 +22,7 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteDef,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, FireDAC.Phys.IBBase, FireDAC.Phys.SQLite,
-  FireDAC.Stan.StorageBin;
+  FireDAC.Stan.StorageBin, FireDAC.Phys.SQLiteWrapper.Stat;
 
 type
   MasterItemArray = array of string;
@@ -380,6 +380,8 @@ type
     cdsCountryID: TIntegerField;
     cdsCountryNAME: TStringField;
     cdsCountryDIALING_CODE: TStringField;
+    cdsShareHolderID_NUMBER: TStringField;
+    cdsDirectorID_NUMBER: TStringField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);

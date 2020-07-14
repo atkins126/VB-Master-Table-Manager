@@ -51,7 +51,6 @@ uses
   Report_DM in 'Data Modules\Report_DM.pas' {ReportDM: TDataModule},
   MyClasses in '..\..\..\..\Lib\Classes\MyClasses.pas',
   VBPrintExportData in '..\..\Lib\VBPrintExportData.pas',
-  VBProxyClass in '..\Lib\VBProxyClass.pas',
   BaseGrid_Frm in 'Lib\BaseGrid_Frm.pas' {BaseGridFrm},
   CustomerReportSelection_Frm in 'General\CustomerReportSelection_Frm.pas' {CustomerReportSelectionFrm},
   AccountHolder_Frm in 'General\AccountHolder_Frm.pas' {AccountHolderFrm},
@@ -60,7 +59,8 @@ uses
   ShareHolderDetail_Frm in 'General\ShareHolderDetail_Frm.pas' {ShareHolderDetailFrm},
   HeirDetail_Frm in 'General\HeirDetail_Frm.pas' {HeirDetailFrm},
   DirectorCompanyLink_Frm in 'General\DirectorCompanyLink_Frm.pas' {DirectorCompanyLinkFrm},
-  Director_Frm in 'General\Director_Frm.pas' {DirectorFrm};
+  Director_Frm in 'General\Director_Frm.pas' {DirectorFrm},
+  VBProxyClasses in '..\Lib\VBProxyClasses.pas';
 
 {$R *.res}
 
@@ -72,13 +72,13 @@ const
   APP_NAME = 'MasterTableManager.exe';
 
 begin
-  {$IFDEF DEBUG}
+{$IFDEF DEBUG}
   ReportMemoryLeaksOnShutdown := True;
-  {$ENDIF}
+{$ENDIF}
   Application.Title := 'Master Table Manager';
   LaunchDrive := ExtractFileDrive(Application.ExeName);
   SwitchPrefix := ['/'];
-  {$IFDEF RELEASE}
+{$IFDEF RELEASE}
   if not FindCmdLineSwitch('VB_SHELL', SwitchPrefix, True) then
   begin
     System.SysUtils.Beep;
@@ -92,7 +92,7 @@ begin
     Application.ShowMainForm := False;
   end
   else
-    {$ENDIF}if (AnsiCompareText(LaunchDrive, 'C:') <> 0) then
+{$ENDIF}if (AnsiCompareText(LaunchDrive, 'C:') <> 0) then
     begin
       System.SysUtils.Beep;
       TaskMessageDlg('Applicaton Launch Error',
@@ -109,4 +109,5 @@ begin
       Application.Run;
     end;
 end.
+
 

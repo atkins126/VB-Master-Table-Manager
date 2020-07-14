@@ -3,8 +3,22 @@ inherited DirectorFrm: TDirectorFrm
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
+    inherited grdMaster: TcxGrid
+      inherited viewMaster: TcxGridDBBandedTableView
+        DataController.DataSource = MTDM.dtsDirector
+        Bands = <
+          item
+            Caption = 'Director Listing'
+          end>
+      end
+    end
     inherited navMaster: TcxDBNavigator
       Width = 324
+      ExplicitWidth = 324
+    end
+    inherited cbxOpenAfterExport: TcxCheckBox
+      Left = 335
+      ExplicitLeft = 335
     end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324

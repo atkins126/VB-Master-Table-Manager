@@ -13,7 +13,8 @@ uses
   FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteDef, FireDAC.Phys.FBDef, FireDAC.UI.Intf,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, FireDAC.Phys.IBBase, FireDAC.Phys.FB,
   FireDAC.Phys, FireDAC.Phys.SQLite, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.DApt;
+  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Phys.SQLiteWrapper.Stat;
 
 type
   TLookupDM = class(TBaseDM)

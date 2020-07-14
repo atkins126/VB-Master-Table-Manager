@@ -21,7 +21,7 @@ uses
   cxNavigator, dxDateRanges, Data.DB, cxDBData, cxDBNavigator, cxGridLevel,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridBandedTableView,
   cxGridDBBandedTableView, cxGrid, dxScrollbarAnnotations, dxPrnDev, dxPrnDlg,
-  cxGridExportLink, dxLayoutcxEditAdapters, cxContainer, cxCheckBox;
+  cxGridExportLink, dxLayoutcxEditAdapters, cxContainer, cxCheckBox, dxBar;
 
 type
   TBaseGridFrm = class(TBaseLayoutFrm)

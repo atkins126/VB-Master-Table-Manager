@@ -1,34 +1,34 @@
 inherited DirectorDetailFrm: TDirectorDetailFrm
   Caption = 'DirectorDetailFrm'
-  ClientHeight = 240
-  ClientWidth = 568
-  ExplicitWidth = 574
-  ExplicitHeight = 269
+  ClientHeight = 318
+  ClientWidth = 544
+  ExplicitWidth = 550
+  ExplicitHeight = 347
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
     Width = 545
-    Height = 450
+    Height = 263
     ExplicitWidth = 545
-    ExplicitHeight = 450
+    ExplicitHeight = 263
     inherited lblHeaderTitle: TcxLabel
       Caption = 'Director Details'
       ExplicitWidth = 523
     end
     inherited btnOK: TcxButton
       Left = 378
-      Top = 414
-      TabOrder = 9
+      Top = 227
+      TabOrder = 10
       OnClick = btnOKClick
       ExplicitLeft = 378
-      ExplicitTop = 414
+      ExplicitTop = 227
     end
     inherited btnCancel: TcxButton
       Left = 459
-      Top = 414
-      TabOrder = 10
+      Top = 227
+      TabOrder = 11
       ExplicitLeft = 459
-      ExplicitTop = 414
+      ExplicitTop = 227
     end
     inherited lblSubTitle: TcxDBLabel
       ExplicitWidth = 513
@@ -86,25 +86,34 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
     end
     object edtTaxNo: TcxTextEdit [9]
       Left = 99
-      Top = 130
-      BeepOnEnter = False
-      Style.HotTrack = False
-      TabOrder = 6
-      Width = 160
-    end
-    object edtEmailAddress: TcxTextEdit [10]
-      Left = 99
       Top = 157
       BeepOnEnter = False
       Style.HotTrack = False
       TabOrder = 8
+      Width = 160
+    end
+    object edtEmailAddress: TcxTextEdit [10]
+      Left = 99
+      Top = 184
+      BeepOnEnter = False
+      Style.HotTrack = False
+      TabOrder = 9
       Width = 412
     end
+    object edtIDNumber: TcxTextEdit [11]
+      Left = 99
+      Top = 130
+      BeepOnEnter = False
+      Style.HotTrack = False
+      Style.TransparentBorder = False
+      TabOrder = 6
+      Width = 160
+    end
     inherited layMainGroup_Root: TdxLayoutGroup
-      ItemIndex = 2
+      ItemIndex = 1
     end
     inherited grpData: TdxLayoutGroup
-      ItemIndex = 1
+      ItemIndex = 4
     end
     object grpName: TdxLayoutGroup
       Parent = grpData
@@ -128,7 +137,7 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       Parent = grpData
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
-      ItemIndex = 1
+      ItemIndex = 2
       LayoutDirection = ldHorizontal
       ShowBorder = False
       Index = 2
@@ -199,29 +208,6 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
     end
     object litSalutation: TdxLayoutItem
       Parent = grpSalutation
-      CaptionOptions.Glyph.SourceDPI = 96
-      CaptionOptions.Glyph.Data = {
-        89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
-        610000001974455874536F6674776172650041646F626520496D616765526561
-        647971C9653C0000000D744558745469746C65005265636F72643B61F05A1A00
-        00021A49444154785EAD915F4853711CC5675CDA2A2246180549905BD94379E3
-        A220D532D4ACB9B0F225A23F4241116E456F116668596B08455820482E2A2828
-        58841425F4074DCD87B9BA45D3D9823518222151912FA7DFF932F2765F6B70B8
-        87733EDF03F7CE01E09FF47F06745D771886217AD47CDA3970F1FC89C170FBD0
-        50F8C2378A9E19BB3CC79BD9018FC723CF672DCD45FDE75A4793376F20D71BC3
-        74DF634A3C337664C87ABDDED901B7DBEDE80936B95EB59C191DEFE9C6D7FBB7
-        3115BD8EC9AECB14BD64EC1493B8753C348F377F06D4AFA037183A695EBD82C9
-        EE4E6423AD180E1DC393C6468A9E997464C8F2C63AA0DDDBD5F06622D28E2FAD
-        A730DC7404FD9D5D30DF7D8269A6C58F048F4A47862C6FAC03CE3BB58199F1C3
-        FB903AB4174F0F1E402A994126374DD133938E8C627FF1C63AE08AFA6A663E34
-        F8F13E5085079B37213D91456EEA87289DCA3293CEDCED47D457FD9D377F0D5C
-        3336C407AB2BF176AB0FCFEBFD18084790F99CA3C4BFDC59271D19B2F60167DB
-        AAD2B3B1B20AC42B2B90D8518B17F57578B8C547894F046AA42343D6FE0ADA9A
-        F90B9775AC5C978CE90646369623BEBD0AE6FE3D14BD64EC143346D6FE110B94
-        5CDB16159687979724EF96AC45DFFA52BC2ED329F1CC54374686ACFD6FA4E628
-        2D58AACD2D0EB98B3ADA0A8B3F5E5AE2FD49D133634726CF3AAC03F264915F5F
-        ACB442693545CF8C1D19B2F601ABF83A9A92530E44E235765690B7BF01D76404
-        F64F3219EB0000000049454E44AE426082}
       CaptionOptions.Text = 'Salutation'
       Control = lucSalutation
       ControlOptions.OriginalHeight = 21
@@ -230,13 +216,14 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       Index = 0
     end
     object litTaxNo: TdxLayoutItem
-      Parent = grpMobileNo
+      Parent = grpData
+      AlignHorz = ahLeft
       CaptionOptions.Text = 'Tax No'
       Control = edtTaxNo
       ControlOptions.OriginalHeight = 21
       ControlOptions.OriginalWidth = 160
       ControlOptions.ShowBorder = False
-      Index = 0
+      Index = 3
     end
     object litMobileNo: TdxLayoutItem
       Parent = grpMobileNo
@@ -255,7 +242,7 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       ControlOptions.OriginalHeight = 21
       ControlOptions.OriginalWidth = 412
       ControlOptions.ShowBorder = False
-      Index = 3
+      Index = 4
     end
     object litOtherName: TdxLayoutItem
       Parent = grpSalutation
@@ -272,6 +259,15 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       SizeOptions.Width = 8
       CaptionOptions.Text = 'Empty Space Item'
       Index = 1
+    end
+    object litIDNumber: TdxLayoutItem
+      Parent = grpMobileNo
+      CaptionOptions.Text = 'ID Number'
+      Control = edtIDNumber
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 160
+      ControlOptions.ShowBorder = False
+      Index = 0
     end
   end
   inherited styRepository: TcxStyleRepository

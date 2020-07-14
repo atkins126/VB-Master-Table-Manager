@@ -41,6 +41,8 @@ type
     litOtherName: TdxLayoutItem;
     spc1: TdxLayoutEmptySpaceItem;
     imgNav16: TcxImageList;
+    litIDNumber: TdxLayoutItem;
+    edtIDNumber: TcxTextEdit;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
     procedure lucCompanyGetDisplayText(Sender: TcxCustomGridTableItem;
@@ -68,7 +70,6 @@ uses
 
 procedure TDirectorDetailFrm.btnOKClick(Sender: TObject);
 begin
-  inherited;
   Validate;
 end;
 
@@ -81,10 +82,9 @@ end;
 
 procedure TDirectorDetailFrm.FormCreate(Sender: TObject);
 begin
-  inherited;
 //  Width := 555;
 //  Height := 480;
-  Self.Height := 280;
+  Self.Height := 310;
   Self.Width := 540;
   MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
@@ -112,7 +112,6 @@ end;
 procedure TDirectorDetailFrm.lucCompanyGetDisplayText(
   Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord; var AText: string);
 begin
-  inherited;
   MTDM.CompanyName := AText;
 end;
 
@@ -123,9 +122,6 @@ begin
 
   if SameText(TrimAll(edtLastName.Text), '') then
     raise EValidateException.Create('Last name must have a value');
-
-  if SameText(lucSalutation.Text, '') then
-    raise EValidateException.Create('Salutation must have a value');
 
   MTDM.FFieldValue.SalutationID := lucSalutation.EditValue;
   MTDM.FFieldValue.FirstName := edtFirstName.Text;

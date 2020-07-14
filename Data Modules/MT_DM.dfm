@@ -2521,6 +2521,10 @@ inherited MTDM: TMTDM
       Size = 60
       Calculated = True
     end
+    object cdsDirectorID_NUMBER: TStringField
+      DisplayLabel = 'ID Number'
+      FieldName = 'ID_NUMBER'
+    end
   end
   object dtsDirector: TDataSource
     DataSet = cdsDirector
@@ -3300,6 +3304,10 @@ inherited MTDM: TMTDM
       FieldName = 'PERCENT_SHARE'
       Origin = 'PERCENT_SHARE'
       Required = True
+    end
+    object cdsShareHolderID_NUMBER: TStringField
+      DisplayLabel = 'ID Number'
+      FieldName = 'ID_NUMBER'
     end
   end
   object dtsHeir: TDataSource

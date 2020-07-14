@@ -20,7 +20,7 @@ uses
   Vcl.Dialogs, System.Actions, Vcl.ActnList, System.StrUtils, System.Types,
   System.Win.Registry,
 
-  VBProxyClass, BaseLayout_Frm, VBCommonValues, CommonMethods, CommonFunctions,
+  VBProxyClasses, BaseLayout_Frm, VBCommonValues, CommonMethods, CommonFunctions,
 
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
   dxSkinsDefaultPainters, cxImageList, dxLayoutLookAndFeels, cxClasses, cxStyles,
@@ -98,6 +98,8 @@ type
     FDIBSecurity: TFDIBSecurity;
     FDIBConfig: TFDIBConfig;
     grpToolbar: TdxLayoutGroup;
+    actDirector: TAction;
+    btnDirector: TdxBarButton;
     procedure FormCreate(Sender: TObject);
     procedure DoLaunchMasterTable(Sender: TObject);
     procedure DoExitApp(Sender: TObject);
@@ -157,7 +159,7 @@ uses
   Base_Frm,
   Lookup_DM,
   Customer_Frm,
-  Report_DM;
+  Report_DM, Director_Frm;
 
 procedure TMainFrm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -376,6 +378,7 @@ begin
     15: CloseTheForm(pagMain.ActivePageIndex, StdActivityFrm, actSTDActivity.Tag, actSTDActivity);
     16: CloseTheForm(pagMain.ActivePageIndex, TaxOfficeFrm, actTaxOffice.Tag, actTaxOffice);
     17: CloseTheForm(pagMain.ActivePageIndex, VehicleMakeFrm, actVehicleMake.Tag, actVehicleMake);
+    18: CloseTheForm(pagMain.ActivePageIndex, DirectorFrm, actDirector.Tag, actDirector);
   end;
 
   if pagMain.PageCount = 0 then
@@ -386,7 +389,6 @@ end;
 
 procedure TMainFrm.DoExitApp(Sender: TObject);
 begin
-//  inherited;
   CloseAllForms;
   MainFrm.Close;
 end;
@@ -396,7 +398,6 @@ var
   NewTabSheet: TcxTabSheet;
   TabSheetName: string;
 begin
-  inherited;
   TabSheetName := RUtils.LPad(MTDM.ActionTag.ToString, '0', 2);
   case MTDM.ActionTag of
     0: // Avtivity Type
@@ -817,7 +818,7 @@ begin
     16: // Tax Office
       begin
         try
-          NewTabSheet := CreateNewTabSheet('TX_OFFICE' + TabSheetName, 'Tax Office', pagMain, actTaxOffice);
+          NewTabSheet := CreateNewTabSheet('TAX_OFFICE' + TabSheetName, 'Tax Office', pagMain, actTaxOffice);
 
           if TaxOfficeFrm <> nil then
             FreeAndNil(TaxOfficeFrm);
@@ -865,6 +866,32 @@ begin
           Screen.Cursor := crDefault;
         end;
       end;
+
+    18: // Director
+      begin
+        try
+          NewTabSheet := CreateNewTabSheet('DIRECTOR' + TabSheetName, 'Director', pagMain, actDirector);
+
+          if DirectorFrm <> nil then
+            FreeAndNil(DirectorFrm);
+
+          if DirectorFrm = nil then
+            DirectorFrm := TDirectorFrm.Create(NewTabSheet);
+
+          pagMain.ActivePageIndex := pagMain.PageCount - 1;
+          DirectorFrm.BorderStyle := bsNone;
+          DirectorFrm.Parent := NewTabSheet;
+          DirectorFrm.ManualDock(pagMain);
+          DirectorFrm.Align := alClient;
+          DirectorFrm.Show;
+          NewTabSheet.Visible := True;
+          NewTabSheet.TabVisible := True;
+          pagMain.Repaint;
+        finally
+          docToolbar.Enabled := True;
+          Screen.Cursor := crDefault;
+        end;
+      end;
   end;
 end;
 
@@ -873,7 +900,6 @@ var
   aControl: TdxBarItemControl;
   APopupPoint: TPoint;
 begin
-  inherited;
   aControl := TdxBarButton(Sender).ClickItemLink.Control;
   APopupPoint := Point(aControl.ItemBounds.Left, aControl.ItemBounds.Bottom);
   APopupPoint := aControl.Parent.ClientToScreen(APopupPoint);
@@ -1002,6 +1028,12 @@ begin
           begin
             FreeAndNil(VehicleMakeFrm);
             btnVehicleMake.Enabled := True;
+          end;
+
+        18: // Director
+          begin
+            FreeAndNil(DirectorFrm);
+            btnDirector.Enabled := True;
           end;
       end;
 

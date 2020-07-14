@@ -14,8 +14,8 @@ inherited CustomerFrm: TCustomerFrm
     ExplicitWidth = 1376
     ExplicitHeight = 731
     object grdCustomer: TcxGrid [0]
-      Left = 0
-      Top = 102
+      Left = 11
+      Top = 125
       Width = 915
       Height = 313
       TabOrder = 7
@@ -37,6 +37,7 @@ inherited CustomerFrm: TCustomerFrm
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
+        EditForm.UseDefaultLayout = False
         OptionsBehavior.IncSearch = True
         OptionsCustomize.ColumnsQuickCustomization = True
         OptionsData.CancelOnExit = False
@@ -84,6 +85,7 @@ inherited CustomerFrm: TCustomerFrm
               FieldName = 'NAME'
             end>
           Properties.ReadOnly = True
+          LayoutItem = viewCustomerLayoutItem1.Owner
           MinWidth = 200
           Options.Editing = False
           Options.IncSearch = False
@@ -99,6 +101,7 @@ inherited CustomerFrm: TCustomerFrm
           DataBinding.FieldName = 'NAME'
           PropertiesClassName = 'TcxTextEditProperties'
           Properties.ReadOnly = True
+          LayoutItem = viewCustomerLayoutItem2.Owner
           MinWidth = 400
           Options.Editing = False
           Options.Grouping = False
@@ -143,6 +146,7 @@ inherited CustomerFrm: TCustomerFrm
           DataBinding.FieldName = 'TAX_NO'
           PropertiesClassName = 'TcxTextEditProperties'
           Properties.ReadOnly = True
+          LayoutItem = viewCustomerLayoutItem3.Owner
           MinWidth = 120
           Options.Editing = False
           Options.Filtering = False
@@ -163,6 +167,7 @@ inherited CustomerFrm: TCustomerFrm
               FieldName = 'NAME'
             end>
           Properties.ReadOnly = True
+          LayoutItem = viewCustomerLayoutItem4.Owner
           MinWidth = 80
           Options.Editing = False
           Options.IncSearch = False
@@ -183,6 +188,7 @@ inherited CustomerFrm: TCustomerFrm
           Properties.ValueChecked = 1
           Properties.ValueUnchecked = 0
           HeaderAlignmentHorz = taCenter
+          LayoutItem = viewCustomerLayoutItem5.Owner
           MinWidth = 60
           Options.Editing = False
           Options.IncSearch = False
@@ -194,14 +200,65 @@ inherited CustomerFrm: TCustomerFrm
           Position.ColIndex = 7
           Position.RowIndex = 0
         end
+        object viewCustomerRootGroup: TcxGridInplaceEditFormGroup
+          AlignHorz = ahLeft
+          AlignVert = avTop
+          ButtonOptions.Buttons = <>
+          Hidden = True
+          LayoutDirection = ldHorizontal
+          ShowBorder = False
+          Index = -1
+        end
+        object viewCustomerAutoCreatedGroup1: TdxLayoutAutoCreatedGroup
+          Parent = viewCustomerRootGroup.Owner
+          AlignHorz = ahLeft
+          AlignVert = avTop
+          Index = 0
+        end
+        object viewCustomerAutoCreatedGroup2: TdxLayoutAutoCreatedGroup
+          Parent = viewCustomerRootGroup.Owner
+          AlignHorz = ahLeft
+          AlignVert = avTop
+          Index = 1
+        end
+        object viewCustomerLayoutItem1: TcxGridInplaceEditFormLayoutItem
+          Parent = viewCustomerAutoCreatedGroup1.Owner
+          AlignHorz = ahLeft
+          AlignVert = avTop
+          Index = 0
+        end
+        object viewCustomerLayoutItem2: TcxGridInplaceEditFormLayoutItem
+          Parent = viewCustomerAutoCreatedGroup2.Owner
+          AlignHorz = ahLeft
+          AlignVert = avTop
+          Index = 0
+        end
+        object viewCustomerLayoutItem3: TcxGridInplaceEditFormLayoutItem
+          Parent = viewCustomerAutoCreatedGroup1.Owner
+          AlignHorz = ahLeft
+          AlignVert = avTop
+          Index = 1
+        end
+        object viewCustomerLayoutItem4: TcxGridInplaceEditFormLayoutItem
+          Parent = viewCustomerAutoCreatedGroup2.Owner
+          AlignHorz = ahLeft
+          AlignVert = avTop
+          Index = 1
+        end
+        object viewCustomerLayoutItem5: TcxGridInplaceEditFormLayoutItem
+          Parent = viewCustomerAutoCreatedGroup1.Owner
+          AlignHorz = ahLeft
+          AlignVert = avTop
+          Index = 2
+        end
       end
       object lvlCustomer: TcxGridLevel
         GridView = viewCustomer
       end
     end
     object grdVCustomer: TcxDBVerticalGrid [1]
-      Left = 921
-      Top = 148
+      Left = 932
+      Top = 171
       Width = 444
       Height = 267
       OptionsView.ScrollBars = ssVertical
@@ -606,8 +663,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object navCustomer: TcxDBNavigator [2]
-      Left = 0
-      Top = -12
+      Left = 11
+      Top = 11
       Width = 360
       Height = 40
       BorderStyle = nbsNone
@@ -666,8 +723,8 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 0
     end
     object navVCustomer: TcxDBNavigator [3]
-      Left = 921
-      Top = 102
+      Left = 932
+      Top = 125
       Width = 216
       Height = 40
       BorderStyle = nbsNone
@@ -710,8 +767,8 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 8
     end
     object grdContactDetailCo: TcxGrid [4]
-      Left = 14
-      Top = 458
+      Left = 25
+      Top = 481
       Width = 391
       Height = 170
       TabOrder = 10
@@ -750,7 +807,6 @@ inherited CustomerFrm: TCustomerFrm
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
-        EditForm.DefaultStretch = fsVertical
         EditForm.UseDefaultLayout = False
         OptionsBehavior.FocusCellOnTab = True
         OptionsBehavior.NavigatorHints = True
@@ -864,7 +920,7 @@ inherited CustomerFrm: TCustomerFrm
         end
         object viewContactDetailCoRootGroup: TcxGridInplaceEditFormGroup
           AlignHorz = ahLeft
-          AlignVert = avClient
+          AlignVert = avTop
           CaptionOptions.Text = 'Template Card'
           ButtonOptions.Buttons = <>
           Hidden = True
@@ -891,8 +947,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCDComment: TcxDBMemo [5]
-      Left = 14
-      Top = 634
+      Left = 25
+      Top = 657
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailCo
       PopupMenu = popDBAction
@@ -2390,8 +2446,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object lblLegend: TcxLabel [16]
-      Left = 0
-      Top = 681
+      Left = 11
+      Top = 704
       Caption = 
         'INS = Add a new record;  ENTER = Edit selected record;  DEL = De' +
         'lete selected record'
@@ -2401,8 +2457,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxOpenAfterExport: TcxCheckBox [17]
-      Left = 677
-      Top = 65
+      Left = 688
+      Top = 88
       Caption = 'Open after export'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2415,8 +2471,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxPersistSelection: TcxCheckBox [18]
-      Left = 372
-      Top = -1
+      Left = 383
+      Top = 21
       Caption = 'Persist Selection'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2429,8 +2485,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxGroupedReport: TcxCheckBox [19]
-      Left = 559
-      Top = 65
+      Left = 570
+      Top = 88
       Caption = 'Grouped Report'
       ParentShowHint = False
       Properties.ImmediatePost = True
@@ -2442,8 +2498,8 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object lucPrintWhat: TcxComboBox [20]
-      Left = 284
-      Top = 65
+      Left = 295
+      Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -2460,8 +2516,8 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object lucReportType: TcxComboBox [21]
-      Left = 85
-      Top = 65
+      Left = 96
+      Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
@@ -2477,8 +2533,8 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object cbxPrintContactDetails: TcxCheckBox [22]
-      Left = 420
-      Top = 65
+      Left = 431
+      Top = 88
       Caption = 'Print contact details'
       ParentShowHint = False
       Properties.ImmediatePost = True

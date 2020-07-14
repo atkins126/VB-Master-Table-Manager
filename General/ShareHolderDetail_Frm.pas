@@ -33,6 +33,9 @@ type
     litMobilePhone: TdxLayoutItem;
     litEmailAddress: TdxLayoutItem;
     litPercentShare: TdxLayoutItem;
+    edtIDNumber: TcxTextEdit;
+    litIDNumber: TdxLayoutItem;
+    grpIDNumber: TdxLayoutGroup;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
   private
@@ -57,8 +60,7 @@ uses
 
 procedure TShareHolderDetailFrm.FormCreate(Sender: TObject);
 begin
-  inherited;
-  Self.Height := 280;
+  Self.Height := 320;
   Self.Width := 540;
   MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
@@ -90,9 +92,6 @@ begin
   if SameText(TrimAll(edtLastName.Text), '') then
     raise EValidateException.Create('Last name must have a value');
 
-  if SameText(lucSalutation.Text, '') then
-    raise EValidateException.Create('Salutation must have a value');
-
   MTDM.FFieldValue.SalutationID := lucSalutation.EditValue;
   MTDM.FFieldValue.FirstName := edtFirstName.Text;
   MTDM.FFieldValue.LastName := edtLastName.Text;
@@ -105,7 +104,6 @@ end;
 
 procedure TShareHolderDetailFrm.btnOKClick(Sender: TObject);
 begin
-  inherited;
   Validate;
 end;
 

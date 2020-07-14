@@ -92,7 +92,7 @@
         <DCC_DcuOutput>$(Dcu)\Master Table Manager</DCC_DcuOutput>
         <VerInfo_Debug>true</VerInfo_Debug>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>..\Icons\Master Table Manager.ico</Icon_MainIcon>
+        <Icon_MainIcon>Master Table Manager.ico</Icon_MainIcon>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <DCC_UnitSearchPath>C:\Data\Delphi\Components\FastMM4\;C:\Data\Delphi\Components\FastMM4\FullDebugMode DLL\Precompiled\;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
@@ -244,7 +244,6 @@
         </DCCReference>
         <DCCReference Include="..\..\..\..\Lib\Classes\MyClasses.pas"/>
         <DCCReference Include="..\..\Lib\VBPrintExportData.pas"/>
-        <DCCReference Include="..\Lib\VBProxyClass.pas"/>
         <DCCReference Include="Lib\BaseGrid_Frm.pas">
             <Form>BaseGridFrm</Form>
         </DCCReference>
@@ -274,6 +273,7 @@
             <Form>DirectorFrm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\Lib\VBProxyClasses.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -295,8 +295,8 @@
                     <Source Name="MainSource">MasterTableManager.dpr</Source>
                 </Source>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
