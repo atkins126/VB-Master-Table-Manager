@@ -16,7 +16,7 @@ uses
   dxLayoutcxEditAdapters, cxContainer, cxEdit, cxLabel, cxTextEdit, cxCheckBox,
   cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
   Vcl.ComCtrls, dxCore, cxDateUtils, cxCalendar, RUtils, dxScreenTip,
-  dxCustomHint, cxHint;
+  dxCustomHint, cxHint, cxDBEdit;
 
 type
   TCustomerEditFrm = class(TBaseLayoutFrm)
@@ -121,6 +121,9 @@ type
     litBillToSameAsName: TdxLayoutItem;
     tipBillToSameAsName: TdxScreenTip;
     actBillToSameAsName: TAction;
+    grpIDNumber: TdxLayoutGroup;
+    litIDNumber: TdxLayoutItem;
+    edtIDNumber: TcxDBTextEdit;
     procedure FormCreate(Sender: TObject);
     procedure lucCustomerTypePropertiesEditValueChanged(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -150,33 +153,28 @@ uses
 
 procedure TCustomerEditFrm.btnOKClick(Sender: TObject);
 begin
-  inherited;
   Validate;
 end;
 
 procedure TCustomerEditFrm.DoTradingAsSameAsCompanyName(Sender: TObject);
 begin
-  inherited;
-  edtTradingAs.EditValue :=  edtCustomerName.EditValue;
+  edtTradingAs.EditValue := edtCustomerName.EditValue;
 end;
 
 procedure TCustomerEditFrm.DoBillToSameAsCompanyName(Sender: TObject);
 begin
-  inherited;
-  edtBillTo.EditValue :=  edtCustomerName.EditValue;
+  edtBillTo.EditValue := edtCustomerName.EditValue;
 end;
 
 procedure TCustomerEditFrm.edtCoNoKeyPress(Sender: TObject; var Key: Char);
 begin
-  inherited;
   Key := UpCase(Key);
 end;
 
 procedure TCustomerEditFrm.FormCreate(Sender: TObject);
 begin
-  inherited;
   Caption := 'Customer Insert/Edit Form';
-  Self.Height := 660;
+  Self.Height := 700;
   Self.Width := 850;
   layMain.Align := alClient;
   lblCustomerHeader.Style.TextColor := RootLookAndFeel.SkinPainter.DefaultSelectionColor;
@@ -198,6 +196,7 @@ begin
   begin
     litCustomerName.Visible := True;
     grpIndividual.Visible := False;
+    grpIDNumber.Visible := False;
     cbxIsActive.Checked := True;
   end;
 
@@ -231,8 +230,10 @@ begin
     edtUIFNo.Text := MTDM.cdsCustomer.FieldByName('UIF_NO').AsString;
     edtSDLNo.Text := MTDM.cdsCustomer.FieldByName('SDL_NO').AsString;
     edtWCNo.Text := MTDM.cdsCustomer.FieldByName('WC_NO').AsString;
+
     if FormatDatetime('dd/MM/yyyy', MTDM.cdsCustomer.FieldByName('AR_COMPLETION_DATE').AsDateTime) <> '30/12/1899' then
       dteARCompletionDate.Date := MTDM.cdsCustomer.FieldByName('AR_COMPLETION_DATE').AsDateTime;
+
     edtEFiling.Text := MTDM.cdsCustomer.FieldByName('EFILING').AsString;
     edtEFUserName.Text := MTDM.cdsCustomer.FieldByName('EF_USER_NAME').AsString;
     edtEFPassword.Text := MTDM.cdsCustomer.FieldByName('EF_PASSWORD').AsString;
@@ -288,18 +289,23 @@ end;
 
 procedure TCustomerEditFrm.FormShow(Sender: TObject);
 begin
-  inherited;
   Screen.Cursor := crDefault;
 end;
 
 procedure TCustomerEditFrm.lucCustomerTypePropertiesEditValueChanged(Sender: TObject);
 begin
-  inherited;
   case lucCustomerType.EditValue of
     // Individual or Sole Proprietor
-    4, 7: grpIndividual.Visible := True;
+    4, 7:
+      begin
+        grpIndividual.Visible := True;
+        grpIDNumber.Visible := True;
+      end
   else
-    grpIndividual.Visible := False;
+    begin
+      grpIndividual.Visible := False;
+      grpIDNumber.Visible := False;
+    end;
   end;
 
   litCustomerName.Visible := not grpIndividual.Visible;
@@ -350,60 +356,62 @@ begin
   case lucCustomerType.EditValue of
     4:
       begin
-        MTDM.FFieldValue.FirstName := edtFirstName.Text;
-        MTDM.FFieldValue.LastName := edtLastName.Text;
-        MTDM.FFieldValue.Initials := edtInitials.Text;
-        MTDM.FFieldValue.Name := edtFirstName.Text + ' ' + edtLastName.Text;
+        MTDM.FieldValue.FirstName := edtFirstName.Text;
+        MTDM.FieldValue.LastName := edtLastName.Text;
+        MTDM.FieldValue.Initials := edtInitials.Text;
+        MTDM.FieldValue.Name := edtFirstName.Text + ' ' + edtLastName.Text;
       end;
   else
-    MTDM.FFieldValue.Name := edtCustomerName.Text;
+    MTDM.FieldValue.Name := edtCustomerName.Text;
   end;
 
-  MTDM.FFieldValue.CustomerTypeID := lucCustomerType.EditValue;
-  MTDM.FFieldValue.YearEndMonthID := NullToZero(lucYearEnd.EditValue);
-  MTDM.FFieldValue.TaxOfficeID := NullToZero(lucTaxOffice.EditValue);
-  MTDM.FFieldValue.VATMonthID := NullToZero(lucVATMonth.EditValue);
-  MTDM.FFieldValue.VATCountryID := NullToZero(lucVATCountry.EditValue);
-  MTDM.FFieldValue.VATOfficeID := NullToZero(lucVATOffice.EditValue);
-  MTDM.FFieldValue.ARMonthID := NullToZero(lucARMonth.EditValue);
-  MTDM.FFieldValue.StatauID := NullToZero(lucStatus.EditValue);
-  MTDM.FFieldValue.IsActive := BooleanToInteger(cbxIsActive.Checked);
-  MTDM.FFieldValue.Initials := edtInitials.Text;
-  MTDM.FFieldValue.TradingAs := edtTradingAs.Text;
-  MTDM.FFieldValue.BillTo := edtBillTo.Text;
-  MTDM.FFieldValue.CoNo := edtCoNo.Text;
-  MTDM.FFieldValue.TaxNo := edtTaxNo.Text;
-  MTDM.FFieldValue.VATNo := edtVATNo.Text;
-  MTDM.FFieldValue.VATCustomsCode := edtVATCustomsCode.Text;
-  MTDM.FFieldValue.PayeNo := edtPAYENo.Text;
-  MTDM.FFieldValue.UifNo := edtUIFNo.Text;
-  MTDM.FFieldValue.SDLNo := edtSDLNo.Text;
-  MTDM.FFieldValue.WCNo := edtWCNo.Text;
+  MTDM.FieldValue.CustomerTypeID := lucCustomerType.EditValue;
+  MTDM.FieldValue.YearEndMonthID := NullToZero(lucYearEnd.EditValue);
+  MTDM.FieldValue.TaxOfficeID := NullToZero(lucTaxOffice.EditValue);
+  MTDM.FieldValue.VATMonthID := NullToZero(lucVATMonth.EditValue);
+  MTDM.FieldValue.VATCountryID := NullToZero(lucVATCountry.EditValue);
+  MTDM.FieldValue.VATOfficeID := NullToZero(lucVATOffice.EditValue);
+  MTDM.FieldValue.ARMonthID := NullToZero(lucARMonth.EditValue);
+  MTDM.FieldValue.StatauID := NullToZero(lucStatus.EditValue);
+  MTDM.FieldValue.IsActive := BooleanToInteger(cbxIsActive.Checked);
+  MTDM.FieldValue.Initials := edtInitials.Text;
+  MTDM.FieldValue.TradingAs := edtTradingAs.Text;
+  MTDM.FieldValue.BillTo := edtBillTo.Text;
+  MTDM.FieldValue.CoNo := edtCoNo.Text;
+  MTDM.FieldValue.TaxNo := edtTaxNo.Text;
+  MTDM.FieldValue.VATNo := edtVATNo.Text;
+  MTDM.FieldValue.VATCustomsCode := edtVATCustomsCode.Text;
+  MTDM.FieldValue.PayeNo := edtPAYENo.Text;
+  MTDM.FieldValue.UifNo := edtUIFNo.Text;
+  MTDM.FieldValue.SDLNo := edtSDLNo.Text;
+  MTDM.FieldValue.WCNo := edtWCNo.Text;
 //  if VarIsNull(dteARCompletionDate.EditValue) then
 
 //  if Length(Trim(dteARCompletionDate.Text)) = 0 then
-//    MTDM.FFieldValue.ARCompletionDate := EncodeDate(1899, 12, 30)
+//    MTDM.FieldValue.ARCompletionDate := EncodeDate(1899, 12, 30)
 //  else
-//    MTDM.FFieldValue.ARCompletionDate := dteARCompletionDate.Date;
+//    MTDM.FieldValue.ARCompletionDate := dteARCompletionDate.Date;
 
   if (FormatDatetime('dd/MM/yyyy', dteARCompletionDate.Date) <> '30/12/1899')
     and (FormatDatetime('dd/MM/yyyy', dteARCompletionDate.Date) <> '00/00/0000') then
-////    MTDM.FFieldValue.ARCompletionDate := -693592
+////    MTDM.FieldValue.ARCompletionDate := -693592
 ////  else
-//    MTDM.FFieldValue.ARCompletionDate := dteARCompletionDate.Date;
+//    MTDM.FieldValue.ARCompletionDate := dteARCompletionDate.Date;
 
-    MTDM.FFieldValue.ARCompletionDate := dteARCompletionDate.Date;
-  MTDM.FFieldValue.PasteAccCode := edtPastelAccCode.Text;
-  MTDM.FFieldValue.VBTaxAccCode := edtVBTaxAccCode.Text;
-  MTDM.FFieldValue.IsProvTaxPayer := BooleanToInteger(cbxProvTaxPayer.Checked);
-  MTDM.FFieldValue.HasLivingWill := BooleanToInteger(cbxLivingWill.Checked);
-  MTDM.FFieldValue.IsOrganDonor := BooleanToInteger(cbxOrganDonor.Checked);
-  MTDM.FFieldValue.EFiling := edtEFiling.Text;
-  MTDM.FFieldValue.EFUserName := edtEFUserName.Text;
-  MTDM.FFieldValue.EFPassword := edtEFPassword.Text;
+    MTDM.FieldValue.ARCompletionDate := dteARCompletionDate.Date;
+  MTDM.FieldValue.PasteAccCode := edtPastelAccCode.Text;
+  MTDM.FieldValue.VBTaxAccCode := edtVBTaxAccCode.Text;
+  MTDM.FieldValue.IsProvTaxPayer := BooleanToInteger(cbxProvTaxPayer.Checked);
+  MTDM.FieldValue.HasLivingWill := BooleanToInteger(cbxLivingWill.Checked);
+  MTDM.FieldValue.IsOrganDonor := BooleanToInteger(cbxOrganDonor.Checked);
+  MTDM.FieldValue.EFiling := edtEFiling.Text;
+  MTDM.FieldValue.EFUserName := edtEFUserName.Text;
+  MTDM.FieldValue.EFPassword := edtEFPassword.Text;
 
   ModalResult := mrOK;
 end;
 
 end.
+
+
 

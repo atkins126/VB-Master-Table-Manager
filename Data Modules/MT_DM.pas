@@ -382,6 +382,7 @@ type
     cdsCountryDIALING_CODE: TStringField;
     cdsShareHolderID_NUMBER: TStringField;
     cdsDirectorID_NUMBER: TStringField;
+    cdsCustomerID_NUMBER: TStringField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);
@@ -393,6 +394,9 @@ type
     procedure cdsDirectorCompanyLinkPostError(DataSet: TDataSet;
       E: EDatabaseError; var Action: TDataAction);
     procedure cdsDirectorCalcFields(DataSet: TDataSet);
+    procedure cdsActivityTypeBeforeEdit(DataSet: TDataSet);
+    procedure cdsActivityTypeBeforeDelete(DataSet: TDataSet);
+    procedure cdsActivityTypeAfterCancel(DataSet: TDataSet);
   private
     { Private declarations }
     FID: Integer;
@@ -410,7 +414,7 @@ type
     FCompanyName: string;
   public
     { Public declarations }
-    FFieldValue: FieldValues;
+    FieldValue: FieldValues;
 
     property ActionTag: Integer read FActionTag write FActionTag;
     property MasterItem: MasterItemArray read FMasterItem write FMasterItem;
@@ -444,7 +448,7 @@ uses RUtils;
 
 procedure TMTDM.cdsActivityTypeNewRecord(DataSet: TDataSet);
 begin
-  inherited;
+  VBBaseDM.DBAction := acInsert;
   DataSet.FieldByName('ID').AsInteger := 0;
 
   if DataSet.FindField('CUSTOMER_ID') <> nil then
@@ -477,7 +481,6 @@ end;
 
 procedure TMTDM.cdsDirectorCalcFields(DataSet: TDataSet);
 begin
-  inherited;
   cdsDirector.FieldByName('FULL_NAME').AsString :=
     cdsDirector.FieldByName('FIRST_NAME').AsString +
     cdsDirector.FieldByName('LAST_NAME').AsString;
@@ -486,7 +489,6 @@ end;
 procedure TMTDM.cdsDirectorCompanyLinkPostError(DataSet: TDataSet;
   E: EDatabaseError; var Action: TDataAction);
 begin
-  inherited;
 //  EFDException(E).FDCode;
   PostError := True;
 
@@ -504,7 +506,6 @@ end;
 
 procedure TMTDM.cdsActivityTypePostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
 begin
-  inherited;
 //  ShowMessage('Class name: ' + E.ClassName);
 //  ShowMessage('Class name: ' + EFDDBEngineException(E).Message);
 
@@ -523,90 +524,89 @@ end;
 
 procedure TMTDM.ClearFieldValues;
 begin
-  FFieldValue.ContactTypeID := 0;
-  FFieldValue.ContactType := '';
-  FFieldValue.TextValue := '';
-  FFieldValue.Comment := '';
-  FFieldValue.Physical1 := '';
-  FFieldValue.Physical2 := '';
-  FFieldValue.Physical3 := '';
-  FFieldValue.Physical4 := '';
-  FFieldValue.PhysicalCode := '';
-  FFieldValue.Postal1 := '';
-  FFieldValue.Postal2 := '';
-  FFieldValue.Postal3 := '';
-  FFieldValue.Postal4 := '';
-  FFieldValue.PostalCode := '';
-  FFieldValue.Billing1 := '';
-  FFieldValue.Billing2 := '';
-  FFieldValue.Billing3 := '';
-  FFieldValue.Billing4 := '';
-  FFieldValue.BillingCode := '';
-  FFieldValue.BankID := 0;
-  FFieldValue.Bank := '';
-  FFieldValue.BranchCode := '';
-  FFieldValue.AccountTypeID := 0;
-  FFieldValue.AccountType := '';
-  FFieldValue.AccountNo := '';
-  FFieldValue.FirstName := '';
-  FFieldValue.LastName := '';
-  FFieldValue.Initials := '';
-  FFieldValue.OtherName := '';
-  FFieldValue.SalutationID := 0;
-  FFieldValue.Salutation := '';
-  FFieldValue.IDNo := '';
-  FFieldValue.PassportNo := '';
-  FFieldValue.JobFunctionID := 0;
-  FFieldValue.JobFunction := '';
-  FFieldValue.PrimaryContact := False;
-  FFieldValue.EmailAddress := '';
-  FFieldValue.TaxNo := '';
-  FFieldValue.MobileNo := '';
-  FFieldValue.DOB := 0.0;
-  FFieldValue.VehicleMakeID := 0;
-  FFieldValue.VehicleMake := '';
-  FFieldValue.VehicleModel := '';
-  FFieldValue.YearOfManufacture := 0;
-  FFieldValue.VehicleRegNo := '';
-  FFieldValue.LicenceRenewalDate := 0.0;
-  FFieldValue.MaintenancePlan := False;
-  FFieldValue.CustomerID := 0;
-  FFieldValue.DirectorID := 0;
+  FieldValue.ContactTypeID := 0;
+  FieldValue.ContactType := '';
+  FieldValue.TextValue := '';
+  FieldValue.Comment := '';
+  FieldValue.Physical1 := '';
+  FieldValue.Physical2 := '';
+  FieldValue.Physical3 := '';
+  FieldValue.Physical4 := '';
+  FieldValue.PhysicalCode := '';
+  FieldValue.Postal1 := '';
+  FieldValue.Postal2 := '';
+  FieldValue.Postal3 := '';
+  FieldValue.Postal4 := '';
+  FieldValue.PostalCode := '';
+  FieldValue.Billing1 := '';
+  FieldValue.Billing2 := '';
+  FieldValue.Billing3 := '';
+  FieldValue.Billing4 := '';
+  FieldValue.BillingCode := '';
+  FieldValue.BankID := 0;
+  FieldValue.Bank := '';
+  FieldValue.BranchCode := '';
+  FieldValue.AccountTypeID := 0;
+  FieldValue.AccountType := '';
+  FieldValue.AccountNo := '';
+  FieldValue.FirstName := '';
+  FieldValue.LastName := '';
+  FieldValue.Initials := '';
+  FieldValue.OtherName := '';
+  FieldValue.SalutationID := 0;
+  FieldValue.Salutation := '';
+  FieldValue.IDNo := '';
+  FieldValue.PassportNo := '';
+  FieldValue.JobFunctionID := 0;
+  FieldValue.JobFunction := '';
+  FieldValue.PrimaryContact := False;
+  FieldValue.EmailAddress := '';
+  FieldValue.TaxNo := '';
+  FieldValue.MobileNo := '';
+  FieldValue.DOB := 0.0;
+  FieldValue.VehicleMakeID := 0;
+  FieldValue.VehicleMake := '';
+  FieldValue.VehicleModel := '';
+  FieldValue.YearOfManufacture := 0;
+  FieldValue.VehicleRegNo := '';
+  FieldValue.LicenceRenewalDate := 0.0;
+  FieldValue.MaintenancePlan := False;
+  FieldValue.CustomerID := 0;
+  FieldValue.DirectorID := 0;
   // Customer
-  FFieldValue.CustomerTypeID := 0;
-  FFieldValue.YearEndMonthID := 0;
-  FFieldValue.TaxOfficeID := 0;
-  FFieldValue.VATMonthID := 0;
-  FFieldValue.VATCountryID := 0;
-  FFieldValue.VATOfficeID := 0;
-  FFieldValue.ARMonthID := 0;
-  FFieldValue.StatauID := 0;
-  FFieldValue.IsActive := 0;
-  FFieldValue.TradingAs := '';
-  FFieldValue.BillTo := '';
-  FFieldValue.CoNo := '';
-  FFieldValue.TaxNo := '';
-  FFieldValue.VATNo := '';
-  FFieldValue.VATCustomsCode := '';
-  FFieldValue.PayeNo := '';
-  FFieldValue.UifNo := '';
-  FFieldValue.SDLNo := '';
-  FFieldValue.WCNo := '';
-  FFieldValue.ARCompletionDate := 0.0;
-  FFieldValue.PasteAccCode := '';
-  FFieldValue.VBTaxAccCode := '';
-  FFieldValue.IsProvTaxPayer := 0;
-  FFieldValue.HasLivingWill := 0;
-  FFieldValue.IsOrganDonor := 0;
-  FFieldValue.EFiling := '';
-  FFieldValue.EFUserName := '';
-  FFieldValue.EFPassword := '';
-  FFieldValue.PercenShare := 0.0;
+  FieldValue.CustomerTypeID := 0;
+  FieldValue.YearEndMonthID := 0;
+  FieldValue.TaxOfficeID := 0;
+  FieldValue.VATMonthID := 0;
+  FieldValue.VATCountryID := 0;
+  FieldValue.VATOfficeID := 0;
+  FieldValue.ARMonthID := 0;
+  FieldValue.StatauID := 0;
+  FieldValue.IsActive := 0;
+  FieldValue.TradingAs := '';
+  FieldValue.BillTo := '';
+  FieldValue.CoNo := '';
+  FieldValue.TaxNo := '';
+  FieldValue.VATNo := '';
+  FieldValue.VATCustomsCode := '';
+  FieldValue.PayeNo := '';
+  FieldValue.UifNo := '';
+  FieldValue.SDLNo := '';
+  FieldValue.WCNo := '';
+  FieldValue.ARCompletionDate := 0.0;
+  FieldValue.PasteAccCode := '';
+  FieldValue.VBTaxAccCode := '';
+  FieldValue.IsProvTaxPayer := 0;
+  FieldValue.HasLivingWill := 0;
+  FieldValue.IsOrganDonor := 0;
+  FieldValue.EFiling := '';
+  FieldValue.EFUserName := '';
+  FieldValue.EFPassword := '';
+  FieldValue.PercenShare := 0.0;
 end;
 
 procedure TMTDM.DataModuleCreate(Sender: TObject);
 begin
-  inherited;
   SetLength(FMasterItem, MASTER_DATASET_COUNT);
   FMasterItem[0] := 'Activity Type';
   FMasterItem[1] := 'Age Period';
@@ -678,16 +678,30 @@ begin
   FMasterDataSet[18] := cdsDirectorCompanyLink;
 end;
 
+procedure TMTDM.cdsActivityTypeAfterCancel(DataSet: TDataSet);
+begin
+  VBBaseDM.DBAction := acBrowsing;
+end;
+
 procedure TMTDM.cdsActivityTypeAfterDelete(DataSet: TDataSet);
 var
   DSArray: TDataSetArray;
 begin
-  inherited;
   SetLength(DSArray, 1);
   DSArray[0] := TFDMemTable(DataSet);
 
   VBBaseDM.ApplyUpdates(DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
     TFDMemTable(DataSet).Tag);
+end;
+
+procedure TMTDM.cdsActivityTypeBeforeDelete(DataSet: TDataSet);
+begin
+  VBBaseDM.DBAction := acDelete;
+end;
+
+procedure TMTDM.cdsActivityTypeBeforeEdit(DataSet: TDataSet);
+begin
+  VBBaseDM.DBAction := acEdit;
 end;
 
 procedure TMTDM.cdsActivityTypeBeforePost(DataSet: TDataSet);
@@ -696,7 +710,6 @@ var
   FieldList, FieldValues, WhereClause, TableName, FieldListValues: string;
   ResponseList: TStringList;
 begin
-  inherited;
   Fieldlist := '';
   FieldValues := '';
   TableName := TFDMemTable(DataSet).UpdateOptions.UpdateTableName;
@@ -767,20 +780,16 @@ procedure TMTDM.cdsActivityTypeAfterPost(DataSet: TDataSet);
 //var
 //  DSArray: TDataSetArray;
 begin
-  inherited;
-//  case VBBaseDM.DBAction of
-//    acEdit, acDelete:
-//      begin
-//        SetLength(DSArray, 1);
-//        DSArray[0] := TFDMemTable(DataSet);
+//  SetLength(DSArray, 1);
+//  DSArray[0] := TFDMemTable(DataSet);
 //
-//        VBBaseDM.ApplyUpdates(DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
-//          TFDMemTable(DataSet).Tag);
+//  VBBaseDM.ApplyUpdates(DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
+//    TFDMemTable(DataSet).Tag);
 //
 ////    SendMessage(Application.MainForm.Handle, WM_RECORD_ID, DWORD(PChar('REQUEST=REFRESH_DATA' + '|ID=' + FID.ToString)), 0);
-//      end;
-//  end;
 end;
 
 end.
+
+
 

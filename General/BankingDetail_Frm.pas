@@ -109,14 +109,14 @@ begin
   if SameText(TrimAll(edtLastName.Text), '') then
     raise EValidateException.Create('Last name must have a value');
 
-  MTDM.FFieldValue.BankID := VarAsType(lucBank.EditValue, varInteger);
-  MTDM.FFieldValue.Bank := lucBank.Text;
-  MTDM.FFieldValue.BranchCode := edtBranchCode.Text;
-  MTDM.FFieldValue.AccountTypeID := VarAsType(lucAccType.EditValue, varInteger);
-  MTDM.FFieldValue.AccountType := lucAccType.Text;
-  MTDM.FFieldValue.AccountNo := edtAccNo.Text;
-  MTDM.FFieldValue.FirstName := edtFirstName.Text;
-  MTDM.FFieldValue.LastName := edtLastName.Text;
+  MTDM.FieldValue.BankID := VarAsType(lucBank.EditValue, varInteger);
+  MTDM.FieldValue.Bank := lucBank.Text;
+  MTDM.FieldValue.BranchCode := edtBranchCode.Text;
+  MTDM.FieldValue.AccountTypeID := VarAsType(lucAccType.EditValue, varInteger);
+  MTDM.FieldValue.AccountType := lucAccType.Text;
+  MTDM.FieldValue.AccountNo := edtAccNo.Text;
+  MTDM.FieldValue.FirstName := edtFirstName.Text;
+  MTDM.FieldValue.LastName := edtLastName.Text;
 
   ModalResult := mrOK;
 end;

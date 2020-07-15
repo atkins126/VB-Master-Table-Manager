@@ -73,8 +73,8 @@ begin
   if SameText(lucCompany.Text, '') then
     raise EValidateException.Create('Please select a company to link to this director');
 
-  MTDM.FFieldValue.CustomerID := VarAsType(lucCompany.EditValue, varInteger);
-  MTDM.FFieldValue.DirectorID := MTDM.cdsDirector.FieldByName('ID').AsInteger;
+  MTDM.FieldValue.CustomerID := VarAsType(lucCompany.EditValue, varInteger);
+  MTDM.FieldValue.DirectorID := MTDM.cdsDirector.FieldByName('ID').AsInteger;
 
   ModalResult := mrOK;
 end;

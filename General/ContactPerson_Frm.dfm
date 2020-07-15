@@ -96,7 +96,6 @@ inherited ContactPersonFrm: TContactPersonFrm
         item
           FieldName = 'NAME'
         end>
-      Properties.ListSource = LookupDM.dtsJobFunction
       Properties.PostPopupValueOnTab = True
       Properties.OnChange = edtFirstNamePropertiesChange
       Style.HotTrack = False

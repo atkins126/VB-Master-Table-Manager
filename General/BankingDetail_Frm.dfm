@@ -45,7 +45,6 @@ inherited BankingDetailFrm: TBankingDetailFrm
         item
           FieldName = 'NAME'
         end>
-      Properties.ListSource = LookupDM.dtsBank
       Properties.PostPopupValueOnTab = True
       Style.HotTrack = False
       TabOrder = 2
@@ -63,7 +62,6 @@ inherited BankingDetailFrm: TBankingDetailFrm
         item
           FieldName = 'NAME'
         end>
-      Properties.ListSource = LookupDM.dtsBankAccountType
       Properties.PostPopupValueOnTab = True
       Style.HotTrack = False
       TabOrder = 4

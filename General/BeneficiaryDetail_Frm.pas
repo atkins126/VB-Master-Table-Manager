@@ -99,12 +99,12 @@ begin
   if SameText(TrimAll(edtEmailAddress.Text), '') then
     raise EValidateException.Create('Email address must have a value');
 
-  MTDM.FFieldValue.FirstName := edtFirstName.Text;
-  MTDM.FFieldValue.LastName := edtLastName.Text;
-  MTDM.FFieldValue.SalutationID := VarAsType(lucSalutation.EditValue, varInteger);
-  MTDM.FFieldValue.Salutation := lucSalutation.Text;
-  MTDM.FFieldValue.MobileNo := edtMobileNo.Text;
-  MTDM.FFieldValue.EmailAddress := edtEmailAddress.Text;
+  MTDM.FieldValue.FirstName := edtFirstName.Text;
+  MTDM.FieldValue.LastName := edtLastName.Text;
+  MTDM.FieldValue.SalutationID := VarAsType(lucSalutation.EditValue, varInteger);
+  MTDM.FieldValue.Salutation := lucSalutation.Text;
+  MTDM.FieldValue.MobileNo := edtMobileNo.Text;
+  MTDM.FieldValue.EmailAddress := edtEmailAddress.Text;
 
   ModalResult := mrOK;
 end;

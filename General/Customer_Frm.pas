@@ -413,6 +413,7 @@ type
     grpPhysicalAddress: TdxLayoutGroup;
     grpPostalAddress: TdxLayoutGroup;
     grpBillingAddress: TdxLayoutGroup;
+    edtVIDNumber: TcxDBEditorRow;
     procedure FormCreate(Sender: TObject);
     procedure viewContactDetailNavigatorButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure FormShow(Sender: TObject);
@@ -627,14 +628,14 @@ begin
   case DetailDataSetID of
     0: // Company contact
       begin
-// MTDM.cdsContactDetailCo.FieldByName('CONTACT_TYPE_ID').AsInteger := MTDM.FFieldValue.ContactTypeID;
-// MTDM.cdsContactDetailCo.FieldByName('VALUE').AsString := MTDM.FFieldValue.TextValue;
-// MTDM.cdsContactDetailCo.FieldByName('COMMENT').AsString := MTDm.FFieldValue.Comment;
-        FDetailDataSet[MTDM.DetailIndex].FieldByName('CONTACT_TYPE_ID').AsInteger := MTDM.FFieldValue.ContactTypeID;
-        FDetailDataSet[MTDM.DetailIndex].FieldByName('VALUE').AsString := MTDM.FFieldValue.TextValue;
-        FDetailDataSet[MTDM.DetailIndex].FieldByName('COMMENT').AsString := MTDM.FFieldValue.Comment;
-        MTDM.ValueArray[0] := 'Contact Type:' + TAB + MTDM.FFieldValue.ContactType;
-        MTDM.ValueArray[1] := 'Contact Value:' + TAB + MTDM.FFieldValue.TextValue;
+// MTDM.cdsContactDetailCo.FieldByName('CONTACT_TYPE_ID').AsInteger := MTDM.FieldValue.ContactTypeID;
+// MTDM.cdsContactDetailCo.FieldByName('VALUE').AsString := MTDM.FieldValue.TextValue;
+// MTDM.cdsContactDetailCo.FieldByName('COMMENT').AsString := MTDM.FieldValue.Comment;
+        FDetailDataSet[MTDM.DetailIndex].FieldByName('CONTACT_TYPE_ID').AsInteger := MTDM.FieldValue.ContactTypeID;
+        FDetailDataSet[MTDM.DetailIndex].FieldByName('VALUE').AsString := MTDM.FieldValue.TextValue;
+        FDetailDataSet[MTDM.DetailIndex].FieldByName('COMMENT').AsString := MTDM.FieldValue.Comment;
+        MTDM.ValueArray[0] := 'Contact Type:' + TAB + MTDM.FieldValue.ContactType;
+        MTDM.ValueArray[1] := 'Contact Value:' + TAB + MTDM.FieldValue.TextValue;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1]]);
@@ -642,42 +643,42 @@ begin
 
     1: // Address
       begin
-        MTDM.cdsAddress.FieldByName('PHYSICAL1').AsString := MTDM.FFieldValue.Physical1;
-        MTDM.cdsAddress.FieldByName('PHYSICAL2').AsString := MTDM.FFieldValue.Physical2;
-        MTDM.cdsAddress.FieldByName('PHYSICAL3').AsString := MTDM.FFieldValue.Physical3;
-        MTDM.cdsAddress.FieldByName('PHYSICAL4').AsString := MTDM.FFieldValue.Physical4;
-        MTDM.cdsAddress.FieldByName('PHYSICAL_CODE').AsString := MTDM.FFieldValue.PhysicalCode;
+        MTDM.cdsAddress.FieldByName('PHYSICAL1').AsString := MTDM.FieldValue.Physical1;
+        MTDM.cdsAddress.FieldByName('PHYSICAL2').AsString := MTDM.FieldValue.Physical2;
+        MTDM.cdsAddress.FieldByName('PHYSICAL3').AsString := MTDM.FieldValue.Physical3;
+        MTDM.cdsAddress.FieldByName('PHYSICAL4').AsString := MTDM.FieldValue.Physical4;
+        MTDM.cdsAddress.FieldByName('PHYSICAL_CODE').AsString := MTDM.FieldValue.PhysicalCode;
 
-        MTDM.cdsAddress.FieldByName('POSTAL1').AsString := MTDM.FFieldValue.Postal1;
-        MTDM.cdsAddress.FieldByName('POSTAL2').AsString := MTDM.FFieldValue.Postal2;
-        MTDM.cdsAddress.FieldByName('POSTAL3').AsString := MTDM.FFieldValue.Postal3;
-        MTDM.cdsAddress.FieldByName('POSTAL4').AsString := MTDM.FFieldValue.Postal4;
-        MTDM.cdsAddress.FieldByName('POSTAL_CODE').AsString := MTDM.FFieldValue.PostalCode;
+        MTDM.cdsAddress.FieldByName('POSTAL1').AsString := MTDM.FieldValue.Postal1;
+        MTDM.cdsAddress.FieldByName('POSTAL2').AsString := MTDM.FieldValue.Postal2;
+        MTDM.cdsAddress.FieldByName('POSTAL3').AsString := MTDM.FieldValue.Postal3;
+        MTDM.cdsAddress.FieldByName('POSTAL4').AsString := MTDM.FieldValue.Postal4;
+        MTDM.cdsAddress.FieldByName('POSTAL_CODE').AsString := MTDM.FieldValue.PostalCode;
 
-        MTDM.cdsAddress.FieldByName('BILLING1').AsString := MTDM.FFieldValue.Billing1;
-        MTDM.cdsAddress.FieldByName('BILLING2').AsString := MTDM.FFieldValue.Billing2;
-        MTDM.cdsAddress.FieldByName('BILLING3').AsString := MTDM.FFieldValue.Billing3;
-        MTDM.cdsAddress.FieldByName('BILLING4').AsString := MTDM.FFieldValue.Billing4;
-        MTDM.cdsAddress.FieldByName('BILLING_CODE').AsString := MTDM.FFieldValue.BillingCode;
+        MTDM.cdsAddress.FieldByName('BILLING1').AsString := MTDM.FieldValue.Billing1;
+        MTDM.cdsAddress.FieldByName('BILLING2').AsString := MTDM.FieldValue.Billing2;
+        MTDM.cdsAddress.FieldByName('BILLING3').AsString := MTDM.FieldValue.Billing3;
+        MTDM.cdsAddress.FieldByName('BILLING4').AsString := MTDM.FieldValue.Billing4;
+        MTDM.cdsAddress.FieldByName('BILLING_CODE').AsString := MTDM.FieldValue.BillingCode;
         ErrorValues := '';
       end;
 
     2: // Contact person
       begin
-        MTDM.cdsContactPerson.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
-        MTDM.cdsContactPerson.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
-        MTDM.cdsContactPerson.FieldByName('OTHER_NAME').AsString := MTDM.FFieldValue.OtherName;
-        MTDM.cdsContactPerson.FieldByName('ID_NUMBER').AsString := MTDM.FFieldValue.IDNo;
-        MTDM.cdsContactPerson.FieldByName('PASSPORT_NUMBER').AsString := MTDM.FFieldValue.PassportNo;
-        MTDM.cdsContactPerson.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
-        MTDM.cdsContactPerson.FieldByName('INITIALS').AsString := MTDM.FFieldValue.Initials;
-        MTDM.cdsContactPerson.FieldByName('DOB').AsDateTime := MTDM.FFieldValue.DOB;
-        MTDM.cdsContactPerson.FieldByName('JOB_FUNCTION_ID').AsInteger := MTDM.FFieldValue.JobFunctionID;
-        MTDM.cdsContactPerson.FieldByName('IS_PRIMARY_CONTACT').AsInteger := BooleanToInteger(MTDM.FFieldValue.PrimaryContact);
+        MTDM.cdsContactPerson.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
+        MTDM.cdsContactPerson.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
+        MTDM.cdsContactPerson.FieldByName('OTHER_NAME').AsString := MTDM.FieldValue.OtherName;
+        MTDM.cdsContactPerson.FieldByName('ID_NUMBER').AsString := MTDM.FieldValue.IDNo;
+        MTDM.cdsContactPerson.FieldByName('PASSPORT_NUMBER').AsString := MTDM.FieldValue.PassportNo;
+        MTDM.cdsContactPerson.FieldByName('SALUTATION_ID').AsInteger := MTDM.FieldValue.SalutationID;
+        MTDM.cdsContactPerson.FieldByName('INITIALS').AsString := MTDM.FieldValue.Initials;
+        MTDM.cdsContactPerson.FieldByName('DOB').AsDateTime := MTDM.FieldValue.DOB;
+        MTDM.cdsContactPerson.FieldByName('JOB_FUNCTION_ID').AsInteger := MTDM.FieldValue.JobFunctionID;
+        MTDM.cdsContactPerson.FieldByName('IS_PRIMARY_CONTACT').AsInteger := BooleanToInteger(MTDM.FieldValue.PrimaryContact);
 
-        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
-        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
-        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FieldValue.LastName;
+        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FieldValue.Salutation;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
@@ -686,12 +687,12 @@ begin
 
     3: // Contact details person
       begin
-        MTDM.cdsContactDetailPerson.FieldByName('CONTACT_TYPE_ID').AsInteger := MTDM.FFieldValue.ContactTypeID;
-        MTDM.cdsContactDetailPerson.FieldByName('VALUE').AsString := MTDM.FFieldValue.TextValue;
-        MTDM.cdsContactDetailPerson.FieldByName('COMMENT').AsString := MTDM.FFieldValue.Comment;
+        MTDM.cdsContactDetailPerson.FieldByName('CONTACT_TYPE_ID').AsInteger := MTDM.FieldValue.ContactTypeID;
+        MTDM.cdsContactDetailPerson.FieldByName('VALUE').AsString := MTDM.FieldValue.TextValue;
+        MTDM.cdsContactDetailPerson.FieldByName('COMMENT').AsString := MTDM.FieldValue.Comment;
 
-        MTDM.ValueArray[0] := 'Contact Type:' + TAB + MTDM.FFieldValue.ContactType;
-        MTDM.ValueArray[1] := 'Contact Value:' + TAB + MTDM.FFieldValue.TextValue;
+        MTDM.ValueArray[0] := 'Contact Type:' + TAB + MTDM.FieldValue.ContactType;
+        MTDM.ValueArray[1] := 'Contact Value:' + TAB + MTDM.FieldValue.TextValue;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1]]);
@@ -699,16 +700,16 @@ begin
 
     4: // Banking details
       begin
-        MTDM.cdsBankingDetail.FieldByName('BANK_ID').AsInteger := MTDM.FFieldValue.BankID;
-        MTDM.cdsBankingDetail.FieldByName('ACCOUNT_TYPE_ID').AsInteger := MTDM.FFieldValue.AccountTypeID;
-        MTDM.cdsBankingDetail.FieldByName('BRANCH_CODE').AsString := MTDM.FFieldValue.BranchCode;
-        MTDM.cdsBankingDetail.FieldByName('ACCOUNT_NO').AsString := MTDM.FFieldValue.AccountNo;
-        MTDM.cdsBankingDetail.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
-        MTDM.cdsBankingDetail.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
+        MTDM.cdsBankingDetail.FieldByName('BANK_ID').AsInteger := MTDM.FieldValue.BankID;
+        MTDM.cdsBankingDetail.FieldByName('ACCOUNT_TYPE_ID').AsInteger := MTDM.FieldValue.AccountTypeID;
+        MTDM.cdsBankingDetail.FieldByName('BRANCH_CODE').AsString := MTDM.FieldValue.BranchCode;
+        MTDM.cdsBankingDetail.FieldByName('ACCOUNT_NO').AsString := MTDM.FieldValue.AccountNo;
+        MTDM.cdsBankingDetail.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
+        MTDM.cdsBankingDetail.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
 
-        MTDM.ValueArray[0] := 'Bank:' + TAB + MTDM.FFieldValue.Bank;
-        MTDM.ValueArray[1] := 'Account Type:' + TAB + MTDM.FFieldValue.AccountType;
-        MTDM.ValueArray[2] := 'Account No:' + TAB + MTDM.FFieldValue.AccountNo;
+        MTDM.ValueArray[0] := 'Bank:' + TAB + MTDM.FieldValue.Bank;
+        MTDM.ValueArray[1] := 'Account Type:' + TAB + MTDM.FieldValue.AccountType;
+        MTDM.ValueArray[2] := 'Account No:' + TAB + MTDM.FieldValue.AccountNo;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
@@ -718,17 +719,17 @@ begin
 
     5: // Director
       begin
-        MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
-        MTDM.cdsDirector.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
-        MTDM.cdsDirector.FieldByName('MIDDLE_NAME').AsString := MTDM.FFieldValue.OtherName;
-        MTDM.cdsDirector.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FFieldValue.EmailAddress;
-        MTDM.cdsDirector.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
-        MTDM.cdsDirector.FieldByName('TAX_NO').AsString := MTDM.FFieldValue.TaxNo;
-        MTDM.cdsDirector.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
+        MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
+        MTDM.cdsDirector.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
+        MTDM.cdsDirector.FieldByName('MIDDLE_NAME').AsString := MTDM.FieldValue.OtherName;
+        MTDM.cdsDirector.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FieldValue.EmailAddress;
+        MTDM.cdsDirector.FieldByName('SALUTATION_ID').AsInteger := MTDM.FieldValue.SalutationID;
+        MTDM.cdsDirector.FieldByName('TAX_NO').AsString := MTDM.FieldValue.TaxNo;
+        MTDM.cdsDirector.FieldByName('MOBILE_PHONE').AsString := MTDM.FieldValue.MobileNo;
 
-        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
-        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
-//        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FieldValue.LastName;
+//        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FieldValue.Salutation;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1]]);
@@ -737,17 +738,17 @@ begin
 
     6: // Beneficiary
       begin
-        MTDM.cdsBeneficiary.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
-        MTDM.cdsBeneficiary.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
-        MTDM.cdsBeneficiary.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
-        MTDM.cdsBeneficiary.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
-        MTDM.cdsBeneficiary.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FFieldValue.EmailAddress;
+        MTDM.cdsBeneficiary.FieldByName('SALUTATION_ID').AsInteger := MTDM.FieldValue.SalutationID;
+        MTDM.cdsBeneficiary.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
+        MTDM.cdsBeneficiary.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
+        MTDM.cdsBeneficiary.FieldByName('MOBILE_PHONE').AsString := MTDM.FieldValue.MobileNo;
+        MTDM.cdsBeneficiary.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FieldValue.EmailAddress;
 
-        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
-        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
-        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
-        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FFieldValue.MobileNo;
-        MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FFieldValue.EmailAddress;
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FieldValue.LastName;
+        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FieldValue.Salutation;
+        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FieldValue.MobileNo;
+        MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FieldValue.EmailAddress;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
@@ -758,17 +759,17 @@ begin
 
     7: // Trustee
       begin
-        MTDM.cdsTrustee.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
-        MTDM.cdsTrustee.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
-        MTDM.cdsTrustee.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
-        MTDM.cdsTrustee.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
-        MTDM.cdsTrustee.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FFieldValue.EmailAddress;
+        MTDM.cdsTrustee.FieldByName('SALUTATION_ID').AsInteger := MTDM.FieldValue.SalutationID;
+        MTDM.cdsTrustee.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
+        MTDM.cdsTrustee.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
+        MTDM.cdsTrustee.FieldByName('MOBILE_PHONE').AsString := MTDM.FieldValue.MobileNo;
+        MTDM.cdsTrustee.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FieldValue.EmailAddress;
 
-        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
-        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
-        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
-        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FFieldValue.MobileNo;
-        MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FFieldValue.EmailAddress;
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FieldValue.LastName;
+        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FieldValue.Salutation;
+        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FieldValue.MobileNo;
+        MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FieldValue.EmailAddress;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
@@ -779,18 +780,18 @@ begin
 
     8: // Shareholder
       begin
-        MTDM.cdsShareHolder.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
-        MTDM.cdsShareHolder.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
-        MTDM.cdsShareHolder.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
-        MTDM.cdsShareHolder.FieldByName('PERCENT_SHARE').AsFloat := MTDM.FFieldValue.PercenShare;
-        MTDM.cdsShareHolder.FieldByName('MOBILE_PHONE').AsString := MTDM.FFieldValue.MobileNo;
-        MTDM.cdsShareHolder.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FFieldValue.EmailAddress;
+        MTDM.cdsShareHolder.FieldByName('SALUTATION_ID').AsInteger := MTDM.FieldValue.SalutationID;
+        MTDM.cdsShareHolder.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
+        MTDM.cdsShareHolder.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
+        MTDM.cdsShareHolder.FieldByName('PERCENT_SHARE').AsFloat := MTDM.FieldValue.PercenShare;
+        MTDM.cdsShareHolder.FieldByName('MOBILE_PHONE').AsString := MTDM.FieldValue.MobileNo;
+        MTDM.cdsShareHolder.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FieldValue.EmailAddress;
 
-        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
-        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
-        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
-        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FFieldValue.MobileNo;
-        MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FFieldValue.EmailAddress;
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FieldValue.LastName;
+        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FieldValue.Salutation;
+        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FieldValue.MobileNo;
+        MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FieldValue.EmailAddress;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
@@ -801,35 +802,35 @@ begin
 
     9: // Heir
       begin
-        MTDM.cdsHeir.FieldByName('SALUTATION_ID').AsInteger := MTDM.FFieldValue.SalutationID;
-        MTDM.cdsHeir.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
-        MTDM.cdsHeir.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
-        MTDM.cdsHeir.FieldByName('ID_NUMBER').AsString := MTDM.FFieldValue.IDNo;
+        MTDM.cdsHeir.FieldByName('SALUTATION_ID').AsInteger := MTDM.FieldValue.SalutationID;
+        MTDM.cdsHeir.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
+        MTDM.cdsHeir.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
+        MTDM.cdsHeir.FieldByName('ID_NUMBER').AsString := MTDM.FieldValue.IDNo;
 
-        MTDM.cdsHeir.FieldByName('PHYSICAL1').AsString := MTDM.FFieldValue.Physical1;
-        MTDM.cdsHeir.FieldByName('PHYSICAL2').AsString := MTDM.FFieldValue.Physical2;
-        MTDM.cdsHeir.FieldByName('PHYSICAL3').AsString := MTDM.FFieldValue.Physical3;
-        MTDM.cdsHeir.FieldByName('PHYSICAL4').AsString := MTDM.FFieldValue.Physical4;
-        MTDM.cdsHeir.FieldByName('PHYSICAL_CODE').AsString := MTDM.FFieldValue.PhysicalCode;
+        MTDM.cdsHeir.FieldByName('PHYSICAL1').AsString := MTDM.FieldValue.Physical1;
+        MTDM.cdsHeir.FieldByName('PHYSICAL2').AsString := MTDM.FieldValue.Physical2;
+        MTDM.cdsHeir.FieldByName('PHYSICAL3').AsString := MTDM.FieldValue.Physical3;
+        MTDM.cdsHeir.FieldByName('PHYSICAL4').AsString := MTDM.FieldValue.Physical4;
+        MTDM.cdsHeir.FieldByName('PHYSICAL_CODE').AsString := MTDM.FieldValue.PhysicalCode;
 
-        MTDM.cdsHeir.FieldByName('POSTAL1').AsString := MTDM.FFieldValue.Postal1;
-        MTDM.cdsHeir.FieldByName('POSTAL2').AsString := MTDM.FFieldValue.Postal2;
-        MTDM.cdsHeir.FieldByName('POSTAL3').AsString := MTDM.FFieldValue.Postal3;
-        MTDM.cdsHeir.FieldByName('POSTAL4').AsString := MTDM.FFieldValue.Postal4;
-        MTDM.cdsHeir.FieldByName('POSTAL_CODE').AsString := MTDM.FFieldValue.PostalCode;
+        MTDM.cdsHeir.FieldByName('POSTAL1').AsString := MTDM.FieldValue.Postal1;
+        MTDM.cdsHeir.FieldByName('POSTAL2').AsString := MTDM.FieldValue.Postal2;
+        MTDM.cdsHeir.FieldByName('POSTAL3').AsString := MTDM.FieldValue.Postal3;
+        MTDM.cdsHeir.FieldByName('POSTAL4').AsString := MTDM.FieldValue.Postal4;
+        MTDM.cdsHeir.FieldByName('POSTAL_CODE').AsString := MTDM.FieldValue.PostalCode;
 
-        MTDM.cdsHeir.FieldByName('ACC_HOLDER_SALUTATION_ID').AsInteger := MTDM.FFieldValue.HAHKSalutatioinID;
-        MTDM.cdsHeir.FieldByName('ACC_HOLDER_FIRST_NAME').AsString := MTDM.FFieldValue.HAHFirstName;
-        MTDM.cdsHeir.FieldByName('ACC_HOLDER_LAST_NAME').AsString := MTDM.FFieldValue.HAHLastName;
-        MTDM.cdsHeir.FieldByName('BANK_ID').AsInteger := MTDM.FFieldValue.BankID;
-        MTDM.cdsHeir.FieldByName('ACCOUNT_TYPE_ID').AsInteger := MTDM.FFieldValue.AccountTypeID;
-        MTDM.cdsHeir.FieldByName('BRANCH_CODE').AsString := MTDM.FFieldValue.BranchCode;
-        MTDM.cdsHeir.FieldByName('ACCOUNT_NO').AsString := MTDM.FFieldValue.AccountNo;
+        MTDM.cdsHeir.FieldByName('ACC_HOLDER_SALUTATION_ID').AsInteger := MTDM.FieldValue.HAHKSalutatioinID;
+        MTDM.cdsHeir.FieldByName('ACC_HOLDER_FIRST_NAME').AsString := MTDM.FieldValue.HAHFirstName;
+        MTDM.cdsHeir.FieldByName('ACC_HOLDER_LAST_NAME').AsString := MTDM.FieldValue.HAHLastName;
+        MTDM.cdsHeir.FieldByName('BANK_ID').AsInteger := MTDM.FieldValue.BankID;
+        MTDM.cdsHeir.FieldByName('ACCOUNT_TYPE_ID').AsInteger := MTDM.FieldValue.AccountTypeID;
+        MTDM.cdsHeir.FieldByName('BRANCH_CODE').AsString := MTDM.FieldValue.BranchCode;
+        MTDM.cdsHeir.FieldByName('ACCOUNT_NO').AsString := MTDM.FieldValue.AccountNo;
 
-        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FFieldValue.FirstName;
-        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FFieldValue.LastName;
-        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FFieldValue.Salutation;
-        MTDM.ValueArray[3] := 'ID No:' + TAB + MTDM.FFieldValue.IDNo;
+        MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FieldValue.FirstName;
+        MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FieldValue.LastName;
+        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FieldValue.Salutation;
+        MTDM.ValueArray[3] := 'ID No:' + TAB + MTDM.FieldValue.IDNo;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
@@ -839,19 +840,19 @@ begin
 
     10: // Vehicle
       begin
-        MTDM.cdsVehicle.FieldByName('THE_YEAR').AsInteger := MTDM.FFieldValue.YearOfManufacture;
-        MTDM.cdsVehicle.FieldByName('VEHICLE_MAKE_ID').AsInteger := MTDM.FFieldValue.VehicleMakeID;
-        MTDM.cdsVehicle.FieldByName('VEHICLE_MODEL').AsString := MTDM.FFieldValue.VehicleModel;
-        MTDM.cdsVehicle.FieldByName('REG_NO').AsString := MTDM.FFieldValue.VehicleRegNo;
-        MTDM.cdsVehicle.FieldByName('RENEWAL_DATE').AsDateTime := MTDM.FFieldValue.LicenceRenewalDate;
-        MTDM.cdsVehicle.FieldByName('MAINTENANCE_PLAN').AsInteger := BooleanToInteger(MTDM.FFieldValue.MaintenancePlan);
-        MTDM.cdsVehicle.FieldByName('COMMENT').AsString := MTDM.FFieldValue.Comment;
+        MTDM.cdsVehicle.FieldByName('THE_YEAR').AsInteger := MTDM.FieldValue.YearOfManufacture;
+        MTDM.cdsVehicle.FieldByName('VEHICLE_MAKE_ID').AsInteger := MTDM.FieldValue.VehicleMakeID;
+        MTDM.cdsVehicle.FieldByName('VEHICLE_MODEL').AsString := MTDM.FieldValue.VehicleModel;
+        MTDM.cdsVehicle.FieldByName('REG_NO').AsString := MTDM.FieldValue.VehicleRegNo;
+        MTDM.cdsVehicle.FieldByName('RENEWAL_DATE').AsDateTime := MTDM.FieldValue.LicenceRenewalDate;
+        MTDM.cdsVehicle.FieldByName('MAINTENANCE_PLAN').AsInteger := BooleanToInteger(MTDM.FieldValue.MaintenancePlan);
+        MTDM.cdsVehicle.FieldByName('COMMENT').AsString := MTDM.FieldValue.Comment;
 
-        MTDM.ValueArray[0] := 'Make:' + TAB + TAB + MTDM.FFieldValue.VehicleMake;
-        MTDM.ValueArray[1] := 'Model:' + TAB + TAB + MTDM.FFieldValue.VehicleModel;
-        MTDM.ValueArray[2] := 'Year:' + TAB + TAB + MTDM.FFieldValue.YearOfManufacture.ToString;
-        MTDM.ValueArray[3] := 'Reg No:' + TAB + TAB + MTDM.FFieldValue.VehicleRegNo;
-        MTDM.ValueArray[4] := 'Renewal Date: ' + TAB + FormatDateTime('dd/MM/yyyy', MTDM.FFieldValue.LicenceRenewalDate);
+        MTDM.ValueArray[0] := 'Make:' + TAB + TAB + MTDM.FieldValue.VehicleMake;
+        MTDM.ValueArray[1] := 'Model:' + TAB + TAB + MTDM.FieldValue.VehicleModel;
+        MTDM.ValueArray[2] := 'Year:' + TAB + TAB + MTDM.FieldValue.YearOfManufacture.ToString;
+        MTDM.ValueArray[3] := 'Reg No:' + TAB + TAB + MTDM.FieldValue.VehicleRegNo;
+        MTDM.ValueArray[4] := 'Renewal Date: ' + TAB + FormatDateTime('dd/MM/yyyy', MTDM.FieldValue.LicenceRenewalDate);
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
@@ -862,54 +863,54 @@ begin
 
     11: // Director company link
       begin
-        MTDM.cdsDirectorCompanyLink.FieldByName('CUSTOMER_ID').AsInteger := MTDM.FFieldValue.CustomerID;
-        MTDM.cdsDirectorCompanyLink.FieldByName('DIRECTOR_ID').AsInteger := MTDM.FFieldValue.DirectorID;
+        MTDM.cdsDirectorCompanyLink.FieldByName('CUSTOMER_ID').AsInteger := MTDM.FieldValue.CustomerID;
+        MTDM.cdsDirectorCompanyLink.FieldByName('DIRECTOR_ID').AsInteger := MTDM.FieldValue.DirectorID;
 
-//        MTDM.ValueArray[0] := 'Customer ' + MTDM.FFieldValue.Name;
+//        MTDM.ValueArray[0] := 'Customer ' + MTDM.FieldValue.Name;
 //        ErrorValues := Format(ERROR_VALUES, [
 //          MTDM.ValueArray[0]]);
       end;
 
     12: // Customer
       begin
-        MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').AsInteger := MTDM.FFieldValue.CustomerTypeID;
-        MTDM.cdsCustomer.FieldByName('YEAR_END_MONTH_ID').AsInteger := MTDM.FFieldValue.YearEndMonthID;
-        MTDM.cdsCustomer.FieldByName('TAX_OFFICE_ID').AsInteger := MTDM.FFieldValue.TaxOfficeID;
-        MTDM.cdsCustomer.FieldByName('VAT_MONTH_ID').AsInteger := MTDM.FFieldValue.VATMonthID;
-        MTDM.cdsCustomer.FieldByName('VAT_COUNTRY_ID').AsInteger := MTDM.FFieldValue.VATCountryID;
-        MTDM.cdsCustomer.FieldByName('VAT_OFFICE_ID').AsInteger := MTDM.FFieldValue.VATOfficeID;
-        MTDM.cdsCustomer.FieldByName('AR_MONTH_ID').AsInteger := MTDM.FFieldValue.ARMonthID;
-        MTDM.cdsCustomer.FieldByName('STATUS_ID').AsInteger := MTDM.FFieldValue.StatauID;
-        MTDM.cdsCustomer.FieldByName('IS_ACTIVE').AsInteger := MTDM.FFieldValue.IsActive;
-        MTDM.cdsCustomer.FieldByName('NAME').AsString := MTDM.FFieldValue.Name;
-        MTDM.cdsCustomer.FieldByName('FIRST_NAME').AsString := MTDM.FFieldValue.FirstName;
-        MTDM.cdsCustomer.FieldByName('LAST_NAME').AsString := MTDM.FFieldValue.LastName;
-        MTDM.cdsCustomer.FieldByName('INITIALS').AsString := MTDM.FFieldValue.Initials;
-        MTDM.cdsCustomer.FieldByName('TRADING_AS').AsString := MTDM.FFieldValue.TradingAs;
-        MTDM.cdsCustomer.FieldByName('BILL_TO').AsString := MTDM.FFieldValue.BillTo;
-        MTDM.cdsCustomer.FieldByName('CO_NO').AsString := MTDM.FFieldValue.CoNo;
-        MTDM.cdsCustomer.FieldByName('TAX_NO').AsString := MTDM.FFieldValue.TaxNo;
-        MTDM.cdsCustomer.FieldByName('VAT_NO').AsString := MTDM.FFieldValue.VATNo;
-        MTDM.cdsCustomer.FieldByName('VAT_CUSTOMS_CODE').AsString := MTDM.FFieldValue.VATCustomsCode;
-        MTDM.cdsCustomer.FieldByName('PAYE_NO').AsString := MTDM.FFieldValue.PayeNo;
-        MTDM.cdsCustomer.FieldByName('UIF_NO').AsString := MTDM.FFieldValue.UifNo;
-        MTDM.cdsCustomer.FieldByName('SDL_NO').AsString := MTDM.FFieldValue.SDLNo;
-        MTDM.cdsCustomer.FieldByName('WC_NO').AsString := MTDM.FFieldValue.WCNo;
+        MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').AsInteger := MTDM.FieldValue.CustomerTypeID;
+        MTDM.cdsCustomer.FieldByName('YEAR_END_MONTH_ID').AsInteger := MTDM.FieldValue.YearEndMonthID;
+        MTDM.cdsCustomer.FieldByName('TAX_OFFICE_ID').AsInteger := MTDM.FieldValue.TaxOfficeID;
+        MTDM.cdsCustomer.FieldByName('VAT_MONTH_ID').AsInteger := MTDM.FieldValue.VATMonthID;
+        MTDM.cdsCustomer.FieldByName('VAT_COUNTRY_ID').AsInteger := MTDM.FieldValue.VATCountryID;
+        MTDM.cdsCustomer.FieldByName('VAT_OFFICE_ID').AsInteger := MTDM.FieldValue.VATOfficeID;
+        MTDM.cdsCustomer.FieldByName('AR_MONTH_ID').AsInteger := MTDM.FieldValue.ARMonthID;
+        MTDM.cdsCustomer.FieldByName('STATUS_ID').AsInteger := MTDM.FieldValue.StatauID;
+        MTDM.cdsCustomer.FieldByName('IS_ACTIVE').AsInteger := MTDM.FieldValue.IsActive;
+        MTDM.cdsCustomer.FieldByName('NAME').AsString := MTDM.FieldValue.Name;
+        MTDM.cdsCustomer.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
+        MTDM.cdsCustomer.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
+        MTDM.cdsCustomer.FieldByName('INITIALS').AsString := MTDM.FieldValue.Initials;
+        MTDM.cdsCustomer.FieldByName('TRADING_AS').AsString := MTDM.FieldValue.TradingAs;
+        MTDM.cdsCustomer.FieldByName('BILL_TO').AsString := MTDM.FieldValue.BillTo;
+        MTDM.cdsCustomer.FieldByName('CO_NO').AsString := MTDM.FieldValue.CoNo;
+        MTDM.cdsCustomer.FieldByName('TAX_NO').AsString := MTDM.FieldValue.TaxNo;
+        MTDM.cdsCustomer.FieldByName('VAT_NO').AsString := MTDM.FieldValue.VATNo;
+        MTDM.cdsCustomer.FieldByName('VAT_CUSTOMS_CODE').AsString := MTDM.FieldValue.VATCustomsCode;
+        MTDM.cdsCustomer.FieldByName('PAYE_NO').AsString := MTDM.FieldValue.PayeNo;
+        MTDM.cdsCustomer.FieldByName('UIF_NO').AsString := MTDM.FieldValue.UifNo;
+        MTDM.cdsCustomer.FieldByName('SDL_NO').AsString := MTDM.FieldValue.SDLNo;
+        MTDM.cdsCustomer.FieldByName('WC_NO').AsString := MTDM.FieldValue.WCNo;
 
-        if (FormatDatetime('dd/MM/yyyy', MTDM.FFieldValue.ARCompletionDate) <> '30/12/1899')
-          and (FormatDatetime('dd/MM/yyyy', MTDM.FFieldValue.ARCompletionDate) <> '00/00/0000') then
-          MTDM.cdsCustomer.FieldByName('AR_COMPLETION_DATE').AsDateTime := MTDM.FFieldValue.ARCompletionDate;
-//        MTDM.cdsCustomer.FieldByName('AR_COMPLETION_DATE').Value := MTDM.FFieldValue.ARCompletionDate;
-        MTDM.cdsCustomer.FieldByName('PASTEL_ACC_CODE').AsString := MTDM.FFieldValue.PasteAccCode;
-        MTDM.cdsCustomer.FieldByName('VB_TAX_ACC_CODE').AsString := MTDM.FFieldValue.VBTaxAccCode;
-        MTDM.cdsCustomer.FieldByName('IS_PROV_TAX_PAYER').AsInteger := MTDM.FFieldValue.IsProvTaxPayer;
-        MTDM.cdsCustomer.FieldByName('HAS_LIVING_WILL').AsInteger := MTDM.FFieldValue.HasLivingWill;
-        MTDM.cdsCustomer.FieldByName('IS_ORGAN_DONOR').AsInteger := MTDM.FFieldValue.IsOrganDonor;
-        MTDM.cdsCustomer.FieldByName('EFILING').AsString := MTDM.FFieldValue.EFiling;
-        MTDM.cdsCustomer.FieldByName('EF_USER_NAME').AsString := MTDM.FFieldValue.EFUserName;
-        MTDM.cdsCustomer.FieldByName('EF_PASSWORD').AsString := MTDM.FFieldValue.EFPassword;
+        if (FormatDatetime('dd/MM/yyyy', MTDM.FieldValue.ARCompletionDate) <> '30/12/1899')
+          and (FormatDatetime('dd/MM/yyyy', MTDM.FieldValue.ARCompletionDate) <> '00/00/0000') then
+          MTDM.cdsCustomer.FieldByName('AR_COMPLETION_DATE').AsDateTime := MTDM.FieldValue.ARCompletionDate;
+//        MTDM.cdsCustomer.FieldByName('AR_COMPLETION_DATE').Value := MTDM.FieldValue.ARCompletionDate;
+        MTDM.cdsCustomer.FieldByName('PASTEL_ACC_CODE').AsString := MTDM.FieldValue.PasteAccCode;
+        MTDM.cdsCustomer.FieldByName('VB_TAX_ACC_CODE').AsString := MTDM.FieldValue.VBTaxAccCode;
+        MTDM.cdsCustomer.FieldByName('IS_PROV_TAX_PAYER').AsInteger := MTDM.FieldValue.IsProvTaxPayer;
+        MTDM.cdsCustomer.FieldByName('HAS_LIVING_WILL').AsInteger := MTDM.FieldValue.HasLivingWill;
+        MTDM.cdsCustomer.FieldByName('IS_ORGAN_DONOR').AsInteger := MTDM.FieldValue.IsOrganDonor;
+        MTDM.cdsCustomer.FieldByName('EFILING').AsString := MTDM.FieldValue.EFiling;
+        MTDM.cdsCustomer.FieldByName('EF_USER_NAME').AsString := MTDM.FieldValue.EFUserName;
+        MTDM.cdsCustomer.FieldByName('EF_PASSWORD').AsString := MTDM.FieldValue.EFPassword;
 
-        MTDM.ValueArray[0] := 'Customer ' + MTDM.FFieldValue.Name;
+        MTDM.ValueArray[0] := 'Customer ' + MTDM.FieldValue.Name;
         ErrorValues := Format(ERROR_VALUES, [
           MTDM.ValueArray[0]]);
       end;
@@ -2181,7 +2182,7 @@ begin
     SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Customer Table')), 0);
     SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
 
-    VBBaseDM.GetData(3, MTDM.cdsCustomer, MTDM.cdsCustomer.Name, ONE_SPACE,
+    VBBaseDM.GetData(3, MTDM.cdsCustomer, MTDM.cdsCustomer.Name, ' ORDER BY FIRST_NAME, LAST_NAME ',
       'C:\Data\Xml\Customer.xml', MTDM.cdsCustomer.UpdateOptions.Generatorname,
       MTDM.cdsCustomer.UpdateOptions.UpdateTableName);
 
@@ -2711,7 +2712,7 @@ begin
                 FOpenTableParam.ScriptID := 9;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Contact Detail Co.xml';
                 FOpenTableParam.FieldName := 'VALUE';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.TextValue;
               end;
 
               CompanyContactDetailFrm.Close;
@@ -2729,7 +2730,7 @@ begin
                 FOpenTableParam.ScriptID := 4;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Address.xml';
                 FOpenTableParam.FieldName := 'PHYSICAL1';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.Physical1;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.Physical1;
               end;
 
               AddressDetailFrm.Close;
@@ -2747,7 +2748,7 @@ begin
                 FOpenTableParam.ScriptID := 10;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Contact Person.xml';
                 FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.FirstName;
               end;
 
               ContactPersonFrm.Close;
@@ -2771,7 +2772,7 @@ begin
                 FOpenTableParam.ScriptID := 37;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Contact Detail Person Customer.xml';
                 FOpenTableParam.FieldName := 'VALUE';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.TextValue;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.TextValue;
               end;
 
               PersonContactDetailFrm.Close;
@@ -2789,7 +2790,7 @@ begin
                 FOpenTableParam.ScriptID := 7;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Banking Detail.xml';
                 FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.Bank;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.Bank;
               end;
 
               BankingDetailFrm.Close;
@@ -2807,7 +2808,7 @@ begin
                 FOpenTableParam.ScriptID := 16;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Director.xml';
                 FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.FirstName;
               end;
 
               DirectorDetailFrm.Close;
@@ -2825,7 +2826,7 @@ begin
                 FOpenTableParam.ScriptID := 8;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Beneficiary.xml';
                 FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.FirstName;
               end;
 
               BeneficiaryDetailFrm.Close;
@@ -2843,7 +2844,7 @@ begin
                 FOpenTableParam.ScriptID := 50;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Trustee.xml';
                 FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.FirstName;
               end;
 
               TrusteeDetailFrm.Close;
@@ -2861,7 +2862,7 @@ begin
                 FOpenTableParam.ScriptID := 77;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Shareholder.xml';
                 FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.FirstName;
               end;
 
               ShareHolderDetailFrm.Close;
@@ -2879,7 +2880,7 @@ begin
                 FOpenTableParam.ScriptID := 78;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Vehicle.xml';
                 FOpenTableParam.FieldName := 'FIRST_NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.FirstName;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.FirstName;
               end;
 
               HeirDetailFrm.Close;
@@ -2897,7 +2898,7 @@ begin
                 FOpenTableParam.ScriptID := 49;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Vehicle.xml';
                 FOpenTableParam.FieldName := 'REG_NO';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.VehicleRegNo;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.VehicleRegNo;
               end;
 
               VehicleDetailFrm.Close;
@@ -2915,7 +2916,7 @@ begin
                 FOpenTableParam.ScriptID := 74;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Director Company Link.xml';
                 FOpenTableParam.FieldName := 'DIRECTOR_ID';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.VehicleRegNo;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.VehicleRegNo;
               end;
 
               DirectorCompanyLinkFrm.Close;
@@ -2939,7 +2940,7 @@ begin
                 FOpenTableParam.ScriptID := 3;
                 FOpenTableParam.FileName := 'C:\Data\Xml\Customer.xml';
                 FOpenTableParam.FieldName := 'NAME';
-                FOpenTableParam.LocateValue := MTDM.FFieldValue.Name;
+                FOpenTableParam.LocateValue := MTDM.FieldValue.Name;
               end;
 
               CustomerEditFrm.Close;
@@ -3052,8 +3053,8 @@ end;
 
 procedure TCustomerFrm.viewContactDetailNavigatorButtonsButtonClick(Sender: TObject;
   AButtonIndex: Integer; var ADone: Boolean);
-var
-  Key: Word;
+//var
+//  Key: Word;
 begin
   inherited;
   ADone := True;

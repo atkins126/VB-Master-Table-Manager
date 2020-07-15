@@ -47,7 +47,6 @@ inherited DirectorCompanyLinkFrm: TDirectorCompanyLinkFrm
           FieldName = 'COMPANY'
         end>
       Properties.ListOptions.SyncMode = True
-      Properties.ListSource = LookupDM.dtsDirectorCompanyLink
       Style.HotTrack = False
       Style.TransparentBorder = False
       TabOrder = 2

@@ -56,7 +56,6 @@ inherited HeirDetailFrm: THeirDetailFrm
         item
           FieldName = 'NAME'
         end>
-      Properties.ListSource = LookupDM.dtsSHSalutation
       Properties.PostPopupValueOnTab = True
       Style.HotTrack = False
       Style.TransparentBorder = False
@@ -192,7 +191,6 @@ inherited HeirDetailFrm: THeirDetailFrm
         item
           FieldName = 'NAME'
         end>
-      Properties.ListSource = LookupDM.dtsSHSalutation
       Properties.PostPopupValueOnTab = True
       Style.HotTrack = False
       Style.TransparentBorder = False
@@ -221,7 +219,6 @@ inherited HeirDetailFrm: THeirDetailFrm
         item
           FieldName = 'NAME'
         end>
-      Properties.ListSource = LookupDM.dtsBank
       Properties.PostPopupValueOnTab = True
       Style.HotTrack = False
       Style.TransparentBorder = False
@@ -241,7 +238,6 @@ inherited HeirDetailFrm: THeirDetailFrm
         item
           FieldName = 'NAME'
         end>
-      Properties.ListSource = LookupDM.dtsBankAccountType
       Properties.PostPopupValueOnTab = True
       Style.HotTrack = False
       Style.TransparentBorder = False

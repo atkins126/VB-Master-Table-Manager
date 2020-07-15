@@ -123,13 +123,13 @@ begin
   if SameText(TrimAll(edtLastName.Text), '') then
     raise EValidateException.Create('Last name must have a value');
 
-  MTDM.FFieldValue.SalutationID := lucSalutation.EditValue;
-  MTDM.FFieldValue.FirstName := edtFirstName.Text;
-  MTDM.FFieldValue.LastName := edtLastName.Text;
-  MTDM.FFieldValue.OtherName := edtOtherName.Text;
-  MTDM.FFieldValue.TaxNo := edtTaxNo.Text;
-  MTDM.FFieldValue.MobileNo := edtMobileNo.Text;
-  MTDM.FFieldValue.EmailAddress := edtEmailAddress.Text;
+  MTDM.FieldValue.SalutationID := lucSalutation.EditValue;
+  MTDM.FieldValue.FirstName := edtFirstName.Text;
+  MTDM.FieldValue.LastName := edtLastName.Text;
+  MTDM.FieldValue.OtherName := edtOtherName.Text;
+  MTDM.FieldValue.TaxNo := edtTaxNo.Text;
+  MTDM.FieldValue.MobileNo := edtMobileNo.Text;
+  MTDM.FieldValue.EmailAddress := edtEmailAddress.Text;
 
   ModalResult := mrOK;
 end;

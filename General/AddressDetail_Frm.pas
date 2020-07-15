@@ -213,23 +213,23 @@ end;
 
 procedure TAddressDetailFrm.Validate;
 begin
-  MTDM.FFieldValue.Physical1 := edtPhysical1.Text;
-  MTDM.FFieldValue.Physical2 := edtPhysical2.Text;
-  MTDM.FFieldValue.Physical3 := edtPhysical3.Text;
-  MTDM.FFieldValue.Physical4 := edtPhysical4.Text;
-  MTDM.FFieldValue.PhysicalCode := edtPhysicalCode.Text;
+  MTDM.FieldValue.Physical1 := edtPhysical1.Text;
+  MTDM.FieldValue.Physical2 := edtPhysical2.Text;
+  MTDM.FieldValue.Physical3 := edtPhysical3.Text;
+  MTDM.FieldValue.Physical4 := edtPhysical4.Text;
+  MTDM.FieldValue.PhysicalCode := edtPhysicalCode.Text;
 
-  MTDM.FFieldValue.Postal1 := edtPostal1.Text;
-  MTDM.FFieldValue.Postal2 := edtPostal2.Text;
-  MTDM.FFieldValue.Postal3 := edtPostal3.Text;
-  MTDM.FFieldValue.Postal4 := edtPostal4.Text;
-  MTDM.FFieldValue.PostalCode := edtPostalCode.Text;
+  MTDM.FieldValue.Postal1 := edtPostal1.Text;
+  MTDM.FieldValue.Postal2 := edtPostal2.Text;
+  MTDM.FieldValue.Postal3 := edtPostal3.Text;
+  MTDM.FieldValue.Postal4 := edtPostal4.Text;
+  MTDM.FieldValue.PostalCode := edtPostalCode.Text;
 
-  MTDM.FFieldValue.Billing1 := edtBilling1.Text;
-  MTDM.FFieldValue.Billing2 := edtBilling2.Text;
-  MTDM.FFieldValue.Billing3 := edtBilling3.Text;
-  MTDM.FFieldValue.Billing4 := edtBilling4.Text;
-  MTDM.FFieldValue.BillingCode := edtBillingCode.Text;
+  MTDM.FieldValue.Billing1 := edtBilling1.Text;
+  MTDM.FieldValue.Billing2 := edtBilling2.Text;
+  MTDM.FieldValue.Billing3 := edtBilling3.Text;
+  MTDM.FieldValue.Billing4 := edtBilling4.Text;
+  MTDM.FieldValue.BillingCode := edtBillingCode.Text;
 
   ModalResult := mrOK;
 end;

@@ -109,11 +109,12 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
       TabOrder = 6
       Width = 160
     end
-    inherited layMainGroup_Root: TdxLayoutGroup
-      ItemIndex = 1
-    end
     inherited grpData: TdxLayoutGroup
       ItemIndex = 4
+    end
+    inherited grpButtons: TdxLayoutGroup
+      AlignHorz = ahRight
+      ItemIndex = 1
     end
     object grpName: TdxLayoutGroup
       Parent = grpData

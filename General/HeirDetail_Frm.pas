@@ -209,31 +209,31 @@ begin
   if SameText(TrimAll(edtAccNo.Text), '') then
     raise EValidateException.Create('Account number must have a value');
 
-  MTDM.FFieldValue.SalutationID := lucSalutation.EditValue;
-  MTDM.FFieldValue.FirstName := edtFirstName.Text;
-  MTDM.FFieldValue.LastName := edtLastName.Text;
-  MTDM.FFieldValue.IDNo := edtIDNo.Text;
+  MTDM.FieldValue.SalutationID := lucSalutation.EditValue;
+  MTDM.FieldValue.FirstName := edtFirstName.Text;
+  MTDM.FieldValue.LastName := edtLastName.Text;
+  MTDM.FieldValue.IDNo := edtIDNo.Text;
 
-  MTDM.FFieldValue.HAHKSalutatioinID := lucHAHSalutation.EditValue;
-  MTDM.FFieldValue.HAHFirstName := edtHAHFirstName.Text;
-  MTDM.FFieldValue.HAHLastName := edtHAHLastName.Text;
+  MTDM.FieldValue.HAHKSalutatioinID := lucHAHSalutation.EditValue;
+  MTDM.FieldValue.HAHFirstName := edtHAHFirstName.Text;
+  MTDM.FieldValue.HAHLastName := edtHAHLastName.Text;
 
-  MTDM.FFieldValue.BankID := lucBank.EditValue;
-  MTDM.FFieldValue.BranchCode := edtBranchCode.Text;
-  MTDM.FFieldValue.AccountTypeID := lucAccType.EditValue;
-  MTDM.FFieldValue.AccountNo := edtAccNo.Text;
+  MTDM.FieldValue.BankID := lucBank.EditValue;
+  MTDM.FieldValue.BranchCode := edtBranchCode.Text;
+  MTDM.FieldValue.AccountTypeID := lucAccType.EditValue;
+  MTDM.FieldValue.AccountNo := edtAccNo.Text;
 
-  MTDM.FFieldValue.Physical1 := edtPhysical1.Text;
-  MTDM.FFieldValue.Physical2 := edtPhysical2.Text;
-  MTDM.FFieldValue.Physical3 := edtPhysical3.Text;
-  MTDM.FFieldValue.Physical4 := edtPhysical4.Text;
-  MTDM.FFieldValue.PhysicalCode := edtPhysicalCode.Text;
+  MTDM.FieldValue.Physical1 := edtPhysical1.Text;
+  MTDM.FieldValue.Physical2 := edtPhysical2.Text;
+  MTDM.FieldValue.Physical3 := edtPhysical3.Text;
+  MTDM.FieldValue.Physical4 := edtPhysical4.Text;
+  MTDM.FieldValue.PhysicalCode := edtPhysicalCode.Text;
 
-  MTDM.FFieldValue.Postal1 := edtPostal1.Text;
-  MTDM.FFieldValue.Postal2 := edtPostal2.Text;
-  MTDM.FFieldValue.Postal3 := edtPostal3.Text;
-  MTDM.FFieldValue.Postal4 := edtPostal4.Text;
-  MTDM.FFieldValue.PostalCode := edtPostalCode.Text;
+  MTDM.FieldValue.Postal1 := edtPostal1.Text;
+  MTDM.FieldValue.Postal2 := edtPostal2.Text;
+  MTDM.FieldValue.Postal3 := edtPostal3.Text;
+  MTDM.FieldValue.Postal4 := edtPostal4.Text;
+  MTDM.FieldValue.PostalCode := edtPostalCode.Text;
 
   ModalResult := mrOK;
 end;

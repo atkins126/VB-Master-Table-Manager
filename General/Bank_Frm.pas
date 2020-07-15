@@ -51,7 +51,6 @@ uses
 
 procedure TBankFrm.FormCreate(Sender: TObject);
 begin
-  inherited;
   Caption := 'Bank';
   viewMaster.DataController.DataSource := MTDM.dtsBank;
   navMaster.DataSource := MTDM.dtsBank;

@@ -443,7 +443,7 @@ inherited ReportDM: TReportDM
       DisplayLabel = 'Type'
       FieldName = 'CUSTOMER_TYPE'
       Origin = 'CUSTOMER_TYPE'
-      Size = 30
+      Size = 50
     end
     object cdsCustomerNAME: TStringField
       DisplayLabel = 'Customer'
@@ -4742,7 +4742,7 @@ inherited ReportDM: TReportDM
       DisplayLabel = 'Customer Type'
       FieldName = 'CUSTOMER_TYPE'
       Origin = 'CUSTOMER_TYPE'
-      Size = 30
+      Size = 50
     end
     object cdsCustomerListingNAME: TStringField
       DisplayLabel = 'Name'

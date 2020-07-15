@@ -159,14 +159,14 @@ begin
   if SameText(dteRenewlDate.Text, '') then
     raise EValidateException.Create('Renewal date must have a value');
 
-  MTDM.FFieldValue.VehicleMakeID := VarAsType(lucVehicleMake.EditValue, varInteger);
-  MTDM.FFieldValue.VehicleMake := lucVehicleMake.Text;
-  MTDM.FFieldValue.VehicleModel := edtModel.Text;
-  MTDM.FFieldValue.VehicleRegNo := edtRegNo.Text;
-  MTDM.FFieldValue.YearOfManufacture := Trunc(edtYear.Value);
-  MTDM.FFieldValue.LicenceRenewalDate := dteRenewlDate.Date;
-  MTDM.FFieldValue.MaintenancePlan := cbxMaintenancePlan.Checked;
-  MTDM.FFieldValue.Comment := memComment.Text;
+  MTDM.FieldValue.VehicleMakeID := VarAsType(lucVehicleMake.EditValue, varInteger);
+  MTDM.FieldValue.VehicleMake := lucVehicleMake.Text;
+  MTDM.FieldValue.VehicleModel := edtModel.Text;
+  MTDM.FieldValue.VehicleRegNo := edtRegNo.Text;
+  MTDM.FieldValue.YearOfManufacture := Trunc(edtYear.Value);
+  MTDM.FieldValue.LicenceRenewalDate := dteRenewlDate.Date;
+  MTDM.FieldValue.MaintenancePlan := cbxMaintenancePlan.Checked;
+  MTDM.FieldValue.Comment := memComment.Text;
 
   ModalResult := mrOK;
 end;

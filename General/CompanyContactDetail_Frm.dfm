@@ -64,7 +64,6 @@ inherited CompanyContactDetailFrm: TCompanyContactDetailFrm
         item
           FieldName = 'NAME'
         end>
-      Properties.ListSource = LookupDM.dtsContactType
       Properties.PostPopupValueOnTab = True
       Style.HotTrack = False
       TabOrder = 2

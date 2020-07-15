@@ -64,7 +64,6 @@ inherited ShareHolderDetailFrm: TShareHolderDetailFrm
         item
           FieldName = 'NAME'
         end>
-      Properties.ListSource = LookupDM.dtsSHSalutation
       Properties.PostPopupValueOnTab = True
       Style.HotTrack = False
       Style.TransparentBorder = False

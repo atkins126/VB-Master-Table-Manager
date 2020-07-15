@@ -10,24 +10,24 @@ inherited CustomerEditFrm: TCustomerEditFrm
   TextHeight = 13
   inherited layMain: TdxLayoutControl
     Width = 831
-    Height = 676
+    Height = 706
     ExplicitWidth = 831
-    ExplicitHeight = 676
+    ExplicitHeight = 706
     object btnOK: TcxButton [0]
       Left = 664
-      Top = 640
+      Top = 670
       Width = 75
       Height = 25
       Caption = 'OK'
       Default = True
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 37
+      TabOrder = 38
       OnClick = btnOKClick
     end
     object btnCancel: TcxButton [1]
       Left = 745
-      Top = 640
+      Top = 670
       Width = 75
       Height = 25
       Cancel = True
@@ -35,7 +35,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       ModalResult = 2
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 38
+      TabOrder = 39
     end
     object lblCustomerHeader: TcxLabel [2]
       Left = 11
@@ -63,30 +63,30 @@ inherited CustomerEditFrm: TCustomerEditFrm
     end
     object edtCoNo: TcxTextEdit [4]
       Left = 110
-      Top = 153
+      Top = 178
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 6
+      TabOrder = 7
       OnKeyPress = edtCoNoKeyPress
       Width = 406
     end
     object edtTradingAs: TcxTextEdit [5]
       Left = 110
-      Top = 206
+      Top = 231
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 8
+      TabOrder = 9
       Width = 350
     end
     object edtBillTo: TcxTextEdit [6]
       Left = 110
-      Top = 237
+      Top = 262
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 10
+      TabOrder = 11
       Width = 350
     end
     object lucCustomerType: TcxLookupComboBox [7]
@@ -103,7 +103,6 @@ inherited CustomerEditFrm: TCustomerEditFrm
           FieldName = 'NAME'
         end>
       Properties.ListOptions.SyncMode = True
-      Properties.ListSource = LookupDM.dtsCustomerType
       Properties.OnEditValueChanged = lucCustomerTypePropertiesEditValueChanged
       Style.HotTrack = False
       Style.TransparentBorder = False
@@ -112,7 +111,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
     end
     object lucStatus: TcxLookupComboBox [8]
       Left = 110
-      Top = 178
+      Top = 203
       BeepOnEnter = False
       Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
@@ -124,15 +123,14 @@ inherited CustomerEditFrm: TCustomerEditFrm
           FieldName = 'NAME'
         end>
       Properties.ListOptions.SyncMode = True
-      Properties.ListSource = LookupDM.dtsCustomerStatus
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 7
+      TabOrder = 8
       Width = 406
     end
     object cbxIsActive: TcxCheckBox [9]
       Left = 20
-      Top = 265
+      Top = 290
       Caption = 'Is Active (For transactions and reports)'
       ParentShowHint = False
       Properties.Alignment = taLeftJustify
@@ -141,12 +139,12 @@ inherited CustomerEditFrm: TCustomerEditFrm
       ShowHint = True
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 12
+      TabOrder = 13
       Transparent = True
     end
     object lucYearEnd: TcxLookupComboBox [10]
       Left = 110
-      Top = 333
+      Top = 358
       BeepOnEnter = False
       Properties.ClearKey = 46
       Properties.DropDownAutoSize = True
@@ -158,33 +156,12 @@ inherited CustomerEditFrm: TCustomerEditFrm
           FieldName = 'NAME'
         end>
       Properties.ListOptions.SyncMode = True
-      Properties.ListSource = LookupDM.dtsMonthOfyear
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 13
+      TabOrder = 14
       Width = 406
     end
     object lucTaxOffice: TcxLookupComboBox [11]
-      Left = 110
-      Top = 383
-      BeepOnEnter = False
-      Properties.ClearKey = 46
-      Properties.DropDownAutoSize = True
-      Properties.DropDownListStyle = lsFixedList
-      Properties.ImmediatePost = True
-      Properties.KeyFieldNames = 'ID'
-      Properties.ListColumns = <
-        item
-          FieldName = 'NAME'
-        end>
-      Properties.ListOptions.SyncMode = True
-      Properties.ListSource = LookupDM.dtsTaxOffice
-      Style.HotTrack = False
-      Style.TransparentBorder = False
-      TabOrder = 15
-      Width = 406
-    end
-    object lucARMonth: TcxLookupComboBox [12]
       Left = 110
       Top = 408
       BeepOnEnter = False
@@ -198,63 +175,41 @@ inherited CustomerEditFrm: TCustomerEditFrm
           FieldName = 'NAME'
         end>
       Properties.ListOptions.SyncMode = True
-      Properties.ListSource = LookupDM.dtsARMonthOfyear
       Style.HotTrack = False
       Style.TransparentBorder = False
       TabOrder = 16
       Width = 406
     end
+    object lucARMonth: TcxLookupComboBox [12]
+      Left = 110
+      Top = 433
+      BeepOnEnter = False
+      Properties.ClearKey = 46
+      Properties.DropDownAutoSize = True
+      Properties.DropDownListStyle = lsFixedList
+      Properties.ImmediatePost = True
+      Properties.KeyFieldNames = 'ID'
+      Properties.ListColumns = <
+        item
+          FieldName = 'NAME'
+        end>
+      Properties.ListOptions.SyncMode = True
+      Style.HotTrack = False
+      Style.TransparentBorder = False
+      TabOrder = 17
+      Width = 406
+    end
     object edtTaxNo: TcxTextEdit [13]
       Left = 110
-      Top = 358
+      Top = 383
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 14
+      TabOrder = 15
       OnKeyPress = edtCoNoKeyPress
       Width = 406
     end
     object lucVATOffice: TcxLookupComboBox [14]
-      Left = 110
-      Top = 526
-      BeepOnEnter = False
-      Properties.ClearKey = 46
-      Properties.DropDownAutoSize = True
-      Properties.DropDownListStyle = lsFixedList
-      Properties.ImmediatePost = True
-      Properties.KeyFieldNames = 'ID'
-      Properties.ListColumns = <
-        item
-          FieldName = 'NAME'
-        end>
-      Properties.ListOptions.SyncMode = True
-      Properties.ListSource = LookupDM.dtsVATOffice
-      Style.HotTrack = False
-      Style.TransparentBorder = False
-      TabOrder = 19
-      Width = 406
-    end
-    object lucVATMonth: TcxLookupComboBox [15]
-      Left = 110
-      Top = 501
-      BeepOnEnter = False
-      Properties.ClearKey = 46
-      Properties.DropDownAutoSize = True
-      Properties.DropDownListStyle = lsFixedList
-      Properties.ImmediatePost = True
-      Properties.KeyFieldNames = 'ID'
-      Properties.ListColumns = <
-        item
-          FieldName = 'NAME'
-        end>
-      Properties.ListOptions.SyncMode = True
-      Properties.ListSource = LookupDM.dtsVATMonth
-      Style.HotTrack = False
-      Style.TransparentBorder = False
-      TabOrder = 18
-      Width = 406
-    end
-    object lucVATCountry: TcxLookupComboBox [16]
       Left = 110
       Top = 551
       BeepOnEnter = False
@@ -268,29 +223,66 @@ inherited CustomerEditFrm: TCustomerEditFrm
           FieldName = 'NAME'
         end>
       Properties.ListOptions.SyncMode = True
-      Properties.ListSource = LookupDM.dtsCountry
       Style.HotTrack = False
       Style.TransparentBorder = False
       TabOrder = 20
       Width = 406
     end
+    object lucVATMonth: TcxLookupComboBox [15]
+      Left = 110
+      Top = 526
+      BeepOnEnter = False
+      Properties.ClearKey = 46
+      Properties.DropDownAutoSize = True
+      Properties.DropDownListStyle = lsFixedList
+      Properties.ImmediatePost = True
+      Properties.KeyFieldNames = 'ID'
+      Properties.ListColumns = <
+        item
+          FieldName = 'NAME'
+        end>
+      Properties.ListOptions.SyncMode = True
+      Style.HotTrack = False
+      Style.TransparentBorder = False
+      TabOrder = 19
+      Width = 406
+    end
+    object lucVATCountry: TcxLookupComboBox [16]
+      Left = 110
+      Top = 576
+      BeepOnEnter = False
+      Properties.ClearKey = 46
+      Properties.DropDownAutoSize = True
+      Properties.DropDownListStyle = lsFixedList
+      Properties.ImmediatePost = True
+      Properties.KeyFieldNames = 'ID'
+      Properties.ListColumns = <
+        item
+          FieldName = 'NAME'
+        end>
+      Properties.ListOptions.SyncMode = True
+      Style.HotTrack = False
+      Style.TransparentBorder = False
+      TabOrder = 21
+      Width = 406
+    end
     object edtVATNo: TcxTextEdit [17]
       Left = 110
-      Top = 476
+      Top = 501
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 17
+      TabOrder = 18
       OnKeyPress = edtCoNoKeyPress
       Width = 406
     end
     object edtVATCustomsCode: TcxTextEdit [18]
       Left = 110
-      Top = 576
+      Top = 601
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 21
+      TabOrder = 22
       OnKeyPress = edtCoNoKeyPress
       Width = 406
     end
@@ -300,7 +292,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 22
+      TabOrder = 23
       OnKeyPress = edtCoNoKeyPress
       Width = 150
     end
@@ -310,7 +302,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 24
+      TabOrder = 25
       OnKeyPress = edtCoNoKeyPress
       Width = 150
     end
@@ -320,7 +312,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 25
+      TabOrder = 26
       OnKeyPress = edtCoNoKeyPress
       Width = 150
     end
@@ -330,7 +322,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 27
+      TabOrder = 28
       Width = 150
     end
     object edtEFUserName: TcxTextEdit [23]
@@ -339,7 +331,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 28
+      TabOrder = 29
       Width = 150
     end
     object edtEFPassword: TcxTextEdit [24]
@@ -348,7 +340,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 29
+      TabOrder = 30
       Width = 150
     end
     object dteARCompletionDate: TcxDateEdit [25]
@@ -363,7 +355,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       Properties.ShowTime = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 26
+      TabOrder = 27
       Width = 150
     end
     object edtPastelAccCode: TcxTextEdit [26]
@@ -372,7 +364,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 30
+      TabOrder = 31
       OnKeyPress = edtCoNoKeyPress
       Width = 150
     end
@@ -382,7 +374,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 31
+      TabOrder = 32
       OnKeyPress = edtCoNoKeyPress
       Width = 150
     end
@@ -397,7 +389,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       ShowHint = True
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 32
+      TabOrder = 33
       Transparent = True
     end
     object cbxLivingWill: TcxCheckBox [29]
@@ -411,7 +403,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       ShowHint = True
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 33
+      TabOrder = 34
       Transparent = True
     end
     object cbxOrganDonor: TcxCheckBox [30]
@@ -425,7 +417,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       ShowHint = True
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 34
+      TabOrder = 35
       Transparent = True
     end
     object edtCreated: TcxDateEdit [31]
@@ -440,7 +432,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       Properties.ShowTime = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 35
+      TabOrder = 36
       Width = 150
     end
     object edtModified: TcxDateEdit [32]
@@ -455,7 +447,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       Properties.ShowTime = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 36
+      TabOrder = 37
       Width = 150
     end
     object edtFirstName: TcxTextEdit [33]
@@ -491,29 +483,37 @@ inherited CustomerEditFrm: TCustomerEditFrm
       BeepOnEnter = False
       Style.HotTrack = False
       Style.TransparentBorder = False
-      TabOrder = 23
+      TabOrder = 24
       OnKeyPress = edtCoNoKeyPress
       Width = 150
     end
     object btnTradingAsSameAsName: TcxButton [37]
       Left = 466
-      Top = 203
+      Top = 228
       Width = 50
       Height = 25
       Action = actTradingAsSameAsName
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 9
+      TabOrder = 10
     end
     object btnBillToSameAsName: TcxButton [38]
       Left = 466
-      Top = 234
+      Top = 259
       Width = 50
       Height = 25
       Action = actBillToSameAsName
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 11
+      TabOrder = 12
+    end
+    object edtIDNumber: TcxDBTextEdit [39]
+      Left = 110
+      Top = 153
+      Style.HotTrack = False
+      Style.TransparentBorder = False
+      TabOrder = 6
+      Width = 130
     end
     inherited layMainGroup_Root: TdxLayoutGroup
       ItemIndex = 2
@@ -581,7 +581,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       ControlOptions.OriginalHeight = 19
       ControlOptions.OriginalWidth = 350
       ControlOptions.ShowBorder = False
-      Index = 3
+      Index = 4
     end
     object litStatus: TdxLayoutItem
       Parent = grpGeneralInfo
@@ -613,7 +613,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       ControlOptions.OriginalHeight = 19
       ControlOptions.OriginalWidth = 200
       ControlOptions.ShowBorder = False
-      Index = 4
+      Index = 5
     end
     object litTradingAs: TdxLayoutItem
       Parent = grpTradingAs
@@ -644,12 +644,13 @@ inherited CustomerEditFrm: TCustomerEditFrm
       ControlOptions.OriginalHeight = 19
       ControlOptions.OriginalWidth = 246
       ControlOptions.ShowBorder = False
-      Index = 7
+      Index = 8
     end
     object grpGeneralInfo: TdxLayoutGroup
       Parent = grpCustomer
       CaptionOptions.Text = 'Generral Information'
       ButtonOptions.Buttons = <>
+      ItemIndex = 3
       Index = 0
     end
     object litCustomerType: TdxLayoutItem
@@ -1085,7 +1086,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       ItemIndex = 1
       LayoutDirection = ldHorizontal
       ShowBorder = False
-      Index = 5
+      Index = 6
     end
     object litTradingAsSameAsName: TdxLayoutItem
       Parent = grpTradingAs
@@ -1104,7 +1105,7 @@ inherited CustomerEditFrm: TCustomerEditFrm
       ItemIndex = 1
       LayoutDirection = ldHorizontal
       ShowBorder = False
-      Index = 6
+      Index = 7
     end
     object litBillToSameAsName: TdxLayoutItem
       Parent = grpBillTo
@@ -1115,6 +1116,23 @@ inherited CustomerEditFrm: TCustomerEditFrm
       ControlOptions.OriginalWidth = 50
       ControlOptions.ShowBorder = False
       Index = 1
+    end
+    object grpIDNumber: TdxLayoutGroup
+      Parent = grpGeneralInfo
+      CaptionOptions.Text = 'New Group'
+      ButtonOptions.Buttons = <>
+      LayoutDirection = ldHorizontal
+      ShowBorder = False
+      Index = 3
+    end
+    object litIDNumber: TdxLayoutItem
+      Parent = grpIDNumber
+      CaptionOptions.Text = 'ID Number'
+      Control = edtIDNumber
+      ControlOptions.OriginalHeight = 19
+      ControlOptions.OriginalWidth = 130
+      ControlOptions.ShowBorder = False
+      Index = 0
     end
   end
   inherited styRepository: TcxStyleRepository

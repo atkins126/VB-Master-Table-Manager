@@ -14,7 +14,7 @@ inherited CustomerFrm: TCustomerFrm
     ExplicitWidth = 1376
     ExplicitHeight = 731
     object grdCustomer: TcxGrid [0]
-      Left = 11
+      Left = -339
       Top = 125
       Width = 915
       Height = 313
@@ -210,13 +210,13 @@ inherited CustomerFrm: TCustomerFrm
           Index = -1
         end
         object viewCustomerAutoCreatedGroup1: TdxLayoutAutoCreatedGroup
-          Parent = viewCustomerRootGroup.Owner
+          Parent = viewCustomerRootGroup
           AlignHorz = ahLeft
           AlignVert = avTop
           Index = 0
         end
         object viewCustomerAutoCreatedGroup2: TdxLayoutAutoCreatedGroup
-          Parent = viewCustomerRootGroup.Owner
+          Parent = viewCustomerRootGroup
           AlignHorz = ahLeft
           AlignVert = avTop
           Index = 1
@@ -257,7 +257,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdVCustomer: TcxDBVerticalGrid [1]
-      Left = 932
+      Left = 582
       Top = 171
       Width = 444
       Height = 267
@@ -309,12 +309,20 @@ inherited CustomerFrm: TCustomerFrm
         Index = 1
         Version = 1
       end
-      object edtVComapnyNo: TcxDBEditorRow
+      object edtVIDNumber: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
-        Properties.DataBinding.FieldName = 'CO_NO'
+        Properties.DataBinding.FieldName = 'ID_NUMBER'
         ID = 3
         ParentID = 0
         Index = 2
+        Version = 1
+      end
+      object edtVComapnyNo: TcxDBEditorRow
+        Properties.EditPropertiesClassName = 'TcxTextEditProperties'
+        Properties.DataBinding.FieldName = 'CO_NO'
+        ID = 4
+        ParentID = 0
+        Index = 3
         Version = 1
       end
       object lucVStatus: TcxDBEditorRow
@@ -326,26 +334,26 @@ inherited CustomerFrm: TCustomerFrm
             FieldName = 'NAME'
           end>
         Properties.DataBinding.FieldName = 'STATUS_ID'
-        ID = 4
+        ID = 5
         ParentID = 0
-        Index = 3
+        Index = 4
         Version = 1
       end
       object edtVTradingAs: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'TRADING_AS'
-        ID = 5
+        ID = 6
         ParentID = 0
-        Index = 4
+        Index = 5
         Version = 1
       end
       object edtVBillTo: TcxDBEditorRow
         Properties.Caption = 'Bill To'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'BILL_TO'
-        ID = 6
+        ID = 7
         ParentID = 0
-        Index = 5
+        Index = 6
         Version = 1
       end
       object cbxVActive: TcxDBEditorRow
@@ -357,14 +365,14 @@ inherited CustomerFrm: TCustomerFrm
         Properties.EditProperties.ValueChecked = 1
         Properties.EditProperties.ValueUnchecked = 0
         Properties.DataBinding.FieldName = 'IS_ACTIVE'
-        ID = 7
+        ID = 8
         ParentID = 0
-        Index = 6
+        Index = 7
         Version = 1
       end
       object grpTaxInformation: TcxCategoryRow
         Properties.Caption = 'Tax Information'
-        ID = 8
+        ID = 9
         ParentID = -1
         Index = 1
         Version = 1
@@ -378,16 +386,16 @@ inherited CustomerFrm: TCustomerFrm
             FieldName = 'NAME'
           end>
         Properties.DataBinding.FieldName = 'YEAR_END_MONTH_ID'
-        ID = 9
-        ParentID = 8
+        ID = 10
+        ParentID = 9
         Index = 0
         Version = 1
       end
       object edtVTaxNo: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'TAX_NO'
-        ID = 10
-        ParentID = 8
+        ID = 11
+        ParentID = 9
         Index = 1
         Version = 1
       end
@@ -399,8 +407,8 @@ inherited CustomerFrm: TCustomerFrm
             FieldName = 'NAME'
           end>
         Properties.DataBinding.FieldName = 'TAX_OFFICE_ID'
-        ID = 11
-        ParentID = 8
+        ID = 12
+        ParentID = 9
         Index = 2
         Version = 1
       end
@@ -412,14 +420,14 @@ inherited CustomerFrm: TCustomerFrm
             FieldName = 'NAME'
           end>
         Properties.DataBinding.FieldName = 'AR_MONTH_ID'
-        ID = 12
-        ParentID = 8
+        ID = 13
+        ParentID = 9
         Index = 3
         Version = 1
       end
       object grpVATInformation: TcxCategoryRow
         Properties.Caption = 'VAT Information'
-        ID = 13
+        ID = 14
         ParentID = -1
         Index = 2
         Version = 1
@@ -427,8 +435,8 @@ inherited CustomerFrm: TCustomerFrm
       object edtVVATNo: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'VAT_NO'
-        ID = 14
-        ParentID = 13
+        ID = 15
+        ParentID = 14
         Index = 0
         Version = 1
       end
@@ -440,8 +448,8 @@ inherited CustomerFrm: TCustomerFrm
             FieldName = 'NAME'
           end>
         Properties.DataBinding.FieldName = 'VAT_OFFICE_ID'
-        ID = 15
-        ParentID = 13
+        ID = 16
+        ParentID = 14
         Index = 1
         Version = 1
       end
@@ -453,8 +461,8 @@ inherited CustomerFrm: TCustomerFrm
             FieldName = 'NAME'
           end>
         Properties.DataBinding.FieldName = 'VAT_MONTH_ID'
-        ID = 16
-        ParentID = 13
+        ID = 17
+        ParentID = 14
         Index = 2
         Version = 1
       end
@@ -470,8 +478,8 @@ inherited CustomerFrm: TCustomerFrm
             FieldName = 'DIALING_CODE'
           end>
         Properties.DataBinding.FieldName = 'VAT_COUNTRY_ID'
-        ID = 17
-        ParentID = 13
+        ID = 18
+        ParentID = 14
         Index = 3
         Version = 1
       end
@@ -479,14 +487,14 @@ inherited CustomerFrm: TCustomerFrm
         Properties.Caption = 'Customs Code'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'Text'
-        ID = 18
-        ParentID = 13
+        ID = 19
+        ParentID = 14
         Index = 4
         Version = 1
       end
       object grpSARS: TcxCategoryRow
         Properties.Caption = 'SARS'
-        ID = 19
+        ID = 20
         ParentID = -1
         Index = 3
         Version = 1
@@ -495,32 +503,32 @@ inherited CustomerFrm: TCustomerFrm
         Properties.Caption = 'PAYE No'
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'PAYE_UIF_NO'
-        ID = 20
-        ParentID = 19
+        ID = 21
+        ParentID = 20
         Index = 0
         Version = 1
       end
       object edtUIFNo: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'UIF_NO'
-        ID = 21
-        ParentID = 19
+        ID = 22
+        ParentID = 20
         Index = 1
         Version = 1
       end
       object edtVSDLNo: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'SDL_NO'
-        ID = 22
-        ParentID = 19
+        ID = 23
+        ParentID = 20
         Index = 2
         Version = 1
       end
       object edtVWCNo: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'WC_NO'
-        ID = 23
-        ParentID = 19
+        ID = 24
+        ParentID = 20
         Index = 3
         Version = 1
       end
@@ -532,38 +540,38 @@ inherited CustomerFrm: TCustomerFrm
         Properties.EditProperties.SaveTime = False
         Properties.EditProperties.ShowTime = False
         Properties.DataBinding.FieldName = 'AR_COMPLETION_DATE'
-        ID = 24
-        ParentID = 19
+        ID = 25
+        ParentID = 20
         Index = 4
         Version = 1
       end
       object edtVEFiling: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'EFILING'
-        ID = 25
-        ParentID = 19
+        ID = 26
+        ParentID = 20
         Index = 5
         Version = 1
       end
       object edtVEFUserName: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'EF_USER_NAME'
-        ID = 26
-        ParentID = 19
+        ID = 27
+        ParentID = 20
         Index = 6
         Version = 1
       end
       object edtVEFPassword: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'EF_PASSWORD'
-        ID = 27
-        ParentID = 19
+        ID = 28
+        ParentID = 20
         Index = 7
         Version = 1
       end
       object grpMiscellaneous: TcxCategoryRow
         Properties.Caption = 'Miscellaneous'
-        ID = 28
+        ID = 29
         ParentID = -1
         Index = 4
         Version = 1
@@ -571,16 +579,16 @@ inherited CustomerFrm: TCustomerFrm
       object edtVPastelAccCode: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'PASTEL_ACC_CODE'
-        ID = 29
-        ParentID = 28
+        ID = 30
+        ParentID = 29
         Index = 0
         Version = 1
       end
       object edtVVBTaxCode: TcxDBEditorRow
         Properties.EditPropertiesClassName = 'TcxTextEditProperties'
         Properties.DataBinding.FieldName = 'VB_TAX_ACC_CODE'
-        ID = 30
-        ParentID = 28
+        ID = 31
+        ParentID = 29
         Index = 1
         Version = 1
       end
@@ -593,8 +601,8 @@ inherited CustomerFrm: TCustomerFrm
         Properties.EditProperties.SaveTime = False
         Properties.EditProperties.ShowTime = False
         Properties.DataBinding.FieldName = 'DATE_CREATED'
-        ID = 31
-        ParentID = 28
+        ID = 32
+        ParentID = 29
         Index = 2
         Version = 1
       end
@@ -607,14 +615,14 @@ inherited CustomerFrm: TCustomerFrm
         Properties.EditProperties.SaveTime = False
         Properties.EditProperties.ShowTime = False
         Properties.DataBinding.FieldName = 'DATE_MODIFIED'
-        ID = 32
-        ParentID = 28
+        ID = 33
+        ParentID = 29
         Index = 3
         Version = 1
       end
       object grpPersonAttribute: TcxCategoryRow
         Properties.Caption = 'Person Attibutes'
-        ID = 33
+        ID = 34
         ParentID = -1
         Index = 5
         Version = 1
@@ -628,8 +636,8 @@ inherited CustomerFrm: TCustomerFrm
         Properties.EditProperties.ValueChecked = 1
         Properties.EditProperties.ValueUnchecked = 0
         Properties.DataBinding.FieldName = 'IS_PROV_TAX_PAYER'
-        ID = 34
-        ParentID = 33
+        ID = 35
+        ParentID = 34
         Index = 0
         Version = 1
       end
@@ -642,8 +650,8 @@ inherited CustomerFrm: TCustomerFrm
         Properties.EditProperties.ValueChecked = 1
         Properties.EditProperties.ValueUnchecked = 0
         Properties.DataBinding.FieldName = 'HAS_LIVING_WILL'
-        ID = 35
-        ParentID = 33
+        ID = 36
+        ParentID = 34
         Index = 1
         Version = 1
       end
@@ -656,14 +664,14 @@ inherited CustomerFrm: TCustomerFrm
         Properties.EditProperties.ValueChecked = 1
         Properties.EditProperties.ValueUnchecked = 0
         Properties.DataBinding.FieldName = 'IS_ORGAN_DONOR'
-        ID = 36
-        ParentID = 33
+        ID = 37
+        ParentID = 34
         Index = 2
         Version = 1
       end
     end
     object navCustomer: TcxDBNavigator [2]
-      Left = 11
+      Left = -339
       Top = 11
       Width = 360
       Height = 40
@@ -723,7 +731,7 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 0
     end
     object navVCustomer: TcxDBNavigator [3]
-      Left = 932
+      Left = 582
       Top = 125
       Width = 216
       Height = 40
@@ -767,11 +775,12 @@ inherited CustomerFrm: TCustomerFrm
       TabOrder = 8
     end
     object grdContactDetailCo: TcxGrid [4]
-      Left = 25
-      Top = 481
+      Left = 10000
+      Top = 10000
       Width = 391
       Height = 170
       TabOrder = 10
+      Visible = False
       OnEnter = grdContactDetailCoEnter
       object viewContactDetailCo: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -947,8 +956,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCDComment: TcxDBMemo [5]
-      Left = 25
-      Top = 657
+      Left = 10000
+      Top = 10000
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailCo
       PopupMenu = popDBAction
@@ -956,6 +965,7 @@ inherited CustomerFrm: TCustomerFrm
       Properties.ScrollBars = ssVertical
       Style.HotTrack = False
       TabOrder = 11
+      Visible = False
       OnDblClick = viewContactDetailCoDblClick
       Height = 24
       Width = 391
@@ -1229,12 +1239,11 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object grdContactPerson: TcxGrid [9]
-      Left = 10000
-      Top = 10000
+      Left = -325
+      Top = 481
       Width = 1250
       Height = 200
       TabOrder = 15
-      Visible = False
       OnEnter = grdContactPersonEnter
       object viewContactPerson: TcxGridDBBandedTableView
         PopupMenu = popDBAction
@@ -1446,12 +1455,11 @@ inherited CustomerFrm: TCustomerFrm
     end
     object grdCPContactDetail: TcxGrid [10]
       Tag = 3
-      Left = 10000
-      Top = 10000
+      Left = 931
+      Top = 481
       Width = 400
       Height = 145
       TabOrder = 16
-      Visible = False
       OnEnter = grdCPContactDetailEnter
       object viewCPContactDetail: TcxGridDBBandedTableView
         Tag = 3
@@ -1604,8 +1612,8 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object memCPcontactDetailComment: TcxDBMemo [11]
-      Left = 10000
-      Top = 10000
+      Left = 931
+      Top = 632
       DataBinding.DataField = 'COMMENT'
       DataBinding.DataSource = MTDM.dtsContactDetailPerson
       PopupMenu = popDBAction
@@ -1613,7 +1621,6 @@ inherited CustomerFrm: TCustomerFrm
       Properties.ScrollBars = ssVertical
       Style.HotTrack = False
       TabOrder = 17
-      Visible = False
       OnDblClick = viewContactDetailCoDblClick
       OnEnter = grdCPContactDetailEnter
       Height = 49
@@ -2446,7 +2453,7 @@ inherited CustomerFrm: TCustomerFrm
       end
     end
     object lblLegend: TcxLabel [16]
-      Left = 11
+      Left = -339
       Top = 704
       Caption = 
         'INS = Add a new record;  ENTER = Edit selected record;  DEL = De' +
@@ -2457,7 +2464,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxOpenAfterExport: TcxCheckBox [17]
-      Left = 688
+      Left = 338
       Top = 88
       Caption = 'Open after export'
       ParentShowHint = False
@@ -2471,7 +2478,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxPersistSelection: TcxCheckBox [18]
-      Left = 383
+      Left = 33
       Top = 21
       Caption = 'Persist Selection'
       ParentShowHint = False
@@ -2485,7 +2492,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object cbxGroupedReport: TcxCheckBox [19]
-      Left = 570
+      Left = 220
       Top = 88
       Caption = 'Grouped Report'
       ParentShowHint = False
@@ -2498,7 +2505,7 @@ inherited CustomerFrm: TCustomerFrm
       Transparent = True
     end
     object lucPrintWhat: TcxComboBox [20]
-      Left = 295
+      Left = -55
       Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
@@ -2516,7 +2523,7 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object lucReportType: TcxComboBox [21]
-      Left = 96
+      Left = -254
       Top = 88
       ParentShowHint = False
       Properties.DropDownListStyle = lsFixedList
@@ -2533,7 +2540,7 @@ inherited CustomerFrm: TCustomerFrm
       Width = 130
     end
     object cbxPrintContactDetails: TcxCheckBox [22]
-      Left = 431
+      Left = 81
       Top = 88
       Caption = 'Print contact details'
       ParentShowHint = False
@@ -2646,7 +2653,6 @@ inherited CustomerFrm: TCustomerFrm
             item
               FieldName = 'NAME'
             end>
-          Properties.ListSource = LookupDM.dtsTrusteeSalutation
           Properties.ReadOnly = True
           MinWidth = 75
           Options.Editing = False
@@ -2828,7 +2834,6 @@ inherited CustomerFrm: TCustomerFrm
             item
               FieldName = 'COMPANY'
             end>
-          Properties.ListSource = LookupDM.dtsCompany
           Properties.ReadOnly = True
           Options.Editing = False
           Options.Filtering = False
@@ -3816,6 +3821,7 @@ inherited CustomerFrm: TCustomerFrm
       AlignVert = avClient
       CaptionOptions.Text = 'New Group'
       ButtonOptions.Buttons = <>
+      ItemIndex = 2
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpDetailGridTabChanged

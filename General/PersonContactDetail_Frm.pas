@@ -91,10 +91,10 @@ begin
   if SameText(TrimAll(edtValue.Text), '') then
     raise EValidateException.Create(lucContactType.Text + ' must have a value');
 
-  MTDM.FFieldValue.ContactTypeID := VarAsType(lucContactType.EditValue, varInteger);
-  MTDM.FFieldValue.ContactType := lucContactType.Text;
-  MTDM.FFieldValue.TextValue := TrimAll(edtValue.Text);
-  MTDM.FFieldValue.Comment := TrimAll(memComment.Text);
+  MTDM.FieldValue.ContactTypeID := VarAsType(lucContactType.EditValue, varInteger);
+  MTDM.FieldValue.ContactType := lucContactType.Text;
+  MTDM.FieldValue.TextValue := TrimAll(edtValue.Text);
+  MTDM.FieldValue.Comment := TrimAll(memComment.Text);
 
   ModalResult := mrOK;
 end;

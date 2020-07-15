@@ -4,8 +4,11 @@ inherited MTDM: TMTDM
   object cdsActivityType: TFDMemTable
     Tag = 39
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    AfterCancel = cdsActivityTypeAfterCancel
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -159,7 +162,10 @@ inherited MTDM: TMTDM
   object cdsBank: TFDMemTable
     Tag = 5
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
+    AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -229,7 +235,10 @@ inherited MTDM: TMTDM
   object cdsBankAccountType: TFDMemTable
     Tag = 6
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
+    AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -299,7 +308,10 @@ inherited MTDM: TMTDM
   object cdsContactType: TFDMemTable
     Tag = 11
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
+    AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -368,8 +380,10 @@ inherited MTDM: TMTDM
   object cdsCustomer: TFDMemTable
     Tag = 3
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -498,6 +512,10 @@ inherited MTDM: TMTDM
       FieldName = 'INITIALS'
       Origin = 'INITIALS'
       Size = 5
+    end
+    object cdsCustomerID_NUMBER: TStringField
+      DisplayLabel = 'ID Number'
+      FieldName = 'ID_NUMBER'
     end
     object cdsCustomerTRADING_AS: TStringField
       DisplayLabel = 'Trading As'
@@ -633,8 +651,10 @@ inherited MTDM: TMTDM
   object cdsCustomerGroup: TFDMemTable
     Tag = 56
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -705,8 +725,10 @@ inherited MTDM: TMTDM
   object cdsCustomerStatus: TFDMemTable
     Tag = 14
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -776,8 +798,10 @@ inherited MTDM: TMTDM
   object cdsCustomerType: TFDMemTable
     Tag = 15
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -842,14 +866,16 @@ inherited MTDM: TMTDM
       FieldName = 'NAME'
       Origin = 'NAME'
       Required = True
-      Size = 30
+      Size = 50
     end
   end
   object cdsJobFunction: TFDMemTable
     Tag = 19
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -920,8 +946,10 @@ inherited MTDM: TMTDM
   object cdsMonthOfYear: TFDMemTable
     Tag = 20
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -995,8 +1023,10 @@ inherited MTDM: TMTDM
   object cdsPricelist: TFDMemTable
     Tag = 22
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -1100,8 +1130,10 @@ inherited MTDM: TMTDM
   object cdsRateUnit: TFDMemTable
     Tag = 38
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -1184,8 +1216,10 @@ inherited MTDM: TMTDM
   object cdsSalutation: TFDMemTable
     Tag = 23
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -1255,8 +1289,10 @@ inherited MTDM: TMTDM
   object cdsStdActivity: TFDMemTable
     Tag = 52
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -1327,8 +1363,10 @@ inherited MTDM: TMTDM
   object cdsTaxOffice: TFDMemTable
     Tag = 25
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -1394,8 +1432,10 @@ inherited MTDM: TMTDM
   object cdsVehicleMake: TFDMemTable
     Tag = 48
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -1551,8 +1591,10 @@ inherited MTDM: TMTDM
   object cdsMasterList: TFDMemTable
     Tag = 35
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -1626,7 +1668,10 @@ inherited MTDM: TMTDM
   object cdsCountry: TFDMemTable
     Tag = 12
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
+    AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -1708,8 +1753,10 @@ inherited MTDM: TMTDM
   object cdsContactDetailCo: TFDMemTable
     Tag = 9
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -1825,8 +1872,10 @@ inherited MTDM: TMTDM
   object cdsAddress: TFDMemTable
     Tag = 4
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -1986,8 +2035,10 @@ inherited MTDM: TMTDM
   object cdsContactDetailPerson: TFDMemTable
     Tag = 37
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -2093,8 +2144,10 @@ inherited MTDM: TMTDM
   object cdsBankingDetail: TFDMemTable
     Tag = 7
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -2241,8 +2294,10 @@ inherited MTDM: TMTDM
   object cdsContactPerson: TFDMemTable
     Tag = 10
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -2396,8 +2451,10 @@ inherited MTDM: TMTDM
   object cdsDirector: TFDMemTable
     Tag = 16
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnCalcFields = cdsDirectorCalcFields
     OnNewRecord = cdsActivityTypeNewRecord
@@ -2534,8 +2591,10 @@ inherited MTDM: TMTDM
   object cdsBeneficiary: TFDMemTable
     Tag = 8
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -2665,8 +2724,10 @@ inherited MTDM: TMTDM
   object cdsVehicle: TFDMemTable
     Tag = 49
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -2808,8 +2869,10 @@ inherited MTDM: TMTDM
   object cdsTrustee: TFDMemTable
     Tag = 50
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -2940,8 +3003,10 @@ inherited MTDM: TMTDM
   object cdsDirectorCompanyLink: TFDMemTable
     Tag = 74
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsDirectorCompanyLinkPostError
@@ -3029,8 +3094,10 @@ inherited MTDM: TMTDM
   object cdsHeir: TFDMemTable
     Tag = 77
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError
@@ -3213,8 +3280,10 @@ inherited MTDM: TMTDM
   object cdsShareHolder: TFDMemTable
     Tag = 76
     ActiveStoredUsage = [auDesignTime]
+    BeforeEdit = cdsActivityTypeBeforeEdit
     BeforePost = cdsActivityTypeBeforePost
     AfterPost = cdsActivityTypeAfterPost
+    BeforeDelete = cdsActivityTypeBeforeDelete
     AfterDelete = cdsActivityTypeAfterDelete
     OnNewRecord = cdsActivityTypeNewRecord
     OnPostError = cdsActivityTypePostError

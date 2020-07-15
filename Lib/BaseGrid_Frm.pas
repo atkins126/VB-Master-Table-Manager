@@ -76,7 +76,6 @@ procedure TBaseGridFrm.FormCreate(Sender: TObject);
 var
   RegKey: TRegistry;
 begin
-  inherited;
   ReportDM.PrintExporting := False;
   RegKey := TRegistry.Create(KEY_ALL_ACCESS or KEY_WRITE or KEY_WOW64_64KEY);
   RegKey.RootKey := HKEY_CURRENT_USER;
@@ -94,7 +93,6 @@ end;
 
 procedure TBaseGridFrm.FormShow(Sender: TObject);
 begin
-  inherited;
   grdMaster.SetFocus;
   viewMaster.Focused := True;
 end;
@@ -106,7 +104,6 @@ var
   DataSet: TFDMemTable;
   Generatorname, UpdateTableName, FileName: string;
 begin
-  inherited;
 //  // Don't allow printing or exporting data whilst editing data.
 //  if (AButtonIndex in [16, 17, 18, 19]) and (navMaster.DataSet.State in [dsEdit, dsInsert]) then
 //    raise EExecutionException.Create('Cannot use the print/export functions whilst editing data.' + CRLF +
@@ -343,7 +340,6 @@ end;
 procedure TBaseGridFrm.viewMasterCustomDrawCell(Sender: TcxCustomGridTableView;
   ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
 begin
-  inherited;
   if AViewInfo.GridRecord = nil then
     Exit;
 

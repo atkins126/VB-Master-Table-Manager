@@ -137,18 +137,18 @@ begin
   if SameText(lucJobFunction.Text, '') then
     raise EValidateException.Create('Job function must have a value');
 
-  MTDM.FFieldValue.FirstName := edtFirstName.Text;
-  MTDM.FFieldValue.LastName := edtLastName.Text;
-  MTDM.FFieldValue.SalutationID := VarAsType(lucSalutation.EditValue, varInteger);
-  MTDM.FFieldValue.Salutation := lucSalutation.Text;
-  MTDM.FFieldValue.Initials := edtInitials.Text;
-  MTDM.FFieldValue.OtherName := edtOtherName.Text;
-  MTDM.FFieldValue.DOB := dteDOB.Date;
-  MTDM.FFieldValue.IDNo := edtIDNo.Text;
-  MTDM.FFieldValue.PassportNo := edtPassportNo.Text;
-  MTDM.FFieldValue.JobFunctionID := VarAsType(lucJobFunction.EditValue, varInteger);
-  MTDM.FFieldValue.JobFunction := lucJobFunction.Text;
-  MTDM.FFieldValue.PrimaryContact := cbxPrimaryContact.Checked;
+  MTDM.FieldValue.FirstName := edtFirstName.Text;
+  MTDM.FieldValue.LastName := edtLastName.Text;
+  MTDM.FieldValue.SalutationID := VarAsType(lucSalutation.EditValue, varInteger);
+  MTDM.FieldValue.Salutation := lucSalutation.Text;
+  MTDM.FieldValue.Initials := edtInitials.Text;
+  MTDM.FieldValue.OtherName := edtOtherName.Text;
+  MTDM.FieldValue.DOB := dteDOB.Date;
+  MTDM.FieldValue.IDNo := edtIDNo.Text;
+  MTDM.FieldValue.PassportNo := edtPassportNo.Text;
+  MTDM.FieldValue.JobFunctionID := VarAsType(lucJobFunction.EditValue, varInteger);
+  MTDM.FieldValue.JobFunction := lucJobFunction.Text;
+  MTDM.FieldValue.PrimaryContact := cbxPrimaryContact.Checked;
 
   ModalResult := mrOK;
 end;
