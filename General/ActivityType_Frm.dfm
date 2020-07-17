@@ -8,14 +8,13 @@ inherited ActivityTypeFrm: TActivityTypeFrm
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
-    Width = 586
-    ExplicitWidth = 586
+    Width = 550
+    ExplicitWidth = 550
     inherited grdMaster: TcxGrid
       Width = 450
       ExplicitWidth = 450
       inherited viewMaster: TcxGridDBBandedTableView
         DataController.DataSource = MTDM.dtsActivityType
-        OptionsCustomize.ColumnsQuickCustomization = True
         OptionsView.NoDataToDisplayInfoText = '<No Activity Type data to display>'
         OptionsView.ColumnAutoWidth = True
         Bands = <
@@ -60,8 +59,8 @@ inherited ActivityTypeFrm: TActivityTypeFrm
       ExplicitWidth = 324
     end
     inherited cbxOpenAfterExport: TcxCheckBox
-      Left = 341
-      ExplicitLeft = 341
+      Left = 335
+      ExplicitLeft = 335
     end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324

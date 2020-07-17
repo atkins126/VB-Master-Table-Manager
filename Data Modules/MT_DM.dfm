@@ -2528,6 +2528,18 @@ inherited MTDM: TMTDM
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
+    object cdsDirectorCUSTOMER_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'C ID'
+      FieldName = 'CUSTOMER_ID'
+      Origin = 'CUSTOMER_ID'
+      Required = True
+    end
+    object cdsDirectorCUSTOMER_TABLE_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'CT ID'
+      FieldName = 'CUSTOMER_TABLE_ID'
+    end
     object cdsDirectorSALUTATION_ID: TIntegerField
       Alignment = taLeftJustify
       DisplayLabel = 'Sal'
@@ -3337,6 +3349,11 @@ inherited MTDM: TMTDM
       FieldName = 'CUSTOMER_ID'
       Origin = 'CUSTOMER_ID'
       Required = True
+    end
+    object cdsShareHolderCUSTOMER_TABLE_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'CT ID'
+      FieldName = 'CUSTOMER_TABLE_ID'
     end
     object cdsShareHolderSALUTATION_ID: TIntegerField
       DisplayLabel = 'Salutation'

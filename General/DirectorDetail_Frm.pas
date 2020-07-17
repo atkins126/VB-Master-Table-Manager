@@ -18,7 +18,7 @@ uses
   cxData, cxDataStorage, cxNavigator, dxDateRanges, dxScrollbarAnnotations,
   Data.DB, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridBandedTableView, cxGridDBBandedTableView, cxGrid,
-  cxCurrencyEdit;
+  cxCurrencyEdit, cxCheckBox;
 
 type
   TDirectorDetailFrm = class(TBaseCustomerEditFrm)
@@ -43,14 +43,20 @@ type
     imgNav16: TcxImageList;
     litIDNumber: TdxLayoutItem;
     edtIDNumber: TcxTextEdit;
+    litDirectorFromCustomer: TdxLayoutItem;
+    cbxDirectorFromCustomer: TcxCheckBox;
+    litCustomer: TdxLayoutItem;
+    lucCustomer: TcxLookupComboBox;
+    styReadOnly: TcxEditStyleController;
     procedure FormCreate(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
-    procedure lucCompanyGetDisplayText(Sender: TcxCustomGridTableItem;
-      ARecord: TcxCustomGridRecord; var AText: string);
+    procedure lucCompanyGetDisplayText(Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord; var AText: string);
+    procedure cbxDirectorFromCustomerPropertiesEditValueChanged(Sender: TObject);
   private
     { Private declarations }
     procedure Validate;
     procedure CmDrawBorder(var Msg: TMessage); message CM_DRAWBORDER;
+    procedure SetReadOnlystatus(CanEdit: Boolean);
   public
     { Public declarations }
   end;
@@ -68,11 +74,6 @@ uses
   Lookup_DM,
   RUtils;
 
-procedure TDirectorDetailFrm.btnOKClick(Sender: TObject);
-begin
-  Validate;
-end;
-
 procedure TDirectorDetailFrm.CmDrawBorder(var Msg: TMessage);
 begin
   if (TObject(Msg.WParam) is TcxCanvas)
@@ -84,10 +85,11 @@ procedure TDirectorDetailFrm.FormCreate(Sender: TObject);
 begin
 //  Width := 555;
 //  Height := 480;
-  Self.Height := 310;
+  Self.Height := 340;
   Self.Width := 540;
   MTDM.ClearFieldValues;
   lucSalutation.Properties.ListSource := LookupDM.dtsSalutation;
+  litCustomer.Visible := cbxDirectorFromCustomer.Checked;
 
   if VBBaseDM.DBAction = acEdit then
   begin
@@ -109,10 +111,40 @@ begin
   edtEmailAddress.Properties.OnChange := ValueChanged;
 end;
 
+procedure TDirectorDetailFrm.btnOKClick(Sender: TObject);
+begin
+  Validate;
+end;
+
+procedure TDirectorDetailFrm.cbxDirectorFromCustomerPropertiesEditValueChanged(Sender: TObject);
+begin
+  litCustomer.Visible := cbxDirectorFromCustomer.Checked;
+  MTDM.ClearFieldValues;
+  edtFirstName.Clear;
+  edtLastName.Clear;
+  lucSalutation.EditValue := Null;
+  edtIDNumber.Clear;
+  edtTaxNo.Clear;
+
+  SetReadOnlystatus(cbxDirectorFromCustomer.Checked);
+end;
+
 procedure TDirectorDetailFrm.lucCompanyGetDisplayText(
   Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord; var AText: string);
 begin
   MTDM.CompanyName := AText;
+end;
+
+procedure TDirectorDetailFrm.SetReadOnlystatus(CanEdit: Boolean);
+begin
+  if not CanEdit then
+  begin
+    edtFirstName.Style.StyleController := styReadOnly;
+    edtLastName.Style.StyleController := styReadOnly;
+    lucSalutation.Style.StyleController := styReadOnly;
+    edtIDNumber.Style.StyleController := styReadOnly;
+    edtTaxNo.Style.StyleController := styReadOnly;
+  end;
 end;
 
 procedure TDirectorDetailFrm.Validate;
@@ -135,4 +167,6 @@ begin
 end;
 
 end.
+
+
 

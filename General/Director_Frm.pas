@@ -23,9 +23,25 @@ uses
 
 type
   TDirectorFrm = class(TBaseGridFrm)
+    edtID: TcxGridDBBandedColumn;
+    edtCustomerID: TcxGridDBBandedColumn;
+    edtCTableID: TcxGridDBBandedColumn;
+    edtSalutationID: TcxGridDBBandedColumn;
+    edtFirstName: TcxGridDBBandedColumn;
+    edtLastName: TcxGridDBBandedColumn;
+    edtMiddleName: TcxGridDBBandedColumn;
+    edtTaxNo: TcxGridDBBandedColumn;
+    edtMobileNo: TcxGridDBBandedColumn;
+    edtEmailAddress: TcxGridDBBandedColumn;
+    edtFullNameFirst: TcxGridDBBandedColumn;
+    edtIDNumber: TcxGridDBBandedColumn;
     procedure FormCreate(Sender: TObject);
+    procedure navMasterButtonsButtonClick(Sender: TObject;
+      AButtonIndex: Integer; var ADone: Boolean);
+    procedure DoEdit(Sender: TObject);
   private
     { Private declarations }
+    procedure EditRecord;
   public
     { Public declarations }
   end;
@@ -43,14 +59,39 @@ uses
   CommonFunctions,
   VBCommonValues,
   RUtils,
-  Report_DM;
+  Report_DM, DirectorDetail_Frm;
+
+procedure TDirectorFrm.DoEdit(Sender: TObject);
+begin
+  inherited;
+  EditRecord;
+end;
+
+procedure TDirectorFrm.EditRecord;
+begin
+  if DirectorDetailFrm = nil then
+    DirectorDetailFrm := TDirectorDetailFrm.Create(nil);
+
+  try
+    if DirectorDetailFrm.ShowModal = mrCancel then
+      Exit;
+  finally
+    DirectorDetailFrm.Close;
+    FreeAndNil(DirectorDetailFrm);
+  end;
+end;
 
 procedure TDirectorFrm.FormCreate(Sender: TObject);
 var
   OrderByClause, FileName: string;
 begin
+  Caption := 'Director Listing';
+  layMain.Align := alClient;
+  layMain.LayoutLookAndFeel := lafCustomSkin;
   OrderByClause := ' ORDER BY D.CUSTOMER_ID, D.FIRST_NAME, D.LAST_NAME';
   FileName := 'Director';
+  navMaster.DataSource := MTDM.dtsDirector;
+  viewMaster.DataController.DataSource := MTDM.dtsDirector;
 
   VBBaseDM.GetData(16, MTDM.cdsDirector, MTDM.cdsDirector.Name, OrderByClause,
     'C:\Data\Xml\' + FileName + '.xml', MTDM.cdsDirector.UpdateOptions.Generatorname,
@@ -68,5 +109,28 @@ begin
   SetButtonVisibility(MTDM.cdsMasterList, 15);
 end;
 
+procedure TDirectorFrm.navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
+begin
+  case AButtonIndex of
+    NBDI_INSERT, NBDI_EDIT:
+      begin
+        ADone := True;
+        inherited;
+        EditRecord;
+      end;
+    NBDI_DELETE:
+      begin
+        VBBaseDM.QueryRequest := Format(USE_COUNT, ['SELECT COUNT(ID) AS USE_COUNT FROM BANKING_DETAIL WHERE BANK_ID = ' +
+            IntToStr(MTDM.cdsBank.FieldByName('ID').AsInteger)]);
+
+        VBBaseDM.ItemToCount := 'Bank';
+        inherited;
+      end;
+  end;
+
+end;
+
 end.
+
+
 

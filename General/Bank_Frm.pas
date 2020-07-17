@@ -19,7 +19,7 @@ uses
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridBandedTableView,
   cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxCurrencyEdit, cxTextEdit,
   dxScrollbarAnnotations, dxPrnDev, dxPrnDlg, dxLayoutcxEditAdapters,
-  cxContainer, cxCheckBox;
+  cxContainer, cxCheckBox, Vcl.Menus;
 
 type
   TBankFrm = class(TBaseGridFrm)

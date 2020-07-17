@@ -383,6 +383,9 @@ type
     cdsShareHolderID_NUMBER: TStringField;
     cdsDirectorID_NUMBER: TStringField;
     cdsCustomerID_NUMBER: TStringField;
+    cdsDirectorCUSTOMER_TABLE_ID: TIntegerField;
+    cdsShareHolderCUSTOMER_TABLE_ID: TIntegerField;
+    cdsDirectorCUSTOMER_ID: TIntegerField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);

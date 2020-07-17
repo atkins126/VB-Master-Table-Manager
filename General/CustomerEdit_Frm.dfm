@@ -1170,8 +1170,8 @@ inherited CustomerEditFrm: TCustomerEditFrm
     Style.Font.Style = [fsBold]
     Style.TextColor = clRed
     Style.IsFontAssigned = True
-    Left = 344
-    Top = 124
+    Left = 204
+    Top = 179
     PixelsPerInch = 96
   end
   object styHintController: TcxHintStyleController

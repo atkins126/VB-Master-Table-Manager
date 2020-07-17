@@ -21,7 +21,8 @@ uses
   cxNavigator, dxDateRanges, Data.DB, cxDBData, cxDBNavigator, cxGridLevel,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridBandedTableView,
   cxGridDBBandedTableView, cxGrid, dxScrollbarAnnotations, dxPrnDev, dxPrnDlg,
-  cxGridExportLink, dxLayoutcxEditAdapters, cxContainer, cxCheckBox, dxBar;
+  cxGridExportLink, dxLayoutcxEditAdapters, cxContainer, cxCheckBox, dxBar,
+  Vcl.Menus;
 
 type
   TBaseGridFrm = class(TBaseLayoutFrm)
@@ -37,6 +38,13 @@ type
     lvlMaster: TcxGridLevel;
     navMaster: TcxDBNavigator;
     cbxOpenAfterExport: TcxCheckBox;
+    popMaster: TPopupMenu;
+    actInsert: TAction;
+    actEdit: TAction;
+    actDelete: TAction;
+    Insert1: TMenuItem;
+    Edit1: TMenuItem;
+    Delete1: TMenuItem;
     procedure DrawCellBorder(var Msg: TMessage); message CM_DRAWBORDER;
 
     procedure FormCreate(Sender: TObject);
@@ -47,6 +55,9 @@ type
     procedure FormShow(Sender: TObject);
     procedure navMasterButtonsButtonClick(Sender: TObject;
       AButtonIndex: Integer; var ADone: Boolean);
+    procedure Doinsert(Sender: TObject);
+    procedure DoEdit(Sender: TObject);
+    procedure DoDelete(Sender: TObject);
   private
     { Private declarations }
   public
@@ -64,6 +75,21 @@ uses
   VBBase_DM,
   MT_DM,
   Report_DM;
+
+procedure TBaseGridFrm.Doinsert(Sender: TObject);
+begin
+  viewMaster.DataController.DataSet.Insert;
+end;
+
+procedure TBaseGridFrm.DoEdit(Sender: TObject);
+begin
+  viewMaster.DataController.DataSet.Edit;
+end;
+
+procedure TBaseGridFrm.DoDelete(Sender: TObject);
+begin
+  viewMaster.DataController.DataSet.Delete;
+end;
 
 procedure TBaseGridFrm.DrawCellBorder(var Msg: TMessage);
 begin
@@ -115,11 +141,20 @@ begin
 
   DataSet := nil;
   ScriptID := 0;
-  ID := 0;
+//  ID := 0;
 //  Screen.Cursor := crHourglass;
 
 //  try
   case AButtonIndex of
+    NBDI_INSERT:
+      begin
+        ADone := True;
+        VBBaseDM.DBAction := acEdit;
+
+        if TcxDBNavigator(Sender).DataSet.RecordCount = 0 then
+          VBBaseDM.DBAction := acInsert;
+      end;
+
 //    NBDI_POST:
 //      begin
 //        if VBBaseDM.PostError then
@@ -358,4 +393,6 @@ begin
 end;
 
 end.
+
+
 

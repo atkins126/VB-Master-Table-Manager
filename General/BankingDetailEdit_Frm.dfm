@@ -1,5 +1,5 @@
-inherited BankingDetailFrm: TBankingDetailFrm
-  Caption = 'BankingDetailFrm'
+inherited BankingDetailEditFrm: TBankingDetailEditFrm
+  Caption = 'BankingDetailEditFrm'
   ClientHeight = 325
   ClientWidth = 726
   ExplicitWidth = 732

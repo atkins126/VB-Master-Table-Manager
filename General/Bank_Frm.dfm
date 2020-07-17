@@ -10,12 +10,13 @@ inherited BankFrm: TBankFrm
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
+    Width = 550
+    ExplicitWidth = 550
     inherited grdMaster: TcxGrid
       Width = 450
       ExplicitWidth = 450
       inherited viewMaster: TcxGridDBBandedTableView
         DataController.DataSource = MTDM.dtsBank
-        OptionsCustomize.ColumnsQuickCustomization = True
         OptionsView.NoDataToDisplayInfoText = '<No Bank data to display>'
         OptionsView.ColumnAutoWidth = True
         OptionsView.FooterAutoHeight = True
@@ -55,6 +56,10 @@ inherited BankFrm: TBankFrm
       Width = 324
       DataSource = MTDM.dtsBank
       ExplicitWidth = 324
+    end
+    inherited cbxOpenAfterExport: TcxCheckBox
+      Left = 335
+      ExplicitLeft = 335
     end
     inherited litNavigator: TdxLayoutItem
       ControlOptions.OriginalWidth = 324
