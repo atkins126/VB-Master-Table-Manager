@@ -46,7 +46,6 @@ type
     sknController: TdxSkinController;
     sbrMain: TdxStatusBar;
     pagMain: TcxPageControl;
-    cbxShowMasterList: TcxCheckBox;
     actExitApp: TAction;
     actCloseScreen: TAction;
     actActivityType: TAction;
@@ -100,6 +99,18 @@ type
     grpToolbar: TdxLayoutGroup;
     actDirector: TAction;
     btnDirector: TdxBarButton;
+    btnCustomerMenu: TdxBarLargeButton;
+    btnSystemMenu: TdxBarLargeButton;
+    btnBankingMenu: TdxBarLargeButton;
+    btnPricingMenu: TdxBarLargeButton;
+    popCustomer: TdxBarPopupMenu;
+    popSystem: TdxBarPopupMenu;
+    popBanking: TdxBarPopupMenu;
+    popPricng: TdxBarPopupMenu;
+    btnSARSMenu: TdxBarLargeButton;
+    popSARS: TdxBarPopupMenu;
+    cntMenuType: TdxBarControlContainerItem;
+    cbxUseMultipleDoprdownMenus: TcxCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure DoLaunchMasterTable(Sender: TObject);
     procedure DoExitApp(Sender: TObject);
@@ -109,6 +120,8 @@ type
     procedure DoCloseScreen(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure cbxUseMultipleDoprdownMenusPropertiesEditValueChanged(
+      Sender: TObject);
   private
     { Private declarations }
     FSkinResourceFileName: string;
@@ -117,9 +130,11 @@ type
     procedure UpdateApplicationSkin(SkinResourceFileName {, SkinName}: string);
     procedure CloseTheForm(PageIndex: Integer; FormToClose: TForm; ActionTag: Integer; Action: TAction);
     procedure CloseAllForms;
+    procedure SetMenuVisibility(UseMultipleMenus: Boolean);
   protected
     procedure HandleTSAfterPost(var MyMsg: TMessage); message WM_RECORD_ID;
     procedure HandlerPostError(var MyMsg: TMessage); message WM_POST_DATA_ERROR;
+    procedure HandleSynchData(var MyMsg: TMessage); message WM_SYNCH_DATA;
     procedure WMCopyData(var Msg: TWMCopyData); message WM_COPYDATA;
     procedure HandleIncomingMessage(DataStructure: PCopyDataStruct; Msg: TWMCopyData);
   public
@@ -184,8 +199,9 @@ end;
 procedure TMainFrm.FormShow(Sender: TObject);
 var
   VBShell: string;
-  {$IFDEF DEBUG}ErrorMsg, {$ENDIF} {SkinResourceFileName,}SkinName: string;
-//  Day, Month, Year: Word;
+{$IFDEF DEBUG}ErrorMsg: string;
+{$ENDIF}
+  RegKey: TRegistry;
 begin
   inherited;
   Screen.Cursor := crHourglass;
@@ -198,8 +214,11 @@ begin
   if MsgDialogFrm = nil then
     MsgDialogFrm := TMsgDialogFrm.Create(nil);
 
+  RegKey := TRegistry.Create(KEY_ALL_ACCESS or KEY_WRITE or KEY_WOW64_64KEY);
+  RegKey.RootKey := HKEY_CURRENT_USER;
+
   try
-    {$IFDEF DEBUG}
+{$IFDEF DEBUG}
     Self.BorderStyle := bsSizeable;
     ErrorMsg := '';
     if not LocalDSServerIsRunning(LOCAL_VB_SHELL_DS_SERVER, ErrorMsg) then
@@ -216,7 +235,7 @@ begin
         [mbOK]
         );
     end;
-    {$ENDIF}
+{$ENDIF}
 
     if VBBaseDM = nil then
       VBBaseDM := TVBBaseDM.Create(nil);
@@ -255,7 +274,18 @@ begin
       MTDM.cdsMasterList.UpdateOptions.UpdateTableName);
 
     VBBaseDM.CheckForUpdates(4, '');
+    RegKey.OpenKey(KEY_MASTER_TABLE_MANAGER, True);
 
+    if not RegKey.ValueExists('Use Multiple Dropdown Menus') then
+      RegKey.WriteBool('Use Multiple Dropdown Menus', True);
+
+    cbxUseMultipleDoprdownMenus.Properties.OnEditValueChanged := nil;
+
+    cbxUseMultipleDoprdownMenus.Checked :=
+      RegKey.ReadBool('Use Multiple Dropdown Menus');
+
+    SetMenuVisibility(RegKey.ReadBool('Use Multiple Dropdown Menus'));
+    RegKey.CloseKey;
     BorderIcons := [];
     BorderStyle := bsNone;
 
@@ -282,6 +312,10 @@ begin
     end;
     WindowState := wsMaximized;
   finally
+    cbxUseMultipleDoprdownMenus.Properties.OnEditValueChanged :=
+      cbxUseMultipleDoprdownMenusPropertiesEditValueChanged;
+
+    RegKey.Free;
     Screen.Cursor := crDefault;
   end;
 end;
@@ -903,7 +937,20 @@ begin
   aControl := TdxBarButton(Sender).ClickItemLink.Control;
   APopupPoint := Point(aControl.ItemBounds.Left, aControl.ItemBounds.Bottom);
   APopupPoint := aControl.Parent.ClientToScreen(APopupPoint);
-  popMasterTable.Popup(APopupPoint.X, APopupPoint.Y);
+
+  case TdxBarButton(Sender).Tag of
+    0: popMasterTable.Popup(APopupPoint.X, APopupPoint.Y);
+    1: popCustomer.Popup(APopupPoint.X, APopupPoint.Y);
+    2: popSystem.Popup(APopupPoint.X, APopupPoint.Y);
+    3: popPricng.Popup(APopupPoint.X, APopupPoint.Y);
+    4: popBanking.Popup(APopupPoint.X, APopupPoint.Y);
+    5: popSARS.Popup(APopupPoint.X, APopupPoint.Y);
+  end;
+end;
+
+procedure TMainFrm.cbxUseMultipleDoprdownMenusPropertiesEditValueChanged(Sender: TObject);
+begin
+  SetMenuVisibility(cbxUseMultipleDoprdownMenus.Checked);
 end;
 
 procedure TMainFrm.CloseAllForms;
@@ -1105,21 +1152,77 @@ begin
 //  end;
 end;
 
-procedure TMainFrm.HandleTSAfterPost(var MyMsg: TMessage);
-//var
-//  SL: TStringList;
+procedure TMainFrm.HandleSynchData(var MyMsg: TMessage);
+var
+  MessageList: TStringList;
+  DetailDataSetID: Integer;
 begin
-//  SL := TStringList.Create;
-//  SL.Delimiter := PIPE;
-//  SL.QuoteChar := '"';
-//  SL.DelimitedText := PChar(MyMsg.WParam);
+//  MessageList := TStringList.Create;
+//  MessageList.Delimiter := PIPE;
+//  MessageList.QuoteChar := '"';
+  Messagelist := RUtils.CreateStringList(PIPE, DOUBLE_QUOTE);
+  MessageList.DelimitedText := PChar(MyMsg.WParam);
+
+  try
+    if MessageList.Values['REQUEST'] = 'REFRESH_DATA' then
+      SendMessage(CustomerFrm.Handle, WM_RECORD_ID, DWORD(PChar(MessageList.DelimitedText)), 0)
+
+    else if MessageList.Values['REQUEST'] = 'SYNCH_DATA' then
+    begin
+      DetailDataSetID := StrToInt(MessageList.Values['DATASET_ID']);
+      case DetailDataSetID of
+        12:
+          begin
+            if DirectorFrm <> nil then
+              SendMessage(DirectorFrm.Handle, WM_SYNCH_DATA, DWORD(PChar('SYNCH_DATA')), 0)
+          end;
+      end;
+    end;
+
+  finally
+    MyMsg.Result := -1;
+    MessageList.Free;
+  end;
+end;
+
+procedure TMainFrm.HandleTSAfterPost(var MyMsg: TMessage);
+begin
 //
-//  try
-//    if SL.Values['REQUEST'] = 'REFRESH_DATA' then
-//      SendMessage(CustomerFrm.Handle, WM_RECORD_ID, DWORD(PChar(SL.DelimitedText)), 0);
-//  finally
-//    MyMsg.Result := -1;
-//  end;
+end;
+
+procedure TMainFrm.SetMenuVisibility(UseMultipleMenus: Boolean);
+var
+  RegKey: TRegistry;
+begin
+  RegKey := TRegistry.Create(KEY_ALL_ACCESS or KEY_WRITE or KEY_WOW64_64KEY);
+  RegKey.RootKey := HKEY_CURRENT_USER;
+  RegKey.OpenKey(KEY_MASTER_TABLE_MANAGER, True);
+
+  try
+    RegKey.WriteBool('Use Multiple Dropdown Menus', cbxUseMultipleDoprdownMenus.Checked);
+    RegKey.CloseKey;
+
+    if UseMultipleMenus then
+    begin
+      btnMasterList.Visible := ivNever;
+      btnCustomerMenu.Visible := ivAlways;
+      btnSystemMenu.Visible := ivAlways;
+      btnPricingMenu.Visible := ivAlways;
+      btnBankingMenu.Visible := ivAlways;
+      btnSARSMenu.Visible := ivAlways;
+    end
+    else
+    begin
+      btnMasterList.Visible := ivAlways;
+      btnCustomerMenu.Visible := ivNever;
+      btnSystemMenu.Visible := ivNever;
+      btnPricingMenu.Visible := ivNever;
+      btnBankingMenu.Visible := ivNever;
+      btnSARSMenu.Visible := ivNever;
+    end;
+  finally
+    RegKey.Free;
+  end;
 end;
 
 procedure TMainFrm.WMCopyData(var Msg: TWMCopyData);
@@ -1154,4 +1257,6 @@ begin
 end;
 
 end.
+
+
 

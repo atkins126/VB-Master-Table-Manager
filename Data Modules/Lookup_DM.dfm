@@ -1267,7 +1267,7 @@ inherited LookupDM: TLookupDM
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
     Left = 685
-    Top = 370
+    Top = 490
     object cdsCompanyID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -1289,7 +1289,7 @@ inherited LookupDM: TLookupDM
   object dtsCompany: TDataSource
     DataSet = cdsCompany
     Left = 685
-    Top = 420
+    Top = 540
   end
   object VbdevConnection: TFDConnection
     Params.Strings = (
@@ -1768,6 +1768,10 @@ inherited LookupDM: TLookupDM
       FieldName = 'AR_MONTH_ID'
       Origin = 'AR_MONTH_ID'
     end
+    object cdsCustomerSALUTATION_ID: TIntegerField
+      DisplayLabel = 'Sal'
+      FieldName = 'SALUTATION_ID'
+    end
     object cdsCustomerSTATUS_ID: TIntegerField
       Alignment = taLeftJustify
       DisplayLabel = 'Status'
@@ -2016,7 +2020,7 @@ inherited LookupDM: TLookupDM
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     Left = 785
-    Top = 370
+    Top = 490
     object cdsDirectorCompanyLinkID: TIntegerField
       Alignment = taLeftJustify
       FieldName = 'ID'
@@ -2038,6 +2042,152 @@ inherited LookupDM: TLookupDM
   object dtsDirectorCompanyLink: TDataSource
     DataSet = cdsDirectorCompanyLink
     Left = 785
+    Top = 540
+  end
+  object cdsDirectorSalutationLU: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    ConstraintsEnabled = True
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 370
+    Top = 490
+    object cdsDirectorSalutationLUID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsDirectorSalutationLUNAME: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+    end
+  end
+  object dtsDirectorSalutationLU: TDataSource
+    DataSet = cdsDirectorSalutationLU
+    Left = 370
+    Top = 540
+  end
+  object cdsCustomerLookup: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    ConstraintsEnabled = True
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 490
+    Top = 490
+    object cdsCustomerLookupID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+    end
+    object cdsCustomerLookupCUSTOMER_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Cust ID'
+      FieldName = 'CUSTOMER_ID'
+    end
+    object cdsCustomerLookupSTaTUS_ID: TIntegerField
+      Alignment = taLeftJustify
+      DisplayLabel = 'St ID'
+      FieldName = 'STTUS_ID'
+    end
+    object cdsCustomerLookupCUSTOMER_GROUP_ID: TIntegerField
+      DisplayLabel = 'CG ID'
+      FieldName = 'CUSTOMER_GROUP_ID'
+    end
+    object cdsCustomerLookupSALUTATION_ID: TIntegerField
+      DisplayLabel = 'Sal'
+      FieldName = 'SALUTATION_ID'
+    end
+    object cdsCustomerLookupNAME: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Size = 100
+    end
+    object cdsCustomerLookupTRADING_AS: TStringField
+      DisplayLabel = 'Trading As'
+      FieldName = 'TRADING_AS'
+      Size = 100
+    end
+    object cdsCustomerLookupCO_NO: TStringField
+      DisplayLabel = 'Co No'
+      FieldName = 'CO_NO'
+    end
+    object cdsCustomerLookupTAX_NO: TStringField
+      DisplayLabel = 'Tax No'
+      FieldName = 'TAX_NO'
+    end
+    object cdsCustomerLookupIS_ACTIVE: TIntegerField
+      DisplayLabel = 'Active'
+      FieldName = 'IS_ACTIVE'
+    end
+    object cdsCustomerLookupFIRST_NAME: TStringField
+      DisplayLabel = 'First Name'
+      DisplayWidth = 30
+      FieldName = 'FIRST_NAME'
+      Size = 30
+    end
+    object cdsCustomerLookupLAST_NAME: TStringField
+      DisplayLabel = 'Last Name'
+      FieldName = 'LAST_NAME'
+      Size = 30
+    end
+    object cdsCustomerLookupOTHER_NAME: TStringField
+      DisplayLabel = 'Other Name'
+      FieldName = 'OTHER_NAME'
+      Size = 100
+    end
+  end
+  object dtsCustomerLookup: TDataSource
+    DataSet = cdsCustomerLookup
+    Left = 490
+    Top = 540
+  end
+  object cdsCustomerSalutation: TFDMemTable
+    ActiveStoredUsage = [auDesignTime]
+    FilterOptions = [foCaseInsensitive]
+    ConstraintsEnabled = True
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode, rvStorePrettyPrint]
+    ResourceOptions.StorePrettyPrint = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 700
+    Top = 370
+    object cdsCustomerSalutationID: TIntegerField
+      Alignment = taLeftJustify
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsCustomerSalutationNAME: TStringField
+      DisplayLabel = 'Name'
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+    end
+  end
+  object dtsCustomerSalutation: TDataSource
+    DataSet = cdsCustomerSalutation
+    Left = 700
     Top = 420
   end
 end

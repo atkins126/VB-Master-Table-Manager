@@ -18,7 +18,7 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridBandedTableView, cxCurrencyEdit,
   cxGridDBBandedTableView, cxGrid, dxLayoutControl, cxMemo, cxDBLookupComboBox,
   dxScrollbarAnnotations, dxPrnDev, dxPrnDlg, cxContainer,
-  dxLayoutcxEditAdapters, cxCheckBox;
+  dxLayoutcxEditAdapters, cxCheckBox, Vcl.Menus;
 
 type
   TPriceListFrm = class(TBaseGridFrm)
@@ -164,6 +164,8 @@ procedure TPriceListFrm.FormCreate(Sender: TObject);
 begin
   inherited;
   Caption := 'Price list';
+  layMain.Align :=  alClient;
+  layMain.LayoutLookAndFeel :=  lafCustomSkin;
   viewMaster.DataController.DataSource := MTDM.dtsPriceList;
 //  viewPriceHistory.DataController.DataSource := ReportDM.dtsPriceHistory;
   navMaster.DataSource := MTDM.dtsPriceList;

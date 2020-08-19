@@ -48,16 +48,16 @@ type
     procedure DrawCellBorder(var Msg: TMessage); message CM_DRAWBORDER;
 
     procedure FormCreate(Sender: TObject);
-    procedure viewMasterCustomDrawCell(Sender: TcxCustomGridTableView;
-      ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
     procedure SetButtonVisibility(DataSet: TFDMemTable; MasterID: Integer);
     procedure SetPrintButtonStatus(DataSet: TFDMemTable);
     procedure FormShow(Sender: TObject);
-    procedure navMasterButtonsButtonClick(Sender: TObject;
-      AButtonIndex: Integer; var ADone: Boolean);
+    procedure navMasterButtonsButtonClick(Sender: TObject; AButtonIndex: Integer; var ADone: Boolean);
     procedure Doinsert(Sender: TObject);
     procedure DoEdit(Sender: TObject);
     procedure DoDelete(Sender: TObject);
+
+    procedure viewMasterCustomDrawCell(Sender: TcxCustomGridTableView;
+      ACanvas: TcxCanvas; AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
   private
     { Private declarations }
   public
@@ -108,10 +108,10 @@ begin
   try
     RegKey.OpenKey(KEY_MASTER_TABLE_MANAGER, True);
 
-    if not RegKey.ValueExists('Open Ducoment After Export') then
-      RegKey.WriteBool('Open Ducoment After Export', True);
+    if not RegKey.ValueExists('Open Document After Export') then
+      RegKey.WriteBool('Open Document After Export', True);
 
-    cbxOpenAfterExport.Checked := RegKey.ReadBool('Open Ducoment After Export');
+    cbxOpenAfterExport.Checked := RegKey.ReadBool('Open Document After Export');
   finally
     RegKey.Free;
   end;
@@ -149,10 +149,13 @@ begin
     NBDI_INSERT:
       begin
         ADone := True;
-        VBBaseDM.DBAction := acEdit;
+        VBBaseDM.DBAction := acInsert;
+      end;
 
-        if TcxDBNavigator(Sender).DataSet.RecordCount = 0 then
-          VBBaseDM.DBAction := acInsert;
+    NBDI_EDIT:
+      begin
+        ADone := True;
+        VBBaseDM.DBAction := acEdit;
       end;
 
 //    NBDI_POST:
@@ -290,6 +293,13 @@ begin
               DataSet := MTDM.cdsVehicleMake;
               ScriptID := 48;
               FileName := 'C:\Data\Xml\Vehicle Make.xml';
+            end;
+
+          ftDirector:
+            begin
+              DataSet := MTDM.cdsDirector;
+              ScriptID := 16;
+              FileName := 'C:\Data\Xml\Director Listing.xml';
             end;
         end;
 

@@ -78,7 +78,6 @@ type
     litCDContactDetail: TdxLayoutItem;
     litContactPerson: TdxLayoutItem;
     litBankingDetail: TdxLayoutItem;
-    litDirector: TdxLayoutItem;
     litBeneficiary: TdxLayoutItem;
     litVehicle: TdxLayoutItem;
     litPhysicalAddress: TdxLayoutItem;
@@ -154,17 +153,6 @@ type
     edtBankDAccountNo: TcxGridDBBandedColumn;
     edtBankDFirstName: TcxGridDBBandedColumn;
     edtBankDLastName: TcxGridDBBandedColumn;
-    grdDirector: TcxGrid;
-    viewDirector: TcxGridDBBandedTableView;
-    lvlDirector: TcxGridLevel;
-    edtDrID: TcxGridDBBandedColumn;
-    lucDrSalutation: TcxGridDBBandedColumn;
-    edtDrFirstName: TcxGridDBBandedColumn;
-    edtDrLastName: TcxGridDBBandedColumn;
-    edtDrMiddleName: TcxGridDBBandedColumn;
-    edtDrTaxNo: TcxGridDBBandedColumn;
-    edtDrMobilePhone: TcxGridDBBandedColumn;
-    edtDrEmailAddress: TcxGridDBBandedColumn;
     grdBeneficiary: TcxGrid;
     viewBeneficiary: TcxGridDBBandedTableView;
     lvlBeneficiary: TcxGridLevel;
@@ -336,31 +324,11 @@ type
     edtTMobilePhone: TcxGridDBBandedColumn;
     edtTEmailAddress: TcxGridDBBandedColumn;
     lvlTrustee: TcxGridLevel;
-    grpDirector: TdxLayoutGroup;
-    litDirectorOfCompany: TdxLayoutItem;
-    grdDirectorCompanyLink: TcxGrid;
-    viewDirectorCompanyLink: TcxGridDBBandedTableView;
-    lvlDirectorCompanyLink: TcxGridLevel;
-    grpDirectorVerticalGrid: TdxLayoutGroup;
     grpPersonAttribute: TcxCategoryRow;
-    edtCoID: TcxGridDBBandedColumn;
-    edtCoDirectorID: TcxGridDBBandedColumn;
-    lucCoCustomerID: TcxGridDBBandedColumn;
     litHeir: TdxLayoutItem;
-    litShareHolder: TdxLayoutItem;
     grdHeir: TcxGrid;
     viewHeir: TcxGridDBBandedTableView;
     lvlHeir: TcxGridLevel;
-    grdShareHolder: TcxGrid;
-    viewShareHolder: TcxGridDBBandedTableView;
-    lvlShareHolder: TcxGridLevel;
-    edtSHID: TcxGridDBBandedColumn;
-    edtSHCustomerID: TcxGridDBBandedColumn;
-    edtSHFirstName: TcxGridDBBandedColumn;
-    edtSHLastName: TcxGridDBBandedColumn;
-    edtSHMobilePhone: TcxGridDBBandedColumn;
-    edtSHEmailAddress: TcxGridDBBandedColumn;
-    edtSHPerecentShare: TcxGridDBBandedColumn;
     edtHID: TcxGridDBBandedColumn;
     edtHCustomerID: TcxGridDBBandedColumn;
     lucHSalutation: TcxGridDBBandedColumn;
@@ -381,7 +349,6 @@ type
     edtHAccountNo: TcxGridDBBandedColumn;
     edtAccHolderFirstName: TcxGridDBBandedColumn;
     edtAccHolderlastName: TcxGridDBBandedColumn;
-    lucSHSalutation: TcxGridDBBandedColumn;
     grpHeir: TdxLayoutGroup;
     litHeirVert: TdxLayoutItem;
     grdHeirVertical: TcxDBVerticalGrid;
@@ -408,7 +375,6 @@ type
     grpBeneficiary: TdxLayoutGroup;
     grpTrustee: TdxLayoutGroup;
     grpVehicle: TdxLayoutGroup;
-    grpShareholder: TdxLayoutGroup;
     grpBankingDetail: TdxLayoutGroup;
     grpPhysicalAddress: TdxLayoutGroup;
     grpPostalAddress: TdxLayoutGroup;
@@ -637,7 +603,7 @@ begin
         MTDM.ValueArray[0] := 'Contact Type:' + TAB + MTDM.FieldValue.ContactType;
         MTDM.ValueArray[1] := 'Contact Value:' + TAB + MTDM.FieldValue.TextValue;
         ErrorValues := Format(ERROR_VALUES, [
-          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1]]);
       end;
 
@@ -668,7 +634,7 @@ begin
         MTDM.cdsContactPerson.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
         MTDM.cdsContactPerson.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
         MTDM.cdsContactPerson.FieldByName('OTHER_NAME').AsString := MTDM.FieldValue.OtherName;
-        MTDM.cdsContactPerson.FieldByName('ID_NUMBER').AsString := MTDM.FieldValue.IDNo;
+        MTDM.cdsContactPerson.FieldByName('ID_NUMBER').AsString := MTDM.FieldValue.IDNumber;
         MTDM.cdsContactPerson.FieldByName('PASSPORT_NUMBER').AsString := MTDM.FieldValue.PassportNo;
         MTDM.cdsContactPerson.FieldByName('SALUTATION_ID').AsInteger := MTDM.FieldValue.SalutationID;
         MTDM.cdsContactPerson.FieldByName('INITIALS').AsString := MTDM.FieldValue.Initials;
@@ -680,7 +646,7 @@ begin
         MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FieldValue.LastName;
         MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FieldValue.Salutation;
         ErrorValues := Format(ERROR_VALUES, [
-          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
             MTDM.ValueArray[1]]);
       end;
@@ -694,7 +660,7 @@ begin
         MTDM.ValueArray[0] := 'Contact Type:' + TAB + MTDM.FieldValue.ContactType;
         MTDM.ValueArray[1] := 'Contact Value:' + TAB + MTDM.FieldValue.TextValue;
         ErrorValues := Format(ERROR_VALUES, [
-          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1]]);
       end;
 
@@ -711,7 +677,7 @@ begin
         MTDM.ValueArray[1] := 'Account Type:' + TAB + MTDM.FieldValue.AccountType;
         MTDM.ValueArray[2] := 'Account No:' + TAB + MTDM.FieldValue.AccountNo;
         ErrorValues := Format(ERROR_VALUES, [
-          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
             MTDM.ValueArray[2]
             ]);
@@ -721,17 +687,17 @@ begin
       begin
         MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
         MTDM.cdsDirector.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
-        MTDM.cdsDirector.FieldByName('MIDDLE_NAME').AsString := MTDM.FieldValue.OtherName;
+        MTDM.cdsDirector.FieldByName('OTHER_NAME').AsString := MTDM.FieldValue.OtherName;
         MTDM.cdsDirector.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FieldValue.EmailAddress;
         MTDM.cdsDirector.FieldByName('SALUTATION_ID').AsInteger := MTDM.FieldValue.SalutationID;
         MTDM.cdsDirector.FieldByName('TAX_NO').AsString := MTDM.FieldValue.TaxNo;
-        MTDM.cdsDirector.FieldByName('MOBILE_PHONE').AsString := MTDM.FieldValue.MobileNo;
+        MTDM.cdsDirector.FieldByName('MOBILE_PHONE').AsString := MTDM.FieldValue.MobileNumber;
 
         MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FieldValue.FirstName;
         MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FieldValue.LastName;
 //        MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FieldValue.Salutation;
         ErrorValues := Format(ERROR_VALUES, [
-          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1]]);
   //          MTDM.ValueArray[2]]);
       end;
@@ -741,16 +707,16 @@ begin
         MTDM.cdsBeneficiary.FieldByName('SALUTATION_ID').AsInteger := MTDM.FieldValue.SalutationID;
         MTDM.cdsBeneficiary.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
         MTDM.cdsBeneficiary.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
-        MTDM.cdsBeneficiary.FieldByName('MOBILE_PHONE').AsString := MTDM.FieldValue.MobileNo;
+        MTDM.cdsBeneficiary.FieldByName('MOBILE_PHONE').AsString := MTDM.FieldValue.MobileNumber;
         MTDM.cdsBeneficiary.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FieldValue.EmailAddress;
 
         MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FieldValue.FirstName;
         MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FieldValue.LastName;
         MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FieldValue.Salutation;
-        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FieldValue.MobileNo;
+        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FieldValue.MobileNumber;
         MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FieldValue.EmailAddress;
         ErrorValues := Format(ERROR_VALUES, [
-          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
             MTDM.ValueArray[2] + CRLF +
             MTDM.ValueArray[3] + CRLF +
@@ -762,16 +728,16 @@ begin
         MTDM.cdsTrustee.FieldByName('SALUTATION_ID').AsInteger := MTDM.FieldValue.SalutationID;
         MTDM.cdsTrustee.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
         MTDM.cdsTrustee.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
-        MTDM.cdsTrustee.FieldByName('MOBILE_PHONE').AsString := MTDM.FieldValue.MobileNo;
+        MTDM.cdsTrustee.FieldByName('MOBILE_PHONE').AsString := MTDM.FieldValue.MobileNumber;
         MTDM.cdsTrustee.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FieldValue.EmailAddress;
 
         MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FieldValue.FirstName;
         MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FieldValue.LastName;
         MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FieldValue.Salutation;
-        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FieldValue.MobileNo;
+        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FieldValue.MobileNumber;
         MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FieldValue.EmailAddress;
         ErrorValues := Format(ERROR_VALUES, [
-          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
             MTDM.ValueArray[2] + CRLF +
             MTDM.ValueArray[3] + CRLF +
@@ -784,16 +750,16 @@ begin
         MTDM.cdsShareHolder.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
         MTDM.cdsShareHolder.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
         MTDM.cdsShareHolder.FieldByName('PERCENT_SHARE').AsFloat := MTDM.FieldValue.PercenShare;
-        MTDM.cdsShareHolder.FieldByName('MOBILE_PHONE').AsString := MTDM.FieldValue.MobileNo;
+        MTDM.cdsShareHolder.FieldByName('MOBILE_PHONE').AsString := MTDM.FieldValue.MobileNumber;
         MTDM.cdsShareHolder.FieldByName('EMAIL_ADDRESS').AsString := MTDM.FieldValue.EmailAddress;
 
         MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FieldValue.FirstName;
         MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FieldValue.LastName;
         MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FieldValue.Salutation;
-        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FieldValue.MobileNo;
+        MTDM.ValueArray[3] := 'Mobile No:' + TAB + MTDM.FieldValue.MobileNumber;
         MTDM.ValueArray[4] := 'Email Address:' + TAB + MTDM.FieldValue.EmailAddress;
         ErrorValues := Format(ERROR_VALUES, [
-          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
             MTDM.ValueArray[2] + CRLF +
             MTDM.ValueArray[3] + CRLF +
@@ -805,7 +771,7 @@ begin
         MTDM.cdsHeir.FieldByName('SALUTATION_ID').AsInteger := MTDM.FieldValue.SalutationID;
         MTDM.cdsHeir.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
         MTDM.cdsHeir.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
-        MTDM.cdsHeir.FieldByName('ID_NUMBER').AsString := MTDM.FieldValue.IDNo;
+        MTDM.cdsHeir.FieldByName('ID_NUMBER').AsString := MTDM.FieldValue.IDNumber;
 
         MTDM.cdsHeir.FieldByName('PHYSICAL1').AsString := MTDM.FieldValue.Physical1;
         MTDM.cdsHeir.FieldByName('PHYSICAL2').AsString := MTDM.FieldValue.Physical2;
@@ -830,9 +796,9 @@ begin
         MTDM.ValueArray[0] := 'First Name:' + TAB + MTDM.FieldValue.FirstName;
         MTDM.ValueArray[1] := 'Last Name:' + TAB + MTDM.FieldValue.LastName;
         MTDM.ValueArray[2] := 'Salutation:' + TAB + MTDM.FieldValue.Salutation;
-        MTDM.ValueArray[3] := 'ID No:' + TAB + MTDM.FieldValue.IDNo;
+        MTDM.ValueArray[3] := 'ID No:' + TAB + MTDM.FieldValue.IDNumber;
         ErrorValues := Format(ERROR_VALUES, [
-          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
             MTDM.ValueArray[2] + CRLF +
             MTDM.ValueArray[3]]);
@@ -854,7 +820,7 @@ begin
         MTDM.ValueArray[3] := 'Reg No:' + TAB + TAB + MTDM.FieldValue.VehicleRegNo;
         MTDM.ValueArray[4] := 'Renewal Date: ' + TAB + FormatDateTime('dd/MM/yyyy', MTDM.FieldValue.LicenceRenewalDate);
         ErrorValues := Format(ERROR_VALUES, [
-          MTDM.ValueArray[0] + CRLF +
+            MTDM.ValueArray[0] + CRLF +
             MTDM.ValueArray[1] + CRLF +
             MTDM.ValueArray[2] + CRLF +
             MTDM.ValueArray[3] + CRLF +
@@ -886,6 +852,7 @@ begin
         MTDM.cdsCustomer.FieldByName('FIRST_NAME').AsString := MTDM.FieldValue.FirstName;
         MTDM.cdsCustomer.FieldByName('LAST_NAME').AsString := MTDM.FieldValue.LastName;
         MTDM.cdsCustomer.FieldByName('INITIALS').AsString := MTDM.FieldValue.Initials;
+        MTDM.cdsCustomer.FieldByName('ID_NUMBER').AsString := MTDM.FieldValue.IDNumber;
         MTDM.cdsCustomer.FieldByName('TRADING_AS').AsString := MTDM.FieldValue.TradingAs;
         MTDM.cdsCustomer.FieldByName('BILL_TO').AsString := MTDM.FieldValue.BillTo;
         MTDM.cdsCustomer.FieldByName('CO_NO').AsString := MTDM.FieldValue.CoNo;
@@ -896,6 +863,9 @@ begin
         MTDM.cdsCustomer.FieldByName('UIF_NO').AsString := MTDM.FieldValue.UifNo;
         MTDM.cdsCustomer.FieldByName('SDL_NO').AsString := MTDM.FieldValue.SDLNo;
         MTDM.cdsCustomer.FieldByName('WC_NO').AsString := MTDM.FieldValue.WCNo;
+
+        if MTDM.FieldValue.SalutationID > 0 then
+          MTDM.cdsCustomer.FieldByName('SALUTATION_ID').AsInteger := MTDm.FieldValue.SalutationID;
 
         if (FormatDatetime('dd/MM/yyyy', MTDM.FieldValue.ARCompletionDate) <> '30/12/1899')
           and (FormatDatetime('dd/MM/yyyy', MTDM.FieldValue.ARCompletionDate) <> '00/00/0000') then
@@ -912,7 +882,7 @@ begin
 
         MTDM.ValueArray[0] := 'Customer ' + MTDM.FieldValue.Name;
         ErrorValues := Format(ERROR_VALUES, [
-          MTDM.ValueArray[0]]);
+            MTDM.ValueArray[0]]);
       end;
   end;
   Result := ErrorValues;
@@ -1061,7 +1031,7 @@ end;
 // begin
 // MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString := CustomerEditFrm.edtDFirstName.Text;
 // MTDM.cdsDirector.FieldByName('LAST_NAME').AsString := CustomerEditFrm.edtDLastName.Text;
-// MTDM.cdsDirector.FieldByName('MIDDLE_NAME').AsString := CustomerEditFrm.edtDOtherName.Text;
+// MTDM.cdsDirector.FieldByName('OTHER_NAME').AsString := CustomerEditFrm.edtDOtherName.Text;
 // MTDM.cdsDirector.FieldByName('EMAIL_ADDRESS').AsString := CustomerEditFrm.edtDEmailAddress.Text;
 // MTDM.cdsDirector.FieldByName('SALUTATION_ID').AsInteger := CustomerEditFrm.lucDSalutation.EditValue;
 // MTDM.cdsDirector.FieldByName('TAX_NO').AsString := CustomerEditFrm.edtDTaxNo.Text;
@@ -1224,23 +1194,14 @@ begin
   TcxLookupComboBoxProperties(lucCPSalutation.Properties).ListSource := LookupDM.dtsSalutation;
   TcxLookupComboBoxProperties(lucCPSalutation.Properties).Buttons.Items[0].Visible := False;
 
-  TcxLookupComboBoxProperties(lucDrSalutation.Properties).ListSource := LookupDM.dtsDirectorSalutation;
-  TcxLookupComboBoxProperties(lucDrSalutation.Properties).Buttons.Items[0].Visible := False;
-
   TcxLookupComboBoxProperties(lucBFSalutation.Properties).ListSource := LookupDM.dtsBFSalutation;
   TcxLookupComboBoxProperties(lucBFSalutation.Properties).Buttons.Items[0].Visible := False;
 
   TcxLookupComboBoxProperties(lucVMakeID.Properties).ListSource := LookupDM.dtsVehicleMake;
   TcxLookupComboBoxProperties(lucVMakeID.Properties).Buttons.Items[0].Visible := False;
 
-  TcxLookupComboBoxProperties(lucDrSalutation.Properties).ListSource := LookupDM.dtsDirectorSalutation;
-  TcxLookupComboBoxProperties(lucDrSalutation.Properties).Buttons.Items[0].Visible := False;
-
   TcxLookupComboBoxProperties(lucTSalutation.Properties).ListSource := LookupDM.dtsTrusteeSalutation;
   TcxLookupComboBoxProperties(lucTSalutation.Properties).Buttons.Items[0].Visible := False;
-
-  TcxLookupComboBoxProperties(lucSHSalutation.Properties).ListSource := LookupDM.dtsSHSalutation;
-  TcxLookupComboBoxProperties(lucSHSalutation.Properties).Buttons.Items[0].Visible := False;
 
   TcxLookupComboBoxProperties(lucHSalutation.Properties).ListSource := LookupDM.dtsHeirSalutation;
   TcxLookupComboBoxProperties(lucHSalutation.Properties).Buttons.Items[0].Visible := False;
@@ -1294,15 +1255,11 @@ begin
   viewContactPerson.DataController.DataSource := MTDM.dtsContactPerson;
   viewCPContactDetail.DataController.DataSource := MTDM.dtsContactDetailPerson;
   viewBankingDetail.DataController.DataSource := MTDM.dtsBankingDetail;
-  viewDirector.DataController.DataSource := MTDM.dtsDirector;
   viewBeneficiary.DataController.DataSource := MTDM.dtsBeneficiary;
   viewTrustee.DataController.DataSource := MTDM.dtsTrustee;
   viewVehicle.DataController.DataSource := MTDM.dtsVehicle;
-  viewDirectorCompanyLink.DataController.DataSource := MTDM.dtsDirectorCompanyLink;
   viewHeir.DataController.DataSource := MTDM.dtsHeir;
   grdHeirVertical.DataController.DataSource := MTDM.dtsHeir;
-  viewShareHolder.DataController.DataSource := MTDM.dtsShareHolder;
-  TcxLookupComboBoxProperties(lucCoCustomerID.Properties).ListSource := LookupDM.dtsCompany;
 
   SetLength(FDetailDataSet, CUSTOMER_DETAIL_COUNT);
   FDetailDataSet[0] := MTDM.cdsContactDetailCo;
@@ -1440,18 +1397,18 @@ begin
           MTDM.FormCaption := 'Banking  Details';
         end;
 
-      5:
-        begin
-          grdDirector.SetFocus;
-          viewDirector.Focused := True;
-          viewDirector.Controller.FocusedColumn := edtDrFirstName;
-          actInsert.Caption := 'Add a new director';
-          actEdit.Caption := 'Edit selected director';
-          actDelete.Caption := 'Delete selected director';
-          MTDM.FormCaption := 'Director Details';
-        end;
+//      5:
+//        begin
+//          grdDirector.SetFocus;
+//          viewDirector.Focused := True;
+//          viewDirector.Controller.FocusedColumn := edtDrFirstName;
+//          actInsert.Caption := 'Add a new director';
+//          actEdit.Caption := 'Edit selected director';
+//          actDelete.Caption := 'Delete selected director';
+//          MTDM.FormCaption := 'Director Details';
+//        end;
 
-      6:
+      5:
         begin
           grdBeneficiary.SetFocus;
           viewBeneficiary.Focused := True;
@@ -1461,7 +1418,7 @@ begin
           MTDM.FormCaption := 'Beneficiary Details';
         end;
 
-      7:
+      6:
         begin
           grdTrustee.SetFocus;
           viewTrustee.Focused := True;
@@ -1471,17 +1428,17 @@ begin
           MTDM.FormCaption := 'trustee Details';
         end;
 
-      8:
-        begin
-          grdShareHolder.SetFocus;
-          viewShareHolder.Focused := True;
-          actInsert.Caption := 'Add a new Shareholder';
-          actEdit.Caption := 'Edit selected Shareholder';
-          actDelete.Caption := 'Delete selected Shareholder';
-          MTDM.FormCaption := 'Shareholder Details';
-        end;
+//      8:
+//        begin
+//          grdShareHolder.SetFocus;
+//          viewShareHolder.Focused := True;
+//          actInsert.Caption := 'Add a new Shareholder';
+//          actEdit.Caption := 'Edit selected Shareholder';
+//          actDelete.Caption := 'Delete selected Shareholder';
+//          MTDM.FormCaption := 'Shareholder Details';
+//        end;
 
-      9:
+      7:
         begin
           grdHeir.SetFocus;
           viewHeir.Focused := True;
@@ -1491,7 +1448,7 @@ begin
           MTDM.FormCaption := 'Heir Details';
         end;
 
-      10:
+      8:
         begin
           grdVehicle.SetFocus;
           viewVehicle.Focused := True;
@@ -2164,7 +2121,7 @@ var
   Iteration: Extended;
 
 const
-  TABLE_COUNT = 26;
+  TABLE_COUNT = 24;
 begin
   if ProgressFrm = nil then
     ProgressFrm := TProgressFrm.Create(nil);
@@ -2260,18 +2217,17 @@ begin
       MTDM.cdsBankingDetail.CreateDataSet;
 
     // Director
-    Inc(Counter);
-    Iteration := Counter / TABLE_COUNT * 100;
-
-//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Director Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Director Table')), 0);
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
-    VBBaseDM.GetData(16, MTDM.cdsDirector, MTDM.cdsDirector.Name, ONE_SPACE,
-      'C:\Data\Xml\Director.xml', MTDM.cdsDirector.UpdateOptions.Generatorname,
-      MTDM.cdsDirector.UpdateOptions.UpdateTableName);
-
-    if not MTDM.cdsDirector.Active then
-      MTDM.cdsDirector.CreateDataSet;
+//    Inc(Counter);
+//    Iteration := Counter / TABLE_COUNT * 100;
+//
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Director Table')), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
+//    VBBaseDM.GetData(16, MTDM.cdsDirector, MTDM.cdsDirector.Name, ONE_SPACE,
+//      'C:\Data\Xml\Director.xml', MTDM.cdsDirector.UpdateOptions.Generatorname,
+//      MTDM.cdsDirector.UpdateOptions.UpdateTableName);
+//
+//    if not MTDM.cdsDirector.Active then
+//      MTDM.cdsDirector.CreateDataSet;
 
     // Beneficiary
     Inc(Counter);
@@ -2330,18 +2286,17 @@ begin
       MTDM.cdsDirectorCompanyLink.CreateDataSet;
 
     // Shareholder
-    Inc(Counter);
-    Iteration := Counter / TABLE_COUNT * 100;
-
-//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('CAPTION=Opening Shareholder Table' + '|PROGRESS=' + Iteration.ToString)), 0);
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Shareholder Table')), 0);
-    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
-    VBBaseDM.GetData(76, MTDM.cdsShareHolder, MTDM.cdsShareHolder.Name, ONE_SPACE,
-      'C:\Data\Xml\Shareholder.xml', MTDM.cdsShareHolder.UpdateOptions.Generatorname,
-      MTDM.cdsShareHolder.UpdateOptions.UpdateTableName);
-
-    if not MTDM.cdsShareHolder.Active then
-      MTDM.cdsShareHolder.CreateDataSet;
+//    Inc(Counter);
+//    Iteration := Counter / TABLE_COUNT * 100;
+//
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_CAPTION, DWORD(PChar('Opening Shareholder Table')), 0);
+//    SendMessage(ProgressFrm.Handle, WM_DOWNLOAD_PROGRESS, DWORD(PChar(Iteration.ToString)), 0);
+//    VBBaseDM.GetData(76, MTDM.cdsShareHolder, MTDM.cdsShareHolder.Name, ONE_SPACE,
+//      'C:\Data\Xml\Shareholder.xml', MTDM.cdsShareHolder.UpdateOptions.Generatorname,
+//      MTDM.cdsShareHolder.UpdateOptions.UpdateTableName);
+//
+//    if not MTDM.cdsShareHolder.Active then
+//      MTDM.cdsShareHolder.CreateDataSet;
 
     // Heir
     Inc(Counter);
@@ -2409,6 +2364,8 @@ begin
     LookupDM.cdsSHSalutation.Close;
     LookupDM.cdsAccHolderSalutation.Close;
     LookupDM.cdsTrusteeSalutation.Close;
+    LookupDM.cdsDirectorSalutationLU.Close;
+    LookupDM.cdsCustomerSalutation.Close;
 
     LookupDM.cdsBFSalutation.Data := LookupDM.cdsSalutation.Data;
     LookupDM.cdsDirectorSalutation.Data := LookupDM.cdsSalutation.Data;
@@ -2416,6 +2373,8 @@ begin
     LookupDM.cdsSHSalutation.Data := LookupDM.cdsSalutation.Data;
     LookupDM.cdsAccHolderSalutation.Data := LookupDM.cdsSalutation.Data;
     LookupDM.cdsTrusteeSalutation.Data := LookupDM.cdsSalutation.Data;
+    LookupDM.cdsDirectorSalutationLU.Data := LookupDM.cdsSalutation.Data;
+    LookupDM.cdsCustomerSalutation.Data := LookupDM.cdsSalutation.Data;
 
     // Job function
     Inc(Counter);
@@ -2961,6 +2920,7 @@ begin
             // Post the data
             try
               FDetailDataSet[MTDM.DetailIndex].Post;
+              SendMessage(Application.MainForm.Handle, WM_SYNCH_DATA, DWORD(PChar('REQUEST=SYNCH_DATA|DATASET_ID=' + MTDM.DetailIndex.ToString)), 0);
 //              if Length(Trim(VBBaseDM.ServerErrorMsg)) > 0 then
 //              begin
 //                FDetailDataSet[MTDM.DetailIndex].AfterDelete := nil;
@@ -3172,12 +3132,12 @@ begin
 
 //{$IFDEF RELEASE}
   grpPersonAttribute.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [4, 7];
-  litShareHolder.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [1, 2, 5, 8];
-  grpDirector.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [1, 2, 5, 8];
   grpHeir.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [6];
   grpPersonAttribute.Visible := MTDM.cdsCustomer.FieldByName('CUSTOMER_TYPE_ID').Asinteger in [4, 7];
 //{$ENDIF}
 end;
 
 end.
+
+
 

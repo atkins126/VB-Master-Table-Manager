@@ -102,7 +102,7 @@ begin
   MTDM.FieldValue.LastName := edtLastName.Text;
   MTDM.FieldValue.SalutationID := VarAsType(lucSalutation.EditValue, varInteger);
   MTDM.FieldValue.Salutation := lucSalutation.Text;
-  MTDM.FieldValue.MobileNo := edtMobileNo.Text;
+  MTDM.FieldValue.MobileNumber := edtMobileNo.Text;
   MTDM.FieldValue.EmailAddress := edtEmailAddress.Text;
 
   ModalResult := mrOK;

@@ -1,4 +1,5 @@
 inherited ActivityTypeFrm: TActivityTypeFrm
+  BorderIcons = []
   BorderStyle = bsNone
   Caption = 'ActivityTypeFrm'
   ClientHeight = 697
@@ -54,16 +55,21 @@ inherited ActivityTypeFrm: TActivityTypeFrm
       end
     end
     inherited navMaster: TcxDBNavigator
-      Width = 324
+      Width = 318
+      Buttons.CustomButtons = <
+        item
+          Hint = 'Preview'
+          ImageIndex = 11
+        end>
       DataSource = MTDM.dtsActivityType
-      ExplicitWidth = 324
+      ExplicitWidth = 318
     end
     inherited cbxOpenAfterExport: TcxCheckBox
       Left = 335
       ExplicitLeft = 335
     end
     inherited litNavigator: TdxLayoutItem
-      ControlOptions.OriginalWidth = 324
+      ControlOptions.OriginalWidth = 318
     end
     inherited litGrid: TdxLayoutItem
       ControlOptions.OriginalWidth = 450

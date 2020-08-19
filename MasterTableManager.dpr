@@ -60,7 +60,8 @@ uses
   HeirDetail_Frm in 'General\HeirDetail_Frm.pas' {HeirDetailFrm},
   DirectorCompanyLink_Frm in 'General\DirectorCompanyLink_Frm.pas' {DirectorCompanyLinkFrm},
   Director_Frm in 'General\Director_Frm.pas' {DirectorFrm},
-  VBProxyClasses in '..\Lib\VBProxyClasses.pas';
+  VBProxyClasses in '..\Lib\VBProxyClasses.pas',
+  Shareholder_Frm in 'General\Shareholder_Frm.pas' {ShareholderFrm};
 
 {$R *.res}
 

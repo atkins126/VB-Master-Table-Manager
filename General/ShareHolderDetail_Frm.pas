@@ -96,7 +96,7 @@ begin
   MTDM.FieldValue.FirstName := edtFirstName.Text;
   MTDM.FieldValue.LastName := edtLastName.Text;
   MTDM.FieldValue.PercenShare := spnPercentShare.Value;
-  MTDM.FieldValue.MobileNo := edtMobileNo.Text;
+  MTDM.FieldValue.MobileNumber := edtMobileNo.Text;
   MTDM.FieldValue.EmailAddress := edtEmailAddress.Text;
 
   ModalResult := mrOK;

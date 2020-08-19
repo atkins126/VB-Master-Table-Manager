@@ -2194,10 +2194,10 @@ inherited ReportDM: TReportDM
       Required = True
       Size = 30
     end
-    object cdsDirectorMIDDLE_NAME: TStringField
-      DisplayLabel = 'Middle Name'
-      FieldName = 'MIDDLE_NAME'
-      Origin = 'MIDDLE_NAME'
+    object cdsDirectorOTHER_NAME: TStringField
+      DisplayLabel = 'Other Name'
+      FieldName = 'OTHER_NAME'
+      Origin = 'OTHER_NAME'
       Size = 30
     end
     object cdsDirectorTAX_NO: TStringField
@@ -2479,7 +2479,7 @@ inherited ReportDM: TReportDM
     Top = 625
   end
   object rptTimesheetByUser: TfrxReport
-    Version = '6.2.1'
+    Version = '6.7'
     DotMatrixReport = False
     EngineOptions.DoublePass = True
     EngineOptions.PrintIfEmpty = False
@@ -2522,6 +2522,7 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
+      MirrorMode = []
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
@@ -3080,7 +3081,7 @@ inherited ReportDM: TReportDM
     Top = 490
   end
   object rptMaster: TfrxReport
-    Version = '6.2.1'
+    Version = '6.7'
     DotMatrixReport = False
     EngineOptions.DoublePass = True
     EngineOptions.PrintIfEmpty = False
@@ -3124,6 +3125,7 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
+      MirrorMode = []
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
@@ -3334,7 +3336,7 @@ inherited ReportDM: TReportDM
     Top = 115
   end
   object rptCustomerListing: TfrxReport
-    Version = '6.2.1'
+    Version = '6.7'
     DotMatrixReport = False
     EngineOptions.DoublePass = True
     EngineOptions.PrintIfEmpty = False
@@ -3378,6 +3380,7 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
+      MirrorMode = []
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
@@ -3739,7 +3742,7 @@ inherited ReportDM: TReportDM
     Top = 340
   end
   object rptPricelist: TfrxReport
-    Version = '6.2.1'
+    Version = '6.7'
     DotMatrixReport = False
     EngineOptions.DoublePass = True
     EngineOptions.PrintIfEmpty = False
@@ -3783,6 +3786,7 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
+      MirrorMode = []
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
@@ -3990,7 +3994,7 @@ inherited ReportDM: TReportDM
     end
   end
   object rptPriceHistory: TfrxReport
-    Version = '6.2.1'
+    Version = '6.7'
     DotMatrixReport = False
     EngineOptions.DoublePass = True
     EngineOptions.PrintIfEmpty = False
@@ -4034,6 +4038,7 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
+      MirrorMode = []
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Frame.Typ = []
@@ -4607,6 +4612,8 @@ inherited ReportDM: TReportDM
     CenterWindow = False
     PrintScaling = False
     PdfA = False
+    PDFStandard = psNone
+    PDFVersion = pv17
     Left = 30
     Top = 170
   end
@@ -4846,7 +4853,7 @@ inherited ReportDM: TReportDM
     Top = 125
   end
   object rptCustomer: TfrxReport
-    Version = '6.2.1'
+    Version = '6.7'
     DotMatrixReport = False
     EngineOptions.DoublePass = True
     EngineOptions.PrintIfEmpty = False
@@ -4923,6 +4930,7 @@ inherited ReportDM: TReportDM
       BottomMargin = 10.000000000000000000
       ColumnWidth = 277.000000000000000000
       Frame.Typ = []
+      MirrorMode = []
       PrintIfEmpty = False
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
@@ -4973,7 +4981,7 @@ inherited ReportDM: TReportDM
         object Memo3: TfrxMemoView
           AllowVectorExport = True
           Top = 18.897662200000000000
-          Width = 71.811023622047200000
+          Width = 71.811023622047210000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -4991,7 +4999,7 @@ inherited ReportDM: TReportDM
         object Memo4: TfrxMemoView
           AllowVectorExport = True
           Top = 37.795300000000000000
-          Width = 71.811023622047200000
+          Width = 71.811023622047210000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -5164,7 +5172,7 @@ inherited ReportDM: TReportDM
         object Memo21: TfrxMemoView
           AllowVectorExport = True
           Top = 56.692962200000000000
-          Width = 71.811023622047200000
+          Width = 71.811023622047210000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -6101,6 +6109,7 @@ inherited ReportDM: TReportDM
       BottomMargin = 10.000000000000000000
       Frame.Typ = [ftLeft, ftRight]
       EndlessHeight = True
+      MirrorMode = []
       PrintIfEmpty = False
       object bndContactDetailPersonHeader: TfrxHeader
         FillType = ftBrush
@@ -6561,7 +6570,7 @@ inherited ReportDM: TReportDM
     Top = 625
   end
   object frxReport1: TfrxReport
-    Version = '6.2.1'
+    Version = '6.7'
     DotMatrixReport = False
     EngineOptions.DoublePass = True
     EngineOptions.PrintIfEmpty = False
@@ -6639,6 +6648,7 @@ inherited ReportDM: TReportDM
       ColumnWidth = 277.000000000000000000
       Frame.Typ = []
       EndlessHeight = True
+      MirrorMode = []
       PrintIfEmpty = False
       object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
@@ -6686,7 +6696,7 @@ inherited ReportDM: TReportDM
         object Memo3: TfrxMemoView
           AllowVectorExport = True
           Top = 0.000012200000000004
-          Width = 71.811023622047200000
+          Width = 71.811023622047210000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -6704,7 +6714,7 @@ inherited ReportDM: TReportDM
         object Memo4: TfrxMemoView
           AllowVectorExport = True
           Top = 18.897650000000000000
-          Width = 71.811023622047200000
+          Width = 71.811023622047210000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -6876,7 +6886,7 @@ inherited ReportDM: TReportDM
         object Memo21: TfrxMemoView
           AllowVectorExport = True
           Top = 37.795312200000000000
-          Width = 71.811023622047200000
+          Width = 71.811023622047210000
           Height = 18.897650000000000000
           DataSet = fdsCustomer
           DataSetName = 'Customer'
@@ -7931,6 +7941,7 @@ inherited ReportDM: TReportDM
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
       EndlessHeight = True
+      MirrorMode = []
       object bndSubAddress: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = [ftLeft, ftRight, ftBottom]
@@ -8360,6 +8371,7 @@ inherited ReportDM: TReportDM
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
       EndlessHeight = True
+      MirrorMode = []
       PrintIfEmpty = False
       object bndSubContactDetailCo: TfrxMasterData
         FillType = ftBrush
@@ -8436,6 +8448,7 @@ inherited ReportDM: TReportDM
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
       EndlessHeight = True
+      MirrorMode = []
       PrintIfEmpty = False
       object bndBankingDetailHeader: TfrxHeader
         FillType = ftBrush
@@ -8638,6 +8651,7 @@ inherited ReportDM: TReportDM
       BottomMargin = 10.000000000000000000
       Frame.Typ = [ftLeft, ftRight]
       EndlessHeight = True
+      MirrorMode = []
       PrintIfEmpty = False
       object bndContactDetailPersonHeader: TfrxHeader
         FillType = ftBrush
@@ -8744,6 +8758,7 @@ inherited ReportDM: TReportDM
       BottomMargin = 10.000000000000000000
       Frame.Typ = [ftTop]
       EndlessHeight = True
+      MirrorMode = []
       PrintIfEmpty = False
       object bndDirectorHeader: TfrxHeader
         FillType = ftBrush
@@ -8964,6 +8979,7 @@ inherited ReportDM: TReportDM
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
       EndlessHeight = True
+      MirrorMode = []
       PrintIfEmpty = False
       object bndbeneficiaryheader: TfrxHeader
         FillType = ftBrush
@@ -9156,6 +9172,7 @@ inherited ReportDM: TReportDM
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
       EndlessHeight = True
+      MirrorMode = []
       PrintIfEmpty = False
       object bndVehicleHeader: TfrxHeader
         FillType = ftBrush
@@ -9453,6 +9470,7 @@ inherited ReportDM: TReportDM
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
+      MirrorMode = []
     end
   end
 end

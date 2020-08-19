@@ -488,6 +488,10 @@ inherited MTDM: TMTDM
       Origin = 'STATUS_ID'
       Required = True
     end
+    object cdsCustomerSALUTATION_ID: TIntegerField
+      DisplayLabel = 'Sal'
+      FieldName = 'SALUTATION_ID'
+    end
     object cdsCustomerNAME: TStringField
       DisplayLabel = 'Name'
       FieldName = 'NAME'
@@ -2463,22 +2467,17 @@ inherited MTDM: TMTDM
     Constraints = <
       item
         CustomConstraint = 'CHAR_LENGTH(TRIM(FIRST_NAME)) > 0'
-        ErrorMessage = 'Director first name must have a value'
+        ErrorMessage = 'First name must have a value'
         FromDictionary = False
       end
       item
         CustomConstraint = 'CHAR_LENGTH(TRIM(LAST_NAME)) > 0'
-        ErrorMessage = 'Director last name must have a value'
+        ErrorMessage = 'Last name must have a value'
         FromDictionary = False
       end
       item
-        CustomConstraint = 'CHAR_LENGTH(TRIM(MOBILE_PHONE)) > 0'
-        ErrorMessage = 'Director mobile phone must have a value'
-        FromDictionary = False
-      end
-      item
-        CustomConstraint = 'CHAR_LENGTH(TRIM(EMAIL_ADDRESS)) > 0'
-        ErrorMessage = 'Director email address must have a value'
+        CustomConstraint = 'CHAR_LENGTH(TRIM(TAX_NO)) > 0'
+        ErrorMessage = 'Tax number must have a value'
         FromDictionary = False
       end>
     FieldDefs = <>
@@ -2495,7 +2494,9 @@ inherited MTDM: TMTDM
         Active = True
         Selected = True
         Name = 'idxDirName'
-        Fields = 'FIRST_NAME;LAST_NAME'
+        Fields = 'FIRST_NAME;LAST_NAME;TAX_NO'
+        Options = [soNoCase]
+        FilterOptions = [ekNoCase]
       end>
     IndexName = 'idxDirName'
     ConstraintsEnabled = True
@@ -2530,15 +2531,10 @@ inherited MTDM: TMTDM
     end
     object cdsDirectorCUSTOMER_ID: TIntegerField
       Alignment = taLeftJustify
-      DisplayLabel = 'C ID'
+      DisplayLabel = 'Cust ID'
       FieldName = 'CUSTOMER_ID'
       Origin = 'CUSTOMER_ID'
       Required = True
-    end
-    object cdsDirectorCUSTOMER_TABLE_ID: TIntegerField
-      Alignment = taLeftJustify
-      DisplayLabel = 'CT ID'
-      FieldName = 'CUSTOMER_TABLE_ID'
     end
     object cdsDirectorSALUTATION_ID: TIntegerField
       Alignment = taLeftJustify
@@ -2560,10 +2556,10 @@ inherited MTDM: TMTDM
       Required = True
       Size = 30
     end
-    object cdsDirectorMIDDLE_NAME: TStringField
-      DisplayLabel = 'Middle Name'
-      FieldName = 'MIDDLE_NAME'
-      Origin = 'MIDDLE_NAME'
+    object cdsDirectorOTHER_NAME: TStringField
+      DisplayLabel = 'Ohter Name'
+      FieldName = 'OTHER_NAME'
+      Origin = 'OTHER_NAME'
       Size = 30
     end
     object cdsDirectorTAX_NO: TStringField
@@ -3345,15 +3341,15 @@ inherited MTDM: TMTDM
     end
     object cdsShareHolderCUSTOMER_ID: TIntegerField
       Alignment = taLeftJustify
-      DisplayLabel = 'C ID'
+      DisplayLabel = 'Cust ID'
       FieldName = 'CUSTOMER_ID'
       Origin = 'CUSTOMER_ID'
       Required = True
     end
-    object cdsShareHolderCUSTOMER_TABLE_ID: TIntegerField
+    object cdsShareHolderCOMPANY_ID: TIntegerField
       Alignment = taLeftJustify
-      DisplayLabel = 'CT ID'
-      FieldName = 'CUSTOMER_TABLE_ID'
+      DisplayLabel = 'Company'
+      FieldName = 'COMPANY_ID'
     end
     object cdsShareHolderSALUTATION_ID: TIntegerField
       DisplayLabel = 'Salutation'

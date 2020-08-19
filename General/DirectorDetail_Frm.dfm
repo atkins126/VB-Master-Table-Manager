@@ -13,7 +13,6 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
     ExplicitHeight = 315
     inherited lblHeaderTitle: TcxLabel
       Caption = 'Director Details'
-      ExplicitWidth = 523
     end
     inherited btnOK: TcxButton
       Left = 378
@@ -55,6 +54,7 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
         item
           FieldName = 'NAME'
         end>
+      Properties.ListSource = LookupDM.dtsDirectorSalutationLU
       Properties.PostPopupValueOnTab = True
       Style.HotTrack = False
       TabOrder = 6
@@ -112,34 +112,48 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
     object cbxDirectorFromCustomer: TcxCheckBox [12]
       Left = 11
       Top = 76
-      Caption = 'Seelct director from an existing VB customer'
+      Caption = 'Select director from an existing VB customer'
       Properties.ImmediatePost = True
       Properties.OnEditValueChanged = cbxDirectorFromCustomerPropertiesEditValueChanged
-      State = cbsChecked
       Style.HotTrack = False
       Style.TransparentBorder = False
       TabOrder = 2
+      Transparent = True
     end
     object lucCustomer: TcxLookupComboBox [13]
       Left = 99
       Top = 101
+      Properties.DropDownAutoSize = True
       Properties.DropDownListStyle = lsFixedList
       Properties.ImmediatePost = True
-      Properties.ListColumns = <>
+      Properties.KeyFieldNames = 'ID'
+      Properties.ListColumns = <
+        item
+          Width = 300
+          FieldName = 'NAME'
+        end
+        item
+          Width = 125
+          FieldName = 'CO_NO'
+        end>
+      Properties.ListOptions.SyncMode = True
+      Properties.ListSource = LookupDM.dtsCustomerLookup
+      Properties.PostPopupValueOnTab = True
+      Properties.OnEditValueChanged = lucCustomerPropertiesEditValueChanged
+      Properties.OnPopup = lucCustomerPropertiesPopup
       Style.HotTrack = False
       Style.TransparentBorder = False
       TabOrder = 3
-      Width = 435
-    end
-    inherited layMainGroup_Root: TdxLayoutGroup
-      ItemIndex = 1
+      Width = 412
     end
     inherited grpData: TdxLayoutGroup
       ItemIndex = 1
     end
     inherited grpButtons: TdxLayoutGroup
-      AlignHorz = ahRight
-      ItemIndex = 1
+      ItemIndex = 2
+    end
+    inherited litLegend: TdxLayoutItem
+      AlignHorz = ahLeft
     end
     object grpName: TdxLayoutGroup
       Parent = grpData
@@ -305,10 +319,11 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
     end
     object litCustomer: TdxLayoutItem
       Parent = grpData
+      AlignHorz = ahLeft
       CaptionOptions.Text = 'Customer'
       Control = lucCustomer
       ControlOptions.OriginalHeight = 19
-      ControlOptions.OriginalWidth = 145
+      ControlOptions.OriginalWidth = 412
       ControlOptions.ShowBorder = False
       Index = 1
     end
@@ -876,8 +891,8 @@ inherited DirectorDetailFrm: TDirectorDetailFrm
   end
   object styReadOnly: TcxEditStyleController
     Style.Color = 13434879
-    Left = 325
-    Top = 200
+    Left = 385
+    Top = 320
     PixelsPerInch = 96
   end
 end

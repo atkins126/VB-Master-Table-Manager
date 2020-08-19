@@ -2,22 +2,34 @@ inherited DirectorFrm: TDirectorFrm
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'DirectorFrm'
-  ClientHeight = 649
-  ClientWidth = 1146
-  ExplicitWidth = 1146
-  ExplicitHeight = 649
+  ClientHeight = 752
+  ClientWidth = 1394
+  ExplicitWidth = 1394
+  ExplicitHeight = 752
   PixelsPerInch = 96
   TextHeight = 13
   inherited layMain: TdxLayoutControl
-    Width = 1100
-    ExplicitWidth = 1100
+    Width = 1236
+    Height = 711
+    ExplicitWidth = 1236
+    ExplicitHeight = 711
     inherited grdMaster: TcxGrid
-      Width = 1060
-      ExplicitWidth = 1060
+      Width = 1195
+      Height = 643
+      ExplicitWidth = 1195
+      ExplicitHeight = 643
       inherited viewMaster: TcxGridDBBandedTableView
         PopupMenu = popMaster
+        OnDblClick = viewMasterDblClick
         DataController.DataSource = MTDM.dtsDirector
+        OptionsBehavior.IncSearch = True
+        OptionsData.Deleting = False
+        OptionsData.DeletingConfirmation = False
+        OptionsData.Editing = False
+        OptionsData.Inserting = False
+        OptionsView.NoDataToDisplayInfoText = '<No Director data to display>'
         OptionsView.ColumnAutoWidth = True
+        OptionsView.ShowColumnFilterButtons = sfbAlways
         Bands = <
           item
             Caption = 'Director Listing'
@@ -66,15 +78,15 @@ inherited DirectorFrm: TDirectorFrm
           Position.ColIndex = 1
           Position.RowIndex = 0
         end
-        object edtCTableID: TcxGridDBBandedColumn
-          DataBinding.FieldName = 'CUSTOMER_TABLE_ID'
-          PropertiesClassName = 'TcxCurrencyEditProperties'
-          Properties.DecimalPlaces = 0
-          Properties.DisplayFormat = '#,##0'
-          Properties.EditFormat = '#,##0'
-          Properties.ReadOnly = True
-          Visible = False
-          MinWidth = 50
+        object lucSalutationID: TcxGridDBBandedColumn
+          DataBinding.FieldName = 'SALUTATION_ID'
+          PropertiesClassName = 'TcxLookupComboBoxProperties'
+          Properties.KeyFieldNames = 'ID'
+          Properties.ListColumns = <
+            item
+              FieldName = 'NAME'
+            end>
+          MinWidth = 70
           Options.Editing = False
           Options.Filtering = False
           Options.ExpressionEditing = False
@@ -83,31 +95,9 @@ inherited DirectorFrm: TDirectorFrm
           Options.HorzSizing = False
           Options.Moving = False
           Options.Sorting = False
-          Width = 50
+          Width = 70
           Position.BandIndex = 0
           Position.ColIndex = 2
-          Position.RowIndex = 0
-        end
-        object edtSalutationID: TcxGridDBBandedColumn
-          DataBinding.FieldName = 'SALUTATION_ID'
-          PropertiesClassName = 'TcxCurrencyEditProperties'
-          Properties.DecimalPlaces = 0
-          Properties.DisplayFormat = '#,##0'
-          Properties.EditFormat = '#,##0'
-          Properties.ReadOnly = True
-          Visible = False
-          MinWidth = 50
-          Options.Editing = False
-          Options.Filtering = False
-          Options.ExpressionEditing = False
-          Options.GroupFooters = False
-          Options.Grouping = False
-          Options.HorzSizing = False
-          Options.Moving = False
-          Options.Sorting = False
-          Width = 50
-          Position.BandIndex = 0
-          Position.ColIndex = 3
           Position.RowIndex = 0
         end
         object edtFirstName: TcxGridDBBandedColumn
@@ -122,7 +112,7 @@ inherited DirectorFrm: TDirectorFrm
           Options.Moving = False
           Width = 130
           Position.BandIndex = 0
-          Position.ColIndex = 4
+          Position.ColIndex = 3
           Position.RowIndex = 0
         end
         object edtLastName: TcxGridDBBandedColumn
@@ -137,11 +127,11 @@ inherited DirectorFrm: TDirectorFrm
           Options.Moving = False
           Width = 130
           Position.BandIndex = 0
-          Position.ColIndex = 5
+          Position.ColIndex = 4
           Position.RowIndex = 0
         end
         object edtMiddleName: TcxGridDBBandedColumn
-          DataBinding.FieldName = 'MIDDLE_NAME'
+          DataBinding.FieldName = 'OTHER_NAME'
           PropertiesClassName = 'TcxTextEditProperties'
           Properties.ReadOnly = True
           MinWidth = 180
@@ -152,7 +142,7 @@ inherited DirectorFrm: TDirectorFrm
           Options.Moving = False
           Width = 180
           Position.BandIndex = 0
-          Position.ColIndex = 6
+          Position.ColIndex = 5
           Position.RowIndex = 0
         end
         object edtTaxNo: TcxGridDBBandedColumn
@@ -161,15 +151,13 @@ inherited DirectorFrm: TDirectorFrm
           Properties.ReadOnly = True
           MinWidth = 120
           Options.Editing = False
-          Options.Filtering = False
-          Options.ExpressionEditing = False
           Options.GroupFooters = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
           Width = 120
           Position.BandIndex = 0
-          Position.ColIndex = 7
+          Position.ColIndex = 6
           Position.RowIndex = 0
         end
         object edtMobileNo: TcxGridDBBandedColumn
@@ -184,7 +172,7 @@ inherited DirectorFrm: TDirectorFrm
           Options.Moving = False
           Width = 110
           Position.BandIndex = 0
-          Position.ColIndex = 8
+          Position.ColIndex = 7
           Position.RowIndex = 0
         end
         object edtIDNumber: TcxGridDBBandedColumn
@@ -193,15 +181,13 @@ inherited DirectorFrm: TDirectorFrm
           Properties.ReadOnly = True
           MinWidth = 130
           Options.Editing = False
-          Options.Filtering = False
-          Options.ExpressionEditing = False
           Options.GroupFooters = False
           Options.Grouping = False
           Options.HorzSizing = False
           Options.Moving = False
           Width = 130
           Position.BandIndex = 0
-          Position.ColIndex = 9
+          Position.ColIndex = 8
           Position.RowIndex = 0
         end
         object edtEmailAddress: TcxGridDBBandedColumn
@@ -213,7 +199,7 @@ inherited DirectorFrm: TDirectorFrm
           Options.Grouping = False
           Options.Moving = False
           Position.BandIndex = 0
-          Position.ColIndex = 10
+          Position.ColIndex = 9
           Position.RowIndex = 0
         end
         object edtFullNameFirst: TcxGridDBBandedColumn
@@ -229,7 +215,7 @@ inherited DirectorFrm: TDirectorFrm
           Options.Moving = False
           Width = 250
           Position.BandIndex = 0
-          Position.ColIndex = 11
+          Position.ColIndex = 10
           Position.RowIndex = 0
         end
       end
@@ -243,7 +229,6 @@ inherited DirectorFrm: TDirectorFrm
         end>
       Buttons.Edit.ImageIndex = 16
       Buttons.Edit.Visible = True
-      DataSource = MTDM.dtsDirector
       ExplicitWidth = 315
     end
     inherited cbxOpenAfterExport: TcxCheckBox
@@ -254,7 +239,7 @@ inherited DirectorFrm: TDirectorFrm
       ControlOptions.OriginalWidth = 315
     end
     inherited litGrid: TdxLayoutItem
-      ControlOptions.OriginalWidth = 1060
+      ControlOptions.OriginalWidth = 1195
     end
   end
   inherited styRepository: TcxStyleRepository

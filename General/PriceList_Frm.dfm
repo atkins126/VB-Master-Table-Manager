@@ -14,12 +14,13 @@ inherited PriceListFrm: TPriceListFrm
     ExplicitWidth = 1421
     ExplicitHeight = 691
     inherited grdMaster: TcxGrid
-      Left = 25
-      Top = 94
+      Left = 10000
+      Top = 10000
       Width = 1368
       Height = 569
-      ExplicitLeft = 25
-      ExplicitTop = 94
+      Visible = False
+      ExplicitLeft = 10000
+      ExplicitTop = 10000
       ExplicitWidth = 1368
       ExplicitHeight = 569
       inherited viewMaster: TcxGridDBBandedTableView
@@ -114,15 +115,15 @@ inherited PriceListFrm: TPriceListFrm
       end
     end
     inherited navMaster: TcxDBNavigator
+      Width = 333
       DataSource = MTDM.dtsPriceList
     end
     object grdPriceHistory: TcxGrid [3]
-      Left = 10000
-      Top = 10000
+      Left = 25
+      Top = 94
       Width = 1368
       Height = 569
       TabOrder = 3
-      Visible = False
       object viewPriceHistory: TcxGridDBBandedTableView
         Navigator.Buttons.CustomButtons = <>
         ScrollbarAnnotations.CustomAnnotations = <>
@@ -147,6 +148,9 @@ inherited PriceListFrm: TPriceListFrm
         GridView = viewPriceHistory
       end
     end
+    inherited litNavigator: TdxLayoutItem
+      ControlOptions.OriginalWidth = 333
+    end
     inherited litGrid: TdxLayoutItem
       Parent = grpPricelist
       AlignHorz = ahClient
@@ -160,6 +164,7 @@ inherited PriceListFrm: TPriceListFrm
       AlignVert = avClient
       CaptionOptions.Text = 'Price List'
       ButtonOptions.Buttons = <>
+      ItemIndex = 1
       LayoutDirection = ldTabbed
       ShowBorder = False
       OnTabChanged = grpPricelistTabChanged

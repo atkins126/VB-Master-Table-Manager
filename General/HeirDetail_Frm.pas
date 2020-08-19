@@ -212,7 +212,7 @@ begin
   MTDM.FieldValue.SalutationID := lucSalutation.EditValue;
   MTDM.FieldValue.FirstName := edtFirstName.Text;
   MTDM.FieldValue.LastName := edtLastName.Text;
-  MTDM.FieldValue.IDNo := edtIDNo.Text;
+  MTDM.FieldValue.IDNumber := edtIDNo.Text;
 
   MTDM.FieldValue.HAHKSalutatioinID := lucHAHSalutation.EditValue;
   MTDM.FieldValue.HAHFirstName := edtHAHFirstName.Text;

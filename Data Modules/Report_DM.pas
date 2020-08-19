@@ -19,7 +19,8 @@ uses
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI, FireDAC.Phys.IBBase, FireDAC.Phys.SQLite,
   FireDAC.Stan.StorageBin,
 
-  dxPrnDev, cxClasses, dxPrnDlg, cxGrid, cxGridExportLink;
+  dxPrnDev, cxClasses, dxPrnDlg, cxGrid, cxGridExportLink,
+  FireDAC.Phys.SQLiteWrapper.Stat;
 
 type
   TReportOptions = record
@@ -156,7 +157,7 @@ type
     cdsDirectorSALUTATION_ID: TIntegerField;
     cdsDirectorFIRST_NAME: TStringField;
     cdsDirectorLAST_NAME: TStringField;
-    cdsDirectorMIDDLE_NAME: TStringField;
+    cdsDirectorOTHER_NAME: TStringField;
     cdsDirectorTAX_NO: TStringField;
     cdsDirectorMOBILE_PHONE: TStringField;
     cdsDirectorEMAIL_ADDRESS: TStringField;
@@ -655,6 +656,14 @@ begin
         Result.TargetDataSet := cdsVehicleMake;
         Result.TargetDataSet.Data := Result.SourceDataSet.Data;
         Result.ReportTypeName := 'Vehicle Make Listing';
+      end;
+
+    ftDirector:
+      begin
+        Result.SourceDataSet := MTDM.cdsDirector;
+        Result.TargetDataSet := cdsDirector;
+        Result.TargetDataSet.Data := Result.SourceDataSet.Data;
+        Result.ReportTypeName := 'Director Listing';
       end;
   end;
 end;

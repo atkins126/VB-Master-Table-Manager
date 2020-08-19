@@ -176,6 +176,30 @@ type
     cdsDirectorCompanyLinkID: TIntegerField;
     cdsDirectorCompanyLinkCUSTOMER_TYPE_ID: TIntegerField;
     cdsDirectorCompanyLinkCOMPANY: TStringField;
+    cdsDirectorSalutationLU: TFDMemTable;
+    dtsDirectorSalutationLU: TDataSource;
+    cdsDirectorSalutationLUID: TIntegerField;
+    cdsDirectorSalutationLUNAME: TStringField;
+    cdsCustomerLookup: TFDMemTable;
+    dtsCustomerLookup: TDataSource;
+    cdsCustomerLookupID: TIntegerField;
+    cdsCustomerLookupCUSTOMER_ID: TIntegerField;
+    cdsCustomerLookupSTaTUS_ID: TIntegerField;
+    cdsCustomerLookupCUSTOMER_GROUP_ID: TIntegerField;
+    cdsCustomerLookupNAME: TStringField;
+    cdsCustomerLookupTRADING_AS: TStringField;
+    cdsCustomerLookupCO_NO: TStringField;
+    cdsCustomerLookupTAX_NO: TStringField;
+    cdsCustomerLookupIS_ACTIVE: TIntegerField;
+    cdsCustomerLookupFIRST_NAME: TStringField;
+    cdsCustomerLookupLAST_NAME: TStringField;
+    cdsCustomerLookupOTHER_NAME: TStringField;
+    cdsCustomerLookupSALUTATION_ID: TIntegerField;
+    cdsCustomerSALUTATION_ID: TIntegerField;
+    cdsCustomerSalutation: TFDMemTable;
+    dtsCustomerSalutation: TDataSource;
+    cdsCustomerSalutationID: TIntegerField;
+    cdsCustomerSalutationNAME: TStringField;
   private
     { Private declarations }
   public

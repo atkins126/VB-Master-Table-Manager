@@ -16,7 +16,7 @@ uses
   dxLayoutcxEditAdapters, cxContainer, cxEdit, cxLabel, cxTextEdit, cxCheckBox,
   cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox,
   Vcl.ComCtrls, dxCore, cxDateUtils, cxCalendar, RUtils, dxScreenTip,
-  dxCustomHint, cxHint, cxDBEdit;
+  dxCustomHint, cxHint, cxDBEdit, cxCurrencyEdit;
 
 type
   TCustomerEditFrm = class(TBaseLayoutFrm)
@@ -123,7 +123,9 @@ type
     actBillToSameAsName: TAction;
     grpIDNumber: TdxLayoutGroup;
     litIDNumber: TdxLayoutItem;
-    edtIDNumber: TcxDBTextEdit;
+    edtIDNumber: TcxTextEdit;
+    lucSalutation: TcxLookupComboBox;
+    litSalutation: TdxLayoutItem;
     procedure FormCreate(Sender: TObject);
     procedure lucCustomerTypePropertiesEditValueChanged(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -177,6 +179,7 @@ begin
   Self.Height := 700;
   Self.Width := 850;
   layMain.Align := alClient;
+  MTDM.ClearFieldValues;
   lblCustomerHeader.Style.TextColor := RootLookAndFeel.SkinPainter.DefaultSelectionColor;
   lblCustomerHeader.Style.Font.Color := RootLookAndFeel.SkinPainter.DefaultSelectionColor;
   lucCustomerType.Properties.ListSource := LookupDM.dtsCustomerType;
@@ -187,6 +190,7 @@ begin
   lucVATMonth.Properties.ListSource := LookupDM.dtsVATMonth;
   lucVATOffice.Properties.ListSource := LookupDM.dtsVATOffice;
   lucVATCountry.Properties.ListSource := LookupDM.dtsCountry;
+  lucSalutation.Properties.ListSource := LookupDM.dtsCustomerSalutation;
 
 //  TcxLookupComboBoxProperties(lucCustomerType.Properties).Buttons.Items[0].Visible := False;
   TcxDateEditProperties(edtCreated.Properties).Buttons.Items[0].Visible := False;
@@ -211,6 +215,11 @@ begin
     edtCustomerName.Text := MTDM.cdsCustomer.FieldByName('NAME').AsString;
     edtFirstName.Text := MTDM.cdsCustomer.FieldByName('FIRST_NAME').AsString;
     edtLastName.Text := MTDM.cdsCustomer.FieldByName('LAST_NAME').AsString;
+
+    if not VarisNull(MTDM.cdsCustomer.FieldByName('SALUTATION_ID').Value) then
+      lucSalutation.EditValue := MTDM.cdsCustomer.FieldByName('SALUTATION_ID').AsInteger;
+
+    edtIDNumber.Text := MTDM.cdsCustomer.FieldByName('ID_NUMBER').AsString;
     edtInitials.Text := MTDM.cdsCustomer.FieldByName('INITIALS').AsString;
     edtCoNo.Text := MTDM.cdsCustomer.FieldByName('CO_NO').AsString;
     lucStatus.EditValue := MTDM.cdsCustomer.FieldByName('STATUS_ID').AsInteger;
@@ -244,47 +253,7 @@ begin
     cbxOrganDonor.Checked := IntegerToBoolean(MTDM.cdsCustomer.FieldByName('IS_ORGAN_DONOR').Asinteger);
     edtCreated.Date := MTDM.cdsCustomer.FieldByName('DATE_CREATED').AsDateTime;
     edtModified.date := MTDM.cdsCustomer.FieldByName('DATE_MODIFIED').AsDateTime;
-  end
-//{$IFDEF DEBUG}
-//  else
-//  begin
-//    lucCustomerType.EditValue := 2;
-//    edtCustomerName.Text := 'Flippie Gouws cc';
-////    edtFirstName.Text := '';
-////    edtLastName.Text := '';
-////    edtInitials.Text := '';
-//    edtCoNo.Text := 'CK1249/12002';
-//    lucStatus.EditValue := 1;
-//    edtTradingAs.Text := 'Flippie Gouws cc';
-////    edtBillTo.Text jj
-//    cbxIsActive.Checked := True;
-//    lucYearEnd.EditValue := 2;
-//    edtTaxNo.Text := '987654321';
-//    lucTaxOffice.EditValue := 9;
-//    lucARMonth.EditValue := 3;
-//    edtVATNo.Text := '316497';
-//    lucVATMonth.EditValue := 4;
-//    lucVATOffice.EditValue := 1;
-//    lucVATCountry.EditValue := 2;
-//    edtVATCustomsCode.Text := 'ZA2468';
-//    edtPAYENo.Text := '654258';
-//    edtUIFNo.Text := '467153';
-//    edtSDLNo.Text := '456852';
-//    edtWCNo.Text := '951753';
-////    dteARCompletionDate.Date := EncodeDate(2020, 6, 30);
-//    edtEFiling.Text := 'Hello';
-//    edtEFUserName.Text := 'flippie';
-//    edtEFPassword.Text := 'qwer123';
-//    edtPastelAccCode.Text := 'FLIP003';
-//    edtVBTaxAccCode.Text := 'FG987';
-//    cbxProvTaxPayer.Checked := True;
-//    cbxLivingWill.Checked := False;
-//    cbxOrganDonor.Checked := False;
-//    dteCreated.Date := Now;
-//    dteModified.date := Now;
-//  end;
-//{$ENDIF}
-    ;
+  end;
 end;
 
 procedure TCustomerEditFrm.FormShow(Sender: TObject);
@@ -374,23 +343,24 @@ begin
   MTDM.FieldValue.ARMonthID := NullToZero(lucARMonth.EditValue);
   MTDM.FieldValue.StatauID := NullToZero(lucStatus.EditValue);
   MTDM.FieldValue.IsActive := BooleanToInteger(cbxIsActive.Checked);
-  MTDM.FieldValue.Initials := edtInitials.Text;
-  MTDM.FieldValue.TradingAs := edtTradingAs.Text;
-  MTDM.FieldValue.BillTo := edtBillTo.Text;
-  MTDM.FieldValue.CoNo := edtCoNo.Text;
-  MTDM.FieldValue.TaxNo := edtTaxNo.Text;
-  MTDM.FieldValue.VATNo := edtVATNo.Text;
-  MTDM.FieldValue.VATCustomsCode := edtVATCustomsCode.Text;
-  MTDM.FieldValue.PayeNo := edtPAYENo.Text;
-  MTDM.FieldValue.UifNo := edtUIFNo.Text;
-  MTDM.FieldValue.SDLNo := edtSDLNo.Text;
-  MTDM.FieldValue.WCNo := edtWCNo.Text;
-//  if VarIsNull(dteARCompletionDate.EditValue) then
+  MTDM.FieldValue.Initials := Trim(edtInitials.Text);
+  MTDM.FieldValue.TradingAs := Trim(edtTradingAs.Text);
+  MTDM.FieldValue.BillTo := Trim(edtBillTo.Text);
+  MTDM.FieldValue.CoNo := Trim(edtCoNo.Text);
+  MTDM.FieldValue.TaxNo := Trim(edtTaxNo.Text);
+  MTDM.FieldValue.VATNo := Trim(edtVATNo.Text);
+  MTDM.FieldValue.VATCustomsCode := Trim(edtVATCustomsCode.Text);
+  MTDM.FieldValue.PayeNo := Trim(edtPAYENo.Text);
+  MTDM.FieldValue.UifNo := Trim(edtUIFNo.Text);
+  MTDM.FieldValue.SDLNo := Trim(edtSDLNo.Text);
+  MTDM.FieldValue.WCNo := Trim(edtWCNo.Text);
+  MTDM.FieldValue.IDNumber := Trim(edtIDNumber.Text);
 
-//  if Length(Trim(dteARCompletionDate.Text)) = 0 then
-//    MTDM.FieldValue.ARCompletionDate := EncodeDate(1899, 12, 30)
-//  else
-//    MTDM.FieldValue.ARCompletionDate := dteARCompletionDate.Date;
+  if not VarIsNull(lucSalutation.EditValue) then
+  begin
+    MTDM.FieldValue.SalutationID := lucSalutation.EditValue;
+    MTDM.FieldValue.Salutation := lucSalutation.Text;
+  end;
 
   if (FormatDatetime('dd/MM/yyyy', dteARCompletionDate.Date) <> '30/12/1899')
     and (FormatDatetime('dd/MM/yyyy', dteARCompletionDate.Date) <> '00/00/0000') then

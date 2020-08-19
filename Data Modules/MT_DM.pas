@@ -63,14 +63,14 @@ type
     OtherName: string;
     SalutationID: Integer;
     Salutation: string;
-    IDNo: string;
+    IDNumber: string;
     PassportNo: string;
     JobFunctionID: Integer;
     JobFunction: string;
     PrimaryContact: Boolean;
     EmailAddress: string;
     TaxNo: string;
-    MobileNo: string;
+    MobileNumber: string;
     DOB: TDateTime;
     VehicleMakeID: Integer;
     VehicleMake: string;
@@ -291,7 +291,7 @@ type
     cdsDirectorSALUTATION_ID: TIntegerField;
     cdsDirectorFIRST_NAME: TStringField;
     cdsDirectorLAST_NAME: TStringField;
-    cdsDirectorMIDDLE_NAME: TStringField;
+    cdsDirectorOTHER_NAME: TStringField;
     cdsDirectorTAX_NO: TStringField;
     cdsDirectorMOBILE_PHONE: TStringField;
     cdsDirectorEMAIL_ADDRESS: TStringField;
@@ -383,9 +383,9 @@ type
     cdsShareHolderID_NUMBER: TStringField;
     cdsDirectorID_NUMBER: TStringField;
     cdsCustomerID_NUMBER: TStringField;
-    cdsDirectorCUSTOMER_TABLE_ID: TIntegerField;
-    cdsShareHolderCUSTOMER_TABLE_ID: TIntegerField;
+    cdsShareHolderCOMPANY_ID: TIntegerField;
     cdsDirectorCUSTOMER_ID: TIntegerField;
+    cdsCustomerSALUTATION_ID: TIntegerField;
     procedure ClearFieldValueArray;
 
     procedure cdsActivityTypeAfterPost(DataSet: TDataSet);
@@ -394,8 +394,7 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsActivityTypePostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
     procedure cdsActivityTypeNewRecord(DataSet: TDataSet);
-    procedure cdsDirectorCompanyLinkPostError(DataSet: TDataSet;
-      E: EDatabaseError; var Action: TDataAction);
+    procedure cdsDirectorCompanyLinkPostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
     procedure cdsDirectorCalcFields(DataSet: TDataSet);
     procedure cdsActivityTypeBeforeEdit(DataSet: TDataSet);
     procedure cdsActivityTypeBeforeDelete(DataSet: TDataSet);
@@ -432,6 +431,8 @@ type
     property HeaderCaptionArray: HeaderCaptionArray read FHeaderCaptionArray write FHeaderCaptionArray;
     property MasterDataSet: TMasterDataSets read FMasterDataSet write FMasterDataSet;
     property CompanyName: string read FCompanyName write FCompanyName;
+
+    procedure UpdateIDValue(DataSet: TFDMemTable; LastID: Integer);
   end;
 
 var
@@ -465,7 +466,7 @@ begin
 
   else if (TFDMemTable(DataSet) = cdsContactDetailPerson) then
   begin
-    DataSet.FieldByName('CONTACT_PERSON_ID').AsInteger := MTDM.cdsContactPerson.FieldByName('ID').AsInteger;
+    DataSet.FieldByName('CONTACT_PERSON_ID').AsInteger := cdsContactPerson.FieldByName('ID').AsInteger;
     DataSet.FieldByName('CONTACT_TYPE_ID').AsInteger := 0;
   end
 
@@ -475,10 +476,13 @@ begin
   else if (TFDMemTable(DataSet) = cdsVehicle) then
     DataSet.FieldByName('MAINTENANCE_PLAN').AsInteger := 0;
 
-  if (TFDMemTable(DataSet) = cdsShareHolder) then
+  if TFDMemTable(DataSet) = cdsShareHolder then
     cdsShareHolder.FieldByName('PERCENT_SHARE').AsFloat := 0;
 
-  if (TFDMemTable(DataSet) = cdsDirectorCompanyLink) then
+  if (TFDMemTable(DataSet) = cdsDirector) or (TFDMemTable(DataSet) = cdsShareHolder) then
+    DataSet.FieldByName('CUSTOMER_ID').AsInteger := 0;
+
+  if TFDMemTable(DataSet) = cdsDirectorCompanyLink then
     DataSet.FieldByName('DIRECTOR_ID').AsInteger := cdsDirector.FieldByName('ID').AsInteger;
 end;
 
@@ -500,21 +504,31 @@ begin
     DataSet.Cancel;
     raise EDuplicateException.Create('Duplicate records not allowed.' + CRLF + CRLF +
       'Company: ' + FCompanyName + CRLF +
-      ' is already linked to director: ' + MTDM.cdsDirector.FieldByName('FIRST_NAME').AsString + ' ' +
-      MTDM.cdsDirector.FieldByName('LAST_NAME').AsString);
-//      ' is already linked to director ' + MTDM.ValueArray[0] + ' ' + MTDM.ValueArray[1]);
+      ' is already linked to director: ' + cdsDirector.FieldByName('FIRST_NAME').AsString + ' ' +
+      cdsDirector.FieldByName('LAST_NAME').AsString);
+//      ' is already linked to director ' + ValueArray[0] + ' ' + ValueArray[1]);
   end;
   DataSet.Cancel;
 end;
 
 procedure TMTDM.cdsActivityTypePostError(DataSet: TDataSet; E: EDatabaseError; var Action: TDataAction);
 begin
-//  ShowMessage('Class name: ' + E.ClassName);
-//  ShowMessage('Class name: ' + EFDDBEngineException(E).Message);
+//  if EFDException(E).FDCode = 15 then // Duplicate record
+//  begin
+//    DataSet.Cancel;
+//    raise EDuplicateException.Create('Duplicate records not allowed.' + CRLF + CRLF +
+//      'Server returned post error: ' + VBBaseDM.ServerErrorMsg);
+//  end;
+//
+//  DataSet.Cancel;
 
-  PostError := True;
-  DataSet.Cancel;
-//  Action :=  daAbort;
+// Original code
+////  ShowMessage('Class name: ' + E.ClassName);
+////  ShowMessage('Class name: ' + EFDDBEngineException(E).Message);
+//
+//  PostError := True;
+//  DataSet.Cancel;
+////  Action :=  daAbort;
 end;
 
 procedure TMTDM.ClearFieldValueArray;
@@ -558,14 +572,14 @@ begin
   FieldValue.OtherName := '';
   FieldValue.SalutationID := 0;
   FieldValue.Salutation := '';
-  FieldValue.IDNo := '';
+  FieldValue.IDNumber := '';
   FieldValue.PassportNo := '';
   FieldValue.JobFunctionID := 0;
   FieldValue.JobFunction := '';
   FieldValue.PrimaryContact := False;
   FieldValue.EmailAddress := '';
   FieldValue.TaxNo := '';
-  FieldValue.MobileNo := '';
+  FieldValue.MobileNumber := '';
   FieldValue.DOB := 0.0;
   FieldValue.VehicleMakeID := 0;
   FieldValue.VehicleMake := '';
@@ -693,7 +707,7 @@ begin
   SetLength(DSArray, 1);
   DSArray[0] := TFDMemTable(DataSet);
 
-  VBBaseDM.ApplyUpdates(DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
+  VBBaseDM.ApplyUpdates(TFDMemTable(DataSet), DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
     TFDMemTable(DataSet).Tag);
 end;
 
@@ -708,88 +722,101 @@ begin
 end;
 
 procedure TMTDM.cdsActivityTypeBeforePost(DataSet: TDataSet);
-var
-  SQLStatement, Response: string;
-  FieldList, FieldValues, WhereClause, TableName, FieldListValues: string;
-  ResponseList: TStringList;
+//var
+//  SQLStatement, Response: string;
+//  FieldList, FieldValues, WhereClause, TableName, FieldListValues: string;
+//  ResponseList: TStringList;
 begin
-  Fieldlist := '';
-  FieldValues := '';
-  TableName := TFDMemTable(DataSet).UpdateOptions.UpdateTableName;
-
-  case VBBaseDM.DBAction of
-    acInsert:
-      begin
-        BuildInsertStatement(DataSet.Tag, FieldList, FieldValues, TFDMemTable(DataSet));
-        SQLStatement := Format(INSERT_RECORD, [TableName, FieldList, FieldValues]);
-
-        PostError := False;
-        Response := 'INSERT';
-        FID := StrToInt(VBBaseDM.ModifyRecord(SQLStatement, Response));
-        ResponseList := RUtils.CreateStringList(PIPE, DOUBLE_QUOTE);
-        ResponseList.DelimitedText := Response;
-        VBBaseDM.ServerErrorMsg := Responselist.Values['RESPONSE'];
-
-        try
-          if SameText(ResponseList.Values['RESPONSE'], 'ERROR') then
-          begin
-            PostError := True;
-            VBBaseDM.ServerErrorMsg := 'One of mroe errors occurred when trying to insert a new record into the ' + TableName +
-              ' table.' + CRLF + CRLF +
-              'Server error message: ' + CRLF + ResponseList.Values['ERROR_MESSAGE'];
-
-            DataSet.Cancel;
-            SendMessage(Application.MainForm.Handle, WM_POST_DATA_ERROR, DWORD(PChar(VBBaseDM.ServerErrorMsg)), 0);
-          end;
-        finally
-          ResponseList.Free;
-        end;
-
-//  if VBBaseDM.DBAction = acInsert then
-//    DataSet.FieldByName('ID').AsInteger := FID;
-      end;
-
-    acEdit:
-      begin
-        BuildUpdateStatement(DataSet.Tag, FieldListValues, WhereClause, TFDMemTable(DataSet));
-        SQLStatement := Format(UPDATE_RECORD, [TableName, FieldListValues, WhereClause]);
-
-        PostError := False;
-        Response := 'UPDATE';
-        FID := StrToInt(VBBaseDM.ModifyRecord(SQLStatement, Response));
-        ResponseList := RUtils.CreateStringList(PIPE, DOUBLE_QUOTE);
-        ResponseList.DelimitedText := Response;
-        VBBaseDM.ServerErrorMsg := Responselist.Values['RESPONSE'];
-
-        try
-          if SameText(ResponseList.Values['RESPONSE'], 'ERROR') then
-          begin
-            PostError := True;
-            VBBaseDM.ServerErrorMsg := 'One of mroe errors occurred when trying to update a record in the ' + TableName +
-              ' table.' + CRLF + CRLF +
-              'Server error message: ' + CRLF + ResponseList.Values['ERROR_MESSAGE'];
-
-            DataSet.Cancel;
-            SendMessage(Application.MainForm.Handle, WM_POST_DATA_ERROR, DWORD(PChar(VBBaseDM.ServerErrorMsg)), 0);
-          end;
-        finally
-          ResponseList.Free;
-        end;
-      end;
-  end;
+//  Fieldlist := '';
+//  FieldValues := '';
+//  TableName := TFDMemTable(DataSet).UpdateOptions.UpdateTableName;
+//
+//  case VBBaseDM.DBAction of
+//    acInsert:
+//      begin
+//        BuildInsertStatement(DataSet.Tag, FieldList, FieldValues, TFDMemTable(DataSet));
+//        SQLStatement := Format(INSERT_RECORD, [TableName, FieldList, FieldValues]);
+//
+//        PostError := False;
+//        Response := 'INSERT';
+//        FID := StrToInt(VBBaseDM.ModifyRecord(SQLStatement, Response));
+//        ResponseList := RUtils.CreateStringList(PIPE, DOUBLE_QUOTE);
+//        ResponseList.DelimitedText := Response;
+//        VBBaseDM.ServerErrorMsg := Responselist.Values['RESPONSE'];
+//
+//        try
+//          if SameText(ResponseList.Values['RESPONSE'], 'ERROR') then
+//          begin
+//            PostError := True;
+//            VBBaseDM.ServerErrorMsg := 'One of mroe errors occurred when trying to insert a new record into the ' + TableName +
+//              ' table.' + CRLF + CRLF +
+//              'Server error message: ' + CRLF + ResponseList.Values['ERROR_MESSAGE'];
+//
+//            DataSet.Cancel;
+//            SendMessage(Application.MainForm.Handle, WM_POST_DATA_ERROR, DWORD(PChar(VBBaseDM.ServerErrorMsg)), 0);
+//          end;
+//        finally
+//          ResponseList.Free;
+//        end;
+//
+////  if VBBaseDM.DBAction = acInsert then
+////    DataSet.FieldByName('ID').AsInteger := FID;
+//      end;
+//
+//    acEdit:
+//      begin
+//        BuildUpdateStatement(DataSet.Tag, FieldListValues, WhereClause, TFDMemTable(DataSet));
+//        SQLStatement := Format(UPDATE_RECORD, [TableName, FieldListValues, WhereClause]);
+//
+//        PostError := False;
+//        Response := 'UPDATE';
+//        FID := StrToInt(VBBaseDM.ModifyRecord(SQLStatement, Response));
+//        ResponseList := RUtils.CreateStringList(PIPE, DOUBLE_QUOTE);
+//        ResponseList.DelimitedText := Response;
+//        VBBaseDM.ServerErrorMsg := Responselist.Values['RESPONSE'];
+//
+//        try
+//          if SameText(ResponseList.Values['RESPONSE'], 'ERROR') then
+//          begin
+//            PostError := True;
+//            VBBaseDM.ServerErrorMsg := 'One of mroe errors occurred when trying to update a record in the ' + TableName +
+//              ' table.' + CRLF + CRLF +
+//              'Server error message: ' + CRLF + ResponseList.Values['ERROR_MESSAGE'];
+//
+//            DataSet.Cancel;
+//            SendMessage(Application.MainForm.Handle, WM_POST_DATA_ERROR, DWORD(PChar(VBBaseDM.ServerErrorMsg)), 0);
+//          end;
+//        finally
+//          ResponseList.Free;
+//        end;
+//      end;
+//  end;
 end;
 
 procedure TMTDM.cdsActivityTypeAfterPost(DataSet: TDataSet);
-//var
-//  DSArray: TDataSetArray;
+var
+  DSArray: TDataSetArray;
 begin
-//  SetLength(DSArray, 1);
-//  DSArray[0] := TFDMemTable(DataSet);
-//
-//  VBBaseDM.ApplyUpdates(DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
-//    TFDMemTable(DataSet).Tag);
-//
-////    SendMessage(Application.MainForm.Handle, WM_RECORD_ID, DWORD(PChar('REQUEST=REFRESH_DATA' + '|ID=' + FID.ToString)), 0);
+  SetLength(DSArray, 1);
+  DSArray[0] := TFDMemTable(DataSet);
+
+  VBBaseDM.ApplyUpdates(TFDMemTable(DataSet), DSArray, TFDMemTable(DataSet).UpdateOptions.Generatorname, TFDMemTable(DataSet).UpdateOptions.UpdateTableName,
+    TFDMemTable(DataSet).Tag);
+
+//  SendMessage(Application.MainForm.Handle, WM_SYNCH_DATA, DWORD(PChar('REQUEST=SYNCH_DATA' + '|ID=' + FID.ToString)), 0);
+end;
+
+procedure TMTDM.UpdateIDValue(DataSet: TFDMemTable; LastID: Integer);
+begin
+  DataSet.AfterPost := nil;
+
+  try
+    DataSet.Edit;
+    DataSet.FieldByName('ID').AsInteger := LastID;
+    DataSet.Post;
+  finally
+    DataSet.AfterPost := cdsActivityTypeAfterPost;
+  end;
 end;
 
 end.

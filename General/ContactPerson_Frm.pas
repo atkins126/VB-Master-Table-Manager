@@ -144,7 +144,7 @@ begin
   MTDM.FieldValue.Initials := edtInitials.Text;
   MTDM.FieldValue.OtherName := edtOtherName.Text;
   MTDM.FieldValue.DOB := dteDOB.Date;
-  MTDM.FieldValue.IDNo := edtIDNo.Text;
+  MTDM.FieldValue.IDNumber := edtIDNo.Text;
   MTDM.FieldValue.PassportNo := edtPassportNo.Text;
   MTDM.FieldValue.JobFunctionID := VarAsType(lucJobFunction.EditValue, varInteger);
   MTDM.FieldValue.JobFunction := lucJobFunction.Text;
